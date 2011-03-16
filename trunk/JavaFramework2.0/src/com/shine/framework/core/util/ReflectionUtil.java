@@ -3,6 +3,8 @@ package com.shine.framework.core.util;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
+import java.rmi.RemoteException;
 
 /**
  * Reflection utilities
@@ -124,4 +126,32 @@ public class ReflectionUtil {
 		Constructor cons = newoneClass.getConstructor(argsClass);
 		return cons.newInstance(args);
 	}
+
+	/**
+	 * 给予接口反射注入
+	 * 
+	 * @param <T>
+	 * @param interfaceClazz
+	 * @param obj
+	 * @return
+	 */
+	public static <T> T getAOPBean(Class<T> interfaceClazz, final T obj) throws RemoteException  {
+		assert interfaceClazz.isInterface();
+
+		return (T) Proxy.newProxyInstance(interfaceClazz.getClassLoader(),
+				new Class[] { interfaceClazz }, new AopInvocationHandlerImpl(
+						obj));
+	}
+
+	/**
+	 * 给予接口反射注入
+	 * 
+	 * @param obj
+	 * @return
+	 */
+	public static Object getAOPBean(final Object obj) throws RemoteException {
+		return Proxy.newProxyInstance(obj.getClass().getClassLoader(), obj
+				.getClass().getInterfaces(), new AopInvocationHandlerImpl(obj));
+	}
+
 }
