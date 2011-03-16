@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- log util config -->
+<logger>
+   <logfolder>e:\hao123</logfolder>
+   <showConsole>true</showConsole>
+</logger>
