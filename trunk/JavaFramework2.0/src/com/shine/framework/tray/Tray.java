@@ -19,7 +19,8 @@ public class Tray {
 	}
 
 	public void init(Object trayParent, PopupMenu popupMenu, String imagePath) {
-		systemTrayModel.setPopupMenu(popupMenu);
+		if (popupMenu != null)
+			systemTrayModel.setPopupMenu(popupMenu);
 		systemTrayModel.setTrayParent(trayParent);
 		systemTrayModel.setImagePath(imagePath);
 		systemTrayModel.jbInit();
