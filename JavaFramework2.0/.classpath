@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk1.6.0_18"/>
+	<classpathentry kind="lib" path="E:/workspace/JavaFramework2.0/lib/ant-1.6.4.jar"/>
+	<classpathentry kind="lib" path="E:/workspace/JavaFramework2.0/lib/bsh-2.0b4.jar"/>
+	<classpathentry kind="lib" path="E:/workspace/JavaFramework2.0/lib/c3p0-0.9.1.2.jar"/>
+	<classpathentry kind="lib" path="E:/workspace/JavaFramework2.0/lib/commons-beanutils-1.8.3.jar"/>
+	<classpathentry kind="lib" path="E:/workspace/JavaFramework2.0/lib/commons-collections-3.2.jar"/>
+	<classpathentry kind="lib" path="E:/workspace/JavaFramework2.0/lib/commons-email-1.2.jar"/>
+	<classpathentry kind="lib" path="E:/workspace/JavaFramework2.0/lib/commons-httpclient-3.0.1.jar" sourcepath="C:/Users/123/.m2/repository/commons-httpclient/commons-httpclient/3.0.1/commons-httpclient-3.0.1-sources.jar"/>
+	<classpathentry kind="lib" path="E:/workspace/JavaFramework2.0/lib/commons-lang-2.4.jar"/>
+	<classpathentry kind="lib" path="E:/workspace/JavaFramework2.0/lib/commons-logging.jar"/>
+	<classpathentry kind="lib" path="E:/workspace/JavaFramework2.0/lib/commons-net-2.2.jar"/>
+	<classpathentry kind="lib" path="E:/workspace/JavaFramework2.0/lib/dom4j-1.6.1.jar"/>
+	<classpathentry kind="lib" path="E:/workspace/JavaFramework2.0/lib/ezmorph-1.0.6.jar"/>
+	<classpathentry kind="lib" path="E:/workspace/JavaFramework2.0/lib/htmlcleaner2_1.jar"/>
+	<classpathentry kind="lib" path="E:/workspace/JavaFramework2.0/lib/JavaSnmpPacket.jar"/>
+	<classpathentry kind="lib" path="E:/workspace/JavaFramework2.0/lib/jaxen-1.1-beta-6.jar"/>
+	<classpathentry kind="lib" path="E:/workspace/JavaFramework2.0/lib/jdom.jar"/>
+	<classpathentry kind="lib" path="E:/workspace/JavaFramework2.0/lib/json-lib-2.2.3-jdk13.jar"/>
+	<classpathentry kind="lib" path="E:/workspace/JavaFramework2.0/lib/log4j-1.2.14.jar"/>
+	<classpathentry kind="lib" path="E:/workspace/JavaFramework2.0/lib/mail.jar"/>
+	<classpathentry kind="lib" path="E:/workspace/JavaFramework2.0/lib/mysql-connector-java-3.0.10-stable-bin.jar"/>
+	<classpathentry kind="lib" path="E:/workspace/JavaFramework2.0/lib/poi-3.7-20101029.jar"/>
+	<classpathentry kind="lib" path="E:/workspace/JavaFramework2.0/lib/quartz-1.6.6.jar"/>
+	<classpathentry kind="lib" path="E:/workspace/JavaFramework2.0/lib/xom-1.2.5.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
