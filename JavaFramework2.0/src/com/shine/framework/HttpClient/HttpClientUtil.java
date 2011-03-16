@@ -11,6 +11,8 @@ import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.httpclient.params.HttpMethodParams;
 
+import com.shine.framework.HttpClient.util.NameValuePairUtil;
+
 /**
  * HttpClientUtil 使用httpclient 3.1
  * 
@@ -21,7 +23,7 @@ public class HttpClientUtil {
 	private static final String CONTENT_CHARSET = "utf-8";// httpclient读取内容时使用的字符集
 
 	/**
-	 * get new http clientVM3xt5Ad2gz9
+	 * get new http client
 	 * 
 	 * @return
 	 */
@@ -154,6 +156,13 @@ public class HttpClientUtil {
 		}
 	}
 
+	/**
+	 * 获取get方法数据的结果
+	 * 
+	 * @param httpClient
+	 * @param getUrl
+	 * @return
+	 */
 	public static String getMethodDataResult(HttpClient httpClient,
 			String getUrl) {
 		GetMethod getMethod = null;
@@ -321,6 +330,15 @@ public class HttpClientUtil {
 		}
 	}
 
+	/**
+	 * 获取post结果
+	 * 
+	 * @param httpClient
+	 * @param postUrl
+	 * @param data
+	 * @param encoding
+	 * @return
+	 */
 	public static String postMethodDataResult(HttpClient httpClient,
 			String postUrl, NameValuePair[] data, String encoding) {
 		encoding = encoding.trim();
@@ -343,6 +361,20 @@ public class HttpClientUtil {
 			if (postMethod != null)
 				postMethod.releaseConnection();
 		}
+	}
+
+	/**
+	 * 
+	 * @param httpClient
+	 * @param postUrl
+	 * @param data
+	 * @param encoding
+	 * @return
+	 */
+	public static String postMethodDataResult(HttpClient httpClient,
+			String postUrl, NameValuePairUtil data, String encoding) {
+		return postMethodDataResult(httpClient, postUrl, data
+				.getNameValuePair(), encoding);
 	}
 
 	/**
