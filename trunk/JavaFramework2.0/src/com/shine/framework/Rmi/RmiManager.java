@@ -10,6 +10,13 @@ import com.shine.framework.Rmi.model.IRmiOpera;
 public class RmiManager {
 	private static String port = "1099";
 
+	/**
+	 * 初始rmi客户端
+	 * @param ip
+	 * @param port
+	 * @param rmiName
+	 * @return
+	 */
 	public static IRmiOpera initRmiClient(String ip, String port, String rmiName) {
 		try {
 			IRmiOpera iRmiOpera = (IRmiOpera) Naming.lookup("rmi://" + ip + ":"
@@ -21,10 +28,23 @@ public class RmiManager {
 		}
 	}
 
+	/**
+	 * 初始化rmi客户端
+	 * @param ip
+	 * @param rmiName
+	 * @return
+	 */
 	public static IRmiOpera initRmiClient(String ip, String rmiName) {
 		return initRmiClient(ip, port, rmiName);
 	}
 
+	/**
+	 * 初始化rmi服务器
+	 * @param ip
+	 * @param port
+	 * @param rmiName
+	 * @param iRmiOpera
+	 */
 	public static void initRmiServer(String ip, String port, String rmiName,
 			IRmiOpera iRmiOpera) {
 		try {
@@ -41,6 +61,12 @@ public class RmiManager {
 		}
 	}
 
+	/**
+	 * 初始化rmi服务器
+	 * @param ip
+	 * @param rmiName
+	 * @param iRmiOpera
+	 */
 	public static void initRmiServer(String ip, String rmiName,
 			IRmiOpera iRmiOpera) {
 		initRmiServer(ip, port, rmiName, iRmiOpera);
