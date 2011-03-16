@@ -1,10 +1,16 @@
 package com.shine.framework.core.util;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
+
+import org.htmlcleaner.CleanerProperties;
+import org.htmlcleaner.HtmlCleaner;
+import org.htmlcleaner.PrettyXmlSerializer;
+import org.htmlcleaner.TagNode;
 
 /**
  * html utilities
@@ -95,6 +101,83 @@ public class HtmlUtil {
 		FileUtil
 				.createFile(filePath, getUrlString(urlPath, encoding), encoding);
 		return true;
+	}
+
+	/**
+	 * 从html url生成xml
+	 * 
+	 * @param htmlurl
+	 * @param xmlurl
+	 * @return
+	 */
+	public static boolean cleanHtml(String htmlurl, String xmlurl) {
+		try {
+			HtmlCleaner cleaner = new HtmlCleaner();
+			CleanerProperties props = cleaner.getProperties();
+			props.setUseCdataForScriptAndStyle(true);
+			props.setRecognizeUnicodeChars(true);
+			props.setUseEmptyElementTags(true);
+			props.setAdvancedXmlEscape(true);
+			props.setTranslateSpecialEntities(true);
+			props.setBooleanAttributeValues("empty");
+
+			TagNode node = cleaner.clean(new File(htmlurl));
+			new PrettyXmlSerializer(props).writeXmlToFile(node, xmlurl);
+			return true;
+		} catch (IOException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	/**
+	 * 通过html的url获取xml，默认utf-8
+	 * 
+	 * @param htmlurl
+	 * @return
+	 */
+	public static String cleanHtmlReturnString(String htmlurl) {
+		try {
+			HtmlCleaner cleaner = new HtmlCleaner();
+			CleanerProperties props = cleaner.getProperties();
+			props.setUseCdataForScriptAndStyle(true);
+			props.setRecognizeUnicodeChars(true);
+			props.setUseEmptyElementTags(true);
+			props.setAdvancedXmlEscape(true);
+			props.setTranslateSpecialEntities(true);
+			props.setBooleanAttributeValues("empty");
+
+			TagNode node = cleaner.clean(new URL(htmlurl));
+			return new PrettyXmlSerializer(props).getXmlAsString(node);
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	/**
+	 * 通过html内容生成xml
+	 * 
+	 * @param htmlString
+	 * @return
+	 */
+	public static String cleanHtmlByString(String htmlString) {
+		try {
+			HtmlCleaner cleaner = new HtmlCleaner();
+			CleanerProperties props = cleaner.getProperties();
+			props.setUseCdataForScriptAndStyle(true);
+			props.setRecognizeUnicodeChars(true);
+			props.setUseEmptyElementTags(true);
+			props.setAdvancedXmlEscape(true);
+			props.setTranslateSpecialEntities(true);
+			props.setBooleanAttributeValues("empty");
+
+			TagNode node = cleaner.clean(htmlString);
+			return new PrettyXmlSerializer(props).getXmlAsString(node);
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	public static void main(String args[]) {
