@@ -50,8 +50,10 @@ public class HtmlUtil {
 			if (type == null)
 				type = con.getContentType();
 
-			if (type == null || type.trim().length() == 0
-					|| type.trim().indexOf("text/html") < 0)
+			if (type == null
+					|| type.trim().length() == 0
+					|| (type.trim().indexOf("text/html") < 0 && type.trim()
+							.indexOf("text/xml") < 0))
 				return null;
 
 			if (type.indexOf("charset=") > 0)
