@@ -17,7 +17,7 @@ public class DBUtil {
 	}
 
 	/**
-	 * ³õÊ¼»¯
+	 * åˆå§‹åŒ–
 	 * 
 	 * @param xmlfile
 	 */
@@ -26,8 +26,7 @@ public class DBUtil {
 	}
 
 	/**
-	 * ³õÊ¼»¯mysql jndiÁ¬½Ó³Ø
-	 * 
+	 * åˆå§‹åŒ–mysql jndiè¿æ¥æ± 
 	 * @param jndi
 	 * @param ip
 	 * @param port
@@ -41,8 +40,7 @@ public class DBUtil {
 	}
 
 	/**
-	 * ³õÊ¼»¯ĞÂµÄjndi
-	 * 
+	 * åˆå§‹åŒ–æ–°çš„jndi
 	 * @param jndi
 	 * @param dbUserName
 	 * @param dbPassWord
@@ -56,8 +54,7 @@ public class DBUtil {
 	}
 
 	/**
-	 * ³õÊ¼»¯ĞÂµÄjndi
-	 * 
+	 * åˆå§‹åŒ–æ–°çš„jndi
 	 * @param jndi
 	 * @param dbUserName
 	 * @param dbPassWord
@@ -78,7 +75,7 @@ public class DBUtil {
 	}
 
 	/**
-	 * ²éÑ¯Êı¾İ
+	 * æŸ¥è¯¢æ•°æ®
 	 * 
 	 * @param conn
 	 * @param sql
@@ -95,7 +92,7 @@ public class DBUtil {
 			dbModel.setResultSet(rs);
 		} catch (Exception e) {
 			// e.printStackTrace();
-			System.out.println("Ö´ĞĞÊ§°Üsql:" + sql);
+			System.out.println("æ‰§è¡Œå¤±è´¥sql:" + sql);
 		} finally {
 			try {
 				if (rs != null)
@@ -110,7 +107,7 @@ public class DBUtil {
 	}
 
 	/**
-	 * ²éÑ¯Êı¾İ
+	 * æŸ¥è¯¢æ•°æ®
 	 * 
 	 * @param jndi
 	 * @param sql
@@ -129,7 +126,7 @@ public class DBUtil {
 			dbModel.setResultSet(rs);
 		} catch (Exception e) {
 			// e.printStackTrace();
-			System.out.println("Ö´ĞĞÊ§°Üsql:" + sql);
+			System.out.println("æ‰§è¡Œå¤±è´¥sql:" + sql);
 		} finally {
 			try {
 				if (rs != null)
@@ -146,7 +143,7 @@ public class DBUtil {
 	}
 
 	/**
-	 * ²éÑ¯Êı¾İ
+	 * æŸ¥è¯¢æ•°æ®
 	 * 
 	 * @param sql
 	 * @return
@@ -164,7 +161,7 @@ public class DBUtil {
 			dbModel.setResultSet(rs);
 		} catch (Exception e) {
 			// e.printStackTrace();
-			System.out.println("Ö´ĞĞÊ§°Üsql:" + sql);
+			System.out.println("æ‰§è¡Œå¤±è´¥sql:" + sql);
 		} finally {
 			try {
 				if (rs != null)
@@ -181,7 +178,7 @@ public class DBUtil {
 	}
 
 	/**
-	 * ¸üĞÂÊı¾İ
+	 * æ›´æ–°æ•°æ®
 	 * 
 	 * @param jndi
 	 * @param Sql
@@ -195,7 +192,7 @@ public class DBUtil {
 			i = stat.executeUpdate(sql);
 		} catch (Exception e) {
 			// e.printStackTrace();
-			System.out.println("Ö´ĞĞÊ§°Üsql:" + sql);
+			System.out.println("æ‰§è¡Œå¤±è´¥sql:" + sql);
 		} finally {
 			try {
 				if (stat != null)
@@ -208,7 +205,7 @@ public class DBUtil {
 	}
 
 	/**
-	 * ¸üĞÂÊı¾İ
+	 * æ›´æ–°æ•°æ®
 	 * 
 	 * @param jndi
 	 * @param sql
@@ -224,7 +221,7 @@ public class DBUtil {
 			i = stat.executeUpdate(sql);
 		} catch (Exception e) {
 			// e.printStackTrace();
-			System.out.println("Ö´ĞĞÊ§°Üsql:" + sql);
+			System.out.println("æ‰§è¡Œå¤±è´¥sql:" + sql);
 		} finally {
 			try {
 				if (stat != null)
@@ -239,7 +236,7 @@ public class DBUtil {
 	}
 
 	/**
-	 * ¸üĞÂÊı¾İ
+	 * æ›´æ–°æ•°æ®
 	 * 
 	 * @param sql
 	 * @return
@@ -254,7 +251,7 @@ public class DBUtil {
 			i = stat.executeUpdate(sql);
 		} catch (Exception e) {
 			// e.printStackTrace();
-			System.out.println("Ö´ĞĞÊ§°Üsql:" + sql);
+			System.out.println("æ‰§è¡Œå¤±è´¥sql:" + sql);
 		} finally {
 			try {
 				if (stat != null)
