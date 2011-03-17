@@ -93,6 +93,8 @@ public class MapManager {
 
 	/**
 	 * 根据地點名稱的搜索出该地图的经纬
+	 * mapkey可以为null或者“”
+	 *
 	 * 
 	 * @param address
 	 * @param mapKey
