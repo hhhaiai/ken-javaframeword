@@ -43,7 +43,8 @@ public final class DBModel extends ArrayList<DBRowModel> {
 			while (rs.next()) {
 				// 防止数据溢出
 				if (i > 50000) {
-					System.out.println("查询数据 >50000行，安全机制防止溢出！");
+					System.out
+							.println("查询数据 >50000行，安全机制防止溢出,只是显示部分数据！请才用分页查询！");
 					break;
 				}
 
@@ -56,6 +57,32 @@ public final class DBModel extends ArrayList<DBRowModel> {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * 从xml中获取数据
+	 * 
+	 * @param xml
+	 */
+	public void setXmlValue(String xml) {
+		boolean b = true;
+
+		List<Element> elementList = XmlUitl.getAllElement(XmlUitl
+				.string2Document(xml).getRootElement(), "node");
+		for (Element ele : elementList) {
+			List<Element> arrList = XmlUitl.getAllElement(ele, "key");
+			DBRowModel dbRowModel = new DBRowModel();
+			for (Element keyElement : arrList) {
+				if (b) {
+					columnName.clear();
+					columnName.add(keyElement.attributeValue("label"));
+				}
+				dbRowModel.put(keyElement.attributeValue("label"), keyElement
+						.getText());
+				b = false;
+			}
+			this.add(dbRowModel);
 		}
 	}
 
@@ -85,8 +112,8 @@ public final class DBModel extends ArrayList<DBRowModel> {
 
 		for (int j = 0; j < this.size(); j++) {
 			// 防止数据溢出
-			if (j > 1000) {
-				System.out.println("生成xml数据 >1000行，安全机制防止溢出！");
+			if (j > 2000) {
+				System.out.println("查询数据 >2000行，安全机制防止溢出,只是显示部分数据！请才用分页查询！");
 				break;
 			}
 
@@ -169,5 +196,4 @@ public final class DBModel extends ArrayList<DBRowModel> {
 		if (!columnName.contains(column_name))
 			columnName.add(column_name);
 	}
-
 }
