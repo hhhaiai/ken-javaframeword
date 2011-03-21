@@ -323,6 +323,10 @@ public class XmlUitl {
 		return true;
 	}
 
+	public static byte[] compressXml(String xml) {
+		return null;
+	}
+
 	public static void main(String args[]) {
 		try {
 			List<Element> list = XmlUitl
