@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:PopUpButton xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				xmlns:s="library://ns.adobe.com/flex/spark" 
+				xmlns:mx="library://ns.adobe.com/flex/mx" 
+				creationComplete="popupbutton1_creationCompleteHandler(event)" 
+				openAlways="true">
+	<fx:Declarations>
+		<fx:XML id="xml" xmlns="">
+			<menus>
+				<menu label="测试" />
+			</menus>
+		</fx:XML>
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import mx.controls.Alert;
+			import mx.events.FlexEvent;
+			import mx.events.ListEvent;
+			import mx.events.MenuEvent;
+		  
+			/**
+			 * 异步方法  funcion(XML)
+			 * */
+			public var method:Function;
+			
+			private function popupbutton1_creationCompleteHandler(event:FlexEvent):void
+			{
+				if(xml.child("menu").length()!=0){
+					this.label=xml.child("menu")[0].@label;
+				}
+			}
+			
+			protected function itenClickEvent(event:MenuEvent):void{
+				if(method==null){
+					Alert.show("没有配置异步方法","提示");
+				}
+				this.label=XML(event.item).@label;
+				method.call(this, XML(event.item));
+			}
+		]]>
+	</fx:Script>
+	<mx:popUp>
+		<mx:Menu id="menu" dataProvider="{xml.menu}" labelField="@label" itemClick="itenClickEvent(event)"/>
+	</mx:popUp>
+</mx:PopUpButton>
