@@ -19,6 +19,22 @@ package com.shine.framework.core.model
 			super();
 		}
 		
+		/**
+		 * 初始xml model的值
+		 * 
+		 * value=<node key1="value1" key2="value2" key3="value3" />
+		 * */
+		public function initBaseXmlValue(value:String):void{
+			xml=value;
+			this.removeAll();
+			var xmlData:XML=XML(value);
+			var length:int=xmlData.attributes().length();
+			for(var i:int=0;i<length;i++){
+				var xmlValue:XML=XML(xmlData.attributes()[i]);
+				this.put(xmlValue.name().toString(),xmlValue.toString());
+			}
+		}
+		
 		//获取xml的数据结构 <node key1="value1" key2="value2" key3="value3" />
 		public function getBaseXmlValue():String{
 			var xmlData:StringBuffer=new StringBuffer;
@@ -31,6 +47,21 @@ package com.shine.framework.core.model
 			return xmlData.toString();
 		}
 		
+		
+		/**
+		 * 初始xml model的值
+		 * 
+		 * value=<node><key1>value1</key1><key2>value2</key2><key3>value3</key3></node>
+		 * */
+		public function initXmlValue(value:String):void{
+			xml=value;
+			this.removeAll();
+			var xmlData:XML=XML(value);
+			for each(var nodeXml:XML in xmlData.children()){
+				this.put(nodeXml.name().toString(),nodeXml.toString());
+			}
+		}
+		
 		//获取xml的数据结构 <node><key1>value1</key1><key2>value2</key2><key3>value3</key3></node>
 		public function getXmlValue():String{
 			var xml:XML=XML("<node />");
@@ -40,20 +71,6 @@ package com.shine.framework.core.model
 				xml.appendChild(keyXml);
 			}
 			return xml.toXMLString();
-		}
-		
-		/**
-		 * 初始xml model的值
-		 * */
-		public function initXmlValue(value:String):void{
-			xml=value;
-			this.removeAll();
-			var xmlData:XML=XML(value);
-			var length:int=xmlData.attributes().length();
-			for(var i:int=0;i<length;i++){
-				var xmlValue:XML=XML(xmlData.attributes()[i]);
-				this.put(xmlValue.name().toString(),xmlValue.toString());
-			}
 		}
 		
 		//由key获取String value
