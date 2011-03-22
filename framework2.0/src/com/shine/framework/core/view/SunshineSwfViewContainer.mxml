@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+-->
+<view:BaseSimpleContainer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+						  xmlns:s="library://ns.adobe.com/flex/spark" 
+						  xmlns:mx="library://ns.adobe.com/flex/mx" 
+						  xmlns:view="com.shine.framework.core.view.*">
+	<view:layout>
+		<s:BasicLayout/>
+	</view:layout>
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import com.shine.framework.core.util.ReferenceUtil;
+			
+			import mx.core.Application;
+			import mx.events.FlexEvent;
+			import mx.managers.SystemManager;
+			import mx.controls.Alert;
+			
+			//加载的url地址
+			[Bindable]
+			public var swfUrl:String;
+			//加载完需要执行的方法
+			public var method:Function;
+			//如果是flex使用
+			[Bindable]
+			private var flexApp:Application;
+			//加载url的类型  type="flash" or type="flex"
+			[Bindable]
+			public var type:String="flex";
+			//如果是flash使用
+			[Bindable]
+			private var flashApp:MovieClip;
+			
+			
+			private function swfloader_CompleteHandler(event:Event):void
+			{
+				if(type=="flex"){
+					var formAppSystemManager:SystemManager=SystemManager(event.currentTarget.content);
+					formAppSystemManager.addEventListener(FlexEvent.APPLICATION_COMPLETE, formApp_ApplicationCompleteHandler);
+				}else if(type=="flash"){
+					this.flashApp=this.swfLoader.content as MovieClip;
+					callMethod(this.flashApp);
+				}
+			}
+			
+			private function formApp_ApplicationCompleteHandler(event:Event):void
+			{
+				this.flexApp=Application(event.target.application);
+				callMethod(this.flexApp);
+			}
+			
+			private function callMethod(value:Object):void{
+				this.completeLoading();
+				if(method!=	null)
+					method.call(this,value);
+			}
+			
+			public function execute(methodName:String,... rest):void{
+				if(type=="flex"){
+					if(this.flexApp!=null){
+						ReferenceUtil.referenceObjectFunction(this.flexApp,methodName,rest);
+					}else{
+						Alert.show("flex没初始化","错误");
+					}
+				}else if(type=="flash"){
+					if(this.flashApp!=null){
+						ReferenceUtil.referenceObjectFunction(this.flashApp,methodName,rest);
+					}else{
+						Alert.show("flash没初始化","错误");
+					}
+				}
+			}
+			
+			public function getFlexApp():Application{
+				if(this.flexApp!=null){
+					return this.flexApp;
+				}else{
+					Alert.show("flex没初始化","错误");
+					return null;
+				}
+			}
+			
+			public function getFlashApp():MovieClip{
+				if(this.flashApp!=null){
+					return this.flashApp;
+				}else{
+					Alert.show("flash没初始化","错误");
+					return null;
+				}
+			}
+		]]>
+	</fx:Script>
+	<mx:SWFLoader id="swfLoader" width="{this.width}" height="{this.height}"  source="{swfUrl}" complete="swfloader_CompleteHandler(event)" />
+</view:BaseSimpleContainer>

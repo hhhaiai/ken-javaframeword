@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:DataGrid xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			 xmlns:s="library://ns.adobe.com/flex/spark" 
+			 xmlns:mx="library://ns.adobe.com/flex/mx" 
+			 creationComplete="datagrid_creationCompleteHandler(event)">
+	<fx:Declarations>
+		<fx:XML id="titleXml" xmlns="">
+			<nodes>
+				<node width="20">
+					<ename>key1</ename>
+					<cname>key1</cname>
+				</node>
+				<node width="30%">
+					<ename>key2</ename>
+					<cname>key2</cname>
+				</node>
+			</nodes>
+		</fx:XML>
+		<fx:XML id="xml" xmlns="">
+			<nodes>
+				<node>
+					<key1>value1</key1>
+					<key2>value2</key2>
+				</node>
+			</nodes>
+		</fx:XML>
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import com.shine.framework.core.model.BaseXmlModel;
+			import com.shine.framework.core.util.DataUtil;
+			
+			import mx.controls.Alert;
+			import mx.controls.dataGridClasses.DataGridColumn;
+			import mx.events.FlexEvent;
+			
+			import spark.components.TextArea;
+			
+			public var downloadPolicy:String="off";
+
+			//初始化
+			private function datagrid_creationCompleteHandler(event:FlexEvent):void
+			{
+				var titleArray:Array=new Array;
+				
+				if(titleXml!=null){
+					for each (var xml:XML in titleXml.node)
+					{
+						var dataGridColumn:DataGridColumn=new DataGridColumn;
+						dataGridColumn.dataField=XML(xml.ename).toString();
+						dataGridColumn.headerText=XML(xml.cname).toString();
+						if(xml.@width!=null&&String(xml.@width).length!=0){
+							if(String(xml.@width).indexOf("%")!=-1){
+								dataGridColumn.width=this.width*int(DataUtil.StringReplaceAll(String(xml.@width),"%",""));
+							}else{
+								dataGridColumn.width=int(xml.@width);
+							}
+						}
+						dataGridColumn.itemRenderer=new ClassFactory(com.shine.framework.core.view.HTMLDataGridRenderer);
+						titleArray.push(dataGridColumn);
+						dataGridColumn=null;
+					}
+					this.columns=titleArray;
+					titleArray=null;
+				}
+				this.dataProvider=xml.children();
+				initRightContext();
+			}
+			
+			//通过model加入新的一行
+			public function addRowByModel(value:BaseXmlModel):void{
+				var dataXml:XML=this.xml.appendChild(XML(value.getXmlValue()));
+				this.dataProvider=dataXml.children();
+			}
+			
+			//直接把数值插入新的一行
+			public function addRowByValue(...arg):void{
+				var num:int=arg.length;
+				var xmllist:XMLList=this.titleXml.children();
+				if(num==xmllist.length()){
+					var model:BaseXmlModel=new BaseXmlModel;
+					for(var i:int=0;i<num;i++){
+						model.put(XML(XML(xmllist[i]).child("ename")).toString(),arg[i]);
+					}
+					addRowByModel(model);
+					model=null;
+				}else{
+					Alert.show("行数据不正确","提示");
+				}
+			}
+			
+			public function cleanDataGridRow():void{
+				this.xml=XML("<nodes />");
+			}
+			
+			//空白处右键
+			private function initRightContext():void
+			{
+				var contextMenu:ContextMenu=new ContextMenu();
+				contextMenu.hideBuiltInItems();
+				
+				if (downloadPolicy == "on")
+				{
+					var saveExcelContextMenuItem:ContextMenuItem=new ContextMenuItem("导出为Excel");
+					saveExcelContextMenuItem.addEventListener(ContextMenuEvent.MENU_ITEM_SELECT, saveExcel);
+					contextMenu.customItems.push(saveExcelContextMenuItem);
+				}
+				
+				this.contextMenu=contextMenu;
+			}
+			
+			private function saveExcel(event:ContextMenuEvent):void
+			{
+				//loadDGInExcel(this, 'http://127.0.0.1:8080/SaleSystem/services/ExcelExport.jsp');
+				loadDGInExcelBySave(this);
+			}
+		]]>
+	</fx:Script>
+	<fx:Script>
+		<![CDATA[
+			/**
+			 * Simple script to convert a Datagrid to a HTML table and then
+			 * pass it on to an external excel exporter
+			 *
+			 */
+			
+			//Libs that are mostly used
+			//(only a number are necessary for the datagrid conversion and export)
+			import flash.errors.*;
+			import flash.events.*;
+			import flash.external.*;
+			import flash.net.URLRequest;
+			import flash.net.URLVariables;
+			
+			/**
+			 * Convert the datagrid to a html table
+			 * Styling etc. can be done externally
+			 *
+			 * @param: dg Datagrid Contains the datagrid that needs to be converted
+			 * @returns: String
+			 */
+			private function convertDGToHTMLTable(dg:DataGrid):String
+			{
+				//Set default values
+				var font:String=dg.getStyle('fontFamily');
+				var size:String=dg.getStyle('fontSize');
+				var str:String='';
+				var colors:String='';
+				var style:String='style="font-family:' + font + ';font-size:' + size + 'pt;"';
+				var hcolor:Array;
+				
+				//Retrieve the headercolor
+				if (dg.getStyle("headerColor") != undefined)
+				{
+					hcolor=[dg.getStyle("headerColor")];
+				}
+				else
+				{
+					hcolor=dg.getStyle("headerColors");
+				}
+				
+				//Set the htmltabel based upon knowlegde from the datagrid
+				//flex3
+				//str+='<table width="' + dg.width + '" border="1"><thead><tr width="' + dg.width + '" style="background-color:#' + Number((hcolor[0])).toString(16) + '">';
+				//flex4
+				str+='<table width="' + dg.width + '" border="1"><thead><tr width="' + dg.width + '" style="background-color:#' + 0xffffff.toString(16) + '">';
+				
+				//Set the tableheader data (retrieves information from the datagrid header
+				for (var i:int=0; i < dg.columns.length; i++)
+				{
+					colors=dg.getStyle("themeColor");
+					
+					if (dg.columns[i].headerText != undefined)
+					{
+						str+="<th " + style + ">" + dg.columns[i].headerText + "</th>";
+					}
+					else
+					{
+						str+="<th " + style + ">" + dg.columns[i].dataField + "</th>";
+					}
+				}
+				str+="</tr></thead><tbody>";
+				colors=dg.getStyle("alternatingRowColors");
+				
+				//Loop through the records in the dataprovider and
+				//insert the column information into the table
+				for (var j:int=0; j < dg.dataProvider.length; j++)
+				{
+					str+="<tr width=\"" + Math.ceil(dg.width) + "\">";
+					
+					for (var k:int=0; k < dg.columns.length; k++)
+					{
+						
+						//Do we still have a valid item?
+						if (dg.dataProvider.getItemAt(j) != undefined && dg.dataProvider.getItemAt(j) != null)
+						{
+							
+							//Check to see if the user specified a labelfunction which we must
+							//use instead of the dataField
+							if (dg.columns[k].labelFunction != undefined)
+							{
+								str+="<td width=\"" + Math.ceil(dg.columns[k].width) + "\" " + style + ">" + dg.columns[k].labelFunction(dg.dataProvider.getItemAt(j), dg.columns[k].dataField) + "</td>";
+								
+							}
+							else
+							{
+								//Our dataprovider contains the real data
+								//We need the column information (dataField)
+								//to specify which key to use.
+								str+="<td width=\"" + Math.ceil(dg.columns[k].width) + "\" " + style + ">" + dg.dataProvider.getItemAt(j)[dg.columns[k].dataField] + "</td>";
+							}
+						}
+					}
+					str+="</tr>";
+				}
+				str+="</tbody></table>";
+				
+				return str;
+			}
+			
+			/**
+			 * Load a specific datagrid into Excel
+			 * This method passes the htmltable string to an backend script which then
+			 * offers the excel download to the user.
+			 * The reason for not using a copy to clipboard and then javascript to
+			 * insert it into Excel is that this mostly will fail because of the user
+			 * setup (Webbrowser configuration).
+			 *
+			 * @params: dg Datagrid The Datagrid that will be loaded into Excel
+			 * @params: url String The location of the excel export file
+			 */
+			private function loadDGInExcel(dg:DataGrid, url:String):void
+			{
+				
+				//Pass the htmltable in a variable so that it can be delivered
+				//to the backend script
+				var variables:URLVariables=new URLVariables();
+				variables.htmltable=convertDGToHTMLTable(dg);
+				
+				//Setup a new request and make sure that we are
+				//sending the data through a post
+				var u:URLRequest=new URLRequest(url);
+				u.data=variables; //Pass the variables
+				u.method=URLRequestMethod.POST; //Don't forget that we need to send as POST
+				
+				//Navigate to the script
+				//We can use _self here, since the script will through a filedownload header
+				//which results in offering a download to the user (and still remaining in you Flex app.)
+				navigateToURL(u, "_self");
+			}
+			
+			private function loadDGInExcelBySave(dg:DataGrid):void
+			{
+				var ba:ByteArray=new ByteArray;
+				ba.writeUTF(convertDGToHTMLTable(dg));
+				var _fileRef:FileReference=new FileReference();
+				_fileRef.save(ba, "data.xls"); //保存到磁盘，会出现个系统保存对话框。
+				ba.clear();
+			}
+		]]>
+	</fx:Script>
+</mx:DataGrid>

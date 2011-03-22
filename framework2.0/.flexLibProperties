@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<flexLibProperties includeAllClasses="true" version="3">
+  <includeClasses>
+    <classEntry path="com.shine.framework.core.view.HTMLToolTip"/>
+    <classEntry path="com.shine.framework.core.util.BaseHttpServiceUtil"/>
+    <classEntry path="com.shine.framework.core.view.SunshineSwfViewContainer"/>
+    <classEntry path="com.shine.framework.core.view.SunshineDataGrid"/>
+    <classEntry path="com.shine.framework.remoteService.RoService"/>
+    <classEntry path="com.shine.framework.core.util.EffectsUtil"/>
+    <classEntry path="com.shine.framework.remoteService.component.RoServiceComponent"/>
+    <classEntry path="com.shine.framework.remoteService.util.RemoteServiceUtil"/>
+    <classEntry path="com.shine.framework.log.Loggor"/>
+    <classEntry path="com.shine.framework.core.service.BaseService"/>
+    <classEntry path="com.shine.flexcoffer.util.BaseRoServiceUtil"/>
+    <classEntry path="com.shine.flexcoffer.view.RoServiceComponent"/>
+    <classEntry path="com.shine.flexcoffer.util.BaseBeanShellUtil"/>
+    <classEntry path="com.shine.flexcoffer.view.BeanShellComponent"/>
+    <classEntry path="com.shine.framework.core.view.SunshineToolContainer"/>
+    <classEntry path="com.shine.framework.core.control.MainControl"/>
+    <classEntry path="com.shine.framework.component.view.ComponentViewStack"/>
+    <classEntry path="com.shine.framework.component.view.NavigatorComponent"/>
+    <classEntry path="com.shine.flexcoffer.view.UploadFileContainer"/>
+    <classEntry path="com.shine.flexcoffer.view.FileDownloadContainer"/>
+    <classEntry path="com.shine.topo.view.node.BaseNodeContainer"/>
+    <classEntry path="com.shine.framework.security.SecurityUtil"/>
+    <classEntry path="com.shine.topo.view.group.BaseGroupContainer"/>
+  </includeClasses>
+  <includeResources/>
+  <namespaceManifests/>
+</flexLibProperties>

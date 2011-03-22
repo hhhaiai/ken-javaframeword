@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   base simple conntainer
+
+   @author viruscodecn@gmail.com
+   @project FlexFramework 2.0 2011-01-11
+-->   
+<s:SkinnableContainer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+					  xmlns:s="library://ns.adobe.com/flex/spark" 
+					  xmlns:mx="library://ns.adobe.com/flex/mx"
+					  initialize="loadInit()">
+	<s:layout>
+		<s:BasicLayout/>
+	</s:layout>
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import com.shine.framework.core.view.HTMLToolTip;
+			
+			import flash.utils.*;
+			
+			import mx.collections.ArrayCollection;
+			import mx.controls.Alert;
+			import mx.controls.Image;
+			import mx.core.UIComponent;
+			import mx.events.FlexEvent;
+			import mx.graphics.codec.IImageEncoder;
+			import mx.graphics.codec.JPEGEncoder;
+			import mx.managers.ToolTipManager;
+			
+			import org.bytearray.gif.player.GIFPlayer;
+			
+			private var loading:Image;
+			private var myGIFPlayer:GIFPlayer=new GIFPlayer(true);
+			
+			//加载的动态gif
+			public var gifUrl:String="resource/image/config/canvasLoading.gif";
+			//加载图片的宽
+			public var gifWidth:Number=50;
+			//加载图片的高
+			public var gifHeight:Number=50;
+			
+			//自动刷新
+			public var autoRefreshPolicy:String="off";
+			public var autoRefreshTime:String="60000";
+			public var autoRefreshMethod:Function;
+			
+			//移动性
+			public var moveable:Boolean=false;
+			
+			//是否给予下载图片
+			public var dowloadPicturePolicy:String="off";
+			public var dowloadPictureName:String="save.jpg";
+			
+			//toop Type toopTipType="text" or toopTipType="html"
+			public var toopTipType:String="text";
+			
+			public function loadInit():void
+			{
+				loading=new Image;
+				loading.width=gifWidth;
+				loading.height=gifHeight;
+				loading.x=0;
+				loading.y=0;
+				
+				var request:URLRequest=new URLRequest(gifUrl);
+				myGIFPlayer.load(request);
+				myGIFPlayer.visible=true;
+				
+				loading.addChild(myGIFPlayer);
+				this.addElement(loading);
+				this.enabled=false;
+				
+				//初始化自动刷新
+				if (autoRefreshPolicy == "on")
+				{
+					setTimeout(autoRefresh, 800);
+				}
+				
+				//初始化提示
+				if(toopTipType=="html"){
+					ToolTipManager.toolTipClass = HTMLToolTip;
+				}
+				
+				this.addEventListener(flash.events.MouseEvent.MOUSE_DOWN, dragBegin);
+				this.addEventListener(flash.events.MouseEvent.MOUSE_UP, dragEnd);
+				this.addEventListener(FlexEvent.CREATION_COMPLETE, loadingComplete);
+				
+				initDowloadPic();
+			}
+
+			private function loadingComplete(event:FlexEvent):void
+			{
+				loading.x=this.width / 2 - gifWidth/2;
+				loading.y=this.height / 2 - gifHeight/2;
+			}
+			
+			//自动刷新
+			public function autoRefresh():void
+			{
+				var time:Number=Number(autoRefreshTime) * 1000;
+				var timer:Timer=new Timer(time);
+				timer.addEventListener(TimerEvent.TIMER, onTimer);
+				timer.start();
+			}
+			
+			//定时刷新执行方法
+			public function onTimer(event:TimerEvent):void
+			{
+				if (autoRefreshMethod != null)
+				{
+					autoRefreshMethod.call(this);
+				}
+				else
+				{
+					Alert.show("自动刷新函数为空","提示");
+				}
+			}
+			
+			//开始延时加载
+			public function startLoading():void
+			{
+				loading.x=this.width / 2 - gifWidth/2;
+				loading.y=this.height / 2 - gifHeight/2;
+				loading.visible=true;
+				this.enabled=false;
+			}
+			
+			//完成延时加载
+			public function completeLoading():void
+			{
+				loading.visible=false;
+				this.enabled=true;
+			}
+			
+			//开始拖动
+			protected function dragBegin(event:MouseEvent):void
+			{
+				if (moveable)
+				{
+					this.startDrag(false);
+				}
+				
+				event.stopPropagation();
+			}
+			
+			//结束拖动
+			protected function dragEnd(event:MouseEvent):void
+			{
+				if (moveable)
+				{
+					this.stopDrag();
+				}
+				
+				event.stopPropagation();
+			}
+			
+			//延迟执行
+			protected function delayFunction(closure:Function, delay:Number, ... arguments):void
+			{
+				setTimeout(closure, delay, arguments);
+			}
+			
+			//初始化保存图片菜单
+			private function initDowloadPic():void
+			{
+				if (dowloadPicturePolicy == "on")
+				{
+					var _contextMenu:ContextMenu=new ContextMenu;
+					_contextMenu.hideBuiltInItems();
+					
+					var savePicContextMenuItem:ContextMenuItem=new ContextMenuItem("保存为图片");
+					savePicContextMenuItem.addEventListener(ContextMenuEvent.MENU_ITEM_SELECT, savePicContextMenu);
+					_contextMenu.customItems.push(savePicContextMenuItem);
+					
+					this.contextMenu=_contextMenu;
+					
+				}
+			}
+			
+			//保存图片
+			public function savePicContextMenu(event:ContextMenuEvent):void
+			{
+				var bitmapData:BitmapData=getBitmapData(UIComponent(this));
+				var _fileRef:FileReference=new FileReference(); //用于保存文件
+				var _encoder:IImageEncoder=new JPEGEncoder(80); //用于编码位图
+				var ba:ByteArray=_encoder.encode(bitmapData); //编码成JPG图片，质量为80
+				_fileRef.save(ba, dowloadPictureName); //保存到磁盘，会出现个系统保存对话框。
+				ba.clear();
+			}
+			
+			//protected function savePic
+			
+			//生成字节码
+			private function getBitmapData(target:UIComponent):BitmapData
+			{
+				var bd:BitmapData=new BitmapData(target.width, target.height);
+				var m:Matrix=new Matrix();
+				bd.draw(target, m);
+				return bd;
+			}
+			
+			//获取所有子元素的list
+			public function getAllElements():ArrayCollection{
+				var elements:ArrayCollection=new ArrayCollection;
+				for(var i:int=0;i<this.numElements;i++){
+					elements.addItem(this.getElementAt(i));
+				}
+				return elements;
+			}
+			
+			//UI的即时更新
+			public function updateUI():void{
+				this.width=this.width-10;
+				this.height=this.height-10;
+				
+				this.callLater(updateUICallLast);
+			}
+			
+			private function updateUICallLast():void{
+				this.width=this.width+10;
+				this.height=this.height+10;
+			}
+		]]>
+	</fx:Script>
+</s:SkinnableContainer>

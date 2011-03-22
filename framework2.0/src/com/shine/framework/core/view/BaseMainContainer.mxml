@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   base Main conntainer
+   
+   @author viruscodecn@gmail.com
+   @project FlexFramework 2.0 2011-01-11
+-->
+<view:BaseSimpleContainer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+						  xmlns:s="library://ns.adobe.com/flex/spark" 
+						  xmlns:mx="library://ns.adobe.com/flex/mx"
+						  xmlns:view="com.shine.framework.core.view.*"
+						  initialize="{loadMainContainerInit()}"
+						  creationComplete="{completeLoadMainContainerInit()}">
+	<view:layout>
+		<s:VerticalLayout />
+	</view:layout>
+	<fx:Declarations>
+		<fx:XMLList id="memuXml" xmlns="">
+			<menuitem label="File">
+				<menuitem label="file"/>
+				<menuitem label="out"/>
+			</menuitem>
+			<menuitem label="about"/>
+		</fx:XMLList>
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import com.shine.framework.core.util.UrlParametersArrayCollection;
+			
+			import mx.controls.Alert;
+			import mx.controls.MenuBar;
+			import mx.events.MenuEvent;
+			
+			[Bindable]
+			private var _url:String="";
+			[Bindable]
+			private var urlParametersArraytCollection:com.shine.framework.core.util.UrlParametersArrayCollection=new UrlParametersArrayCollection;
+			
+			//内置memu管理
+			[Bindable]
+			public var memuPolicy:String="off";
+			public var menuBar:MenuBar;
+			//menu单击处理事件
+			public var menuItemFunction:Function;
+			
+			private function loadMainContainerInit():void{
+				if(memuPolicy=="on"){
+					menuBar=new MenuBar;
+					menuBar.x=0;
+					menuBar.y=0;
+					menuBar.height=30;
+					menuBar.labelField="@label";
+					menuBar.dataProvider=memuXml;
+					menuBar.addEventListener(MenuEvent.ITEM_CLICK,menuClick);
+					this.addElement(menuBar);
+				}
+			}
+			
+			/** 
+			 *设置menu的宽度
+			 */
+			private function completeLoadMainContainerInit():void{
+				if(menuBar!=null)
+				     menuBar.width=this.width;
+			}
+			
+			/**
+			 *  memu事件注册
+			 * 
+			 * function 结构
+			 * private function show(value:String):void{
+			 *	Alert.show("123"+value);
+			 *  }
+			 */
+			private function menuClick(event:MenuEvent):void{
+				if(menuItemFunction!=null)
+				    menuItemFunction.call(this,XML(event.item).toXMLString());
+				else
+					Alert.show(XML(event.item).toXMLString());
+			}
+			
+			public function get url():String
+			{
+				return _url;
+			}
+
+			public function set url(value:String):void
+			{
+				_url = value;
+				urlParametersArraytCollection.analysisParameters(value);
+			}
+			
+			public function getUrlParameters(value:String):String{
+				return urlParametersArraytCollection.getParameters(value);
+			}
+			
+		]]>
+	</fx:Script>
+</view:BaseSimpleContainer>

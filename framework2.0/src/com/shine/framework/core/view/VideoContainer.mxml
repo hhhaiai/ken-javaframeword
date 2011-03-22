@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<view:BaseSimpleContainer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+						  xmlns:s="library://ns.adobe.com/flex/spark" 
+						  xmlns:mx="library://ns.adobe.com/flex/mx" 
+						  xmlns:view="com.shine.framework.core.view.*" 
+						  creationComplete="{complete()}" 
+						  dowloadPicturePolicy="on">
+	<view:layout>
+		<s:BasicLayout/>
+	</view:layout>
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import flash.media.Camera;
+			import flash.media.Video;
+			
+			import mx.controls.Alert;
+			
+			public var camera:Camera;
+			public var video:Video; 
+			
+			private function complete():void{
+				this.completeLoading();
+				
+				camera=Camera.getCamera(); 
+				if(camera==null) 
+				{ 
+					Alert.show("No Camera!","Warning"); 
+					return; 
+				}
+				
+
+				var videoWidth:Number=0;
+				var videoHeight:Number=0;
+				
+				if(camera.width*this.height/camera.height>this.width){
+					videoWidth=this.width;
+					videoHeight=camera.height*this.width/camera.width;
+				}else{
+					videoWidth=camera.width*this.height/camera.height;
+					videoHeight=this.height;
+				}
+				
+				video=new Video(videoWidth, videoHeight);
+				video.attachCamera(camera); 
+				videoHoler.addChild(video);
+			}
+		]]>
+	</fx:Script>
+	<s:SpriteVisualElement id="videoHoler" width="100%" height="100%" />
+</view:BaseSimpleContainer>

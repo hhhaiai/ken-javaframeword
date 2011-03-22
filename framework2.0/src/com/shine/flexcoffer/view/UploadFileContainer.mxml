@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<view:BaseSimpleContainer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+						  xmlns:s="library://ns.adobe.com/flex/spark" 
+						  xmlns:mx="library://ns.adobe.com/flex/mx" 
+						  xmlns:view="com.shine.framework.core.view.*" 
+						  width="200" height="120" 
+						  creationComplete="{uploadFileComplete()}">
+	<view:layout>
+		<s:BasicLayout/>
+	</view:layout>
+	<fx:Declarations>
+		<s:RemoteObject id="upload" destination="uploadFile" endpoint="messagebroker/amf" result="getRomoteHelloRes(event)"/>
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import flash.events.Event;
+			import flash.net.FileFilter;
+			import flash.net.FileReference;
+			
+			import mx.controls.Alert;
+			import mx.events.CloseEvent;
+			import mx.managers.PopUpManager;
+			import mx.rpc.events.FaultEvent;
+			import mx.rpc.events.ResultEvent;
+			
+			private var fileRef:FileReference = new FileReference();
+			
+			[Bindable]
+			public var fileName:String="";
+			
+			[Bindable]
+			public var fileType:String="*.*";
+			
+			[Bindable]
+			public var filePath:String="";
+			
+			private function uploadFileComplete():void{
+				this.completeLoading();
+			}
+			
+			private function pickFile(evt:MouseEvent):void
+			{
+				var imageTypes:FileFilter = new FileFilter("文件 ("+fileType+")", fileType);
+				var allTypes:Array = new Array(imageTypes);
+				fileRef.addEventListener(Event.SELECT, selectHandler);        
+				fileRef.addEventListener(ProgressEvent.PROGRESS, progressHandler);
+				fileRef.addEventListener(Event.COMPLETE, completeHandler); 
+				try{
+					fileRef.browse(allTypes);
+				}catch (error:Error){
+					Alert.show("Unable to browse for files."+error.toString(),"提示");
+				}
+			}
+			
+			private function progressHandler(evt:ProgressEvent):void
+			{
+				lb_progress.text = " 已上传 " + (evt.bytesLoaded/1024).toFixed(2)+ " K，共 " + (evt.bytesTotal/1024).toFixed(2) + " K";
+				var proc: uint = evt.bytesLoaded / evt.bytesTotal * 100;
+				progress.setProgress(proc, 100);
+				progress.label= "当前进度: " + " " + proc + "%";
+			}
+			
+			private function selectHandler(evt:Event):void
+			{    
+				fileRef.load();
+			}
+			
+			private function completeHandler(evt:Event):void{
+				if(filePath.length!=0){
+					this.fileName=fileRef.name;
+					upload.uploadFile(fileRef.data,filePath,fileRef.name);
+				}
+				else
+					Alert.show("请设置文件上传路径");
+			} 
+			
+			private function getRomoteHelloRes(e:ResultEvent):void
+			{
+				Alert.show("上传完成");
+			}
+			
+			private function clean():void{
+				progress.setProgress(0, 100);
+				lb_progress.text="";
+				this.fileName="";
+			}
+		]]>
+	</fx:Script>
+	<s:VGroup id="vGroup" width="100%" height="100%" gap="0">
+		<s:HGroup id="hTool" width="100%" height="30" gap="0">
+			<s:Button label="上传文件"  click="pickFile(event)" />
+			<s:Button label="清除" click="{clean()}" />
+		</s:HGroup>
+		<s:Scroller id="scroller" width="100%" height="100%">
+			<s:VGroup id="fileGroup" width="100%" height="{vGroup.height-30}" gap="0">
+				<mx:ProgressBar id="progress"  width="100%" height="40" mode="manual" />
+				<s:Label id="lb_progress" width="100%" height="30" />
+			</s:VGroup>
+		</s:Scroller>
+	</s:VGroup>
+</view:BaseSimpleContainer>

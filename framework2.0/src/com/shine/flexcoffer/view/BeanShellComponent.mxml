@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+@author:viruscodecn
+@email viruscodecn@gmail.com
+@url http://code.google.com/p/flexcoffee/
+@date 07/24/2010
+@version flexcoffee 1.0
+-->
+<!--
+<beanshell:BaseBeanShellUtil id="beanShell"
+object="{this}"
+autoRun="off"
+method="{showBeanShellResult}">
+<beanshell:code>
+String result="java println"+#value#;
+System.out.println(result);
+</beanshell:code>
+</beanshell:BaseBeanShellUtil>
+-->
+<mx:UIComponent xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				xmlns:s="library://ns.adobe.com/flex/spark" 
+				xmlns:mx="library://ns.adobe.com/flex/mx" 
+				creationComplete="{complete()}">
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import com.shine.flexcoffer.util.BaseBeanShellUtil;
+			
+			public var destination:String="";
+			//remote server host
+			public var host:String="";
+			//java code
+			public var code:String="";
+			//return flex method
+			public var method:Function;
+			//auto run java code
+			public var autoRun:String="off";
+			//user java code flex object
+			public var object:Object;
+			//bean shell util
+			public var baseBeanShell:BaseBeanShellUtil;
+			
+			private function complete():void{
+				baseBeanShell=new BaseBeanShellUtil;
+				
+				if(destination.length!=0)
+				  baseBeanShell.destination=destination;
+				
+				if (autoRun == "on")
+					baseBeanShell.beanShell(code, method);
+			}
+		]]>
+	</fx:Script>
+</mx:UIComponent>

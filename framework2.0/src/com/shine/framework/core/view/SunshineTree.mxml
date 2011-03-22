@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Tree xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx"
+		 labelField="@label"
+		 dataProvider="{xml}" 
+		 showRoot="false" 
+		 initialize="{sunshineTreeInit()}">
+	<fx:Declarations>
+		<!-- <node label="" icon="" /> label:是节点的显示的text;icon:是节点图标-->
+		<fx:XML id="xml" xmlns="">
+			<node />
+		</fx:XML>
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import mx.events.FlexEvent;
+			//控制是否动态修改icon标签
+			public var iconControl:Boolean=true;
+			
+			private function sunshineTreeInit():void{
+				if(iconControl)
+				     this.itemRenderer=new ClassFactory(com.shine.framework.core.view.IconTreeRenderer);
+			}
+		]]>
+	</fx:Script>
+</mx:Tree>

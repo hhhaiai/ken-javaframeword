@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+@author:viruscodecn
+@email viruscodecn@gmail.com
+@url http://code.google.com/p/flexcoffee/
+@date 07/24/2010
+@version flexcoffee 2.0
+-->
+<!--
+<roservice:BaseRoServiceUtil id="simpleRoService" 
+host="http://192.168.2.18:8888/nms4"
+classPath="org.analysis.flexcoffee.flexinterface.SimpleTest"
+classMethod="simpleTest"
+method="{simpleReture}"
+value="{['test']}"
+autoRun="off"/>
+-->
+<mx:UIComponent xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				xmlns:s="library://ns.adobe.com/flex/spark" 
+				xmlns:mx="library://ns.adobe.com/flex/mx" 
+				creationComplete="{complete()}">
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			//interface util
+			import com.shine.flexcoffer.util.BaseRoServiceUtil;
+			
+			[Bindable]
+			public var destination:String="";
+			//remote server host
+			[Bindable]
+			public var host:String="";
+			//remote server java class path
+			[Bindable]
+			public var classPath:String="";
+			//remote server java method
+			[Bindable]
+			public var classMethod:String="";
+			//input data to java method
+			[Bindable]
+			public var value:Object;
+			//return to flex method
+			[Bindable]
+			public var method:Function;
+			//auto run java method
+			[Bindable]
+			public var autoRun:String="off";
+			//Roservice util
+			public var baseRoServiceUtil:BaseRoServiceUtil;
+			
+			private function complete():void
+			{
+				baseRoServiceUtil=new BaseRoServiceUtil;
+			}
+			
+			public function run():void
+			{
+				if(destination.length!=0)
+					baseRoServiceUtil.destination=destination;
+				baseRoServiceUtil.method=method;
+				baseRoServiceUtil.loadClass(classPath, classMethod, value); 
+			}
+		]]>
+	</fx:Script>
+</mx:UIComponent>
