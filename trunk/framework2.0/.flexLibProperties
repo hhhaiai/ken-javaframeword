@@ -23,7 +23,14 @@
     <classEntry path="com.shine.flexcoffer.view.FileDownloadContainer"/>
     <classEntry path="com.shine.topo.view.node.BaseNodeContainer"/>
     <classEntry path="com.shine.framework.security.SecurityUtil"/>
-    <classEntry path="com.shine.topo.view.group.BaseGroupContainer"/>
+    <classEntry path="com.shine.framework.DBUtil.model.DBRowModel"/>
+    <classEntry path="com.shine.framework.DBUtil.model.DBModel"/>
+    <classEntry path="com.shine.topo.view.control.BaseControl"/>
+    <classEntry path="com.shine.framework.core.util.XMLUtils"/>
+    <classEntry path="com.shine.topo.view.Line.TopoLine"/>
+    <classEntry path="com.shine.topo.view.label.TopoLabel"/>
+    <classEntry path="com.shine.topo.view.label.LineLabel"/>
+    <classEntry path="com.shine.topo.util.TopoNodeArrayCollection"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>
