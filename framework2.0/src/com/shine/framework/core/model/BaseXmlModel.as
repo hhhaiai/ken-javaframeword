@@ -84,5 +84,10 @@ package com.shine.framework.core.model
 		public function getInt(key:String):int{
 			return int(this.get(key));
 		}
+		
+		//由key获取num value
+		public function getNumber(key:String):int{
+			return Number(this.get(key));
+		}
 	}
 }

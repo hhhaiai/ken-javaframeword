@@ -223,6 +223,16 @@
 				this.width=this.width+10;
 				this.height=this.height+10;
 			}
+			
+			//获取中心的x
+			public function getCenterX():Number{
+				return this.x+this.width/2;
+			}
+			
+			//获取中心的y
+			public function getCenterY():Number{
+				return this.y+this.height/2;
+			}
 		]]>
 	</fx:Script>
 </s:SkinnableContainer>
