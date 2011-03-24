@@ -1,4 +1,4 @@
-package com.shine.framework.security
+package com.shine.framework.Security
 {
 	public class SecurityUtil
 	{
