@@ -3,7 +3,8 @@
 						  xmlns:s="library://ns.adobe.com/flex/spark" 
 						  xmlns:mx="library://ns.adobe.com/flex/mx" 
 						  xmlns:view="com.shine.framework.core.view.*" 
-						  creationComplete="{complete()}">
+						  creationComplete="{nodeComplete()}" 
+						  moveable="true">
 	<view:layout>
 		<s:BasicLayout/>
 	</view:layout>
@@ -12,11 +13,123 @@
 	</fx:Declarations>
 	<fx:Script>
 		<![CDATA[
-			private function complete():void{
+			import com.shine.framework.core.model.BaseXmlModel;
+			import com.shine.topo.util.TopoLinesArrayCollection;
+			import com.shine.topo.view.Line.TopoLine;
+			import com.shine.topo.view.label.TopoLabel;
+			import com.shine.topo.view.topo.BaseGroupContainer;
+			
+			import mx.controls.Image;
+			import mx.events.MoveEvent;
+			
+			
+			//相关连接线
+			public var fromLineArrayCollection:TopoLinesArrayCollection=new TopoLinesArrayCollection;
+			public var toLineArrayCollection:TopoLinesArrayCollection=new TopoLinesArrayCollection;
+			
+			//原始位置
+			public var ox:Number;
+			public var oy:Number;
+			
+			public var baseXmlModel:BaseXmlModel;
+			
+			public var topoImage:Image;
+			public var topoLabel:TopoLabel;
+			
+			private function nodeComplete():void{
 				this.completeLoading();
 			}
 			
+			//初始化节点数据
+			public function initNode(value:BaseXmlModel):void{
+				this.baseXmlModel=value;
+
+				topoImage=new Image;
+				topoImage.width=this.width;
+				topoImage.height=this.height;
+				this.addElement(topoImage);
+				refreshImage();
+				
+				this.x=value.getNumber("x");
+				this.y=value.getNumber("y");
+				this.ox=this.x;
+				this.oy=this.y;
+				
+				topoLabel=new TopoLabel;
+				refreshLabel();
+				
+				this.addEventListener(MoveEvent.MOVE,moveLine);
+				this.addEventListener(MouseEvent.MOUSE_MOVE,moveMouse);
+				
+				value=null;
+			}
 			
+			private function moveLine(event:MoveEvent):void{
+				refreshLine();
+				refreshLabel();
+			}
+			
+			private function moveMouse(event:MouseEvent):void{
+				refreshLine();
+				refreshLabel()
+			}
+			
+			public function refreshLine():void{
+				for each(var topoLine:TopoLine in fromLineArrayCollection){
+					topoLine.resetBeginLine(getCenterX(),getCenterY());
+				}
+				
+				for each(var topoLine:TopoLine in toLineArrayCollection){
+					topoLine.resetEndLine(getCenterX(),getCenterY());
+				}
+			}
+			
+			public function addFromLine(value:TopoLine):void{
+				fromLineArrayCollection.addTopoLine(value);
+				value.resetBeginLine(this.getCenterX(),this.getCenterY());
+			}
+			
+			public function delteFromLine(value:TopoLine):void{
+				fromLineArrayCollection.removeTopoLine(value);
+			}
+			
+			public function addToLine(value:TopoLine):void{
+				toLineArrayCollection.addTopoLine(value);
+				value.resetEndLine(this.getCenterX(),this.getCenterY());
+			}
+			
+			public function delteToLine(value:TopoLine):void{
+				toLineArrayCollection.removeTopoLine(value);
+			}
+			
+			public function refreshLabel():void{
+				if(topoLabel!=null){
+					topoLabel.x=this.x;
+					topoLabel.y=getBottomRightY();
+					topoLabel.setHtml(this.baseXmlModel.getString("label"));
+					topoLabel.setUrl(this.baseXmlModel.getString("url"));
+				}
+			}
+			
+			public function resize(value:Number):void{
+				this.x=this.ox*value/100;
+				this.y=this.oy*value/100;
+				refreshLine();
+				refreshLabel();
+			}
+			
+			public function refreshImage():void{
+				topoImage.source=this.baseXmlModel.getString("image");
+			}
+			
+			
+			public function getBottomRightX():Number{
+				return this.x+this.width;
+			}
+			
+			public function getBottomRightY():Number{
+				return this.y+this.height;
+			}
 		]]>
 	</fx:Script>
 </view:BaseSimpleContainer>

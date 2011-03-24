@@ -9,4 +9,9 @@
 	<fx:Declarations>
 		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
 	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			
+		]]>
+	</fx:Script>
 </view:BaseSimpleContainer>

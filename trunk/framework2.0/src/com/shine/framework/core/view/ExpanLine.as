@@ -23,9 +23,6 @@ package com.shine.framework.core.view
 		}
 		
 		public function initLine():void{
-			if(comp==null)
-				comp=new UIComponent();
-			comp.addChild(lines);
 			lines.graphics.clear();
 			lines.graphics.lineStyle(weight, color, 1);
 			lines.graphics.moveTo(line_x1, line_y1);
@@ -67,6 +64,9 @@ package com.shine.framework.core.view
 		
 		public function getLine():UIComponent
 		{
+			if(comp==null)
+				comp=new UIComponent();
+			comp.addChild(lines);
 			return comp;
 		}
 	}
