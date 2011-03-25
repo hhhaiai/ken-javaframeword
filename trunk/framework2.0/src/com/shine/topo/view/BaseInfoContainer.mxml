@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:BorderContainer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				   xmlns:s="library://ns.adobe.com/flex/spark" 
+				   xmlns:mx="library://ns.adobe.com/flex/mx" 
+				   xmlns:view="com.shine.framework.view.*"
+				   creationComplete="{complete()}" 
+				   xmlns:view1="com.shine.cabinetsRoom.view.*" 
+				   backgroundColor="0xF0F8FF"
+				   borderColor="0xB7BABC"
+				   borderStyle="solid"
+				   borderVisible="true"
+				   borderWeight="1"
+				   cornerRadius="5"
+				   dropShadowVisible="true" xmlns:view2="com.shine.topo.view.*">
+	<fx:Declarations>
+		<s:Fade id="fadeEffect" target="{this}" alphaFrom="0" alphaTo="1"/>
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import mx.controls.Alert;
+			import mx.events.FlexEvent;
+			
+			private var b:Boolean=false;
+			
+			
+			private function complete():void{
+				//				this.addEventListener(MouseEvent.MOUSE_OVER,over);
+				//				this.addEventListener(MouseEvent.MOUSE_OUT,out);
+				
+				this.addEventListener(MouseEvent.ROLL_OVER,over);
+				this.addEventListener(MouseEvent.ROLL_OUT,out);
+				infoTextArea.addEventListener(FlexEvent.SHOW,showEvent);
+			}
+			
+			private function over(event:MouseEvent):void{
+				this.b=true;
+				
+				event.stopPropagation();
+			}
+			
+			private function out(event:MouseEvent):void{
+				this.b=false;
+				hideDetail();
+				
+				event.stopPropagation();
+			}
+			
+			public function showDetail(value:String):void{
+				infoTextArea.visible=false;
+				this.visible=false;
+				
+				var a:Array=[value];
+				this.callLater(showLater,a);
+				a=null;
+			}
+			
+			private function showLater(value:String):void{
+				infoTextArea.htmlText=value;
+				infoTextArea.show();
+			}
+			
+			private function showEvent(event:FlexEvent):void{
+				this.height=infoTextArea.height;
+				this.x=this.parent.mouseX+4;
+				this.y=this.parent.mouseY+4;
+				this.alpha=0;
+				this.visible=true;
+				this.b=false;
+				fadeEffect.play();
+			}
+			
+			public function hideDetail():void{
+				if(!b){
+					infoTextArea.visible=false;
+					this.visible=false;
+				}
+			}
+		]]>
+	</fx:Script>
+	<view2:BaseInfoTextArea id="infoTextArea" width="100%" height="100%" />
+</s:BorderContainer>

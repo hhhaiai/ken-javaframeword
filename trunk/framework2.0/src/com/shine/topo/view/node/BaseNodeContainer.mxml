@@ -15,9 +15,10 @@
 		<![CDATA[
 			import com.shine.framework.core.model.BaseXmlModel;
 			import com.shine.topo.util.TopoLinesArrayCollection;
+			import com.shine.topo.view.BaseInfoContainer;
+			import com.shine.topo.view.BaseInfoTextArea;
 			import com.shine.topo.view.Line.TopoLine;
 			import com.shine.topo.view.label.TopoLabel;
-			import com.shine.topo.view.topo.BaseGroupContainer;
 			
 			import mx.controls.Image;
 			import mx.events.MoveEvent;
@@ -35,6 +36,7 @@
 			
 			public var topoImage:Image;
 			public var topoLabel:TopoLabel;
+			public var infoContainer:BaseInfoContainer;
 			
 			private function nodeComplete():void{
 				this.completeLoading();
@@ -60,6 +62,8 @@
 				
 				this.addEventListener(MoveEvent.MOVE,moveLine);
 				this.addEventListener(MouseEvent.MOUSE_MOVE,moveMouse);
+				this.addEventListener(MouseEvent.MOUSE_OVER,over);
+				this.addEventListener(MouseEvent.MOUSE_OUT,out);
 				
 				value=null;
 			}
@@ -72,6 +76,19 @@
 			private function moveMouse(event:MouseEvent):void{
 				refreshLine();
 				refreshLabel()
+			}
+			
+			private function over(event:MouseEvent):void{
+				infoContainer.showDetail(this.baseXmlModel.getString("message"));
+				this.alpha=this.alpha-0.2;
+				event.stopPropagation();
+			}
+			
+			
+			private function out(event:MouseEvent):void{
+				infoContainer.visible=false;
+				this.alpha=this.alpha+0.2;
+				event.stopPropagation();
 			}
 			
 			public function refreshLine():void{
