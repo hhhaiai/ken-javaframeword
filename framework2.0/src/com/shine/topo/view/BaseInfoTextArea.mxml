@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<view:SunshineTextArea xmlns:fx="http://ns.adobe.com/mxml/2009" 
+					   xmlns:s="library://ns.adobe.com/flex/spark" 
+					   xmlns:mx="library://ns.adobe.com/flex/mx" 
+					   xmlns:view="com.shine.framework.core.view.*"
+					   editable="false" wordWrap="true" 
+					   contentBackgroundColor="0xF0F8FF"
+					   borderStyle="none">
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+</view:SunshineTextArea>
