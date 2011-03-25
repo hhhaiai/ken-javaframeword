@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:TextArea xmlns:mx="http://www.adobe.com/2006/mxml"
+			 creationComplete="init()"
+			 change="changeHandler()"
+			 show="changeHandler()">
+	<mx:Script>
+		<![CDATA[
+		    import mx.controls.Alert;
+
+		    //自动刷新
+			public var autoRefreshPolicy="off";
+			public var autoRefreshTime:String="60000";
+			public var autoRefreshMethod:Function;
+
+			private function init():void
+			{
+				this.verticalScrollPosition=0;
+				this.verticalScrollPolicy="off";
+				this.textField.autoSize=TextFieldAutoSize.LEFT;
+				this.height=this.textHeight + this.borderMetrics.top + this.borderMetrics.bottom;
+
+				if (autoRefreshPolicy == "on")
+				{
+					setTimeout(autoRefresh, 800);
+				}
+			}
+
+			public function autoRefresh():void
+			{
+				var time:Number=Number(autoRefreshTime) * 1000;
+				var timer:Timer=new Timer(time);
+				timer.addEventListener(TimerEvent.TIMER, onTimer);
+				timer.start();
+			}
+
+
+			public function onTimer(event:TimerEvent):void
+			{
+				if (autoRefreshMethod != null)
+				{
+					autoRefreshMethod.call(this);
+				}
+				else
+				{
+					Alert.show("自动刷新函数为空");
+				}
+			}
+
+			private function changeHandler():void
+			{
+				this.verticalScrollPosition=0;
+				this.height=this.textHeight + this.borderMetrics.top + this.borderMetrics.bottom;
+			}
+
+			public function show():void
+			{
+				this.callLater(callLateShow);
+			}
+
+			protected function callLateShow():void
+			{
+				this.visible=true;
+			}
+		]]>
+	</mx:Script>
+</mx:TextArea>
