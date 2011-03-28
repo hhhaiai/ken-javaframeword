@@ -12,7 +12,7 @@
 	<classpathentry kind="lib" path="E:/workspace/JavaFramework2.0/lib/commons-lang-2.4.jar"/>
 	<classpathentry kind="lib" path="E:/workspace/JavaFramework2.0/lib/commons-logging.jar"/>
 	<classpathentry kind="lib" path="E:/workspace/JavaFramework2.0/lib/commons-net-2.2.jar"/>
-	<classpathentry kind="lib" path="E:/workspace/JavaFramework2.0/lib/dom4j-1.6.1.jar"/>
+	<classpathentry kind="lib" path="E:/workspace/JavaFramework2.0/lib/dom4j-1.6.1.jar" sourcepath="C:/Users/123/.m2/repository/dom4j/dom4j/1.6.1/dom4j-1.6.1-sources.jar"/>
 	<classpathentry kind="lib" path="E:/workspace/JavaFramework2.0/lib/ezmorph-1.0.6.jar"/>
 	<classpathentry kind="lib" path="E:/workspace/JavaFramework2.0/lib/htmlcleaner2_1.jar"/>
 	<classpathentry kind="lib" path="E:/workspace/JavaFramework2.0/lib/JavaSnmpPacket.jar"/>
@@ -27,7 +27,7 @@
 	<classpathentry kind="lib" path="E:/workspace/JavaFramework2.0/lib/xom-1.2.5.jar"/>
 	<classpathentry kind="lib" path="E:/workspace/JavaFramework2.0/lib/commons-codec-1.3.jar"/>
 	<classpathentry kind="lib" path="E:/workspace/JavaFramework2.0/lib/jpcap.jar"/>
-	<classpathentry kind="lib" path="E:/workspace/JavaFramework2.0/lib/jetty-6.1.26.jar"/>
+	<classpathentry kind="lib" path="E:/workspace/JavaFramework2.0/lib/jetty-6.1.26.jar" sourcepath="C:/Users/123/.m2/repository/org/mortbay/jetty/jetty/6.1.26/jetty-6.1.26-sources.jar"/>
 	<classpathentry kind="lib" path="E:/workspace/JavaFramework2.0/lib/jetty-util-6.1.26.jar"/>
 	<classpathentry kind="lib" path="E:/workspace/JavaFramework2.0/lib/servlet-api-2.5-20081211.jar"/>
 	<classpathentry kind="lib" path="E:/workspace/JavaFramework2.0/lib/jsp-api-2.0.jar"/>
@@ -39,5 +39,9 @@
 	<classpathentry kind="lib" path="E:/workspace/JavaFramework2.0/lib/commons-el-1.0.jar"/>
 	<classpathentry kind="lib" path="E:/workspace/JavaFramework2.0/lib/slf4j-api-1.3.1.jar"/>
 	<classpathentry kind="lib" path="E:/workspace/JavaFramework2.0/lib/tomcat-juli.jar"/>
+	<classpathentry kind="lib" path="E:/workspace/JavaFramework2.0/lib/sqlitejdbc-v056.jar"/>
+	<classpathentry kind="lib" path="E:/workspace/JavaFramework2.0/lib/edtftpj.jar"/>
+	<classpathentry kind="lib" path="E:/workspace/JavaFramework2.0/lib/JNative.jar"/>
+	<classpathentry kind="lib" path="E:/workspace/JavaFramework2.0/lib/gpsparser.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
