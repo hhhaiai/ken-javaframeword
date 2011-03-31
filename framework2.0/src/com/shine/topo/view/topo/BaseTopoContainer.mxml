@@ -12,11 +12,32 @@
 	</fx:Declarations>
 	<fx:Script>
 		<![CDATA[
+			import com.shine.topo.util.TopoLinesArrayCollection;
+			import com.shine.topo.util.TopoNodeArrayCollection;
 			import com.shine.topo.view.Line.TopoLine;
 			import com.shine.topo.view.node.BaseNodeContainer;
 			
-			private function baseTopoContainerComplete():void{
-				
+			
+			
+			private function baseTopoContainerComplete():void{	
+			}
+			
+			//加载所有topo节点
+			public function addTopoNodeList(value:TopoNodeArrayCollection):void{
+				for each(var node:BaseNodeContainer in value){
+					this.addTopoNode(node);
+				}
+			}
+			
+			//删除所有topo节点
+			public function deleteAllTopoNode():void{
+			}
+			
+			//加载所有topo链路
+			public function addTopoLineList(value:TopoLinesArrayCollection):void{
+				for each(var line:TopoLine in value){
+					this.addTopoLine(line);
+				}
 			}
 			
 			//加入topo节点
@@ -34,6 +55,8 @@
 					this.addElement(value.getLine());
 				}
 			}
+			
+			
 		]]>
 	</fx:Script>
 </view:BaseSimpleContainer>
