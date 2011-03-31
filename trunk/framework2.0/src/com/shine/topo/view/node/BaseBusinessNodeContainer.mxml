@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<node:BaseNodeContainer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+						xmlns:s="library://ns.adobe.com/flex/spark" 
+						xmlns:mx="library://ns.adobe.com/flex/mx" 
+						xmlns:node="com.shine.topo.view.node.*" 
+						creationComplete="{baseBusinessNodeContainerComplete()}">
+	<node:layout>
+		<s:BasicLayout/>
+	</node:layout>
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import com.shine.topo.view.Line.TopoLine;
+			
+			private function baseBusinessNodeContainerComplete():void{
+				
+			}
+			
+			public override function addFromLine(value:TopoLine):void{
+				fromLineArrayCollection.addTopoLine(value);
+				value.resetBeginLine(this.getCenterX(),this.getBottomRightY());
+			}
+			
+			public override function addToLine(value:TopoLine):void{
+				toLineArrayCollection.addTopoLine(value);
+				value.resetEndLine(this.getCenterX(),0);
+			}
+			
+			public override function refreshLine():void{
+				for each(var topoLine:TopoLine in this.fromLineArrayCollection){
+					topoLine.resetBeginLine(getCenterX(),getBottomRightY());
+				}
+				
+				for each(var topoLine:TopoLine in this.toLineArrayCollection){
+					topoLine.resetEndLine(getCenterX(),0);
+				}
+			}
+		]]>
+	</fx:Script>
+</node:BaseNodeContainer>
