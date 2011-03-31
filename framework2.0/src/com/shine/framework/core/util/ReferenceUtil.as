@@ -2,6 +2,7 @@ package com.shine.framework.core.util
 {
 	import flash.utils.describeType;
 	import flash.utils.getDefinitionByName;
+	import mx.utils.NameUtil;
 	
 	import mx.collections.ArrayCollection;
 	import mx.controls.Alert;
@@ -41,6 +42,14 @@ package com.shine.framework.core.util
 		 * */
 		public static function referenceObjectFunction(instance:Object,functionName:String,... rest):*{
 			return instance[functionName].apply(instance,rest); 
+		}
+		
+		
+		/**
+		 * 获取class name
+		 * */
+		public static function getClassName(value:Object):String{
+			return NameUtil.createUniqueName(value);
 		}
 		
 		/**

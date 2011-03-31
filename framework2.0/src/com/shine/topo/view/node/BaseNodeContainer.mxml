@@ -24,8 +24,9 @@
 			import mx.events.MoveEvent;
 			
 			
-			//相关连接线
+			//起点连线
 			public var fromLineArrayCollection:TopoLinesArrayCollection=new TopoLinesArrayCollection;
+			//终点连线
 			public var toLineArrayCollection:TopoLinesArrayCollection=new TopoLinesArrayCollection;
 			
 			//原始位置
@@ -34,6 +35,7 @@
 			
 			public var baseXmlModel:BaseXmlModel;
 			
+			//topo图片
 			public var topoImage:Image;
 			public var topoLabel:TopoLabel;
 			public var infoContainer:BaseInfoContainer;
@@ -68,29 +70,33 @@
 				value=null;
 			}
 			
+			//刷新链路和label
 			private function moveLine(event:MoveEvent):void{
 				refreshLine();
 				refreshLabel();
 			}
 			
+			//刷新链路和label
 			private function moveMouse(event:MouseEvent):void{
 				refreshLine();
 				refreshLabel()
 			}
 			
+			//移入设备
 			private function over(event:MouseEvent):void{
 				infoContainer.showDetail(this.baseXmlModel.getString("message"));
 				this.alpha=this.alpha-0.2;
 				event.stopPropagation();
 			}
 			
-			
+			//移出设备
 			private function out(event:MouseEvent):void{
 				infoContainer.visible=false;
 				this.alpha=this.alpha+0.2;
 				event.stopPropagation();
 			}
 			
+			//刷新链路
 			public function refreshLine():void{
 				for each(var topoLine:TopoLine in fromLineArrayCollection){
 					topoLine.resetBeginLine(getCenterX(),getCenterY());
@@ -101,24 +107,29 @@
 				}
 			}
 			
+			//加入链路起点
 			public function addFromLine(value:TopoLine):void{
 				fromLineArrayCollection.addTopoLine(value);
 				value.resetBeginLine(this.getCenterX(),this.getCenterY());
 			}
 			
+			//删除链路起点
 			public function delteFromLine(value:TopoLine):void{
 				fromLineArrayCollection.removeTopoLine(value);
 			}
 			
+			//加入链路终点
 			public function addToLine(value:TopoLine):void{
 				toLineArrayCollection.addTopoLine(value);
 				value.resetEndLine(this.getCenterX(),this.getCenterY());
 			}
 			
+			//删除链路终点
 			public function delteToLine(value:TopoLine):void{
 				toLineArrayCollection.removeTopoLine(value);
 			}
 			
+			//刷新label位置
 			public function refreshLabel():void{
 				if(topoLabel!=null){
 					topoLabel.x=this.x;
@@ -128,6 +139,7 @@
 				}
 			}
 			
+		    //用于缩放
 			public function resize(value:Number):void{
 				this.x=this.ox*value/100;
 				this.y=this.oy*value/100;
@@ -135,6 +147,7 @@
 				refreshLabel();
 			}
 			
+			//刷新设备图片
 			public function refreshImage():void{
 				topoImage.source=this.baseXmlModel.getString("image");
 			}
