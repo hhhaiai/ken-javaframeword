@@ -12,7 +12,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.PrintWriter;
-import java.util.List;
 
 import org.apache.poi.poifs.filesystem.DirectoryEntry;
 import org.apache.poi.poifs.filesystem.DocumentEntry;
@@ -157,6 +156,16 @@ public class FileUtil {
 			if (printWrinter != null)
 				printWrinter.close();
 		}
+	}
+	
+	/**
+	 * 读取file,默认utf-8
+	 * 
+	 * @param filePath
+	 * @return
+	 */
+	public static byte[] readFileByte(String filePath){
+		return readFile(filePath).getBytes();
 	}
 
 	/**
