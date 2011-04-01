@@ -60,6 +60,19 @@ public final class QuartzSchedulerFactory {
 			e.printStackTrace();
 		}
 	}
+	
+	public void remove(QuartzJob qj){
+		try {
+			String jobName = qj.getClass().getSimpleName();
+			String groupName = Scheduler.DEFAULT_GROUP;
+			scheduler.pauseTrigger(jobName, groupName);
+			scheduler.unscheduleJob(jobName, groupName);
+			scheduler.deleteJob(jobName, groupName);
+			jobs.remove(qj);
+		} catch (SchedulerException e) {
+			e.printStackTrace();
+		}
+	}
 
 	public void shutdown() {
 		try {

@@ -123,11 +123,7 @@ public class CmdUtil {
 	 */
 	public static void exeuteCmdFileNoMonitor(String filePath) {
 		try {
-			System.out.println(filePath);
-			Runtime run = Runtime.getRuntime();
-			System.out.println("1");
-			Process pro = run.exec(filePath);
-			System.out.println("2");
+			Runtime.getRuntime().exec(filePath);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
