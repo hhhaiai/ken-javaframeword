@@ -123,8 +123,11 @@ public class CmdUtil {
 	 */
 	public static void exeuteCmdFileNoMonitor(String filePath) {
 		try {
+			System.out.println(filePath);
 			Runtime run = Runtime.getRuntime();
+			System.out.println("1");
 			Process pro = run.exec(filePath);
+			System.out.println("2");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -138,18 +141,17 @@ public class CmdUtil {
 	 */
 	public static String createBatFile(String... cmd) {
 		if (System.getProperty("os.name").toLowerCase().indexOf("windows") != -1) {
-			String path = "temp" + File.separator + "temp"
-					+ DateUtil.getCurrentDateTimeAsId() + ".bat";
+			String path = System.getProperty("user.dir") + File.separator 
+					+ "temp" + DateUtil.getCurrentDateTimeAsId() + ".bat";
 			FileUtil.createFile(path);
 			StringBuffer content = new StringBuffer();
 			for (int i = 0; i < cmd.length; i++) {
 				content.append(cmd[i] + "\r\n");
 			}
 			FileUtil.writeFile(path, content.toString());
-			return "\"" + System.getProperty("user.dir")
-					+ File.separator + path + "\"";
+			return "\"" + path + "\"";
 		} else {
-			String path = "temp.sh";
+			String path = System.getProperty("user.dir") + File.separator + "temp.sh";
 			FileUtil.createFile(path);
 			StringBuffer content = new StringBuffer();
 			content.append("#!/bin/sh").append("\n");
@@ -157,7 +159,7 @@ public class CmdUtil {
 				content.append(cmd[i] + "\r\n");
 			}
 			FileUtil.writeFile(path, content.toString());
-			return System.getProperty("user.dir") + File.separator + path;
+			return path;
 		}
 	}
 
@@ -172,6 +174,15 @@ public class CmdUtil {
 			Thread.sleep(3000);
 			exeuteCmdFile(path);
 		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void main(String[] args) {
+		try {
+			Runtime.getRuntime().exec("cmd /c start /D\"D:\\ProgramFiles\\apache-tomcat-6.0.24\\bin\" shutdown.bat");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
