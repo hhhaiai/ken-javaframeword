@@ -16,7 +16,7 @@
     <classEntry path="com.shine.flexcoffer.util.BaseBeanShellUtil"/>
     <classEntry path="com.shine.flexcoffer.view.BeanShellComponent"/>
     <classEntry path="com.shine.framework.core.view.SunshineToolContainer"/>
-    <classEntry path="com.shine.framework.core.control.MainControl"/>
+    <classEntry path="com.shine.framework.core.control.Control"/>
     <classEntry path="com.shine.framework.component.view.ComponentViewStack"/>
     <classEntry path="com.shine.framework.component.view.NavigatorComponent"/>
     <classEntry path="com.shine.flexcoffer.view.UploadFileContainer"/>
@@ -32,6 +32,10 @@
     <classEntry path="com.shine.topo.view.BaseInfoTextArea"/>
     <classEntry path="com.shine.topo.view.BaseInfoContainer"/>
     <classEntry path="com.shine.topo.control.BaseControl"/>
+    <classEntry path="com.shine.topo.view.topo.BaseBusinessTopoContainer"/>
+    <classEntry path="com.shine.topo.util.TopoRightArrayMap"/>
+    <classEntry path="com.shine.framework.Dashboard.view.Dashboard"/>
+    <classEntry path="com.shine.framework.Dashboard.skin.DashBoardTenSkin"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>
