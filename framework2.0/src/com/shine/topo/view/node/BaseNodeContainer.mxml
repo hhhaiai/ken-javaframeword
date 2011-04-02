@@ -21,6 +21,7 @@
 			import com.shine.topo.view.label.TopoLabel;
 			
 			import mx.controls.Image;
+			import mx.controls.Alert;
 			import mx.events.MoveEvent;
 			
 			
@@ -49,6 +50,7 @@
 				this.baseXmlModel=value;
 
 				topoImage=new Image;
+				topoImage.maintainAspectRatio=false;
 				topoImage.width=this.width;
 				topoImage.height=this.height;
 				this.addElement(topoImage);
@@ -69,6 +71,10 @@
 				
 				value=null;
 			}
+			
+//			public function initRight(value:BaseXmlModel):void{
+//				
+//			}
 			
 			//刷新链路和label
 			private function moveLine(event:MoveEvent):void{
@@ -149,6 +155,8 @@
 			
 			//刷新设备图片
 			public function refreshImage():void{
+				topoImage.width=this.width;
+				topoImage.height=this.height;
 				topoImage.source=this.baseXmlModel.getString("image");
 			}
 			

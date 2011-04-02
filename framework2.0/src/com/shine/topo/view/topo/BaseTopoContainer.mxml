@@ -17,7 +17,7 @@
 			import com.shine.topo.view.Line.TopoLine;
 			import com.shine.topo.view.node.BaseNodeContainer;
 			
-			
+			import mx.controls.Alert;
 			
 			private function baseTopoContainerComplete():void{	
 			}

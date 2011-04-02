@@ -12,10 +12,18 @@
 	</fx:Declarations>
 	<fx:Script>
 		<![CDATA[
+			import com.shine.topo.util.TopoNodeArrayCollection;
 			import com.shine.topo.view.node.BaseBusinessNodeContainer;
 			
 			private function baseBusinessTopoContainerComplete():void{
 				
+			}
+			
+			//加载所有topo节点
+			public function addTopoBusinessNodeList(value:TopoNodeArrayCollection):void{
+				for each(var node:BaseBusinessNodeContainer in value){
+					this.addBusinessNode(node);
+				}
 			}
 			
 			public function addBusinessNode(value:BaseBusinessNodeContainer):void{

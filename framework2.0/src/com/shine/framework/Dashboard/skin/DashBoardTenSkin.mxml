@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+
+ADOBE SYSTEMS INCORPORATED
+Copyright 2008 Adobe Systems Incorporated
+All Rights Reserved.
+
+NOTICE: Adobe permits you to use, modify, and distribute this file
+in accordance with the terms of the license agreement accompanying it.
+
+-->
+
+<!--- The default skin class for a Spark SkinnableContainer container.  
+
+@see spark.components.SkinnableContainer
+
+@langversion 3.0
+@playerversion Flash 10
+@playerversion AIR 1.5
+@productversion Flex 4
+-->
+<s:Skin xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark" 
+		xmlns:fb="http://ns.adobe.com/flashbuilder/2009" alpha.disabled="0.5" height.normal="228">
+	<fx:Metadata>[HostComponent("com.shine.framework.core.view.BaseSimpleContainer")]</fx:Metadata>
+	
+	<fx:Script>
+		<![CDATA[
+			
+			private function complete():void{
+				
+			}
+
+			public function setValue(value:int):void{
+				if(value>0&&value<101){
+					valueLabel.text=String(value);
+					
+					if(value==100){
+						for(var j:int=1;j<11;j++){
+							SolidColor(this["pathColor"+String(j)]).color=0x122e29;
+						}
+						return;
+					}
+					
+					for(var j:int=1;j<11;j++){
+						SolidColor(this["pathColor"+String(j)]).color=0x67bd45;
+					}
+					
+					if(value>10&&value<100){
+						for(var i:int=1;i<=value/10;i++){
+							SolidColor(this["pathColor"+String(i)]).color=0x122e29;
+						}
+						
+						SolidColor(this["pathColor"+String(int(value/10)+1)]).color=0x65c294;
+					}else{
+						SolidColor(this["pathColor1"]).color=0x65c294;
+					}
+				}
+			}
+		]]>
+	</fx:Script>
+	
+	<s:states>
+		<s:State name="normal" />
+		<s:State name="disabled" />
+	</s:states>
+	
+	<!--- Defines the appearance of the SkinnableContainer class's background. -->
+	<s:Rect id="background" left="0" right="0" top="0" bottom="0">
+		<s:fill>
+			<!--- @private -->
+			<s:SolidColor id="bgFill" color="#FFFFFF"/>
+		</s:fill>
+	</s:Rect>
+	
+	<!--
+	Note: setting the minimum size to 0 here so that changes to the host component's
+	size will not be thwarted by this skin part's minimum size.   This is a compromise,
+	more about it here: http://bugs.adobe.com/jira/browse/SDK-21143
+	-->
+	<!--- @copy spark.components.SkinnableContainer#contentGroup -->
+	<s:Group id="contentGroup" left="0" right="0" top="0" bottom="0" minWidth="0" minHeight="0">
+		<s:layout>
+			<s:BasicLayout/>
+		</s:layout>
+	</s:Group>
+	<s:Group x="0" y="0" id="group">
+		<s:Path id="center" winding="nonZero" data="M176.228 116.897C176.228 74.1919 141.664 39.6997 98.9805 39.6997 56.2969 39.6997 21.7334 74.1919 21.7334 116.897 21.7334 159.602 56.2969 194.094 98.9805 194.094 141.664 194.094 176.228 159.602 176.228 116.897Z" >
+			<s:fill>
+				<s:SolidColor color="#122e29"/>
+			</s:fill>
+		</s:Path>
+		<s:Path  winding="nonZero" data="M53.9336 54.106C54.0742 54.3643 71.043 39.958 98.5313 39.6768L98.5313 17.9619C98.5313 17.9619 68.543 16.562 41.2285 36.5151 42.6973 39.0151 53.793 53.8477 53.9336 54.106Z" >
+			<s:fill>
+				<s:SolidColor id="pathColor1" color="#67bd45"/>
+			</s:fill>
+		</s:Path>
+		<s:Path  winding="nonZero" data="M98.5313 39.6768" >
+			<s:fill>
+				<s:SolidColor color="#00000"/>
+			</s:fill>
+		</s:Path>
+		<s:Path id="path2" winding="nonZero" data="M99.5117 39.6768L99.4648 17.9619C99.4648 17.9619 129.309 16.5361 156.83 36.5742L143.963 54.106C143.963 54.106 126.074 39.708 99.5117 39.6768Z" >
+			<s:fill>
+				<s:SolidColor id="pathColor2" color="#67bd45"/>
+			</s:fill>
+		</s:Path>
+		<s:Path  winding="nonZero" data="M120.293 48.208" >
+			<s:fill>
+				<s:SolidColor color="#67bd45"/>
+			</s:fill>
+		</s:Path>
+		<s:Path winding="nonZero" data="M112.324 45.1143" >
+			<s:fill>
+				<s:SolidColor color="#67bd45"/>
+			</s:fill>
+		</s:Path>
+		<s:Path id="path3" winding="nonZero" data="M144.78 54.6987L157.64 37.1631C157.64 37.1631 182.649 53.9644 193.027 85.8799 193.071 86.0112 172.325 92.5723 172.325 92.5723 172.325 92.5723 166.022 69.958 144.78 54.6987Z" >
+			<s:fill>
+				<s:SolidColor id="pathColor3" color="#67bd45"/>
+			</s:fill>
+		</s:Path>
+		<s:Path id="path4" winding="nonZero" data="M172.63 93.5127L193.326 86.8018C193.326 86.8018 203.647 112.667 193.326 146.99L172.63 140.282C172.63 140.282 180.793 117.958 172.63 93.5127Z" >
+			<s:fill>
+				<s:SolidColor id="pathColor4" color="#6abd45"/>
+			</s:fill>
+		</s:Path>
+		<s:Path id="path5"  winding="nonZero" data="M172.32 141.238L193.014 147.955C193.014 147.955 185.918 175.771 157.71 196.578L144.834 179.055C144.834 179.055 164.168 166.396 172.32 141.238Z" >
+			<s:fill>
+				<s:SolidColor id="pathColor5" color="#6abd45"/>
+			</s:fill>
+		</s:Path>
+		<s:Path id="path6" winding="nonZero" data="M144.013 179.653L156.808 197.236C156.808 197.236 133.648 215.792 99.4814 215.832L99.4814 194.093C99.4814 194.093 122.689 195.125 144.013 179.653Z" >
+			<s:fill>
+				<s:SolidColor id="pathColor6" color="#6abd45"/>
+			</s:fill>
+		</s:Path>
+		<s:Path id="path7" winding="nonZero" data="M53.9482 179.653C53.9482 179.653 72.3555 194.167 98.4385 194.092L98.4414 215.832C98.4414 215.832 69.1885 217.458 41.1436 197.229L53.9482 179.653Z" >
+			<s:fill>
+				<s:SolidColor id="pathColor7" color="#6abd45"/>
+			</s:fill>
+		</s:Path>
+		<s:Path id="path8" winding="nonZero" data="M53.1299 179.058L40.334 196.64C40.334 196.64 15.543 180.458 4.92041 147.873 4.92041 147.873 25.5078 141.241 25.6504 141.266 25.793 141.292 30.8555 161.708 53.1299 179.058Z" >
+			<s:fill>
+				<s:SolidColor id="pathColor8" color="#6abd45"/>
+			</s:fill>
+		</s:Path>
+		<s:Path id="path9" winding="nonZero" data="M25.293 140.243L4.59277 146.94C4.59277 146.94 -5.73438 120.265 4.5835 86.8721 4.5835 86.8721 25.126 93.5 25.293 93.5415 25.3975 94.604 17.2031 113.578 25.293 140.243Z" >
+			<s:fill>
+				<s:SolidColor id="pathColor9" color="#6abd45"/>
+			</s:fill>
+		</s:Path>
+		<s:Path id="path10" winding="nonZero" data="M25.6543 92.5161L4.91504 85.9365C4.91504 85.9365 12.6055 57.3955 40.293 37.1841L53.1172 54.7456C53.1172 54.7456 34.043 67.333 25.6543 92.5161Z" >
+			<s:fill>
+				<s:SolidColor id="pathColor10" color="#6abd45"/>
+			</s:fill>
+		</s:Path>
+		<s:Path winding="nonZero" data="M259.313 0" >
+			<s:fill>
+				<s:SolidColor color="#67bd45"/>
+			</s:fill>
+		</s:Path>
+	</s:Group>
+	
+	<s:VGroup width="200" height="240" horizontalAlign="center" verticalAlign="middle" height.normal="208" y.normal="10">
+		<s:Label id="valueLabel" text="00" color="0xffffff" fontSize="50"  text.normal="00"/>
+	</s:VGroup>
+</s:Skin>

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Graphic version="1.0" viewHeight="841.89" viewWidth="595.28" ai:appVersion="14.0.0.367" d:id="1" xmlns="http://ns.adobe.com/fxg/2008" xmlns:ai="http://ns.adobe.com/ai/2008" xmlns:d="http://ns.adobe.com/fxg/2008/dt">
+  <Library/>
+  <Group id="group" x="275.02" y="72.667" d:id="2" d:type="layer" d:userLabel="图层 1">
+    <Path id="one" winding="nonZero" ai:knockout="0" data="M176.228 116.897C176.228 74.1919 141.664 39.6997 98.9805 39.6997 56.2969 39.6997 21.7334 74.1919 21.7334 116.897 21.7334 159.602 56.2969 194.094 98.9805 194.094 141.664 194.094 176.228 159.602 176.228 116.897Z" >
+      <fill>
+        <SolidColor color="#020403"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M53.9336 54.106C54.0742 54.3643 71.043 39.958 98.5313 39.6768L98.5313 17.9619C98.5313 17.9619 68.543 16.562 41.2285 36.5151 42.6973 39.0151 53.793 53.8477 53.9336 54.106Z" >
+      <fill>
+        <SolidColor color="#6abd45"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M98.5313 39.6768" >
+      <fill>
+        <SolidColor color="#67bd45"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M99.5117 39.6768L99.4648 17.9619C99.4648 17.9619 129.309 16.5361 156.83 36.5742L143.963 54.106C143.963 54.106 126.074 39.708 99.5117 39.6768Z" >
+      <fill>
+        <SolidColor color="#67bd45"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M120.293 48.208" >
+      <fill>
+        <SolidColor color="#67bd45"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M112.324 45.1143" >
+      <fill>
+        <SolidColor color="#67bd45"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M144.78 54.6987L157.64 37.1631C157.64 37.1631 182.649 53.9644 193.027 85.8799 193.071 86.0112 172.325 92.5723 172.325 92.5723 172.325 92.5723 166.022 69.958 144.78 54.6987Z" >
+      <fill>
+        <SolidColor color="#6abd45"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M172.63 93.5127L193.326 86.8018C193.326 86.8018 203.647 112.667 193.326 146.99L172.63 140.282C172.63 140.282 180.793 117.958 172.63 93.5127Z" >
+      <fill>
+        <SolidColor color="#6abd45"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M172.32 141.238L193.014 147.955C193.014 147.955 185.918 175.771 157.71 196.578L144.834 179.055C144.834 179.055 164.168 166.396 172.32 141.238Z" >
+      <fill>
+        <SolidColor color="#6abd45"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M144.013 179.653L156.808 197.236C156.808 197.236 133.648 215.792 99.4814 215.832L99.4814 194.093C99.4814 194.093 122.689 195.125 144.013 179.653Z" >
+      <fill>
+        <SolidColor color="#6abd45"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M53.9482 179.653C53.9482 179.653 72.3555 194.167 98.4385 194.092L98.4414 215.832C98.4414 215.832 69.1885 217.458 41.1436 197.229L53.9482 179.653Z" >
+      <fill>
+        <SolidColor color="#6abd45"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M53.1299 179.058L40.334 196.64C40.334 196.64 15.543 180.458 4.92041 147.873 4.92041 147.873 25.5078 141.241 25.6504 141.266 25.793 141.292 30.8555 161.708 53.1299 179.058Z" >
+      <fill>
+        <SolidColor color="#6abd45"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M25.3203 140.248L4.62012 146.946C4.62012 146.946 -5.70703 120.271 4.61084 86.8774L25.3203 93.5469C25.3203 93.5469 17.2305 113.583 25.3203 140.248Z" >
+      <fill>
+        <SolidColor color="#67bd45"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M25.293 140.243L4.59277 146.94C4.59277 146.94 -5.73438 120.265 4.5835 86.8721 4.5835 86.8721 25.126 93.5 25.293 93.5415 25.3975 94.604 17.2031 113.578 25.293 140.243Z" >
+      <fill>
+        <SolidColor color="#6abd45"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M25.6543 92.5161L4.91504 85.9365C4.91504 85.9365 12.6055 57.3955 40.293 37.1841L53.1172 54.7456C53.1172 54.7456 34.043 67.333 25.6543 92.5161Z" >
+      <fill>
+        <SolidColor color="#6abd45"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M259.313 0" >
+      <fill>
+        <SolidColor color="#67bd45"/>
+      </fill>
+    </Path>
+  </Group>
+  <Private>
+    <ai:PrivateElement d:ref="#1">
+      <ai:SaveOptions>
+        <ai:Dictionary>
+          <ai:DictEntry name="preserveGradientPolicy" value="3" valueType="Integer"/>
+          <ai:DictEntry name="clipToActiveArtboard" value="1" valueType="Boolean"/>
+          <ai:DictEntry name="rasterizeResolution" value="72" valueType="Integer"/>
+          <ai:DictEntry name="downsampleLinkedImages" value="0" valueType="Boolean"/>
+          <ai:DictEntry name="preserveFilterPolicy" value="3" valueType="Integer"/>
+          <ai:DictEntry name="preserveTextPolicy" value="3" valueType="Integer"/>
+          <ai:DictEntry name="includeXMP" value="0" valueType="Boolean"/>
+          <ai:DictEntry name="includeSymbol" value="0" valueType="Boolean"/>
+          <ai:DictEntry name="writeImages" value="1" valueType="Boolean"/>
+          <ai:DictEntry name="versionKey" value="1" valueType="Integer"/>
+          <ai:DictEntry name="aiEditCap" value="1" valueType="Boolean"/>
+        </ai:Dictionary>
+      </ai:SaveOptions>
+      <ai:DocData base="10边.assets/images"/>
+      <ai:Artboards originOffsetH="0" originOffsetV="841.89" rulerCanvasDiffH="298.5" rulerCanvasDiffV="-420.39" zoom="3">
+        <ai:Artboard active="1" index="0" right="595.28" top="841.89"/>
+        <ai:ArtboardsParam all="0" range="" type="0"/>
+      </ai:Artboards>
+    </ai:PrivateElement>
+    <ai:PrivateElement d:ref="#2">
+      <ai:LayerOptions colorType="ThreeColor">
+        <ai:ThreeColor blue="257" green="128.502" red="79.31"/>
+      </ai:LayerOptions>
+    </ai:PrivateElement>
+  </Private>
+</Graphic>
