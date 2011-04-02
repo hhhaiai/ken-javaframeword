@@ -3,7 +3,7 @@
 						xmlns:s="library://ns.adobe.com/flex/spark" 
 						xmlns:mx="library://ns.adobe.com/flex/mx" 
 						xmlns:node="com.shine.topo.view.node.*" 
-						creationComplete="{baseBusinessNodeContainerComplete()}">
+						creationComplete="{baseBusinessNodeContainerComplete()}" backgroundAlpha="0.6">
 	<node:layout>
 		<s:BasicLayout/>
 	</node:layout>
@@ -12,10 +12,18 @@
 	</fx:Declarations>
 	<fx:Script>
 		<![CDATA[
+			import com.shine.framework.core.model.BaseXmlModel;
 			import com.shine.topo.view.Line.TopoLine;
 			
 			private function baseBusinessNodeContainerComplete():void{
 				
+			}
+			
+			public function initBusinessNode(value:BaseXmlModel):void{
+				initNode(value);
+				
+				this.width=value.getNumber("width");
+				this.height=value.getNumber("height");
 			}
 			
 			public override function addFromLine(value:TopoLine):void{

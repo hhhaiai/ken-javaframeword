@@ -2,6 +2,8 @@ package com.shine.framework.core.util
 {
 	import flash.utils.describeType;
 	import flash.utils.getDefinitionByName;
+	import flash.utils.getQualifiedClassName;  
+	import flash.utils.getQualifiedSuperclassName;  
 	import mx.utils.NameUtil;
 	
 	import mx.collections.ArrayCollection;
@@ -44,12 +46,22 @@ package com.shine.framework.core.util
 			return instance[functionName].apply(instance,rest); 
 		}
 		
+		/**
+		 * 获取class name全名
+		 * */
+		public static function getClassFullName(value:Object):String{
+			return getQualifiedClassName(value);
+		}
+		
 		
 		/**
 		 * 获取class name
 		 * */
 		public static function getClassName(value:Object):String{
-			return NameUtil.createUniqueName(value);
+			if(getQualifiedClassName(value).indexOf("::")!=-1)
+				return getQualifiedClassName(value).substring(getQualifiedClassName(value).indexOf("::")+2);
+			else
+				return getClassFullName(value);
 		}
 		
 		/**
