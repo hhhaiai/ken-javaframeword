@@ -19,6 +19,13 @@
 			
 			import mx.controls.Alert;
 			
+			//背景图片
+			[Bindable]
+			public var topoBackgroupImagePath:String;
+			//是否显示背景
+			[Bindable]
+			public var topoBackgroupPolicy:Boolean=false;
+			
 			private function baseTopoContainerComplete():void{	
 			}
 			
@@ -45,18 +52,20 @@
 				if(value!=null){
 					this.addElement(value);
 					if(value.topoLabel!=null)
-						this.addElement(value.topoLabel);
+						this.group.addElement(value.topoLabel);
 				}
 			}
 			
 			//加入连线
 			public function addTopoLine(value:TopoLine):void{
 				if(value!=null){
-					this.addElement(value.getLine());
+					this.group.addElement(value.getLine());
 				}
 			}
-			
-			
 		]]>
 	</fx:Script>
+	<mx:Image id="backgroupImage" width="{this.width}" height="{this.height}" source="{topoBackgroupImagePath}" visible="{topoBackgroupPolicy}" maintainAspectRatio="false" />
+	<s:Scroller id="scroller" width="100%" height="100%">
+		<s:Group id="group" clipAndEnableScrolling="true"/>	
+	</s:Scroller>
 </view:BaseSimpleContainer>

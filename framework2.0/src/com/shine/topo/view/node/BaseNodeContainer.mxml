@@ -8,9 +8,6 @@
 	<view:layout>
 		<s:BasicLayout/>
 	</view:layout>
-	<fx:Declarations>
-		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
-	</fx:Declarations>
 	<fx:Script>
 		<![CDATA[
 			import com.shine.framework.core.model.BaseXmlModel;
@@ -20,8 +17,9 @@
 			import com.shine.topo.view.Line.TopoLine;
 			import com.shine.topo.view.label.TopoLabel;
 			
-			import mx.controls.Image;
 			import mx.controls.Alert;
+			import mx.controls.Image;
+			import mx.effects.Glow;
 			import mx.events.MoveEvent;
 			
 			
@@ -40,6 +38,11 @@
 			public var topoImage:Image;
 			public var topoLabel:TopoLabel;
 			public var infoContainer:BaseInfoContainer;
+			
+			//选中状态
+			public var selectStatement:Boolean=false;
+			
+			
 			
 			private function nodeComplete():void{
 				this.completeLoading();
@@ -72,9 +75,10 @@
 				value=null;
 			}
 			
-//			public function initRight(value:BaseXmlModel):void{
-//				
-//			}
+			//初始化右键菜单
+			public function initRight(value:BaseXmlModel):void{
+				
+			}
 			
 			//刷新链路和label
 			private function moveLine(event:MoveEvent):void{
@@ -160,6 +164,40 @@
 				topoImage.source=this.baseXmlModel.getString("image");
 			}
 			
+			public function setSelect():void{
+				if (!selectStatement)
+				{
+					var glow:Glow=new Glow(this);
+					glow.duration=1000;
+					glow.alphaFrom=1.0;
+					glow.alphaTo=0.3;
+					glow.blurXFrom=0.0;
+					glow.blurXTo=50.0;
+					glow.blurYFrom=0.0;
+					glow.blurYTo=50.0;
+					glow.color=0x00ff00;
+					glow.play();
+					selectStatement=true;
+				}
+			}	
+			
+			public function cancelSelect():void
+			{
+				if (selectStatement)
+				{
+					var glow:Glow=new Glow(this);
+					glow.duration=1000;
+					glow.alphaFrom=0.3;
+					glow.alphaTo=1.0;
+					glow.blurXFrom=50.0;
+					glow.blurXTo=0.0;
+					glow.blurYFrom=50.0;
+					glow.blurYTo=0.0;
+					glow.color=0x00ff00;
+					glow.play();
+					selectStatement=false;
+				}
+			}
 			
 			public function getBottomRightX():Number{
 				return this.x+this.width;
