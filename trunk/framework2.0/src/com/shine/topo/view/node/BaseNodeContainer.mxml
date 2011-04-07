@@ -172,9 +172,9 @@
 					glow.alphaFrom=1.0;
 					glow.alphaTo=0.3;
 					glow.blurXFrom=0.0;
-					glow.blurXTo=50.0;
+					glow.blurXTo=this.width/2+20.0;
 					glow.blurYFrom=0.0;
-					glow.blurYTo=50.0;
+					glow.blurYTo=this.width/2+20.0;
 					glow.color=0x00ff00;
 					glow.play();
 					selectStatement=true;
@@ -189,9 +189,9 @@
 					glow.duration=1000;
 					glow.alphaFrom=0.3;
 					glow.alphaTo=1.0;
-					glow.blurXFrom=50.0;
+					glow.blurXFrom=this.width/2+20.0;
 					glow.blurXTo=0.0;
-					glow.blurYFrom=50.0;
+					glow.blurYFrom=this.width/2+20.0;
 					glow.blurYTo=0.0;
 					glow.color=0x00ff00;
 					glow.play();
