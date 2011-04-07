@@ -69,7 +69,7 @@
 			
 			//通过model加入新的一行
 			public function addRowByModel(value:BaseXmlModel):void{
-				var dataXml:XML=this.xml.appendChild(XML(value.getXmlValue()));
+				var dataXml:XML=this.xml.appendChild(XML(value.getBaseXmlValue()));
 				this.dataProvider=dataXml.children();
 			}
 			

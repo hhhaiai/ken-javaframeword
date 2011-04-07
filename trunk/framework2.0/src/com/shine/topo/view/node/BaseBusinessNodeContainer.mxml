@@ -3,7 +3,7 @@
 						xmlns:s="library://ns.adobe.com/flex/spark" 
 						xmlns:mx="library://ns.adobe.com/flex/mx" 
 						xmlns:node="com.shine.topo.view.node.*" 
-						creationComplete="{baseBusinessNodeContainerComplete()}" backgroundAlpha="0.6">
+						creationComplete="{baseBusinessNodeContainerComplete()}">
 	<node:layout>
 		<s:BasicLayout/>
 	</node:layout>

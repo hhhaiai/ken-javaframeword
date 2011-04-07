@@ -1,0 +1,554 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Graphic version="1.0" viewHeight="137.148" viewWidth="137.162" ai:appVersion="14.0.0.367" d:id="1" xmlns="http://ns.adobe.com/fxg/2008" xmlns:ai="http://ns.adobe.com/ai/2008" xmlns:d="http://ns.adobe.com/fxg/2008/dt">
+  <Library/>
+  <Group d:id="2" d:type="layer" d:userLabel="图层 1">
+    <Path winding="nonZero" ai:knockout="0" data="M122.193 68.5918C122.193 38.9316 98.2046 14.9766 68.5776 14.9766 38.9536 14.9766 14.9639 38.9316 14.9639 68.5918 14.9639 98.25 38.9536 122.207 68.5776 122.207 98.2046 122.207 122.193 98.25 122.193 68.5918Z" >
+      <fill>
+        <SolidColor color="#010203"/>
+      </fill>
+      <stroke>
+        <SolidColorStroke caps="none" weight="1" joints="miter" miterLimit="4"/>
+      </stroke>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M42.7896 21.396L35.6509 8.43018C35.6509 8.43018 38.7114 6.7666 39.2524 6.59375L45.5454 19.9741C45.5454 19.9741 44.0103 20.7158 42.7896 21.396Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M45.8228 19.8491L39.5122 6.45996C39.5122 6.45996 42.6743 4.9917 43.2231 4.854L48.6411 18.6392C48.6411 18.6392 47.0845 19.2471 45.8228 19.8491Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M48.9224 18.5132L43.4653 4.75439C43.4653 4.75439 46.7114 3.48779 47.2681 3.38428L51.811 17.4829C51.811 17.4829 50.2192 17.9917 48.9224 18.5132Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M49.1958 19.5532" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M52.1021 17.3882L47.52 3.31396C47.52 3.31396 50.8403 2.25342 51.4028 2.18506L55.0493 16.541C55.0493 16.541 53.4302 16.9487 52.1021 17.3882Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M55.3696 16.457L51.6821 2.12305C51.6821 2.12305 55.061 1.27295 55.6274 1.24023L58.3657 15.7969C58.3657 15.7969 56.7231 16.1021 55.3696 16.457Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M58.6509 15.729L55.8696 1.19141C55.8696 1.19141 59.2954 0.555176 59.8618 0.558105L61.6797 15.2583C61.6797 15.2583 60.022 15.4595 58.6509 15.729Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M61.9824 15.2231L60.1216 0.539551C60.1216 0.539551 63.5801 0.120117 64.1445 0.158691L65.0371 14.9438C65.0371 14.9438 63.3691 15.0405 61.9824 15.2231Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M65.3594 14.9155C65.3359 14.9155 64.4219 0.144043 64.4219 0.144043 64.4219 0.144043 67.8999 -0.0576172 68.4624 0.0161133L68.4253 14.8281C68.4253 14.8281 65.3828 14.9155 65.3594 14.9155Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M68.7417 14.8057C68.7183 14.8042 68.7339 0.00439453 68.7339 0.00439453 68.7339 0.00439453 72.2183 0.0214844 72.7749 0.130859L71.8081 14.9111C71.8081 14.9111 68.7671 14.8071 68.7417 14.8057Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M72.0952 14.9272C72.0718 14.9238 73.0171 0.154297 73.0171 0.154297 73.0171 0.154297 76.4937 0.390625 77.0425 0.534668L75.1479 15.2251C75.1479 15.2251 72.1206 14.9302 72.0952 14.9272Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M75.4644 15.2603C75.439 15.2559 77.3101 0.574707 77.3101 0.574707 77.3101 0.574707 80.7651 1.02881 81.3042 1.20703L78.4917 15.7495C78.4917 15.7495 75.4878 15.2651 75.4644 15.2603Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M78.7769 15.7803C78.7534 15.7739 81.5425 1.23975 81.5425 1.23975 81.5425 1.23975 84.9624 1.90967 85.4878 2.12061L81.7671 16.4585C81.7671 16.4585 78.8003 15.7861 78.7769 15.7803Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M82.0815 16.5229C82.0581 16.5151 85.7534 2.18457 85.7534 2.18457 85.7534 2.18457 89.1265 3.06836 89.6382 3.31201L85.0249 17.3877C85.0249 17.3877 82.105 16.5303 82.0815 16.5229Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M85.3218 17.4912C85.3003 17.4819 89.8882 3.41162 89.8882 3.41162 89.8882 3.41162 93.1968 4.50537 93.6929 4.78076L88.2046 18.5391C88.2046 18.5391 85.3433 17.5 85.3218 17.4912Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M88.4995 18.6274C88.478 18.6172 93.9409 4.86279 93.9409 4.86279 93.9409 4.86279 97.1753 6.16162 97.6519 6.46826L91.312 19.8545C91.312 19.8545 88.521 18.6382 88.4995 18.6274Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M91.6362 19.9805C91.6147 19.9692 97.9312 6.58447 97.9312 6.58447 97.9312 6.58447 101.078 8.08447 101.535 8.41992L94.3647 21.3813C94.3647 21.3813 91.6577 19.9927 91.6362 19.9805Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M94.6538 21.5347C94.6343 21.5215 101.779 8.56055 101.779 8.56055 101.779 8.56055 104.824 10.2544 105.259 10.6182L97.2905 23.104C97.2905 23.104 94.6753 21.5479 94.6538 21.5347Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M97.5288 23.2549C97.5093 23.2402 105.431 10.7153 105.431 10.7153 105.431 10.7153 108.373 12.6138 108.787 13.0068L100.068 25.001C100.068 25.001 97.5464 23.269 97.5288 23.2549Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M100.339 25.1597C100.32 25.144 109.019 13.1504 109.019 13.1504 109.019 13.1504 111.833 15.2256 112.22 15.6431L102.763 27.0581C102.763 27.0581 100.357 25.1748 100.339 25.1597Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M102.994 27.2334C102.976 27.2168 112.41 15.793 112.41 15.793 112.41 15.793 115.089 18.0405 115.449 18.4819L105.292 29.2803C105.292 29.2803 103.011 27.25 102.994 27.2334Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M102.974 27.2397C102.957 27.2231 112.39 15.7998 112.39 15.7998 112.39 15.7998 115.07 18.0474 115.429 18.4888L105.273 29.2871C105.273 29.2871 102.992 27.2563 102.974 27.2397Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M105.521 29.5093C105.505 29.4912 115.638 18.6826 115.638 18.6826 115.638 18.6826 118.171 21.0942 118.503 21.5571L107.689 31.6968C107.689 31.6968 105.539 29.5269 105.521 29.5093Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M107.894 31.8789C107.878 31.8599 118.669 21.709 118.669 21.709 118.669 21.709 121.046 24.2749 121.349 24.7578L109.919 34.1978C109.919 34.1978 107.91 31.897 107.894 31.8789Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M110.125 34.4146C110.111 34.395 121.517 24.9414 121.517 24.9414 121.517 24.9414 123.728 27.6514 124 28.1528L112 36.8564C112 36.8564 110.138 34.4341 110.125 34.4146Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M112.201 37.0996C112.187 37.0791 124.166 28.3604 124.166 28.3604 124.166 28.3604 126.203 31.2041 126.441 31.7212L113.919 39.6543C113.919 39.6543 112.212 37.1201 112.201 37.0996Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M114.083 39.8965C114.072 39.875 126.574 31.9263 126.574 31.9263 126.574 31.9263 128.427 34.8916 128.634 35.4229L115.638 42.5547C115.638 42.5547 114.095 39.918 114.083 39.8965Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M115.802 42.8398C115.792 42.8164 128.769 35.6689 128.769 35.6689 128.769 35.6689 130.433 38.7451 130.605 39.2871L117.187 45.5898C117.187 45.5898 115.812 42.8613 115.802 42.8398Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M132.316 43.1797C132.259 43.0352 131.572 41.293 130.73 39.5029L117.314 45.8281C117.314 45.8281 118.513 48.4941 118.542 48.6445 118.542 48.6445 131.398 43.5566 132.316 43.1797Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M133.783 47.2383C133.736 47.0898 133.16 45.2988 132.433 43.4531L118.644 48.9531C118.644 48.9531 119.673 51.6992 119.693 51.8535 119.693 51.8535 132.843 47.5586 133.783 47.2383Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M135.007 51.377C134.968 51.2266 134.505 49.4023 133.896 47.5137L119.789 52.1387C119.789 52.1387 120.644 54.9434 120.654 55.0977 120.654 55.0977 134.048 51.6367 135.007 51.377Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M135.941 55.543C135.912 55.3906 135.566 53.541 135.076 51.6172L120.707 55.3477C120.707 55.3477 121.382 58.2012 121.382 58.3555 121.382 58.3555 134.968 55.7422 135.941 55.543Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M136.646 59.8125C136.626 59.6582 136.396 57.791 136.029 55.8398L121.455 58.6602C121.455 58.6602 121.951 61.5508 121.941 61.7051 121.941 61.7051 135.662 59.9512 136.646 59.8125Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M137.07 64.1172C137.06 63.9629 136.947 62.084 136.703 60.1152L121.978 62.0137C121.978 62.0137 122.292 64.9297 122.273 65.082 122.273 65.082 136.078 64.1934 137.07 64.1172Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M137.158 68.4355C137.158 68.2813 137.162 66.4004 137.042 64.418L122.228 65.3887C122.228 65.3887 122.359 68.3203 122.33 68.4707 122.33 68.4707 136.164 68.4512 137.158 68.4355Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M137.025 72.748C137.035 72.5918 137.158 70.7168 137.162 68.7305L122.318 68.7695C122.318 68.7695 122.263 71.7012 122.224 71.8516 122.224 71.8516 136.033 72.6992 137.025 72.748Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M136.667 77.002C136.687 76.8477 136.927 74.9824 137.056 73.002L122.238 72.1074C122.238 72.1074 122 75.0313 121.953 75.1777 121.953 75.1777 135.679 76.8926 136.667 77.002Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M135.978 81.2773C136.007 81.125 136.365 79.2793 136.617 77.3105L121.884 75.4863C121.884 75.4863 121.462 78.3906 121.406 78.5332 121.406 78.5332 135 81.1055 135.978 81.2773Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M135.066 85.5195C135.105 85.3691 135.578 83.5488 135.955 81.6016L121.365 78.8555C121.365 78.8555 120.761 81.7266 120.697 81.8672 120.697 81.8672 134.101 85.2852 135.066 85.5195Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M133.876 89.6504C133.925 89.502 134.511 87.7148 135.007 85.793L120.621 82.1387C120.621 82.1387 119.837 84.9668 119.763 85.0996 119.763 85.0996 132.927 89.3574 133.876 89.6504Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M132.441 93.6738C132.5 93.5293 133.197 91.7832 133.812 89.8965L119.683 85.3457C119.683 85.3457 118.724 88.1172 118.642 88.248 118.642 88.248 131.511 93.3223 132.441 93.6738Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M130.724 97.6543C130.791 97.5137 131.595 95.8145 132.33 93.9707L118.513 88.541C118.513 88.541 117.382 91.248 117.292 91.373 117.292 91.373 129.818 97.2441 130.724 97.6543Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M128.781 101.48C128.857 101.344 129.767 99.6973 130.615 97.9043L117.167 91.6172C117.167 91.6172 115.869 94.248 115.771 94.3652 115.771 94.3652 127.904 101.014 128.781 101.48Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M126.603 105.225C126.687 105.094 127.699 103.51 128.658 101.771L115.632 94.6523C115.632 94.6523 114.171 97.1973 114.066 97.3086 114.066 97.3086 125.757 104.705 126.603 105.225Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M124.171 108.793C124.263 108.668 125.373 107.15 126.439 105.477L113.886 97.5547C113.886 97.5547 112.267 100 112.156 100.107 112.156 100.107 123.359 108.221 124.171 108.793Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M121.566 112.184C121.666 112.064 122.867 110.619 124.037 109.016L112.005 100.32C112.005 100.32 110.238 102.66 110.119 102.758 110.119 102.758 120.791 111.561 121.566 112.184Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M118.697 115.434C118.802 115.32 120.093 113.953 121.363 112.426L109.9 102.992C109.9 102.992 107.988 105.217 107.865 105.309 107.865 105.309 117.962 114.764 118.697 115.434Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M115.667 118.502C115.781 118.396 117.154 117.111 118.515 115.668L107.669 105.533C107.669 105.533 105.621 107.633 105.492 107.717 105.492 107.717 114.976 117.787 115.667 118.502Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M112.466 121.35C112.587 121.252 114.039 120.057 115.488 118.701L105.298 107.904C105.298 107.904 103.123 109.873 102.99 109.947 102.99 109.947 111.822 120.594 112.466 121.35Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M109.021 123.977C109.146 123.887 110.669 122.785 112.203 121.521L102.71 110.107C102.71 110.107 100.416 111.936 100.277 112.002 100.277 112.002 108.425 123.182 109.021 123.977Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M108.773 124.152L100.078 112.182 97.5151 113.941 105.427 126.41C105.427 126.41 108.474 124.359 108.773 124.152Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M105.156 126.574L97.2573 114.105 94.6694 115.652 101.761 128.586C101.761 128.586 104.833 126.863 105.156 126.574Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M101.488 128.74L94.3882 115.801 91.6284 117.211 97.9058 130.568C97.9058 130.568 101.148 129.008 101.488 128.74Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M97.6362 130.699L91.3608 117.34 88.521 118.574 93.939 132.266C93.939 132.266 97.2808 130.945 97.6362 130.699Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M93.6577 132.404L88.2358 118.678 85.3218 119.73 89.8706 133.736C89.8706 133.736 93.2886 132.629 93.6577 132.404Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M89.5972 133.814L85.0464 119.773 82.0737 120.643 85.7339 134.906C85.7339 134.906 89.2144 134.016 89.5972 133.814Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M85.4956 135.02L81.8354 120.721 78.814 121.4 81.5718 135.865C81.5718 135.865 85.0991 135.193 85.4956 135.02Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M81.2749 135.963L78.521 121.463 75.4624 121.953 77.3042 136.561C77.3042 136.561 80.8687 136.113 81.2749 135.963Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M77.0151 136.621L75.1753 121.979 72.0933 122.273 73.0151 136.969C73.0151 136.969 76.6011 136.746 77.0151 136.621Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M72.7358 137.033L71.8198 122.303 68.7241 122.404 68.7222 137.129C68.7222 137.129 72.314 137.133 72.7358 137.033Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M68.4155 137.135L68.4253 122.375 65.3301 122.283 64.4043 136.979C64.4043 136.979 67.9878 137.207 68.4155 137.135Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M64.127 136.988L65.0645 122.258 61.9805 121.971 60.1353 136.58C60.1353 136.58 63.6973 137.033 64.127 136.988Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M59.8228 136.605L61.6836 121.963 58.6235 121.482 55.8618 135.945C55.8618 135.945 59.3911 136.623 59.8228 136.605Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M55.5532 135.934L58.3306 121.438 55.3052 120.766 51.6431 135.027C51.6431 135.027 55.1216 135.924 55.5532 135.934Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M51.4146 134.975L55.0942 120.682 52.1196 119.82 47.5669 133.824C47.5669 133.824 50.9829 134.938 51.4146 134.975Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M47.2485 133.742L51.8208 119.709 48.9048 118.664 43.4829 132.354C43.4829 132.354 46.8208 133.68 47.2485 133.742Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M43.2173 132.283L48.6606 118.564 45.8169 117.338 39.5454 130.66C39.5454 130.66 42.7954 132.193 43.2173 132.283Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M39.2544 130.551L45.5493 117.199 42.7876 115.797 35.6919 128.699C35.6919 128.699 38.8384 130.434 39.2544 130.551Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M35.4028 128.592L42.5239 115.664 39.854 114.09 31.9634 126.521C31.9634 126.521 34.9946 128.449 35.4028 128.592Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M31.7153 126.398L39.6313 113.943 37.0669 112.205 28.4126 124.117C28.4126 124.117 31.3149 126.23 31.7153 126.398Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M28.1782 123.971L36.8618 112.037 34.4126 110.141 25.0254 121.484C25.0254 121.484 27.7915 123.777 28.1782 123.971Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M24.7578 121.32L34.1743 109.955 31.8481 107.908 21.7666 118.643C21.7666 118.643 24.3828 121.104 24.7578 121.32Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M21.5313 118.447L31.6431 107.697 29.4497 105.51 18.7144 115.588C18.7144 115.588 21.1709 118.209 21.5313 118.447Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M18.501 115.408L29.2681 105.313 27.2153 102.99 15.8696 112.377C15.8696 112.377 18.1563 115.146 18.501 115.408Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M15.6821 112.166L27.061 102.768 25.1592 100.322 13.2461 108.977C13.2461 108.977 15.3545 111.885 15.6821 112.166Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M13.0234 108.779L24.9697 100.113 23.2246 97.5527 10.792 105.441C10.792 105.441 12.7139 108.477 13.0234 108.779Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M10.6172 105.193L23.084 97.2949 21.5039 94.6289 8.6001 101.723C8.6001 101.723 10.3271 104.871 10.6172 105.193Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M8.42578 101.488L21.3643 94.3887 19.9541 91.6309 6.63037 97.8984C6.63037 97.8984 8.15674 101.15 8.42578 101.488Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M6.48926 97.6465L19.8481 91.373 18.6143 88.5313 4.92334 93.9512C4.92334 93.9512 6.24219 97.293 6.48926 97.6465Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M4.77051 93.6953L18.4971 88.2734 17.4434 85.3594 3.43945 89.9082C3.43945 89.9082 4.5459 93.3242 4.77051 93.6953Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M3.33447 89.6484L17.374 85.0977 16.5059 82.125 2.24365 85.7852C2.24365 85.7852 3.13379 89.2637 3.33447 89.6484Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M2.15674 85.5195L16.4546 81.8613 15.7744 78.8398 1.31104 81.5977C1.31104 81.5977 1.98047 85.125 2.15674 85.5195Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M1.2124 81.2871L15.7114 78.5332 15.2227 75.4746 0.614258 77.3184C0.614258 77.3184 1.06104 80.8828 1.2124 81.2871Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M0.540527 77.0234L15.1841 75.1855 14.8882 72.1016 0.193359 73.0254C0.193359 73.0254 0.415039 76.6094 0.540527 77.0234Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M0.167969 72.7461L14.8979 71.8301 14.7964 68.7344 0.0722656 68.7324C0.0722656 68.7324 0.0688477 72.3242 0.167969 72.7461Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M0.0146484 68.4434L14.7729 68.4551 14.8657 65.3594 0.170898 64.4336C0.170898 64.4336 -0.0585938 68.0176 0.0146484 68.4434Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M0.182617 64.1836L14.9111 65.1211 15.1982 62.0371 0.558594 60.1895C0.558594 60.1895 0.370117 61.3867 0.182617 64.1836Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M0.604492 59.8789L15.2446 61.7402 15.7251 58.6797 1.22119 55.8984C1.22119 55.8984 0.766602 58.0117 0.604492 59.8789Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M1.26904 55.5898L15.7637 58.3672 16.4355 55.3438 2.14014 51.6797C2.14014 51.6797 1.44873 54.4375 1.26904 55.5898Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M2.22705 51.3809L16.5229 55.0566 17.3481 52.1289 3.31152 47.5742C3.31152 47.5742 2.47852 50.2422 2.22705 51.3809Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M3.40576 47.2852L17.4375 51.8574 18.4834 48.9414 4.75977 43.5156C4.75977 43.5156 3.72803 46.1641 3.40576 47.2852Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M4.89697 43.1934L18.6143 48.6367 19.8408 45.793 6.48535 39.5156C6.48535 39.5156 5.28906 42.0938 4.89697 43.1934Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M6.62109 39.2725L19.9697 45.5664 21.3726 42.8047 8.4375 35.7017C8.4375 35.7017 7.08154 38.2012 6.62109 39.2725Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M8.58789 35.4316L21.5151 42.5527 23.0879 39.8828 10.625 31.9819C10.625 31.9819 9.11475 34.3906 8.58789 35.4316Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M10.7876 31.7397L23.2422 39.6572 24.9805 37.0928 13.0371 28.4248C13.0371 28.4248 11.3784 30.7339 10.7876 31.7397Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M13.1997 28.1743L25.1328 36.8584 27.0278 34.4082 15.6528 25.0073C15.6528 25.0073 13.8525 27.208 13.1997 28.1743Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M15.8818 24.7666L27.2466 34.1831 29.2915 31.856 18.5293 21.7598C18.5293 21.7598 16.5942 23.8428 15.8818 24.7666Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M18.7275 21.5469L29.4771 31.6582 31.6646 29.4644 21.5581 18.7119C21.5581 18.7119 19.4961 20.6699 18.7275 21.5469Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M21.7637 18.5171L31.8579 29.2832 34.1782 27.2314 24.7676 15.8657C24.7676 15.8657 22.5864 17.6899 21.7637 18.5171Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M24.9805 15.688L34.3794 27.0669 36.8247 25.1646 28.145 13.2305C28.145 13.2305 25.8535 14.9141 24.9805 15.688Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M28.4067 13.0605L37.0708 25.0073 39.6313 23.2622 31.7192 10.8066C31.7192 10.8066 29.3267 12.3433 28.4067 13.0605Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+    <Path winding="nonZero" ai:knockout="0" data="M31.9341 10.6523L39.8306 23.1196 42.4966 21.5391 35.3794 8.61084C35.3794 8.61084 32.897 9.99414 31.9341 10.6523Z" >
+      <fill>
+        <SolidColor color="#5ebb47"/>
+      </fill>
+    </Path>
+  </Group>
+  <Private>
+    <ai:PrivateElement d:ref="#1">
+      <ai:SaveOptions>
+        <ai:Dictionary>
+          <ai:DictEntry name="aiEditCap" value="1" valueType="Boolean"/>
+          <ai:DictEntry name="versionKey" value="1" valueType="Integer"/>
+          <ai:DictEntry name="writeImages" value="1" valueType="Boolean"/>
+          <ai:DictEntry name="includeSymbol" value="0" valueType="Boolean"/>
+          <ai:DictEntry name="includeXMP" value="0" valueType="Boolean"/>
+          <ai:DictEntry name="preserveTextPolicy" value="3" valueType="Integer"/>
+          <ai:DictEntry name="preserveFilterPolicy" value="3" valueType="Integer"/>
+          <ai:DictEntry name="downsampleLinkedImages" value="0" valueType="Boolean"/>
+          <ai:DictEntry name="rasterizeResolution" value="72" valueType="Integer"/>
+          <ai:DictEntry name="clipToActiveArtboard" value="0" valueType="Boolean"/>
+          <ai:DictEntry name="preserveGradientPolicy" value="3" valueType="Integer"/>
+        </ai:Dictionary>
+      </ai:SaveOptions>
+      <ai:DocData base="100等份.assets/images"/>
+      <ai:Artboards originOffsetH="231.823" originOffsetV="457.008" rulerCanvasDiffH="298.5" rulerCanvasDiffV="-420.39" zoom="3">
+        <ai:Artboard active="1" bottom="3.334" index="0" left="-22.333" right="572.945" top="845.223"/>
+        <ai:Artboard bottom="319.557" index="1" left="231.667" right="369" top="457.223"/>
+        <ai:ArtboardsParam all="0" range="" type="0"/>
+      </ai:Artboards>
+    </ai:PrivateElement>
+    <ai:PrivateElement d:ref="#2">
+      <ai:LayerOptions colorType="ThreeColor">
+        <ai:ThreeColor blue="257" green="128.502" red="79.31"/>
+      </ai:LayerOptions>
+    </ai:PrivateElement>
+  </Private>
+</Graphic>

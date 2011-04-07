@@ -19,16 +19,17 @@
 				
 			}
 			
-			//加载所有topo节点
+			//加载所有topo业务节点
 			public function addTopoBusinessNodeList(value:TopoNodeArrayCollection):void{
 				for each(var node:BaseBusinessNodeContainer in value){
 					this.addBusinessNode(node);
 				}
 			}
 			
+			//加载topo业务节点
 			public function addBusinessNode(value:BaseBusinessNodeContainer):void{
 				if(value!=null){
-					this.addElement(value);
+					this.group.addElement(value);
 				}
 			}
 		]]>
