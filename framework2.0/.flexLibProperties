@@ -36,6 +36,7 @@
     <classEntry path="com.shine.topo.util.TopoRightArrayMap"/>
     <classEntry path="com.shine.framework.Dashboard.view.Dashboard"/>
     <classEntry path="com.shine.framework.Dashboard.skin.DashBoardTenSkin"/>
+    <classEntry path="com.shine.framework.Dashboard.skin.DashBoardHundred"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>
