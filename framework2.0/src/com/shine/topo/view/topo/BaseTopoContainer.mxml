@@ -14,6 +14,7 @@
 		<![CDATA[
 			import com.shine.topo.util.TopoLinesArrayCollection;
 			import com.shine.topo.util.TopoNodeArrayCollection;
+			import com.shine.topo.view.BaseInfoContainer;
 			import com.shine.topo.view.Line.TopoLine;
 			import com.shine.topo.view.node.BaseNodeContainer;
 			
@@ -26,7 +27,14 @@
 			[Bindable]
 			public var topoBackgroupPolicy:Boolean=false;
 			
-			private function baseTopoContainerComplete():void{	
+			//信息窗口
+			public var baseInfoContainer:BaseInfoContainer;
+			
+			private function baseTopoContainerComplete():void{
+				baseInfoContainer=new BaseInfoContainer;
+				baseInfoContainer.visible=false;
+				baseInfoContainer.width=300;
+				this.group.addElement(baseInfoContainer);
 			}
 			
 			//加载所有topo节点
@@ -50,7 +58,8 @@
 			//加入topo节点
 			public function addTopoNode(value:BaseNodeContainer):void{
 				if(value!=null){
-					this.addElement(value);
+					this.group.addElement(value);
+					value.infoContainer=this.baseInfoContainer;
 					if(value.topoLabel!=null)
 						this.group.addElement(value.topoLabel);
 				}

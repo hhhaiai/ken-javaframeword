@@ -2,9 +2,8 @@ package com.shine.framework.core.view
 {
 	import flash.display.Sprite;
 	
-	import mx.core.UIComponent;
-	
 	import mx.controls.Alert;
+	import mx.core.UIComponent;
 
 	public class ExpanLine
 	{
@@ -60,6 +59,14 @@ package com.shine.framework.core.view
 		public function removeLine():void
 		{
 			lines.graphics.clear();
+		}
+		
+		public function changeColor(value:uint):void{
+			this.color=value;
+			lines.graphics.clear();
+			lines.graphics.lineStyle(weight, color, 1);
+			lines.graphics.moveTo(line_x1, line_y1);
+			lines.graphics.lineTo(line_x2, line_y2);
 		}
 		
 		public function getLine():UIComponent
