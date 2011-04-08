@@ -17,7 +17,9 @@ package com.shine.topo.view.Line
 		}
 		
 		public function initTopoLine(value:BaseXmlModel,startNode:BaseNodeContainer,endNode:BaseNodeContainer):void{
-			this.baseXmModel=value;
+			this.color=0xd9d6c3;
+			this.weight=2;
+		    this.baseXmModel=value;
 
 			if(startNode==null||endNode==null){
 				return;

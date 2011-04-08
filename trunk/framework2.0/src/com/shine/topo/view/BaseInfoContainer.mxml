@@ -11,16 +11,18 @@
 				   borderVisible="true"
 				   borderWeight="1"
 				   cornerRadius="5"
-				   dropShadowVisible="true" xmlns:view2="com.shine.topo.view.*">
+				   dropShadowVisible="true" 
+				   xmlns:view2="com.shine.topo.view.*">
 	<fx:Declarations>
 		<s:Fade id="fadeEffect" target="{this}" alphaFrom="0" alphaTo="1"/>
 	</fx:Declarations>
 	<fx:Script>
 		<![CDATA[
 			import mx.controls.Alert;
+			import mx.core.UIComponent;
 			import mx.events.FlexEvent;
 			
-			private var b:Boolean=false;
+			private var b:Boolean=false;	
 			
 			
 			private function complete():void{
@@ -51,7 +53,7 @@
 				
 				var a:Array=[value];
 				this.callLater(showLater,a);
-				a=null;
+				a=null;	
 			}
 			
 			private function showLater(value:String):void{
