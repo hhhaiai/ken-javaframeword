@@ -20,7 +20,7 @@ package com.shine.framework.core.util
 			return xmlArrayCollection;
 		}
 		
-		public static function editXMLNodeValue(xml:XML,tag:String,attribute:ArrayCollection,editAttribute:ArrayCollection):XML{
+		public static function editXMLNodeValue(xml:XML,tag:String,attribute:Array,editAttribute:Array):XML{
 			
 			
 			return xml;
