@@ -17,10 +17,8 @@
 			}
 			
 			private function click(event:MouseEvent):void{
-				Alert.show(url);
-				if(url!=null){
+				if(url!=null)
 					EventUtil.event(url,"newPage");
-				}
 			}
 			
 			public function setHtml(value:String):void{

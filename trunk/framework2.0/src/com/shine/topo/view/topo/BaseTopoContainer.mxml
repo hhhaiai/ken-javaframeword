@@ -12,6 +12,7 @@
 	</fx:Declarations>
 	<fx:Script>
 		<![CDATA[
+			import com.shine.framework.core.model.BaseXmlModel;
 			import com.shine.topo.util.TopoLinesArrayCollection;
 			import com.shine.topo.util.TopoNodeArrayCollection;
 			import com.shine.topo.view.BaseInfoContainer;
@@ -30,11 +31,28 @@
 			//信息窗口
 			public var baseInfoContainer:BaseInfoContainer;
 			
+			//组件初始化完成
 			private function baseTopoContainerComplete():void{
 				baseInfoContainer=new BaseInfoContainer;
 				baseInfoContainer.visible=false;
 				baseInfoContainer.width=300;
+			}
+			
+			//初始化信息提示
+			public function initBaseInfoContainer():void{
 				this.group.addElement(baseInfoContainer);
+			}
+			
+			//初始化组件
+			public function initTopoContainer(value:BaseXmlModel):void{
+				if(value.getString("backgroupPolicy")!=null&&value.getString("backgroupImage")!=null){
+					if(value.getString("backgroupPolicy")=="true"){
+						this.topoBackgroupPolicy=true;
+						this.topoBackgroupImagePath=value.getString("backgroupImage");
+					}else{
+						this.topoBackgroupPolicy=false;
+					}
+				}
 			}
 			
 			//加载所有topo节点
@@ -46,6 +64,7 @@
 			
 			//删除所有topo节点
 			public function deleteAllTopoNode():void{
+				this.group.removeAllElements();
 			}
 			
 			//加载所有topo链路
@@ -71,6 +90,8 @@
 					this.group.addElement(value.getLine());
 				}
 			}
+			
+			
 		]]>
 	</fx:Script>
 	<mx:Image id="backgroupImage" width="{this.width}" height="{this.height}" source="{topoBackgroupImagePath}" visible="{topoBackgroupPolicy}" maintainAspectRatio="false" />
