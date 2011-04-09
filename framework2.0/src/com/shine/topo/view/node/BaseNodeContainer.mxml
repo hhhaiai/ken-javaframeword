@@ -3,7 +3,6 @@
 						  xmlns:s="library://ns.adobe.com/flex/spark" 
 						  xmlns:mx="library://ns.adobe.com/flex/mx" 
 						  xmlns:view="com.shine.framework.core.view.*" 
-						  creationComplete="{nodeComplete()}" 
 						  moveable="true">
 	<view:layout>
 		<s:BasicLayout/>
@@ -16,6 +15,7 @@
 			import com.shine.topo.view.BaseInfoTextArea;
 			import com.shine.topo.view.Line.TopoLine;
 			import com.shine.topo.view.label.TopoLabel;
+			import com.shine.framework.core.util.EventUtil;
 			
 			import mx.controls.Alert;
 			import mx.controls.Image;
@@ -43,11 +43,6 @@
 			public var selectStatement:Boolean=false;
 			
 			
-			
-			private function nodeComplete():void{
-				this.completeLoading();
-			}
-			
 			//初始化节点数据
 			public function initNode(value:BaseXmlModel):void{
 				this.baseXmlModel=value;
@@ -67,12 +62,24 @@
 				topoLabel=new TopoLabel;
 				refreshLabel();
 				
+				if(value.getString("doubleClick")!=null)
+					this.addEventListener(MouseEvent.DOUBLE_CLICK,doubleClick);
+				
 				this.addEventListener(MoveEvent.MOVE,moveLine);
 				this.addEventListener(MouseEvent.MOUSE_MOVE,moveMouse);
 				this.addEventListener(MouseEvent.MOUSE_OVER,over);
 				this.addEventListener(MouseEvent.MOUSE_OUT,out);
 				
 				value=null;
+			}
+			
+			
+			//双击事件
+			private function doubleClick(event:MouseEvent):void{
+				if(this.baseXmlModel.getString("doubleClickType")!=null)
+				  EventUtil.event(this.baseXmlModel.getString("doubleClick"),this.baseXmlModel.getString("doubleClickType"));
+				else
+				  EventUtil.event(this.baseXmlModel.getString("doubleClick"),"newPage");	
 			}
 			
 			//初始化右键菜单
@@ -95,15 +102,11 @@
 			//移入设备
 			private function over(event:MouseEvent):void{
 				infoContainer.showDetail(this.baseXmlModel.getString("message"));
-				this.alpha=this.alpha-0.2;
-				event.stopPropagation();
 			}
 			
 			//移出设备
 			private function out(event:MouseEvent):void{
-				infoContainer.visible=false;
-				this.alpha=this.alpha+0.2;
-				event.stopPropagation();
+				infoContainer.hideDetail();
 			}
 			
 			//刷新链路
@@ -181,6 +184,7 @@
 				}
 			}	
 			
+			//取消选中
 			public function cancelSelect():void
 			{
 				if (selectStatement)

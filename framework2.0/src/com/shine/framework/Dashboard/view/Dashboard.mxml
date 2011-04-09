@@ -1,17 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<view:BaseSimpleContainer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+<s:SkinnableContainer xmlns:fx="http://ns.adobe.com/mxml/2009" 
 						  xmlns:s="library://ns.adobe.com/flex/spark" 
 						  xmlns:mx="library://ns.adobe.com/flex/mx" 
-						  xmlns:view="com.shine.framework.core.view.*" 
-						  creationComplete="{complete()}" backgroundAlpha="0">
-	<view:layout>
-		<s:BasicLayout/>
-	</view:layout>
-	<fx:Script>
-		<![CDATA[
-			private function complete():void{
-				this.completeLoading();
-			}
-		]]>
-	</fx:Script>
-</view:BaseSimpleContainer>
+						  backgroundAlpha="0">
+	<s:layout>
+		<s:BasicLayout />
+	</s:layout>
+</s:SkinnableContainer>
