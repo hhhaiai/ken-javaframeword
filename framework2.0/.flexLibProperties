@@ -37,6 +37,9 @@
     <classEntry path="com.shine.framework.Dashboard.view.Dashboard"/>
     <classEntry path="com.shine.framework.Dashboard.skin.DashBoardTenSkin"/>
     <classEntry path="com.shine.framework.Dashboard.skin.DashBoardHundred"/>
+    <classEntry path="com.shine.topo.control.SaveControl"/>
+    <classEntry path="com.shine.framework.core.model.XmlModel"/>
+    <classEntry path="com.shine.framework.core.util.XmlModelArrayCollection"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>
