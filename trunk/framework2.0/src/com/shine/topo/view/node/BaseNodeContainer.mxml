@@ -101,7 +101,8 @@
 			
 			//移入设备
 			private function over(event:MouseEvent):void{
-				infoContainer.showDetail(this.baseXmlModel.getString("message"));
+				if(this.baseXmlModel.getString("message")!=null||this.baseXmlModel.getString("message").length!=0)
+					infoContainer.showDetail(this.baseXmlModel.getString("message"));
 			}
 			
 			//移出设备
@@ -201,6 +202,11 @@
 					glow.play();
 					selectStatement=false;
 				}
+			}
+			
+			public function savePoint():void{
+				this.ox=this.x;
+				this.oy=this.y;
 			}
 			
 			public function getBottomRightX():Number{

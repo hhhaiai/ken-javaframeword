@@ -3,9 +3,10 @@
 					   xmlns:s="library://ns.adobe.com/flex/spark" 
 					   xmlns:mx="library://ns.adobe.com/flex/mx" 
 					   xmlns:view="com.shine.framework.core.view.*"
-					   editable="false" wordWrap="true" 
+					   editable="false" 
+					   wordWrap="true" 
 					   contentBackgroundColor="0xF0F8FF"
-					   borderStyle="none">
+					   borderStyle="none" enabled="false">
 	<fx:Declarations>
 		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
 	</fx:Declarations>

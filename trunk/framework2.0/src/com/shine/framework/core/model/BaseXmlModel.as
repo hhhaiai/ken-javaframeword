@@ -47,6 +47,18 @@ package com.shine.framework.core.model
 			return xmlData.toString();
 		}
 		
+		//获取xml的数据结构 <name key1="value1" key2="value2" key3="value3" />
+		public function getOriginalXmlValue():String{
+			var xmlData:StringBuffer=new StringBuffer;
+			xmlData.append("<"+String(XML(this.xml).name())+" ");
+			var length:int=this.getLength();
+			for(var i:int=0;i<length;i++){
+				xmlData.append(this.getKeyByIndex(i)+"='"+this.getValueByIndex(i)+"' ");
+			}
+			xmlData.append("/>");
+			return xmlData.toString();
+		}
+		
 		
 		/**
 		 * 初始xml model的值，把子节点中的名称做key，值做value
