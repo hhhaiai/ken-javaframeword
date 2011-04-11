@@ -56,7 +56,12 @@
 								dataGridColumn.width=int(xml.@width);
 							}
 						}
-						dataGridColumn.itemRenderer=new ClassFactory(com.shine.framework.core.view.HTMLDataGridRenderer);
+						if(String(xml.@type)!=null&&String(xml.@type)=="image"){
+							dataGridColumn.itemRenderer=new ClassFactory(com.shine.framework.core.view.ImageDataGridRender);
+						}else{
+							dataGridColumn.itemRenderer=new ClassFactory(com.shine.framework.core.view.HTMLDataGridRender);
+						}
+						
 						titleArray.push(dataGridColumn);
 						dataGridColumn=null;
 					}

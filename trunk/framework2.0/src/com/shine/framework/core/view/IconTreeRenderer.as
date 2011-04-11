@@ -32,7 +32,8 @@ package com.shine.framework.core.view
 			myImage.source = defaultImg;   
 			myImage.width=imageWidth;   
 			myImage.height=imageHeight;   
-			myImage.setStyle( "verticalAlign", "middle" );   
+			myImage.setStyle( "verticalAlign", "middle" );
+			myImage.maintainAspectRatio=false;
 			addChild(myImage);   
 			
 		}      

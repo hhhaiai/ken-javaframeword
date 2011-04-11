@@ -40,6 +40,13 @@
     <classEntry path="com.shine.topo.control.SaveControl"/>
     <classEntry path="com.shine.framework.core.model.XmlModel"/>
     <classEntry path="com.shine.framework.core.util.XmlModelArrayCollection"/>
+    <classEntry path="com.shine.framework.EventControl.EventControl"/>
+    <classEntry path="com.shine.framework.EventControl.model.BaseEvent"/>
+    <classEntry path="com.shine.topo.view.addDeviceComponent.AddDeviceContainer"/>
+    <classEntry path="com.shine.topo.view.addDeviceComponent.AddLineContainer"/>
+    <classEntry path="com.shine.framework.EventControl.utils.EventMap"/>
+    <classEntry path="com.shine.framework.EventControl.utils.ComponentMap"/>
+    <classEntry path="com.shine.framework.core.view.ImageDataGridRender"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

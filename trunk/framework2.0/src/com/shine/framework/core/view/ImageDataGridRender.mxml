@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		   xmlns:s="library://ns.adobe.com/flex/spark" 
+		   xmlns:mx="library://ns.adobe.com/flex/mx" >
+	<fx:Script>
+		<![CDATA[
+			private function change(value:String):String{
+				return value;
+			}
+		]]>
+	</fx:Script>
+	<mx:VBox>
+		<mx:Image id="image" source="{change(data.alarmImage)}"/>
+		<!--<s:Label text="{data.alarmImage}" />-->
+	</mx:VBox>
+</mx:Canvas>

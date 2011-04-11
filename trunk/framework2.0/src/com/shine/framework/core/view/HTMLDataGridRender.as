@@ -5,9 +5,9 @@ package com.shine.framework.core.view
 	import mx.events.FlexEvent;
 	import mx.controls.Alert;
 	
-	public class HTMLDataGridRenderer extends Text
+	public class HTMLDataGridRender extends Text
 	{
-		public function HTMLDataGridRenderer()
+		public function HTMLDataGridRender()
 		{
 			super();
 		}

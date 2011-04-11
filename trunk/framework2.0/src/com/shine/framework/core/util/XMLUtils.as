@@ -14,18 +14,11 @@ package com.shine.framework.core.util
 			return xmlArrayCollection;
 		}
 		
+		//获取所有tag节点
 		public static function saxXmlNodeByTag(value:XML,tag:Array):XMLArrayCollection{
 			var xmlArrayCollection:XMLArrayCollection=new XMLArrayCollection();
 			xmlArrayCollection.saxXmlNodeByTag(value,tag);
 			return xmlArrayCollection;
-		}
-		
-		public static function editXMLNodeValue(xml:XML,tag:String,attribute:Array,editAttribute:Array):XML{
-			
-			
-			return xml;
-		}
-		
-		
+		}		
 	}
 }

@@ -14,9 +14,10 @@ package com.shine.framework.core.model
 	public class BaseXmlModel extends ArrayMap
 	{
 		public var xml:String="";
-		public function BaseXmlModel()
+		public function BaseXmlModel(value:String=null)
 		{
 			super();
+			initXmlValue(value);
 		}
 		
 		/**

@@ -6,7 +6,7 @@
 					   editable="false" 
 					   wordWrap="true" 
 					   contentBackgroundColor="0xF0F8FF"
-					   borderStyle="none" enabled="false">
+					   borderStyle="none">
 	<fx:Declarations>
 		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
 	</fx:Declarations>

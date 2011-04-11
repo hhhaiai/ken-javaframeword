@@ -14,13 +14,25 @@
 	</fx:Declarations>
 	<fx:Script>
 		<![CDATA[
+			import mx.controls.Alert;
 			import mx.events.FlexEvent;
+			
 			//控制是否动态修改icon标签
 			public var iconControl:Boolean=true;
+			
+			public function setXml(value:XML):void{
+				this.xml=value;
+				openTree();
+			}
 			
 			private function sunshineTreeInit():void{
 				if(iconControl)
 				     this.itemRenderer=new ClassFactory(com.shine.framework.core.view.IconTreeRenderer);
+			}
+			
+			//开启树
+			public function openTree():void{
+				this.expandItem(this.xml, true);
 			}
 		]]>
 	</fx:Script>

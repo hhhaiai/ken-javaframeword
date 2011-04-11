@@ -86,12 +86,15 @@
 			
 			//加入连线
 			public function addTopoLine(value:TopoLine):void{
-				if(value!=null){
+				if(value!=null)
 					this.group.addElement(value.getLine());
-				}
 			}
 			
-			
+			//删除连线
+			public function deleteTopoLine(value:TopoLine):void{
+				if(value!=null)
+					this.group.removeElement(value.getLine());
+			}
 		]]>
 	</fx:Script>
 	<mx:Image id="backgroupImage" width="{this.width}" height="{this.height}" source="{topoBackgroupImagePath}" visible="{topoBackgroupPolicy}" maintainAspectRatio="false" />
