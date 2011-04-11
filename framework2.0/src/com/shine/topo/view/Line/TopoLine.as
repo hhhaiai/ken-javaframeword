@@ -11,12 +11,18 @@ package com.shine.topo.view.Line
 	{
 		public var baseXmModel:BaseXmlModel;
 		public var lineLabel:LineLabel;
+		
+		public var startNode:BaseNodeContainer;
+		public var endNode:BaseNodeContainer;
 		public function TopoLine()
 		{
 			super();
 		}
 		
 		public function initTopoLine(value:BaseXmlModel,startNode:BaseNodeContainer,endNode:BaseNodeContainer):void{
+			this.startNode=startNode;
+			this.endNode=endNode;
+			
 			if(value.getString("color")!=null)
 				this.color=uint(value.getString("color"));
 			

@@ -25,6 +25,7 @@ package com.shine.framework.core.util
 		{
 		}
 		
+		//调用事件
 		public static function event(url:String,type:String,value:String=null,method:Function=null):void{
 			if (type == "newPage")
 			{
@@ -57,6 +58,7 @@ package com.shine.framework.core.util
 			}
 		}
 		
+		//保存xml
 		private static function showXmlCanvas(value:XML):void{
 			alert(value.toXMLString());
 		}

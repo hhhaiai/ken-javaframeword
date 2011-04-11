@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<view:BaseSimpleContainer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+						  xmlns:s="library://ns.adobe.com/flex/spark" 
+						  xmlns:mx="library://ns.adobe.com/flex/mx" 
+						  xmlns:view="com.shine.framework.core.view.*" 
+						  xmlns:addDeviceComponent="com.shine.topo.view.addDeviceComponent.*"
+						  creationComplete="{addDeviceContainer_Complete()}">
+	<view:layout>
+		<s:BasicLayout/>
+	</view:layout>
+	<fx:Declarations>
+		<fx:XML id="xml" xmlns="">
+			<node>
+				<node type="line" name="链路" />
+			</node>
+		</fx:XML>
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			
+			private function addDeviceContainer_Complete():void{
+				
+			}
+			
+			public function setXml(value:XML):void{
+				addDeivceTree.xml=value;
+			}
+		]]>
+	</fx:Script>
+	<view:SunshineTree id="addDeivceTree" width="100%" height="100%" />
+	<addDeviceComponent:AddLineContainer id="addLineContainer" width="100%" height="100%" visible="false" />
+</view:BaseSimpleContainer>
