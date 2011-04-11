@@ -12,8 +12,11 @@ package com.shine.framework.EventControl.utils
 			super();
 		}
 		
+		//加入事件广播组件
 		public function addComponent(value:UIComponent):void{
 			this.put(ReferenceUtil.getClassName(value),value);
 		}
+		
+		
 	}
 }

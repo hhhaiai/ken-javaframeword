@@ -24,6 +24,7 @@ package com.shine.framework.EventControl
 			return EventControl._instance;
 		}
 		
+		//广播事件
 		public function dispatchEvent(event:BaseEvent,... components):void{
 			if(components.length!=0){
 				for each(var component:UIComponent in components){
@@ -36,6 +37,7 @@ package com.shine.framework.EventControl
 			}
 		}
 		
+		//加入广播实例
 		public function addComponent(value:UIComponent):void{
 			componentMap.addComponent(value);
 		}
