@@ -1,9 +1,6 @@
 package com.shine.framework.core.util
 {
-	import flash.display.BitmapData;
 	import flash.external.ExternalInterface;
-	import flash.geom.Matrix;
-	import flash.net.FileReference;
 	import flash.net.URLRequest;
 	import flash.net.navigateToURL;
 	import flash.utils.ByteArray;
@@ -11,8 +8,7 @@ package com.shine.framework.core.util
 	import mx.controls.Alert;
 	import mx.core.IUITextField;
 	import mx.core.UIComponent;
-	import mx.graphics.codec.IImageEncoder;
-	import mx.graphics.codec.JPEGEncoder;
+	
 	
 	use namespace mx.core.mx_internal;
 
@@ -71,23 +67,6 @@ package com.shine.framework.core.util
 			alert(value);
 		}
 		
-		public static function savePictureEvent(value:UIComponent,dowloadPictureName:String="save.jpg"):void{
-			var bitmapData:BitmapData=getBitmapData(value);
-			var _fileRef:FileReference=new FileReference(); //用于保存文件
-			var _encoder:IImageEncoder=new JPEGEncoder(80); //用于编码位图
-			var ba:ByteArray=_encoder.encode(bitmapData); //编码成JPG图片，质量为80
-			_fileRef.save(ba, dowloadPictureName); //保存到磁盘，会出现个系统保存对话框。
-			ba.clear();
-		}
-		
-		//生成字节码
-		private static function getBitmapData(target:UIComponent):BitmapData
-		{
-			var bd:BitmapData=new BitmapData(target.width, target.height);
-			var m:Matrix=new Matrix();
-			bd.draw(target, m);
-			return bd;
-		}
 		
 		//resize alert
 		public static function alert(content:String,title:String="提示",typt:String="text",width:int=0,height:int=0):void{
