@@ -4,13 +4,13 @@
 		   xmlns:mx="library://ns.adobe.com/flex/mx" >
 	<fx:Script>
 		<![CDATA[
-			private function change(value:String):String{
+			private function init(value:String):String{
 				return value;
 			}
 		]]>
 	</fx:Script>
 	<mx:VBox>
-		<mx:Image id="image" source="{change(data.alarmImage)}"/>
+		<mx:Image id="image" source="{init(data.alarmImage)}"/>
 		<!--<s:Label text="{data.alarmImage}" />-->
 	</mx:VBox>
 </mx:Canvas>
