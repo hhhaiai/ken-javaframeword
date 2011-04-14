@@ -3,7 +3,7 @@
 			 xmlns:s="library://ns.adobe.com/flex/spark" 
 			 xmlns:mx="library://ns.adobe.com/flex/mx" 
 			 creationComplete="datagrid_creationCompleteHandler(event)">
-	<!-- type="image/html/excult" -->
+	<!-- type="image/html/external" -->
 	<fx:Declarations>
 		<fx:XML id="titleXml" xmlns="">
 			<nodes>
@@ -68,7 +68,7 @@
 							dataGridColumn.itemRenderer=new ClassFactory(com.shine.framework.core.view.ImageDataGridRender);
 						}else if(String(xml.@type)=="html"){
 							dataGridColumn.itemRenderer=new ClassFactory(com.shine.framework.core.view.HTMLDataGridRender);
-						}else if(String(xml.@type)=="excult"){
+						}else if(String(xml.@type)=="external"){
 							if(itemRendererClass!=null)
 								dataGridColumn.itemRenderer=itemRendererClass;
 						}
