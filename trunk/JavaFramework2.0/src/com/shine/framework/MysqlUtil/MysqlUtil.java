@@ -77,7 +77,7 @@ public class MysqlUtil {
 			String userName, String password, String dbname) {
 		StringBuffer cmd = new StringBuffer(100);
 		if (System.getProperty("os.name").toLowerCase().indexOf("windows") != -1) {
-			// cmd.append("cmd.exe /c ");
+			//cmd.append("cmd.exe /c ");
 			cmd.append("\"");
 			cmd.append(mysqlPath + "bin\\");
 			cmd.append(MYSQL_DUMP_CMD);
