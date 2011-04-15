@@ -5,6 +5,9 @@ public class Example {
 		// System.out
 		// .println(MapManager.getGoogleMapXmlCn(38.9146943, 121.612382));
 
-		System.out.println(MapManager.getLatlng("广东 广州", ""));
+		//System.out.println(MapManager.getLatlng("美国", ""));
+		
+		String re[]=MapManager.repairLatlng(38.9146943, 121.612382);
+		System.out.println();
 	}
 }
