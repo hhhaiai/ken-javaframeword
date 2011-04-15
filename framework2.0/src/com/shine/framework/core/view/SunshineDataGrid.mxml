@@ -29,6 +29,7 @@
 	<fx:Script>
 		<![CDATA[
 			import com.shine.framework.core.model.BaseXmlModel;
+			import com.shine.framework.core.model.XmlModel;
 			import com.shine.framework.core.util.DataUtil;
 			
 			import mx.controls.Alert;
@@ -105,9 +106,21 @@
 				}
 			}
 			
+			//删除其中一行
+			public function removeDataGridRow(num:int):void{
+				var xmlModel:XmlModel=new XmlModel(this.xml);
+				xmlModel.deleteXmlByIndex(num);
+				this.xml=XML(xmlModel.getOriginalXmlValue());
+			}
+			
 			//清空数据单元
 			public function cleanDataGridRow():void{
 				this.xml=XML("<nodes />");
+			}
+			
+			//获取表格高度
+			public function getDataGridRowLenght():int{
+				return this.xml.children().length();
 			}
 			
 			//空白处右键

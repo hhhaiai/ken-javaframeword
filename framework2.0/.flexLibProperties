@@ -49,7 +49,9 @@
     <classEntry path="com.shine.framework.core.view.ImageDataGridRender"/>
     <classEntry path="com.shine.framework.core.io.IOUtils"/>
     <classEntry path="com.shine.cofferChart.CofferCharts"/>
-    <classEntry path="com.shine.cofferChart.view.CofferLineContainer"/>
+    <classEntry path="com.shine.resource.CoreResource"/>
+    <classEntry path="com.shine.framework.Map.MapContainer"/>
+    <classEntry path="com.shine.cofferChart.view.LineCharts.LineChart"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

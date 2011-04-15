@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<view:BaseSimpleContainer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+						  xmlns:s="library://ns.adobe.com/flex/spark" 
+						  xmlns:mx="library://ns.adobe.com/flex/mx" 
+						  xmlns:view="com.shine.framework.core.view.*">
+	<view:layout>
+		<s:BasicLayout/>
+	</view:layout>
+	<fx:Declarations>
+		<fx:XML id="xml" xmlns="">
+			<!--
+			<nodes longitude="113.938056" latitude="22.524722"  >
+				<node longitude="113.938056" latitude="22.524722"  title="123" info="321"  returnType="" />
+			</nodes>
+			-->
+			
+			<nodes longitude="113.938056" latitude="22.524722" zoom="14" title="123" info="321"/>
+		</fx:XML>
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import com.google.maps.InfoWindowOptions;
+			import com.google.maps.LatLng;
+			import com.google.maps.Map;
+			import com.google.maps.MapEvent;
+			import com.google.maps.MapOptions;
+			import com.google.maps.MapType;
+			import com.google.maps.overlays.Marker;
+			import com.google.maps.overlays.MarkerOptions;
+			import com.google.maps.controls.ZoomControl;
+			import com.google.maps.styles.FillStyle;
+			import com.google.maps.styles.StrokeStyle;
+			
+			[Bindable]
+			public var key:String="ABQIAAAAPULZWkPVuPUodDGOdN8_QRR9J3WxsHI1Q-Sropp79KNqGyzTMxQYGQZHGr1dNjN8TGECz-Hn5pwqUw";
+
+			//地图加载完成事件
+			private function onMapReady(event:Event):void {
+				if(xml.toXMLString()!=null){
+					setXml(xml);
+				}
+				
+				this.completeLoading();
+			}
+			
+			//设置xml
+			public function setXml(value:XML):void{
+//				map.sensor="true";
+				this.map.setCenter(new LatLng(Number(xml.@latitude),Number(xml.@longitude)), int(xml.@zoom), MapType.NORMAL_MAP_TYPE);
+				
+				if(xml.@title!=null&&String(xml.@title).length!=0){
+					map.openInfoWindow(map.getCenter(), new InfoWindowOptions({title: String(xml.@title), content: String(xml.@info)}));
+				}
+				
+				if(xml.children().length()!=0){
+					for each(var pointXml:XML in this.xml.children()){
+						addMark(Number(xml.@longitude),Number(xml.@latitude));
+					}
+				}
+				
+				map.addControl(new ZoomControl());
+				
+			}
+			
+			//加入标记
+			public function addMark(longitude:Number,latitude:Number):void{
+				this.map.addOverlay(new Marker(new LatLng(latitude,longitude),new MarkerOptions({
+					strokeStyle: new StrokeStyle({color: 0x987654}),
+					fillStyle: new FillStyle({color: 0x223344, alpha: 0.8}),
+					radius: 12,
+					hasShadow: true
+				})));
+			}
+			
+			//设置中心
+			public function setCenter(longitude:Number,latitude:Number):void{
+				map.setCenter(new LatLng(latitude,longitude),14, MapType.NORMAL_MAP_TYPE);
+			}
+			
+			//缩放地图
+			public function setZoom(value:int):void{
+				map.setZoom(value);
+			}
+		]]>
+	</fx:Script>
+	<maps:Map xmlns:maps="com.google.maps.*" url="http://code.google.com/apis/maps/"  language="zh-CN" countryCode="utf-8" id="map" mapevent_mapready="onMapReady(event)" 
+			  width="100%" height="100%" key="{key}"/>
+</view:BaseSimpleContainer>
