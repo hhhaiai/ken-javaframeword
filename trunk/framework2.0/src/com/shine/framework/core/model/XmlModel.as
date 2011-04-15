@@ -16,6 +16,7 @@ package com.shine.framework.core.model
 			initModel(value);
 		}
 		
+		//初始化数据
 		public function initModel(value:String):void{
 			this.xml=value;
 			
@@ -51,6 +52,12 @@ package com.shine.framework.core.model
 			for each(var xmlModel:XmlModel in xmlModelArray){
 				xmlModel.editXml(tag,attributes,values,editAttributes,editValue);
 			}
+		}
+		
+		//删除某个子节点
+		public function deleteXmlByIndex(value:int):void{
+			if(value<xmlModelArray.length)
+				xmlModelArray.removeItemAt(value);
 		}
 		
 		//删除某个xml
@@ -114,6 +121,14 @@ package com.shine.framework.core.model
 				}
 			}
 			return false;
+		}
+		
+		//获取子节点
+		public function getChileNode(value:int):BaseXmlModel{
+			if(value<xmlModelArray.length){
+				return xmlModelArray.getItemAt(value) as BaseXmlModel;
+			}
+			return null;
 		}
 		
 		//获取修改后的xml
