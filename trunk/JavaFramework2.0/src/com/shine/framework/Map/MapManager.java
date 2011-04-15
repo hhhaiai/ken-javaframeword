@@ -86,9 +86,8 @@ public class MapManager {
 	}
 
 	/**
-	 * 根据地點名稱的搜索出该地图的经纬
-	 * mapkey可以为null或者“”
-	 *
+	 * 根据地點名稱的搜索出该地图的经纬 mapkey可以为null或者“”
+	 * 
 	 * 
 	 * @param address
 	 * @param mapKey
@@ -120,6 +119,38 @@ public class MapManager {
 			ret = HtmlUtil.getUrlString(url);
 		}
 		return ret;
+	}
+
+	/**
+	 * 消除天朝偏移
+	 * 
+	 * 偏移修正接口：
+	 * http://www.anttna.com/goffset/goffset1.php?lat=纠偏前的纬度值&lon=纠偏前的经度值
+	 * 
+	 * @param lng
+	 * @param lat
+	 * @return
+	 */
+	public static String[] repairLatlng(double lng, double lat) {
+		try {
+			StringBuffer url = new StringBuffer();
+			url.append("http://www.anttna.com/goffset/goffset1.php?lat=");
+			url.append(lat);
+			url.append("&lon=");
+			url.append(lng);
+
+			String ret = HtmlUtil.getUrlString(url.toString());
+			url = null;
+			if (ret.indexOf(",") != -1) {
+				String sp[]=ret.split(",");
+				sp[0]=sp[0].trim();
+				sp[1]=sp[1].trim();
+				return sp;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }
