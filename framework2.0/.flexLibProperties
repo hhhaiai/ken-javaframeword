@@ -52,6 +52,8 @@
     <classEntry path="com.shine.resource.CoreResource"/>
     <classEntry path="com.shine.framework.Map.MapContainer"/>
     <classEntry path="com.shine.cofferChart.view.LineCharts.LineChart"/>
+    <classEntry path="com.shine.plugins.view.BasePluginsContainer"/>
+    <classEntry path="com.shine.framework.core.view.GifImage"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

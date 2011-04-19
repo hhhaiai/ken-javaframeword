@@ -10,7 +10,7 @@
 		<fx:XML id="xml" xmlns="">
 			<!--
 			<nodes longitude="113.938056" latitude="22.524722"  >
-				<node longitude="113.938056" latitude="22.524722"  title="123" info="321"  returnType="" />
+			<node longitude="113.938056" latitude="22.524722"  title="123" info="321"  returnType="" />
 			</nodes>
 			-->
 			
@@ -23,17 +23,31 @@
 			import com.google.maps.LatLng;
 			import com.google.maps.Map;
 			import com.google.maps.MapEvent;
+			import com.google.maps.MapMouseEvent;
 			import com.google.maps.MapOptions;
 			import com.google.maps.MapType;
+			import com.google.maps.controls.MapTypeControl;
+			import com.google.maps.controls.PositionControl;
+			import com.google.maps.controls.ZoomControl;
 			import com.google.maps.overlays.Marker;
 			import com.google.maps.overlays.MarkerOptions;
-			import com.google.maps.controls.ZoomControl;
 			import com.google.maps.styles.FillStyle;
 			import com.google.maps.styles.StrokeStyle;
 			
 			[Bindable]
 			public var key:String="ABQIAAAAPULZWkPVuPUodDGOdN8_QRR9J3WxsHI1Q-Sropp79KNqGyzTMxQYGQZHGr1dNjN8TGECz-Hn5pwqUw";
-
+			
+			//是否加入缩放
+			public var zoomControlPolicy:Boolean=false;
+			//是否加入mapType
+			public var mapTypePolicy:Boolean=false;
+			//方向指向盘
+			public var positionPolicy:Boolean=false;
+			//地图单击事件
+			public var clickMethod:Function;
+			//地图双击事件
+			public var doubleClickMethod:Function;
+			
 			//地图加载完成事件
 			private function onMapReady(event:Event):void {
 				if(xml.toXMLString()!=null){
@@ -45,8 +59,9 @@
 			
 			//设置xml
 			public function setXml(value:XML):void{
-//				map.sensor="true";
+				//				map.sensor="true";
 				this.map.setCenter(new LatLng(Number(xml.@latitude),Number(xml.@longitude)), int(xml.@zoom), MapType.NORMAL_MAP_TYPE);
+				
 				
 				if(xml.@title!=null&&String(xml.@title).length!=0){
 					map.openInfoWindow(map.getCenter(), new InfoWindowOptions({title: String(xml.@title), content: String(xml.@info)}));
@@ -54,22 +69,37 @@
 				
 				if(xml.children().length()!=0){
 					for each(var pointXml:XML in this.xml.children()){
-						addMark(Number(xml.@longitude),Number(xml.@latitude));
+						addMark(Number(xml.@longitude),Number(xml.@latitude),String(xml.@title),String(xml.@info));
 					}
 				}
 				
-				map.addControl(new ZoomControl());
+				if(zoomControlPolicy)
+					addZoomControl();
+				
+				if(mapTypePolicy)
+					addMapTypeControl();
+				
+				if(positionPolicy)
+					addPositionControl();
+				
+				
+				this.map.addEventListener(MouseEvent.DOUBLE_CLICK,doubleCilk);
+				this.map.addEventListener(MouseEvent.CLICK,clickMethod);
 				
 			}
 			
 			//加入标记
-			public function addMark(longitude:Number,latitude:Number):void{
-				this.map.addOverlay(new Marker(new LatLng(latitude,longitude),new MarkerOptions({
+			public function addMark(longitude:Number,latitude:Number,title:String=null,info:String=null):void{
+				var marker:Marker=new Marker(new LatLng(latitude,longitude),new MarkerOptions({
 					strokeStyle: new StrokeStyle({color: 0x987654}),
 					fillStyle: new FillStyle({color: 0x223344, alpha: 0.8}),
 					radius: 12,
 					hasShadow: true
-				})));
+				}));
+				this.map.addOverlay(marker);
+				
+				if(title!=null)
+					map.openInfoWindow(marker.getLatLng(), new InfoWindowOptions({title: title,content: info}));
 			}
 			
 			//设置中心
@@ -80,6 +110,33 @@
 			//缩放地图
 			public function setZoom(value:int):void{
 				map.setZoom(value);
+			}
+			
+			//加入zoom控制
+			public function addZoomControl():void{
+				map.addControl(new ZoomControl());
+			}
+			
+			//加入Maptype
+			public function addMapTypeControl():void{
+				map.addControl(new MapTypeControl());
+			}
+			
+			//加入Maptype
+			public function addPositionControl():void{
+				map.addControl(new PositionControl());
+			}
+			
+			//单击事件
+			public function click(event:MapMouseEvent):void{
+				if(clickMethod!=null)
+					clickMethod.call(this,event.latLng.lng(),event.latLng.lat());
+			}
+			
+			//双击事件
+			public function doubleCilk(event:MapMouseEvent):void{
+				if(doubleClickMethod!=null)
+					doubleClickMethod.call(this,event.latLng.lng(),event.latLng.lat());
 			}
 		]]>
 	</fx:Script>

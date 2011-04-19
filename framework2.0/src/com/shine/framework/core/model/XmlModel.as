@@ -66,8 +66,8 @@ package com.shine.framework.core.model
 			for(var i:int=0;i<num;i++){
 				if(xmlModelArray.getXmlModel(i).tagCheck(tag,attributes,values)){
 					xmlModelArray.removeItemAt(i);
-				}else{
-					xmlModelArray.getXmlModel(i).deleteXmlByTag(tag,attributes,values);
+//				}else{
+//					xmlModelArray.getXmlModel(i).deleteXmlByTag(tag,attributes,values);
 				}
 			}
 		}
@@ -78,8 +78,8 @@ package com.shine.framework.core.model
 			for(var i:int=0;i<num;i++){
 				if(xml==xmlModelArray.getXmlModel(i).xml){
 					xmlModelArray.removeItemAt(i);
-				}else{
-					xmlModelArray.getXmlModel(i).deleteXml(xml);
+//				}else{
+//					xmlModelArray.getXmlModel(i).deleteXml(xml);
 				}
 			}
 		}
