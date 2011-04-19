@@ -79,20 +79,28 @@
 					Alert.show(XML(event.item).toXMLString());
 			}
 			
+			
+	        //获取url
 			public function get url():String
 			{
 				return _url;
 			}
 
+			//设置url
 			public function set url(value:String):void
 			{
 				_url = value;
 				urlParametersArraytCollection.analysisParameters(value);
 			}
 			
+			//获取url参数
 			public function getUrlParameters(value:String):String{
 				return urlParametersArraytCollection.getParameters(value);
 			}
+			
+//			public function invokePlugins(pluginsName:String,pluginsFunctionName:String,... parms):*{
+//				return ExternalInterface.call();
+//			}
 			
 		]]>
 	</fx:Script>

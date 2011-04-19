@@ -29,6 +29,8 @@
 					image.y=0;
 					
 					var request:URLRequest=new URLRequest(source);
+					myGIFPlayer.width=this.width;
+					myGIFPlayer.height=this.height;
 					myGIFPlayer.load(request);
 					myGIFPlayer.visible=true;
 					
