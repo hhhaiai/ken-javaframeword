@@ -12,7 +12,9 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.net.URL;
 
+import org.apache.jasper.tagplugins.jstl.core.Url;
 import org.apache.poi.poifs.filesystem.DirectoryEntry;
 import org.apache.poi.poifs.filesystem.DocumentEntry;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
@@ -44,6 +46,27 @@ public class FileUtil {
 					+ folderPath + "出错!");
 		}
 		return folderPath;
+	}
+	
+	/**
+	 * Url to file
+	 * @param url
+	 * @return
+	 * @throws Exception
+	 */
+	public static File urlToFile(String url) throws Exception{
+		return urlToFile(new URL(url));
+	}
+	
+	
+	/**
+	 * url to file
+	 * @param url
+	 * @return
+	 * @throws Exception
+	 */
+	public static File urlToFile(URL  url) throws Exception{
+		return new File(url.toURI());
 	}
 
 	/**

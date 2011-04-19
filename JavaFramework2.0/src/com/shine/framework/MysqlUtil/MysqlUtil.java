@@ -77,7 +77,7 @@ public class MysqlUtil {
 			String userName, String password, String dbname) {
 		StringBuffer cmd = new StringBuffer(100);
 		if (System.getProperty("os.name").toLowerCase().indexOf("windows") != -1) {
-			//cmd.append("cmd.exe /c ");
+			cmd.append("cmd.exe /c ");
 			cmd.append("\"");
 			cmd.append(mysqlPath + "bin\\");
 			cmd.append(MYSQL_DUMP_CMD);
@@ -155,7 +155,7 @@ public class MysqlUtil {
 			writer = new OutputStreamWriter(out, "utf8");
 			writer.write(outStr);
 			// 注：这里如果用缓冲方式写入文件的话，会导致中文乱码，用flush()方法则可以避免
-			writer.flush();
+			//writer.flush();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -172,6 +172,6 @@ public class MysqlUtil {
 	public static void main(String args[]) {
 		MysqlUtil.dumpDataBase(
 				"E:\\Program Files (x86)\\MySQL\\MySQL Server 5.1\\",
-				"E:\\db.db", "root", "root", "nms4");
+				"E:\\db.db", "root", "root", "test");
 	}
 }

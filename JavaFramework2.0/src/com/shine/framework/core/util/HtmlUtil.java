@@ -53,11 +53,13 @@ public class HtmlUtil {
 			if (type == null
 					|| type.trim().length() == 0
 					|| (type.trim().indexOf("text/html") < 0 && type.trim()
-							.indexOf("text/xml") < 0))
-				return null;
-
-			if (type.indexOf("charset=") > 0)
-				charSet = type.substring(type.indexOf("charset=") + 8);
+							.indexOf("text/xml") < 0)){
+				
+			}else{
+				if (type.indexOf("charset=") > 0)
+					charSet = type.substring(type.indexOf("charset=") + 8);
+			}
+			
 			in = new BufferedReader(new InputStreamReader(con.getInputStream(),
 					charSet));
 
