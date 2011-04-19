@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<view:BaseSimpleContainer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+						  xmlns:s="library://ns.adobe.com/flex/spark" 
+						  xmlns:mx="library://ns.adobe.com/flex/mx" 
+						  xmlns:view="com.shine.framework.core.view.*" 
+						  creationComplete="{complete()}">
+	<view:layout>
+		<s:BasicLayout/>
+	</view:layout>
+	<fx:Script>
+		<![CDATA[
+			import mx.controls.Image;
+			
+			import org.bytearray.gif.player.GIFPlayer;
+			//加载的动态gif
+			public var source:String="";
+			
+			private var image:Image;
+			private var myGIFPlayer:GIFPlayer=new GIFPlayer(true);
+			
+			public function complete():void{
+				this.completeLoading();
+				
+				if(source.length!=0){
+					image=new Image;
+					image.width=this.width;
+					image.height=this.height;
+					image.x=0;
+					image.y=0;
+					
+					var request:URLRequest=new URLRequest(source);
+					myGIFPlayer.load(request);
+					myGIFPlayer.visible=true;
+					
+					image.addChild(myGIFPlayer);
+					this.addElement(image);
+				}
+			}
+		]]>
+	</fx:Script>
+</view:BaseSimpleContainer>

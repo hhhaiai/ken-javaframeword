@@ -18,6 +18,8 @@
 	<fx:Script>
 		<![CDATA[
 			import com.shine.framework.core.view.HTMLToolTip;
+			import com.shine.framework.core.util.ReferenceUtil;
+			import com.shine.resource.CoreResource;
 			
 			import flash.utils.*;
 			
@@ -36,7 +38,7 @@
 			private var myGIFPlayer:GIFPlayer=new GIFPlayer(true);
 			
 			//加载的动态gif
-			public var gifUrl:String="resource/image/config/canvasLoading.gif";
+			//public var gifUrl:String="resource/image/config/canvasLoading.gif";
 			//加载图片的宽
 			public var gifWidth:Number=50;
 			//加载图片的高
@@ -65,8 +67,9 @@
 				loading.x=0;
 				loading.y=0;
 				
-				var request:URLRequest=new URLRequest(gifUrl);
-				myGIFPlayer.load(request);
+//				var request:URLRequest=new URLRequest(gifUrl);
+//				myGIFPlayer.load(request);
+				(myGIFPlayer as GIFPlayer).loadBytes(CoreResource.getInstance().loadingGif as ByteArray);
 				myGIFPlayer.visible=true;
 				
 				loading.addChild(myGIFPlayer);
@@ -219,6 +222,7 @@
 				this.callLater(updateUICallLast);
 			}
 			
+			//UI的即时更新
 			private function updateUICallLast():void{
 				this.width=this.width+10;
 				this.height=this.height+10;
@@ -232,6 +236,11 @@
 			//获取中心的y
 			public function getCenterY():Number{
 				return this.y+this.height/2;
+			}
+			
+			//反射调用方法
+			public function invoke(functionName:String,... parm):*{
+				return ReferenceUtil.referenceObjectFunction(this,functionName,parm);
 			}
 		]]>
 	</fx:Script>

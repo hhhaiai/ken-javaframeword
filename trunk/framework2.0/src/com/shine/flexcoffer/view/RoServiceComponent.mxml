@@ -59,6 +59,9 @@ autoRun="off"/>
 			{
 				if(destination.length!=0)
 					baseRoServiceUtil.destination=destination;
+				if(host.length!=0)
+					baseRoServiceUtil.host=host;	
+				
 				baseRoServiceUtil.method=method;
 				baseRoServiceUtil.loadClass(classPath, classMethod, value); 
 			}
