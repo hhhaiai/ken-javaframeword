@@ -17,8 +17,8 @@
 	</fx:Declarations>
 	<fx:Script>
 		<![CDATA[
-			import com.shine.framework.core.view.HTMLToolTip;
 			import com.shine.framework.core.util.ReferenceUtil;
+			import com.shine.framework.core.view.HTMLToolTip;
 			import com.shine.resource.CoreResource;
 			
 			import flash.utils.*;
@@ -37,8 +37,6 @@
 			private var loading:Image;
 			private var myGIFPlayer:GIFPlayer=new GIFPlayer(true);
 			
-			//加载的动态gif
-			//public var gifUrl:String="resource/image/config/canvasLoading.gif";
 			//加载图片的宽
 			public var gifWidth:Number=50;
 			//加载图片的高
@@ -67,9 +65,7 @@
 				loading.x=0;
 				loading.y=0;
 				
-//				var request:URLRequest=new URLRequest(gifUrl);
-//				myGIFPlayer.load(request);
-				(myGIFPlayer as GIFPlayer).loadBytes(CoreResource.getInstance().loadingGif as ByteArray);
+				myGIFPlayer.loadBytes(CoreResource.getInstance().loadingGif as ByteArray);
 				myGIFPlayer.visible=true;
 				
 				loading.addChild(myGIFPlayer);
@@ -241,6 +237,13 @@
 			//反射调用方法
 			public function invoke(functionName:String,... parm):*{
 				return ReferenceUtil.referenceObjectFunction(this,functionName,parm);
+			}
+			
+			//把该组件放置到它父类的顶部(慎用)
+			public function onTop():void{
+				if(this.parent!=null){
+					this.parent.setChildIndex(this,this.parent.numChildren-1);
+				}
 			}
 		]]>
 	</fx:Script>

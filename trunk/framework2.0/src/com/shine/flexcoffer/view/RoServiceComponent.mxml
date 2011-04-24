@@ -59,6 +59,7 @@ autoRun="off"/>
 			{
 				if(destination.length!=0)
 					baseRoServiceUtil.destination=destination;
+				
 				if(host.length!=0)
 					baseRoServiceUtil.host=host;	
 				

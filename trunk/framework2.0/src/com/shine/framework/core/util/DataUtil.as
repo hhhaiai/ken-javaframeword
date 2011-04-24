@@ -92,5 +92,18 @@ package com.shine.framework.core.util
 			}
 			return true;
 		}
+		
+		//计算2点距离
+		public static function getDistance(x1:Number,x2:Number,y1:Number,y2:Number):Number{
+			return Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));;
+		}
+		
+		//圆周运动  x:圆心x y:圆心y r:半径  angle:弧度
+		public static function getRoundPoint(x:Number,y:Number,r:Number,angle:Number):Object{
+			var o:Object=new Object;
+			o.x = x + (Math.cos(angle) * r);
+			o.y = y + (Math.sin(angle) * r);
+			return o;
+		}
 	}
 }
