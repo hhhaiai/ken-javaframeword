@@ -83,8 +83,8 @@
 					addPositionControl();
 				
 				
-				this.map.addEventListener(MouseEvent.DOUBLE_CLICK,doubleCilk);
-				this.map.addEventListener(MouseEvent.CLICK,clickMethod);
+//				this.map.addEventListener(MouseEvent.DOUBLE_CLICK,doubleCilk);
+//				this.map.addEventListener(MouseEvent.CLICK,clickMethod);
 				
 			}
 			

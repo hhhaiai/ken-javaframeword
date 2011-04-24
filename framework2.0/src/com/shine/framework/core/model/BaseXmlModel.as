@@ -3,6 +3,8 @@ package com.shine.framework.core.model
 	import com.shine.framework.core.util.ArrayMap;
 	import com.shine.framework.core.util.StringBuffer;
 	
+	import flashx.textLayout.formats.Float;
+	
 	import mx.controls.Alert;
 	
 	/**
@@ -100,7 +102,7 @@ package com.shine.framework.core.model
 		
 		//由key获取num value
 		public function getNumber(key:String):int{
-			return Number(this.get(key));
+			return Number(this.getString(key));
 		}
 	}
 }

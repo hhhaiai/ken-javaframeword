@@ -16,7 +16,7 @@ package com.shine.framework.core.util
 		}
 		
 		/**
-		 * 获取class的object
+		 * 获取class的object package::className
 		 * */
 		public static function referenceClass(className:String):Object{
 			var ClassReference:Class = getDefinitionByName(className) as Class;
