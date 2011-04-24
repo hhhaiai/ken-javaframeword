@@ -8,7 +8,7 @@ import java.awt.*;
 import java.awt.geom.AffineTransform;  
 import java.io.File; 
 
-import net.dapper.scrender.Scrender;
+//import net.dapper.scrender.Scrender;
 
 
 public class ImageUtil {
@@ -72,13 +72,13 @@ public class ImageUtil {
 		ImageIO.write(srcImage, imgType, saveFile);
 	}
 	
-	public static void htmlToImage(String url,String fileUrl){
-		try{
-			 Scrender scrender = new Scrender();
-			 scrender.init();
-	         scrender.render("http://www.oschina.net", new File("e:/oschina.index.html.jpg"));
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-	}
+//	public static void htmlToImage(String url,String fileUrl){
+//		try{
+//			 Scrender scrender = new Scrender();
+//			 scrender.init();
+//	         scrender.render("http://www.oschina.net", new File("e:/oschina.index.html.jpg"));
+//		}catch(Exception e){
+//			e.printStackTrace();
+//		}
+//	}
 }
