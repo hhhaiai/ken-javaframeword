@@ -43,5 +43,9 @@
 	<classpathentry kind="lib" path="E:/workspace/JavaFramework2.0/lib/edtftpj.jar"/>
 	<classpathentry kind="lib" path="E:/workspace/JavaFramework2.0/lib/JNative.jar"/>
 	<classpathentry kind="lib" path="E:/workspace/JavaFramework2.0/lib/gpsparser.jar"/>
+	<classpathentry kind="lib" path="E:/workspace/JavaFramework2.0/lib/jimi.jar"/>
+	<classpathentry kind="lib" path="E:/workspace/JavaFramework2.0/lib/swt.jar"/>
+	<classpathentry kind="lib" path="E:/workspace/JavaFramework2.0/lib/swt-linux.jar"/>
+	<classpathentry kind="lib" path="E:/workspace/JavaFramework2.0/lib/swt-windows.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
