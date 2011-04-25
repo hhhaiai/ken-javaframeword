@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<view:BaseSimpleContainer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+						  xmlns:s="library://ns.adobe.com/flex/spark" 
+						  xmlns:mx="library://ns.adobe.com/flex/mx" 
+						  xmlns:view="com.shine.framework.core.view.*" 
+						  width="200" height="30" visible="false" creationComplete="{complete()}">
+	<view:layout>
+		<s:BasicLayout/>
+	</view:layout>
+	<fx:Script>
+		<![CDATA[
+			import com.shine.framework.Licence.LicenceManager;
+			
+			private function complete():void{
+				this.completeLoading();
+				
+				LicenceManager.getInstance().loadLicence("data.swc",returnMethod);
+			}
+			
+			private function returnMethod():void{
+				this.visible=true;
+			}
+		]]>
+	</fx:Script>
+	<s:Label text="尊敬的客户，您的系统授权协议已经过期或者给非法盗用，为了保护您的利益，请与我们工程师联系！！" fontWeight="bold" fontStyle="italic" fontSize="12" />
+</view:BaseSimpleContainer>

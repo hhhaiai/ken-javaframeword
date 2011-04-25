@@ -2,6 +2,7 @@ package com.shine.framework.Swc
 {
 	import flash.display.Loader;
 	import flash.events.Event;
+	import flash.events.IOErrorEvent;
 	import flash.net.URLLoader;
 	import flash.net.URLLoaderDataFormat;
 	import flash.net.URLRequest;
@@ -47,10 +48,10 @@ package com.shine.framework.Swc
 			if(completeMethod!=null){
 				this.method=completeMethod;
 			}
-			
 			if(this.swcUrl!=null){
 				var loader:URLLoader = new URLLoader();
 				loader.addEventListener(Event.COMPLETE,swcLoaded);
+				loader.addEventListener(IOErrorEvent.IO_ERROR,error);
 				loader.dataFormat = URLLoaderDataFormat.BINARY;
 				loader.load(new URLRequest(swcUrl));
 			}else{
@@ -64,10 +65,19 @@ package com.shine.framework.Swc
 		{
 			var byte:ByteArray = e.target.data;
 			byte = swc2swf(byte);
-			
 			var loader:Loader = new Loader();
 			loader.contentLoaderInfo.addEventListener(Event.COMPLETE,libReady);
+			loader.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR,swfError);
+			
 			loader.loadBytes(byte,new LoaderContext(false,ApplicationDomain.currentDomain));
+		}
+		
+		private function error(e:Event):void{
+			Alert.show("加载"+this.swcUrl+"失败");
+		}
+		
+		private function swfError(e:Event):void{
+			Alert.show("加载"+this.swcUrl+"swf失败");
 		}
 		
 		
@@ -83,11 +93,11 @@ package com.shine.framework.Swc
 		{
 			var zipFile:ZipFile = new ZipFile(byte);
 			var zipEntry:ZipEntry = null;
-			if(libraryUrl!=null)
+			if(libraryUrl!=null&&libraryUrl.length!=0)
 				zipEntry = zipFile.getEntry(libraryUrl);
 			else
 				zipEntry = zipFile.getEntry("library.swf");
-			return zipFile.getInput(zipEntry)
+			return zipFile.getInput(zipEntry);
 		}
 		
 	}
