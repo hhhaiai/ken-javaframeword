@@ -1,7 +1,10 @@
 package com.shine.framework.Licence
 {
-	import com.shine.framework.core.util.ReferenceUtil;
 	import com.shine.framework.Browser.BrowserUtils;
+	import com.shine.framework.Swc.SwcManager;
+	import com.shine.framework.core.util.ReferenceUtil;
+	
+	import mx.controls.Alert;
 	
 	public class LicenceManager
 	{
@@ -9,7 +12,12 @@ package com.shine.framework.Licence
 		//licence数据 
 		public var licence:String="";
 		//licence 模式
-		public var licenceStatus:String="";
+		public var licenceConfig:String="";
+		
+		//licence 状态
+		public var licenceStatus:Boolean=false;
+		
+		public var returnMethod:Function;
 		
 		public function LicenceManager(enforcer:SingletonEnforcer)
 		{
@@ -24,8 +32,26 @@ package com.shine.framework.Licence
 			return LicenceManager._instance;
 		}
 		
-		public function loadLicence(swcUrl:String):void{
+		//加载swc
+		public function loadLicence(swcUrl:String,returnMethod:Function=null):void{
+			var swcManage:SwcManager =new SwcManager;
+			swcManage.loadSwc(swcUrl,loadComplete);
+			if(returnMethod!=null){
+				this.returnMethod=returnMethod;
+			}
+		}
+		
+		//加载完成
+		private function loadComplete():void{
+			if(checkLicenceName()==true&&checkLicenceUrl()==true){
+				licenceStatus=true;
+			}else{
+				licenceStatus=false;
+			}
 			
+			if(returnMethod!=null){
+				this.returnMethod.call(this);
+			}
 		}
 		
 		//检查licence name
@@ -46,7 +72,7 @@ package com.shine.framework.Licence
 		public function checkLicenceUrl():Boolean{
 			var o:Object=ReferenceUtil.referenceClass("com.shine.framework.Licence.file::LicenceFile");
 			if(o.licenceUrl!=null&&String(o.licenceUrl).length!=0){
-				if(BrowserUtils.getBrowserFullUrl()==String(o.licenceUrl))
+				if(BrowserUtils.getBrowserBaseUrl()==String(o.licenceUrl))
 					return true;
 			}else{
 				return true;
