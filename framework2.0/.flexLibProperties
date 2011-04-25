@@ -62,6 +62,7 @@
     <classEntry path="com.shine.framework.Browser.BrowserUtils"/>
     <classEntry path="com.shine.framework.Licence.LicenceManager"/>
     <classEntry path="com.shine.framework.Licence.file.LicenceFile"/>
+    <classEntry path="com.shine.framework.core.view.ProgressDataGrid"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

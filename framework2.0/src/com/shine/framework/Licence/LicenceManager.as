@@ -1,12 +1,13 @@
 package com.shine.framework.Licence
 {
 	import com.shine.framework.core.util.ReferenceUtil;
+	import com.shine.framework.Browser.BrowserUtils;
 	
 	public class LicenceManager
 	{
 		private static var _instance:LicenceManager;
-		//licence数据 url+date
-		public var licenceValue:String="";
+		//licence数据 
+		public var licence:String="";
 		//licence 模式
 		public var licenceStatus:String="";
 		
@@ -27,11 +28,28 @@ package com.shine.framework.Licence
 			
 		}
 		
-		//检查licence
-		public function checkLicence():Boolean{
+		//检查licence name
+		public function checkLicenceName():Boolean{
 			var o:Object=ReferenceUtil.referenceClass("com.shine.framework.Licence.file::LicenceFile");
-			if(o.licence!=null&&String(o.licence).length!=0){
-				this.licenceValue=String(o.licence);
+			if(licence.length!=0){
+				if(o.licence!=null&&String(o.licence).length!=0){
+					if(licence==String(o.licence))
+						return true;
+				}else{
+					return false;
+				}
+			}
+			return false;
+		}
+		
+		//检查licence name
+		public function checkLicenceUrl():Boolean{
+			var o:Object=ReferenceUtil.referenceClass("com.shine.framework.Licence.file::LicenceFile");
+			if(o.licenceUrl!=null&&String(o.licenceUrl).length!=0){
+				if(BrowserUtils.getBrowserFullUrl()==String(o.licenceUrl))
+					return true;
+			}else{
+				return true;
 			}
 			return false;
 		}
