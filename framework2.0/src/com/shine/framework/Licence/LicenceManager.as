@@ -13,10 +13,9 @@ package com.shine.framework.Licence
 		public var licence:String="";
 		//licence 模式
 		public var licenceConfig:String="";
-		
 		//licence 状态
 		public var licenceStatus:Boolean=false;
-		
+		//返回值方法
 		public var returnMethod:Function;
 		
 		public function LicenceManager(enforcer:SingletonEnforcer)
