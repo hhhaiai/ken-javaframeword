@@ -11,6 +11,7 @@ import jpcap.NetworkInterfaceAddress;
  * 
  * @author viruscodecn@gmail.com
  * @project JavaFramework 1.0 2011-4-26
+ * @blog http://blog.csdn.net/arjick/archive/2009/09/06/4525474.aspx
  */
 public class JpcapManager {
 	public static void startMonitor() throws Exception {
