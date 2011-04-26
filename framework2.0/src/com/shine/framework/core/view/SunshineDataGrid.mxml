@@ -31,6 +31,7 @@
 			import com.shine.framework.DBUtil.model.DBModel;
 			import com.shine.framework.core.model.BaseXmlModel;
 			import com.shine.framework.core.model.XmlModel;
+			import com.shine.framework.core.util.ArrayMap;
 			import com.shine.framework.core.util.DataUtil;
 			
 			import mx.controls.Alert;
@@ -85,9 +86,11 @@
 				initRightContext();
 			}
 			
-			public function addModel(value:DBModel):void{
+			//加入DataGrid
+			public function addModel(value:ArrayMap):void{
 				for(var i:int=0;i<value.getLength();i++){
-					addRowByModel(value.getRow(i));
+					if(value.get(i) is BaseXmlModel)
+					    addRowByModel(value.get(i) as BaseXmlModel);
 				}
 			}
 			
