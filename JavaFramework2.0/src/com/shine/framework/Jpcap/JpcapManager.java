@@ -6,6 +6,12 @@ import jpcap.JpcapCaptor;
 import jpcap.NetworkInterface;
 import jpcap.NetworkInterfaceAddress;
 
+/**
+ * java 采集jpcap数据
+ * 
+ * @author viruscodecn@gmail.com
+ * @project JavaFramework 1.0 2011-4-26
+ */
 public class JpcapManager {
 	public static void startMonitor() throws Exception {
 		// TODO 自动生成方法存根

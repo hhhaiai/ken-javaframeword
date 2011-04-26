@@ -9,6 +9,12 @@ import com.gregbugaj.gps.RoutePoint;
 import com.shine.framework.core.util.FileUtil;
 import com.shine.framework.core.util.HtmlUtil;
 
+/**
+ * 获取gps数据基于0813协议
+ * 
+ * @author viruscodecn@gmail.com
+ * @project JavaFramework 2.0 2011-4-26
+ */
 public class GpsManager {
 	/**
 	 * 获取gps route 实例
