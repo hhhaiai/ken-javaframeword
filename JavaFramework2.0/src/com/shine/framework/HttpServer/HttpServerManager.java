@@ -14,6 +14,7 @@ import org.mortbay.thread.BoundedThreadPool;
  * 
  * @author viruscodecn@gmail.com
  * @project JavaFramework 1.0 2011-03-23
+ * @blog http://blog.csdn.net/arjick/archive/2011/04/26/6364746.aspx
  */
 public class HttpServerManager {
 	private Server server;
