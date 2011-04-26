@@ -134,6 +134,8 @@ public class FtpUtil {
 			String remoteFileName) throws FTPException, IOException {
 		client.downloadFile(localFileName, remoteFileName, WriteMode.OVERWRITE);
 	}
+	
+	
 }
 
 class UploadListener extends EventAdapter {

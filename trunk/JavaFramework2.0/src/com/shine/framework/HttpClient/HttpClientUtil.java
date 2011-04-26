@@ -1,6 +1,11 @@
 package com.shine.framework.HttpClient;
 
 import java.io.IOException;
+import java.net.URL;
+import java.security.Security;
+
+import javax.net.ssl.SSLSocketFactory;
+
 
 import org.apache.commons.httpclient.DefaultHttpMethodRetryHandler;
 import org.apache.commons.httpclient.HttpClient;
@@ -10,6 +15,10 @@ import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.httpclient.params.HttpMethodParams;
+import org.apache.commons.httpclient.protocol.Protocol;
+import org.apache.commons.httpclient.protocol.ProtocolSocketFactory;
+import org.apache.commons.httpclient.protocol.SSLProtocolSocketFactory;
+import org.apache.commons.lang.StringUtils;
 
 import com.shine.framework.HttpClient.util.NameValuePairUtil;
 
@@ -375,6 +384,52 @@ public class HttpClientUtil {
 			String postUrl, NameValuePairUtil data, String encoding) {
 		return postMethodDataResult(httpClient, postUrl, data
 				.getNameValuePair(), encoding);
+	}
+
+	/**
+	 * 把client注册 ssl url
+	 * @param url
+	 * @param client
+	 */
+	private void supportSSL(String url, HttpClient client) {
+		if (StringUtils.isBlank(url)) {
+			return;
+		}
+		String siteUrl = StringUtils.lowerCase(url);
+		if (!(siteUrl.startsWith("https"))) {
+			return;
+		}
+
+		try {
+			setSSLProtocol(siteUrl, client);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		Security.setProperty("ssl.SocketFactory.provider",
+				"com.tool.util.DummySSLSocketFactory");
+	}
+
+	/**
+	 * 把client设置 ssl url
+	 * @param strUrl
+	 * @param client
+	 * @throws Exception
+	 */
+	private static void setSSLProtocol(String strUrl, HttpClient client)
+			throws Exception {
+
+		URL url = new URL(strUrl);
+		String host = url.getHost();
+		int port = url.getPort();
+
+		if (port <= 0) {
+			port = 443;
+		}
+		ProtocolSocketFactory factory = new SSLProtocolSocketFactory();
+		Protocol authhttps = new Protocol("https", factory, port);
+		Protocol.registerProtocol("https", authhttps);
+		// set https protocol
+		client.getHostConfiguration().setHost(host, port, authhttps);
 	}
 
 	/**
