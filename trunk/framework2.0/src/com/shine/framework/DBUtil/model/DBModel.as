@@ -8,5 +8,21 @@ package com.shine.framework.DBUtil.model
 		{
 			super();
 		}
+		
+		public function setXml(value:String):void{
+			
+		}
+		
+		public function getXml():XML{
+			return null;
+		}
+		
+		public function addRow(value:DBRowModel):void{
+			this.put(this.getLength(),value);
+		}
+		
+		public function getRow(value:int):DBRowModel{
+			return this.get(value) as DBRowModel;
+		}
 	}
 }

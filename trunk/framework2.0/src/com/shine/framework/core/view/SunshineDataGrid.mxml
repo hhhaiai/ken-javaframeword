@@ -28,6 +28,7 @@
 	</fx:Declarations>
 	<fx:Script>
 		<![CDATA[
+			import com.shine.framework.DBUtil.model.DBModel;
 			import com.shine.framework.core.model.BaseXmlModel;
 			import com.shine.framework.core.model.XmlModel;
 			import com.shine.framework.core.util.DataUtil;
@@ -82,6 +83,12 @@
 				}
 				this.dataProvider=xml.children();
 				initRightContext();
+			}
+			
+			public function addModel(value:DBModel):void{
+				for(var i:int=0;i<value.getLength();i++){
+					addRowByModel(value.getRow(i));
+				}
 			}
 			
 			//通过model加入新的一行

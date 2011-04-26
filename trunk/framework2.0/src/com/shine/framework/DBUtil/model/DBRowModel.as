@@ -13,10 +13,12 @@ package com.shine.framework.DBUtil.model
 		
 		public function setDBXml(value:String):void{
 			this.xml=value;
+			
+			this.initBaseXmlValue(value);
 		}
 		
 		public function getDBXml():String{
-			return null;
+			return this.xml;
 		}
 	}
 }
