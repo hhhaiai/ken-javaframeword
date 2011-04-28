@@ -1,4 +1,4 @@
-package com.shine.framework.SnmpUtil;
+package com.shine.framework.core.util;
 
 import java.net.InetAddress;
 import java.util.ArrayList;
@@ -9,13 +9,7 @@ import snmp.SNMPSequence;
 import snmp.SNMPVarBindList;
 import snmp.SNMPv1CommunicationInterface;
 
-/**
- * snmp utilities
- * 
- * @author viruscodecn@gmail.com
- * @project JavaFramework 2.0 2010-11-29
- */
-public class SnmpUtil {
+public class SnmpUtils {
 	private SNMPv1CommunicationInterface comInterface = null;
 	private String ip;
 	private String community;
@@ -30,7 +24,7 @@ public class SnmpUtil {
 	 * @param port
 	 * @throws Exception
 	 */
-	public SnmpUtil(String ip, String community, int port) throws Exception {
+	public SnmpUtils(String ip, String community, int port) throws Exception {
 		InetAddress hostAddress = InetAddress.getByName(ip);
 		comInterface = new SNMPv1CommunicationInterface(version, hostAddress,
 				community, port);
@@ -43,7 +37,7 @@ public class SnmpUtil {
 	 * @param community
 	 * @throws Exception
 	 */
-	public SnmpUtil(String ip, String community) throws Exception {
+	public SnmpUtils(String ip, String community) throws Exception {
 		InetAddress hostAddress = InetAddress.getByName(ip);
 		comInterface = new SNMPv1CommunicationInterface(version, hostAddress,
 				community);
@@ -173,6 +167,29 @@ public class SnmpUtil {
 				comInterface.closeConnection();
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		SnmpUtils util = null;
+		try {
+			String[] oid = { "1.3.6.1.2.1.25.2.3.1.2", // type
+					"1.3.6.1.2.1.25.2.3.1.3", // descr
+					"1.3.6.1.2.1.25.2.3.1.4", // unit
+					"1.3.6.1.2.1.25.2.3.1.5", // size
+					"1.3.6.1.2.1.25.2.3.1.6" }; // used
+			util = new SnmpUtils("10.42.8.15", "public", 161);
+			List<String> list = util.getTableView(oid);
+			for (String s : list) {
+				System.out.println(s);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			util.close();
 		}
 	}
 }
