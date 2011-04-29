@@ -10,8 +10,11 @@ public class Example {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		//List<HashMap> list=IISUtils.getDatas(file, ip, username, password, webservice);
+		//IISUtils.getIISDataInfo("192.168.2.18", "public", 161);
+		
+		//IISUtils.getIISConnectionInfo("192.168.2.18", "public", 161);
 
+		IISUtils.getIISRequestInfo("192.168.2.18", "public", 161);
 	}
 
 }

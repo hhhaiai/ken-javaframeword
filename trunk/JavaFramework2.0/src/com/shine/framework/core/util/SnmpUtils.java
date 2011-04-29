@@ -176,12 +176,8 @@ public class SnmpUtils {
 	public static void main(String[] args) {
 		SnmpUtils util = null;
 		try {
-			String[] oid = { "1.3.6.1.2.1.25.2.3.1.2", // type
-					"1.3.6.1.2.1.25.2.3.1.3", // descr
-					"1.3.6.1.2.1.25.2.3.1.4", // unit
-					"1.3.6.1.2.1.25.2.3.1.5", // size
-					"1.3.6.1.2.1.25.2.3.1.6" }; // used
-			util = new SnmpUtils("10.42.8.15", "public", 161);
+			String[] oid = { "1.3.6.1.4.1.311.1.7.2.1.1"};
+			util = new SnmpUtils("192.168.2.18", "public", 161);
 			List<String> list = util.getTableView(oid);
 			for (String s : list) {
 				System.out.println(s);
