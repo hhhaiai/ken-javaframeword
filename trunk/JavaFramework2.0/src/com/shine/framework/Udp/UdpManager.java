@@ -206,8 +206,13 @@ public class UdpManager {
 class ReceviceRunnable extends Thread {
 	public void run() {
 		try {
-			if (UdpManager.getManager().getState())
-				UdpManager.getManager().receive();
+			boolean b = true;
+			while (b) {
+				if (UdpManager.getManager().getState())
+					UdpManager.getManager().receive();
+				else
+					b = false;
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
