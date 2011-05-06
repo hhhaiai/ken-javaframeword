@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<view:BaseSimpleContainer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+						  xmlns:s="library://ns.adobe.com/flex/spark" 
+						  xmlns:mx="library://ns.adobe.com/flex/mx" 
+						  xmlns:view="com.shine.framework.core.view.*" 
+						  xmlns:code="http://code.google.com/p/flex-iframe/">
+	<view:layout>
+		<s:BasicLayout/>
+	</view:layout>
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			[bindable]
+			public var url:String="":
+			
+			public function setUrl(value:String):void{
+				this.url=value;
+			}
+			
+			public function getUrl():String{
+				return iframe.source;
+			}
+			
+			public function excuteScript(value:String):void{
+				
+			}
+			
+			public function refresh():void{
+				
+			}
+			
+			public function home():void{
+				
+			}
+		]]>
+	</fx:Script>
+	<code:IFrame id="iframe" label="iframe" width="100%" height="100%" source="{url}"  />
+</view:BaseSimpleContainer>
