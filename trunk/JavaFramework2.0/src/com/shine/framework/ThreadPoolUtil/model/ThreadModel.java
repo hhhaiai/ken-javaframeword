@@ -4,6 +4,7 @@ public abstract class ThreadModel {
 	private String threadName;
 	private boolean state;
 	private int timeOut;
+	private String description;
 
 	public String getThreadName() {
 		return threadName;
@@ -24,7 +25,6 @@ public abstract class ThreadModel {
 	public boolean getState() {
 		return state;
 	}
-	
 
 	public int getTimeOut() {
 		return timeOut;
@@ -32,6 +32,14 @@ public abstract class ThreadModel {
 
 	public void setTimeOut(int timeOut) {
 		this.timeOut = timeOut;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	// 执行方法
