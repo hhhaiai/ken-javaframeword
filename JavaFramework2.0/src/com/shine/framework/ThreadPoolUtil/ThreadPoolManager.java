@@ -16,13 +16,13 @@ public class ThreadPoolManager {
 		return manager;
 	}
 
-	public void initPool(String xmlPath) {
+	public synchronized void initPool(String xmlPath) {
 	}
 
-	public void initPool() {
+	public synchronized void initPool() {
 	}
 
-	public void startThreadPool() {
+	public synchronized void startThreadPool() {
 		if (!this.state) {
 			for (SuperThread thread : pool.values()) {
 				thread.start();
@@ -31,12 +31,12 @@ public class ThreadPoolManager {
 		}
 	}
 
-	public void restartThreadPool() {
+	public synchronized void restartThreadPool() {
 		this.stopThreadPool();
 		this.startThreadPool();
 	}
 
-	public void stopThreadPool() {
+	public synchronized void stopThreadPool() {
 		if (this.state) {
 			for (SuperThread thread : pool.values()) {
 				thread.setState(false);

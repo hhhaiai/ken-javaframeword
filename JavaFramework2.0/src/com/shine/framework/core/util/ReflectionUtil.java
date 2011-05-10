@@ -80,8 +80,13 @@ public class ReflectionUtil {
 	 * @throws Exception
 	 */
 	public static Object invokeMethod(Object object, String methodName,
-			Object[] args) throws Exception {
+			Object... args) throws Exception {
 		Class objectClass = object.getClass();
+		if (args == null) {
+			Method method = objectClass.getMethod(methodName);
+			return method.invoke(object);
+		}
+		
 		Class[] argsClass = new Class[args.length];
 		for (int i = 0, j = args.length; i < j; i++) {
 			argsClass[i] = args[i].getClass();
@@ -89,6 +94,7 @@ public class ReflectionUtil {
 		Method method = objectClass.getMethod(methodName, argsClass);
 		return method.invoke(object, args);
 	}
+
 
 	/**
 	 * 执行另外一个class的main方法
@@ -135,7 +141,8 @@ public class ReflectionUtil {
 	 * @param obj
 	 * @return
 	 */
-	public static <T> T getAOPBean(Class<T> interfaceClazz, final T obj) throws RemoteException  {
+	public static <T> T getAOPBean(Class<T> interfaceClazz, final T obj)
+			throws RemoteException {
 		assert interfaceClazz.isInterface();
 
 		return (T) Proxy.newProxyInstance(interfaceClazz.getClassLoader(),

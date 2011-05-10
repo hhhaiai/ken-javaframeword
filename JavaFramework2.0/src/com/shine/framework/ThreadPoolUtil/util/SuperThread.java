@@ -15,6 +15,8 @@ public class SuperThread extends Thread {
 
 	public void run() {
 		if (threadModel != null) {
+			System.out.println("Thread" + threadModel.getThreadName()
+					+ " is running!");
 			while (threadModel.getState()) {
 				try {
 					threadModel.excute();
