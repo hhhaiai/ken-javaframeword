@@ -7,6 +7,12 @@ package com.shine.framework.Swf
 	import mx.controls.Alert;
 	import mx.core.UIComponent;
 	
+	/**
+	 * 动态加载swf
+	 * 
+	 * Author: viruscodecn@gmail.com
+	 * Blog:http://blog.csdn.net/arjick/archive/2011/05/12/6415093.aspx
+	 */
 	public class SwfManager extends UIComponent
 	{
 		//swc的路径

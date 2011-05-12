@@ -65,7 +65,8 @@
     <classEntry path="com.shine.framework.core.view.ProgressDataGrid"/>
     <classEntry path="com.shine.framework.Licence.view.LicenceContainer"/>
     <classEntry path="com.shine.framework.core.view.SunshineHtmlContainer"/>
-    <classEntry path="com.shine.framework.core.view.PluginContainer"/>
+    <classEntry path="com.shine.framework.PluginComponent.utils.PluginsMap"/>
+    <classEntry path="com.shine.framework.PluginComponent.utils.PluginsFactory"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

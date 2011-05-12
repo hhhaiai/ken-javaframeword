@@ -16,6 +16,12 @@ package com.shine.framework.Swc
 	import nochump.util.zip.ZipEntry;
 	import nochump.util.zip.ZipFile;
 	
+	/**
+	 * 动态加载swc
+	 * 
+	 * Author: viruscodecn@gmail.com
+	 * Blog:http://blog.csdn.net/arjick/archive/2011/05/12/6415093.aspx
+	 */
 	public class SwcManager extends UIComponent
 	{
 		//swc的路径

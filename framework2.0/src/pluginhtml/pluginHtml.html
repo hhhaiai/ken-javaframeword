@@ -1,0 +1,58 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+	<head>
+		<title>pluginHtml.html</title>
+
+		<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+		<meta http-equiv="description" content="this is my page">
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+		<script type="text/javascript" src="swfobject.js">
+</script>
+
+		<script language="javascript">
+/*添加div*/
+function add(divId,x,y,width,height) {
+	//创建一个div  
+	var div = document.createElement("div");
+	//添加到页面  
+	document.body.appendChild(my);
+	//id
+	div.id=divId;
+	//通过样式指定该div的位置方式,若是想要自己设置div的位置,这句话必须有,把它注释掉你就可以知道效果拉~试试看  
+	div.style.position = "absolute";
+	//通过样式指定x坐标(随机数0~450)  
+	div.style.top = x;
+	//通过样式指定y坐标(随机数0~700)  
+	div.style.left = y;
+	//通过样式指定宽度  
+	div.style.width = width;
+	//通过样式指定高度  
+	div.style.height = height;
+	//通过样式指定背景颜色,,若是背景图片 例为my.style.backgroundImage="url(img/3.jpg)"  
+	div.style.backgroundColor = "#ffffff";
+	//添加div的内容  
+	div.innerHTML = '';
+}
+</script>
+<!-- 
+		<script type="text/javascript">
+swfobject.embedSWF("test.swf", "myContent", "300", "120", "9.0.0",
+		"expressInstall.swf");
+</script>
+ -->
+	</head>
+
+	<body>
+		<div id="myContent">
+			<h1>
+				Alternative content
+			</h1>
+			<p>
+				<a href="http://www.adobe.com/go/getflashplayer"><img
+						src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif"
+						alt="Get Adobe Flash player" /> </a>
+			</p>
+		</div>
+	</body>
+</html>
