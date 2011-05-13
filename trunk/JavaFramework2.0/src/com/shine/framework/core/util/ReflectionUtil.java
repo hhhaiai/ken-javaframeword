@@ -14,6 +14,17 @@ import java.rmi.RemoteException;
  */
 public class ReflectionUtil {
 	/**
+	 * 获取class对象
+	 * 
+	 * @param classPath
+	 * @return
+	 * @throws Exception
+	 */
+	public static Object getClasstoObject(String classPath) throws Exception {
+		return Class.forName(classPath).newInstance();
+	}
+
+	/**
 	 * 获取某个对象的属性 如果这个属性是非公有的，这里会报IllegalAccessException
 	 * 
 	 * @param object
@@ -71,6 +82,20 @@ public class ReflectionUtil {
 	}
 
 	/**
+	 * 反射某个class的方法
+	 * 
+	 * @param classPath
+	 * @param methodName
+	 * @param args
+	 * @return
+	 * @throws Exception
+	 */
+	public static Object invokeMethod(String classPath, String methodName,
+			Object... args) throws Exception {
+		return invokeMethod(getClasstoObject(classPath), methodName, args);
+	}
+
+	/**
 	 * 执行某对象的方法
 	 * 
 	 * @param object
@@ -81,12 +106,13 @@ public class ReflectionUtil {
 	 */
 	public static Object invokeMethod(Object object, String methodName,
 			Object... args) throws Exception {
+		System.out.println("123");
 		Class objectClass = object.getClass();
 		if (args == null) {
 			Method method = objectClass.getMethod(methodName);
 			return method.invoke(object);
 		}
-		
+
 		Class[] argsClass = new Class[args.length];
 		for (int i = 0, j = args.length; i < j; i++) {
 			argsClass[i] = args[i].getClass();
@@ -94,7 +120,6 @@ public class ReflectionUtil {
 		Method method = objectClass.getMethod(methodName, argsClass);
 		return method.invoke(object, args);
 	}
-
 
 	/**
 	 * 执行另外一个class的main方法
