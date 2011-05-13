@@ -9,8 +9,8 @@ package com.shine.framework.PluginComponent.utils
 			super();
 		}
 		
-		public function putPlugin():void{
-			
-		}
+//		public function putPlugin(name:String,):void{
+//			
+//		}
 	}
 }
