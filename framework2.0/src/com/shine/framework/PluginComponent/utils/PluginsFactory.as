@@ -16,6 +16,8 @@ package com.shine.framework.PluginComponent.utils
 			}
 			return _instance;
 		}
+		
+		
 	}
 }
 class SingletonEnforcer
