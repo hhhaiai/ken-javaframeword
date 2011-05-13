@@ -52,7 +52,6 @@
     <classEntry path="com.shine.resource.CoreResource"/>
     <classEntry path="com.shine.framework.Map.MapContainer"/>
     <classEntry path="com.shine.cofferChart.view.LineCharts.LineChart"/>
-    <classEntry path="com.shine.plugins.view.BasePluginsContainer"/>
     <classEntry path="com.shine.framework.core.view.GifImage"/>
     <classEntry path="com.shine.topo.model.RightXmlModel"/>
     <classEntry path="com.shine.framework.Session.SessionManager"/>
