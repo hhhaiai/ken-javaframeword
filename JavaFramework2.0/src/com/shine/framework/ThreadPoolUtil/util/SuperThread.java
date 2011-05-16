@@ -31,7 +31,7 @@ public class SuperThread extends Thread {
 		}
 	}
 
-	public ThreadModel getThreadModel() {
+	public  ThreadModel getThreadModel() {
 		return threadModel;
 	}
 
