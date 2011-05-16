@@ -25,10 +25,10 @@ public class XmlThreadModel extends ThreadModel {
 	@Override
 	public void excute() {
 		try {
-//			if(){
-//				
-//			}
-			ReflectionUtil.invokeMethod(classPath, method);
+			if (classPath != null && classPath.length() != 0 && method != null
+					&& method.length() != 0) {
+				ReflectionUtil.invokeMethod(classPath, method);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

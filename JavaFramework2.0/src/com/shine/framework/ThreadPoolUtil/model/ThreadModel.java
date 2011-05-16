@@ -42,6 +42,14 @@ public abstract class ThreadModel {
 		this.description = description;
 	}
 
+	public void slow() {
+		this.timeOut = this.timeOut * 150 / 100;
+	}
+
+	public void fast() {
+		this.timeOut = this.timeOut / 2;
+	}
+
 	// 执行方法
 	public abstract void excute();
 
