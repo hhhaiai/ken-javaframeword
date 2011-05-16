@@ -4,6 +4,13 @@ import com.shine.framework.ThreadPoolUtil.model.ThreadModel;
 import com.shine.framework.ThreadPoolUtil.util.SuperThread;
 import com.shine.framework.ThreadPoolUtil.util.ThreadPool;
 
+/**
+ * 线程池管理
+ * 
+ * @author viruscodecn@gmail.com
+ * @blog
+ * 
+ */
 public class ThreadPoolManager {
 	public static ThreadPoolManager manager = new ThreadPoolManager();
 	public ThreadPool pool = new ThreadPool();
