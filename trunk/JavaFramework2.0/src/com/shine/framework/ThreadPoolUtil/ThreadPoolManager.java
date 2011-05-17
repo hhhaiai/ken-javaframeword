@@ -117,5 +117,23 @@ public class ThreadPoolManager {
 		}
 		return false;
 	}
+	
+	/**
+	 * 线程减速
+	 */
+	public void slow(){
+		for (Map.Entry<String, SuperThread> entry : pool.entrySet()) {
+			entry.getValue().getThreadModel().slow();
+		}
+	}
+	
+	/**
+	 * 线程加速
+	 */
+	public void fast(){
+		for (Map.Entry<String, SuperThread> entry : pool.entrySet()) {
+			entry.getValue().getThreadModel().fast();
+		}
+	}
 
 }
