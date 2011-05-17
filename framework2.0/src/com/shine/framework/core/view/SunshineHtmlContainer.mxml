@@ -12,8 +12,8 @@
 	</fx:Declarations>
 	<fx:Script>
 		<![CDATA[
-			[bindable]
-			public var url:String="":
+			[Bindable]
+			public var url:String="";
 			
 			public function setUrl(value:String):void{
 				this.url=value;
