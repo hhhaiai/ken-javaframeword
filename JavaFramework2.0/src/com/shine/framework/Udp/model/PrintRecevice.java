@@ -1,6 +1,12 @@
 package com.shine.framework.Udp.model;
 
-public class PrintRecevice implements UdpReceviceIf {
+public class PrintRecevice extends UdpReceviceIf {
+
+	public PrintRecevice() {
+		super();
+
+		this.setKey("testPrint");
+	}
 
 	@Override
 	public void recevice(String ip, int port, String data) {
