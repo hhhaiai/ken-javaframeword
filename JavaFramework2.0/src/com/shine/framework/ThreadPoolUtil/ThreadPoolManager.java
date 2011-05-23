@@ -14,14 +14,14 @@ import com.shine.framework.ThreadPoolUtil.util.ThreadPool;
  * 
  */
 public class ThreadPoolManager {
-	public static ThreadPoolManager manager = new ThreadPoolManager();
-	public ThreadPool pool = new ThreadPool();
-	public boolean state = false;
+	private static ThreadPoolManager manager = new ThreadPoolManager();
+	private ThreadPool pool = new ThreadPool();
+	private boolean state = false;
 
 	public ThreadPoolManager() {
 	}
 
-	public ThreadPoolManager getManager() {
+	public static ThreadPoolManager getManager() {
 		return manager;
 	}
 
