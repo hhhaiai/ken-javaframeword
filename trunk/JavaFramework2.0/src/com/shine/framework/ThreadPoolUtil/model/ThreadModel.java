@@ -5,6 +5,7 @@ public abstract class ThreadModel {
 	private boolean state;
 	private int timeOut;
 	private String description;
+	
 
 	public String getThreadName() {
 		return threadName;

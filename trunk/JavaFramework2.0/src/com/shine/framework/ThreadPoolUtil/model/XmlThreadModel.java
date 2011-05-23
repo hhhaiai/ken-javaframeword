@@ -5,6 +5,8 @@ import com.shine.framework.core.util.ReflectionUtil;
 public class XmlThreadModel extends ThreadModel {
 	private String classPath;
 	private String method;
+	
+	
 
 	public String getClassPath() {
 		return classPath;
