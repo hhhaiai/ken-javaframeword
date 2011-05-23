@@ -4,9 +4,4 @@ public class Process {
 	public void close() {
 		System.exit(0);
 	}
-	
-	public void addReturnUdpSocket(){
-		
-	}
-
 }
