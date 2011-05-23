@@ -2,10 +2,9 @@ package com.shine.framework.ThreadPoolUtil.model;
 
 public abstract class ThreadModel {
 	private String threadName;
-	private boolean state;
+	private boolean state=true;
 	private int timeOut;
 	private String description;
-	
 
 	public String getThreadName() {
 		return threadName;

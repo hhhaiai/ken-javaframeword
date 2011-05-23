@@ -21,7 +21,8 @@ public class SuperThread extends Thread {
 				try {
 					threadModel.excute();
 
-					Thread.sleep(threadModel.getTimeOut() * 1000);
+					if (threadModel.getTimeOut() != 0)
+						Thread.sleep(threadModel.getTimeOut() * 1000);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -31,7 +32,7 @@ public class SuperThread extends Thread {
 		}
 	}
 
-	public  ThreadModel getThreadModel() {
+	public ThreadModel getThreadModel() {
 		return threadModel;
 	}
 
