@@ -26,7 +26,7 @@ public class IISUtils {
 	public static Map<String, String> getIISDataInfo(String ip, String community, int port) {
 		Map<String, String> map = new HashMap<String, String>();
 		SnmpUtils snmpUtils = null;
-		String[] oid = { "1.3.6.1.4.1.311.1.7.2.1.1",
+		String[] oid = { "1.3.6.1.4.1.311.1.7.3.1.1",
 				"1.3.6.1.4.1.311.1.7.3.1.2", "1.3.6.1.4.1.311.1.7.3.1.3",
 				"1.3.6.1.4.1.311.1.7.3.1.5", "1.3.6.1.4.1.311.1.7.3.1.5",
 				"1.3.6.1.4.1.311.1.7.3.1.6" };
@@ -68,7 +68,7 @@ public class IISUtils {
 			String community, int port) {
 		Map<String, String> map = new HashMap<String, String>();
 		SnmpUtils snmpUtils = null;
-		String[] oid = { "1.3.6.1.4.1.311.1.7.2.1.7",
+		String[] oid = { "1.3.6.1.4.1.311.1.7.3.1.7",
 				"1.3.6.1.4.1.311.1.7.3.1.8", "1.3.6.1.4.1.311.1.7.3.1.9",
 				"1.3.6.1.4.1.311.1.7.3.1.10", "1.3.6.1.4.1.311.1.7.3.1.11",
 				"1.3.6.1.4.1.311.1.7.3.1.12", "1.3.6.1.4.1.311.1.7.3.1.13",
@@ -130,7 +130,7 @@ public class IISUtils {
 	public static Map<String, String> getIISRequestInfo(String ip, String community, int port) {
 		Map<String, String> map = new HashMap<String, String>();
 		SnmpUtils snmpUtils = null;
-		String[] oid = { "1.3.6.1.4.1.311.1.7.2.1.17",
+		String[] oid = { "1.3.6.1.4.1.311.1.7.3.1.17",
 				"1.3.6.1.4.1.311.1.7.3.1.18", "1.3.6.1.4.1.311.1.7.3.1.19",
 				"1.3.6.1.4.1.311.1.7.3.1.20", "1.3.6.1.4.1.311.1.7.3.1.21",
 				"1.3.6.1.4.1.311.1.7.3.1.22", "1.3.6.1.4.1.311.1.7.3.1.23",
@@ -196,7 +196,7 @@ public class IISUtils {
 	public static Map<String, String> getIISBlockInfo(String ip, String community, int port) {
 		Map<String, String> map = new HashMap<String, String>();
 		SnmpUtils snmpUtils = null;
-		String[] oid = { "1.3.6.1.4.1.311.1.7.2.1.39",
+		String[] oid = { "1.3.6.1.4.1.311.1.7.3.1.39",
 				"1.3.6.1.4.1.311.1.7.3.1.40", "1.3.6.1.4.1.311.1.7.3.1.41",
 				"1.3.6.1.4.1.311.1.7.3.1.42", "1.3.6.1.4.1.311.1.7.3.1.43",
 				"1.3.6.1.4.1.311.1.7.3.1.44", "1.3.6.1.4.1.311.1.7.3.1.45" };

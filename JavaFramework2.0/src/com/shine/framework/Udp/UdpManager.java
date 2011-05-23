@@ -18,7 +18,7 @@ public class UdpManager {
 
 	private UdpHelperMap map = new UdpHelperMap();
 
-	public static UdpManager getManager() {
+	public static UdpManager getManager() { 
 		return manager;
 	}
 
