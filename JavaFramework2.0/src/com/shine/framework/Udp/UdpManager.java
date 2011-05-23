@@ -9,7 +9,7 @@ import java.net.SocketException;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.shine.framework.Udp.model.UdpReceviceIf;
+import com.shine.framework.Udp.model.UdpRecevice;
 import com.shine.framework.Udp.utils.UdpHelperMap;
 import com.shine.framework.Udp.utils.UdpSocketHelper;
 
@@ -56,7 +56,7 @@ public class UdpManager {
 	 * @param port
 	 * @param udpReceviceIf
 	 */
-	public void addRecevice(int port, UdpReceviceIf udpReceviceIf) {
+	public void addRecevice(int port, UdpRecevice udpReceviceIf) {
 		map.addRecevice(port, udpReceviceIf);
 	}
 

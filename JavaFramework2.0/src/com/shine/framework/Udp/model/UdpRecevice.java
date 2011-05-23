@@ -2,7 +2,7 @@ package com.shine.framework.Udp.model;
 
 import java.net.DatagramPacket;
 
-public abstract class UdpReceviceIf {
+public abstract class UdpRecevice {
 
 	private String key;
 
