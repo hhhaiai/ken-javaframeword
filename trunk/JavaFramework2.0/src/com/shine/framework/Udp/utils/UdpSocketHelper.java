@@ -9,7 +9,7 @@ import java.net.SocketException;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.shine.framework.Udp.model.UdpReceviceIf;
+import com.shine.framework.Udp.model.UdpRecevice;
 
 public class UdpSocketHelper {
 	private byte[] buffer = new byte[2048];
@@ -22,7 +22,7 @@ public class UdpSocketHelper {
 
 	private String orgIp;
 
-	private Map<String, UdpReceviceIf> reciveInterface;
+	private Map<String, UdpRecevice> reciveInterface;
 
 	private ReceviceRunnable receviceRunnable;
 
@@ -106,7 +106,7 @@ public class UdpSocketHelper {
 	 * 
 	 * @param udpReceviceIf
 	 */
-	public void addRecevice(UdpReceviceIf udpReceviceIf) {
+	public void addRecevice(UdpRecevice udpReceviceIf) {
 		this.addRecevice(udpReceviceIf.getKey(), udpReceviceIf);
 	}
 
@@ -116,9 +116,9 @@ public class UdpSocketHelper {
 	 * @param key
 	 * @param udpReceviceIf
 	 */
-	public void addRecevice(String key, UdpReceviceIf udpReceviceIf) {
+	public void addRecevice(String key, UdpRecevice udpReceviceIf) {
 		if (reciveInterface == null)
-			reciveInterface = new HashMap<String, UdpReceviceIf>();
+			reciveInterface = new HashMap<String, UdpRecevice>();
 		reciveInterface.put(key, udpReceviceIf);
 	}
 
@@ -134,7 +134,7 @@ public class UdpSocketHelper {
 		orgIp = packet.getAddress().getHostAddress();
 		String info = new String(packet.getData(), 0, packet.getLength());
 		if (reciveInterface != null) {
-			for (UdpReceviceIf udpReceviceIf : reciveInterface.values()) {
+			for (UdpRecevice udpReceviceIf : reciveInterface.values()) {
 				udpReceviceIf.recevice(packet);
 				udpReceviceIf.recevice(orgIp, packet.getPort(), info);
 			}

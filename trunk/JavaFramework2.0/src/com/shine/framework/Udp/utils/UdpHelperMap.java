@@ -2,7 +2,7 @@ package com.shine.framework.Udp.utils;
 
 import java.util.HashMap;
 
-import com.shine.framework.Udp.model.UdpReceviceIf;
+import com.shine.framework.Udp.model.UdpRecevice;
 
 public class UdpHelperMap extends HashMap<Integer, UdpSocketHelper> {
 	public void putHelper(UdpSocketHelper helper) {
@@ -25,7 +25,7 @@ public class UdpHelperMap extends HashMap<Integer, UdpSocketHelper> {
 	 * @param helperName
 	 * @param udpReceviceIf
 	 */
-	public void addRecevice(int port, UdpReceviceIf udpReceviceIf) {
+	public void addRecevice(int port, UdpRecevice udpReceviceIf) {
 		this.get(port).addRecevice(udpReceviceIf);
 	}
 

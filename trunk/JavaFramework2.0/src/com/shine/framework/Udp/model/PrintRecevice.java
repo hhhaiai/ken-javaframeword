@@ -2,7 +2,7 @@ package com.shine.framework.Udp.model;
 
 import java.net.DatagramPacket;
 
-public class PrintRecevice extends UdpReceviceIf {
+public class PrintRecevice extends UdpRecevice {
 
 	public PrintRecevice() {
 		super();
