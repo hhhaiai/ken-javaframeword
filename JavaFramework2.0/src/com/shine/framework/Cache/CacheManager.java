@@ -11,14 +11,31 @@ public class CacheManager {
 		return manager;
 	}
 
+	/**
+	 * 加入cache
+	 * 
+	 * @param object
+	 * @param tag
+	 */
 	public void addCache(Object object, String... tag) {
 		map.put(createTags(tag), object);
 	}
 
+	/**
+	 * 获取cache
+	 * 
+	 * @param tag
+	 * @return
+	 */
 	public Object getCache(String... tag) {
 		return map.get(createTags(tag));
 	}
 
+	/**
+	 * 删除cache
+	 * 
+	 * @param tag
+	 */
 	public void removeCache(String... tag) {
 		map.remove(createTags(tag));
 	}
@@ -40,6 +57,9 @@ public class CacheManager {
 		return tags;
 	}
 
+	/**
+	 * 清空cache
+	 */
 	public void cleanCache() {
 		map.clear();
 	}
