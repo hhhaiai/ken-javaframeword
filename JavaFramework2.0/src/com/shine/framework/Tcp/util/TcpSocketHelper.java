@@ -5,7 +5,7 @@ import java.net.ServerSocket;
 public class TcpSocketHelper {
 	public ServerSocket serveSocket = null;
 
-	private int port = 7777;
+	private int port;
 
 	public void bind() throws Exception {
 		serveSocket = new ServerSocket(port);
