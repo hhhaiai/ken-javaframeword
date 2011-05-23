@@ -7,7 +7,7 @@ public class CacheManager {
 
 	private CacheMap map = new CacheMap();
 
-	public CacheManager getManager() {
+	public static CacheManager getManager() {
 		return manager;
 	}
 
