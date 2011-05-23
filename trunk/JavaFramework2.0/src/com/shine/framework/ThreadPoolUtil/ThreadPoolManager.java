@@ -5,6 +5,7 @@ import java.util.Map;
 import com.shine.framework.ThreadPoolUtil.model.ThreadModel;
 import com.shine.framework.ThreadPoolUtil.util.SuperThread;
 import com.shine.framework.ThreadPoolUtil.util.ThreadPool;
+import com.shine.framework.core.util.DateUtil;
 
 /**
  * 线程池管理
@@ -65,17 +66,23 @@ public class ThreadPoolManager {
 
 	/**
 	 * 加入新的线程
+	 * 
 	 * @param model
 	 */
 	public void addThread(ThreadModel model) {
+		model = checkThreadModel(model);
+
 		addThread(new SuperThread(model));
 	}
 
 	/**
 	 * 加入新的线程
+	 * 
 	 * @param thread
 	 */
 	public void addThread(SuperThread thread) {
+		thread = checkSuperThread(thread);
+
 		pool.putSuperThread(thread.getThreadModel().getThreadName(), thread);
 
 		if (this.state) {
@@ -87,6 +94,7 @@ public class ThreadPoolManager {
 
 	/**
 	 * 杀死线程
+	 * 
 	 * @param threadName
 	 */
 	public void killThread(String threadName) {
@@ -100,11 +108,10 @@ public class ThreadPoolManager {
 			}
 		}
 	}
-	
-	
 
 	/**
 	 * 获取线程的状态
+	 * 
 	 * @param threadName
 	 * @return
 	 */
@@ -117,23 +124,57 @@ public class ThreadPoolManager {
 		}
 		return false;
 	}
-	
+
 	/**
 	 * 线程减速
 	 */
-	public void slow(){
+	public void slow() {
 		for (Map.Entry<String, SuperThread> entry : pool.entrySet()) {
 			entry.getValue().getThreadModel().slow();
 		}
 	}
-	
+
 	/**
 	 * 线程加速
 	 */
-	public void fast(){
+	public void fast() {
 		for (Map.Entry<String, SuperThread> entry : pool.entrySet()) {
 			entry.getValue().getThreadModel().fast();
 		}
+	}
+
+	/**
+	 * 检查superthread
+	 * 
+	 * @param thread
+	 * @return
+	 */
+	private SuperThread checkSuperThread(SuperThread thread) {
+		thread.setThreadModel(checkThreadModel(thread.getThreadModel()));
+		return thread;
+	}
+
+	/**
+	 * 检查threadmodel
+	 * 
+	 * @param threadModel
+	 * @return
+	 */
+	private ThreadModel checkThreadModel(ThreadModel threadModel) {
+		if (threadModel.getThreadName() == null) {
+			threadModel.setThreadName(rendomThreadInfo());
+			threadModel.setDescription(threadModel.getThreadName());
+		}
+		return threadModel;
+	}
+
+	/**
+	 * 随机线程名称
+	 * 
+	 * @return
+	 */
+	private String rendomThreadInfo() {
+		return "thread" + DateUtil.getCurrentDateTimeAsId();
 	}
 
 }
