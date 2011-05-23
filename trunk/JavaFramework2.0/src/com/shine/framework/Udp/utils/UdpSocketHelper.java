@@ -12,8 +12,6 @@ import java.util.Map;
 import com.shine.framework.Udp.model.UdpReceviceIf;
 
 public class UdpSocketHelper {
-	private String helperName;
-
 	private byte[] buffer = new byte[2048];
 
 	private DatagramSocket ds = null;
@@ -98,6 +96,7 @@ public class UdpSocketHelper {
 	public final void startReceive() {
 		if (receviceRunnable == null) {
 			receviceRunnable = new ReceviceRunnable();
+			receviceRunnable.setHelper(this);
 			receviceRunnable.start();
 		}
 	}
@@ -185,6 +184,15 @@ public class UdpSocketHelper {
 	}
 
 	/**
+	 * 获取监控的端口
+	 * 
+	 * @return
+	 */
+	public final int getBindPort() {
+		return this.socketAddress.getPort();
+	}
+
+	/**
 	 * 获取运行状态
 	 * 
 	 * @return
@@ -210,22 +218,26 @@ public class UdpSocketHelper {
 			ex.printStackTrace();
 		}
 	}
-
-	public String getHelperName() {
-		return helperName;
-	}
-
-	public void setHelperName(String helperName) {
-		this.helperName = helperName;
-	}
 }
 
 class ReceviceRunnable extends Thread {
+	private UdpSocketHelper helper;
+
 	public void run() {
 		try {
-
+			if (helper != null)
+				if (helper.getState())
+					helper.receive();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	public UdpSocketHelper getHelper() {
+		return helper;
+	}
+
+	public void setHelper(UdpSocketHelper helper) {
+		this.helper = helper;
 	}
 }

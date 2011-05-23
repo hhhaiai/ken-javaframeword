@@ -4,17 +4,29 @@ import java.util.HashMap;
 
 import com.shine.framework.Udp.model.UdpReceviceIf;
 
-public class UdpHelperMap extends HashMap<String, UdpSocketHelper> {
+public class UdpHelperMap extends HashMap<Integer, UdpSocketHelper> {
 	public void putHelper(UdpSocketHelper helper) {
 		if (helper != null)
-			this.put(helper.getHelperName(), helper);
+			this.put(helper.getBindPort(), helper);
 	}
 
-	public void stopHelperSocket(String helperName) {
-		this.get(helperName).close();
+	/**
+	 * 关闭端口
+	 * 
+	 * @param helperName
+	 */
+	public void stopHelperSocket(int port) {
+		this.get(port).close();
 	}
 
-	public void addRecevice(String helperName, UdpReceviceIf udpReceviceIf) {
-		this.get(helperName).addRecevice(udpReceviceIf);
+	/**
+	 * 加入监听
+	 * 
+	 * @param helperName
+	 * @param udpReceviceIf
+	 */
+	public void addRecevice(int port, UdpReceviceIf udpReceviceIf) {
+		this.get(port).addRecevice(udpReceviceIf);
 	}
+
 }

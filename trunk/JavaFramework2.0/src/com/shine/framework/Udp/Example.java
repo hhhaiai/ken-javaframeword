@@ -9,11 +9,11 @@ public class Example {
 	 */
 	public static void main(String[] args) throws Exception {
 
-//		UdpManager.getManager("127.0.0.1", 8888).addRecevice("print",
-//				new PrintRecevice());
-//		UdpManager.getManager().startReceive();
-//
-//		UdpManager.getManager().send("127.0.0.1", 8888, "123");
+		UdpManager.getManager().addBind(8888);
+		UdpManager.getManager().addRecevice(8888, new PrintRecevice());
+		UdpManager.getManager().startRecevice();
+
+		UdpManager.getManager().send(8888,"127.0.0.1", 8888, "123");
 	}
 
 }
