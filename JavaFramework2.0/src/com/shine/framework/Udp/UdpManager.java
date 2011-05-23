@@ -18,10 +18,17 @@ public class UdpManager {
 
 	private UdpHelperMap map = new UdpHelperMap();
 
-	public static UdpManager getManager() { 
+	public static UdpManager getManager() {
 		return manager;
 	}
 
+	/**
+	 * 加入udp监听
+	 * 
+	 * @param host
+	 * @param port
+	 * @return
+	 */
 	public Boolean addBind(String host, int port) {
 		try {
 			UdpSocketHelper helper = new UdpSocketHelper(host, port);
@@ -33,7 +40,44 @@ public class UdpManager {
 		return false;
 	}
 
-	public void addRecevice(String helperName, UdpReceviceIf udpReceviceIf) {
-		map.addRecevice(helperName, udpReceviceIf);
+	/**
+	 * 加入udp监听
+	 * 
+	 * @param port
+	 * @return
+	 */
+	public Boolean addBind(int port) {
+		return addBind("127.0.0.1", port);
+	}
+
+	/**
+	 * 加入接收器
+	 * 
+	 * @param port
+	 * @param udpReceviceIf
+	 */
+	public void addRecevice(int port, UdpReceviceIf udpReceviceIf) {
+		map.addRecevice(port, udpReceviceIf);
+	}
+
+	/**
+	 * 启动监听线程
+	 */
+	public void startRecevice() {
+		for (UdpSocketHelper helper : map.values()) {
+			helper.startReceive();
+		}
+	}
+
+	/**
+	 * 启动监听线程
+	 * @param port
+	 */
+	public void startRecevice(int port) {
+		map.get(port).startReceive();
+	}
+	
+	public void send(int port,String ip,int recevicePort,String data) throws IOException{
+		map.get(port).send(ip, recevicePort, data);
 	}
 }
