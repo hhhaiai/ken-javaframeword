@@ -135,6 +135,7 @@ public class UdpSocketHelper {
 		String info = new String(packet.getData(), 0, packet.getLength());
 		if (reciveInterface != null) {
 			for (UdpReceviceIf udpReceviceIf : reciveInterface.values()) {
+				udpReceviceIf.recevice(packet);
 				udpReceviceIf.recevice(orgIp, packet.getPort(), info);
 			}
 		}
