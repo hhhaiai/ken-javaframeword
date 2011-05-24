@@ -17,6 +17,8 @@ public class ProxyServerHelper {
 
 	private int localport;
 
+	private boolean state = true;
+
 	public ProxyServerHelper() {
 
 	}
@@ -39,6 +41,13 @@ public class ProxyServerHelper {
 	}
 
 	/**
+	 * 关闭proxy 服务器
+	 */
+	public void close() {
+		state = false;
+	}
+
+	/**
 	 * runs a single-threaded proxy server on the specified local port. It never
 	 * returns.
 	 */
@@ -49,7 +58,7 @@ public class ProxyServerHelper {
 		final byte[] request = new byte[1024];
 		byte[] reply = new byte[4096];
 
-		while (true) {
+		while (state) {
 			Socket client = null, server = null;
 			try {
 				// Wait for a connection on the local port
