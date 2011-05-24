@@ -9,4 +9,8 @@ public class Process {
 	public String getProcessState() {
 		return null;
 	}
+	
+	public void startProcessMonitor(){
+		
+	}
 }
