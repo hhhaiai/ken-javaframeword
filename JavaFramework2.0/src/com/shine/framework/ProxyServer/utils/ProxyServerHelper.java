@@ -23,6 +23,12 @@ public class ProxyServerHelper {
 
 	}
 
+	/**
+	 * 监听服务器
+	 * @param host
+	 * @param remoteport
+	 * @param localport
+	 */
 	public ProxyServerHelper(String host, int remoteport, int localport) {
 		this.host = host;
 		this.remoteport = remoteport;
@@ -160,6 +166,14 @@ public class ProxyServerHelper {
 
 	public void setLocalport(int localport) {
 		this.localport = localport;
+	}
+
+	public boolean isState() {
+		return state;
+	}
+
+	public void setState(boolean state) {
+		this.state = state;
 	}
 
 }
