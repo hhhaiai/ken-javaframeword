@@ -51,5 +51,6 @@
 	<classpathentry kind="lib" path="E:/workspace/JavaFramework2.0/lib/yuicompressor-2.4.6.jar"/>
 	<classpathentry kind="lib" path="E:/workspace/JavaFramework2.0/lib/jargs-1.0.jar"/>
 	<classpathentry kind="lib" path="E:/workspace/JavaFramework2.0/lib/rhino-1.6R7.jar"/>
+	<classpathentry kind="lib" path="E:/workspace/JavaFramework2.0/lib/htmlparser.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
