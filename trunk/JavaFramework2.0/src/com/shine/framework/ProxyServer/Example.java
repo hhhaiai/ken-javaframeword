@@ -6,8 +6,8 @@ public class Example {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		ProxyServerManager.getManager().addProxy("192.168.2.18", 8888, 9999);
+		ProxyServerManager.getManager().startProxy();
 	}
 
 }
