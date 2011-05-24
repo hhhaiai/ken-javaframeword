@@ -17,7 +17,7 @@ public class ProxyServerHelper {
 
 	private int localport;
 
-	private boolean state = true;
+	private boolean state = false;
 
 	public ProxyServerHelper() {
 
@@ -25,6 +25,7 @@ public class ProxyServerHelper {
 
 	/**
 	 * 监听服务器
+	 * 
 	 * @param host
 	 * @param remoteport
 	 * @param localport
@@ -39,6 +40,9 @@ public class ProxyServerHelper {
 	 * 启动接收数据包
 	 */
 	public final void startProxy() {
+		System.out.println("Starting proxy for " + host + ":" + remoteport
+				+ " on port " + localport);
+		this.state = true;
 		if (proxyRunnable == null) {
 			proxyRunnable = new ProxyRunnable();
 			proxyRunnable.setHelper(this);

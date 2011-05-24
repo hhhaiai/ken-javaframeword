@@ -10,8 +10,8 @@ import java.net.Socket;
 public class SimpleProxyServer {
 	  public static void main(String[] args) throws IOException {
 	    try {
-	      String host = "192.168.2.18";
-	      int remoteport = 8888;
+	      String host = "www.cnbeta.com";
+	      int remoteport = 80;
 	      int localport = 9999;
 	      // Print a start-up message
 	      System.out.println("Starting proxy for " + host + ":" + remoteport

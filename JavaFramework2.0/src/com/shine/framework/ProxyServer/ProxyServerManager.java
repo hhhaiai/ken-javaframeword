@@ -1,7 +1,13 @@
 package com.shine.framework.ProxyServer;
 
+import java.util.List;
+import java.util.Map;
+
+import org.dom4j.Element;
+
 import com.shine.framework.ProxyServer.utils.ProxyServerHelper;
 import com.shine.framework.ProxyServer.utils.ProxyServerMap;
+import com.shine.framework.core.util.XmlUitl;
 
 public class ProxyServerManager {
 	public static ProxyServerManager manager = new ProxyServerManager();
@@ -12,6 +18,26 @@ public class ProxyServerManager {
 
 	public static ProxyServerManager getManager() {
 		return manager;
+	}
+
+	/**
+	 * 加入代理
+	 * @param configPath
+	 */
+	public void addProxy(String configPath) {
+		try {
+			List<Element> list = XmlUitl.getAllElementByPath(configPath,
+					"proxy");
+
+			for (Element ele : list) {
+				Map<String, String> map = XmlUitl.getAllAttribute(ele);
+				addProxy(map.get("name"), map.get("host"), Integer.parseInt(map
+						.get("remoteport")), Integer.parseInt(map
+						.get("localport")));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -56,6 +82,7 @@ public class ProxyServerManager {
 
 	/**
 	 * 删除代理
+	 * 
 	 * @param host
 	 * @param remotePort
 	 * @param localPort
