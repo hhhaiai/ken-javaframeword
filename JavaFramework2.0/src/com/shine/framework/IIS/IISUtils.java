@@ -6,6 +6,13 @@ import java.util.Map;
 
 import com.shine.framework.core.util.SnmpUtils;
 
+/**
+ * IIS监控管理类
+ * 
+ * @author viruscodecn@gmail.com
+ * @blog http://blog.csdn.net/arjick/archive/2011/05/27/6450608.aspx
+ *
+ */
 @SuppressWarnings("unchecked")
 public class IISUtils {
 	/**
