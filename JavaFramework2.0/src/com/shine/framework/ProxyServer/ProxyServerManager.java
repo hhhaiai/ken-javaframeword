@@ -9,6 +9,12 @@ import com.shine.framework.ProxyServer.utils.ProxyServerHelper;
 import com.shine.framework.ProxyServer.utils.ProxyServerMap;
 import com.shine.framework.core.util.XmlUitl;
 
+/**
+ * 代理服务器
+ * @author viruscodecn@gmail.com
+ * @blog http://blog.csdn.net/arjick/archive/2011/05/27/6450906.aspx
+ *
+ */
 public class ProxyServerManager {
 	public static ProxyServerManager manager = new ProxyServerManager();
 
