@@ -86,8 +86,11 @@
 			
 			//加入连线
 			public function addTopoLine(value:TopoLine):void{
-				if(value!=null)
+				if(value!=null){
 					this.group.addElement(value.getLine());
+					if(value.infoLabe!=null)
+					   this.group.addElement(value.infoLabe);
+				}
 			}
 			
 			//删除连线

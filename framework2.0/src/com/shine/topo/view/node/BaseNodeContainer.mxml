@@ -25,6 +25,9 @@
 			import mx.effects.Glow;
 			import mx.events.MoveEvent;
 			
+			import spark.components.BorderContainer;
+			import spark.skins.spark.BorderContainerSkin;
+			
 			
 			//起点连线
 			public var fromLineArrayCollection:TopoLinesArrayCollection=new TopoLinesArrayCollection;
@@ -41,6 +44,7 @@
 			public var topoImage:Image;
 			public var topoLabel:TopoLabel;
 			public var infoContainer:BaseInfoContainer;
+			public var topoActive:BorderContainer;
 			
 			//选中状态
 			public var selectStatement:Boolean=false;
@@ -52,6 +56,14 @@
 			//初始化节点数据
 			public function initNode(value:BaseXmlModel):void{
 				this.baseXmlModel=value;
+				
+				topoActive=new BorderContainer;
+				topoActive.width=this.width;
+				topoActive.height=this.height;
+				topoActive.visible=false;
+				topoActive.setStyle("borderWeight",3);
+				topoActive.setStyle("borderStyle","solid");
+				this.addElement(topoActive);
 
 				topoImage=new Image;
 				topoImage.maintainAspectRatio=false;
@@ -77,6 +89,10 @@
 				this.addEventListener(MouseEvent.MOUSE_OUT,out);
 				
 				value=null;
+			}
+			
+			public function setActive():void{
+				topoActive.visible=true;
 			}
 			
 			
