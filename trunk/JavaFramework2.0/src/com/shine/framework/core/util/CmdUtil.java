@@ -29,7 +29,7 @@ public class CmdUtil {
 					sb.append(line + "\r\n");
 					line = br.readLine();
 				}
-				System.out.println(sb.toString());
+				//System.out.println(sb.toString());
 
 				try {
 					pro.waitFor();
