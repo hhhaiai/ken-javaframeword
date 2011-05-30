@@ -4,13 +4,64 @@
 		   xmlns:mx="library://ns.adobe.com/flex/mx" >
 	<fx:Script>
 		<![CDATA[
-			private function init(value:String):String{
-				return value;
+			import mx.controls.dataGridClasses.DataGridListData;
+			import mx.controls.listClasses.BaseListData;
+			import mx.events.FlexEvent;
+			
+			private var value:String="";
+			
+			// Make the listData property bindable.
+			[Bindable("dataChange")]
+			private var _listData : BaseListData;    
+			
+			
+			public function get listData() : BaseListData
+			{
+				return _listData;            
+			}                                        
+			
+			public function set listData( value : BaseListData ) : void
+			{
+				_listData = value;
+				
+			}
+			
+			private var _data:Object;
+			
+			[Bindable("dataChange")]
+			[Inspectable(environment="none")]
+			override public function get data():Object
+			{
+				return _data;
+			}
+			override public function set data(value:Object):void
+			{
+				_data = value;
+				
+				if (listData)
+				{
+					if(XML((listData as DataGridListData).label).children().length()!=0){
+						value = XML((listData as DataGridListData).label).children().toXMLString();
+					}
+					else
+						value = (listData as DataGridListData).label;
+					
+				}
+				else if (_data != null)
+				{
+					if (_data is String)
+						value = String(_data);
+					else
+						value = _data.toString();
+				}	
+				dispatchEvent(new FlexEvent(FlexEvent.DATA_CHANGE));
 			}
 		]]>
 	</fx:Script>
+	<!--<mx:Image source="{data[(DataGridListData(listData).dataField)]}"/>-->
 	<mx:VBox>
-		<mx:Image id="image" source="{init(data.alarmImage)}"/>
-		<!--<s:Label text="{data.alarmImage}" />-->
+		<!--<s:Label text="{XML(data).child('image').toString()}" />-->
+		<s:Label text="{value}" />
 	</mx:VBox>
+	
 </mx:Canvas>
