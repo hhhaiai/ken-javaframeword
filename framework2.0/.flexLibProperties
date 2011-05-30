@@ -66,6 +66,18 @@
     <classEntry path="com.shine.framework.core.view.SunshineHtmlContainer"/>
     <classEntry path="com.shine.framework.PluginComponent.utils.PluginsMap"/>
     <classEntry path="com.shine.framework.PluginComponent.utils.PluginsFactory"/>
+    <classEntry path="com.shine.workflow.jbpm.view.points.BasePoint"/>
+    <classEntry path="com.shine.workflow.jbpm.model.BasePointModel"/>
+    <classEntry path="com.shine.workflow.jbpm.view.JbpmContainer"/>
+    <classEntry path="com.shine.workflow.jbpm.view.line.JbpmLine"/>
+    <classEntry path="com.shine.workflow.jbpm.view.points.StartPoint"/>
+    <classEntry path="com.shine.workflow.jbpm.model.ProcessModel"/>
+    <classEntry path="com.shine.workflow.jbpm.view.points.DecisionPoint"/>
+    <classEntry path="com.shine.workflow.jbpm.view.points.TaskPoint"/>
+    <classEntry path="com.shine.workflow.jbpm.view.points.EndPoint"/>
+    <classEntry path="com.shine.workflow.jbpm.util.TransitionMap"/>
+    <classEntry path="com.shine.framework.core.view.BrokenLine"/>
+    <classEntry path="com.shine.framework.core.util.SystemUtils"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>
