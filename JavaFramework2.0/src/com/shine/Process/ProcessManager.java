@@ -24,11 +24,10 @@ public class ProcessManager {
 	}
 
 	public void openProcessByJar(String jar) {
-
+       
 	}
 
 	public void openProcessByJar(String jar, String method) {
 
 	}
-
 }
