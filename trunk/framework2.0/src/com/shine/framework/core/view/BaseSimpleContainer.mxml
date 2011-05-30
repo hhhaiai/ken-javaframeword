@@ -53,6 +53,7 @@
 			//是否给予下载图片
 			public var dowloadPicturePolicy:String="off";
 			public var dowloadPictureName:String="save.jpg";
+			public var dowloadComponent:UIComponent;
 			
 			//toop Type toopTipType="text" or toopTipType="html"
 			public var toopTipType:String="text";
@@ -182,7 +183,11 @@
 			//保存图片
 			public function savePicContextMenu(event:ContextMenuEvent):void
 			{
-				var bitmapData:BitmapData=getBitmapData(UIComponent(this));
+				var bitmapData:BitmapData=null;
+				if(dowloadComponent!=null)
+					bitmapData=getBitmapData(dowloadComponent);
+				else
+					bitmapData=getBitmapData(UIComponent(this));
 				var _fileRef:FileReference=new FileReference(); //用于保存文件
 				var _encoder:IImageEncoder=new JPEGEncoder(80); //用于编码位图
 				var ba:ByteArray=_encoder.encode(bitmapData); //编码成JPG图片，质量为80

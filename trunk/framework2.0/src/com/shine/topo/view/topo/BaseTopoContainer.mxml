@@ -3,7 +3,9 @@
 						  xmlns:s="library://ns.adobe.com/flex/spark" 
 						  xmlns:mx="library://ns.adobe.com/flex/mx" 
 						  xmlns:view="com.shine.framework.core.view.*" 
-						  creationComplete="{baseTopoContainerComplete()}">
+						  creationComplete="{baseTopoContainerComplete()}" 
+						  dowloadPicturePolicy="on" 
+						  dowloadComponent="{group}">
 	<view:layout>
 		<s:BasicLayout/>
 	</view:layout>
@@ -102,6 +104,6 @@
 	</fx:Script>
 	<mx:Image id="backgroupImage" width="{this.width}" height="{this.height}" source="{topoBackgroupImagePath}" visible="{topoBackgroupPolicy}" maintainAspectRatio="false" />
 	<s:Scroller id="scroller" width="100%" height="100%">
-		<s:Group id="group" clipAndEnableScrolling="true"/>	
+		<s:Group id="group" />	
 	</s:Scroller>
 </view:BaseSimpleContainer>
