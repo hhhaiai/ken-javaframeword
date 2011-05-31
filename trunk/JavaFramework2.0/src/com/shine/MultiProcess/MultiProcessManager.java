@@ -27,7 +27,7 @@ public class MultiProcessManager {
 
 	}
 
-	public String operaProcess(String name, String date) {
+	public String operaProcess(String name, String commnd) {
 		return null;
 	}
 }
