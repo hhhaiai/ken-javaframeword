@@ -1,7 +1,11 @@
 package com.shine.MultiProcess;
 
+import com.shine.MultiProcess.utils.ProcessUtils;
+
 public class MultiProcessManager {
 	private static MultiProcessManager manager = new MultiProcessManager();
+	
+	private ProcessUtils processUtil=new ProcessUtils();
 
 	public static MultiProcessManager getManager() {
 		return manager;
