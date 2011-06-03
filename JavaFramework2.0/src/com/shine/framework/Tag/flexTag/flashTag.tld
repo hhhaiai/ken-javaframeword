@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<taglib>
+	<tlib-version>1.0</tlib-version>
+	<jsp-version>1.2</jsp-version>
+
+	<tag>
+		<name>flashTag</name>
+		<tag-class>com.shine.framework.Tag.flexTag.FlashTag</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+			<name>flashName</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>flashUrl</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>flashVars</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	<!-- web.xml  -->
+	<!--
+		<jsp-config> <taglib> <taglib-uri>/WEB-INF/MyTagLib</taglib-uri>
+		<taglib-location>/WEB-INF/flashTag.tld</taglib-location> </taglib>
+		</jsp-config>
+	-->
+</taglib>
