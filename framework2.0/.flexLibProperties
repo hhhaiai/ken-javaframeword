@@ -78,6 +78,8 @@
     <classEntry path="com.shine.workflow.jbpm.util.TransitionMap"/>
     <classEntry path="com.shine.framework.core.view.BrokenLine"/>
     <classEntry path="com.shine.framework.core.util.SystemUtils"/>
+    <classEntry path="com.shine.framework.Ftp.FtpFileUpDownload"/>
+    <classEntry path="com.shine.framework.Ftp.event.FileUpDownloadEvent"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>
