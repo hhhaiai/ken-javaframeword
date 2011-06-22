@@ -80,6 +80,7 @@
     <classEntry path="com.shine.framework.core.util.SystemUtils"/>
     <classEntry path="com.shine.framework.Ftp.FtpFileUpDownload"/>
     <classEntry path="com.shine.framework.Ftp.event.FileUpDownloadEvent"/>
+    <classEntry path="com.shine.webPlugin.WebPluginContainer"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>
