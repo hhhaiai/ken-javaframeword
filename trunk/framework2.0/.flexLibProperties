@@ -81,6 +81,8 @@
     <classEntry path="com.shine.framework.Ftp.FtpFileUpDownload"/>
     <classEntry path="com.shine.framework.Ftp.event.FileUpDownloadEvent"/>
     <classEntry path="com.shine.webPlugin.WebPluginContainer"/>
+    <classEntry path="com.shine.framework.core.util.JsonUtils"/>
+    <classEntry path="com.shine.framework.core.util.BaseJsonServiceUtil"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>
