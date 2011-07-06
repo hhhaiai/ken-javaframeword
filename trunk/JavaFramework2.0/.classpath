@@ -54,5 +54,7 @@
 	<classpathentry kind="lib" path="E:/workspace/JavaFramework2.0/lib/htmlparser.jar"/>
 	<classpathentry kind="lib" path="E:/workspace/JavaFramework2.0/lib/jai_imageio-1.1-alpha.jar"/>
 	<classpathentry kind="lib" path="E:/workspace/JavaFramework2.0/lib/poi-scratchpad-3.7-20101029.jar"/>
+	<classpathentry kind="lib" path="E:/workspace/JavaFramework2.0/lib/StarJFlvLib.jar"/>
+	<classpathentry kind="lib" path="E:/workspace/JavaFramework2.0/lib/Filters.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
