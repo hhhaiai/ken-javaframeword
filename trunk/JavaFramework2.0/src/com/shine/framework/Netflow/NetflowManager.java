@@ -6,4 +6,8 @@ public class NetflowManager {
 	public static NetflowManager getManager() {
 		return manager;
 	}
+	
+	public void startReceiver(){
+		
+	}
 }
