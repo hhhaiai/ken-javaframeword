@@ -12,6 +12,10 @@ public class NetflowManager {
 	}
 
 	public void startReceiver(String configPath) {
-       
+
+	}
+
+	public void startReceiver(int port, int cache, String physicalCachePath) {
+
 	}
 }
