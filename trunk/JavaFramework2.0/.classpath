@@ -56,5 +56,6 @@
 	<classpathentry kind="lib" path="E:/workspace/JavaFramework2.0/lib/poi-scratchpad-3.7-20101029.jar"/>
 	<classpathentry kind="lib" path="E:/workspace/JavaFramework2.0/lib/StarJFlvLib.jar"/>
 	<classpathentry kind="lib" path="E:/workspace/JavaFramework2.0/lib/Filters.jar"/>
+	<classpathentry kind="lib" path="E:/workspace/JavaFramework2.0/lib/jnca-beta-0.91.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
