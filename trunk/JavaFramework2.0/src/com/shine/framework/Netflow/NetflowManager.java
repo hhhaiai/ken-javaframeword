@@ -1,5 +1,10 @@
 package com.shine.framework.Netflow;
 
+/**
+ * 
+ * @author 123
+ * @lib jnca-beta-0.91.jar
+ */
 public class NetflowManager {
 	private static NetflowManager manager = new NetflowManager();
 
