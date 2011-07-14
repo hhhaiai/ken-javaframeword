@@ -6,8 +6,12 @@ public class NetflowManager {
 	public static NetflowManager getManager() {
 		return manager;
 	}
-	
-	public void startReceiver(){
-		
+
+	public void startReceiver() {
+
+	}
+
+	public void startReceiver(String configPath) {
+       
 	}
 }
