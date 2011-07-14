@@ -57,5 +57,7 @@
 	<classpathentry kind="lib" path="E:/workspace/JavaFramework2.0/lib/StarJFlvLib.jar"/>
 	<classpathentry kind="lib" path="E:/workspace/JavaFramework2.0/lib/Filters.jar"/>
 	<classpathentry kind="lib" path="E:/workspace/JavaFramework2.0/lib/jnca-beta-0.91.jar"/>
+	<classpathentry kind="lib" path="E:/workspace/JavaFramework2.0/lib/pygmy-core-ooweb.jar"/>
+	<classpathentry kind="lib" path="E:/workspace/JavaFramework2.0/lib/pygmy-handlers.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
