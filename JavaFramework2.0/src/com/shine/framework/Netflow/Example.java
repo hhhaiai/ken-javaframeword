@@ -1,4 +1,4 @@
-package com.shine.framework.Netflow;
+package com.shine.Netflow;
 
 public class Example {
 
@@ -6,8 +6,9 @@ public class Example {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		System.out.println("netflow 接收器 启动");
+		
+		NetflowManager.getManager().startReceiver(6696, 20);
 	}
 
 }

@@ -1,4 +1,7 @@
-package com.shine.framework.Netflow;
+package com.shine.Netflow;
+
+import com.shine.framework.Udp.UdpManager;
+import com.shine.framework.Udp.model.PrintRecevice;
 
 /**
  * 
@@ -20,7 +23,9 @@ public class NetflowManager {
 
 	}
 
-	public void startReceiver(int port, int cache, String physicalCachePath) {
-
+	public void startReceiver(int port, int cache) {
+		UdpManager.getManager().addBind(port);
+		UdpManager.getManager().addRecevice(port, new PrintRecevice());
+		UdpManager.getManager().startRecevice();
 	}
 }
