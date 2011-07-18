@@ -137,6 +137,7 @@ public class UdpSocketHelper {
 			for (UdpRecevice udpReceviceIf : reciveInterface.values()) {
 				udpReceviceIf.recevice(packet);
 				udpReceviceIf.recevice(orgIp, packet.getPort(), info);
+				udpReceviceIf.recevice(orgIp, packet.getPort(), buffer);
 			}
 		}
 	}
@@ -226,9 +227,11 @@ class ReceviceRunnable extends Thread {
 
 	public void run() {
 		try {
-			if (helper != null)
-				if (helper.getState())
-					helper.receive();
+			while (true) {
+				if (helper != null)
+					if (helper.getState())
+						helper.receive();
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

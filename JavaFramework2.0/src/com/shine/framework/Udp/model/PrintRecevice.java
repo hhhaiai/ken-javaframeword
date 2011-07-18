@@ -23,4 +23,7 @@ public class PrintRecevice extends UdpRecevice {
 		System.out.println(data);
 	}
 
+	@Override
+	public void recevice(String ip, int port, byte[] data) {
+	}
 }
