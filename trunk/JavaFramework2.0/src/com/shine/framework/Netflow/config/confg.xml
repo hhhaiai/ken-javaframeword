@@ -1,4 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <config>
-    
+    <netflow_port>6696</netflow_port>
+    <routers>
+		<router>
+			<id>1</id>
+			<name>ygnet</name>
+			<ip_address>192.168.100.1</ip_address>
+		</router>
+		<router>
+			<id>2</id>
+			<name>ygnet2</name>
+			<ip_address>127.0.0.1</ip_address>
+		</router>
+	</routers>
+	<cache_size>20</cache_size>
 </config>
