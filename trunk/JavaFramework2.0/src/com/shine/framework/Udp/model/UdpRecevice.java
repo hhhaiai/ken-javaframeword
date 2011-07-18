@@ -7,7 +7,9 @@ public abstract class UdpRecevice {
 	private String key;
 
 	public abstract void recevice(String ip, int port, String data);
-	
+
+	public abstract void recevice(String ip, int port, byte[] data);
+
 	public abstract void recevice(DatagramPacket packet);
 
 	public String getKey() {
