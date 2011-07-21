@@ -1,21 +1,27 @@
 package com.shine.Netflow.threadModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.shine.Netflow.model.RawNetFlow;
+import com.shine.Netflow.translator.TranslatorHelper;
 import com.shine.framework.ThreadPoolUtil.model.ThreadModel;
 
 public class ProcessThreadModel extends ThreadModel {
 
-	private List<RawNetFlow> flows;
+	private List<byte[]> flows;
 
 	@Override
-	public void excute() {
+	public void excute(Object... args) {
 		try {
-			for (RawNetFlow flow : flows) {
+			if (args.length != 0) {
+				flows = (ArrayList<byte[]>) args[0];
 
+				for (byte[] data : flows) {
+					TranslatorHelper.translator(1, data);
+				}
+				flows = null;
 			}
-			flows = null;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

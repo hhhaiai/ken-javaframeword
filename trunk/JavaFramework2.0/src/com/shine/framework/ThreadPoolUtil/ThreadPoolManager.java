@@ -155,6 +155,20 @@ public class ThreadPoolManager {
 	}
 
 	/**
+	 * 获取空闲线程
+	 * 
+	 * @return
+	 */
+	public SuperThread getIdleThread() {
+		for (Map.Entry<String, SuperThread> entry : pool.entrySet()) {
+			if (!entry.getValue().isBusy()) {
+				return entry.getValue();
+			}
+		}
+		return null;
+	}
+
+	/**
 	 * 检查threadmodel
 	 * 
 	 * @param threadModel
@@ -174,7 +188,15 @@ public class ThreadPoolManager {
 	 * @return
 	 */
 	private String rendomThreadInfo() {
-		return "thread" + DateUtil.getCurrentDateTimeAsId();
+		return "thread" + DateUtil.getCurrentDateTimeDetailAsId();
+	}
+
+	public ThreadPool getPool() {
+		return pool;
+	}
+
+	public void setPool(ThreadPool pool) {
+		this.pool = pool;
 	}
 
 }

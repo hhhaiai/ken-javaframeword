@@ -8,6 +8,7 @@ import com.shine.Netflow.utils.NetFlowUtil;
 public abstract class Translator {
 	/**
 	 * 获取数据包的版本
+	 * 
 	 * @param buffer
 	 * @return
 	 */
@@ -15,5 +16,5 @@ public abstract class Translator {
 		return NetFlowUtil.toIntNumber(buffer, 0, 2);
 	}
 
-	abstract List<RawNetFlow> translate(final int rid, final byte[] buffer);
+	abstract RawNetFlow translate(final int rid, final byte[] buffer);
 }

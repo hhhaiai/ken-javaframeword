@@ -5,8 +5,6 @@ import com.shine.framework.core.util.ReflectionUtil;
 public class XmlThreadModel extends ThreadModel {
 	private String classPath;
 	private String method;
-	
-	
 
 	public String getClassPath() {
 		return classPath;
@@ -25,7 +23,7 @@ public class XmlThreadModel extends ThreadModel {
 	}
 
 	@Override
-	public void excute() {
+	public void excute(Object... args) {
 		try {
 			if (classPath != null && classPath.length() != 0 && method != null
 					&& method.length() != 0) {
