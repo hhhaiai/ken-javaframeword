@@ -11,6 +11,9 @@ public class ProcessThreadModel extends ThreadModel {
 
 	private List<byte[]> flows;
 
+	/**
+	 * 处理器
+	 */
 	@Override
 	public void excute(Object... args) {
 		try {
