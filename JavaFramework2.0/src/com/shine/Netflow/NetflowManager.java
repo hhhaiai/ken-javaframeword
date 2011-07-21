@@ -25,7 +25,7 @@ public class NetflowManager {
 
 	public void startReceiver(int port, int cache) {
 		UdpManager.getManager().addBind(port);
-		UdpManager.getManager().addRecevice(port, new NetflowRecevice());
+		UdpManager.getManager().addRecevice(port, new NetflowRecevice(cache));
 		UdpManager.getManager().startRecevice();
 	}
 }
