@@ -53,7 +53,7 @@ public class NetflowRecevice extends UdpRecevice {
 			try {
 				ProcessThreadModel model = new ProcessThreadModel();
 				model.setThreadName("process" + i);
-				model.setTimeOut(1000);
+				model.setTimeOut(100);
 				ThreadPoolManager.getManager().addThread(model);
 				model = null;
 			} catch (Exception e) {
@@ -83,6 +83,8 @@ public class NetflowRecevice extends UdpRecevice {
 			if (ThreadPoolManager.getManager().getIdleThread() != null) {
 				ThreadPoolManager.getManager().getIdleThread().setValues(list);
 				list.clear();
+			} else {
+
 			}
 		} else {
 			list.add(data);
