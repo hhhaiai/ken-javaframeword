@@ -80,8 +80,10 @@ public class NetflowRecevice extends UdpRecevice {
 	public void recevice(String ip, int port, byte[] data) {
 		System.out.println(list.size());
 		if (list.size() > cache) {
-			ThreadPoolManager.getManager().getIdleThread().setValues(list);
-			list.clear();
+			if (ThreadPoolManager.getManager().getIdleThread() != null) {
+				ThreadPoolManager.getManager().getIdleThread().setValues(list);
+				list.clear();
+			}
 		} else {
 			list.add(data);
 		}
