@@ -4,6 +4,8 @@ import com.shine.framework.ThreadPoolUtil.model.ThreadModel;
 
 public class SuperThread extends Thread {
 	private ThreadModel threadModel;
+	private boolean busy = false;
+	private Object[] values;
 
 	public SuperThread() {
 
@@ -19,10 +21,16 @@ public class SuperThread extends Thread {
 					+ " is running!");
 			while (threadModel.getState()) {
 				try {
-					threadModel.excute();
+
+					busy = true;
+					if (values != null)
+						threadModel.excute(values);
+					else
+						threadModel.excute();
+					busy = false;
 
 					if (threadModel.getTimeOut() != 0)
-						Thread.sleep(threadModel.getTimeOut() * 1000);
+						Thread.sleep(threadModel.getTimeOut());
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -47,4 +55,21 @@ public class SuperThread extends Thread {
 	public void setTimeOut(int timeOut) {
 		this.threadModel.setTimeOut(timeOut);
 	}
+
+	public boolean isBusy() {
+		return busy;
+	}
+
+	public void setBusy(boolean busy) {
+		this.busy = busy;
+	}
+
+	public Object[] getValues() {
+		return values;
+	}
+
+	public void setValues(Object... values) {
+		this.values = values;
+	}
+
 }

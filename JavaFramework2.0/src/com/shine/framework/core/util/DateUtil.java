@@ -229,6 +229,13 @@ public class DateUtil {
 	}
 
 	/**
+	 * 得到当前时间yyyyMMddHHmmssSSS
+	 */
+	public static String getCurrentDateTimeDetailAsId() {
+		return getDateString(new Date(), "yyyyMMddHHmmssSSS");
+	}
+
+	/**
 	 * 得到当前时间HH:mm:ss
 	 * 
 	 * @return

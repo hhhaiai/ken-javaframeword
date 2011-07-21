@@ -6,7 +6,7 @@ public class Example {
     public static void main(String args[]){
     	PrintThreadModel threadModel=new PrintThreadModel();
 //    	threadModel.setThreadName("print");
-    	threadModel.setTimeOut(1);
+    	threadModel.setTimeOut(1000);
 //    	threadModel.setDescription("print test");
 //    	threadModel.setState(true);
     	

@@ -14,10 +14,7 @@ public class TranslatorHelper extends HashMap {
 
 	public static void translator(int rid, byte[] data) {
 		TranslatorV5 t = new TranslatorV5();
-		List<RawNetFlow> list = t.translate(rid, data);
-		System.out.println("222:" + list.size());
-		for (RawNetFlow flow : list) {
-			System.out.println(flow.toString());
-		}
+		RawNetFlow flow = t.translate(rid, data);
+		System.out.println(flow.toString());
 	}
 }

@@ -23,7 +23,7 @@ public class MethodThreadModel extends ThreadModel {
 	}
 
 	@Override
-	public void excute() {
+	public void excute(Object... args) {
 		try {
 			ReflectionUtil.invokeMethod(object, methodName);
 		} catch (Exception e) {

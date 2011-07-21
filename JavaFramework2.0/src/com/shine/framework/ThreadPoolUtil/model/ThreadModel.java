@@ -2,7 +2,7 @@ package com.shine.framework.ThreadPoolUtil.model;
 
 public abstract class ThreadModel {
 	private String threadName;
-	private boolean state=true;
+	private boolean state = true;
 	private int timeOut;
 	private String description;
 
@@ -51,6 +51,6 @@ public abstract class ThreadModel {
 	}
 
 	// 执行方法
-	public abstract void excute();
+	public abstract void excute(Object... args);
 
 }
