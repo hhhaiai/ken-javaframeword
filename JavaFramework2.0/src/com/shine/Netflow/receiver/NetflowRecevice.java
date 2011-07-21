@@ -10,12 +10,21 @@ import com.shine.Netflow.translator.TranslatorHelper;
 import com.shine.framework.ThreadPoolUtil.ThreadPoolManager;
 import com.shine.framework.Udp.model.UdpRecevice;
 
+/**
+ * netflow接收器 用于接收并且解析netflow
+ * 
+ * @author viruscodecn@gmail.com
+ * 
+ */
 public class NetflowRecevice extends UdpRecevice {
 
 	private int cache = 20;
 	private int threadSize = 20;
 	private List<byte[]> list = new ArrayList<byte[]>();
 
+	/**
+	 * 初始接收器
+	 */
 	public NetflowRecevice() {
 		super();
 
@@ -23,6 +32,11 @@ public class NetflowRecevice extends UdpRecevice {
 		initThreadPool();
 	}
 
+	/**
+	 * 初始化接收器
+	 * 
+	 * @param cache
+	 */
 	public NetflowRecevice(int cache) {
 		super();
 
@@ -31,6 +45,9 @@ public class NetflowRecevice extends UdpRecevice {
 		initThreadPool();
 	}
 
+	/**
+	 * 初始化处理线程池
+	 */
 	private void initThreadPool() {
 		for (int i = 0; i < threadSize; i++) {
 			try {
@@ -56,6 +73,9 @@ public class NetflowRecevice extends UdpRecevice {
 		// TODO Auto-generated method stub
 	}
 
+	/**
+	 * 接收到数据
+	 */
 	@Override
 	public void recevice(String ip, int port, byte[] data) {
 		System.out.println(list.size());
