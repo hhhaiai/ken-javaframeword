@@ -169,6 +169,22 @@ public class ThreadPoolManager {
 	}
 
 	/**
+	 * 根据类型获取空闲线程
+	 * 
+	 * @param type
+	 * @return
+	 */
+	public SuperThread getIdleThread(String type) {
+		for (Map.Entry<String, SuperThread> entry : pool.entrySet()) {
+			if (entry.getValue().getType().equals(type)
+					&& !entry.getValue().isBusy()) {
+				return entry.getValue();
+			}
+		}
+		return null;
+	}
+
+	/**
 	 * 检查threadmodel
 	 * 
 	 * @param threadModel

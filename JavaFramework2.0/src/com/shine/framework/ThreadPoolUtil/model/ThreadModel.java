@@ -2,6 +2,7 @@ package com.shine.framework.ThreadPoolUtil.model;
 
 public abstract class ThreadModel {
 	private String threadName;
+	private String type;
 	private boolean state = true;
 	private int timeOut;
 	private String description;
@@ -12,6 +13,14 @@ public abstract class ThreadModel {
 
 	public void setThreadName(String threadName) {
 		this.threadName = threadName;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 	public boolean isState() {
