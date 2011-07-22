@@ -4,13 +4,17 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 
 import com.shine.framework.DBUtil.manage.DBManager;
 import com.shine.framework.DBUtil.model.DBModel;
+import com.shine.framework.DBUtil.utils.BatchMap;
 
 public class DBUtil {
 
 	private static DBUtil util = new DBUtil();
+	private int batchSqlSize = 200;
+	private BatchMap map = new BatchMap();
 
 	public final static DBUtil getInstance() {
 		return util;
@@ -71,10 +75,12 @@ public class DBUtil {
 	 */
 	public void initNewJndi(String jndi, String dbUserName, String dbPassWord,
 			String jdbcUrl, String driverClass, int initSize, int minPoolSize,
-			int maxPoolSize, int maxStatements, int maxIdleTime) {
+			int maxPoolSize, int maxStatements, int maxIdleTime,
+			int batchSqlSize) {
 		DBManager.getInstance().initNewJndi(jndi, dbUserName, dbPassWord,
 				jdbcUrl, driverClass, initSize, minPoolSize, maxPoolSize,
 				maxStatements, maxIdleTime);
+		this.setBatchSqlSize(batchSqlSize);
 	}
 
 	/**
@@ -222,6 +228,14 @@ public class DBUtil {
 		return dbModel;
 	}
 
+	/**
+	 * 更新查询缓存
+	 * 
+	 * @param jndi
+	 * @param sql
+	 * @param result
+	 * @return
+	 */
 	public int cacheUpdate(String jndi, String sql, String result) {
 		StringBuffer cacheSql = new StringBuffer();
 		cacheSql.append("insert into cache (sql,jndi, result,time) values ('");
@@ -416,4 +430,58 @@ public class DBUtil {
 		return i;
 	}
 
+	/**
+	 * 加入缓存执行
+	 * 
+	 * @param jndi
+	 * @param sql
+	 */
+	public void addBatchUpdate(String jndi, String sql) {
+		map.addSql(jndi, sql);
+	}
+
+	/**
+	 * 批量更新数据
+	 * 
+	 * @param jndi
+	 * @param sql
+	 * @return
+	 */
+	public int[] executeBatchUpdate(String jndi, List<String> sql) {
+		int[] updateCount = null;
+		Connection conn = null;
+		Statement stat = null;
+		try {
+			conn = DBManager.getInstance().getConnection(jndi);
+			stat = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
+					ResultSet.CONCUR_UPDATABLE);
+			conn.setAutoCommit(false);
+			for (String s : sql) {
+				stat.addBatch(s);
+			}
+			updateCount = stat.executeBatch();
+			conn.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.err.println("执行失败sql:" + sql);
+		} finally {
+			try {
+				if (stat != null)
+					stat.close();
+				if (conn != null)
+					conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return updateCount;
+	}
+
+	public int getBatchSqlSize() {
+		return batchSqlSize;
+	}
+
+	public void setBatchSqlSize(int batchSqlSize) {
+		this.batchSqlSize = batchSqlSize;
+	}
 }
