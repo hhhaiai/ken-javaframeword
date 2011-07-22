@@ -7,8 +7,8 @@ public class Example {
 	 */
 	public static void main(String[] args) {
 		System.out.println("netflow 接收器 启动");
-		
-		NetflowManager.getManager().startReceiver(6696, 20);
+
+		NetflowManager.getManager().startReceiver(6696, 20, 30);
 	}
 
 }

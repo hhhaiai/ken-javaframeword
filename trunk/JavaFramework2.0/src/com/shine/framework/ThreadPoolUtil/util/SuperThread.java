@@ -72,4 +72,8 @@ public class SuperThread extends Thread {
 		this.values = values;
 	}
 
+	public String getType() {
+		return this.threadModel.getType();
+	}
+
 }

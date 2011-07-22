@@ -29,7 +29,6 @@ public class NetflowRecevice extends UdpRecevice {
 		super();
 
 		this.setKey("netFlow");
-		initThreadPool();
 	}
 
 	/**
@@ -42,25 +41,6 @@ public class NetflowRecevice extends UdpRecevice {
 
 		this.setKey("netFlow");
 		this.setCache(cache);
-		initThreadPool();
-	}
-
-	/**
-	 * 初始化处理线程池
-	 */
-	private void initThreadPool() {
-		for (int i = 0; i < threadSize; i++) {
-			try {
-				ProcessThreadModel model = new ProcessThreadModel();
-				model.setThreadName("process" + i);
-				model.setTimeOut(100);
-				ThreadPoolManager.getManager().addThread(model);
-				model = null;
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-		ThreadPoolManager.getManager().startThreadPool();
 	}
 
 	@Override
@@ -80,8 +60,9 @@ public class NetflowRecevice extends UdpRecevice {
 	public void recevice(String ip, int port, byte[] data) {
 		System.out.println(list.size());
 		if (list.size() > cache) {
-			if (ThreadPoolManager.getManager().getIdleThread() != null) {
-				ThreadPoolManager.getManager().getIdleThread().setValues(list);
+			if (ThreadPoolManager.getManager().getIdleThread("process") != null) {
+				ThreadPoolManager.getManager().getIdleThread("process")
+						.setValues(list);
 				list.clear();
 			} else {
 
@@ -97,6 +78,14 @@ public class NetflowRecevice extends UdpRecevice {
 
 	public void setCache(int cache) {
 		this.cache = cache;
+	}
+
+	public int getThreadSize() {
+		return threadSize;
+	}
+
+	public void setThreadSize(int threadSize) {
+		this.threadSize = threadSize;
 	}
 
 }
