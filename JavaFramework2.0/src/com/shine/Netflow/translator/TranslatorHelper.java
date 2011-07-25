@@ -32,8 +32,7 @@ public class TranslatorHelper {
 	 * @param rid
 	 * @param data
 	 */
-	public static void translator(int rid, byte[] data) {
-		RawNetFlow flow = map.get(getFlowVersion(data)).translate(rid, data);
-		System.out.println(flow.toString());
+	public static RawNetFlow translator(int rid, byte[] data) {
+		return map.get(getFlowVersion(data)).translate(rid, data);
 	}
 }

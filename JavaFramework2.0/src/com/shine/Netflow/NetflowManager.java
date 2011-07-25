@@ -3,6 +3,7 @@ package com.shine.Netflow;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.shine.Netflow.netflowIf.NetFlowIf;
 import com.shine.Netflow.receiver.NetflowRecevice;
 import com.shine.Netflow.threadModel.ProcessThreadModel;
 import com.shine.framework.ThreadPoolUtil.ThreadPoolManager;
@@ -18,6 +19,7 @@ public class NetflowManager {
 	private static NetflowManager manager = new NetflowManager();
 
 	private Map<String, String> routeMap = new HashMap<String, String>();
+	private Map<String, NetFlowIf> netflowHandleMap = new HashMap<String, NetFlowIf>();
 
 	public static NetflowManager getManager() {
 		return manager;
@@ -40,7 +42,7 @@ public class NetflowManager {
 	 *            数据包缓存
 	 */
 	public void startReceiver(int port, int cache, int threadSize) {
-		//初始化线程池
+		// 初始化线程池
 		initThreadPool(threadSize);
 
 		// 监听端口
@@ -80,4 +82,11 @@ public class NetflowManager {
 		this.routeMap = routeMap;
 	}
 
+	public Map<String, NetFlowIf> getNetflowHandleMap() {
+		return netflowHandleMap;
+	}
+
+	public void setNetflowHandleMap(Map<String, NetFlowIf> netflowHandleMap) {
+		this.netflowHandleMap = netflowHandleMap;
+	}
 }
