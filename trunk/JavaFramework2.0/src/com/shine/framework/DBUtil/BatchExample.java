@@ -17,7 +17,7 @@ public class BatchExample {
 			
 		}
 		
-		for (int i = 0; i < 1000; i++) {
+		for (int i = 0; i < 1006; i++) {
 			//System.out.println(i);
 			String sql = "insert into test1(test) value('123')";
 			DBUtil.getInstance().addBatchUpdate("jdbc/test", sql);

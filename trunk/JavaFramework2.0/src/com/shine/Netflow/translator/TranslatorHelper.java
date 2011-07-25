@@ -8,12 +8,17 @@ import com.shine.Netflow.model.RawNetFlow;
 import com.shine.Netflow.utils.NetFlowUtil;
 
 public class TranslatorHelper {
+	private static TranslatorHelper helper;
 	private static Map<Integer, Translator> map = new HashMap<Integer, Translator>();
+	private static boolean b = true;
 
-	public TranslatorHelper() {
-		super();
-
-		map.put(5, new TranslatorV5());
+	public static TranslatorHelper getHelper() {
+		if (b) {
+			helper = new TranslatorHelper();
+			map.put(5, new TranslatorV5());
+			b = false;
+		}
+		return helper;
 	}
 
 	/**
@@ -22,7 +27,7 @@ public class TranslatorHelper {
 	 * @param buffer
 	 * @return
 	 */
-	public static int getFlowVersion(byte[] buffer) {
+	public int getFlowVersion(byte[] buffer) {
 		return NetFlowUtil.toIntNumber(buffer, 0, 2);
 	}
 
@@ -32,7 +37,7 @@ public class TranslatorHelper {
 	 * @param rid
 	 * @param data
 	 */
-	public static RawNetFlow translator(int rid, byte[] data) {
-		return map.get(getFlowVersion(data)).translate(rid, data);
+	public RawNetFlow translator(int rid, byte[] data) {
+		return map.get(5).translate(rid, data);
 	}
 }
