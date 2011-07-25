@@ -19,6 +19,7 @@ public class ProcessThreadModel extends ThreadModel {
 		try {
 			if (args.length != 0) {
 				flows = (ArrayList<byte[]>) args[0];
+				
 
 				for (byte[] data : flows) {
 					TranslatorHelper.translator(1, data);

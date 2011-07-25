@@ -27,6 +27,7 @@ public class SuperThread extends Thread {
 						threadModel.excute(values);
 					else
 						threadModel.excute();
+					
 					busy = false;
 
 					if (threadModel.getTimeOut() != 0)
@@ -70,6 +71,7 @@ public class SuperThread extends Thread {
 
 	public void setValues(Object... values) {
 		this.values = values;
+		busy = true;
 	}
 
 	public String getType() {

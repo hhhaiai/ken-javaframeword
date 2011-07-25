@@ -11,7 +11,7 @@ public class TranslatorHelper extends HashMap {
 
 		this.put(5, new TranslatorV5());
 	}
-
+	
 	public static void translator(int rid, byte[] data) {
 		TranslatorV5 t = new TranslatorV5();
 		RawNetFlow flow = t.translate(rid, data);

@@ -77,6 +77,14 @@ public class UdpManager {
 		map.get(port).startReceive();
 	}
 	
+	/**
+	 * 发送udp数据包
+	 * @param port
+	 * @param ip
+	 * @param recevicePort
+	 * @param data
+	 * @throws IOException
+	 */
 	public void send(int port,String ip,int recevicePort,String data) throws IOException{
 		map.get(port).send(ip, recevicePort, data);
 	}

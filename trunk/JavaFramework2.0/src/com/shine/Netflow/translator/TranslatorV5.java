@@ -40,6 +40,7 @@ public class TranslatorV5 extends Translator {
 			{ V5_HEADER_SIZE + 45, 1 }, // 18.
 			{ V5_HEADER_SIZE + 46, 2 } }; // 19.
 
+
 	public RawNetFlow translate(final int rid, final byte[] buffer) {
 
 		RawNetFlow flow = new RawNetFlow();

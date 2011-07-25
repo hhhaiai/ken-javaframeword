@@ -8,12 +8,15 @@ import java.util.List;
 
 import com.shine.framework.DBUtil.manage.DBManager;
 import com.shine.framework.DBUtil.model.DBModel;
+import com.shine.framework.DBUtil.threadModel.UpdateThreadModel;
 import com.shine.framework.DBUtil.utils.BatchMap;
+import com.shine.framework.ThreadPoolUtil.ThreadPoolManager;
 
 public class DBUtil {
 
 	private static DBUtil util = new DBUtil();
 	private int batchSqlSize = 200;
+	private int batchThreadSize = 50;
 	private BatchMap map = new BatchMap();
 
 	public final static DBUtil getInstance() {
@@ -27,6 +30,21 @@ public class DBUtil {
 	 */
 	public void init(String xmlfile) {
 		DBManager.getInstance().init(xmlfile);
+		initBatchThreadPool();
+	}
+
+	/**
+	 * 初始化批量提交线程池
+	 */
+	public void initBatchThreadPool() {
+		UpdateThreadModel updateThreadModel = null;
+		for (int i = 0; i < batchThreadSize; i++) {
+			updateThreadModel = new UpdateThreadModel();
+			updateThreadModel.setThreadName("updateThreadModel" + i);
+			ThreadPoolManager.getManager().addThread(updateThreadModel);
+			updateThreadModel = null;
+		}
+		ThreadPoolManager.getManager().startThreadPool();
 	}
 
 	/**
@@ -447,7 +465,7 @@ public class DBUtil {
 	 * @param sql
 	 * @return
 	 */
-	public int[] executeBatchUpdate(String jndi, List<String> sql) {
+	public synchronized int[] executeBatchUpdate(String jndi, List<String> sql) {
 		int[] updateCount = null;
 		Connection conn = null;
 		Statement stat = null;
@@ -461,6 +479,7 @@ public class DBUtil {
 			}
 			updateCount = stat.executeBatch();
 			conn.commit();
+			System.out.println("提交完成" + sql.size());
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.err.println("执行失败sql:" + sql);
@@ -484,4 +503,13 @@ public class DBUtil {
 	public void setBatchSqlSize(int batchSqlSize) {
 		this.batchSqlSize = batchSqlSize;
 	}
+
+	public int getBatchThreadSize() {
+		return batchThreadSize;
+	}
+
+	public void setBatchThreadSize(int batchThreadSize) {
+		this.batchThreadSize = batchThreadSize;
+	}
+
 }
