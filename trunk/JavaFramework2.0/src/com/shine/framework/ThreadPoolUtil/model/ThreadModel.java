@@ -4,7 +4,7 @@ public abstract class ThreadModel {
 	private String threadName;
 	private String type;
 	private boolean state = true;
-	private int timeOut;
+	private int timeOut = 100;
 	private String description;
 
 	public String getThreadName() {
