@@ -24,7 +24,8 @@ public class BatchMap extends HashMap<String, ArrayList<String>> {
 				ArrayList<String> list = this.get(jndi);
 				if (ThreadPoolManager.getManager().getIdleThread("dbUpdate") != null) {
 					ThreadPoolManager.getManager().getIdleThread("dbUpdate")
-							.setValues(jndi, this.get(jndi));
+							.setValues(jndi,
+									((ArrayList) this.get(jndi)).clone());
 				}
 				this.get(jndi).clear();
 			}

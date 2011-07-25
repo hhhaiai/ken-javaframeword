@@ -63,8 +63,9 @@ public class NetflowRecevice extends UdpRecevice {
 		System.out.println(list.size());
 		if (list.size() > cache) {
 			if (ThreadPoolManager.getManager().getIdleThread("process") != null) {
+
 				ThreadPoolManager.getManager().getIdleThread("process")
-						.setValues(list);
+						.setValues(((ArrayList) list).clone());
 				list.clear();
 			} else {
 				System.out.println("数据包过多，抛弃部分数据....");
