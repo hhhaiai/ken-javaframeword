@@ -40,6 +40,7 @@ public class NetflowManager {
 	 *            数据包缓存
 	 */
 	public void startReceiver(int port, int cache, int threadSize) {
+		//初始化线程池
 		initThreadPool(threadSize);
 
 		// 监听端口
