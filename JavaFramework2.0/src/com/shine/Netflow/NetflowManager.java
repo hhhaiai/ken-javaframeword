@@ -1,5 +1,8 @@
 package com.shine.Netflow;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import com.shine.Netflow.receiver.NetflowRecevice;
 import com.shine.Netflow.threadModel.ProcessThreadModel;
 import com.shine.framework.ThreadPoolUtil.ThreadPoolManager;
@@ -13,6 +16,8 @@ import com.shine.framework.Udp.model.PrintRecevice;
  */
 public class NetflowManager {
 	private static NetflowManager manager = new NetflowManager();
+
+	private Map<String, String> routeMap = new HashMap<String, String>();
 
 	public static NetflowManager getManager() {
 		return manager;
@@ -37,8 +42,11 @@ public class NetflowManager {
 	public void startReceiver(int port, int cache, int threadSize) {
 		initThreadPool(threadSize);
 
+		// 监听端口
 		UdpManager.getManager().addBind(port);
+		// 配置接收器
 		UdpManager.getManager().addRecevice(port, new NetflowRecevice(cache));
+		// 启动udp接收线程
 		UdpManager.getManager().startRecevice();
 	}
 
@@ -62,4 +70,13 @@ public class NetflowManager {
 		}
 		ThreadPoolManager.getManager().startThreadPool();
 	}
+
+	public Map<String, String> getRouteMap() {
+		return routeMap;
+	}
+
+	public void setRouteMap(Map<String, String> routeMap) {
+		this.routeMap = routeMap;
+	}
+
 }

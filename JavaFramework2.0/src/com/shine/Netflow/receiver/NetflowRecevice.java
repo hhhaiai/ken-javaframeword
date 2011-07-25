@@ -4,7 +4,9 @@ import java.net.DatagramPacket;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.shine.Netflow.NetflowManager;
 import com.shine.Netflow.model.RawNetFlow;
+import com.shine.Netflow.model.SourceNetFlow;
 import com.shine.Netflow.threadModel.ProcessThreadModel;
 import com.shine.Netflow.translator.TranslatorHelper;
 import com.shine.framework.ThreadPoolUtil.ThreadPoolManager;
@@ -20,7 +22,7 @@ public class NetflowRecevice extends UdpRecevice {
 
 	private int cache = 20;
 	private int threadSize = 20;
-	private List<byte[]> list = new ArrayList<byte[]>();
+	private List<SourceNetFlow> list = new ArrayList<SourceNetFlow>();
 
 	/**
 	 * 初始接收器
@@ -65,10 +67,16 @@ public class NetflowRecevice extends UdpRecevice {
 						.setValues(list);
 				list.clear();
 			} else {
-
+				System.out.println("数据包过多，抛弃部分数据....");
+				list.clear();
 			}
 		} else {
-			list.add(data);
+			SourceNetFlow sourceNetFlow = new SourceNetFlow();
+			sourceNetFlow.setRouteId(Integer.parseInt(NetflowManager
+					.getManager().getRouteMap().get(ip)));
+			sourceNetFlow.setNetflowData(data);
+			list.add(sourceNetFlow);
+			sourceNetFlow = null;
 		}
 	}
 

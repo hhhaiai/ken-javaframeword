@@ -16,5 +16,6 @@ public abstract class Translator {
 		return NetFlowUtil.toIntNumber(buffer, 0, 2);
 	}
 
+
 	abstract RawNetFlow translate(final int rid, final byte[] buffer);
 }

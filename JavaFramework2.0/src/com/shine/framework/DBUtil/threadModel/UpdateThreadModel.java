@@ -20,8 +20,10 @@ public class UpdateThreadModel extends ThreadModel {
 				String jndi = (String) args[0];
 
 				ArrayList<String> list = (ArrayList<String>) args[1];
-
-				DBUtil.getInstance().executeBatchUpdate(jndi, list);
+				if (list.size() != 0) {
+					DBUtil.getInstance().executeBatchUpdate(jndi, list);
+					list.clear();
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

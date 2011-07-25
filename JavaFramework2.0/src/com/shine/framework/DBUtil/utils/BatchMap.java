@@ -20,6 +20,8 @@ public class BatchMap extends HashMap<String, ArrayList<String>> {
 			this.get(jndi).add(sql);
 
 			if (this.get(jndi).size() > DBUtil.getInstance().getBatchSqlSize()) {
+				System.out.println("批量执行sql");
+				ArrayList<String> list = this.get(jndi);
 				if (ThreadPoolManager.getManager().getIdleThread("dbUpdate") != null) {
 					ThreadPoolManager.getManager().getIdleThread("dbUpdate")
 							.setValues(jndi, this.get(jndi));

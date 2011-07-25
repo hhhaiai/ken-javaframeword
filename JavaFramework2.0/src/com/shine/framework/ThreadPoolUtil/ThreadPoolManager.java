@@ -41,6 +41,12 @@ public class ThreadPoolManager {
 				entry.getValue().start();
 			}
 			this.state = true;
+		} else {
+			for (Map.Entry<String, SuperThread> entry : pool.entrySet()) {
+				if (!entry.getValue().isAlive()) {
+					entry.getValue().start();
+				}
+			}
 		}
 	}
 
