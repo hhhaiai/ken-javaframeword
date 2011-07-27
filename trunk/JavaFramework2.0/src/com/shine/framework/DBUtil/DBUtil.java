@@ -15,7 +15,7 @@ import com.shine.framework.ThreadPoolUtil.ThreadPoolManager;
 public class DBUtil {
 
 	private static DBUtil util = new DBUtil();
-	private int batchSqlSize = 200;
+	private int batchSqlSize = 500;
 	private int batchThreadSize = 50;
 	private BatchMap map = new BatchMap();
 

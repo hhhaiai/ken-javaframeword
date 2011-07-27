@@ -59,7 +59,6 @@ public class NetflowRecevice extends UdpRecevice {
 	 */
 	@Override
 	public void recevice(String ip, int port, byte[] data) {
-		System.out.println(list.size());
 		if (list.size() > cache) {
 			if (ThreadPoolManager.getManager().getIdleThread("process") != null) {
 
