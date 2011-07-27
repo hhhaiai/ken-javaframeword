@@ -22,13 +22,24 @@ public class UdpSocketHelper {
 
 	private String orgIp;
 
+	// 接收数据接口
 	private Map<String, UdpRecevice> reciveInterface;
 
+	// 接收数据线程
 	private ReceviceRunnable receviceRunnable;
+
+	private boolean receviceable = true;
 
 	public UdpSocketHelper() {
 	}
 
+	/**
+	 * 初始化数据
+	 * 
+	 * @param host
+	 * @param port
+	 * @throws SocketException
+	 */
 	public UdpSocketHelper(String host, int port) throws SocketException {
 		bind(host, port);
 	}
@@ -220,6 +231,15 @@ public class UdpSocketHelper {
 			ex.printStackTrace();
 		}
 	}
+
+	public boolean isReceviceable() {
+		return receviceable;
+	}
+
+	public void setReceviceable(boolean receviceable) {
+		this.receviceable = receviceable;
+	}
+
 }
 
 class ReceviceRunnable extends Thread {
@@ -228,9 +248,13 @@ class ReceviceRunnable extends Thread {
 	public void run() {
 		try {
 			while (true) {
+				// 检测接受器是否初始化
 				if (helper != null)
+					// 检测接收器是否启动
 					if (helper.getState())
-						helper.receive();
+						// 检测接收器是否抛弃数据包
+						if (helper.isReceviceable())
+							helper.receive();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

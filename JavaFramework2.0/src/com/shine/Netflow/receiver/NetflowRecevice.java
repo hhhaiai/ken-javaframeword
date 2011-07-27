@@ -21,7 +21,6 @@ import com.shine.framework.Udp.model.UdpRecevice;
 public class NetflowRecevice extends UdpRecevice {
 
 	private int cache = 20;
-	private int threadSize = 20;
 	private List<SourceNetFlow> list = new ArrayList<SourceNetFlow>();
 
 	/**
@@ -68,7 +67,8 @@ public class NetflowRecevice extends UdpRecevice {
 						.setValues(((ArrayList) list).clone());
 				list.clear();
 			} else {
-				System.out.println("数据包过多，抛弃部分数据....");
+				System.err.println("数据包过多，抛弃部分数据,并且升级系统....");
+				NetflowManager.getManager().autoUpdate();
 				list.clear();
 			}
 		} else {
@@ -87,14 +87,6 @@ public class NetflowRecevice extends UdpRecevice {
 
 	public void setCache(int cache) {
 		this.cache = cache;
-	}
-
-	public int getThreadSize() {
-		return threadSize;
-	}
-
-	public void setThreadSize(int threadSize) {
-		this.threadSize = threadSize;
 	}
 
 }

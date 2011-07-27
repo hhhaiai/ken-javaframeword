@@ -17,6 +17,8 @@ public class ProcessThreadModel extends ThreadModel {
 
 	public ProcessThreadModel() {
 		flowResults = new ArrayList<RawNetFlow>();
+
+		this.setType("process");
 	}
 
 	/**
@@ -27,6 +29,7 @@ public class ProcessThreadModel extends ThreadModel {
 
 		try {
 			if (args.length != 0) {
+				System.out.println("处理线程为:" + this.getThreadName());
 				flows = (ArrayList<SourceNetFlow>) args[0];
 				// 清空
 				flowResults.clear();
@@ -43,6 +46,7 @@ public class ProcessThreadModel extends ThreadModel {
 					netflowIf.handle((List) ((ArrayList) flowResults).clone());
 				}
 				flowResults.clear();
+				args = null;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

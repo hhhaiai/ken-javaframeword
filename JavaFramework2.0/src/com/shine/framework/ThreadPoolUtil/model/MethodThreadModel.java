@@ -6,6 +6,25 @@ public class MethodThreadModel extends ThreadModel {
 	private String methodName;
 	private Object object;
 
+	public MethodThreadModel() {
+
+	}
+
+	public MethodThreadModel(Object object, String methodName) {
+		this.object = object;
+		this.methodName = methodName;
+	}
+
+	@Override
+	public void excute(Object... args) {
+		try {
+			ReflectionUtil.invokeMethod(object, methodName);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+
 	public String getMethodName() {
 		return methodName;
 	}
@@ -20,16 +39,6 @@ public class MethodThreadModel extends ThreadModel {
 
 	public void setObject(Object object) {
 		this.object = object;
-	}
-
-	@Override
-	public void excute(Object... args) {
-		try {
-			ReflectionUtil.invokeMethod(object, methodName);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
 	}
 
 }
