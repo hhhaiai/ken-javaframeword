@@ -71,21 +71,76 @@ public class UdpManager {
 
 	/**
 	 * 启动监听线程
+	 * 
 	 * @param port
 	 */
 	public void startRecevice(int port) {
 		map.get(port).startReceive();
 	}
-	
+
+	/**
+	 * 所有端口暂停接收数据 抛弃数据包
+	 */
+	public void pauseRecevice() {
+		for (UdpSocketHelper helper : map.values()) {
+			helper.setReceviceable(false);
+		}
+	}
+
+	/**
+	 * 指定端口暂停接收数据 抛弃相关数据包
+	 * 
+	 * @param port
+	 */
+	public void pauseRecevice(int port) {
+		map.get(port).setReceviceable(false);
+	}
+
+	/**
+	 * 关闭所有监听线程
+	 */
+	public void stopReceivce() {
+		for (UdpSocketHelper helper : map.values()) {
+			helper.close();
+		}
+	}
+
+	/**
+	 * 关闭所有监听线程
+	 * 
+	 * @param port
+	 */
+	public void stopRecevice(int port) {
+		map.get(port).close();
+	}
+
 	/**
 	 * 发送udp数据包
+	 * 
 	 * @param port
 	 * @param ip
 	 * @param recevicePort
 	 * @param data
 	 * @throws IOException
 	 */
-	public void send(int port,String ip,int recevicePort,String data) throws IOException{
+	public void send(int port, String ip, int recevicePort, String data)
+			throws IOException {
 		map.get(port).send(ip, recevicePort, data);
+	}
+
+	/**
+	 * 群发数据
+	 * 
+	 * @param port
+	 * @param recevicePort
+	 * @param data
+	 * @param ips
+	 * @throws IOException
+	 */
+	public void sendIpGroup(int port, int recevicePort, String data,
+			String... ips) throws IOException {
+		for (String ip : ips) {
+			map.get(port).send(ip, recevicePort, data);
+		}
 	}
 }

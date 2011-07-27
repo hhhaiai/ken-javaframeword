@@ -106,7 +106,6 @@ public class ReflectionUtil {
 	 */
 	public static Object invokeMethod(Object object, String methodName,
 			Object... args) throws Exception {
-		System.out.println("123");
 		Class objectClass = object.getClass();
 		if (args == null) {
 			Method method = objectClass.getMethod(methodName);
