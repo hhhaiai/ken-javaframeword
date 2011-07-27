@@ -13,9 +13,6 @@ public class BatchExample {
 				.getInstance()
 				.init(
 						"E:\\workspace\\JavaFramework2.0\\src\\com\\shine\\framework\\DBUtil\\config\\dbXml.xml");
-		for (int i = 0; i < 10000; i++) {
-			
-		}
 		
 		for (int i = 0; i < 1006; i++) {
 			//System.out.println(i);

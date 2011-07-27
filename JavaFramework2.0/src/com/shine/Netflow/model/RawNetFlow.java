@@ -10,9 +10,13 @@ package com.shine.Netflow.model;
 
 import com.shine.Netflow.utils.NetFlowUtil;
 
+/**
+ * netflow基类
+ * 
+ * @author viruscodecn@gmail.com
+ * 
+ */
 public class RawNetFlow {
-	private static final String subSql = "(router_id,src_ip,src_port,dst_ip,dst_port,in_if,out_if,protocol,bytes,log_time)values(";
-
 	private int routerId;
 	private long srcIP;
 	private long dstIP;
@@ -20,9 +24,11 @@ public class RawNetFlow {
 	private int dstPort;
 	private int inIf;
 	private int outIf;
-	private int bytes;
+	private long bytes;
 	private int protocol;
 	private String logTime;
+
+	private static final String subSql = "(router_id,src_ip,src_port,dst_ip,dst_port,in_if,out_if,protocol,bytes,log_time)values(";
 
 	public RawNetFlow() {
 		routerId = 1;
@@ -85,11 +91,11 @@ public class RawNetFlow {
 		this.outIf = outIf;
 	}
 
-	public int getBytes() {
+	public long getBytes() {
 		return bytes;
 	}
 
-	public void setBytes(int bytes) {
+	public void setBytes(long bytes) {
 		this.bytes = bytes;
 	}
 
@@ -121,6 +127,23 @@ public class RawNetFlow {
 		str.append(",protocol=").append(protocol);
 		str.append(",bytes=").append(bytes);
 		str.append(",log_time=").append(logTime);
+		return str.toString();
+	}
+
+	public String toSQL(String tableName) {
+		StringBuffer str = new StringBuffer(50);
+		str.append("insert into ").append(tableName);
+		str.append(subSql);
+		str.append(routerId).append(",'");
+		str.append(NetFlowUtil.convertIP(srcIP)).append("',");
+		str.append(srcPort).append(",'");
+		str.append(NetFlowUtil.convertIP(dstIP));
+		str.append("',").append(dstPort).append(",");
+		str.append(inIf).append(",");
+		str.append(outIf).append(",");
+		str.append(protocol).append(",");
+		str.append(bytes).append(",");
+		str.append(" SYSDATE())");
 		return str.toString();
 	}
 }

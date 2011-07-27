@@ -61,7 +61,7 @@ public class TranslatorV5 extends Translator {
 		flow.setOutIf(NetFlowUtil.toIntNumber(buffer, V5_TEMPLATE[4][0],
 				V5_TEMPLATE[4][1]));
 
-		flow.setBytes(NetFlowUtil.toIntNumber(buffer, V5_TEMPLATE[6][0],
+		flow.setBytes(NetFlowUtil.toLongNumber(buffer, V5_TEMPLATE[6][0],
 				V5_TEMPLATE[6][1]));
 
 		flow.setProtocol(NetFlowUtil.toIntNumber(buffer, V5_TEMPLATE[13][0],

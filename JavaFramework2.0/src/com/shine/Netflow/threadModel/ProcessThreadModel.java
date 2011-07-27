@@ -29,7 +29,6 @@ public class ProcessThreadModel extends ThreadModel {
 
 		try {
 			if (args.length != 0) {
-				System.out.println("处理线程为:" + this.getThreadName());
 				flows = (ArrayList<SourceNetFlow>) args[0];
 				// 清空
 				flowResults.clear();
