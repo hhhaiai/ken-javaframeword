@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="Flow"
+  id="myeclipse.1311388888971"
+  context-root="/Flow"
+  j2ee-spec="5.0"
+  archive="Flow.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+
