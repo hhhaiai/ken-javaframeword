@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml-body>
+	<!-- 在remoting-config.xml加入  -->
+	<destination id="classLoader">
+		<properties>
+			<source>com.shine.Flexcoffee.flexinterface.flexloader.ClassLoader
+			</source>
+		</properties>
+	</destination>
+	<destination id="beanShell">
+		<properties>
+			<source>com.shine.Flexcoffee.flexinterface.beanshell.BeanShell
+			</source>
+		</properties>
+	</destination>
+	<destination id="uploadFile">
+		<properties>
+			<source>com.shine.Flexcoffee.flexinterface.fileUpload.UploadFile</source>
+		</properties>
+	</destination>
+</xml-body>
