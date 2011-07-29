@@ -59,6 +59,20 @@ public class ThreadPoolManager {
 	}
 
 	/**
+	 * 根据线程类型关闭部分线程池
+	 * 
+	 * @param type
+	 */
+	public synchronized void stopThreadPool(String type) {
+		if (this.state) {
+			for (Map.Entry<String, SuperThread> entry : pool.entrySet()) {
+				if (entry.getValue().getType().equals(type))
+					entry.getValue().setState(false);
+			}
+		}
+	}
+
+	/**
 	 * 关闭线程池
 	 */
 	public synchronized void stopThreadPool() {

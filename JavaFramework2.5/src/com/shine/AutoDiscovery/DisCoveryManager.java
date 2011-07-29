@@ -23,4 +23,12 @@ public class DisCoveryManager {
 
 	}
 
+	public void initDiscoveryThread() {
+
+	}
+
+	public void startDiscovery() {
+
+	}
+
 }
