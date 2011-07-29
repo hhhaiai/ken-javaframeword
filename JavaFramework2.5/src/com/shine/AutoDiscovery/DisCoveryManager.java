@@ -1,4 +1,4 @@
-package com.shine.framework.AutoDiscovery;
+package com.shine.AutoDiscovery;
 
 public class DisCoveryManager {
 	private String label;

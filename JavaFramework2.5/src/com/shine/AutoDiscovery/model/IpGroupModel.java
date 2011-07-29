@@ -1,4 +1,4 @@
-package com.shine.framework.AutoDiscovery.model;
+package com.shine.AutoDiscovery.model;
 
 public class IpGroupModel {
 	private String ip;
