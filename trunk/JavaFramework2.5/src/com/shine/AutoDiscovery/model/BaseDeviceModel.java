@@ -1,4 +1,4 @@
-package com.shine.framework.AutoDiscovery.model;
+package com.shine.AutoDiscovery.model;
 
 public class BaseDeviceModel {
 	private String label = "未知设备";
