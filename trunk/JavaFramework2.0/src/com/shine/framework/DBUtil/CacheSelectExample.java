@@ -20,9 +20,11 @@ public class CacheSelectExample {
 		DBModel map3 = new DBModel();
 		map3.setXmlValue(map.getDataXml());
 		System.out.println();
+		map3.close();
 
 		DBUtil.getInstance().cacheUpdate("11", "1", "11111");
 		DBModel map4 = DBUtil.getInstance().cacheQuery("11", "1");
+		map4.close();
 
 	}
 
