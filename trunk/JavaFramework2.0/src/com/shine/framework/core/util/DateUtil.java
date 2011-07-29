@@ -220,6 +220,13 @@ public class DateUtil {
 	public static String getCurrentDateTime() {
 		return getDateString(new Date(), "yyyy-MM-dd HH:mm:ss");
 	}
+	
+	/**
+	 * 得到当前时间yyyyMMdd
+	 */
+	public static String getCurrentDateAsId() {
+		return getDateString(new Date(), "yyyyMMdd");
+	}
 
 	/**
 	 * 得到当前时间yyyyMMddHHmmss

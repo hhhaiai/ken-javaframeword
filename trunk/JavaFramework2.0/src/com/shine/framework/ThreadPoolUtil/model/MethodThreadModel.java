@@ -3,8 +3,8 @@ package com.shine.framework.ThreadPoolUtil.model;
 import com.shine.framework.core.util.ReflectionUtil;
 
 public class MethodThreadModel extends ThreadModel {
-	private String methodName;
-	private Object object;
+	protected String methodName;
+	protected Object object;
 
 	public MethodThreadModel() {
 

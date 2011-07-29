@@ -20,6 +20,10 @@ public final class DBModel extends ArrayList<DBRowModel> {
 	// 列名集
 	private List<String> columnName = new ArrayList<String>();
 
+	private int maxRows = 1000;
+
+	private ResultSet rs;
+
 	public DBModel() {
 	}
 
@@ -34,27 +38,14 @@ public final class DBModel extends ArrayList<DBRowModel> {
 	 */
 	public void setResultSet(ResultSet rs) {
 		try {
+			this.rs = rs;
 			ResultSetMetaData md = rs.getMetaData();
 			for (int j = 0; j < md.getColumnCount(); j++) {
 				columnName.add(md.getColumnName(j + 1));
 			}
 
-			int i = 0;
-			while (rs.next()) {
-				// 防止数据溢出
-				if (i > 50000) {
-					System.out
-							.println("查询数据 >50000行，安全机制防止溢出,只是显示部分数据！请才用分页查询！");
-					break;
-				}
+			next();
 
-				DBRowModel dbRowModel = new DBRowModel();
-				for (int j = 0; j < md.getColumnCount(); j++) {
-					dbRowModel.put(columnName.get(j), rs.getString(j + 1));
-				}
-				this.add(dbRowModel);
-				i++;
-			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -124,11 +115,6 @@ public final class DBModel extends ArrayList<DBRowModel> {
 					if (XmlUitl.getStringType(
 							(String) dbRowModel.get(columnName.get(i))).equals(
 							"XML")) {
-						// (dataElement.addElement(columnName.get(String
-						// .valueOf(i)))).add(DataUtil.string2Document(
-						// (String) dbRowModel.get(columnName.get(String
-						// .valueOf(i)))).getRootElement());
-
 						dataElement.addElement("key").addAttribute("label",
 								columnName.get(i)).add(
 								XmlUitl.string2Document(
@@ -195,5 +181,67 @@ public final class DBModel extends ArrayList<DBRowModel> {
 	public void addColumnName(String column_name) {
 		if (!columnName.contains(column_name))
 			columnName.add(column_name);
+	}
+
+	/**
+	 * 加载下1000行数据
+	 * 
+	 * @throws SQLException
+	 */
+	public void next() throws SQLException {
+		this.clear();
+		int i = 0;
+		while (rs.next()) {
+			// 防止数据溢出
+			if (i > maxRows) {
+				break;
+			}
+
+			DBRowModel dbRowModel = new DBRowModel();
+			for (int j = 0; j < columnName.size(); j++) {
+				dbRowModel.put(columnName.get(j), rs.getString(j + 1));
+			}
+			this.add(dbRowModel);
+			i++;
+		}
+	}
+
+	/**
+	 * 部分关闭，只是关闭ResultSet和Statement
+	 */
+	public void closPart() {
+		try {
+			if (this.rs != null) {
+				this.rs.close();
+			}
+
+			if (this.rs.getStatement() != null) {
+				this.rs.getStatement().close();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * 全部关闭,关闭Connection,ResultSet和Statement
+	 */
+	public void close() {
+		try {
+			if (this.rs != null) {
+				this.rs.close();
+			}
+
+			if (this.rs.getStatement() != null) {
+				this.rs.getStatement().close();
+			}
+
+			if (this.rs.getStatement().getConnection() != null) {
+				this.rs.getStatement().getConnection().close();
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }
