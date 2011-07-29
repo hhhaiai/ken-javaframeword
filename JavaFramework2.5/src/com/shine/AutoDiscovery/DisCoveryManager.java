@@ -3,7 +3,7 @@ package com.shine.AutoDiscovery;
 public class DisCoveryManager {
 	private String label;
 	private String returnUrl;
-	
+
 	public String type;
 
 	// 共同体community1,community2
@@ -16,6 +16,10 @@ public class DisCoveryManager {
 	public String passwords;
 
 	public DisCoveryManager() {
+
+	}
+
+	public void init(String xmlPath) {
 
 	}
 
