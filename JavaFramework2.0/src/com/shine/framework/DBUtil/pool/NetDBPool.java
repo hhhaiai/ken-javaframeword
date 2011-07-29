@@ -108,5 +108,4 @@ public class NetDBPool implements DBPool {
 			throw new RuntimeException("无法从数据源获取连接 ", e);
 		}
 	}
-
 }

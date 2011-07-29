@@ -43,9 +43,6 @@ public final class DBModel extends ArrayList<DBRowModel> {
 			for (int j = 0; j < md.getColumnCount(); j++) {
 				columnName.add(md.getColumnName(j + 1));
 			}
-
-			next();
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -188,7 +185,7 @@ public final class DBModel extends ArrayList<DBRowModel> {
 	 * 
 	 * @throws SQLException
 	 */
-	public void next() throws SQLException {
+	public int next() throws SQLException {
 		this.clear();
 		int i = 0;
 		while (rs.next()) {
@@ -204,23 +201,16 @@ public final class DBModel extends ArrayList<DBRowModel> {
 			this.add(dbRowModel);
 			i++;
 		}
+		return this.size();
 	}
 
 	/**
-	 * 部分关闭，只是关闭ResultSet和Statement
+	 * model回到原点
+	 * 
+	 * @throws SQLException
 	 */
-	public void closPart() {
-		try {
-			if (this.rs != null) {
-				this.rs.close();
-			}
-
-			if (this.rs.getStatement() != null) {
-				this.rs.getStatement().close();
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	public void beforeFirst() throws SQLException {
+		rs.beforeFirst();
 	}
 
 	/**
@@ -228,20 +218,27 @@ public final class DBModel extends ArrayList<DBRowModel> {
 	 */
 	public void close() {
 		try {
-			if (this.rs != null) {
+			if (this.rs != null)
 				this.rs.close();
-			}
-
-			if (this.rs.getStatement() != null) {
-				this.rs.getStatement().close();
-			}
-
-			if (this.rs.getStatement().getConnection() != null) {
-				this.rs.getStatement().getConnection().close();
-			}
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
+
+	public int getMaxRows() {
+		return maxRows;
+	}
+
+	public void setMaxRows(int maxRows) {
+		this.maxRows = maxRows;
+	}
+
+	public ResultSet getRs() {
+		return rs;
+	}
+
+	public void setRs(ResultSet rs) {
+		this.rs = rs;
+	}
+
 }

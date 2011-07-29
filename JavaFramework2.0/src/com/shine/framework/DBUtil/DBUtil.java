@@ -173,8 +173,8 @@ public class DBUtil {
 	 * @param methodName
 	 * @return
 	 */
-	public void asynchronousExecuteQuery(String jndi, String sql, Object object,
-			String methodName) {
+	public void asynchronousExecuteQuery(String jndi, String sql,
+			Object object, String methodName) {
 		if (ThreadPoolManager.getManager().getIdleThread("dbSelect") != null) {
 			ThreadPoolManager.getManager().getIdleThread("dbSelect").setValues(
 					jndi, sql, object, methodName);

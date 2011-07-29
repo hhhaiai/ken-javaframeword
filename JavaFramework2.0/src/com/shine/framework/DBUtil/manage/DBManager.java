@@ -2,6 +2,7 @@ package com.shine.framework.DBUtil.manage;
 
 import java.io.File;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -280,6 +281,7 @@ public class DBManager extends HashMap<String, DBPool> {
 		}
 		return null;
 	}
+
 
 	/**
 	 * 获取默认连接
