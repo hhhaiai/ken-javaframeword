@@ -47,25 +47,26 @@ public class FileUtil {
 		}
 		return folderPath;
 	}
-	
+
 	/**
 	 * Url to file
+	 * 
 	 * @param url
 	 * @return
 	 * @throws Exception
 	 */
-	public static File urlToFile(String url) throws Exception{
+	public static File urlToFile(String url) throws Exception {
 		return urlToFile(new URL(url));
 	}
-	
-	
+
 	/**
 	 * url to file
+	 * 
 	 * @param url
 	 * @return
 	 * @throws Exception
 	 */
-	public static File urlToFile(URL  url) throws Exception{
+	public static File urlToFile(URL url) throws Exception {
 		return new File(url.toURI());
 	}
 
@@ -180,14 +181,14 @@ public class FileUtil {
 				printWrinter.close();
 		}
 	}
-	
+
 	/**
 	 * 读取file,默认utf-8
 	 * 
 	 * @param filePath
 	 * @return
 	 */
-	public static byte[] readFileByte(String filePath){
+	public static byte[] readFileByte(String filePath) {
 		return readFile(filePath).getBytes();
 	}
 
@@ -226,7 +227,7 @@ public class FileUtil {
 			try {
 				String data = "";
 				while ((data = br.readLine()) != null) {
-					fileContent.append(data + " ");
+					fileContent.append(data + "\n");
 				}
 			} catch (Exception e) {
 				System.err.println(FileUtil.class.toString() + ":读取file"
@@ -610,7 +611,6 @@ public class FileUtil {
 		}
 		return null;
 	}
-	
 
 	public static void main(String args[]) {
 		// TODO Auto-generated method stub

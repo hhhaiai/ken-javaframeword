@@ -4,10 +4,12 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.shine.framework.DBUtil.manage.DBManager;
 import com.shine.framework.DBUtil.model.DBModel;
+import com.shine.framework.DBUtil.threadModel.SelectThreadModel;
 import com.shine.framework.DBUtil.threadModel.UpdateThreadModel;
 import com.shine.framework.DBUtil.utils.BatchMap;
 import com.shine.framework.ThreadPoolUtil.ThreadPoolManager;
@@ -16,7 +18,8 @@ public class DBUtil {
 
 	private static DBUtil util = new DBUtil();
 	private int batchSqlSize = 500;
-	private int batchThreadSize = 50;
+	private int batchThreadSize = 10;
+	private int selectThreadSize = 20;
 	private BatchMap map = new BatchMap();
 
 	public final static DBUtil getInstance() {
@@ -30,7 +33,22 @@ public class DBUtil {
 	 */
 	public void init(String xmlfile) {
 		DBManager.getInstance().init(xmlfile);
+		initSelectThreadPool();
 		initBatchThreadPool();
+		ThreadPoolManager.getManager().startThreadPool();
+	}
+
+	/**
+	 * 初始化查询线程
+	 */
+	public void initSelectThreadPool() {
+		SelectThreadModel selectThreadModel = null;
+		for (int i = 0; i < batchThreadSize; i++) {
+			selectThreadModel = new SelectThreadModel();
+			selectThreadModel.setThreadName("selectThreadModel" + i);
+			ThreadPoolManager.getManager().addThread(selectThreadModel);
+			selectThreadModel = null;
+		}
 	}
 
 	/**
@@ -44,7 +62,6 @@ public class DBUtil {
 			ThreadPoolManager.getManager().addThread(updateThreadModel);
 			updateThreadModel = null;
 		}
-		ThreadPoolManager.getManager().startThreadPool();
 	}
 
 	/**
@@ -119,15 +136,6 @@ public class DBUtil {
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.err.println("执行失败sql:" + sql);
-		} finally {
-			try {
-				if (rs != null)
-					rs.close();
-				if (stat != null)
-					stat.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
 		}
 		return dbModel;
 	}
@@ -146,27 +154,33 @@ public class DBUtil {
 		ResultSet rs = null;
 		try {
 			conn = DBManager.getInstance().getConnection(jndi);
-			// stat = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
-			// ResultSet.CONCUR_READ_ONLY);
 			stat = conn.createStatement();
 			rs = stat.executeQuery(sql);
 			dbModel.setResultSet(rs);
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.err.println("执行失败sql:" + sql);
-		} finally {
-			try {
-				if (rs != null)
-					rs.close();
-				if (stat != null)
-					stat.close();
-				if (conn != null)
-					conn.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
 		}
 		return dbModel;
+	}
+
+	/**
+	 * 异步查询数据库
+	 * 
+	 * @param jndi
+	 * @param sql
+	 * @param object
+	 * @param methodName
+	 * @return
+	 */
+	public void asynchronousExecuteQuery(String jndi, String sql, Object object,
+			String methodName) {
+		if (ThreadPoolManager.getManager().getIdleThread("dbSelect") != null) {
+			ThreadPoolManager.getManager().getIdleThread("dbSelect").setValues(
+					jndi, sql, object, methodName);
+		} else {
+			System.err.println("异步查询线程不够");
+		}
 	}
 
 	/**
@@ -188,17 +202,6 @@ public class DBUtil {
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.err.println("执行失败sql:" + sql);
-		} finally {
-			try {
-				if (rs != null)
-					rs.close();
-				if (stat != null)
-					stat.close();
-				if (conn != null)
-					conn.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
 		}
 		return dbModel;
 	}
@@ -226,7 +229,6 @@ public class DBUtil {
 			conn = DBManager.getInstance().getConnection("jdbc/cache");
 			stat = conn.createStatement();
 			rs = stat.executeQuery(sqlCache.toString());
-			// dbModel.setResultSet(rs);
 			dbModel.setXmlValue(rs.getString("result"));
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -510,6 +512,14 @@ public class DBUtil {
 
 	public void setBatchThreadSize(int batchThreadSize) {
 		this.batchThreadSize = batchThreadSize;
+	}
+
+	public int getSelectThreadSize() {
+		return selectThreadSize;
+	}
+
+	public void setSelectThreadSize(int selectThreadSize) {
+		this.selectThreadSize = selectThreadSize;
 	}
 
 }
