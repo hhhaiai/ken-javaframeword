@@ -24,7 +24,7 @@ public class DisCoveryManager {
 	}
 
 	public void initDiscoveryThread() {
-
+		System.out.println("初始化发现线程");
 	}
 
 	public void startDiscovery() {
