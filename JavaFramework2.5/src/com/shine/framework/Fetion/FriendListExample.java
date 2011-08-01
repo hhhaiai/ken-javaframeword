@@ -11,6 +11,7 @@ public class FriendListExample {
 	public static void main(String[] args) throws Exception {
 		FetionManager.getManger().login("13544424150", "ch15013375717");
 		FetionManager.getManger().getFriendsList("13544424150");
+		FetionManager.getManger().loginOut("13544424150");
 	}
 
 }
