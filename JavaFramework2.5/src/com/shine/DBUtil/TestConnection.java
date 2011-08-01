@@ -12,7 +12,7 @@ public class TestConnection {
 	 * 测试连接关闭
 	 * 
 	 * @param args
-	 * @throws SQLException 
+	 * @throws SQLException
 	 */
 	public static void main(String[] args) throws SQLException {
 		DBUtil
@@ -22,17 +22,21 @@ public class TestConnection {
 
 		Connection conn = DBManager.getInstance().getConnection("jdbc/test");
 
+		// 查询测试1
 		DBModel dbModel = DBUtil.getInstance().executeQuery(conn,
 				"select * from test1");
 		dbModel.next();
 		System.out.println(dbModel.getDataXml());
-		dbModel.close();
+		// 部分关闭
+		dbModel.closePart();
 
-//		DBModel dbModel1 = DBUtil.getInstance().executeQuery(conn,
-//				"select * from test1");
-//		dbModel1.next();
-//		System.out.println(dbModel1.getDataXml());
-//		dbModel1.close();
+		// 查询测试2
+		DBModel dbModel1 = DBUtil.getInstance().executeQuery(conn,
+				"select * from test1");
+		dbModel1.next();
+		System.out.println(dbModel1.getDataXml());
+		// 全部关闭
+		dbModel1.close();
 
 	}
 
