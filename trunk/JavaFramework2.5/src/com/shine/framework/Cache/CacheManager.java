@@ -7,8 +7,6 @@ public class CacheManager {
 
 	private CacheMap map = new CacheMap();
 
-	private boolean compressor = false;
-
 	public static CacheManager getManager() {
 		return manager;
 	}
