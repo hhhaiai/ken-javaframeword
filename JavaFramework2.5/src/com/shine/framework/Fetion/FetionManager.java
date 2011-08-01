@@ -1,9 +1,15 @@
 package com.shine.framework.Fetion;
 
+import java.util.Collection;
+import java.util.Iterator;
+
 import net.solosky.maplefetion.FetionClient;
 import net.solosky.maplefetion.LoginState;
 import net.solosky.maplefetion.NotifyEventListener;
+import net.solosky.maplefetion.bean.Buddy;
+import net.solosky.maplefetion.bean.Cord;
 import net.solosky.maplefetion.bean.Message;
+import net.solosky.maplefetion.bean.Relation;
 import net.solosky.maplefetion.event.ActionEvent;
 import net.solosky.maplefetion.event.NotifyEvent;
 import net.solosky.maplefetion.event.NotifyEventType;
@@ -12,6 +18,7 @@ import net.solosky.maplefetion.event.action.FailureEvent;
 import net.solosky.maplefetion.event.action.failure.RequestFailureEvent;
 import net.solosky.maplefetion.event.action.success.SendChatMessageSuccessEvent;
 import net.solosky.maplefetion.event.notify.ImageVerifyEvent;
+import net.solosky.maplefetion.store.FetionStore;
 
 import com.shine.framework.Fetion.utils.FetionClientMap;
 
@@ -140,6 +147,87 @@ public class FetionManager {
 		case TRANSFER_ERROR:
 			System.out.println("发送失败, 超时");
 		}
+	}
+
+	/**
+	 * 显示好友列表
+	 * 
+	 * @param mobileNum
+	 */
+	public void getFriendsList(String mobileNum) {
+		FetionStore store = map.get(mobileNum).getFetionStore();
+		Iterator<Cord> it = store.getCordList().iterator();
+		int id = 0;
+		// this.buddymap.clear();
+		// 分组显示好友
+		while (it.hasNext()) {
+			Cord cord = it.next();
+			id = cord(cord.getId(), cord.getTitle(), id, store
+					.getBuddyListByCord(cord));
+		}
+		id = cord(-1, "默认分组", id, store.getBuddyListWithoutCord());
+	}
+
+	/**
+	 * 显示一个组的用户
+	 */
+	public int cord(int cordId, String name, int startId,
+			Collection<Buddy> buddyList) {
+		Iterator<Buddy> it = buddyList.iterator();
+		Buddy buddy = null;
+		System.out.println("\n-------------------------------");
+		System.out.println("【" + cordId + "::" + name + "】");
+		System.out.println("-------------------------------");
+		if (buddyList.size() == 0) {
+			System.out.println("暂无好友。。");
+		}
+		while (it.hasNext()) {
+			buddy = it.next();
+			// this.buddymap.put(Integer.toString(startId), buddy.getUri());
+			String impresa = buddy.getImpresa();
+			System.out.println(Integer.toString(startId) + " "
+					+ formatRelation(buddy.getRelation()) + " "
+					+ fomartString(buddy.getDisplayName(), 10) + "\t"
+					+ buddy.getDisplayPresence() + "\t"
+					+ (impresa == null ? "" : impresa));
+			startId++;
+		}
+		return startId;
+	}
+
+	/**
+	 * 格式化字符串
+	 */
+	public String fomartString(String str, int len) {
+		if (str != null) {
+			if (str.length() > len)
+				return str.substring(0, len) + ".";
+			else
+				return str;
+		} else {
+			return "";
+		}
+	}
+
+	/**
+	 * 格式化关系
+	 */
+	public String formatRelation(Relation relation) {
+		switch (relation) {
+		case BUDDY:
+			return "B";
+		case UNCONFIRMED:
+			return "W";
+		case DECLINED:
+			return "X";
+		case STRANGER:
+			return "？";
+		case BANNED:
+			return "@";
+		default:
+			return "-";
+		}
+
 	}
 
 	/**
