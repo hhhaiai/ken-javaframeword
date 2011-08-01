@@ -17,7 +17,7 @@ public class PageSelectPage {
 		DBUtil
 				.getInstance()
 				.init(
-						"E:\\workspace\\JavaFramework2.0\\src\\com\\shine\\framework\\DBUtil\\config\\dbXml.xml");
+						"E:\\workspace\\JavaFramework2.5\\src\\com\\shine\\framework\\DBUtil\\config\\dbXml.xml");
 
 		DBModel dbModel = DBUtil.getInstance().executeQuery("jdbc/test",
 				"select * from test1");
