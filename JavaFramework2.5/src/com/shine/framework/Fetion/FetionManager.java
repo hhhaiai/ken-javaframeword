@@ -241,4 +241,13 @@ public class FetionManager {
 		map.get(mobileNum).logout();
 		System.out.println("已经退出。");
 	}
+
+	/**
+	 * 退出所有客户端
+	 * 
+	 * @throws Exception
+	 */
+	public void loginOut() throws Exception {
+
+	}
 }
