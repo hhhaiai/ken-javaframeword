@@ -1,8 +1,10 @@
 package com.shine.framework.DBUtil.model;
 
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,13 +24,15 @@ public final class DBModel extends ArrayList<DBRowModel> {
 
 	private int maxRows = 1000;
 
+	private Connection conn;
+	private Statement stat;
 	private ResultSet rs;
 
 	public DBModel() {
 	}
 
-	public DBModel(ResultSet rs) {
-		setResultSet(rs);
+	public DBModel(Connection conn, Statement stat, ResultSet rs) {
+		setResultSet(conn, stat, rs);
 	}
 
 	/**
@@ -36,8 +40,10 @@ public final class DBModel extends ArrayList<DBRowModel> {
 	 * 
 	 * @param rs
 	 */
-	public void setResultSet(ResultSet rs) {
+	public void setResultSet(Connection conn, Statement stat, ResultSet rs) {
 		try {
+			this.conn = conn;
+			this.stat = stat;
 			this.rs = rs;
 			ResultSetMetaData md = rs.getMetaData();
 			for (int j = 0; j < md.getColumnCount(); j++) {
@@ -220,6 +226,12 @@ public final class DBModel extends ArrayList<DBRowModel> {
 		try {
 			if (this.rs != null)
 				this.rs.close();
+
+			if (this.stat != null)
+				this.stat.close();
+
+			if (this.conn != null)
+				this.conn.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -231,6 +243,22 @@ public final class DBModel extends ArrayList<DBRowModel> {
 
 	public void setMaxRows(int maxRows) {
 		this.maxRows = maxRows;
+	}
+
+	public Connection getConn() {
+		return conn;
+	}
+
+	public void setConn(Connection conn) {
+		this.conn = conn;
+	}
+
+	public Statement getStat() {
+		return stat;
+	}
+
+	public void setStat(Statement stat) {
+		this.stat = stat;
 	}
 
 	public ResultSet getRs() {

@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.List;
 
 import com.shine.framework.DBUtil.manage.DBManager;
@@ -132,7 +131,7 @@ public class DBUtil {
 		try {
 			stat = conn.createStatement();
 			rs = stat.executeQuery(sql);
-			dbModel.setResultSet(rs);
+			dbModel.setResultSet(conn, stat, rs);
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.err.println("执行失败sql:" + sql);
@@ -156,7 +155,7 @@ public class DBUtil {
 			conn = DBManager.getInstance().getConnection(jndi);
 			stat = conn.createStatement();
 			rs = stat.executeQuery(sql);
-			dbModel.setResultSet(rs);
+			dbModel.setResultSet(conn, stat, rs);
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.err.println("执行失败sql:" + sql);
@@ -198,7 +197,7 @@ public class DBUtil {
 			conn = DBManager.getInstance().getConnection();
 			stat = conn.createStatement();
 			rs = stat.executeQuery(sql);
-			dbModel.setResultSet(rs);
+			dbModel.setResultSet(conn, stat, rs);
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.err.println("执行失败sql:" + sql);
@@ -312,22 +311,11 @@ public class DBUtil {
 			conn = DBManager.getInstance().getConnection(jndi);
 			stat = conn.createStatement();
 			rs = stat.executeQuery(sql);
-			dbModel.setResultSet(rs);
+			dbModel.setResultSet(conn, stat, rs);
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.err.println("执行失败sql:" + sql);
-		} finally {
-			try {
-				if (rs != null)
-					rs.close();
-				if (stat != null)
-					stat.close();
-				if (conn != null)
-					conn.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
+		} 
 		return dbModel;
 	}
 
