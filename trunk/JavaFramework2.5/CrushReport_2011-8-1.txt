@@ -1,0 +1,495 @@
+=============================MapleFetion CrushReport=================================
+Thank you for working with MapleFetion!!! 
+ProjectHome : http://maplefetion.googlecode.com 
+Author      : solosky <solosky772@qq.com> 
+AuthorBlog  : http://www.solosky.net 
+-------------------------------------------------------------------------------------
+
+Ops, if you saw this report, FetionClient was crushed by some exceptions. Sorry for that.
+Please Email this crush file or log file to author to find and fix bugs, thank you sincerely.
+
+CrushedDate:Mon Aug 01 11:30:04 CST 2011
+
+------------------------------------Version---------------------------------------
+ClientVersion   : MapleFetion-2.5.1
+ProtocolVersion : 4.1.0740
+
+-------------------------------------Config--------------------------------------
+server.http-tunnel = http://221.130.46.141/ht/sd.aspx
+server.sipc-ssl-proxy = 221.130.46.141:443
+fetion.sip.check-alive-interval = 20
+fetion.sip.keep-connection-interval = 30
+crush.send.enable = false
+server.verify-pic-uri = http://nav.fetion.com.cn/nav/GetPicCodeV4.aspx
+fetion.dialog.check-idle-interval = 150
+server.set-portrait = http://hdss1fta.fetion.com.cn/HDS_S00/setportrait.aspx
+fetion.sip.default-alive-time = 120
+fetion.sip.machine-code = 5DBFE64D4449FBD0AE130C7B12D27A9F
+log.sipc.dir = ./
+fetion.dialog.max-idle-time = 300
+fetion.dialog.wait-buddy-enter-timeout = 20
+fetion.sip.default-retry-times = 0
+fetion.dialog.max-opened-number = 12
+server.sipc-proxy = 221.130.46.141:8080
+fetion.sip.keep-alive-interval = 600
+crush.log.dir = .
+log.sipc.enable = false
+crush.send.url = http://maplefetion.solosky.net/crushReport.php?report={report}
+crush.log.enable = true
+server.get-portrait = http://hdss1fta.fetion.com.cn/HDS_S00/getportrait.aspx
+server.nav-system-uri = http://nav.fetion.com.cn/nav/getsystemconfig.aspx
+server.ssi-sign-in-v2 = https://uid.fetion.com.cn/ssiportal/SSIAppSignInV4.aspx
+fetion.group.enable = false
+
+------------------------------Exception-----------------------------------
+net.solosky.maplefetion.client.SystemException: java.lang.NoClassDefFoundError: org/apache/mina/util/Base64
+	at net.solosky.maplefetion.client.response.AbstractResponseHandler.handle(AbstractResponseHandler.java:111)
+	at net.solosky.maplefetion.client.dispatcher.AbstractMessageDispatcher.dispatch(AbstractMessageDispatcher.java:157)
+	at net.solosky.maplefetion.client.dispatcher.AbstractMessageDispatcher.doProcessIncoming(AbstractMessageDispatcher.java:110)
+	at net.solosky.maplefetion.chain.AbstractProcessor.processIncoming(AbstractProcessor.java:158)
+	at net.solosky.maplefetion.chain.AbstractProcessor.processIncoming(AbstractProcessor.java:160)
+	at net.solosky.maplefetion.util.SipcParser.flushInMessage(SipcParser.java:156)
+	at net.solosky.maplefetion.util.SipcParser.processIncoming(SipcParser.java:293)
+	at net.solosky.maplefetion.chain.AbstractProcessor.processIncoming(AbstractProcessor.java:160)
+	at net.solosky.maplefetion.net.AbstractTransfer.bytesRecived(AbstractTransfer.java:80)
+	at net.solosky.maplefetion.net.tcp.TcpTransfer.access$3(TcpTransfer.java:1)
+	at net.solosky.maplefetion.net.tcp.TcpTransfer$1.run(TcpTransfer.java:129)
+	at java.lang.Thread.run(Thread.java:619)
+Caused by: java.lang.NoClassDefFoundError: org/apache/mina/util/Base64
+	at net.solosky.maplefetion.util.StringHelper.base64Decode(StringHelper.java:130)
+	at net.solosky.maplefetion.client.response.UserAuthResponseHandler.decryptCredential(UserAuthResponseHandler.java:185)
+	at net.solosky.maplefetion.client.response.UserAuthResponseHandler.doActionOK(UserAuthResponseHandler.java:162)
+	at net.solosky.maplefetion.client.response.AbstractResponseHandler.doHandle(AbstractResponseHandler.java:168)
+	at net.solosky.maplefetion.client.response.AbstractResponseHandler.handle(AbstractResponseHandler.java:102)
+	... 11 more
+Caused by: java.lang.ClassNotFoundException: org.apache.mina.util.Base64
+	at java.net.URLClassLoader$1.run(URLClassLoader.java:202)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.net.URLClassLoader.findClass(URLClassLoader.java:190)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:307)
+	at sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:301)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:248)
+	... 16 more
+
+-------------------------------SipcMessage----------------------------------
+Class:class net.solosky.maplefetion.sipc.SipcRequest
+----------
+R fetion.com.cn SIP-C/4.0
+F: 783093053
+I: 1
+Q: 2 R
+A: Digest response="11AE92D63B96C97D69ABBB63BCD06EF6243BE43BDF373BAB6B16B6593EB3DEC2942E183C6B81E57BB1D2C6ECDB2DDB5A921840D804ABD2DFB0F90E545156087C0DC18938CF2CA3D20358E70A524E29D4C7EA114D53DF783122B35DA5220D3E85586AE615510D2D24E8680545F3A92AF75773BF222E676CD52F5FE398F5B3605C",algorithm="SHA1-sess-v4"
+AK: ak-value
+L: 466
+
+<args><device machine-code="5DBFE64D4449FBD0AE130C7B12D27A9F" accept-language="default"/><caps value="1FFF" /><events value="7f" /><user-info sid="783093053" user-id="242904129"><personal version="0" attributes="v4default" /><custom-config version="0" /><contact-list version="0"   buddy-attributes="v4default" /></user-info><credentials domains="fetion.com.cn;m161.com.cn;www.ikuwa.cn;games.fetion.com.cn" /><presence><basic value="400" desc="" /></presence></args>
+-------------------------------SipcMessage----------------------------------
+Class:class net.solosky.maplefetion.sipc.SipcResponse
+----------
+SIP-C/4.0 200 OK
+I: 1
+Q: 2 R
+X: 600
+L: 11512
+
+<results><client public-ip="219.136.225.70" login-place="" last-login-ip="219.136.225.70" last-login-place="" last-login-time="Mon, 01 Aug 2011 02:42:22 GMT" current-login-time="Mon, 01 Aug 2011 03:30:10 GMT" /><user-info><personal version="357925882" register-email="" user-id="242904129" sid="783093053" mobile-no="13544424150" uri="sip:783093053@fetion.com.cn;p=1345" name="Arjick" nickname="xxk" gender="0" impresa="宁" portrait-crc="0" birth-date="1986-03-07" birthday-valid="1" carrier="CMCC" carrier-status="0" carrier-region="CN.gd.20." user-region="" profile="" blood-type="0" occupation="" hobby="" job-title="" home-phone="" work-phone="" other-phone="" personal-email="" work-email="Arjick@163.com" other-email="Arjick@163.com" primary-email="0" company="" company-website="" global-permission="identity=0;phone=0;email=1;birthday=1;business=0;presence=1;contact=1;location=3;buddy=2;ivr=2;buddy-ex=0;show=0;" sms-online-status="0.0:0:0" save-xeno-msg="0" email-binding-status="0" email-binding-alias="783093053" set-pwd-question="0"/><configs><config name="weather-city">-1</config><config name="directsms-rec">0</config><config name="send-offlinefile-sms">1</config><config name="group-invite-config">1</config><config name="weather-region"></config><config name="addbuddy-app-sms">0</config><config name="private-presence"></config><config name="permission-request">0</config><config name="sms-notify">0</config><config name="schedule-sms-receipt">1</config><config name="weather-ip">1</config><config name="rev-offlinefile-sms">1</config><config name="alv2-setwarn">0</config></configs><custom-config version="348224436">H4sIALNOLk0EAHSVz47aMBDGX6V9AljY3kaRWP60SARQQ8VhtQcvmYClxI5sB5pjX6hv1ffohNisnWS5wPy+bzxjT2Lgl0Y1lyLj50oxw6WIYJamJykMO5m9kkVpojGMegySi7xtmEFtYtSanVFHGcs1wmhAubsPvCDGinJ5RVXH+hwZVVl/X4OlMKgOMkGRWqNPYFYZ+RPLvF4K9p5j6qr3OMS1xjxbi3m7Ab3h2tgVByXYK9RoBhMGJbD7pNbixPURsI9u1yLF3/cTDQlspDiTNUFjuHBH04GwWq73LqA1/BCOyMwF1QIzVuWu3w6krckrFydcL6Jz2mznEcKcm5q+J7Su/QlJodvhlMfHEEIGiZFlEye1Dm09Dt+VrMoF12XO6lim2Oygx1rXS2iwIXSSgzx6Qmk22ml+6LSmn47+QPcndCdyLtDOloLaf6T7IrTZChdoGM+19zz7FGzOfSsUjjpx47ftbFmBfk0f+z46Ur+aT2F2Y/VOrNMcrcMDnhhzUdE7Gn3zDQ5aX3JSiCJh9E4Ga/kcdlnWHIytYJsPYej5ISulo0nH1FJ4qTQVWFV53haxdXsYtrIdyFYantXHC4rGY+2fiJRkX8tPsoZVWLGrVNy44dMIe2RZlFzZRHdd+Qi2eHvnmBhmKh2N2w+V9CkkvChzDNiUJtyntBqmLQlK9jDEUqb7i2K6mao2qrkq/v39AyP7my4q3+FuJf5hH0fw9XW+mB1mr29vkUscO/lpUH5y8mRQnjh5OihPnfw8KBMdBY3OK21kgep+O9N1pr+MyNL/a/sPAAD//wAAAADuBgAA</custom-config><contact-list version="362089942"><buddy-lists><buddy-list id="1" name="我的好友"/><buddy-list id="2" name="Family"/><buddy-list id="3" name="初中"/><buddy-list id="4" name="小学"/><buddy-list id="5" name="高中"/><buddy-list id="6" name="大学同学"/><buddy-list id="7" name="陌生人"/><buddy-list id="8" name="大学朋友"/><buddy-list id="9" name="工作朋友"/></buddy-lists><buddies><b i="223997173" u="sip:677994017@fetion.com.cn;p=2419" n="" l="8" f="0" r="1" o="0" p="identity=1;"/><b i="241038798" u="sip:700592229@fetion.com.cn;p=931" n="" l="9" f="0" r="1" o="0" p="identity=1;"/><b i="241275093" u="sip:772044854@fetion.com.cn;p=1028" n="" l="6" f="0" r="1" o="0" p="identity=1;"/><b i="241691718" u="tel:13534962278" n="表哥" l="2" r="1" o="1" p="identity=1;"/><b i="241764865" u="sip:869989428@fetion.com.cn;p=1263" n="∨icky" l="1" f="300184707" r="1" o="0" p="identity=1;"/><b i="241827832" u="sip:677386548@fetion.com.cn;p=1265" n="" l="2" f="0" r="1" o="0" p="identity=1;"/><b i="243680942" u="sip:294394218@fetion.com.cn;p=1503" n="" l="" f="0" r="2" o="0" p="identity=1;"/><b i="243690905" u="sip:625522785@fetion.com.cn;p=1502" n="李文" l="5" f="0" r="2" o="0" p="identity=1;"/><b i="243830825" u="sip:634492980@fetion.com.cn;p=1505" n="敏龙" l="5" f="315485331" r="1" o="0" p="identity=1;"/><b i="243862445" u="sip:669454062@fetion.com.cn;p=1504" n="" l="3" f="0" r="1" o="0" p="identity=1;"/><b i="244863618" u="sip:575296919@fetion.com.cn;p=1705" n="" l="3" f="0" r="1" o="0" p="identity=1;"/><b i="244972231" u="sip:563816061@fetion.com.cn;p=1706" n="黄志辉" l="1" f="0" r="2" o="0" p="identity=1;"/><b i="244975632" u="sip:628534364@fetion.com.cn;p=1706" n="孙波" l="3" f="0" r="1" o="0" p="identity=1;"/><b i="250038936" u="sip:646075247@fetion.com.cn;p=4143" n="" l="1" f="0" r="1" o="0" p="identity=1;"/><b i="251472062" u="sip:990099@fetion.com.cn;p=5147" n="" l="1" f="0" r="1" o="1" p=""/><b i="284833246" u="sip:704172738@fetion.com.cn;p=187" n="陈李生" l="1" f="0" r="1" o="1" p="identity=1;"/><b i="290350996" u="sip:822102774@fetion.com.cn;p=1009" n="廖丽清" l="6" f="0" r="1" o="0" p="identity=1;"/><b i="295903496" u="tel:13652205458" n="" l="1" r="1" o="1" p="identity=1;"/><b i="302414786" u="sip:706044167@fetion.com.cn;p=3847" n="" l="8" f="0" r="1" o="0" p="identity=1;"/><b i="310734368" u="tel:15820426637" n="弟弟" l="2" r="1" o="0" p="identity=1;"/><b i="313026214" u="sip:720376538@fetion.com.cn;p=9045" n="" l="1;7" f="0" r="0" o="0" p=""/><b i="343822766" u="tel:15923677576" n="梁思宜" l="1" r="0" o="1" p="identity=1;"/><b i="446393122" u="sip:762119873@fetion.com.cn;p=205" n="陈虹" l="2" f="0" r="1" o="1" p="identity=1;"/><b i="446936973" u="sip:738134451@fetion.com.cn;p=256" n="黄灿贤" l="6" f="0" r="1" o="0" p="identity=1;"/><b i="447922574" u="tel:13435755221" n="池方雄" l="8" r="1" o="0" p="identity=1;"/><b i="452152726" u="tel:13631147200" n="" l="8" r="1" o="0" p="identity=1;"/><b i="455488950" u="sip:573416537@fetion.com.cn;p=3531" n="高丹" l="5" f="0" r="1" o="0" p="identity=1;"/><b i="455918420" u="sip:712035611@fetion.com.cn;p=3805" n="" l="6" f="308486763" r="1" o="0" p="identity=1;"/><b i="456542883" u="tel:13824726351" n="锐鑫" l="6" r="1" o="0" p="identity=1;"/><b i="456548330" u="sip:752940021@fetion.com.cn;p=4148" n="伟泉" l="6" f="0" r="1" o="0" p="identity=1;"/><b i="456555071" u="tel:13824727232" n="JB桢" l="6" r="1" o="0" p="identity=1;"/><b i="456601404" u="tel:13824734954" n="邓聪" l="6" r="1" o="0" p="identity=1;"/><b i="456615784" u="tel:13824797800" n="李锦安" l="6" r="1" o="0" p="identity=1;"/><b i="458907668" u="sip:677949441@fetion.com.cn;p=5200" n="" l="3" f="0" r="1" o="0" p="identity=1;"/><b i="462074929" u="sip:675619098@fetion.com.cn;p=7107" n="梦醒" l="8" f="0" r="1" o="0" p="identity=1;"/><b i="465730564" u="sip:839068328@fetion.com.cn;p=1252" n="" l="1" f="0" r="1" o="1" p="identity=1;"/><b i="465756283" u="sip:745343351@fetion.com.cn;p=1253" n="惠贞" l="6" f="0" r="1" o="0" p="identity=1;"/><b i="468966431" u="sip:703753057@fetion.com.cn;p=3199" n="" l="" f="0" r="1" o="0" p="identity=1;"/><b i="469330925" u="sip:840098930@fetion.com.cn;p=3509" n="郭一鸿" l="3" f="0" r="1" o="1" p="identity=1;"/><b i="469562884" u="sip:578419713@fetion.com.cn;p=3882" n="" l="" f="0" r="1" o="0" p="identity=1;"/><b i="469876918" u="sip:665125586@fetion.com.cn;p=4161" n="林汉升" l="9" f="0" r="1" o="0" p="identity=1;"/><b i="469999420" u="sip:516965077@fetion.com.cn;p=4165" n="康思华" l="2" f="0" r="1" o="1" p="identity=1;"/><b i="470136181" u="sip:228690100@fetion.com.cn;p=5123" n="罗小丽" l="" f="0" r="1" o="0" p="identity=1;"/><b i="470750299" u="sip:753043079@fetion.com.cn;p=6058" n="" l="8" f="0" r="1" o="0" p="identity=1;"/><b i="471907801" u="tel:15989021737" n="" l="1" r="1" o="0" p="identity=1;"/><b i="472532518" u="sip:823351537@fetion.com.cn;p=7799" n="" l="1" f="0" r="1" o="0" p=""/><b i="472534291" u="sip:687120605@fetion.com.cn;p=7103" n="" l="3" f="0" r="1" o="0" p="identity=1;"/><b i="503706030" u="sip:835130831@fetion.com.cn;p=2215" n="" l="8" f="0" r="1" o="0" p="identity=1;"/><b i="506631348" u="sip:897567958@fetion.com.cn;p=1185" n="弟弟" l="2" f="0" r="1" o="1" p="identity=1;"/><b i="522723210" u="sip:827688691@fetion.com.cn;p=2123" n="池方雄" l="8" f="303866373" r="1" o="0" p="identity=1;"/><b i="552088358" u="sip:819083661@fetion.com.cn;p=2363" n="" l="7" f="0" r="0" o="0" p="identity=1;"/><b i="563311737" u="sip:826613545@fetion.com.cn;p=9034" n="陈虹(广州)" l="2" f="0" r="1" o="0" p="identity=1;"/><b i="597794122" u="tel:15913378036" n="晓黎" l="8" r="1" o="0" p="identity=1;"/><b i="605797358" u="sip:352759703@fetion.com.cn;p=1504" n="" l="" f="0" r="1" o="0" p="identity=1;"/><b i="608289031" u="sip:857806771@fetion.com.cn;p=7900" n="" l="" f="0" r="1" o="0" p="identity=1;"/><b i="628879572" u="tel:15018208512" n="彭凝" l="6" r="1" o="0" p="identity=1;"/><b i="633247873" u="sip:978614559@fetion.com.cn;p=9088" n="" l="1" f="0" r="1" o="0" p="identity=1;"/><b i="635063451" u="tel:13822557396" n="表哥新手机" l="2" r="1" o="0" p="identity=1;"/><b i="646642976" u="sip:898021741@fetion.com.cn;p=6097" n="黄建夫" l="6" f="0" r="1" o="0" p="identity=1;"/><b i="647815690" u="sip:921431820@fetion.com.cn;p=5177" n="" l="6" f="0" r="1" o="0" p="identity=1;"/><b i="650650408" u="sip:909946626@fetion.com.cn;p=342" n="陈杰华" l="6;" f="0" r="1" o="1" p="identity=1;"/><b i="653465045" u="sip:595271743@fetion.com.cn;p=237" n="" l="1" f="0" r="1" o="1" p="identity=1;"/><b i="859084288" u="sip:330383351@fetion.com.cn;p=6073" n="" l="9" f="0" r="1" o="0" p="identity=1;"/><b i="912851410" u="sip:386202394@fetion.com.cn;p=993" n="林光恒" l="" f="0" r="1" o="0" p="identity=1;"/></buddies><chat-friends><c i="248655362" u="sip:660006358@fetion.com.cn;p=3528"/><c i="292259620" u="sip:572556141@fetion.com.cn;p=1789"/></chat-friends><blacklist><k i="455605436" u="sip:775718949@fetion.com.cn;p=3531" n=""/></blacklist></contact-list><score value="7827" level="10" level-score="7053"/><services></services><quotas><quota-limit><limit name="max-buddies" value="500"/><limit name="max-groupadmin-count" value="4"/><limit name="max-joingroup-count" value="20"/></quota-limit><quota-frequency><frequency name="send-sms" day-limit="600" day-count="0" month-limit="10000" month-count="0"/></quota-frequency></quotas><capability-list basic-caps="1ffff" contact-caps="ffffff" extended-caps="201fff"><contact carrier="CMCC" contact-caps="ffffff" /><contact carrier="CMHK" contact-caps="9ffc9f" /><contact carrier="CMPAK" contact-caps="857c08" /><contact carrier="HK.OTHER" contact-caps="0" /><contact carrier="" contact-caps="a57008" /><contact carrier="SGSH" contact-caps="857c08" /><contact carrier="SGST" contact-caps="857c08" /></capability-list></user-info><credentials kernel="g2R6HJpIXv25LphwrBJBUYn9lh/xuNGVw1FyqSVjMnB1eSdZwP5KYoRuP4WbUH5w78+LBxxPZk5Ce+2fkN8sHkrcWYK1fO7J/I1umSltKdXwOsXIEloE6BThqNZf0aBAiVNQT1x3xnpy4pX5gFCczEtzHx0pgwA89ACxwhgk1uW5ZPZvoejHHGq5VMS8aXwV"><credential domain="fetion.com.cn" c="A9ndNHq/KNopzqgr8cqMz9oKG4q5hYIrWOzLPDqslJJHjKcSLN2LzSmSueHt36qW8iJsgNR1YJuxltUsQlLzRGSONkSRMtZZtaGNj/j2HdCt0vZwzUUzG4pfSQvElv+wr6w3oIC9I1Fz6xls4G+XRx9BSuToISrHEI/RuR2PHR1Hfx0Kz2EbXzPFgbLndLO7"/><credential domain="m161.com.cn" c="ej3QoDJLc5pR6DibmVjG67Hfcc6A2ezFC0L47vax/5bXx0sduZp2p2XVG02TC/Jd++itkrBp2IBVv5oo2iG/FxQHLn0/astdR0QF3LQLempy4EllYl+1ZjT2y/OCvE5xEkNvoQjVNBHCV02IQhyzzbVdrM496M93HsNtMcffvFE="/><credential domain="www.ikuwa.cn" c="EtFUo+g4iYlcBXBURQiqfTkjmoXvPZq8IluSBLh7SDhg6tmJ6rLy3KEABg/AIwxQC7CGexuH7kRqiDPQb6FSLcQXV/jl34O6RlAvxz2GLO4BKLXhAHwJx9deCwiUhvV+p1SUW0hHFqTJhpt1WxEA9G4slL5loeQfbWqBFyEL3mQ="/><credential domain="games.fetion.com.cn" c="XhDe7SZ0gXEPnNo4BW+ic7CX6e6n9MzOxSiYBS8BFDD7gh+6Us/Ibv1+sLyjsAloeUBsT/FBqdG4GntDLR/BR3gQ/iD2Pf1EUJXxySAnjzNVRazFf9TrRKaCnzDcjg5/sHBq4p/25D5tChQZqTCVOonijDyvQMPypnOhM/LEf8V8gdKMmJMvzLl4C4jxzpc3"/></credentials></results>
+===================================================================================
+
+
+=============================MapleFetion CrushReport=================================
+Thank you for working with MapleFetion!!! 
+ProjectHome : http://maplefetion.googlecode.com 
+Author      : solosky <solosky772@qq.com> 
+AuthorBlog  : http://www.solosky.net 
+-------------------------------------------------------------------------------------
+
+Ops, if you saw this report, FetionClient was crushed by some exceptions. Sorry for that.
+Please Email this crush file or log file to author to find and fix bugs, thank you sincerely.
+
+CrushedDate:Mon Aug 01 11:30:04 CST 2011
+
+------------------------------------Version---------------------------------------
+ClientVersion   : MapleFetion-2.5.1
+ProtocolVersion : 4.1.0740
+
+-------------------------------------Config--------------------------------------
+server.http-tunnel = http://221.130.46.141/ht/sd.aspx
+server.sipc-ssl-proxy = 221.130.46.141:443
+fetion.sip.check-alive-interval = 20
+fetion.sip.keep-connection-interval = 30
+crush.send.enable = false
+server.verify-pic-uri = http://nav.fetion.com.cn/nav/GetPicCodeV4.aspx
+fetion.dialog.check-idle-interval = 150
+server.set-portrait = http://hdss1fta.fetion.com.cn/HDS_S00/setportrait.aspx
+fetion.sip.default-alive-time = 120
+fetion.sip.machine-code = 5DBFE64D4449FBD0AE130C7B12D27A9F
+log.sipc.dir = ./
+fetion.dialog.max-idle-time = 300
+fetion.dialog.wait-buddy-enter-timeout = 20
+fetion.sip.default-retry-times = 0
+fetion.dialog.max-opened-number = 12
+server.sipc-proxy = 221.130.46.141:8080
+fetion.sip.keep-alive-interval = 600
+crush.log.dir = .
+log.sipc.enable = false
+crush.send.url = http://maplefetion.solosky.net/crushReport.php?report={report}
+crush.log.enable = true
+server.get-portrait = http://hdss1fta.fetion.com.cn/HDS_S00/getportrait.aspx
+server.nav-system-uri = http://nav.fetion.com.cn/nav/getsystemconfig.aspx
+server.ssi-sign-in-v2 = https://uid.fetion.com.cn/ssiportal/SSIAppSignInV4.aspx
+fetion.group.enable = false
+
+------------------------------Exception-----------------------------------
+net.solosky.maplefetion.client.dispatcher.DispatcherException: Cannot find a class to handle this notify - notify:
+BN 783093053 SIP-C/4.0
+N: UpdateEndpoint
+L: 173
+I: 1
+Q: 1 BN
+
+<events><event type="EndpointChanged"><endpoints self="primary"><endpoint device-id="PCSM010042220319" device-type="PCSmart" device-caps="5ff"/></endpoints></event></events>
+	at net.solosky.maplefetion.client.dispatcher.AbstractMessageDispatcher.dispatch(AbstractMessageDispatcher.java:175)
+	at net.solosky.maplefetion.client.dispatcher.AbstractMessageDispatcher.doProcessIncoming(AbstractMessageDispatcher.java:108)
+	at net.solosky.maplefetion.chain.AbstractProcessor.processIncoming(AbstractProcessor.java:158)
+	at net.solosky.maplefetion.chain.AbstractProcessor.processIncoming(AbstractProcessor.java:160)
+	at net.solosky.maplefetion.util.SipcParser.flushInMessage(SipcParser.java:156)
+	at net.solosky.maplefetion.util.SipcParser.processIncoming(SipcParser.java:293)
+	at net.solosky.maplefetion.chain.AbstractProcessor.processIncoming(AbstractProcessor.java:160)
+	at net.solosky.maplefetion.net.AbstractTransfer.bytesRecived(AbstractTransfer.java:80)
+	at net.solosky.maplefetion.net.tcp.TcpTransfer.access$3(TcpTransfer.java:1)
+	at net.solosky.maplefetion.net.tcp.TcpTransfer$1.run(TcpTransfer.java:129)
+	at java.lang.Thread.run(Thread.java:619)
+
+===================================================================================
+
+
+=============================MapleFetion CrushReport=================================
+Thank you for working with MapleFetion!!! 
+ProjectHome : http://maplefetion.googlecode.com 
+Author      : solosky <solosky772@qq.com> 
+AuthorBlog  : http://www.solosky.net 
+-------------------------------------------------------------------------------------
+
+Ops, if you saw this report, FetionClient was crushed by some exceptions. Sorry for that.
+Please Email this crush file or log file to author to find and fix bugs, thank you sincerely.
+
+CrushedDate:Mon Aug 01 11:38:07 CST 2011
+
+------------------------------------Version---------------------------------------
+ClientVersion   : MapleFetion-2.5.1
+ProtocolVersion : 4.1.0740
+
+-------------------------------------Config--------------------------------------
+server.http-tunnel = http://221.130.46.141/ht/sd.aspx
+server.sipc-ssl-proxy = 221.130.46.141:443
+fetion.sip.check-alive-interval = 20
+fetion.sip.keep-connection-interval = 30
+crush.send.enable = false
+server.verify-pic-uri = http://nav.fetion.com.cn/nav/GetPicCodeV4.aspx
+fetion.dialog.check-idle-interval = 150
+server.set-portrait = http://hdss1fta.fetion.com.cn/HDS_S00/setportrait.aspx
+fetion.sip.default-alive-time = 120
+fetion.sip.machine-code = 5DBFE64D4449FBD0AE130C7B12D27A9F
+log.sipc.dir = ./
+fetion.dialog.max-idle-time = 300
+fetion.dialog.wait-buddy-enter-timeout = 20
+fetion.sip.default-retry-times = 0
+fetion.dialog.max-opened-number = 12
+server.sipc-proxy = 221.130.46.141:8080
+fetion.sip.keep-alive-interval = 600
+crush.log.dir = .
+log.sipc.enable = false
+crush.send.url = http://maplefetion.solosky.net/crushReport.php?report={report}
+crush.log.enable = true
+server.get-portrait = http://hdss1fta.fetion.com.cn/HDS_S00/getportrait.aspx
+server.nav-system-uri = http://nav.fetion.com.cn/nav/getsystemconfig.aspx
+server.ssi-sign-in-v2 = https://uid.fetion.com.cn/ssiportal/SSIAppSignInV4.aspx
+fetion.group.enable = false
+
+------------------------------Exception-----------------------------------
+net.solosky.maplefetion.client.SystemException: java.lang.NoClassDefFoundError: org/apache/mina/util/Base64
+	at net.solosky.maplefetion.client.response.AbstractResponseHandler.handle(AbstractResponseHandler.java:111)
+	at net.solosky.maplefetion.client.dispatcher.AbstractMessageDispatcher.dispatch(AbstractMessageDispatcher.java:157)
+	at net.solosky.maplefetion.client.dispatcher.AbstractMessageDispatcher.doProcessIncoming(AbstractMessageDispatcher.java:110)
+	at net.solosky.maplefetion.chain.AbstractProcessor.processIncoming(AbstractProcessor.java:158)
+	at net.solosky.maplefetion.chain.AbstractProcessor.processIncoming(AbstractProcessor.java:160)
+	at net.solosky.maplefetion.util.SipcParser.flushInMessage(SipcParser.java:156)
+	at net.solosky.maplefetion.util.SipcParser.processIncoming(SipcParser.java:293)
+	at net.solosky.maplefetion.chain.AbstractProcessor.processIncoming(AbstractProcessor.java:160)
+	at net.solosky.maplefetion.net.AbstractTransfer.bytesRecived(AbstractTransfer.java:80)
+	at net.solosky.maplefetion.net.tcp.TcpTransfer.access$3(TcpTransfer.java:1)
+	at net.solosky.maplefetion.net.tcp.TcpTransfer$1.run(TcpTransfer.java:129)
+	at java.lang.Thread.run(Thread.java:619)
+Caused by: java.lang.NoClassDefFoundError: org/apache/mina/util/Base64
+	at net.solosky.maplefetion.util.StringHelper.base64Decode(StringHelper.java:130)
+	at net.solosky.maplefetion.client.response.UserAuthResponseHandler.decryptCredential(UserAuthResponseHandler.java:185)
+	at net.solosky.maplefetion.client.response.UserAuthResponseHandler.doActionOK(UserAuthResponseHandler.java:162)
+	at net.solosky.maplefetion.client.response.AbstractResponseHandler.doHandle(AbstractResponseHandler.java:168)
+	at net.solosky.maplefetion.client.response.AbstractResponseHandler.handle(AbstractResponseHandler.java:102)
+	... 11 more
+Caused by: java.lang.ClassNotFoundException: org.apache.mina.util.Base64
+	at java.net.URLClassLoader$1.run(URLClassLoader.java:202)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.net.URLClassLoader.findClass(URLClassLoader.java:190)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:307)
+	at sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:301)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:248)
+	... 16 more
+
+-------------------------------SipcMessage----------------------------------
+Class:class net.solosky.maplefetion.sipc.SipcRequest
+----------
+R fetion.com.cn SIP-C/4.0
+F: 783093053
+I: 1
+Q: 2 R
+A: Digest response="1D5AC66ADC795BBBF81121BB0EC3FFDF73DF82695E7594D6098362D682D592ED186832A3A0F306E9BB14733CE26769E5D8C7AFD9A2B88C188C0AFFA641209B45A60B30EF554CDCAD2EFBBDAB5E84DD89E6DF8E062DB4E156FEB1C63E8ADD36CA1276293592B0D7FADB13333476085023CC2CBD6F2F86E7E4AD90C917D96CF724",algorithm="SHA1-sess-v4"
+AK: ak-value
+L: 466
+
+<args><device machine-code="5DBFE64D4449FBD0AE130C7B12D27A9F" accept-language="default"/><caps value="1FFF" /><events value="7f" /><user-info sid="783093053" user-id="242904129"><personal version="0" attributes="v4default" /><custom-config version="0" /><contact-list version="0"   buddy-attributes="v4default" /></user-info><credentials domains="fetion.com.cn;m161.com.cn;www.ikuwa.cn;games.fetion.com.cn" /><presence><basic value="400" desc="" /></presence></args>
+-------------------------------SipcMessage----------------------------------
+Class:class net.solosky.maplefetion.sipc.SipcResponse
+----------
+SIP-C/4.0 200 OK
+I: 1
+Q: 2 R
+X: 600
+L: 11512
+
+<results><client public-ip="219.136.225.70" login-place="" last-login-ip="219.136.225.70" last-login-place="" last-login-time="Mon, 01 Aug 2011 03:30:10 GMT" current-login-time="Mon, 01 Aug 2011 03:38:12 GMT" /><user-info><personal version="357925882" register-email="" user-id="242904129" sid="783093053" mobile-no="13544424150" uri="sip:783093053@fetion.com.cn;p=1345" name="Arjick" nickname="xxk" gender="0" impresa="宁" portrait-crc="0" birth-date="1986-03-07" birthday-valid="1" carrier="CMCC" carrier-status="0" carrier-region="CN.gd.20." user-region="" profile="" blood-type="0" occupation="" hobby="" job-title="" home-phone="" work-phone="" other-phone="" personal-email="" work-email="Arjick@163.com" other-email="Arjick@163.com" primary-email="0" company="" company-website="" global-permission="identity=0;phone=0;email=1;birthday=1;business=0;presence=1;contact=1;location=3;buddy=2;ivr=2;buddy-ex=0;show=0;" sms-online-status="0.0:0:0" save-xeno-msg="0" email-binding-status="0" email-binding-alias="783093053" set-pwd-question="0"/><configs><config name="weather-city">-1</config><config name="directsms-rec">0</config><config name="send-offlinefile-sms">1</config><config name="group-invite-config">1</config><config name="weather-region"></config><config name="addbuddy-app-sms">0</config><config name="private-presence"></config><config name="permission-request">0</config><config name="sms-notify">0</config><config name="schedule-sms-receipt">1</config><config name="weather-ip">1</config><config name="rev-offlinefile-sms">1</config><config name="alv2-setwarn">0</config></configs><custom-config version="348224436">H4sIALNOLk0EAHSVz47aMBDGX6V9AljY3kaRWP60SARQQ8VhtQcvmYClxI5sB5pjX6hv1ffohNisnWS5wPy+bzxjT2Lgl0Y1lyLj50oxw6WIYJamJykMO5m9kkVpojGMegySi7xtmEFtYtSanVFHGcs1wmhAubsPvCDGinJ5RVXH+hwZVVl/X4OlMKgOMkGRWqNPYFYZ+RPLvF4K9p5j6qr3OMS1xjxbi3m7Ab3h2tgVByXYK9RoBhMGJbD7pNbixPURsI9u1yLF3/cTDQlspDiTNUFjuHBH04GwWq73LqA1/BCOyMwF1QIzVuWu3w6krckrFydcL6Jz2mznEcKcm5q+J7Su/QlJodvhlMfHEEIGiZFlEye1Dm09Dt+VrMoF12XO6lim2Oygx1rXS2iwIXSSgzx6Qmk22ml+6LSmn47+QPcndCdyLtDOloLaf6T7IrTZChdoGM+19zz7FGzOfSsUjjpx47ftbFmBfk0f+z46Ur+aT2F2Y/VOrNMcrcMDnhhzUdE7Gn3zDQ5aX3JSiCJh9E4Ga/kcdlnWHIytYJsPYej5ISulo0nH1FJ4qTQVWFV53haxdXsYtrIdyFYantXHC4rGY+2fiJRkX8tPsoZVWLGrVNy44dMIe2RZlFzZRHdd+Qi2eHvnmBhmKh2N2w+V9CkkvChzDNiUJtyntBqmLQlK9jDEUqb7i2K6mao2qrkq/v39AyP7my4q3+FuJf5hH0fw9XW+mB1mr29vkUscO/lpUH5y8mRQnjh5OihPnfw8KBMdBY3OK21kgep+O9N1pr+MyNL/a/sPAAD//wAAAADuBgAA</custom-config><contact-list version="362089942"><buddy-lists><buddy-list id="1" name="我的好友"/><buddy-list id="2" name="Family"/><buddy-list id="3" name="初中"/><buddy-list id="4" name="小学"/><buddy-list id="5" name="高中"/><buddy-list id="6" name="大学同学"/><buddy-list id="7" name="陌生人"/><buddy-list id="8" name="大学朋友"/><buddy-list id="9" name="工作朋友"/></buddy-lists><buddies><b i="223997173" u="sip:677994017@fetion.com.cn;p=2419" n="" l="8" f="0" r="1" o="0" p="identity=1;"/><b i="241038798" u="sip:700592229@fetion.com.cn;p=931" n="" l="9" f="0" r="1" o="0" p="identity=1;"/><b i="241275093" u="sip:772044854@fetion.com.cn;p=1028" n="" l="6" f="0" r="1" o="0" p="identity=1;"/><b i="241691718" u="tel:13534962278" n="表哥" l="2" r="1" o="1" p="identity=1;"/><b i="241764865" u="sip:869989428@fetion.com.cn;p=1263" n="∨icky" l="1" f="300184707" r="1" o="0" p="identity=1;"/><b i="241827832" u="sip:677386548@fetion.com.cn;p=1265" n="" l="2" f="0" r="1" o="0" p="identity=1;"/><b i="243680942" u="sip:294394218@fetion.com.cn;p=1503" n="" l="" f="0" r="2" o="0" p="identity=1;"/><b i="243690905" u="sip:625522785@fetion.com.cn;p=1502" n="李文" l="5" f="0" r="2" o="0" p="identity=1;"/><b i="243830825" u="sip:634492980@fetion.com.cn;p=1505" n="敏龙" l="5" f="315485331" r="1" o="0" p="identity=1;"/><b i="243862445" u="sip:669454062@fetion.com.cn;p=1504" n="" l="3" f="0" r="1" o="0" p="identity=1;"/><b i="244863618" u="sip:575296919@fetion.com.cn;p=1705" n="" l="3" f="0" r="1" o="0" p="identity=1;"/><b i="244972231" u="sip:563816061@fetion.com.cn;p=1706" n="黄志辉" l="1" f="0" r="2" o="0" p="identity=1;"/><b i="244975632" u="sip:628534364@fetion.com.cn;p=1706" n="孙波" l="3" f="0" r="1" o="0" p="identity=1;"/><b i="250038936" u="sip:646075247@fetion.com.cn;p=4143" n="" l="1" f="0" r="1" o="0" p="identity=1;"/><b i="251472062" u="sip:990099@fetion.com.cn;p=5147" n="" l="1" f="0" r="1" o="1" p=""/><b i="284833246" u="sip:704172738@fetion.com.cn;p=187" n="陈李生" l="1" f="0" r="1" o="1" p="identity=1;"/><b i="290350996" u="sip:822102774@fetion.com.cn;p=1009" n="廖丽清" l="6" f="0" r="1" o="0" p="identity=1;"/><b i="295903496" u="tel:13652205458" n="" l="1" r="1" o="1" p="identity=1;"/><b i="302414786" u="sip:706044167@fetion.com.cn;p=3847" n="" l="8" f="0" r="1" o="0" p="identity=1;"/><b i="310734368" u="tel:15820426637" n="弟弟" l="2" r="1" o="0" p="identity=1;"/><b i="313026214" u="sip:720376538@fetion.com.cn;p=9045" n="" l="1;7" f="0" r="0" o="0" p=""/><b i="343822766" u="tel:15923677576" n="梁思宜" l="1" r="0" o="1" p="identity=1;"/><b i="446393122" u="sip:762119873@fetion.com.cn;p=205" n="陈虹" l="2" f="0" r="1" o="1" p="identity=1;"/><b i="446936973" u="sip:738134451@fetion.com.cn;p=256" n="黄灿贤" l="6" f="0" r="1" o="0" p="identity=1;"/><b i="447922574" u="tel:13435755221" n="池方雄" l="8" r="1" o="0" p="identity=1;"/><b i="452152726" u="tel:13631147200" n="" l="8" r="1" o="0" p="identity=1;"/><b i="455488950" u="sip:573416537@fetion.com.cn;p=3531" n="高丹" l="5" f="0" r="1" o="0" p="identity=1;"/><b i="455918420" u="sip:712035611@fetion.com.cn;p=3805" n="" l="6" f="308486763" r="1" o="0" p="identity=1;"/><b i="456542883" u="tel:13824726351" n="锐鑫" l="6" r="1" o="0" p="identity=1;"/><b i="456548330" u="sip:752940021@fetion.com.cn;p=4148" n="伟泉" l="6" f="0" r="1" o="0" p="identity=1;"/><b i="456555071" u="tel:13824727232" n="JB桢" l="6" r="1" o="0" p="identity=1;"/><b i="456601404" u="tel:13824734954" n="邓聪" l="6" r="1" o="0" p="identity=1;"/><b i="456615784" u="tel:13824797800" n="李锦安" l="6" r="1" o="0" p="identity=1;"/><b i="458907668" u="sip:677949441@fetion.com.cn;p=5200" n="" l="3" f="0" r="1" o="0" p="identity=1;"/><b i="462074929" u="sip:675619098@fetion.com.cn;p=7107" n="梦醒" l="8" f="0" r="1" o="0" p="identity=1;"/><b i="465730564" u="sip:839068328@fetion.com.cn;p=1252" n="" l="1" f="0" r="1" o="1" p="identity=1;"/><b i="465756283" u="sip:745343351@fetion.com.cn;p=1253" n="惠贞" l="6" f="0" r="1" o="0" p="identity=1;"/><b i="468966431" u="sip:703753057@fetion.com.cn;p=3199" n="" l="" f="0" r="1" o="0" p="identity=1;"/><b i="469330925" u="sip:840098930@fetion.com.cn;p=3509" n="郭一鸿" l="3" f="0" r="1" o="1" p="identity=1;"/><b i="469562884" u="sip:578419713@fetion.com.cn;p=3882" n="" l="" f="0" r="1" o="0" p="identity=1;"/><b i="469876918" u="sip:665125586@fetion.com.cn;p=4161" n="林汉升" l="9" f="0" r="1" o="0" p="identity=1;"/><b i="469999420" u="sip:516965077@fetion.com.cn;p=4165" n="康思华" l="2" f="0" r="1" o="1" p="identity=1;"/><b i="470136181" u="sip:228690100@fetion.com.cn;p=5123" n="罗小丽" l="" f="0" r="1" o="0" p="identity=1;"/><b i="470750299" u="sip:753043079@fetion.com.cn;p=6058" n="" l="8" f="0" r="1" o="0" p="identity=1;"/><b i="471907801" u="tel:15989021737" n="" l="1" r="1" o="0" p="identity=1;"/><b i="472532518" u="sip:823351537@fetion.com.cn;p=7799" n="" l="1" f="0" r="1" o="0" p=""/><b i="472534291" u="sip:687120605@fetion.com.cn;p=7103" n="" l="3" f="0" r="1" o="0" p="identity=1;"/><b i="503706030" u="sip:835130831@fetion.com.cn;p=2215" n="" l="8" f="0" r="1" o="0" p="identity=1;"/><b i="506631348" u="sip:897567958@fetion.com.cn;p=1185" n="弟弟" l="2" f="0" r="1" o="1" p="identity=1;"/><b i="522723210" u="sip:827688691@fetion.com.cn;p=2123" n="池方雄" l="8" f="303866373" r="1" o="0" p="identity=1;"/><b i="552088358" u="sip:819083661@fetion.com.cn;p=2363" n="" l="7" f="0" r="0" o="0" p="identity=1;"/><b i="563311737" u="sip:826613545@fetion.com.cn;p=9034" n="陈虹(广州)" l="2" f="0" r="1" o="0" p="identity=1;"/><b i="597794122" u="tel:15913378036" n="晓黎" l="8" r="1" o="0" p="identity=1;"/><b i="605797358" u="sip:352759703@fetion.com.cn;p=1504" n="" l="" f="0" r="1" o="0" p="identity=1;"/><b i="608289031" u="sip:857806771@fetion.com.cn;p=7900" n="" l="" f="0" r="1" o="0" p="identity=1;"/><b i="628879572" u="tel:15018208512" n="彭凝" l="6" r="1" o="0" p="identity=1;"/><b i="633247873" u="sip:978614559@fetion.com.cn;p=9088" n="" l="1" f="0" r="1" o="0" p="identity=1;"/><b i="635063451" u="tel:13822557396" n="表哥新手机" l="2" r="1" o="0" p="identity=1;"/><b i="646642976" u="sip:898021741@fetion.com.cn;p=6097" n="黄建夫" l="6" f="0" r="1" o="0" p="identity=1;"/><b i="647815690" u="sip:921431820@fetion.com.cn;p=5177" n="" l="6" f="0" r="1" o="0" p="identity=1;"/><b i="650650408" u="sip:909946626@fetion.com.cn;p=342" n="陈杰华" l="6;" f="0" r="1" o="1" p="identity=1;"/><b i="653465045" u="sip:595271743@fetion.com.cn;p=237" n="" l="1" f="0" r="1" o="1" p="identity=1;"/><b i="859084288" u="sip:330383351@fetion.com.cn;p=6073" n="" l="9" f="0" r="1" o="0" p="identity=1;"/><b i="912851410" u="sip:386202394@fetion.com.cn;p=993" n="林光恒" l="" f="0" r="1" o="0" p="identity=1;"/></buddies><chat-friends><c i="248655362" u="sip:660006358@fetion.com.cn;p=3528"/><c i="292259620" u="sip:572556141@fetion.com.cn;p=1789"/></chat-friends><blacklist><k i="455605436" u="sip:775718949@fetion.com.cn;p=3531" n=""/></blacklist></contact-list><score value="7827" level="10" level-score="7053"/><services></services><quotas><quota-limit><limit name="max-buddies" value="500"/><limit name="max-groupadmin-count" value="4"/><limit name="max-joingroup-count" value="20"/></quota-limit><quota-frequency><frequency name="send-sms" day-limit="600" day-count="0" month-limit="10000" month-count="0"/></quota-frequency></quotas><capability-list basic-caps="1ffff" contact-caps="ffffff" extended-caps="201fff"><contact carrier="CMCC" contact-caps="ffffff" /><contact carrier="CMHK" contact-caps="9ffc9f" /><contact carrier="CMPAK" contact-caps="857c08" /><contact carrier="HK.OTHER" contact-caps="0" /><contact carrier="" contact-caps="a57008" /><contact carrier="SGSH" contact-caps="857c08" /><contact carrier="SGST" contact-caps="857c08" /></capability-list></user-info><credentials kernel="ThMHcPR+4GFLRb1SHw68BgAfpKXYrDGnU+AQaNB7w1WYOCWnwgJaspLswS34ltANdTCtYu6xhnBdAa6UfTNvO07q10kC0BS5b6inPsfylem2PIAi5rjbK98kSxj6fxPOaLyNIx0TfOM78UCRg32GHgWuWHFmz5WHN6Oin7CdHeavEmUD2DWHVWe3n305JuIj"><credential domain="fetion.com.cn" c="F4CM6NhbxG+EstftZvbi8ZqC8qlU5AjAbboLRdLgdRAmrtN170DWvTINO/jQzM37e0PcESXboxukEpJOCQIkKZjpt95MLSHk+ISZDE8tMNFUQOdXAf5C6rpTa1XZkK5rm7S2vMm+FCWo2XDqJfH/tiuALbwDSTkficRlDKmzXBnz38a4CceEAlkjOADA/1mG"/><credential domain="m161.com.cn" c="aVgIdwSgbcmOsp34UFbqZtSS3yhvFKqCSfL7DcLmkui2FiDmYCJc/0YHrxW+AS8uATSEvrDM4L6rVxvavPauB6D7lssfKpWBBKWKi/zYNqgjLMElFAlALUYYCpGXoq3gWi/YZFLxxyE/Akvld8ldf3+u16M7swRzM9N6VEW6xNo="/><credential domain="www.ikuwa.cn" c="OfbVB1/HLvAH+l390XxP3FbYXBUPiH+bCKQMJ49EpsQkOSBl8n4aiJrD/+qJS/q8sQc3W339jong+aQSF1UghByHiSYE8H+70pTVlnpWLUeqHQg7XC+kJyaVk05s82uaB1SsLHk2qnX6fEcKDVwjg8w8ISm/loaoZB9PO9rvyBw="/><credential domain="games.fetion.com.cn" c="y5ETvT9myDzR1lXp3LAK0QabBhsl9rOfdfgFejW3dsNnGR1ancYqq6fPlibWWIoqos51Ls4ymhhz/81DbcBN4kQgMvZInQq/91cHXOCxI7cM3HWJwQBmz3r48eAM/6D7rvaNRfvgDQY1iw3CU/HyTGOAQwF1C6ts9uugc73zYVku0hvKmj8J3FVY4ldxc6rt"/></credentials></results>
+===================================================================================
+
+
+=============================MapleFetion CrushReport=================================
+Thank you for working with MapleFetion!!! 
+ProjectHome : http://maplefetion.googlecode.com 
+Author      : solosky <solosky772@qq.com> 
+AuthorBlog  : http://www.solosky.net 
+-------------------------------------------------------------------------------------
+
+Ops, if you saw this report, FetionClient was crushed by some exceptions. Sorry for that.
+Please Email this crush file or log file to author to find and fix bugs, thank you sincerely.
+
+CrushedDate:Mon Aug 01 11:38:07 CST 2011
+
+------------------------------------Version---------------------------------------
+ClientVersion   : MapleFetion-2.5.1
+ProtocolVersion : 4.1.0740
+
+-------------------------------------Config--------------------------------------
+server.http-tunnel = http://221.130.46.141/ht/sd.aspx
+server.sipc-ssl-proxy = 221.130.46.141:443
+fetion.sip.check-alive-interval = 20
+fetion.sip.keep-connection-interval = 30
+crush.send.enable = false
+server.verify-pic-uri = http://nav.fetion.com.cn/nav/GetPicCodeV4.aspx
+fetion.dialog.check-idle-interval = 150
+server.set-portrait = http://hdss1fta.fetion.com.cn/HDS_S00/setportrait.aspx
+fetion.sip.default-alive-time = 120
+fetion.sip.machine-code = 5DBFE64D4449FBD0AE130C7B12D27A9F
+log.sipc.dir = ./
+fetion.dialog.max-idle-time = 300
+fetion.dialog.wait-buddy-enter-timeout = 20
+fetion.sip.default-retry-times = 0
+fetion.dialog.max-opened-number = 12
+server.sipc-proxy = 221.130.46.141:8080
+fetion.sip.keep-alive-interval = 600
+crush.log.dir = .
+log.sipc.enable = false
+crush.send.url = http://maplefetion.solosky.net/crushReport.php?report={report}
+crush.log.enable = true
+server.get-portrait = http://hdss1fta.fetion.com.cn/HDS_S00/getportrait.aspx
+server.nav-system-uri = http://nav.fetion.com.cn/nav/getsystemconfig.aspx
+server.ssi-sign-in-v2 = https://uid.fetion.com.cn/ssiportal/SSIAppSignInV4.aspx
+fetion.group.enable = false
+
+------------------------------Exception-----------------------------------
+net.solosky.maplefetion.client.dispatcher.DispatcherException: Cannot find a class to handle this notify - notify:
+BN 783093053 SIP-C/4.0
+N: UpdateEndpoint
+L: 173
+I: 1
+Q: 1 BN
+
+<events><event type="EndpointChanged"><endpoints self="primary"><endpoint device-id="PCSM010042220319" device-type="PCSmart" device-caps="5ff"/></endpoints></event></events>
+	at net.solosky.maplefetion.client.dispatcher.AbstractMessageDispatcher.dispatch(AbstractMessageDispatcher.java:175)
+	at net.solosky.maplefetion.client.dispatcher.AbstractMessageDispatcher.doProcessIncoming(AbstractMessageDispatcher.java:108)
+	at net.solosky.maplefetion.chain.AbstractProcessor.processIncoming(AbstractProcessor.java:158)
+	at net.solosky.maplefetion.chain.AbstractProcessor.processIncoming(AbstractProcessor.java:160)
+	at net.solosky.maplefetion.util.SipcParser.flushInMessage(SipcParser.java:156)
+	at net.solosky.maplefetion.util.SipcParser.processIncoming(SipcParser.java:293)
+	at net.solosky.maplefetion.chain.AbstractProcessor.processIncoming(AbstractProcessor.java:160)
+	at net.solosky.maplefetion.net.AbstractTransfer.bytesRecived(AbstractTransfer.java:80)
+	at net.solosky.maplefetion.net.tcp.TcpTransfer.access$3(TcpTransfer.java:1)
+	at net.solosky.maplefetion.net.tcp.TcpTransfer$1.run(TcpTransfer.java:129)
+	at java.lang.Thread.run(Thread.java:619)
+
+===================================================================================
+
+
+=============================MapleFetion CrushReport=================================
+Thank you for working with MapleFetion!!! 
+ProjectHome : http://maplefetion.googlecode.com 
+Author      : solosky <solosky772@qq.com> 
+AuthorBlog  : http://www.solosky.net 
+-------------------------------------------------------------------------------------
+
+Ops, if you saw this report, FetionClient was crushed by some exceptions. Sorry for that.
+Please Email this crush file or log file to author to find and fix bugs, thank you sincerely.
+
+CrushedDate:Mon Aug 01 11:50:20 CST 2011
+
+------------------------------------Version---------------------------------------
+ClientVersion   : MapleFetion-2.5.1
+ProtocolVersion : 4.1.0740
+
+-------------------------------------Config--------------------------------------
+server.http-tunnel = http://221.130.46.141/ht/sd.aspx
+server.sipc-ssl-proxy = 221.130.46.141:443
+fetion.sip.check-alive-interval = 20
+fetion.sip.keep-connection-interval = 30
+crush.send.enable = false
+server.verify-pic-uri = http://nav.fetion.com.cn/nav/GetPicCodeV4.aspx
+fetion.dialog.check-idle-interval = 150
+server.set-portrait = http://hdss1fta.fetion.com.cn/HDS_S00/setportrait.aspx
+fetion.sip.default-alive-time = 120
+fetion.sip.machine-code = 5DBFE64D4449FBD0AE130C7B12D27A9F
+log.sipc.dir = ./
+fetion.dialog.max-idle-time = 300
+fetion.dialog.wait-buddy-enter-timeout = 20
+fetion.sip.default-retry-times = 0
+fetion.dialog.max-opened-number = 12
+server.sipc-proxy = 221.130.46.141:8080
+fetion.sip.keep-alive-interval = 600
+crush.log.dir = .
+log.sipc.enable = false
+crush.send.url = http://maplefetion.solosky.net/crushReport.php?report={report}
+crush.log.enable = true
+server.get-portrait = http://hdss1fta.fetion.com.cn/HDS_S00/getportrait.aspx
+server.nav-system-uri = http://nav.fetion.com.cn/nav/getsystemconfig.aspx
+server.ssi-sign-in-v2 = https://uid.fetion.com.cn/ssiportal/SSIAppSignInV4.aspx
+fetion.group.enable = false
+
+------------------------------Exception-----------------------------------
+net.solosky.maplefetion.client.SystemException: java.lang.NoClassDefFoundError: org/apache/mina/util/Base64
+	at net.solosky.maplefetion.client.response.AbstractResponseHandler.handle(AbstractResponseHandler.java:111)
+	at net.solosky.maplefetion.client.dispatcher.AbstractMessageDispatcher.dispatch(AbstractMessageDispatcher.java:157)
+	at net.solosky.maplefetion.client.dispatcher.AbstractMessageDispatcher.doProcessIncoming(AbstractMessageDispatcher.java:110)
+	at net.solosky.maplefetion.chain.AbstractProcessor.processIncoming(AbstractProcessor.java:158)
+	at net.solosky.maplefetion.chain.AbstractProcessor.processIncoming(AbstractProcessor.java:160)
+	at net.solosky.maplefetion.util.SipcParser.flushInMessage(SipcParser.java:156)
+	at net.solosky.maplefetion.util.SipcParser.processIncoming(SipcParser.java:293)
+	at net.solosky.maplefetion.chain.AbstractProcessor.processIncoming(AbstractProcessor.java:160)
+	at net.solosky.maplefetion.net.AbstractTransfer.bytesRecived(AbstractTransfer.java:80)
+	at net.solosky.maplefetion.net.tcp.TcpTransfer.access$3(TcpTransfer.java:1)
+	at net.solosky.maplefetion.net.tcp.TcpTransfer$1.run(TcpTransfer.java:129)
+	at java.lang.Thread.run(Thread.java:619)
+Caused by: java.lang.NoClassDefFoundError: org/apache/mina/util/Base64
+	at net.solosky.maplefetion.util.StringHelper.base64Decode(StringHelper.java:130)
+	at net.solosky.maplefetion.client.response.UserAuthResponseHandler.decryptCredential(UserAuthResponseHandler.java:185)
+	at net.solosky.maplefetion.client.response.UserAuthResponseHandler.doActionOK(UserAuthResponseHandler.java:162)
+	at net.solosky.maplefetion.client.response.AbstractResponseHandler.doHandle(AbstractResponseHandler.java:168)
+	at net.solosky.maplefetion.client.response.AbstractResponseHandler.handle(AbstractResponseHandler.java:102)
+	... 11 more
+Caused by: java.lang.ClassNotFoundException: org.apache.mina.util.Base64
+	at java.net.URLClassLoader$1.run(URLClassLoader.java:202)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.net.URLClassLoader.findClass(URLClassLoader.java:190)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:307)
+	at sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:301)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:248)
+	... 16 more
+
+-------------------------------SipcMessage----------------------------------
+Class:class net.solosky.maplefetion.sipc.SipcRequest
+----------
+R fetion.com.cn SIP-C/4.0
+F: 783093053
+I: 1
+Q: 2 R
+A: Digest response="1E5770D11BCB01E81AC34198B01DC7E365C380E616C95D8EFB469C395586988C654248F993A2EE125E4D5BE7102422A6A335F22D7DB6CB088D9B124EBA15B65BFF7374A4A3FCBF5F6D92E744F5C71CC4123F39A36AFB85614826A1EA3E2DD583B0F0E5413E7C6107312A78FFE83097DEBD3C0FCD19DEA029BCE825802ABCD9D4",algorithm="SHA1-sess-v4"
+AK: ak-value
+L: 466
+
+<args><device machine-code="5DBFE64D4449FBD0AE130C7B12D27A9F" accept-language="default"/><caps value="1FFF" /><events value="7f" /><user-info sid="783093053" user-id="242904129"><personal version="0" attributes="v4default" /><custom-config version="0" /><contact-list version="0"   buddy-attributes="v4default" /></user-info><credentials domains="fetion.com.cn;m161.com.cn;www.ikuwa.cn;games.fetion.com.cn" /><presence><basic value="400" desc="" /></presence></args>
+-------------------------------SipcMessage----------------------------------
+Class:class net.solosky.maplefetion.sipc.SipcResponse
+----------
+SIP-C/4.0 200 OK
+I: 1
+Q: 2 R
+X: 600
+L: 11512
+
+<results><client public-ip="219.136.225.70" login-place="" last-login-ip="219.136.225.70" last-login-place="" last-login-time="Mon, 01 Aug 2011 03:38:12 GMT" current-login-time="Mon, 01 Aug 2011 03:50:26 GMT" /><user-info><personal version="357925882" register-email="" user-id="242904129" sid="783093053" mobile-no="13544424150" uri="sip:783093053@fetion.com.cn;p=1345" name="Arjick" nickname="xxk" gender="0" impresa="宁" portrait-crc="0" birth-date="1986-03-07" birthday-valid="1" carrier="CMCC" carrier-status="0" carrier-region="CN.gd.20." user-region="" profile="" blood-type="0" occupation="" hobby="" job-title="" home-phone="" work-phone="" other-phone="" personal-email="" work-email="Arjick@163.com" other-email="Arjick@163.com" primary-email="0" company="" company-website="" global-permission="identity=0;phone=0;email=1;birthday=1;business=0;presence=1;contact=1;location=3;buddy=2;ivr=2;buddy-ex=0;show=0;" sms-online-status="0.0:0:0" save-xeno-msg="0" email-binding-status="0" email-binding-alias="783093053" set-pwd-question="0"/><configs><config name="weather-city">-1</config><config name="directsms-rec">0</config><config name="send-offlinefile-sms">1</config><config name="group-invite-config">1</config><config name="weather-region"></config><config name="addbuddy-app-sms">0</config><config name="private-presence"></config><config name="permission-request">0</config><config name="sms-notify">0</config><config name="schedule-sms-receipt">1</config><config name="weather-ip">1</config><config name="rev-offlinefile-sms">1</config><config name="alv2-setwarn">0</config></configs><custom-config version="348224436">H4sIALNOLk0EAHSVz47aMBDGX6V9AljY3kaRWP60SARQQ8VhtQcvmYClxI5sB5pjX6hv1ffohNisnWS5wPy+bzxjT2Lgl0Y1lyLj50oxw6WIYJamJykMO5m9kkVpojGMegySi7xtmEFtYtSanVFHGcs1wmhAubsPvCDGinJ5RVXH+hwZVVl/X4OlMKgOMkGRWqNPYFYZ+RPLvF4K9p5j6qr3OMS1xjxbi3m7Ab3h2tgVByXYK9RoBhMGJbD7pNbixPURsI9u1yLF3/cTDQlspDiTNUFjuHBH04GwWq73LqA1/BCOyMwF1QIzVuWu3w6krckrFydcL6Jz2mznEcKcm5q+J7Su/QlJodvhlMfHEEIGiZFlEye1Dm09Dt+VrMoF12XO6lim2Oygx1rXS2iwIXSSgzx6Qmk22ml+6LSmn47+QPcndCdyLtDOloLaf6T7IrTZChdoGM+19zz7FGzOfSsUjjpx47ftbFmBfk0f+z46Ur+aT2F2Y/VOrNMcrcMDnhhzUdE7Gn3zDQ5aX3JSiCJh9E4Ga/kcdlnWHIytYJsPYej5ISulo0nH1FJ4qTQVWFV53haxdXsYtrIdyFYantXHC4rGY+2fiJRkX8tPsoZVWLGrVNy44dMIe2RZlFzZRHdd+Qi2eHvnmBhmKh2N2w+V9CkkvChzDNiUJtyntBqmLQlK9jDEUqb7i2K6mao2qrkq/v39AyP7my4q3+FuJf5hH0fw9XW+mB1mr29vkUscO/lpUH5y8mRQnjh5OihPnfw8KBMdBY3OK21kgep+O9N1pr+MyNL/a/sPAAD//wAAAADuBgAA</custom-config><contact-list version="362089942"><buddy-lists><buddy-list id="1" name="我的好友"/><buddy-list id="2" name="Family"/><buddy-list id="3" name="初中"/><buddy-list id="4" name="小学"/><buddy-list id="5" name="高中"/><buddy-list id="6" name="大学同学"/><buddy-list id="7" name="陌生人"/><buddy-list id="8" name="大学朋友"/><buddy-list id="9" name="工作朋友"/></buddy-lists><buddies><b i="223997173" u="sip:677994017@fetion.com.cn;p=2419" n="" l="8" f="0" r="1" o="0" p="identity=1;"/><b i="241038798" u="sip:700592229@fetion.com.cn;p=931" n="" l="9" f="0" r="1" o="0" p="identity=1;"/><b i="241275093" u="sip:772044854@fetion.com.cn;p=1028" n="" l="6" f="0" r="1" o="0" p="identity=1;"/><b i="241691718" u="tel:13534962278" n="表哥" l="2" r="1" o="1" p="identity=1;"/><b i="241764865" u="sip:869989428@fetion.com.cn;p=1263" n="∨icky" l="1" f="300184707" r="1" o="0" p="identity=1;"/><b i="241827832" u="sip:677386548@fetion.com.cn;p=1265" n="" l="2" f="0" r="1" o="0" p="identity=1;"/><b i="243680942" u="sip:294394218@fetion.com.cn;p=1503" n="" l="" f="0" r="2" o="0" p="identity=1;"/><b i="243690905" u="sip:625522785@fetion.com.cn;p=1502" n="李文" l="5" f="0" r="2" o="0" p="identity=1;"/><b i="243830825" u="sip:634492980@fetion.com.cn;p=1505" n="敏龙" l="5" f="315485331" r="1" o="0" p="identity=1;"/><b i="243862445" u="sip:669454062@fetion.com.cn;p=1504" n="" l="3" f="0" r="1" o="0" p="identity=1;"/><b i="244863618" u="sip:575296919@fetion.com.cn;p=1705" n="" l="3" f="0" r="1" o="0" p="identity=1;"/><b i="244972231" u="sip:563816061@fetion.com.cn;p=1706" n="黄志辉" l="1" f="0" r="2" o="0" p="identity=1;"/><b i="244975632" u="sip:628534364@fetion.com.cn;p=1706" n="孙波" l="3" f="0" r="1" o="0" p="identity=1;"/><b i="250038936" u="sip:646075247@fetion.com.cn;p=4143" n="" l="1" f="0" r="1" o="0" p="identity=1;"/><b i="251472062" u="sip:990099@fetion.com.cn;p=5147" n="" l="1" f="0" r="1" o="1" p=""/><b i="284833246" u="sip:704172738@fetion.com.cn;p=187" n="陈李生" l="1" f="0" r="1" o="1" p="identity=1;"/><b i="290350996" u="sip:822102774@fetion.com.cn;p=1009" n="廖丽清" l="6" f="0" r="1" o="0" p="identity=1;"/><b i="295903496" u="tel:13652205458" n="" l="1" r="1" o="1" p="identity=1;"/><b i="302414786" u="sip:706044167@fetion.com.cn;p=3847" n="" l="8" f="0" r="1" o="0" p="identity=1;"/><b i="310734368" u="tel:15820426637" n="弟弟" l="2" r="1" o="0" p="identity=1;"/><b i="313026214" u="sip:720376538@fetion.com.cn;p=9045" n="" l="1;7" f="0" r="0" o="0" p=""/><b i="343822766" u="tel:15923677576" n="梁思宜" l="1" r="0" o="1" p="identity=1;"/><b i="446393122" u="sip:762119873@fetion.com.cn;p=205" n="陈虹" l="2" f="0" r="1" o="1" p="identity=1;"/><b i="446936973" u="sip:738134451@fetion.com.cn;p=256" n="黄灿贤" l="6" f="0" r="1" o="0" p="identity=1;"/><b i="447922574" u="tel:13435755221" n="池方雄" l="8" r="1" o="0" p="identity=1;"/><b i="452152726" u="tel:13631147200" n="" l="8" r="1" o="0" p="identity=1;"/><b i="455488950" u="sip:573416537@fetion.com.cn;p=3531" n="高丹" l="5" f="0" r="1" o="0" p="identity=1;"/><b i="455918420" u="sip:712035611@fetion.com.cn;p=3805" n="" l="6" f="308486763" r="1" o="0" p="identity=1;"/><b i="456542883" u="tel:13824726351" n="锐鑫" l="6" r="1" o="0" p="identity=1;"/><b i="456548330" u="sip:752940021@fetion.com.cn;p=4148" n="伟泉" l="6" f="0" r="1" o="0" p="identity=1;"/><b i="456555071" u="tel:13824727232" n="JB桢" l="6" r="1" o="0" p="identity=1;"/><b i="456601404" u="tel:13824734954" n="邓聪" l="6" r="1" o="0" p="identity=1;"/><b i="456615784" u="tel:13824797800" n="李锦安" l="6" r="1" o="0" p="identity=1;"/><b i="458907668" u="sip:677949441@fetion.com.cn;p=5200" n="" l="3" f="0" r="1" o="0" p="identity=1;"/><b i="462074929" u="sip:675619098@fetion.com.cn;p=7107" n="梦醒" l="8" f="0" r="1" o="0" p="identity=1;"/><b i="465730564" u="sip:839068328@fetion.com.cn;p=1252" n="" l="1" f="0" r="1" o="1" p="identity=1;"/><b i="465756283" u="sip:745343351@fetion.com.cn;p=1253" n="惠贞" l="6" f="0" r="1" o="0" p="identity=1;"/><b i="468966431" u="sip:703753057@fetion.com.cn;p=3199" n="" l="" f="0" r="1" o="0" p="identity=1;"/><b i="469330925" u="sip:840098930@fetion.com.cn;p=3509" n="郭一鸿" l="3" f="0" r="1" o="1" p="identity=1;"/><b i="469562884" u="sip:578419713@fetion.com.cn;p=3882" n="" l="" f="0" r="1" o="0" p="identity=1;"/><b i="469876918" u="sip:665125586@fetion.com.cn;p=4161" n="林汉升" l="9" f="0" r="1" o="0" p="identity=1;"/><b i="469999420" u="sip:516965077@fetion.com.cn;p=4165" n="康思华" l="2" f="0" r="1" o="1" p="identity=1;"/><b i="470136181" u="sip:228690100@fetion.com.cn;p=5123" n="罗小丽" l="" f="0" r="1" o="0" p="identity=1;"/><b i="470750299" u="sip:753043079@fetion.com.cn;p=6058" n="" l="8" f="0" r="1" o="0" p="identity=1;"/><b i="471907801" u="tel:15989021737" n="" l="1" r="1" o="0" p="identity=1;"/><b i="472532518" u="sip:823351537@fetion.com.cn;p=7799" n="" l="1" f="0" r="1" o="0" p=""/><b i="472534291" u="sip:687120605@fetion.com.cn;p=7103" n="" l="3" f="0" r="1" o="0" p="identity=1;"/><b i="503706030" u="sip:835130831@fetion.com.cn;p=2215" n="" l="8" f="0" r="1" o="0" p="identity=1;"/><b i="506631348" u="sip:897567958@fetion.com.cn;p=1185" n="弟弟" l="2" f="0" r="1" o="1" p="identity=1;"/><b i="522723210" u="sip:827688691@fetion.com.cn;p=2123" n="池方雄" l="8" f="303866373" r="1" o="0" p="identity=1;"/><b i="552088358" u="sip:819083661@fetion.com.cn;p=2363" n="" l="7" f="0" r="0" o="0" p="identity=1;"/><b i="563311737" u="sip:826613545@fetion.com.cn;p=9034" n="陈虹(广州)" l="2" f="0" r="1" o="0" p="identity=1;"/><b i="597794122" u="tel:15913378036" n="晓黎" l="8" r="1" o="0" p="identity=1;"/><b i="605797358" u="sip:352759703@fetion.com.cn;p=1504" n="" l="" f="0" r="1" o="0" p="identity=1;"/><b i="608289031" u="sip:857806771@fetion.com.cn;p=7900" n="" l="" f="0" r="1" o="0" p="identity=1;"/><b i="628879572" u="tel:15018208512" n="彭凝" l="6" r="1" o="0" p="identity=1;"/><b i="633247873" u="sip:978614559@fetion.com.cn;p=9088" n="" l="1" f="0" r="1" o="0" p="identity=1;"/><b i="635063451" u="tel:13822557396" n="表哥新手机" l="2" r="1" o="0" p="identity=1;"/><b i="646642976" u="sip:898021741@fetion.com.cn;p=6097" n="黄建夫" l="6" f="0" r="1" o="0" p="identity=1;"/><b i="647815690" u="sip:921431820@fetion.com.cn;p=5177" n="" l="6" f="0" r="1" o="0" p="identity=1;"/><b i="650650408" u="sip:909946626@fetion.com.cn;p=342" n="陈杰华" l="6;" f="0" r="1" o="1" p="identity=1;"/><b i="653465045" u="sip:595271743@fetion.com.cn;p=237" n="" l="1" f="0" r="1" o="1" p="identity=1;"/><b i="859084288" u="sip:330383351@fetion.com.cn;p=6073" n="" l="9" f="0" r="1" o="0" p="identity=1;"/><b i="912851410" u="sip:386202394@fetion.com.cn;p=993" n="林光恒" l="" f="0" r="1" o="0" p="identity=1;"/></buddies><chat-friends><c i="248655362" u="sip:660006358@fetion.com.cn;p=3528"/><c i="292259620" u="sip:572556141@fetion.com.cn;p=1789"/></chat-friends><blacklist><k i="455605436" u="sip:775718949@fetion.com.cn;p=3531" n=""/></blacklist></contact-list><score value="7827" level="10" level-score="7053"/><services></services><quotas><quota-limit><limit name="max-buddies" value="500"/><limit name="max-groupadmin-count" value="4"/><limit name="max-joingroup-count" value="20"/></quota-limit><quota-frequency><frequency name="send-sms" day-limit="600" day-count="1" month-limit="10000" month-count="1"/></quota-frequency></quotas><capability-list basic-caps="1ffff" contact-caps="ffffff" extended-caps="201fff"><contact carrier="CMCC" contact-caps="ffffff" /><contact carrier="CMHK" contact-caps="9ffc9f" /><contact carrier="CMPAK" contact-caps="857c08" /><contact carrier="HK.OTHER" contact-caps="0" /><contact carrier="" contact-caps="a57008" /><contact carrier="SGSH" contact-caps="857c08" /><contact carrier="SGST" contact-caps="857c08" /></capability-list></user-info><credentials kernel="WfgtVsNy+jmDkh8T0Y2qhSWQnjZjsoZ0fAas1tQX14RDzhIC0w5BT+hyr/HDEhSw8i1xyebLfWy6kUjT31l64qUhsyD+JNJ84ApAouGKWo23Blvmr8G7BSfZwOKADM3g1iu/HvnjddAG1PGZ8D4jlH/DKpr82BpPL+bXRvxr4BeD0jkZcLEOq8qhfB0p4HXj"><credential domain="fetion.com.cn" c="wHSG3a/vifMWy9HBACY+rFdfy37LflIn+EcTpwP4VzhN3gLlxH4HzkIPi2NZKRpBq58jWNurYP+k2aoSpyby8efFIk8UdFytdktkUeHE8YhMXL3sivZN0aspQhaZFUdJh3hGxLmSvEi2iOylbWJ03DOtorSKf+VFpjYi928GvJZeJLxPUleHKr2MjDw22LTk"/><credential domain="m161.com.cn" c="rkyk5SivdyoxASXynWDFPLrD/DrU5bQBGyVEt0KEY/bBKPzct3Njf9HacKJbV6G3hD7KWXXci1NtLKF90ek6B3ze8us8vyjNTjMLl4/lZJ+MtzTN1qFVvkdKxIo5y10viv68kY3cJHhdduic3YlXQAw+kHGQwpj8Iv+lbJ3yHmo="/><credential domain="www.ikuwa.cn" c="wLMkoPTJ2xnr8UZzMXbRcSmk3hSAnxIz7Mn3KZEJIHAH97BTlSG1ALqvieiWT4HyE+paNdE/KOwXNJR4tfBJDFQpeL4JGprktAvPmMlyYonfSpdTi6KxDlNhpghAnsiNGs4jnDBvh1czZP8Y+KUqFIA4P8j1ex3nawlHv38vtqI="/><credential domain="games.fetion.com.cn" c="MXJNEm5HqYr3AilR9g1M+90aGmI064uIbuJFvWT/MPKb+idfa+P+SLPr10xfAsr1VTZ9hLISjMyEwlBYDBqrpBk//A0s9Nc2h7R+q+3qF+DJF0msf30KtdJlAgNay/KqbTfKYZ4rDfdrc8JOYGVYvKfhRaNVPK9Afg731SBaMt/RbjpqPupWS7JDJUEtGv5g"/></credentials></results>
+===================================================================================
+
+
+=============================MapleFetion CrushReport=================================
+Thank you for working with MapleFetion!!! 
+ProjectHome : http://maplefetion.googlecode.com 
+Author      : solosky <solosky772@qq.com> 
+AuthorBlog  : http://www.solosky.net 
+-------------------------------------------------------------------------------------
+
+Ops, if you saw this report, FetionClient was crushed by some exceptions. Sorry for that.
+Please Email this crush file or log file to author to find and fix bugs, thank you sincerely.
+
+CrushedDate:Mon Aug 01 11:50:20 CST 2011
+
+------------------------------------Version---------------------------------------
+ClientVersion   : MapleFetion-2.5.1
+ProtocolVersion : 4.1.0740
+
+-------------------------------------Config--------------------------------------
+server.http-tunnel = http://221.130.46.141/ht/sd.aspx
+server.sipc-ssl-proxy = 221.130.46.141:443
+fetion.sip.check-alive-interval = 20
+fetion.sip.keep-connection-interval = 30
+crush.send.enable = false
+server.verify-pic-uri = http://nav.fetion.com.cn/nav/GetPicCodeV4.aspx
+fetion.dialog.check-idle-interval = 150
+server.set-portrait = http://hdss1fta.fetion.com.cn/HDS_S00/setportrait.aspx
+fetion.sip.default-alive-time = 120
+fetion.sip.machine-code = 5DBFE64D4449FBD0AE130C7B12D27A9F
+log.sipc.dir = ./
+fetion.dialog.max-idle-time = 300
+fetion.dialog.wait-buddy-enter-timeout = 20
+fetion.sip.default-retry-times = 0
+fetion.dialog.max-opened-number = 12
+server.sipc-proxy = 221.130.46.141:8080
+fetion.sip.keep-alive-interval = 600
+crush.log.dir = .
+log.sipc.enable = false
+crush.send.url = http://maplefetion.solosky.net/crushReport.php?report={report}
+crush.log.enable = true
+server.get-portrait = http://hdss1fta.fetion.com.cn/HDS_S00/getportrait.aspx
+server.nav-system-uri = http://nav.fetion.com.cn/nav/getsystemconfig.aspx
+server.ssi-sign-in-v2 = https://uid.fetion.com.cn/ssiportal/SSIAppSignInV4.aspx
+fetion.group.enable = false
+
+------------------------------Exception-----------------------------------
+net.solosky.maplefetion.client.dispatcher.DispatcherException: Cannot find a class to handle this notify - notify:
+BN 783093053 SIP-C/4.0
+N: UpdateEndpoint
+L: 173
+I: 1
+Q: 1 BN
+
+<events><event type="EndpointChanged"><endpoints self="primary"><endpoint device-id="PCSM010042220319" device-type="PCSmart" device-caps="5ff"/></endpoints></event></events>
+	at net.solosky.maplefetion.client.dispatcher.AbstractMessageDispatcher.dispatch(AbstractMessageDispatcher.java:175)
+	at net.solosky.maplefetion.client.dispatcher.AbstractMessageDispatcher.doProcessIncoming(AbstractMessageDispatcher.java:108)
+	at net.solosky.maplefetion.chain.AbstractProcessor.processIncoming(AbstractProcessor.java:158)
+	at net.solosky.maplefetion.chain.AbstractProcessor.processIncoming(AbstractProcessor.java:160)
+	at net.solosky.maplefetion.util.SipcParser.flushInMessage(SipcParser.java:156)
+	at net.solosky.maplefetion.util.SipcParser.processIncoming(SipcParser.java:293)
+	at net.solosky.maplefetion.chain.AbstractProcessor.processIncoming(AbstractProcessor.java:160)
+	at net.solosky.maplefetion.net.AbstractTransfer.bytesRecived(AbstractTransfer.java:80)
+	at net.solosky.maplefetion.net.tcp.TcpTransfer.access$3(TcpTransfer.java:1)
+	at net.solosky.maplefetion.net.tcp.TcpTransfer$1.run(TcpTransfer.java:129)
+	at java.lang.Thread.run(Thread.java:619)
+
+===================================================================================
+
+
