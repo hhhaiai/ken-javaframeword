@@ -60,8 +60,16 @@ public class FetionManager {
 		if (state == LoginState.LOGIN_SUCCESS) {
 			System.err.println(mobileNum + "登陆成功");
 			map.put(mobileNum, client);
+		} else if (state == LoginState.SSI_AUTH_FAIL) {
+			System.out.println("你输入的手机号或者密码不对，请检查后重试!");
+		} else if (state == LoginState.SSI_CONNECT_FAIL) {
+			System.out.println("SSI连接失败！！");
+		} else if (state == LoginState.SIPC_CONNECT_FAIL) {
+			System.out.println("SIPC服务器连接失败！！");
+		} else if (state == LoginState.LOGIN_CANCELED) {
+			// 取消了登录
 		} else {
-			System.err.println(mobileNum + "登陆失败");
+			System.out.println("登录失败，原因：" + state.name());
 		}
 	}
 
