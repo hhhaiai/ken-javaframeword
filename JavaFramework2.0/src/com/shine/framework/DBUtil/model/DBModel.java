@@ -220,6 +220,21 @@ public final class DBModel extends ArrayList<DBRowModel> {
 	}
 
 	/**
+	 * 部分关闭,关闭ResultSet和Statement
+	 */
+	public void closePart() {
+		try {
+			if (this.rs != null)
+				this.rs.close();
+
+			if (this.stat != null)
+				this.stat.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
 	 * 全部关闭,关闭Connection,ResultSet和Statement
 	 */
 	public void close() {
