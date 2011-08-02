@@ -59,5 +59,6 @@
 	<classpathentry kind="lib" path="E:/workspace/JavaFramework2.0/lib/jnca-beta-0.91.jar"/>
 	<classpathentry kind="lib" path="E:/workspace/JavaFramework2.0/lib/pygmy-core-ooweb.jar"/>
 	<classpathentry kind="lib" path="E:/workspace/JavaFramework2.0/lib/pygmy-handlers.jar"/>
+	<classpathentry kind="lib" path="E:/workspace/JavaFramework2.0/lib/org-jofc-0.8.20110729.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
