@@ -61,5 +61,6 @@
 	<classpathentry kind="lib" path="E:/workspace/JavaFramework2.5/lib/xom-1.2.5.jar"/>
 	<classpathentry kind="lib" path="E:/workspace/JavaFramework2.5/lib/yuicompressor-2.4.6.jar"/>
 	<classpathentry kind="lib" path="E:/workspace/JavaFramework2.5/lib/maplefetion-core-2.5.1.jar"/>
+	<classpathentry kind="lib" path="E:/workspace/JavaFramework2.5/lib/org-jofc-0.8.20110729.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
