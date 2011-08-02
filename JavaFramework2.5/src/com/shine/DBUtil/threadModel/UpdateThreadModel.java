@@ -1,7 +1,6 @@
 package com.shine.DBUtil.threadModel;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import com.shine.DBUtil.DBUtil;
 import com.shine.framework.ThreadPoolUtil.model.ThreadModel;
@@ -13,6 +12,7 @@ public class UpdateThreadModel extends ThreadModel {
 		this.setTimeOut(1000);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void excute(Object... args) {
 		try {

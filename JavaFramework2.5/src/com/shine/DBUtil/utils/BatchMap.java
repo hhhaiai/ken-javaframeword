@@ -2,8 +2,6 @@ package com.shine.DBUtil.utils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-
 import com.shine.DBUtil.DBUtil;
 import com.shine.framework.ThreadPoolUtil.ThreadPoolManager;
 
@@ -21,11 +19,12 @@ public class BatchMap extends HashMap<String, ArrayList<String>> {
 
 			if (this.get(jndi).size() > DBUtil.getInstance().getBatchSqlSize()) {
 				System.out.println("批量执行sql");
-				ArrayList<String> list = this.get(jndi);
 				if (ThreadPoolManager.getManager().getIdleThread("dbUpdate") != null) {
 					ThreadPoolManager.getManager().getIdleThread("dbUpdate")
-							.setValues(jndi,
-									((ArrayList) this.get(jndi)).clone());
+							.setValues(
+									jndi,
+									((ArrayList<String>) this.get(jndi))
+											.clone());
 				}
 				this.get(jndi).clear();
 			}

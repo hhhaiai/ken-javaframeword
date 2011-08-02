@@ -2,7 +2,6 @@ package com.shine.DBUtil.threadModel;
 
 import com.shine.DBUtil.DBUtil;
 import com.shine.DBUtil.model.DBModel;
-import com.shine.framework.ThreadPoolUtil.model.MethodThreadModel;
 import com.shine.framework.ThreadPoolUtil.model.ThreadModel;
 import com.shine.framework.core.util.ReflectionUtil;
 

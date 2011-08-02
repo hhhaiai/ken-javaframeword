@@ -4,6 +4,11 @@ import java.util.HashMap;
 
 public class DBRowModel extends HashMap<String, String> {
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
 	 * 获取行的值
 	 * 
 	 * @param key

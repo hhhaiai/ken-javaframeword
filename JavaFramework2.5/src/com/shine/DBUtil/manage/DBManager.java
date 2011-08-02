@@ -2,7 +2,6 @@ package com.shine.DBUtil.manage;
 
 import java.io.File;
 import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
