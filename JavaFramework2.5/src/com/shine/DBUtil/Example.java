@@ -21,6 +21,7 @@ public class Example {
 
 		DBUtil.getInstance().cacheUpdate("11", "1", "11111");
 		DBModel map4 = DBUtil.getInstance().cacheQuery("11", "1");
+		map4.close();
 
 		// ///////
 		// DBUtil

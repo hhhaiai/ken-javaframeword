@@ -16,7 +16,6 @@ public class ExcelUtils {
 	 * @param filePath 文件路径
 	 * @return 读出的Excel的内容
 	 */
-	@SuppressWarnings("deprecation")
 	public String getTextFromExcel(String filePath) {
 		StringBuffer buff = new StringBuffer();
 		try {

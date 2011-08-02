@@ -2,7 +2,6 @@ package com.shine.DBUtil;
 
 import java.sql.SQLException;
 
-import com.shine.DBUtil.manage.DBManager;
 import com.shine.DBUtil.model.DBModel;
 
 public class PageSelectPage {

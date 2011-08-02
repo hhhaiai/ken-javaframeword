@@ -95,7 +95,6 @@ public class DataUtil {
 	/**
 	 * compare two string Lists 找出lastElements有但legacyElements没有的元素
 	 */
-	@SuppressWarnings("unchecked")
 	public static <T> List<T> getOffset(final List<T> lastElements,
 			final List<T> legacyElements) {
 		if (DataUtil.isNull(legacyElements))
