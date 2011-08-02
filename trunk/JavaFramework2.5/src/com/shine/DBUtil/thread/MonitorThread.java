@@ -1,7 +1,6 @@
 package com.shine.DBUtil.thread;
 
 import com.shine.DBUtil.DBUtil;
-import com.shine.DBUtil.model.DBModel;
 
 public final class MonitorThread extends Thread {
 	private boolean monitorState = false;
@@ -16,7 +15,7 @@ public final class MonitorThread extends Thread {
 								"jdbc/cache",
 								"delete from cache where julianday(time)*86400<(julianday(strftime('%Y-%m-%d %H:%M:%S','now','localtime'))*86400-"
 										+ cacheTime + ");");
-				this.sleep(cacheTime * 1000);
+				Thread.sleep(cacheTime * 1000);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
