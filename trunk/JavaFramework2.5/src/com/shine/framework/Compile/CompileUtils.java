@@ -1,7 +1,5 @@
 package com.shine.framework.Compile;
 
-import java.io.File;
-import java.io.FileWriter;
 
 import com.shine.framework.core.util.ReflectionUtil;
 import com.sun.tools.javac.Main;
@@ -41,6 +39,7 @@ public class CompileUtils {
 	 * @param javaPath
 	 * @return
 	 */
+	@SuppressWarnings("static-access")
 	public static int CompileFile(String javaPath, String targetPath,
 			String libPath) {
 		int status = -1;

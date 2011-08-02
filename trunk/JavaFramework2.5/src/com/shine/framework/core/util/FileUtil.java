@@ -14,9 +14,8 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.URL;
 
-import org.apache.jasper.tagplugins.jstl.core.Url;
-import org.apache.poi.poifs.filesystem.DirectoryEntry;
-import org.apache.poi.poifs.filesystem.DocumentEntry;
+//import org.apache.poi.poifs.filesystem.DirectoryEntry;
+//import org.apache.poi.poifs.filesystem.DocumentEntry;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 
 /**
@@ -507,9 +506,9 @@ public class FileUtil {
 			byte b[] = content.getBytes();
 			bais = new ByteArrayInputStream(b);
 			POIFSFileSystem poifs = new POIFSFileSystem();
-			DirectoryEntry directory = poifs.getRoot();
-			DocumentEntry documentEntry = directory.createDocument(
-					"WordDocument", bais);
+//			DirectoryEntry directory = poifs.getRoot();
+//			DocumentEntry documentEntry = directory.createDocument(
+//					"WordDocument", bais);
 
 			ostream = new FileOutputStream(path);
 			// 生成Word临时文件
@@ -552,9 +551,9 @@ public class FileUtil {
 			byte b[] = content.getBytes();
 			bais = new ByteArrayInputStream(b);
 			POIFSFileSystem poifs = new POIFSFileSystem();
-			DirectoryEntry directory = poifs.getRoot();
-			DocumentEntry documentEntry = directory.createDocument(
-					"WordDocument", bais);
+//			DirectoryEntry directory = poifs.getRoot();
+//			DocumentEntry documentEntry = directory.createDocument(
+//					"WordDocument", bais);
 
 			ostream = new FileOutputStream(path);
 			// 生成Word临时文件
