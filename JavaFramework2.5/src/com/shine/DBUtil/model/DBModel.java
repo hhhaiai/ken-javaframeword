@@ -22,7 +22,11 @@ public final class DBModel extends ArrayList<DBRowModel> {
 	// 列名集
 	private List<String> columnName = new ArrayList<String>();
 
+	// 每页缓存条数
 	private int maxRows = 1000;
+
+	// 页数
+	private int page = -1;
 
 	private Connection conn;
 	private Statement stat;
@@ -207,6 +211,7 @@ public final class DBModel extends ArrayList<DBRowModel> {
 			this.add(dbRowModel);
 			i++;
 		}
+		page++;
 		return this.size();
 	}
 
@@ -217,6 +222,34 @@ public final class DBModel extends ArrayList<DBRowModel> {
 	 */
 	public void beforeFirst() throws SQLException {
 		rs.beforeFirst();
+		page = -1;
+		next();
+	}
+
+	/**
+	 * 获取其中某页数据
+	 * 
+	 * @param page
+	 * @return
+	 * @throws SQLException
+	 */
+	public DBModel getPageValues(int page, int maxRows) throws SQLException {
+		this.maxRows = maxRows;
+		return getPageValues(page);
+	}
+
+	/**
+	 * 获取其中某页数据
+	 * 
+	 * @param page
+	 * @return
+	 * @throws SQLException
+	 */
+	public DBModel getPageValues(int page) throws SQLException {
+		this.page = page;
+		rs.absolute(page * maxRows);
+		next();
+		return this;
 	}
 
 	/**
@@ -258,6 +291,14 @@ public final class DBModel extends ArrayList<DBRowModel> {
 
 	public void setMaxRows(int maxRows) {
 		this.maxRows = maxRows;
+	}
+
+	public int getPage() {
+		return page;
+	}
+
+	public void setPage(int page) {
+		this.page = page;
 	}
 
 	public Connection getConn() {
