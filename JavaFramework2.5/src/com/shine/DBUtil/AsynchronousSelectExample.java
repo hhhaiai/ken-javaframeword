@@ -18,7 +18,7 @@ public class AsynchronousSelectExample {
 		DBUtil
 				.getInstance()
 				.init(
-						"E:\\workspace\\JavaFramework2.0\\src\\com\\shine\\framework\\DBUtil\\config\\dbXml.xml");
+						"E:\\workspace\\JavaFramework2.5\\src\\com\\shine\\DBUtil\\config\\dbXml.xml");
 
 		AsynchronousSelectExample example = new AsynchronousSelectExample();
 		DBUtil.getInstance()

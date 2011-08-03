@@ -191,7 +191,19 @@ public final class DBModel extends ArrayList<DBRowModel> {
 	}
 
 	/**
-	 * 加载下1000行数据
+	 * 加载下一次缓存数据
+	 * 
+	 * @param maxRows
+	 * @return
+	 * @throws SQLException
+	 */
+	public int next(int maxRows) throws SQLException {
+		this.maxRows = maxRows;
+		return next();
+	}
+
+	/**
+	 * 加载下一次缓存数据
 	 * 
 	 * @throws SQLException
 	 */

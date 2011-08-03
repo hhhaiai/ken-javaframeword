@@ -21,17 +21,20 @@ public class PageSelectPage {
 		DBModel dbModel = DBUtil.getInstance().executeQuery("jdbc/test",
 				"select * from test1");
 
-		while (dbModel.next() != 0) {
-			System.out.println(dbModel.size());
-			// System.out.println(dbModel.getDataXml());
-		}
+		dbModel.next(10);
+		System.out.println(dbModel.getDataXml());
+
+		// while (dbModel.next() != 0) {
+		// System.out.println(dbModel.size());
+		// // System.out.println(dbModel.getDataXml());
+		// }
 
 		// 重新读取一次
-		dbModel.beforeFirst();
-		while (dbModel.next() != 0) {
-			System.out.println(dbModel.size());
-			// System.out.println(dbModel.getDataXml());
-		}
+		// dbModel.beforeFirst();
+		// while (dbModel.next() != 0) {
+		// System.out.println(dbModel.size());
+		// // System.out.println(dbModel.getDataXml());
+		// }
 
 		dbModel.close();
 	}
