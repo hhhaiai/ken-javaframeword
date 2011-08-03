@@ -25,10 +25,15 @@ import com.shine.framework.ThreadPoolUtil.ThreadPoolManager;
 public class DBUtil {
 
 	private static DBUtil util = new DBUtil();
+	// 缓存提交sql
 	private int batchSqlSize = 500;
 	private int batchThreadSize = 10;
-	private int selectThreadSize = 20;
 	private BatchMap map = new BatchMap();
+	// 异步查询线程数
+	private int selectThreadSize = 10;
+	// log File path
+	private String filePath = "";
+	private boolean logPolicy = false;
 
 	public final static DBUtil getInstance() {
 		return util;
@@ -493,6 +498,17 @@ public class DBUtil {
 			}
 		}
 		return updateCount;
+	}
+
+	/**
+	 * 记录sql语句
+	 * 
+	 * @param sql
+	 */
+	private void logSql(String sql) {
+		if (logPolicy) {
+
+		}
 	}
 
 	public int getBatchSqlSize() {

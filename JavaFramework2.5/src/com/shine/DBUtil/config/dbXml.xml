@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<config cache="true" cacheTime="600" cachePath="cache" log="true">
+<config cache="true" cacheTime="600" cachePath="cache"
+	batchSqlSize="500" batchThreadSize="10" selectThreadSize="10" log="true">
 	<Resource jndi="jdbc/Default" driverClass="com.mysql.jdbc.Driver"
 		dbUserName="root" dbPassWord="root"
 		jdbcUrl="jdbc:mysql://127.0.0.1:3306/nms4?useUnicode=true&amp;characterEncoding=utf-8"
