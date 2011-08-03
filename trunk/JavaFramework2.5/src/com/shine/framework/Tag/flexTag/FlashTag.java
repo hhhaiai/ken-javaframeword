@@ -4,6 +4,12 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.BodyTagSupport;
 
+/**
+ * 嵌入flash标签
+ * 
+ * @author viruscodecn@gmail.com
+ * 
+ */
 public class FlashTag extends BodyTagSupport {
 	private String flashName;
 	private String flashUrl;

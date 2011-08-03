@@ -11,8 +11,6 @@ import org.apache.tools.zip.ZipFile;
 import org.apache.tools.zip.ZipOutputStream;
 
 public class ZipUtil {
-	private static final int BUFFEREDSIZE = 8192;
-
 	/**
 	 * 压缩
 	 * 

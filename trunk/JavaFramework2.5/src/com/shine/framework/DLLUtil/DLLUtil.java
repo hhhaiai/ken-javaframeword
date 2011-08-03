@@ -14,6 +14,7 @@ public class DLLUtil {
 	 * @param args
 	 * @return
 	 */
+	@SuppressWarnings("deprecation")
 	public Object callDLL(String dllName, String methodName, Type returnType,
 			DllModel... args) {
 		JNative n = null;
