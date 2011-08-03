@@ -6,8 +6,6 @@ import java.util.List;
 import com.gregbugaj.gps.GPSParser;
 import com.gregbugaj.gps.Route;
 import com.gregbugaj.gps.RoutePoint;
-import com.shine.framework.core.util.FileUtil;
-import com.shine.framework.core.util.HtmlUtil;
 
 /**
  * 获取gps数据基于0813协议
