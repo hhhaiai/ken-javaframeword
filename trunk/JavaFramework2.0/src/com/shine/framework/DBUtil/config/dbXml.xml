@@ -18,4 +18,10 @@
 	<!-- sqlite -->
 	<Resource jndi="jdbc/Default2" driverClass="org.sqlite.JDBC"
 		jdbcUrl="jdbc:sqlite:E://zieckey.db" />
+	<!-- sybase iq -->
+	<Resource jndi="jdbc/Sybase" driverClass="com.sybase.jdbc4.jdbc.SybDriver"
+		dbUserName="DBA" dbPassWord="SQL"
+		jdbcUrl="jdbc:sybase:Tds:192.168.11.27:2638?ServiceName=hzkk"
+		initSize="2" minPoolSize="1" maxPoolSize="10" maxStatements="50"
+		maxIdleTime="60" />
 </config>
