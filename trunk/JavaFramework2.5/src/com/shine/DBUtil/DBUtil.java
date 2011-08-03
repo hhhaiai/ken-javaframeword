@@ -13,6 +13,15 @@ import com.shine.DBUtil.threadModel.UpdateThreadModel;
 import com.shine.DBUtil.utils.BatchMap;
 import com.shine.framework.ThreadPoolUtil.ThreadPoolManager;
 
+/**
+ * db util java数据库操作类库
+ * 
+ * @author viruscodecn@gmail.com
+ * @url 概述 http://blog.csdn.net/arjick/article/details/6656401
+ * @url 配置连接和分页查询 http://blog.csdn.net/arjick/article/details/6656456
+ * @url 多线程异步查询 http://blog.csdn.net/arjick/article/details/6656488
+ * @url 缓冲多线程插入 http://blog.csdn.net/arjick/article/details/6656537
+ */
 public class DBUtil {
 
 	private static DBUtil util = new DBUtil();
@@ -315,7 +324,7 @@ public class DBUtil {
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.err.println("执行失败sql:" + sql);
-		} 
+		}
 		return dbModel;
 	}
 
