@@ -2,8 +2,6 @@ package com.shine.netflow.job;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 import com.shine.framework.DBUtil.DBUtil;
 import com.shine.framework.DBUtil.model.DBModel;
@@ -65,12 +63,10 @@ public class DBJobAdapter {
 	 * @param table 数据表名称
 	 */
 	public void truncateDate(String table) {
-		List<String> sqls = new ArrayList<String>();
-		sqls.add(this._createTempTable(table));
-		sqls.add(this._truncateTable(table));
-		sqls.add(this._restoreTable(table));
-		sqls.add(this._dropTempTable(table));
-		DBUtil.getInstance().executeBatchUpdate(JNDI, sqls);
+		StringBuffer sql = new StringBuffer(30);
+		sql.append("TRUNCATE TABLE ");
+		sql.append(table);
+		DBUtil.getInstance().executeUpdate(sql.toString());
 	}
 	
 	/**
@@ -98,62 +94,5 @@ public class DBJobAdapter {
 			e.printStackTrace();
 		}
 		return rowCount;
-	}
-	
-	/**
-	 * 创建临时表
-	 * 
-	 * @param table 数据表名称
-	 */
-	private String _createTempTable(String table) {
-		StringBuffer sql = new StringBuffer(50);
-		sql.append("CREATE TEMPORARY TABLE `tmp_");
-		sql.append(table);
-		sql.append("` SELECT * FROM `");
-		sql.append(table);
-		sql.append("` WHERE `log_time` NOT BETWEEN '");
-		sql.append(this.startDate);
-		sql.append("' AND '");
-		sql.append(this.endDate).append("'");
-		return sql.toString();
-	}
-	
-	/**
-	 * 清空数据表
-	 * 
-	 * @param table 数据表名称
-	 */
-	private String _truncateTable(String table) {
-		StringBuffer sql = new StringBuffer(50);
-		sql.append("TRUNCATE TABLE ");
-		sql.append(table);
-		return sql.toString();
-	}
-	
-	/**
-	 * 恢复数据表数据
-	 * 
-	 * @param table 数据表名称
-	 */
-	private String _restoreTable(String table) {
-		StringBuffer sql = new StringBuffer(50);
-		sql.append("INSERT INTO `");
-		sql.append(table);
-		sql.append("` SELECT * FROM tmp_");
-		sql.append(table);
-		return sql.toString();
-	}
-	
-	/**
-	 * 删除临时数据表
-	 * 
-	 * @param table 数据表名称
-	 * @return
-	 */
-	private String _dropTempTable(String table) {
-		StringBuffer sql = new StringBuffer(50);
-		sql.append("DROP TABLE `tmp_");
-		sql.append(table).append("`");
-		return sql.toString();
 	}
 }
