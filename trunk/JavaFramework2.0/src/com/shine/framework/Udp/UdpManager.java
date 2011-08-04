@@ -97,6 +97,24 @@ public class UdpManager {
 	}
 
 	/**
+	 * 所有端口恢复接收数据 抛弃数据包
+	 */
+	public void resumeRecevice() {
+		for (UdpSocketHelper helper : map.values()) {
+			helper.setReceviceable(true);
+		}
+	}
+
+	/**
+	 * 指定端口恢复接收数据 抛弃相关数据包
+	 * 
+	 * @param port
+	 */
+	public void resumeRecevice(int port) {
+		map.get(port).setReceviceable(true);
+	}
+
+	/**
 	 * 关闭所有监听线程
 	 */
 	public void stopReceivce() {
