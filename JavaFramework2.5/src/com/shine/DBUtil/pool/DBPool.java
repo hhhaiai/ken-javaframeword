@@ -1,7 +1,6 @@
 package com.shine.DBUtil.pool;
 
 import java.sql.Connection;
-import java.sql.SQLException;
 
 public interface DBPool {
 

@@ -25,4 +25,8 @@
 		jdbcUrl="jdbc:sybase:Tds:192.168.11.27:2638?ServiceName=hzkk"
 		initSize="2" minPoolSize="1" maxPoolSize="10" maxStatements="50"
 		maxIdleTime="60" />
+	<!-- 集群 -->
+	<Cluster jndiCluster="jdbc/Cluster">
+
+	</Cluster>
 </config>

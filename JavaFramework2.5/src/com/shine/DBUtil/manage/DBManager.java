@@ -24,7 +24,7 @@ public class DBManager extends HashMap<String, DBPool> {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private static DBManager manager = new DBManager();
+	private static DBManager manager = null;
 	private String xmlfile;
 	private Map<String, DBPool> map = null;
 	// 缓存模块
@@ -35,6 +35,8 @@ public class DBManager extends HashMap<String, DBPool> {
 	private String jdbcCache = "jdbc/cache";
 
 	public final static DBManager getInstance() {
+		if (manager != null)
+			manager = new DBManager();
 		return manager;
 	}
 
@@ -111,7 +113,7 @@ public class DBManager extends HashMap<String, DBPool> {
 			monitorThread.setCacheTime(this.cacheTime);
 			monitorThread.start();
 
-			System.out.println("缓存模块启动完成!");
+			System.out.println("缓存模块启动完成!!!!");
 		}
 	}
 
@@ -280,7 +282,6 @@ public class DBManager extends HashMap<String, DBPool> {
 		}
 		return null;
 	}
-
 
 	/**
 	 * 获取默认连接
