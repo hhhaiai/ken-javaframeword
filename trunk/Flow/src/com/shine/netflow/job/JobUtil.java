@@ -14,8 +14,9 @@ public class JobUtil {
 	}
 
 	public static JobUtil getInstance() {
-		if (jobUtil != null)
+		if (jobUtil == null) {
 			jobUtil = new JobUtil();
+		}
 		return jobUtil;
 	}
 
