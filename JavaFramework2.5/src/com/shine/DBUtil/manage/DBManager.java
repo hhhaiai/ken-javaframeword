@@ -2,6 +2,7 @@ package com.shine.DBUtil.manage;
 
 import java.io.File;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -35,7 +36,7 @@ public class DBManager extends HashMap<String, DBPool> {
 	private String jdbcCache = "jdbc/cache";
 
 	public final static DBManager getInstance() {
-		if (manager != null)
+		if (manager == null)
 			manager = new DBManager();
 		return manager;
 	}
@@ -281,6 +282,39 @@ public class DBManager extends HashMap<String, DBPool> {
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	/**
+	 * 获取连接池连接总数
+	 * 
+	 * @param jndi
+	 * @return
+	 * @throws SQLException
+	 */
+	public int getNumConnection(String jndi) throws SQLException {
+		return map.get(jndi).getNumConnection();
+	}
+
+	/**
+	 * 获取连接池空闲连接数
+	 * 
+	 * @param jndi
+	 * @return
+	 * @throws SQLException
+	 */
+	public int getNumIdleConection(String jndi) throws SQLException {
+		return map.get(jndi).getNumIdleConection();
+	}
+
+	/**
+	 * 获取连接池繁忙连接数
+	 * 
+	 * @param jndi
+	 * @return
+	 * @throws SQLException
+	 */
+	public int getNumBusyConnection(String jndi) throws SQLException {
+		return map.get(jndi).getNumBusyConnection();
 	}
 
 	/**

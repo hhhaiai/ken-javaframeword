@@ -108,4 +108,19 @@ public class NetDBPool implements DBPool {
 			throw new RuntimeException("无法从数据源获取连接 ", e);
 		}
 	}
+
+	@Override
+	public int getNumConnection() throws SQLException {
+		return dataSource.getNumConnections();
+	}
+
+	@Override
+	public int getNumIdleConection() throws SQLException {
+		return dataSource.getNumIdleConnections();
+	}
+
+	@Override
+	public int getNumBusyConnection() throws SQLException {
+		return dataSource.getNumBusyConnections();
+	}
 }
