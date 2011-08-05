@@ -1,4 +1,4 @@
-package com.shine.netflow.model;
+package com.shine.netflow.job.model;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;

@@ -3,7 +3,7 @@
 <%
 	String pageDate = request.getParameter("page");
 	if (pageDate != null && pageDate.length() != 0) {
-		DBmodel dbModel=
+		//DBmodel dbModel=
 		out.println();
 	}
 %>

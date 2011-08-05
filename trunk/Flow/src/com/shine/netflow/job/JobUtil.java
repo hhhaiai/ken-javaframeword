@@ -1,7 +1,7 @@
 package com.shine.netflow.job;
 
 import com.shine.framework.JobUtil.QuartzSchedulerFactory;
-import com.shine.netflow.model.DBCreateTableJob;
+import com.shine.netflow.job.model.DBCreateTableJob;
 
 /**
  * 任务调度管理工具类
