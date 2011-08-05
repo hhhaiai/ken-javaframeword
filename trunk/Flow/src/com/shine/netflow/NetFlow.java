@@ -12,7 +12,7 @@ public class NetFlow {
 		System.out.println("netflow 接收器 启动");
 		// 初始化数据库连接池和线程池
 		DBUtil.getInstance().init(
-				SYS_PATH + "\\src\\com\\shine\\framework\\config\\dbXml.xml");
+				SYS_PATH + "\\src\\com\\shine\\sourceflow\\config\\dbXml.xml");
 		// 启动任务调度
 		JobUtil.getInstance().init();
 		// 加入路由路径
