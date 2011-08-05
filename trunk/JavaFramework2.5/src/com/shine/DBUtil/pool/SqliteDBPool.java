@@ -3,6 +3,7 @@ package com.shine.DBUtil.pool;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 public class SqliteDBPool implements DBPool {
@@ -68,15 +69,17 @@ public class SqliteDBPool implements DBPool {
 			Connection conn = pool.getConnection();
 
 			Statement stat = conn.createStatement();
-//
-//			stat
-//					.executeUpdate("create table tbl1(name varchar(20), salary int);");// 创建一个表，两列
-//
-//			stat.executeUpdate("insert into tbl1 values('ZhangSan',8000);"); // 插入数据
-//
-//			stat.executeUpdate("insert into tbl1 values('LiSi',7800);");
-//			stat.executeUpdate("insert into tbl1 values('WangWu',5800);");
-//			stat.executeUpdate("insert into tbl1 values('ZhaoLiu',9100);");
+			//
+			// stat
+			// .executeUpdate("create table tbl1(name varchar(20), salary int);");//
+			// 创建一个表，两列
+			//
+			// stat.executeUpdate("insert into tbl1 values('ZhangSan',8000);");
+			// // 插入数据
+			//
+			// stat.executeUpdate("insert into tbl1 values('LiSi',7800);");
+			// stat.executeUpdate("insert into tbl1 values('WangWu',5800);");
+			// stat.executeUpdate("insert into tbl1 values('ZhaoLiu',9100);");
 
 			ResultSet rs = stat.executeQuery("select * from tbl1;"); // 查询数据
 
@@ -93,6 +96,21 @@ public class SqliteDBPool implements DBPool {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public int getNumConnection() throws SQLException {
+		return 0;
+	}
+
+	@Override
+	public int getNumIdleConection() throws SQLException {
+		return 0;
+	}
+
+	@Override
+	public int getNumBusyConnection() throws SQLException {
+		return 0;
 	}
 
 }

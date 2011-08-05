@@ -1,6 +1,7 @@
 package com.shine.DBUtil.pool;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 
 public interface DBPool {
 
@@ -38,4 +39,28 @@ public interface DBPool {
 	 * @return
 	 */
 	public Connection getConnection();
+
+	/**
+	 * 获取连接总数
+	 * 
+	 * @return
+	 * @throws SQLException
+	 */
+	public int getNumConnection() throws SQLException;
+
+	/**
+	 * 获取空闲连接总数
+	 * 
+	 * @return
+	 * @throws SQLException
+	 */
+	public int getNumIdleConection() throws SQLException;
+
+	/**
+	 * 获取繁忙连接总数
+	 * 
+	 * @return
+	 * @throws SQLException
+	 */
+	public int getNumBusyConnection() throws SQLException;
 }
