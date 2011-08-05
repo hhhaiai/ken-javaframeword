@@ -109,12 +109,6 @@ public final class DBModel extends ArrayList<DBRowModel> {
 		Element configElement = document.addElement("nodes");
 
 		for (int j = 0; j < this.size(); j++) {
-			// 防止数据溢出
-			if (j > 2000) {
-				System.out.println("查询数据 >2000行，安全机制防止溢出,只是显示部分数据！请才用分页查询！");
-				break;
-			}
-
 			Element dataElement = configElement.addElement("node");
 			DBRowModel dbRowModel = (DBRowModel) this.get(j);
 			for (int i = 0; i < columnName.size(); i++) {

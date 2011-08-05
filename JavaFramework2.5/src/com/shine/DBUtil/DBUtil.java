@@ -1,5 +1,6 @@
 package com.shine.DBUtil;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -450,6 +451,79 @@ public class DBUtil {
 			}
 		}
 		return i;
+	}
+
+	/**
+	 * 调用存储过程
+	 * 
+	 * @param jndi
+	 * @param call
+	 * @param callPrams
+	 * @return
+	 * @example proc=conn.prepareCall("{calltest_a(?,?)}");
+	 *          proc.setString(1,"1001"); proc.setString(2,"TestA");
+	 *          proc.execute();
+	 */
+	public boolean executeCallable(String jndi, String call,
+			List<String> callPrams) {
+		Connection conn = null;
+		CallableStatement proc = null;
+		try {
+			conn = DBManager.getInstance().getConnection(jndi);
+			proc = conn.prepareCall(call);
+			int i = 1;
+			for (String s : callPrams) {
+				proc.setString(i, s);
+				i++;
+			}
+			proc.execute();
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.err.println("执行失败sql:" + call);
+		} finally {
+			try {
+				if (null != proc)
+					proc.close();
+
+				if (conn != null)
+					conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return false;
+	}
+
+	public String executeCallableReturn(String jndi, String call,
+			List<String> callPrams) {
+		Connection conn = null;
+		CallableStatement proc = null;
+		try {
+			conn = DBManager.getInstance().getConnection(jndi);
+			proc = conn.prepareCall(call);
+			int i = 1;
+			for (String s : callPrams) {
+				proc.setString(i, s);
+				i++;
+			}
+			proc.execute();
+			return null;
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.err.println("执行失败sql:" + call);
+		} finally {
+			try {
+				if (null != proc)
+					proc.close();
+
+				if (conn != null)
+					conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return null;
 	}
 
 	/**
