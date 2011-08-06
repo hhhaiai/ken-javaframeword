@@ -59,7 +59,7 @@ public class NetflowManager {
 		initThreadPool(threadSize);
 
 		// 监听端口
-		UdpManager.getManager().addBind(port);
+		UdpManager.getManager().addBind("127.0.0.1",port);
 		// 配置接收器
 		UdpManager.getManager().addRecevice(port, new NetflowRecevice(cache));
 		// 启动udp接收线程
