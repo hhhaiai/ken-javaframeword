@@ -3,6 +3,7 @@ package com.shine.DBUtil.manage;
 import java.io.File;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -16,6 +17,7 @@ import com.shine.DBUtil.pool.DBPool;
 import com.shine.DBUtil.pool.NetDBPool;
 import com.shine.DBUtil.pool.SqliteDBPool;
 import com.shine.DBUtil.thread.MonitorThread;
+import com.shine.DBUtil.utils.ClusterList;
 import com.shine.framework.core.util.FileUtil;
 import com.shine.framework.core.util.XmlUitl;
 
@@ -27,7 +29,10 @@ public class DBManager extends HashMap<String, DBPool> {
 
 	private static DBManager manager = null;
 	private String xmlfile;
+	// 线程池容器
 	private Map<String, DBPool> map = null;
+	// 集群容器
+	private Map<String, ClusterList> clusterMap = null;
 	// 缓存模块
 	private String cache = "false";
 	private int cacheTime = 1800;
@@ -49,6 +54,9 @@ public class DBManager extends HashMap<String, DBPool> {
 	public void init(String xmlfile) {
 		if (map == null)
 			map = new HashMap<String, DBPool>();
+		if (clusterMap == null)
+			clusterMap = new HashMap<String, ClusterList>();
+
 		try {
 			this.xmlfile = xmlfile;
 			Document document = XmlUitl.getFileDocument(xmlfile);
@@ -65,6 +73,7 @@ public class DBManager extends HashMap<String, DBPool> {
 				attributeMap = XmlUitl.getAllAttribute(element);
 				if (!String.valueOf(attributeMap.get("driverClass")).equals(
 						"org.sqlite.JDBC")) {
+					// 初始化连接池
 					DBPool pool = new NetDBPool();
 					pool.init(String.valueOf(attributeMap.get("dbUserName")),
 							String.valueOf(attributeMap.get("dbPassWord")),
@@ -81,6 +90,7 @@ public class DBManager extends HashMap<String, DBPool> {
 											.get("maxIdleTime"))));
 					map.put(String.valueOf(attributeMap.get("jndi")), pool);
 				} else {
+					// 初始化sqllite数据库
 					DBPool pool = new SqliteDBPool();
 					pool.init("", "", String.valueOf(attributeMap
 							.get("jdbcUrl")), String.valueOf(attributeMap
@@ -88,6 +98,32 @@ public class DBManager extends HashMap<String, DBPool> {
 					map.put(String.valueOf(attributeMap.get("jndi")), pool);
 				}
 			}
+			list = null;
+
+			// 加载集群
+			List<Element> clusterList = XmlUitl.getAllElement(document
+					.getRootElement(), "Cluster");
+			for (Element element : clusterList) {
+				List<Element> resourceList = XmlUitl.getAllElement(element,
+						"Resource");
+				ClusterList resourceNameList = new ClusterList();
+				for (Element ele : resourceList) {
+					Map attributeMap1 = XmlUitl.getAllAttribute(ele);
+					resourceNameList.add(String.valueOf(attributeMap1
+							.get("jndi")));
+					attributeMap1 = null;
+				}
+				resourceList = null;
+
+				attributeMap = XmlUitl.getAllAttribute(element);
+				// 设置主要数据库
+				resourceNameList.setMainDB(attributeMap.get("mainDB"));
+				clusterMap.put(attributeMap.get("jndiCluster"),
+						resourceNameList);
+				attributeMap = null;
+			}
+
+			// 启动缓存模块
 			startCacheFramework();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -285,6 +321,80 @@ public class DBManager extends HashMap<String, DBPool> {
 	}
 
 	/**
+	 * 获取集群的连接器
+	 * 
+	 * @param clusterJndi
+	 * @return
+	 */
+	public final Connection getClusterConnection(String clusterJndi) {
+		try {
+			ClusterList clusterList = clusterMap.get(clusterJndi);
+			// 检查主连接数据库是否正常
+			if (this.testCheckoutConnection(clusterList.getMainDB()))
+				return null;
+
+			String idleJndiName = null;
+			int idleJndiNum = 999;
+			for (String clusterJndiName : clusterList) {
+				if (this.getNumBusyConnection(clusterJndiName) == 0) {
+					idleJndiName = clusterJndiName;
+					continue;
+				}
+
+				if (this.testCheckoutConnection(clusterJndiName)
+						&& idleJndiNum > this
+								.getNumBusyConnection(clusterJndiName)) {
+					idleJndiNum = this.getNumBusyConnection(clusterJndiName);
+					idleJndiName = clusterJndiName;
+				}
+			}
+			clusterList = null;
+			// 输出集群查询的数据库jndi
+			System.out.println("集群查询的数据库" + idleJndiName);
+			return map.get(idleJndiName).getConnection();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	/**
+	 * 获取集群数据库连接器列表
+	 * 
+	 * @param clusterJndi
+	 * @return
+	 */
+	public final List<Connection> getClusterConnectionList(String clusterJndi) {
+		List<Connection> list = null;
+		try {
+			list = new ArrayList<Connection>();
+			ClusterList clusterList = clusterMap.get(clusterJndi);
+			for (String clusterJndiName : clusterList) {
+				list.add(map.get(clusterJndiName).getConnection());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	/**
+	 * 获取集群数据库jndi列表
+	 * 
+	 * @param clusterJndi
+	 * @return
+	 */
+	public final ClusterList getClusterConnectionNameList(String clusterJndi) {
+		ClusterList list = null;
+		try {
+			list = clusterMap.get(clusterJndi);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	/**
 	 * 获取连接池连接总数
 	 * 
 	 * @param jndi
@@ -315,6 +425,17 @@ public class DBManager extends HashMap<String, DBPool> {
 	 */
 	public int getNumBusyConnection(String jndi) throws SQLException {
 		return map.get(jndi).getNumBusyConnection();
+	}
+
+	/**
+	 * 检查该连接池是否正常
+	 * 
+	 * @param jndi
+	 * @return
+	 * @throws SQLException
+	 */
+	public boolean testCheckoutConnection(String jndi) throws SQLException {
+		return map.get(jndi).testCheckoutConnection();
 	}
 
 	/**

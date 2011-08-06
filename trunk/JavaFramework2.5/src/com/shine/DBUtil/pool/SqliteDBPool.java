@@ -113,4 +113,9 @@ public class SqliteDBPool implements DBPool {
 		return 0;
 	}
 
+	@Override
+	public boolean testCheckoutConnection() throws SQLException {
+		return true;
+	}
+
 }

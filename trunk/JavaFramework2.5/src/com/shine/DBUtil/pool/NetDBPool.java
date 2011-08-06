@@ -123,4 +123,9 @@ public class NetDBPool implements DBPool {
 	public int getNumBusyConnection() throws SQLException {
 		return dataSource.getNumBusyConnections();
 	}
+
+	@Override
+	public boolean testCheckoutConnection() throws SQLException {
+		return dataSource.isTestConnectionOnCheckout();
+	}
 }
