@@ -63,4 +63,12 @@ public interface DBPool {
 	 * @throws SQLException
 	 */
 	public int getNumBusyConnection() throws SQLException;
+
+	/**
+	 * 检查是否可以获取连接
+	 * 
+	 * @return
+	 * @throws SQLException
+	 */
+	public boolean testCheckoutConnection() throws SQLException;
 }

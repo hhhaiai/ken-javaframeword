@@ -25,8 +25,20 @@
 		jdbcUrl="jdbc:sybase:Tds:192.168.11.27:2638?ServiceName=hzkk"
 		initSize="2" minPoolSize="1" maxPoolSize="10" maxStatements="50"
 		maxIdleTime="60" />
+	<!-- 集群测试数据库 -->
+	<Resource jndi="jdbc/Cluster1" driverClass="com.mysql.jdbc.Driver"
+		dbUserName="root" dbPassWord="root"
+		jdbcUrl="jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&amp;characterEncoding=utf-8"
+		initSize="2" minPoolSize="1" maxPoolSize="10" maxStatements="50"
+		maxIdleTime="60" />
+	<Resource jndi="jdbc/Cluster2" driverClass="com.mysql.jdbc.Driver"
+		dbUserName="root" dbPassWord="root"
+		jdbcUrl="jdbc:mysql://127.0.0.1:3306/test2?useUnicode=true&amp;characterEncoding=utf-8"
+		initSize="2" minPoolSize="1" maxPoolSize="10" maxStatements="50"
+		maxIdleTime="60" />
 	<!-- 集群 -->
-	<Cluster jndiCluster="jdbc/Cluster">
-
+	<Cluster jndiCluster="jdbc/Cluster" mainDB="jdbc/Cluster1">
+		<Resource jndi="jdbc/Cluster1" />
+		<Resource jndi="jdbc/Cluster2" />
 	</Cluster>
 </config>

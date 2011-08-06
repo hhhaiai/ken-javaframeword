@@ -12,6 +12,7 @@ import com.shine.DBUtil.model.DBModel;
 import com.shine.DBUtil.threadModel.SelectThreadModel;
 import com.shine.DBUtil.threadModel.UpdateThreadModel;
 import com.shine.DBUtil.utils.BatchMap;
+import com.shine.DBUtil.utils.ClusterList;
 import com.shine.framework.ThreadPoolUtil.ThreadPoolManager;
 
 /**
@@ -495,6 +496,14 @@ public class DBUtil {
 		return false;
 	}
 
+	/**
+	 * 调用存储过程带返回值（测试）
+	 * 
+	 * @param jndi
+	 * @param call
+	 * @param callPrams
+	 * @return
+	 */
 	public String executeCallableReturn(String jndi, String call,
 			List<String> callPrams) {
 		Connection conn = null;
@@ -572,6 +581,34 @@ public class DBUtil {
 			}
 		}
 		return updateCount;
+	}
+
+	/**
+	 * 集群查询
+	 * 
+	 * @param clusterJndi
+	 * @param sql
+	 * @return
+	 */
+	public DBModel executeClusterQuery(String clusterJndi, String sql) {
+		Connection conn = DBManager.getInstance().getClusterConnection(
+				clusterJndi);
+		return executeQuery(conn, sql);
+	}
+
+	/**
+	 * 集群更新
+	 * 
+	 * @param clusterJndi
+	 * @param sql
+	 */
+	public void executeClusterUpdate(String clusterJndi, String sql) {
+		ClusterList list = DBManager.getInstance()
+				.getClusterConnectionNameList(clusterJndi);
+		for (String jndi : list) {
+			executeUpdate(jndi, sql);
+		}
+
 	}
 
 	/**
