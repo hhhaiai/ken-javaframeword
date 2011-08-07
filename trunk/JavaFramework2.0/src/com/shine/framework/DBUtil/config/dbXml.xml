@@ -15,6 +15,11 @@
 		jdbcUrl="jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&amp;characterEncoding=utf-8"
 		initSize="2" minPoolSize="1" maxPoolSize="10" maxStatements="50"
 		maxIdleTime="60" />
+	<!-- MonetDB -->
+	<Resource jndi="jdbc/MonetDB" driverClass="nl.cwi.monetdb.jdbc.MonetDriver"
+		dbUserName="monetdb" dbPassWord="monetdb" jdbcUrl="jdbc:monetdb://127.0.0.1:50000/demo"
+		initSize="2" minPoolSize="1" maxPoolSize="10" maxStatements="50"
+		maxIdleTime="60" />
 	<!-- sqlite -->
 	<Resource jndi="jdbc/Default2" driverClass="org.sqlite.JDBC"
 		jdbcUrl="jdbc:sqlite:E://zieckey.db" />
