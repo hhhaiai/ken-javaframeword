@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<boot>
+    <!-- 版权 -->
+    <copyRight>广州阳光耐特电子有限公司</copyRight>
+    <!-- 版本 -->
+    <version>FLOW 3.0</version>
+    <!-- netflow接收端口 -->
+    <port>6696</port>
+    <!-- 监听主机 -->
+    <host>127.0.0.1</host>
+    <!-- 接收数据时的缓存条数 -->
+    <receive-cache>20</receive-cache>
+    <!-- 处理线程数 -->
+    <process-thread-size>20</process-thread-size>
+    <!-- 提交线程数 -->
+    <update-thread-size>20</update-thread-size>
+    <!-- 查询线数 -->
+    <select-therad-size>20</select-therad-size>
+    <!-- 批量执行SQL数 -->
+    <batch-sql>60</batch-sql>
+    <!-- 路由配置 -->
+    <routers>
+        <router>
+            <id>0</id>
+            <ip-address>127.0.0.1</ip-address>
+        </router>
+    </routers>
+    <!-- 计划任务 -->
+    <schedulers>
+        <scheduler>com.shine.netflow.job.model.DBCreateTableJob</scheduler>
+    </schedulers>
+</boot>
