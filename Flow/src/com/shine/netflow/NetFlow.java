@@ -13,17 +13,17 @@ import com.shine.sourceflow.config.ConfigManager;
 
 public class NetFlow {
 	private static NetFlow netFlow;
-	
+
 	private NetFlow() {
 	}
-	
+
 	public static NetFlow getInstance() {
 		if (netFlow == null) {
 			netFlow = new NetFlow();
 		}
 		return netFlow;
 	}
-	
+
 	/**
 	 * 初始化
 	 */
@@ -35,8 +35,8 @@ public class NetFlow {
 		// 启动任务调度
 		JobUtil.getInstance().init();
 		// 加入路由路径
-		List<Element> routers = XmlUitl.
-			getAllElement(configMgr.getAttribute("routers"));
+		List<Element> routers = XmlUitl.getAllElement(configMgr
+				.getAttribute("routers"));
 		for (Element element : routers) {
 			List<Element> list = XmlUitl.getAllElement(element);
 			String id = list.get(0).getText();
@@ -44,17 +44,18 @@ public class NetFlow {
 			NetflowManager.getManager().getRouteMap().put(ip, id);
 		}
 		// 加入处理接口
-		NetflowManager.getManager().
-			getNetflowHandleMap().put("print", new NetflowImpl());
+		NetflowManager.getManager().getNetflowHandleMap().put("print",
+				new NetflowImpl());
 		// 启动接收
 		String host = configMgr.getAttribute("host").getText();
-		int port = Integer.parseInt(
-				configMgr.getAttribute("port").getText());
-		int cache = Integer.parseInt(
-				configMgr.getAttribute("receive-cache").getText());
-		int threadSize = Integer.parseInt(
-				configMgr.getAttribute("process-thread-size").getText());
-		NetflowManager.getManager().startReceiver(host, port, cache, threadSize);
+		int port = Integer.parseInt(configMgr.getAttribute("port").getText());
+		int cache = Integer.parseInt(configMgr.getAttribute("receive-cache")
+				.getText());
+		int threadSize = Integer.parseInt(configMgr.getAttribute(
+				"process-thread-size").getText());
+		NetflowManager.getManager()
+				.startReceiver(host, port, cache, threadSize);
+		configMgr = null;
 	}
 
 	public void close() {
