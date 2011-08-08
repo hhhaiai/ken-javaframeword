@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<config cache="true" cacheTime="600" cachePath="cache">
-	<Resource jndi="jdbc/flow" driverClass="com.mysql.jdbc.Driver"
-		dbUserName="root" dbPassWord="ROOT"
-		jdbcUrl="jdbc:mysql://127.0.0.1:3306/flow?useUnicode=true&amp;characterEncoding=utf-8"
-		initSize="20" minPoolSize="20" maxPoolSize="100" maxStatements="100"
-		maxIdleTime="100" />
-</config>
