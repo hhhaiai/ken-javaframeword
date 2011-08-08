@@ -50,7 +50,7 @@ public class NetflowManager {
 	 * @param cache
 	 *            数据包缓存
 	 */
-	public void startReceiver(int port, int cache, int threadSize) {
+	public void startReceiver(String host, int port, int cache, int threadSize) {
 		this.cache = cache;
 		this.threadSize = threadSize;
 		this.port = port;
@@ -59,7 +59,7 @@ public class NetflowManager {
 		initThreadPool(threadSize);
 
 		// 监听端口
-		UdpManager.getManager().addBind("127.0.0.1",port);
+		UdpManager.getManager().addBind(host, port);
 		// 配置接收器
 		UdpManager.getManager().addRecevice(port, new NetflowRecevice(cache));
 		// 启动udp接收线程

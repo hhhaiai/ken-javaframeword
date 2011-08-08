@@ -16,7 +16,7 @@ public class Example {
 		NetflowManager.getManager().getNetflowHandleMap().put("print",
 				new NetFlowImpl());
 		// 启动接收
-		NetflowManager.getManager().startReceiver(6696, 10, 2);
+		NetflowManager.getManager().startReceiver("127.0.0.1", 6696, 10, 2);
 	}
 
 }
