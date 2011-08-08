@@ -34,7 +34,6 @@ public class DBCreateTableJob implements QuartzJob {
 	public Trigger createTrigger() {
 		Trigger trigger = TriggerUtils.makeDailyTrigger(TRIGGER_HOUR,
 				TRIGGER_MINUTE);
-		// Trigger trigger = TriggerUtils.makeSecondlyTrigger(1);
 		trigger.setName(TRIGGER_NAME);
 		return trigger;
 	}
@@ -44,18 +43,12 @@ public class DBCreateTableJob implements QuartzJob {
 		// 暂停接收数据包
 		UdpManager.getManager().pauseRecevice();
 
-		try {
-			// TODO 记录日志
-			System.out.println("开始任务调度。。。");
-			Long startTime = System.currentTimeMillis();
-			this.createTable();
-			this.stroeData();
-			this.truncateDate();
-			Long endTime = System.currentTimeMillis();
-			System.out.println("执行时间" + (endTime - startTime));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		// TODO 记录日志
+		// 开始任务调度
+		System.out.println("开始任务调度。。。");
+		this.createTable();
+		this.stroeData();
+		this.truncateDate();
 
 		// 重新启动接收数据包
 		UdpManager.getManager().resumeRecevice();
