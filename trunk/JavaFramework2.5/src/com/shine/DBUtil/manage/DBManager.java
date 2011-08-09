@@ -71,8 +71,18 @@ public class DBManager extends HashMap<String, DBPool> {
 			Map<String, String> attributeMap = null;
 			for (Element element : list) {
 				attributeMap = XmlUitl.getAllAttribute(element);
-				if (!String.valueOf(attributeMap.get("driverClass")).equals(
-						"org.sqlite.JDBC")) {
+
+				if (String.valueOf(attributeMap.get("driverClass")).equals(
+						"org.sqlite.JDBC")
+						|| String.valueOf(attributeMap.get("driverClass"))
+								.equals("org.relique.jdbc.csv.CsvDriver")) {
+					// 初始化sqllite数据库
+					DBPool pool = new SqliteDBPool();
+					pool.init("", "", String.valueOf(attributeMap
+							.get("jdbcUrl")), String.valueOf(attributeMap
+							.get("driverClass")));
+					map.put(String.valueOf(attributeMap.get("jndi")), pool);
+				} else {
 					// 初始化连接池
 					DBPool pool = new NetDBPool();
 					pool.init(String.valueOf(attributeMap.get("dbUserName")),
@@ -88,13 +98,6 @@ public class DBManager extends HashMap<String, DBPool> {
 											.get("maxStatements"))), Integer
 									.parseInt(String.valueOf(attributeMap
 											.get("maxIdleTime"))));
-					map.put(String.valueOf(attributeMap.get("jndi")), pool);
-				} else {
-					// 初始化sqllite数据库
-					DBPool pool = new SqliteDBPool();
-					pool.init("", "", String.valueOf(attributeMap
-							.get("jdbcUrl")), String.valueOf(attributeMap
-							.get("driverClass")));
 					map.put(String.valueOf(attributeMap.get("jndi")), pool);
 				}
 			}
