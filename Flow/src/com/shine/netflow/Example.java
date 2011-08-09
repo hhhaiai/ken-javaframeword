@@ -6,7 +6,9 @@ public class Example {
 	public static void main(String args[]) {
 		ConfigManager.getManager().initConfig(
 				"E:\\workspace\\Flow\\WebRoot\\WEB-INF\\config\\boot.xml");
-		ConfigManager.getManager().setConfigPath("E:\\workspace\\Flow\\WebRoot\\WEB-INF\\config\\");
-		NetFlow.getInstance().init();
+		ConfigManager.getManager().setConfigPath(
+				"E:\\workspace\\Flow\\WebRoot\\WEB-INF\\config\\");
+		NetFlow flow = new NetFlow();
+		flow.init();
 	}
 }

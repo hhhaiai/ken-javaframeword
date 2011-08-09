@@ -12,16 +12,15 @@ import com.shine.netflow.job.JobUtil;
 import com.shine.sourceflow.config.ConfigManager;
 
 public class NetFlow {
-	private static NetFlow netFlow;
+	private static NetFlow flow = null;
 
 	private NetFlow() {
 	}
 
-	public static NetFlow getInstance() {
-		if (netFlow == null) {
-			netFlow = new NetFlow();
-		}
-		return netFlow;
+	public static NetFlow getNetFlow() {
+		if (flow == null)
+			flow = new NetFlow();
+		return flow;
 	}
 
 	/**
