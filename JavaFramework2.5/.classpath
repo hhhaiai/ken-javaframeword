@@ -64,5 +64,6 @@
 	<classpathentry kind="lib" path="E:/workspace/JavaFramework2.5/lib/org-jofc-0.8.20110729.jar"/>
 	<classpathentry kind="lib" path="E:/workspace/JavaFramework2.5/lib/sybases-jconn4.jar"/>
 	<classpathentry kind="lib" path="E:/workspace/JavaFramework2.5/lib/monetdb-1.11-jdbc.jar"/>
+	<classpathentry kind="lib" path="E:/workspace/JavaFramework2.5/lib/csvjdbc.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

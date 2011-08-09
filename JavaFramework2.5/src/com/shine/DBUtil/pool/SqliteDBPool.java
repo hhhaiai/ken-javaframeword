@@ -6,6 +6,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+/**
+ * sqlite数据集
+ * 
+ * @author viruscodecn@gmail.com
+ * 
+ */
 public class SqliteDBPool implements DBPool {
 	// private String dbUserName;
 	// private String dbPassWord;
