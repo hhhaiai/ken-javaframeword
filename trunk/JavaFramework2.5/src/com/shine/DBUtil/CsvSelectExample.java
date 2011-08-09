@@ -20,9 +20,8 @@ public class CsvSelectExample {
 		DBModel dbModel = DBUtil.getInstance().executeQuery("jndi/Csv",
 				"select * from test");
 
-		while (dbModel.next() != 0) {
-			System.out.println(dbModel.getDataXml());
-		}
+		dbModel.next();
+		System.out.println(dbModel.getDataXml());
 		dbModel.close();
 
 	}
