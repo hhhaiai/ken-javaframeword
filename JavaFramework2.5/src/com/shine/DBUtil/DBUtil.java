@@ -164,21 +164,141 @@ public class DBUtil {
 			DatabaseMetaData dbMetaData = conn.getMetaData();
 			rs = dbMetaData.getSchemas();
 			dbModel.setResultSet(conn, null, rs);
+			dbMetaData = null;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return dbModel;
 	}
 
-	public DBModel getAllTables(Connection conn) {
-		Statement stat = null;
-		ResultSet rs = null;
+	/**
+	 * 获取所有表
+	 * 
+	 * @param jndi
+	 * @param schemaName
+	 *            =null
+	 * @return
+	 */
+	public DBModel getAllTables(String jndi, String schemaName) {
 		try {
-
+			Connection conn = DBManager.getInstance().getConnection(jndi);
+			if (conn != null)
+				return getAllTables(conn, schemaName);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	/**
+	 * 货所有表
+	 * 
+	 * @param conn
+	 * @param schemaName
+	 *            =null
+	 * @return
+	 */
+	public DBModel getAllTables(Connection conn, String schemaName) {
+		DBModel dbModel = new DBModel();
+		ResultSet rs = null;
+		try {
+			DatabaseMetaData dbMetaData = conn.getMetaData();
+			String[] types = { "TABLE" };
+			rs = dbMetaData.getTables(null, schemaName, "%", types);
+			dbModel.setResultSet(conn, null, rs);
+			dbMetaData = null;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return dbModel;
+	}
+
+	/**
+	 * 获取所有视图
+	 * 
+	 * @param jndi
+	 * @param schemaName
+	 *            =null
+	 * @return
+	 */
+	public DBModel getAllViews(String jndi, String schemaName) {
+		try {
+			Connection conn = DBManager.getInstance().getConnection(jndi);
+			if (conn != null)
+				return getAllTables(conn, schemaName);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	/**
+	 * 所有视图
+	 * 
+	 * @param conn
+	 * @param schemaName
+	 *            =null
+	 * @return
+	 */
+	public DBModel getAllViews(Connection conn, String schemaName) {
+		DBModel dbModel = new DBModel();
+		ResultSet rs = null;
+		try {
+			DatabaseMetaData dbMetaData = conn.getMetaData();
+			String[] types = { "VIEW" };
+			rs = dbMetaData.getTables(null, schemaName, "%", types);
+			dbModel.setResultSet(conn, null, rs);
+			dbMetaData = null;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return dbModel;
+	}
+
+	/**
+	 * 获取表列名集
+	 * 
+	 * @param jndi
+	 * @param schemaName
+	 *            =null
+	 * @param tableName
+	 * @return
+	 */
+	public DBModel getTableColumns(String jndi, String schemaName,
+			String tableName) {
+		try {
+			Connection conn = DBManager.getInstance().getConnection(jndi);
+			if (conn != null)
+				return getTableColumns(conn, schemaName, tableName);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	/**
+	 * 获取表列名集
+	 * 
+	 * @param conn
+	 * @param jndi
+	 * @param schemaName
+	 *            =null
+	 * @param tableName
+	 * @return
+	 */
+	public DBModel getTableColumns(Connection conn, String schemaName,
+			String tableName) {
+		DBModel dbModel = new DBModel();
+		ResultSet rs = null;
+		try {
+			DatabaseMetaData dbMetaData = conn.getMetaData();
+			rs = dbMetaData.getColumns(null, schemaName, tableName, "%");
+			dbModel.setResultSet(conn, null, rs);
+			dbMetaData = null;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return dbModel;
 	}
 
 	/**
@@ -211,20 +331,14 @@ public class DBUtil {
 	 * @return
 	 */
 	public DBModel executeQuery(String jndi, String sql) {
-		DBModel dbModel = new DBModel();
-		Connection conn = null;
-		Statement stat = null;
-		ResultSet rs = null;
 		try {
-			conn = DBManager.getInstance().getConnection(jndi);
-			stat = conn.createStatement();
-			rs = stat.executeQuery(sql);
-			dbModel.setResultSet(conn, stat, rs);
+			Connection conn = DBManager.getInstance().getConnection(jndi);
+			if (conn != null)
+				return executeQuery(conn, sql);
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.err.println("执行失败sql:" + sql);
 		}
-		return dbModel;
+		return null;
 	}
 
 	/**
