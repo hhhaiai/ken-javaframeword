@@ -2,6 +2,7 @@ package com.shine.DBUtil;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -131,6 +132,53 @@ public class DBUtil {
 				jdbcUrl, driverClass, initSize, minPoolSize, maxPoolSize,
 				maxStatements, maxIdleTime);
 		this.setBatchSqlSize(batchSqlSize);
+	}
+
+	/**
+	 * 获取数据库全部模式
+	 * 
+	 * @param jndi
+	 * @return
+	 */
+	public DBModel getAllSchemas(String jndi) {
+		try {
+			Connection conn = DBManager.getInstance().getConnection(jndi);
+			if (conn != null)
+				return getAllSchemas(conn);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	/**
+	 * 获取数据库全部模式
+	 * 
+	 * @param conn
+	 * @return
+	 */
+	public DBModel getAllSchemas(Connection conn) {
+		DBModel dbModel = new DBModel();
+		ResultSet rs = null;
+		try {
+			DatabaseMetaData dbMetaData = conn.getMetaData();
+			rs = dbMetaData.getSchemas();
+			dbModel.setResultSet(conn, null, rs);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return dbModel;
+	}
+
+	public DBModel getAllTables(Connection conn) {
+		Statement stat = null;
+		ResultSet rs = null;
+		try {
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	/**

@@ -14,7 +14,7 @@ import org.dom4j.Element;
 
 import com.shine.framework.core.util.XmlUitl;
 
-public final class DBModel extends ArrayList<DBRowModel> {
+public class DBModel extends ArrayList<DBRowModel> {
 	/**
 	 * 
 	 */
