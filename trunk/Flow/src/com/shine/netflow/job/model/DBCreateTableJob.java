@@ -18,8 +18,8 @@ import com.shine.netflow.job.DBJobAdapter;
  */
 public class DBCreateTableJob implements QuartzJob {
 	private static final String TRIGGER_NAME = "DBCreateTable";
-	private static final int TRIGGER_HOUR = 13;
-	private static final int TRIGGER_MINUTE = 00;
+	private static final int TRIGGER_HOUR = 12;
+	private static final int TRIGGER_MINUTE = 01;
 
 	private List<String> tables = new ArrayList<String>();
 	private DBJobAdapter dbUtil = new DBJobAdapter();

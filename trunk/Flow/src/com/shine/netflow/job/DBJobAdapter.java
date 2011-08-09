@@ -13,7 +13,6 @@ public class DBJobAdapter {
 		"router_id,src_ip,src_port,dst_ip,dst_port,in_if,out_if,protocol,bytes,log_time";
 	
 	public DBJobAdapter() {
-		
 	}
 	
 	/**

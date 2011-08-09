@@ -3,7 +3,6 @@ package com.shine.framework.config;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
-import com.shine.netflow.NetFlow;
 import com.shine.sourceflow.Sourceflow;
 
 /**
@@ -17,7 +16,6 @@ public class ConfigListener implements ServletContextListener {
 				getAttribute("version").getText() + "]Starting");
 		
 		Sourceflow.getSourceflow().init();
-		
 	}
 	
 	public void contextDestroyed(ServletContextEvent event) {

@@ -6,10 +6,10 @@ import org.dom4j.Element;
 
 import com.shine.Netflow.NetflowManager;
 import com.shine.framework.DBUtil.DBUtil;
+import com.shine.framework.config.ConfigManager;
 import com.shine.framework.core.util.XmlUitl;
 import com.shine.netflow.handle.NetflowImpl;
 import com.shine.netflow.job.JobUtil;
-import com.shine.sourceflow.config.ConfigManager;
 
 public class NetFlow {
 	private static NetFlow flow = null;
@@ -30,7 +30,15 @@ public class NetFlow {
 		System.out.println("netflow 接收器 启动");
 		ConfigManager configMgr = ConfigManager.getManager();
 		// 初始化数据库连接池和线程池
-		DBUtil.getInstance().init(configMgr.getConfigPath() + "dbXML.xml");
+		int bathSqlSize = Integer.parseInt(
+				configMgr.getAttribute("batch-sql").getText());
+		int bathThreadSize = Integer.parseInt(
+				configMgr.getAttribute("update-thread-size").getText());
+		int selectThreadSize = Integer.parseInt(
+				configMgr.getAttribute("select-therad-size").getText());
+		DBUtil.getInstance()
+			  .initThreadConfig(bathSqlSize, bathThreadSize, selectThreadSize)
+			  .init(configMgr.getConfigPath() + "dbXML.xml");
 		// 启动任务调度
 		JobUtil.getInstance().init();
 		// 加入路由路径
