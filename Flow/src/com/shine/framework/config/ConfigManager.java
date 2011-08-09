@@ -75,7 +75,16 @@ public final class ConfigManager {
 	}
 
 	/**
-	 * 初始化配置路径
+	 * 获取系统配置目录
+	 * 
+	 * @return 系统配置目录
+	 */
+	public String getConfigPath() {
+		return this.configPath;
+	}
+	
+	/**
+	 * 初始化系统配置目录
 	 * 
 	 * @param configPath
 	 */
@@ -84,19 +93,9 @@ public final class ConfigManager {
 	}
 
 	/**
-	 * 获取系统配置目录
-	 * 
-	 * @return 系统配置目录
-	 */
-	public String getConfigPath() {
-		return this.configPath;
-	}
-
-	/**
 	 * 获取指定键指示的系统配置
 	 * 
-	 * @param key
-	 *            键
+	 * @param  key
 	 * @return 指定键指示的系统配置
 	 */
 	public Element getAttribute(String key) {
@@ -107,9 +106,7 @@ public final class ConfigManager {
 	 * 设置指定键指示的系统配置
 	 * 
 	 * @param key
-	 *            键
 	 * @param value
-	 *            值
 	 */
 	public void setAttribute(String key, Element value) {
 		if (this.attributes.containsKey(key)) {

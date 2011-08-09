@@ -1,14 +1,13 @@
 package com.shine.netflow;
 
-import com.shine.sourceflow.config.ConfigManager;
+import com.shine.framework.config.ConfigManager;
 
 public class Example {
 	public static void main(String args[]) {
 		ConfigManager.getManager().initConfig(
-				"E:\\workspace\\Flow\\WebRoot\\WEB-INF\\config\\boot.xml");
+				"D:\\work\\Flow\\WebRoot\\WEB-INF\\config\\boot.xml");
 		ConfigManager.getManager().setConfigPath(
-				"E:\\workspace\\Flow\\WebRoot\\WEB-INF\\config\\");
-		NetFlow flow = new NetFlow();
-		flow.init();
+				"D:\\work\\Flow\\WebRoot\\WEB-INF\\config\\");
+		NetFlow.getNetFlow().init();
 	}
 }

@@ -3,9 +3,6 @@ package com.shine.sourceflow;
 import com.shine.netflow.NetFlow;
 
 public class Sourceflow {
-
-	private NetFlow flow = null;
-
 	private static Sourceflow sourceflow = null;
 
 	public static Sourceflow getSourceflow() {
