@@ -203,10 +203,10 @@ public class DBModel extends ArrayList<DBRowModel> {
 	 */
 	public int next() throws SQLException {
 		this.clear();
-		if (this.stat.isClosed())
-			return 0;
-		if (rs.isClosed())
-			return 0;
+//		if (this.stat == null || this.stat.isClosed())
+//			return 0;
+//		if (rs.isClosed())
+//			return 0;
 
 		int i = 0;
 		while (rs.next()) {
