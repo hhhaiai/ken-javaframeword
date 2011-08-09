@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+    "http://struts.apache.org/dtds/struts-2.1.7.dtd">
+
+<struts>
+    <package name="flow" extends="base" namespace="/">
+        <!-- IP流量统计 -->
+        <action name="iptraffic_*" 
+                class="com.shine.sourceflow.web.IPTrafficAction" method="{1}">
+            <result name="success">${target}</result>
+        </action>
+    </package>
+</struts>

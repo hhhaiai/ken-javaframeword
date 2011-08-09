@@ -4,10 +4,13 @@
     "http://struts.apache.org/dtds/struts-2.1.7.dtd">
 
 <struts>
-    <package name="flow" extends="struts-default" namespace="/">
-        <action name="iptraffic_*" 
-                class="com.shine.sourceflow.web.IPTrafficAction" method="{1}">
-                <result name="success">${target}</result>
-        </action>
-    </package>
+	<package name="base" extends="struts-default" abstract="true">
+		<global-results>
+			<result name="exception">/common/exception.jsp</result>
+		</global-results>
+		<global-exception-mappings>
+			<exception-mapping result="exception" exception="java.lang.Exception"></exception-mapping>
+		</global-exception-mappings>
+	</package>
+	<include file="../config/flowStruts.xml" />
 </struts>
