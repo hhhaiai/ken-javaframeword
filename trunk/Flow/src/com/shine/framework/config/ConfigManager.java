@@ -1,4 +1,4 @@
-package com.shine.sourceflow.config;
+package com.shine.framework.config;
 
 import java.util.HashMap;
 import java.util.List;

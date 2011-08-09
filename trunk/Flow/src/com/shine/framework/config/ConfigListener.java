@@ -1,9 +1,10 @@
-package com.shine.sourceflow.config;
+package com.shine.framework.config;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
 import com.shine.netflow.NetFlow;
+import com.shine.sourceflow.Sourceflow;
 
 /**
  * Tomcat启动时调用,加载系统基本配置
@@ -14,11 +15,12 @@ public class ConfigListener implements ServletContextListener {
 		ConfigManager.getManager().init(event.getServletContext());
 		System.out.println("[" + ConfigManager.getManager().
 				getAttribute("version").getText() + "]Starting");
-		// 启动netflow接收器
-		NetFlow.getInstance().init();
+		
+		Sourceflow.getSourceflow().init();
+		
 	}
 	
 	public void contextDestroyed(ServletContextEvent event) {
-		
+		Sourceflow.getSourceflow().destroy();
 	}
 }
