@@ -9,6 +9,7 @@ import com.shine.Netflow.model.RawNetFlow;
 import com.shine.Netflow.model.SourceNetFlow;
 import com.shine.Netflow.threadModel.ProcessThreadModel;
 import com.shine.Netflow.translator.TranslatorHelper;
+import com.shine.Netflow.utils.NetFlowUtil;
 import com.shine.framework.ThreadPoolUtil.ThreadPoolManager;
 import com.shine.framework.Udp.model.UdpRecevice;
 
@@ -71,9 +72,17 @@ public class NetflowRecevice extends UdpRecevice {
 				list.clear();
 			}
 		} else {
+			int versionNum = NetFlowUtil.toIntNumber(data, 0, 2);
+			if ((versionNum > 9) || (versionNum <= 0)) {
+				//System.err.println("接收到不符合要求数据包....");
+				return;
+			}
+
+			// 构造原始数据包
 			SourceNetFlow sourceNetFlow = new SourceNetFlow();
 			sourceNetFlow.setRouteId(Integer.parseInt(NetflowManager
 					.getManager().getRouteMap().get(ip)));
+			sourceNetFlow.setVersionNum(versionNum);
 			sourceNetFlow.setNetflowData(data);
 			list.add(sourceNetFlow);
 			sourceNetFlow = null;
