@@ -5,13 +5,13 @@ import java.sql.SQLException;
 import com.shine.DBUtil.model.DBModel;
 import com.shine.framework.core.util.FileUtil;
 
-public class CacheSelectExample {
+public class CachePageSelectExample {
 
 	/**
-	 * 缓冲提交例子
+	 * 缓存翻页查询
 	 * 
 	 * @param args
-	 * @throws SQLException 
+	 * @throws SQLException
 	 */
 	public static void main(String[] args) throws SQLException {
 		DBUtil
@@ -19,28 +19,34 @@ public class CacheSelectExample {
 				.init(
 						"E:\\workspace\\JavaFramework2.5\\src\\com\\shine\\DBUtil\\config\\dbXml.xml");
 
+		// 首次查询，加入缓存
 		DBModel model = DBUtil.getInstance().executeCacheQuery("jdbc/test",
 				"select * from test1");
-		FileUtil.createFile("E://w1.txt");
-		model.next();
-		FileUtil.writeFile("E://w1.txt", model.getDataXml());
 		model.close();
 
-		// 缓存查询
+		
 		DBModel model1 = DBUtil.getInstance().executeCacheQuery("jdbc/test",
 				"select * from test1");
-		FileUtil.createFile("E://w2.txt");
+		
+		// 缓存查询第一页数据
 		model1.next();
+		FileUtil.createFile("E://w1.txt");
+		FileUtil.writeFile("E://w1.txt", model1.getDataXml());
+		
+		
+		// 缓存查询第二页数据
+		model1.next();
+		FileUtil.createFile("E://w2.txt");
 		FileUtil.writeFile("E://w2.txt", model1.getDataXml());
-		model1.close();
-
-		// 非缓存查询
-		DBModel model2 = DBUtil.getInstance().executeQuery("jdbc/test",
-				"select * from test1");
+		
+		
+		//继续获取第一页数据
+		model1.beforeFirst();
+		model1.next();
 		FileUtil.createFile("E://w3.txt");
-		model2.next();
-		FileUtil.writeFile("E://w3.txt", model2.getDataXml());
-		model2.close();
+		FileUtil.writeFile("E://w3.txt", model1.getDataXml());
+		
+		model1.close();
 	}
 
 }

@@ -14,6 +14,12 @@ import org.dom4j.Element;
 
 import com.shine.framework.core.util.XmlUitl;
 
+/**
+ * 数据库model
+ * 
+ * @author viruscodecn@gmail.com
+ * 
+ */
 public class DBModel extends ArrayList<DBRowModel> {
 	/**
 	 * 
@@ -28,15 +34,35 @@ public class DBModel extends ArrayList<DBRowModel> {
 	// 页数
 	private int page = -1;
 
+	// 内置查询数据model
 	private Connection conn;
 	private Statement stat;
 	private ResultSet rs;
+	private String sql;
+
+	// 是否cache查询的model
+	private boolean cacheState = false;
 
 	public DBModel() {
 	}
 
-	public DBModel(Connection conn, Statement stat, ResultSet rs) {
-		setResultSet(conn, stat, rs);
+	public DBModel(Connection conn, String sql) {
+		setConnection(conn, sql);
+	}
+
+	public DBModel(Connection conn, Statement stat, ResultSet rs, String sql) {
+		setResultSet(conn, stat, rs, sql);
+	}
+
+	/**
+	 * 配置基础数据
+	 * 
+	 * @param conn
+	 * @param sql
+	 */
+	public void setConnection(Connection conn, String sql) {
+		this.conn = conn;
+		this.sql = sql;
 	}
 
 	/**
@@ -44,11 +70,13 @@ public class DBModel extends ArrayList<DBRowModel> {
 	 * 
 	 * @param rs
 	 */
-	public void setResultSet(Connection conn, Statement stat, ResultSet rs) {
+	public void setResultSet(Connection conn, Statement stat, ResultSet rs,
+			String sql) {
 		try {
 			this.conn = conn;
 			this.stat = stat;
 			this.rs = rs;
+			this.sql = sql;
 			ResultSetMetaData md = rs.getMetaData();
 			for (int j = 0; j < md.getColumnCount(); j++) {
 				columnName.add(md.getColumnName(j + 1));
@@ -59,11 +87,51 @@ public class DBModel extends ArrayList<DBRowModel> {
 	}
 
 	/**
+	 * 重新建立resultSet
+	 */
+	public void reSetResult() {
+		try {
+			if (this.sql == null) {
+				System.err.print("sql语句出错");
+				return;
+			}
+			if (this.conn == null) {
+				System.err.print("conn出错");
+				return;
+			}
+			this.closePart();
+			this.stat = this.conn.createStatement();
+			if (this.isSelectSql(this.sql))
+				this.rs = this.stat.executeQuery(sql);
+			else
+				this.stat.execute(sql);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.err.println("重建ResultSet出错!!");
+		}
+
+	}
+
+	/**
+	 * 重新建立ResultSet
+	 * 
+	 * @param conn
+	 * @param sql
+	 */
+	public void reSetResult(Connection conn, String sql) {
+		this.conn = conn;
+		this.sql = sql;
+		this.reSetResult();
+	}
+
+	/**
 	 * 从xml中获取数据
 	 * 
 	 * @param xml
 	 */
 	public void setXmlValue(String xml) {
+		this.clear();
 		boolean b = true;
 
 		List<Element> elementList = XmlUitl.getAllElement(XmlUitl
@@ -202,11 +270,21 @@ public class DBModel extends ArrayList<DBRowModel> {
 	 * @throws SQLException
 	 */
 	public int next() throws SQLException {
+		// 缓存启动，加载第一页缓存
+		if (cacheState) {
+			if (page == -1) {
+				page++;
+				return this.size();
+			} else {
+				this.reSetResult();
+				cacheState = false;
+				rs.absolute((page + 1) * maxRows);
+			}
+		}
+
 		this.clear();
-//		if (this.stat == null || this.stat.isClosed())
-//			return 0;
-//		if (rs.isClosed())
-//			return 0;
+		if (this.conn == null)
+			return 0;
 
 		int i = 0;
 		while (rs.next()) {
@@ -234,7 +312,6 @@ public class DBModel extends ArrayList<DBRowModel> {
 	public void beforeFirst() throws SQLException {
 		rs.beforeFirst();
 		page = -1;
-		next();
 	}
 
 	/**
@@ -258,7 +335,7 @@ public class DBModel extends ArrayList<DBRowModel> {
 	 */
 	public DBModel getPageValues(int page) throws SQLException {
 		this.page = page;
-		rs.absolute(page * maxRows);
+		rs.absolute((page + 1) * maxRows);
 		next();
 		return this;
 	}
@@ -294,6 +371,16 @@ public class DBModel extends ArrayList<DBRowModel> {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	/**
+	 * 判断是否是select语句
+	 * 
+	 * @param sql
+	 * @return
+	 */
+	private boolean isSelectSql(String sql) {
+		return sql.toLowerCase().startsWith("select");
 	}
 
 	public int getMaxRows() {
@@ -334,6 +421,22 @@ public class DBModel extends ArrayList<DBRowModel> {
 
 	public void setRs(ResultSet rs) {
 		this.rs = rs;
+	}
+
+	public String getSql() {
+		return sql;
+	}
+
+	public void setSql(String sql) {
+		this.sql = sql;
+	}
+
+	public boolean isCacheState() {
+		return cacheState;
+	}
+
+	public void setCacheState(boolean cacheState) {
+		this.cacheState = cacheState;
 	}
 
 }

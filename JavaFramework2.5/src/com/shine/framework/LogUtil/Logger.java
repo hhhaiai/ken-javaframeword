@@ -8,7 +8,6 @@ import com.shine.framework.core.util.DateUtil;
 import com.shine.framework.core.util.FileUtil;
 import com.shine.framework.core.util.XmlUitl;
 
-
 /**
  * Logger 系统日志
  * 
@@ -17,7 +16,7 @@ import com.shine.framework.core.util.XmlUitl;
  */
 public class Logger {
 	private static boolean load = false;
-	private static Logger log = new Logger();
+	private static Logger log = null;
 
 	private String folderPath;
 	private boolean showConsole = false;

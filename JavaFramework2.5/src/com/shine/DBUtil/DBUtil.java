@@ -163,7 +163,7 @@ public class DBUtil {
 		try {
 			DatabaseMetaData dbMetaData = conn.getMetaData();
 			rs = dbMetaData.getSchemas();
-			dbModel.setResultSet(conn, null, rs);
+			dbModel.setResultSet(conn, null, rs, null);
 			dbMetaData = null;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -205,7 +205,7 @@ public class DBUtil {
 			DatabaseMetaData dbMetaData = conn.getMetaData();
 			String[] types = { "TABLE" };
 			rs = dbMetaData.getTables(null, schemaName, "%", types);
-			dbModel.setResultSet(conn, null, rs);
+			dbModel.setResultSet(conn, null, rs, null);
 			dbMetaData = null;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -247,7 +247,7 @@ public class DBUtil {
 			DatabaseMetaData dbMetaData = conn.getMetaData();
 			String[] types = { "VIEW" };
 			rs = dbMetaData.getTables(null, schemaName, "%", types);
-			dbModel.setResultSet(conn, null, rs);
+			dbModel.setResultSet(conn, null, rs, null);
 			dbMetaData = null;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -293,7 +293,7 @@ public class DBUtil {
 		try {
 			DatabaseMetaData dbMetaData = conn.getMetaData();
 			rs = dbMetaData.getColumns(null, schemaName, tableName, "%");
-			dbModel.setResultSet(conn, null, rs);
+			dbModel.setResultSet(conn, null, rs, null);
 			dbMetaData = null;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -315,7 +315,7 @@ public class DBUtil {
 		try {
 			stat = conn.createStatement();
 			rs = stat.executeQuery(sql);
-			dbModel.setResultSet(conn, stat, rs);
+			dbModel.setResultSet(conn, stat, rs, null);
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.err.println("执行失败sql:" + sql);
@@ -367,20 +367,14 @@ public class DBUtil {
 	 * @return
 	 */
 	public DBModel executeQuery(String sql) {
-		DBModel dbModel = new DBModel();
-		Connection conn = null;
-		Statement stat = null;
-		ResultSet rs = null;
 		try {
-			conn = DBManager.getInstance().getConnection();
-			stat = conn.createStatement();
-			rs = stat.executeQuery(sql);
-			dbModel.setResultSet(conn, stat, rs);
+			Connection conn = DBManager.getInstance().getConnection();
+			if (conn != null)
+				return executeQuery(conn, sql);
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.err.println("执行失败sql:" + sql);
 		}
-		return dbModel;
+		return null;
 	}
 
 	/**
@@ -406,7 +400,16 @@ public class DBUtil {
 			conn = DBManager.getInstance().getConnection("jdbc/cache");
 			stat = conn.createStatement();
 			rs = stat.executeQuery(sqlCache.toString());
-			dbModel.setXmlValue(rs.getString("result"));
+			dbModel.setCacheState(true);
+			try {
+				while (rs.next()) {
+					dbModel.setXmlValue(rs.getString("result"));
+				}
+			} catch (Exception e) {
+
+			}
+			dbModel.setConnection(DBManager.getInstance().getConnection(jndi),
+					sql);
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.err.println("执行失败sql:" + sql);
@@ -470,6 +473,40 @@ public class DBUtil {
 	}
 
 	/**
+	 * 不从缓存库抽取数据，但是更新缓存记录
+	 * 
+	 * @param jndi
+	 * @param sql
+	 * @return
+	 */
+	public DBModel executeCacheQueryOnlyUpdate(String jndi, String sql) {
+		DBModel dbModel = new DBModel();
+		Connection conn = null;
+		Statement stat = null;
+		ResultSet rs = null;
+		try {
+			conn = DBManager.getInstance().getConnection(jndi);
+			stat = conn.createStatement();
+			rs = stat.executeQuery(sql);
+			dbModel.setResultSet(conn, stat, rs, sql);
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.err.println("执行失败sql:" + sql);
+		}
+
+		// 更新缓存
+		try {
+			if (dbModel.next() != 0) {
+				cacheUpdate(jndi, sql, dbModel.getDataXml());
+			}
+			dbModel.beforeFirst();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return dbModel;
+	}
+
+	/**
 	 * 缓冲查询查询数据
 	 * 
 	 * @param sql
@@ -480,21 +517,7 @@ public class DBUtil {
 		if (!cacheModel.isEmpty()) {
 			return cacheModel;
 		}
-
-		DBModel dbModel = new DBModel();
-		Connection conn = null;
-		Statement stat = null;
-		ResultSet rs = null;
-		try {
-			conn = DBManager.getInstance().getConnection(jndi);
-			stat = conn.createStatement();
-			rs = stat.executeQuery(sql);
-			dbModel.setResultSet(conn, stat, rs);
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.err.println("执行失败sql:" + sql);
-		}
-		return dbModel;
+		return executeCacheQueryOnlyUpdate(jndi, sql);
 	}
 
 	/**

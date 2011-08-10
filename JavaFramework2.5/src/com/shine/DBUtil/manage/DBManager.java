@@ -66,6 +66,8 @@ public class DBManager extends HashMap<String, DBPool> {
 			cacheTime = Integer.parseInt(rootMap.get("cacheTime"));
 			cachePath = rootMap.get("cachePath");
 			rootMap = null;
+
+			// 初始化数据库
 			List<Element> list = XmlUitl.getAllElement(document
 					.getRootElement(), "Resource");
 			Map<String, String> attributeMap = null;
@@ -224,6 +226,7 @@ public class DBManager extends HashMap<String, DBPool> {
 		jdbcUrl.append(File.separator);
 		jdbcUrl.append("cache.db");
 		initSqliteJndi(jdbcCache, jdbcUrl.toString());
+		jdbcUrl=null;
 	}
 
 	/**
