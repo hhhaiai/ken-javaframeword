@@ -79,13 +79,15 @@ public class NetflowRecevice extends UdpRecevice {
 			}
 
 			// 构造原始数据包
-			SourceNetFlow sourceNetFlow = new SourceNetFlow();
-			sourceNetFlow.setRouteId(Integer.parseInt(NetflowManager
-					.getManager().getRouteMap().get(ip)));
-			sourceNetFlow.setVersionNum(versionNum);
-			sourceNetFlow.setNetflowData(data);
-			list.add(sourceNetFlow);
-			sourceNetFlow = null;
+			String rooteIP = NetflowManager.getManager().getRouteMap().get(ip);
+			if (rooteIP != null) {
+				SourceNetFlow sourceNetFlow = new SourceNetFlow();
+				sourceNetFlow.setRouteId(Integer.parseInt(rooteIP));
+//				sourceNetFlow.setVersionNum(versionNum);
+				sourceNetFlow.setNetflowData(data);
+				list.add(sourceNetFlow);
+				sourceNetFlow = null;
+			}
 		}
 	}
 
