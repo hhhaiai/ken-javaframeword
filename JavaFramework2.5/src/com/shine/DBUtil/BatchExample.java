@@ -14,7 +14,7 @@ public class BatchExample {
 				.init(
 						"E:\\workspace\\JavaFramework2.5\\src\\com\\shine\\DBUtil\\config\\dbXml.xml");
 		
-		for (int i = 0; i < 5006; i++) {
+		for (int i = 0; i < 5001; i++) {
 			//System.out.println(i);
 			String sql = "insert into test1(test) value('"+i+"')";
 			DBUtil.getInstance().addBatchUpdate("jdbc/test", sql);
