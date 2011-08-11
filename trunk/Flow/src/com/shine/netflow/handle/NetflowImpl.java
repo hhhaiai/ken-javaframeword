@@ -2,9 +2,9 @@ package com.shine.netflow.handle;
 
 import java.util.List;
 
+import com.shine.DBUtil.DBUtil;
 import com.shine.Netflow.model.RawNetFlow;
 import com.shine.Netflow.netflowIf.NetFlowIf;
-import com.shine.framework.DBUtil.DBUtil;
 import com.shine.netflow.utils.NetflowHelper;
 
 public class NetflowImpl implements NetFlowIf {

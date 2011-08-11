@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.dom4j.Element;
 
+import com.shine.DBUtil.DBUtil;
 import com.shine.Netflow.NetflowManager;
-import com.shine.framework.DBUtil.DBUtil;
 import com.shine.framework.config.ConfigManager;
 import com.shine.framework.core.util.XmlUitl;
 import com.shine.netflow.handle.NetflowImpl;
@@ -30,15 +30,15 @@ public class NetFlow {
 		System.out.println("netflow 接收器 启动");
 		ConfigManager configMgr = ConfigManager.getManager();
 		// 初始化数据库连接池和线程池
-		int bathSqlSize = Integer.parseInt(
-				configMgr.getAttribute("batch-sql").getText());
-		int bathThreadSize = Integer.parseInt(
-				configMgr.getAttribute("update-thread-size").getText());
-		int selectThreadSize = Integer.parseInt(
-				configMgr.getAttribute("select-therad-size").getText());
-		DBUtil.getInstance()
-			  .initThreadConfig(bathSqlSize, bathThreadSize, selectThreadSize)
-			  .init(configMgr.getConfigPath() + "dbXML.xml");
+		int bathSqlSize = Integer.parseInt(configMgr.getAttribute("batch-sql")
+				.getText());
+		int bathThreadSize = Integer.parseInt(configMgr.getAttribute(
+				"update-thread-size").getText());
+		int selectThreadSize = Integer.parseInt(configMgr.getAttribute(
+				"select-therad-size").getText());
+		DBUtil.getInstance().initThreadConfig(bathSqlSize, bathThreadSize,
+				selectThreadSize);
+		DBUtil.getInstance().init(configMgr.getConfigPath() + "dbXML.xml");
 		// 启动任务调度
 		JobUtil.getInstance().init();
 		// 加入路由路径
