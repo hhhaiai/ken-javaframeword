@@ -14,7 +14,9 @@ import com.shine.DBUtil.threadModel.SelectThreadModel;
 import com.shine.DBUtil.threadModel.UpdateThreadModel;
 import com.shine.DBUtil.utils.BatchMap;
 import com.shine.DBUtil.utils.ClusterList;
+import com.shine.Netflow.receiver.NetflowRecevice;
 import com.shine.framework.ThreadPoolUtil.ThreadPoolManager;
+import com.shine.framework.Udp.UdpManager;
 
 /**
  * db util java数据库操作类库
@@ -30,7 +32,10 @@ public class DBUtil {
 	private static DBUtil util = null;
 	// 缓存提交sql
 	private int batchSqlSize = 500;
+	private int maxBatchSqlSize = 1000;
+	private int incomeBatchSqlSize = 100;
 	private int batchThreadSize = 10;
+	private int maxBatchThreadSize = 50;
 	private BatchMap map = new BatchMap();
 	// 异步查询线程数
 	private int selectThreadSize = 10;
@@ -87,12 +92,46 @@ public class DBUtil {
 	 * 初始化批量提交线程池
 	 */
 	public void initBatchThreadPool() {
-		UpdateThreadModel updateThreadModel = null;
 		for (int i = 0; i < batchThreadSize; i++) {
-			updateThreadModel = new UpdateThreadModel();
-			updateThreadModel.setThreadName("updateThreadModel" + i);
-			ThreadPoolManager.getManager().addThread(updateThreadModel);
-			updateThreadModel = null;
+			addBatchThread(i);
+		}
+	}
+
+	/**
+	 * 自动加入新的数据库提交线程
+	 */
+	public void autoAddBatchThread() {
+		if (batchThreadSize < maxBatchThreadSize) {
+			batchThreadSize = batchThreadSize + 1;
+			addBatchThread(batchThreadSize);
+			ThreadPoolManager.getManager().startThreadPool();
+			System.err.println("加入新的数据库提交线程完成,现在处理线程数为:" + batchThreadSize);
+		} else {
+			System.err.println("数据库提交线程已经达到最大值" + maxBatchThreadSize);
+		}
+	}
+
+	/**
+	 * 加入批量提交线程
+	 * 
+	 * @param i
+	 */
+	private void addBatchThread(int i) {
+		UpdateThreadModel updateThreadModel = new UpdateThreadModel();
+		updateThreadModel.setThreadName("updateThreadModel" + i);
+		ThreadPoolManager.getManager().addThread(updateThreadModel);
+		updateThreadModel = null;
+	}
+
+	/**
+	 * 升级批量提交SQL缓存
+	 */
+	public void autoBatchCache() {
+		if (batchSqlSize < maxBatchSqlSize) {
+			batchSqlSize = batchSqlSize + incomeBatchSqlSize;
+			System.err.println("升级缓存完成，现在缓存数位:" + batchSqlSize);
+		} else {
+			System.err.println("无法升级缓存，已经达到最大值" + maxBatchSqlSize);
 		}
 	}
 
@@ -753,7 +792,7 @@ public class DBUtil {
 	 * @param sql
 	 * @return
 	 */
-	public synchronized int[] executeBatchUpdate(String jndi, List<String> sql) {
+	public int[] executeBatchUpdate(String jndi, List<String> sql) {
 		int[] updateCount = null;
 		Connection conn = null;
 		Statement stat = null;
@@ -845,6 +884,22 @@ public class DBUtil {
 
 	public void setSelectThreadSize(int selectThreadSize) {
 		this.selectThreadSize = selectThreadSize;
+	}
+
+	public int getMaxBatchSqlSize() {
+		return maxBatchSqlSize;
+	}
+
+	public void setMaxBatchSqlSize(int maxBatchSqlSize) {
+		this.maxBatchSqlSize = maxBatchSqlSize;
+	}
+
+	public int getMaxBatchThreadSize() {
+		return maxBatchThreadSize;
+	}
+
+	public void setMaxBatchThreadSize(int maxBatchThreadSize) {
+		this.maxBatchThreadSize = maxBatchThreadSize;
 	}
 
 }
