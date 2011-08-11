@@ -1,6 +1,6 @@
 package com.shine.netflow.job;
 
-import com.shine.framework.DBUtil.DBUtil;
+import com.shine.DBUtil.DBUtil;
 import com.shine.framework.core.util.DateUtil;
 import com.shine.netflow.utils.NetflowHelper;
 
