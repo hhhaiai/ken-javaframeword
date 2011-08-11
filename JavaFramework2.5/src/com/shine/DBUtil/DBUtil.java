@@ -367,10 +367,10 @@ public class DBUtil {
 	 * @return
 	 */
 	public void asynchronousExecuteQuery(String jndi, String sql,
-			Object object, String methodName) {
+			Object object, String methodName, boolean cacheBoolean) {
 		if (ThreadPoolManager.getManager().getIdleThread("dbSelect") != null) {
 			ThreadPoolManager.getManager().getIdleThread("dbSelect").setValues(
-					jndi, sql, object, methodName);
+					jndi, sql, object, methodName, cacheBoolean);
 		} else {
 			System.err.println("异步查询线程不够");
 		}

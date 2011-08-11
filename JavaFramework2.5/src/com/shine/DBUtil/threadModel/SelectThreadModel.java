@@ -25,8 +25,15 @@ public class SelectThreadModel extends ThreadModel {
 	public void excute(Object... args) {
 		try {
 			if (args != null && args.length != 0) {
-				DBModel dbModel = DBUtil.getInstance().executeQuery(
-						(String) args[0], (String) args[1]);
+				DBModel dbModel = null;
+				if ((Boolean) args[4]) {
+					dbModel = DBUtil.getInstance().executeCacheQuery(
+							(String) args[0], (String) args[1]);
+				} else {
+					dbModel = DBUtil.getInstance().executeQuery(
+							(String) args[0], (String) args[1]);
+				}
+
 				this.object = args[2];
 				this.methodName = (String) args[3];
 
