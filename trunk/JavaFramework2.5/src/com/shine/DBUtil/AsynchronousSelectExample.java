@@ -21,10 +21,9 @@ public class AsynchronousSelectExample {
 						"E:\\workspace\\JavaFramework2.5\\src\\com\\shine\\DBUtil\\config\\dbXml.xml");
 
 		AsynchronousSelectExample example = new AsynchronousSelectExample();
-		DBUtil.getInstance()
-				.asynchronousExecuteQuery("jdbc/Default",
-						"select * from gdzfw_bag_video_link", example,
-						"getReusltModel");
+		DBUtil.getInstance().asynchronousExecuteQuery("jdbc/Default",
+				"select * from gdzfw_bag_video_link", example,
+				"getReusltModel", true);
 
 	}
 }
