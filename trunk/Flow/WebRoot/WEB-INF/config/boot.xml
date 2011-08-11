@@ -27,6 +27,6 @@
     </routers>
     <!-- 计划任务 -->
     <schedulers>
-        <scheduler>com.shine.netflow.job.model.DBCreateTableJob</scheduler>
+        <scheduler>com.shine.netflow.job.model.CreateDailyTableJob</scheduler>
     </schedulers>
 </boot>
