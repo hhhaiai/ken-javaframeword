@@ -1,4 +1,4 @@
-package com.shine.netflow.job;
+package com.shine.netflow.job.dao;
 
 import com.shine.DBUtil.DBUtil;
 import com.shine.framework.core.util.DateUtil;
@@ -7,12 +7,11 @@ import com.shine.netflow.utils.NetflowHelper;
 /**
  * 计划任务数据库存储适配器,专门辅助计划任务操作数据库
  */
-public class DBJobAdapter {
-	private static final String JNDI = "jdbc/flow";
+public class CreateDailyTableDao extends GenericDao {
 	private static final String SUB_SQL = 
 		"router_id,src_ip,src_port,dst_ip,dst_port,in_if,out_if,protocol,bytes,log_time";
 	
-	public DBJobAdapter() {
+	public CreateDailyTableDao() {
 	}
 	
 	/**
