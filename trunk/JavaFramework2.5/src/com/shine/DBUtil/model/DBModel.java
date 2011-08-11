@@ -26,22 +26,22 @@ public class DBModel extends ArrayList<DBRowModel> {
 	 */
 	private static final long serialVersionUID = 1L;
 	// 列名集
-	private List<String> columnName = new ArrayList<String>();
+	protected List<String> columnName = new ArrayList<String>();
 
 	// 每页缓存条数
-	private int maxRows = 1000;
+	protected int maxRows = 1000;
 
 	// 页数
-	private int page = -1;
+	protected int page = -1;
 
 	// 内置查询数据model
-	private Connection conn;
-	private Statement stat;
-	private ResultSet rs;
-	private String sql;
+	protected Connection conn;
+	protected Statement stat;
+	protected ResultSet rs;
+	protected String sql;
 
 	// 是否cache查询的model
-	private boolean cacheState = false;
+	protected boolean cacheState = false;
 
 	public DBModel() {
 	}
@@ -103,8 +103,6 @@ public class DBModel extends ArrayList<DBRowModel> {
 			this.stat = this.conn.createStatement();
 			if (this.isSelectSql(this.sql))
 				this.rs = this.stat.executeQuery(sql);
-			else
-				this.stat.execute(sql);
 
 		} catch (Exception e) {
 			e.printStackTrace();
