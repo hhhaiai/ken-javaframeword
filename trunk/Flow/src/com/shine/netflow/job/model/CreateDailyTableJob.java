@@ -11,20 +11,20 @@ import org.quartz.TriggerUtils;
 
 import com.shine.framework.JobUtil.model.QuartzJob;
 import com.shine.framework.Udp.UdpManager;
-import com.shine.netflow.job.DBJobAdapter;
+import com.shine.netflow.job.dao.CreateDailyTableDao;
 
 /**
  * 每天定时生成数据表的计划任务
  */
-public class DBCreateTableJob implements QuartzJob {
+public class CreateDailyTableJob implements QuartzJob {
 	private static final String TRIGGER_NAME = "DBCreateTable";
-	private static final int TRIGGER_HOUR = 12;
-	private static final int TRIGGER_MINUTE = 01;
+	private static final int TRIGGER_HOUR = 23;
+	private static final int TRIGGER_MINUTE = 55;
 
 	private List<String> tables = new ArrayList<String>();
-	private DBJobAdapter dbUtil = new DBJobAdapter();
+	private CreateDailyTableDao dbUtil = new CreateDailyTableDao();
 
-	public DBCreateTableJob() {
+	public CreateDailyTableJob() {
 		for (int i = 1; i <= 24; i++) {
 			this.tables.add("rawnetflow_hour_"
 					+ new DecimalFormat("00").format(i));
