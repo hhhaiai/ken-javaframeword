@@ -16,7 +16,7 @@ import com.shine.framework.Udp.model.PrintRecevice;
  * @author viruscodecn@gmail.com
  */
 public class NetflowManager {
-	private static NetflowManager manager = new NetflowManager();
+	private static NetflowManager manager = null;
 
 	private Map<String, String> routeMap = new HashMap<String, String>();
 	private Map<String, NetFlowIf> netflowHandleMap = new HashMap<String, NetFlowIf>();
@@ -31,6 +31,8 @@ public class NetflowManager {
 	private int port;
 
 	public static NetflowManager getManager() {
+		if (manager == null)
+			manager = new NetflowManager();
 		return manager;
 	}
 
