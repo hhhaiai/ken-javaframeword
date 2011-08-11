@@ -395,6 +395,13 @@ public class DBModel extends ArrayList<DBRowModel> {
 
 	public void setPage(int page) {
 		this.page = page;
+		try {
+			if (rs != null)
+				rs.absolute((page + 1) * maxRows);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public Connection getConn() {
