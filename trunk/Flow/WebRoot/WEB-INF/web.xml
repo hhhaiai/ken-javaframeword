@@ -5,7 +5,7 @@
 	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 	<!-- 默认主页 -->
 	<welcome-file-list>
-		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>common/mainUI.jsp</welcome-file>
 	</welcome-file-list>
 
     <!-- 配置监听 -->
