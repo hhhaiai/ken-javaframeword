@@ -1,0 +1,6 @@
+<items id="1000" text="网络流量" initID="1001">
+	<item id="1001" text="首页" icon="flow.gif" />
+	<item id="1002" text="网络流量" icon="process_info.gif">
+		<item id="1003" text="IP流量" icon="flow_mine.gif" actionData="/flow/iptraffic_list" />
+	</item>
+</items>
