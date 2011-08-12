@@ -8,7 +8,7 @@
         <!-- IP流量统计 -->
         <action name="iptraffic_*" 
                 class="com.shine.sourceflow.web.IPTrafficAction" method="{1}">
-            <result name="success">${target}</result>
+            <result name="list">/show/ipTraffic.jsp</result>
         </action>
     </package>
 </struts>
