@@ -22,7 +22,7 @@ public class CreateDailyTableJob implements QuartzJob {
 	private static final int TRIGGER_MINUTE = 55;
 
 	private List<String> tables = new ArrayList<String>();
-	private CreateDailyTableDao dbUtil = new CreateDailyTableDao();
+	private CreateDailyTableDao dao = new CreateDailyTableDao();
 
 	public CreateDailyTableJob() {
 		for (int i = 1; i <= 24; i++) {
@@ -58,7 +58,7 @@ public class CreateDailyTableJob implements QuartzJob {
 	 * 创建表
 	 */
 	private void createTable() {
-		this.dbUtil.createTable();
+		this.dao.createTable();
 	}
 
 	/**
@@ -67,7 +67,7 @@ public class CreateDailyTableJob implements QuartzJob {
 	private void stroeData() {
 		// 遍历所有的数据表
 		for (String table : this.tables) {
-			this.dbUtil.saveData(table);
+			this.dao.saveData(table);
 		}
 	}
 
@@ -77,7 +77,7 @@ public class CreateDailyTableJob implements QuartzJob {
 	private void truncateDate() {
 		// 遍历所有的数据表
 		for (String table : this.tables) {
-			this.dbUtil.truncateDate(table);
+			this.dao.truncateDate(table);
 		}
 	}
 }
