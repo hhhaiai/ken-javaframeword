@@ -7,7 +7,7 @@
     <package name="flow" extends="base" namespace="/">
         <!-- IP流量统计 -->
         <action name="iptraffic_*" 
-                class="com.shine.sourceflow.web.IPTrafficAction" method="{1}">
+                class="com.shine.sourceflow.web.show.IPTrafficAction" method="{1}">
             <result name="list">/show/ipTraffic.jsp</result>
         </action>
     </package>
