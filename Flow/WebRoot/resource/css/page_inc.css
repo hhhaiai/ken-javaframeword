@@ -1,0 +1,59 @@
+@charset "utf-8";
+/**
+ * This file defines default common style, includes this file in every files.
+ */
+/*
+engage html tag basic defination.
+*/
+body {
+	margin: 0;
+	padding: 0;
+	font-size: 12px;
+	background: #fff;
+	font-family: "宋体";
+	color: #000;
+}
+fieldset, legend, form, img, ul, ol, li, div, table, td, th{
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+h1, h2, h3, h4, h5, h6 {
+	margin: 0;
+	padding: 0;
+	text-align: center;
+}
+h5, h6 {
+	font-size: 12px;
+}
+h4 {
+	font-size: 14px;
+}
+h3 {
+	font-size: 16px;
+}
+h2 {
+	font-size: 18px;
+}
+h1 {
+	font-size: 24px;
+}
+input {
+	margin: 0;
+	padding: 0;
+	font-size: 12px;
+}
+select {
+	height: 20px;
+}
+label {
+	border: none;
+	cursor: default;
+}
+a {
+	text-decoration:none;
+	color:#06C;
+}
+a:hover {
+	color:#F90;
+}

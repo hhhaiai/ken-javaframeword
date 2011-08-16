@@ -1,0 +1,14 @@
+@charset "utf-8";
+/*
+query_form:query form, override some std_info style.
+*/
+.query_form{
+	width:500px;
+	display:none;
+}
+.query_form .std_info .field{
+	width:150px;
+}
+.query_form .std_info select.field{
+	width:154px;
+}
