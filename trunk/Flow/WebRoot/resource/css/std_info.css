@@ -1,0 +1,373 @@
+@charset "utf-8";
+/**
+ * Standard(std) info page is formed of title and groups,
+ * and each group always be formed of header and body.
+ * Its content min width is 820px, included 50px margin and 770px content width;
+ */
+.std_info {
+	font-size:12px;
+}
+.std_info a {
+	text-decoration:none;
+	color:#06C;/*#28417A #06C*/
+}
+.std_info a:hover {
+	color:#F90;
+}
+.std_info .page_wrapper{
+	margin:30px 0 50px 25px;
+}
+.std_info .limit_770{
+	width:770px;
+}
+.std_info .ct_main {
+	float:left;
+	width:700px;
+}
+.std_info .ct_side {
+	width:220px;
+	float:right;
+	margin-right:12px !important;
+	margin-right:6px;
+}
+.std_info .indent {
+	margin-left:2em;
+}
+.std_info h3.title {
+	font-size:16px;
+	color:#28417A;
+	text-align:left;
+}
+.std_info .top_bar {
+	position:absolute;
+	top:5px;
+	height:25px;
+	text-align:right;
+}
+.std_info .top_bar a{
+	color:#28417A;
+}
+.std_info .top_bar a:hover{
+	color:#F90;
+}
+.std_info .top_bar .sep{
+	border-right:solid 1px #ccc;
+	margin:0 12px 0 6px;
+}
+.std_info .side_btns {
+	float:right;
+}
+.std_info .side_btns button{
+	height:20px;
+}
+.std_info a.icon_btn{
+	line-height:16px;
+}
+.std_info a.icon_btn *{
+	vertical-align:middle;
+}
+.std_info a.icon_btn img{
+	width:16px;
+	height:16px;
+}
+.std_info .group {
+	margin-top:30px;
+}
+.std_info .group legend{
+	*margin-left:-7px;/*for ie<8*/
+	color:#000;
+}
+.std_info .group fieldset.wrapper {
+	display:block;
+	border:none;
+	border-top:solid 1px #CCC;
+}
+.std_info .group .g_bar{
+	margin-top:8px;
+	height:12px;
+	text-align:right;
+	clear:both;
+}
+.std_info .group .g_body{
+	margin-top:16px;
+	line-height:1.5em;
+	padding-left:24px;
+	clear:both;
+}
+.std_info .group .g_body p{
+	margin:1em 0;
+}
+.std_info .pane{
+	float:right;
+	width:210px;
+	margin:0;
+	margin-left:9px !important;
+	margin-left:5px;
+	margin-bottom:9px;
+}
+.std_info .pane .head{
+	width:100%;
+	height:22px;
+	clear:both;
+}
+.std_info .pane .body,
+.std_info .pane .bar{
+	width:190px;
+	margin:5px auto;
+	clear:both;
+}
+.std_info .pane .head .h_left{
+	width:8px;
+	background:url(../image/system/mix/homepage/bg_pane_left.gif) no-repeat;
+}
+.std_info .pane .head .h_right{
+	width:8px;
+	background:url(../image/system/mix/homepage/bg_pane_right.gif) no-repeat;
+}
+.std_info .pane .head .h_center{
+	background:url(../image/system/mix/homepage/bg_pane_center.gif) repeat-x;
+	font-weight:bold;
+	color:#28417A;
+}
+/**
+ * @name report
+ * style for report which always has fixed form:
+ * title + rpt_header + rpt_search + body
+ */
+.std_info .report{
+	margin-top:30px;
+}
+.std_info .report .rpt_header{
+	padding-bottom:1em;
+}
+.std_info .report .rpt_header .icon_btn{
+	float:right;
+}
+.std_info .search_wrapper{
+	padding:12px 0;
+}
+/*search_wrapper_ani: for animate display searchbar.*/
+.std_info .search_wrapper_ani{
+	height:0;
+	font-size:1px;
+	display:none;
+	overflow:hidden;
+	border-top:solid 1px #ccc;
+}
+.std_info .search_bottom_bar{
+	padding-top:5px;
+}
+.std_info .search_bottom_bar button{
+	line-height:16px;
+}
+/*.std_info .report .rpt_body{
+}*/
+/**
+ * @name chart_wrapper
+ * style for chart wrapper.
+ */
+.std_info .chart_wrapper {
+	text-align:center;
+	margin:5px auto;
+}
+.std_info .report .chart_wrapper {
+	margin:2em auto;
+}
+.std_info .report .std_info_tip{
+	text-align:center;
+	margin:2em auto;
+}
+/**
+ * @name hash_info
+ * style for hash table content.
+ */
+.std_info table.hash_info {
+	text-align:left;
+}
+.std_info table.hash_info td, .std_info table.hash_info th {
+	vertical-align:top;
+	line-height:14px;
+	padding:5px 0;/*for multi lines content*/
+}
+.std_info table.hash_info th {
+	font-weight:normal;
+	width:100px;
+	white-space:nowrap;
+	text-align:left;
+}
+/**
+ * @name data_list
+ * style for list data table.
+ */
+.std_info .data_list{
+	width:100%;
+}
+.std_info .data_list th, .std_info .data_list td{
+	border-bottom:solid 1px #eee;
+	line-height:14px;
+	padding:3px;
+	text-align:left;
+}
+.std_info .data_list th{
+	background-color:#eee;
+	font-weight:normal;
+}
+.std_info .three_line_form{
+	width:100%;
+	border-top:solid 1px #000;
+	border-bottom:solid 1px #000;
+}
+.std_info .three_line_form th, .std_info .three_line_form td{
+	line-height:14px;
+	padding:3px;
+	text-align:left;
+}
+.std_info .three_line_form th{
+	border-bottom:solid 1px #000;
+}
+/**
+ * @name title_list
+ * style for title list.
+ */
+.std_info .title_list li{
+	list-style:none;
+	margin:8px 0;
+}
+.std_info .title_list .timestamp{
+	float:right;
+	color:#999;
+}
+.std_info .title_list li.more{
+	text-align:right;
+}
+/**
+ * @name search_list
+ * style for search results list.
+ * contains following article info: title, abstract, hilite keyword and description.
+ */
+.std_info .search_list li{
+	list-style:none;
+	margin:8px 0 20px 0;
+	line-height:1.5;
+}
+.std_info .search_list .title{
+	font-size:14px;
+}
+.std_info .search_list .desc{
+	color:#008000;
+}
+
+/**
+ * @name std_pagination
+ * style for pagination.
+ */
+.std_info .std_pagination{
+	height:20px;
+	margin:3px 0;
+	text-align:right;
+}
+.std_info .std_pagination img.btn{
+	width:16px;
+	height:16px;
+	cursor:pointer;
+	vertical-align:middle;
+}
+
+/**
+ * @name basic_info
+ * style for basic info of device detail page.
+ */
+.std_info .basic_info .res_image_ctn{
+	width:60px;
+	vertical-align:top;
+}
+.std_info .basic_info .res_image_ctn img{
+	border:none;
+	margin-top:1.5em;
+}
+.std_info .basic_info .res_info{
+	vertical-align:top;
+}
+
+/**
+ * form fields layout
+ */
+.std_info .fields_layout{
+	width:100%;
+	text-align:left;
+}
+.std_info .fields_layout th.label{
+	font-weight:lighter;
+	padding-left:24px;
+	width:100px;
+}
+.std_info .fields_layout td{
+	height:30px;
+	line-height:30px;
+	vertical-align:middle;
+}
+.std_info .fields_layout .checkbox_list_ctn{
+	border:solid 1px #eee;
+	height:80px;
+	line-height:16px;
+	overflow:auto;
+}
+.std_info .fields_layout .checkbox_list_ctn input{
+	margin-right:5px ;
+}
+.std_info .form_action_bar{
+	border-top:solid 1px #ccc;
+	margin-top:3em;
+	padding-top:2em;
+	height:30px;
+	padding-left:148px;
+}
+.std_info .asterisk{
+	color:red;
+}
+.std_info .field{
+	width:200px;
+}
+.std_info select.field{
+	width:204px;
+}
+.std_info .cols_2 .field{
+	width:150px;
+}
+.std_info .cols_2 select.field{
+	width:154px;
+}
+.std_info .cols_3 .field{
+	width:100px;
+}
+.std_info .cols_3 select.field{
+	width:104px;
+}
+
+/**
+ * @name export_header
+ * the header style of export pdf page.
+ * @name print_header
+ * the header style of print page.
+ */
+.std_info_export_header, .std_info_print_header{
+	height: 25px;
+	margin-bottom:2em;
+	text-align:right;
+	border-bottom:solid 1px #ccc;
+}
+.std_info_print_header{
+	display:none;
+}
+
+@media print{
+	.std_info{
+		margin:0;
+	}
+	.std_info .top_bar, .std_info .report .rpt_search{
+		display:none;
+	}
+	.std_info_print_header{
+		display:block;
+	}
+}
