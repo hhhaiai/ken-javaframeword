@@ -463,8 +463,10 @@ public class DBUtil {
 			} catch (Exception e) {
 
 			}
-			dbModel.setConnection(DBManager.getInstance().getConnection(jndi),
+			if (!dbModel.isEmpty()) {
+				dbModel.setConnection(DBManager.getInstance().getConnection(jndi),
 					sql);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.err.println("执行失败sql:" + sql);
