@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.struts2.interceptor.ServletRequestAware;
 
 import com.opensymphony.xwork2.ActionSupport;
+import com.shine.DBUtil.model.DBModel;
 import com.shine.sourceflow.model.show.GenericDTO;
 import com.shine.sourceflow.service.show.GenericService;
 
@@ -17,6 +18,7 @@ public abstract class GenericAction extends ActionSupport implements ServletRequ
 	protected HttpServletRequest request;
 	protected GenericService service;
 	protected GenericDTO dto;
+	protected DBModel dbModel;
 	
 	public GenericAction() {
 		
@@ -28,5 +30,9 @@ public abstract class GenericAction extends ActionSupport implements ServletRequ
 	
 	public GenericDTO getDto() {
 		return dto;
+	}
+	
+	public DBModel getDbModel() {
+		return dbModel;
 	}
 }

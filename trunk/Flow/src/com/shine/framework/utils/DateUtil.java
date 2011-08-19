@@ -15,6 +15,7 @@ public final class DateUtil {
     public static final String DATE_PATTERN_DEFAULT = "yyyy-MM-dd";
     public static final String HOUR_PATTERN_DEFAULT = "HH:mm:ss";
     public static final String DATE_PATTERN_COMPACT = "yyyyMMdd";
+    public static final String MONTH_PATTERN_COMPACT = "yyyyMM";
 	
 	/** 当前日期 */
 	private static Date currentDate = new Date();
@@ -270,6 +271,25 @@ public final class DateUtil {
 	}
 	
 	/**
+	 * 获取当前月份的紧凑格式(如:201108)
+	 * 
+	 * @return 当前月份的紧凑格式
+	 */
+	public static String getCompactMonth() {
+		return DateUtil.dateToString(DateUtil.MONTH_PATTERN_COMPACT);
+	}
+	
+	/**
+	 * 获取指定日期所在月份的紧凑格式(如:20110809)
+	 * 
+	 * @param  date 日期
+	 * @return 指定日期所在月份的紧凑格式
+	 */
+	public static String getCompactMonth(Date date) {
+		return DateUtil.dateToString(date, DateUtil.MONTH_PATTERN_COMPACT);
+	}
+	
+	/**
      * 获取当前年份 
      * 
      * @return 当前年份 
@@ -344,6 +364,48 @@ public final class DateUtil {
 		GregorianCalendar calendar = new GregorianCalendar();
 		calendar.setTime(date);
 		calendar.add(GregorianCalendar.DATE, interval);
+		return calendar.getTime();
+	}
+	
+	/**
+	 * 获取前一个月份的日期
+	 * 
+	 * @return 前个月份的日期
+	 */
+	public static Date getPreviousMonth() {
+		return DateUtil.getIntervalOfMonth(-1);
+	}
+	
+	/**
+	 * 获取后一个月份的日期
+	 * 
+	 * @return 后一个月份的日期
+	 */
+	public static Date getNextMonth() {
+		return DateUtil.getIntervalOfMonth(1);
+	}
+	
+	/**
+	 * 获取当天距离指定月份间隔的日期
+	 * 
+	 * @param  interval 间隔月份(正数为向前推算,负数为向后推算)
+	 * @return 距离指定月份间隔的日期
+	 */
+	public static Date getIntervalOfMonth(int interval) {
+		return DateUtil.getIntervalOfMonth(DateUtil.currentDate, interval);
+	}
+	
+	/**
+	 * 获取距离指定月份间隔的日期
+	 * 
+	 * @param  date     日期
+	 * @param  interval 间隔月份(正数为向前推算,负数为向后推算)
+	 * @return 距离指定月份间隔的日期
+	 */
+	public static Date getIntervalOfMonth(Date date, int interval) {
+		GregorianCalendar calendar = new GregorianCalendar();
+		calendar.setTime(date);
+		calendar.add(GregorianCalendar.MONTH, interval);
 		return calendar.getTime();
 	}
 }
