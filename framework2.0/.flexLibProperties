@@ -83,6 +83,17 @@
     <classEntry path="com.shine.webPlugin.WebPluginContainer"/>
     <classEntry path="com.shine.framework.core.util.JsonUtils"/>
     <classEntry path="com.shine.framework.core.util.BaseJsonServiceUtil"/>
+    <classEntry path="com.shine.cofferChart.control.MainControl"/>
+    <classEntry path="com.shine.cofferChart.view.LineCharts.LineChartComponet"/>
+    <classEntry path="com.shine.cofferChart.view.ChartComponet"/>
+    <classEntry path="com.shine.cofferChart.model.lineCharts.LineChartsModel"/>
+    <classEntry path="com.shine.cofferChart.model.lineCharts.NodesModel"/>
+    <classEntry path="com.shine.cofferChart.view.PieCharts.PieChartComponet"/>
+    <classEntry path="com.shine.cofferChart.view.PieCharts.PieChart"/>
+    <classEntry path="com.shine.cofferChart.model.pieCharts.PieChartsModel"/>
+    <classEntry path="com.shine.cofferChart.view.ColumnCharts.ColumnChart"/>
+    <classEntry path="com.shine.cofferChart.view.ColumnCharts.ColumnChartComponet"/>
+    <classEntry path="com.shine.cofferChart.model.columnCharts.ColumnsChartsModel"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

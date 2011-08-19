@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<view:ChartComponet xmlns:fx="http://ns.adobe.com/mxml/2009" 
+					xmlns:s="library://ns.adobe.com/flex/spark" 
+					xmlns:mx="library://ns.adobe.com/flex/mx" 
+					xmlns:view="com.shine.cofferChart.view.*"
+					creationComplete="{complete()}" 
+					xmlns:PieCharts="com.shine.cofferChart.view.PieCharts.*">
+	<view:layout>
+		<s:VerticalLayout gap="0" horizontalAlign="center" />
+	</view:layout>
+	<fx:Script>
+		<![CDATA[
+			import com.shine.cofferChart.control.MainControl;
+			import com.shine.cofferChart.model.pieCharts.PieChartsModel;
+			
+			import mx.charts.events.ChartItemEvent;
+			import mx.charts.series.items.PieSeriesItem;
+			import mx.graphics.IFill;
+			import mx.graphics.SolidColor;
+			import mx.utils.StringUtil;
+			import mx.controls.Alert;
+			
+			[Bindable]
+			private var title:String="";
+			[Bindable]
+			private var dataXmlList:XMLList=new XMLList;
+			private var clickType:String;
+			
+			private var pieChartModel:PieChartsModel=new PieChartsModel;
+			
+			private function complete():void{
+				this.completeLoading();
+				
+				this.initData();
+			}
+			
+			private function initData():void{
+				pieChartModel.setXml(XML(MainControl.getInstance().getString("dataXml")));
+				
+				//设置基本属性
+				if(pieChartModel.getString("title")==null||pieChartModel.getString("title").length==0){
+					pieChart.height=pieChart.height+titleLable.height;
+					titleLable.height=0;
+				}else
+					this.title=pieChartModel.getString("title");
+				
+				clickType=pieChartModel.getString("clickType");
+				
+				this.dataXmlList=XML(MainControl.getInstance().getString("dataXml")).child("node");
+				
+				//显示特性
+				if (pieChartModel.getString("showDataTips") == "true")
+				{
+					pieChart.showDataTips=true;
+				}
+				else
+				{
+					pieChart.showDataTips=false;
+				}
+				if (pieChartModel.getString("showAllDataTips") == "true")
+				{
+					pieChart.showAllDataTips=true;
+					pieChart.showDataTips=false;
+				}
+				
+				//图例
+				if (pieChartModel.getString("legend") == "true")
+				{
+					legend.visible=true;
+				}
+				else
+				{
+					legend.visible=false;
+					pieChart.height=pieChart.height+legend.height;
+					legend.height=0;
+				}
+			}
+			
+			private function pieSeries_labelFunc(item:Object, field:String, index:Number, percentValue:Number):String
+			{
+				return StringUtil.substitute("{0} {2}({1}%)", item.@label, percentValue.toFixed(1), item.@value);
+			}
+			
+			/**
+			 * 改变填充颜色
+			 * */
+			private function pieSeries_fillFunc(item:PieSeriesItem, index:Number):IFill
+			{
+				var curItem:PieSeriesItem=PieSeriesItem(item);
+				return new SolidColor(uint(curItem.item.@color), 1.0);
+			}
+			
+			private function pieChart_itemClick(evt:ChartItemEvent):void
+			{
+				if (clickType == "detail")
+				{
+					var psi:PieSeriesItem=evt.hitData.chartItem as PieSeriesItem;
+					Alert.show("data=" + psi.item.@data + "n" + "percentValue=" + psi.percentValue.toFixed(1) + "%", "label=" + psi.item.@label);
+				}
+				else if (clickType == "pop")
+				{
+					var arr:Array=[];
+					arr[evt.hitData.chartItem.index]=0.2;
+					pieSeries.perWedgeExplodeRadius=arr;
+				}
+			}
+		]]>
+	</fx:Script>
+	<mx:Label id="titleLable"
+			  text="{title}"
+			  fontSize="12" height="20"/>
+	<PieCharts:PieChart id="pieChart"
+						itemClick="pieChart_itemClick(event);"
+						showDataTips="true"
+						width="100%"
+						height="{this.height-titleLable.height-legend.height}"
+						y="{titleLable.height}"
+						dataProvider="{dataXmlList}">
+       <PieCharts:series>
+		   <mx:PieSeries id="pieSeries"
+						 field="@value"
+						 nameField="@label"
+						 labelPosition="callout"
+						 labelFunction="pieSeries_labelFunc">
+			   <mx:stroke>
+				   <mx:Stroke color="black"
+							  weight="0"/>
+			   </mx:stroke>
+		   </mx:PieSeries>
+	   </PieCharts:series>
+	</PieCharts:PieChart>
+	<mx:Legend id="legend"
+			   dataProvider="{pieChart}" height="25"/>
+</view:ChartComponet>

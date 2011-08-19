@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<view:ChartComponet xmlns:fx="http://ns.adobe.com/mxml/2009" 
+						  xmlns:s="library://ns.adobe.com/flex/spark" 
+						  xmlns:mx="library://ns.adobe.com/flex/mx" 
+                          xmlns:view="com.shine.cofferChart.view.*"
+						  xmlns:LineCharts="com.shine.cofferChart.view.LineCharts.*" 
+						  creationComplete="{complete()}">
+	<view:layout>
+		<s:VerticalLayout gap="0" horizontalAlign="center" />
+	</view:layout>
+	<fx:Script>
+		<![CDATA[
+			import com.shine.cofferChart.control.MainControl;
+			import com.shine.cofferChart.model.lineCharts.LineChartsModel;
+			import com.shine.framework.core.model.BaseXmlModel;
+			import com.shine.framework.core.util.XMLArrayCollection;
+			
+			import mx.charts.series.LineSeries;
+			import mx.controls.Alert;
+			import mx.graphics.Stroke;
+			
+			[Bindable]
+			private var title:String="";
+			[Bindable]
+			private var dataXmlList:XMLList=new XMLList;
+			[Bindable]
+			private var verticalTitle:String="";
+			[Bindable]
+			private var horizontalTitle:String="";
+			[Bindable]
+			private var lineForm:String="curve";
+			
+			private var lineChartModel:LineChartsModel=new LineChartsModel;
+			
+			private function complete():void{
+				this.completeLoading();
+				
+				this.initData();
+			}
+			
+			private function initData():void{
+				lineChartModel.setXml(XML(MainControl.getInstance().getString("dataXml")));
+				
+				//设置基本属性
+				if(lineChartModel.getString("title")==null||lineChartModel.getString("title").length==0){
+					lineChart.height=lineChart.height+titleLable.height;
+					titleLable.height=0;
+				}else
+					this.title=lineChartModel.getString("title");
+				this.lineForm=lineChartModel.getString("form");
+				this.dataXmlList=XML(MainControl.getInstance().getString("dataXml")).child("node");
+				this.verticalTitle=lineChartModel.getString("verticalTitle");
+				this.horizontalTitle=lineChartModel.getString("horizontalTitle");
+				
+				//设置线条属性
+				var lineLineSeries:Array=new Array();
+				var linesArrayCollection:XMLArrayCollection=lineChartModel.linesArrayCollection;
+				for (var j:int=0; j < linesArrayCollection.length; j++)
+				{
+					var lineModel:BaseXmlModel=linesArrayCollection.getBaseXMLModel(j);
+					var lineSeries:LineSeries=new LineSeries();
+					lineSeries.yField="@" + lineModel.getString("value");
+					lineSeries.displayName=lineModel.getString("label");
+					lineSeries.setStyle("form", lineForm);
+					if (lineModel.getString("color") != null)
+					{
+						lineSeries.setStyle("lineStroke", new Stroke(uint(lineModel.getString("color")), 3));
+					}
+					lineLineSeries.push(lineSeries);
+				}
+				lineChart.series=lineLineSeries;
+				
+				//设置是否提示
+				if (lineChartModel.getString("showDataTips") == "true")
+				{
+					lineChart.showDataTips=true;
+				}
+				else
+				{
+					lineChart.showDataTips=false;
+				}
+				if (lineChartModel.getString("showAllDataTips") == "true")
+				{
+					lineChart.showAllDataTips=true;
+					lineChart.showDataTips=false;
+				}
+				
+				//图例是否显示
+				if (lineChartModel.getString("legend") == "true")
+				{
+					legend.visible=true;
+				}
+				else
+				{
+					legend.visible=false;
+					lineChart.height=lineChart.height+legend.height;
+					legend.height=0;
+				}
+			}
+		]]>
+	</fx:Script>
+	<mx:Label id="titleLable"
+			  text="{title}"
+			  fontSize="12" height="20"/>
+	<LineCharts:LineChart id="lineChart" 
+						  showDataTips="true"
+						  showAllDataTips="false"
+						  dataProvider="{dataXmlList}"
+						  width="100%"
+						  height="{this.height-titleLable.height-legend.height}">
+		<!-- vertical axis -->
+		<LineCharts:verticalAxis>
+			<mx:LinearAxis baseAtZero="false"
+						   title="{verticalTitle}"/>
+		</LineCharts:verticalAxis>
+			
+		
+		<!-- horizontal axis -->
+		<LineCharts:horizontalAxis>
+			<mx:CategoryAxis id="ca"
+							 categoryField="@label"
+							 title="{horizontalTitle}"/>
+		</LineCharts:horizontalAxis>
+		
+		<!-- horizontal axis renderer -->
+		<LineCharts:horizontalAxisRenderers>
+			<mx:AxisRenderer axis="{ca}"
+							 canDropLabels="true"/>
+		</LineCharts:horizontalAxisRenderers>
+	</LineCharts:LineChart>
+	<mx:Legend id="legend"
+			   dataProvider="{lineChart}" height="25"/>
+</view:ChartComponet>
