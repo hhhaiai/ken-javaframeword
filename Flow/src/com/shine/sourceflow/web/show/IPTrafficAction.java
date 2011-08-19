@@ -16,7 +16,7 @@ public class IPTrafficAction extends GenericAction {
 	
 	public String list() {
 		this.dto.init(this.request);
-		this.service.query(this.dto);
+		this.dbModel = this.service.query(this.dto);
 		return "list";
 	}
 }

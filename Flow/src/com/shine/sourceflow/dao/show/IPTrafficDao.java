@@ -25,7 +25,7 @@ public class IPTrafficDao extends GenericDao {
 		case 2:
 			return this.queryStrategy.createWeeklyQuerySQL(dto);
 		case 3:
-			return this.queryStrategy.createDailyQuerySQL(dto);
+			return this.queryStrategy.createMonthlyQuerySQL(dto);
 		case 4:
 			return this.queryStrategy.createHourlyQuerySQL(dto);
 		}

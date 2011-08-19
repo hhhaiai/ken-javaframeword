@@ -3,7 +3,7 @@ package com.shine.sourceflow.dao.show.strategy;
 import com.shine.sourceflow.model.show.GenericDTO;
 
 /**
- * 查询策略
+ * 查询策略，运用不同的查询策略来加快数据库查询
  */
 public interface IQueryStrategy {
 	/**

@@ -1,6 +1,7 @@
 package com.shine.sourceflow.dao.show;
 
 import com.shine.DBUtil.DBUtil;
+import com.shine.DBUtil.model.DBModel;
 import com.shine.sourceflow.model.show.GenericDTO;
 
 /**
@@ -9,11 +10,14 @@ import com.shine.sourceflow.model.show.GenericDTO;
 public abstract class GenericDao {
 	private static final String JNDI = "jdbc/flow";
 	
-	public void query(GenericDTO dto) {
+	public DBModel query(GenericDTO dto) {
 		String sql = this.createQuerySQL(dto);
+		DBModel dbModel = null;
 		if (sql != null && !sql.isEmpty()) {
-			DBUtil.getInstance().executeCacheQuery(JNDI, sql);
+			dbModel = DBUtil.getInstance().executeCacheQuery(JNDI, sql);
+			dbModel.close();
 		}
+		return dbModel;
 	}
 	
 	/**
