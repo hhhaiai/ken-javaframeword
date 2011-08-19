@@ -1,18 +1,25 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"%>
-<%@ include file="/common/path.jsp"%>
+<%@page language="java" contentType="text/html; charset=UTF-8"%>
+<%@include file="/common/path.jsp"%>
+<%@taglib prefix="s" uri="/struts-tags"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
 <title>IP流量</title>
-<script type="text/javascript"
-    src="${rootPath}resource/js/rl/src/RealLight.js"></script>
+<script type="text/javascript" src="${rootPath}resource/js/rl/src/RealLight.js"></script>
 </script>
 <script language="javascript">   
 rl.importCss("nf:std_info");
+rl.importJs("gui.indicator.ProgressBar");
 rl.importJs("nf:reportQuery");
 rl.importJs("nf:queryDialog");
-rl.addAutoDecoArea("mainForm", "queryDialogContent");
+rl.addAutoDecoArea("mainForm", "queryDialogContent", "ipTrafficList");
+
+rl.gui.indicator.ProgressBar.prototype.barSkinRule = function(progress){
+    return progress <= 25 ? "green" : 
+          (progress <= 50 ? "yellow" : 
+          (progress <= 80 ? "orange" : "red"));
+}
 
 // 查询
 function query(){
@@ -21,6 +28,11 @@ function query(){
     mainForm.submit(); 
 }
 </script>
+<style type="text/css">
+.data_list .rl_progressbar td{
+    border:none;
+}
+</style>
 </head>
 <body>
 <div class="std_info">
@@ -91,6 +103,31 @@ function query(){
                 </div>
             </div>
             <!-- 查询框 END -->
+            <!-- 以目标IP分组数据展现 START -->
+            <div>
+            <table id="ipTrafficList" class="data_list" width=100% cellSpacing=0 cellPadding=0 border=0>
+            <s:if test="#request.dbModel.size > 0">
+            <tr>
+            	<th>&nbsp;</th>
+                <th>源ip地址</th>
+            	<th>流量(MB)</th>
+                <th>百分比</th>
+                <th>流量趋势</th>
+            </tr>
+            <s:iterator value="#request.dbModel" status="dbModel">
+            <tr>
+            	<td><s:property value="#dbModel.index + 1" /></td>
+            	<td><a href="javascript:void(0);"><s:property value="dbModel[#dbModel.index]['src_ip']" /></a></td>
+                <td><s:property value="dbModel[#dbModel.index]['total_bytes']" /></td>
+                <td><span ctype="ProgressBar" barSkin="green" progress="10"></span></td>
+                <td><img height="14" width="14" src="${rootPath}resource/image/icons/trend.png" border="0"></td>
+            </tr>
+            </s:iterator>
+            </s:if>
+            <s:else><center><img src="${rootPath}resource/image/default/no_data.gif" /></center></s:else>
+            </table>
+            </div>
+            <!-- 以目标IP分组数据展现 END -->
         </div>
         <!-- IP流量统计 START -->
     </div>

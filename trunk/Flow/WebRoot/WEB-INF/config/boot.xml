@@ -28,5 +28,6 @@
     <!-- 计划任务 -->
     <schedulers>
         <scheduler>com.shine.netflow.job.model.CreateDailyTableJob</scheduler>
+        <scheduler>com.shine.netflow.job.model.CreateImmediateTableJob</scheduler>
     </schedulers>
 </boot>
