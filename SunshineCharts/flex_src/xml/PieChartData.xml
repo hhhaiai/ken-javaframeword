@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<data title="" autoRefreshPolicy="on" autoRefreshTime="180" debug="off" backGroudColor="0xffffff" clickType="pop" showDataTips="true" showAllDataTips="false" legend="true">
+   <node label="p1" value="10" color="0xffff00" description="饼1"/>
+   <node label="p2" value="10" color="0xff00ff" description="饼2"/>
+   <node label="p3" value="10" color="0x00ffff" description="饼3"/>
+</data>

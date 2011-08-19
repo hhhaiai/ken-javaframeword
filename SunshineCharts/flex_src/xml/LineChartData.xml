@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<data title="" autoRefreshPolicy="on" autoRefreshTime="180" debug="off"
+	backGroudColor="0xffffff" verticalTitle="price" horizontalTitle="date"
+	form="curve" showDataTips="true" showAllDataTips="false"
+	savePicturePolicy="on" savePicturePolicyName="test.jpg" legend="true">
+	<lines>
+		<line value="line1" label="线1" color="ox000000" />
+	</lines>
+	<node label="1" line1="100" />
+	<node label="2" line1="0" />
+	<node label="3" line1="100" />
+</data>
