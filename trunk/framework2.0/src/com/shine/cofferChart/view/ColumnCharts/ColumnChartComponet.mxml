@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<view:ChartComponet xmlns:fx="http://ns.adobe.com/mxml/2009" 
+					xmlns:s="library://ns.adobe.com/flex/spark" 
+					xmlns:mx="library://ns.adobe.com/flex/mx" 
+					xmlns:view="com.shine.cofferChart.view.*" 
+					creationComplete="{complete()}" 
+					xmlns:ColumnCharts="com.shine.cofferChart.view.ColumnCharts.*">
+	<view:layout>
+		<s:VerticalLayout gap="0" horizontalAlign="center" />
+	</view:layout>
+	<fx:Script>
+		<![CDATA[
+			import com.shine.cofferChart.control.MainControl;
+			import com.shine.cofferChart.model.columnCharts.ColumnsChartsModel;
+			import com.shine.framework.core.model.BaseXmlModel;
+			import com.shine.framework.core.util.XMLArrayCollection;
+			
+			import mx.charts.ChartItem;
+			import mx.charts.LegendItem;
+			import mx.charts.series.ColumnSeries;
+			import mx.charts.series.items.ColumnSeriesItem;
+			import mx.controls.Alert;
+			import mx.graphics.IFill;
+			import mx.graphics.SolidColor;
+			
+			[Bindable]
+			private var title:String="";
+			[Bindable]
+			private var dataXmlList:XMLList=new XMLList;
+			[Bindable]
+			private var verticalTitle:String="";
+			[Bindable]
+			private var horizontalTitle:String="";
+			[Bindable]
+			private var type:String="clustered";
+			
+			private var columnChartModel:ColumnsChartsModel=new ColumnsChartsModel;
+			private var columnsArrayCollection:XMLArrayCollection=null;
+			
+			private function complete():void{
+				this.completeLoading();
+				this.initData();
+			}
+			
+			private function initData():void{
+				columnChartModel.setXml(XML(MainControl.getInstance().getString("dataXml")));
+				
+				//设置基本属性
+				if(columnChartModel.getString("title")==null||columnChartModel.getString("title").length==0){
+					columnChart.height=columnChart.height+columnChart.height;
+					titleLable.height=0;
+				}else
+					this.title=columnChartModel.getString("title");
+				this.type=columnChartModel.getString("type");
+				this.dataXmlList=XML(MainControl.getInstance().getString("dataXml")).child("node");
+				this.verticalTitle=columnChartModel.getString("verticalTitle");
+				this.horizontalTitle=columnChartModel.getString("horizontalTitle");
+				
+				//设置颜色
+				var columnSeriesArray:Array=new Array;
+				columnsArrayCollection=columnChartModel.columnsArrayCollection;
+				for (var j:int=0; j < columnsArrayCollection.length; j++)
+				{
+					var columnsModel:BaseXmlModel=columnsArrayCollection.getBaseXMLModel(j);
+					var columnSeries:ColumnSeries=new ColumnSeries;
+					columnSeries.xField="@label";
+					columnSeries.yField="@" + columnsModel.getString("value");
+					columnSeries.displayName=columnsModel.getString("label");
+					if (columnsModel.getString("color") != null)
+					{
+						columnSeries.fillFunction=fillFunction;
+					}
+					columnSeriesArray.push(columnSeries);
+				}
+				columnChart.series=columnSeriesArray;
+				
+				//更新图例
+				
+				if (columnsArrayCollection.length != 0)
+				{
+					legend.removeAllChildren();
+					for (var i:int=0; i < columnsArrayCollection.length; i++)
+					{
+						var columnsModel:BaseXmlModel=columnsArrayCollection.getBaseXMLModel(i);
+						var legendItem:LegendItem=new LegendItem;
+						legendItem.label=columnsModel.getString("label");
+						var fill:IFill=new SolidColor(uint(columnsModel.getString("color")));
+						legendItem.setStyle("fill", fill);
+						legendItem.setStyle("fontWeight", "bold");
+						legend.addChild(legendItem);
+					}
+				}
+				else
+				{
+					legend.dataProvider=columnChart;
+				}
+				
+				//设置显示属性
+				if (columnChartModel.getString("showDataTips") == "true")
+				{
+					columnChart.showDataTips=true;
+				}
+				else
+				{
+					columnChart.showDataTips=false;
+				}
+				if (columnChartModel.getString("legend") == "true")
+				{
+					legend.visible=true;
+				}
+				else
+				{
+					legend.visible=false;
+					columnChart.height=columnChart.height+legend.height;
+					legend.height=0;
+				}
+				if (columnChartModel.getString("showAllDataTips") == "true")
+				{
+					columnChart.showAllDataTips=true;
+					columnChart.showDataTips=false;
+				}
+			}
+			
+			public function fillFunction(item:ChartItem, index:Number):IFill
+			{
+				if (columnsArrayCollection!=null||columnsArrayCollection.length!=0)
+				{
+					for each(var columnsModel:BaseXmlModel in columnsArrayCollection){
+						if(columnsModel.getString("value")==ColumnSeries(item.element).yField.substr(1)){
+							return (new SolidColor(uint(columnsModel.getString("color")), .75));
+						}
+					}
+				}
+				return (new SolidColor(0x563412, .75));
+			}
+		]]>
+	</fx:Script>
+	<mx:Label id="titleLable"
+			  text="{title}"
+			  fontSize="12" height="20"/>
+	<ColumnCharts:ColumnChart id="columnChart"
+							  dataProvider="{dataXmlList}"
+							  showDataTips="true"
+							  showAllDataTips="false"
+							  width="100%"
+							  height="{this.height-legend.height-titleLable.height}" >
+		<ColumnCharts:horizontalAxis>
+			<mx:CategoryAxis id="ca"
+							 categoryField="@label"/>
+		</ColumnCharts:horizontalAxis>
+		
+		
+		<ColumnCharts:horizontalAxisRenderers>
+			<mx:AxisRenderer axis="{ca}"
+							 canDropLabels="false"/>
+		</ColumnCharts:horizontalAxisRenderers>
+		<ColumnCharts:seriesFilters>
+			<fx:Array />
+		</ColumnCharts:seriesFilters>
+	</ColumnCharts:ColumnChart>
+	<mx:Legend id="legend"  height="25"/>
+</view:ChartComponet>

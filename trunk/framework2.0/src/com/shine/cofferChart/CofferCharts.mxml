@@ -12,22 +12,74 @@
 	</fx:Declarations>
 	<fx:Script>
 		<![CDATA[
-			import com.adobe.serialization.json.JSON;
+			import com.shine.cofferChart.control.MainControl;
+			import com.shine.cofferChart.view.ColumnCharts.ColumnChartComponet;
+			import com.shine.cofferChart.view.LineCharts.LineChartComponet;
+			import com.shine.cofferChart.view.PieCharts.PieChartComponet;
+			import com.shine.framework.core.util.BaseHttpServiceUtil;
+			
+			import mx.controls.Alert;
+			
+			private var lineChartComponet:LineChartComponet=null;
+			private var pieChartComponet:PieChartComponet=null;
+			private var columnChartComponet:ColumnChartComponet=null;
 			
 			private function complete():void{
+				this.completeLoading();
 				
+				refresh();
+				initComponent();
 			}
 			
-			public function initCofferChartsByJson(value:JSON):void{
-				
+			public function refresh():void{
+				this.startLoading();
+				getDataXml();
+				this.completeLoading();
 			}
 			
+			public function getDataXml():void{
+				if(MainControl.getInstance().getString("dataUrl")!=null&&MainControl.getInstance().getString("dataUrl").length!=0){
+					var baseGetHttpService:BaseHttpServiceUtil=new BaseHttpServiceUtil;
+					baseGetHttpService.getResultXml(MainControl.getInstance().getString("dataUrl"),initCofferCharts,null,MainControl.getInstance().getString("cleanCache"));
+				}
+			}
+			
+			//获取xml
 			public function initCofferCharts(value:XML):void{
+				MainControl.getInstance().put("dataXml",value.toXMLString());
 				
+				if(String(value.@debug)=="on"){
+					Alert.show(value.toXMLString(),"debug");
+				}
+				
+				if(value.@autoRefreshPolicy!=null&&String(value.@autoRefreshPolicy)=="on"){
+					this.autoRefreshPolicy="on";
+					this.autoRefreshTime=String(value.@autoRefreshTime);
+					this.autoRefreshMethod=refresh;
+					this.autoRefresh();
+				}
+			}
+			
+			
+			//初始化组件
+			public function initComponent():void{
+				if(MainControl.getInstance().getString("type")=="lineChart"){
+					lineChartComponet=new LineChartComponet;
+					lineChartComponet.width=this.width;
+					lineChartComponet.height=this.height;
+					this.addElement(lineChartComponet);
+				}else if(MainControl.getInstance().getString("type")=="pieChart"){
+					pieChartComponet=new PieChartComponet;
+					pieChartComponet.width=this.width;
+					pieChartComponet.height=this.height;
+					this.addElement(pieChartComponet);
+				}else if(MainControl.getInstance().getString("type")=="columnChart"){
+					columnChartComponet=new ColumnChartComponet;
+					columnChartComponet.width=this.width;
+					columnChartComponet.height=this.height;
+					this.addElement(columnChartComponet);
+				}
 			}
 		]]>
 	</fx:Script>
-	<mx:ViewStack id="viewStack" width="100%" height="100%">
-		
-	</mx:ViewStack>
 </view:BaseSimpleContainer>
