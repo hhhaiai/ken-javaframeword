@@ -8,7 +8,7 @@
 		<tag-class>com.shine.framework.Tag.chartTag.ChartsTag</tag-class>
 		<body-content>empty</body-content>
 		<attribute>
-			<name>flashName</name>
+			<name>id</name>
 			<required>true</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
@@ -27,12 +27,49 @@
 			<required>true</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
+		<attribute>
+			<name>cleanCache</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>width</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>height</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
 	</tag>
 	<!-- web.xml  -->
 	<!--
 		<jsp-config> <taglib> <taglib-uri>/WEB-INF/chartsTagLib</taglib-uri>
-		<taglib-location>/WEB-INF/chartsTag.tld</taglib-location> </taglib>
-		</jsp-config>
+		<taglib-location>/WEB-INF/tag/chartsTag.tld</taglib-location>
+		</taglib> </jsp-config>
 	-->
-	<!--  -->
+
+	<!-- jsp head tag -->
+	<!-- <%@taglib uri="/WEB-INF/chartsTagLib" prefix="chart"%> -->
+	<!-- line tag -->
+	<!--
+		<chart:flashTag id="lineChart" type="lineChart"
+		dataUrl="xml/LineChartData.xml" flashUrl="SunshineCharts.swf"
+		cleanCache="off" width="100%" height="100%" />
+	-->
+
+	<!-- Pie tag -->
+	<!--
+		<chart:flashTag id="pieChart" type="pieChart"
+		dataUrl="xml/PieChartData.xml" flashUrl="SunshineCharts.swf"
+		cleanCache="off" width="100%" height="100%" />
+	-->
+
+	<!-- columns tag -->
+	<!--
+		<chart:flashTag id="colmnsChart" type="columnChart"
+		dataUrl="xml/ColumnsChartData.xml" flashUrl="SunshineCharts.swf"
+		cleanCache="off" width="100%" height="100%" />
+	-->
 </taglib>

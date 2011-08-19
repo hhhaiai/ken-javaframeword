@@ -5,25 +5,35 @@ import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.BodyTagSupport;
 
 public class ChartsTag extends BodyTagSupport {
-	private String flashName;
+	private String id;
 	private String flashUrl;
 	private String type;
 	private String dataUrl;
+	private String cleanCache;
+
+	private String width = "400";
+	private String height = "300";
 
 	@Override
-	public int doAfterBody() throws JspException { // 重载方法(有多个方法,这是其中一个而已)
+	public int doStartTag() throws JspException { // 重载方法(有多个方法,这是其中一个而已)
 		// pageContext.getOut();// 获取JSP页面的输出流 out
 		// pageContext.getRequest();// 获取JSP页面的请求对象 request
 		// pageContext.getSession();// 获取JSP页面的会话对象 session
 		// pageContext.getServletContext();// 获取JSP页面的应用对象 application
 
-		String flashVars = "type=" + type + "&dataUrl=" + dataUrl;
+		String flashVars = "type=" + type + "&dataUrl=" + dataUrl
+				+ "&cleanCache=" + cleanCache;
 
 		JspWriter out = pageContext.getOut();
 		try {
 			out
-					.println("<object classid='clsid:D27CDB6E-AE6D-11cf-96B8-444553540000' width='100%' height=‘100%’ id='"
-							+ flashName + "'>");
+					.println("<object classid='clsid:D27CDB6E-AE6D-11cf-96B8-444553540000' width='"
+							+ width
+							+ "' height='"
+							+ height
+							+ "' id='"
+							+ id
+							+ "'>");
 			out.println("<param name='movie' value='" + flashUrl + "' />");
 			out.println("<param name='quality' value='high' />");
 			out.println("<param name='bgcolor' value='#ffffff' />");
@@ -51,12 +61,12 @@ public class ChartsTag extends BodyTagSupport {
 		return this.EVAL_PAGE;
 	}
 
-	public String getFlashName() {
-		return flashName;
+	public String getId() {
+		return id;
 	}
 
-	public void setFlashName(String flashName) {
-		this.flashName = flashName;
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public String getFlashUrl() {
@@ -81,6 +91,30 @@ public class ChartsTag extends BodyTagSupport {
 
 	public void setDataUrl(String dataUrl) {
 		this.dataUrl = dataUrl;
+	}
+
+	public String getCleanCache() {
+		return cleanCache;
+	}
+
+	public void setCleanCache(String cleanCache) {
+		this.cleanCache = cleanCache;
+	}
+
+	public String getWidth() {
+		return width;
+	}
+
+	public void setWidth(String width) {
+		this.width = width;
+	}
+
+	public String getHeight() {
+		return height;
+	}
+
+	public void setHeight(String height) {
+		this.height = height;
 	}
 
 }
