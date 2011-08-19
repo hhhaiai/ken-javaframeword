@@ -2,12 +2,12 @@
 
 <data title="" autoRefreshPolicy="on" autoRefreshTime="180" debug="off"
 	backGroudColor="0xffffff" verticalTitle="price" horizontalTitle="date"
-	form="curve" showDataTips="true" showAllDataTips="false"
-	savePicturePolicy="on" savePicturePolicyName="test.jpg" legend="true">
+	form="curve" showDataTips="true" showAllDataTips="false" legend="true">
 	<lines>
-		<line value="line1" label="线1" color="ox000000" />
+		<line value="line1" label="线1" color="0x00ffff" />
+		<line value="line2" label="线2" color="0xffff00" />
 	</lines>
-	<node label="1" line1="100" />
-	<node label="2" line1="0" />
-	<node label="3" line1="100" />
+	<node label="1" line1="100" line2="100" />
+	<node label="2" line1="0" line2="300" />
+	<node label="3" line1="100" line2="100" />
 </data>
