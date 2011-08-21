@@ -1,6 +1,7 @@
 package com.shine.framework.dao.impl;
 
 import java.io.Serializable;
+import java.lang.reflect.Method;
 import java.sql.SQLException;
 import java.util.Collections;
 import java.util.List;
@@ -14,6 +15,7 @@ import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.engine.SessionFactoryImplementor;
 import org.hibernate.hql.QueryTranslator;
 import org.hibernate.hql.classic.QueryTranslatorImpl;
+import org.hibernate.metadata.ClassMetadata;
 import org.hibernate.transform.Transformers;
 import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.HibernateTemplate;
@@ -24,7 +26,9 @@ import com.shine.framework.dao.callBack.HQLListCallBack;
 import com.shine.framework.dao.callBack.SQLExecuteCallBack;
 import com.shine.framework.dao.callBack.SQLListCallBack;
 import com.shine.framework.dao.callBack.SQLQueryOneCallBack;
-import com.shine.framework.entity.Pagination;
+import com.shine.framework.dao.util.Pagination;
+import com.shine.framework.entity.BaseEntity;
+import com.shine.framework.exception.DataAccessException;
 
 /**
  * 数据库基本操作实现类
@@ -37,6 +41,34 @@ public class GenericDaoImpl extends HibernateDaoSupport implements GenericDao{
 	@Override
 	public HibernateTemplate getHibernateTemp() {
 		return getHibernateTemplate();
+	}
+	
+	/**
+	 * 获取实体类信息
+	 * @param clazz
+	 * @return
+	 */
+	protected ClassMetadata getClassMetadata(Class clazz){
+		return this.getSessionFactory().getClassMetadata(clazz);
+	}
+	
+	/**
+	 * 获取实体属性值
+	 * @param entity
+	 * @param propertityName
+	 * @return
+	 */
+	protected Object getEntityPropertityValue(final BaseEntity entity,final String propertityName){
+		try {
+			String f = propertityName.substring(0, 1);
+			String mname = "get" + f.toUpperCase();
+			if(mname.length()>1)
+				mname = mname + propertityName.substring(1, mname.length()); 
+			Method m = entity.getClass().getMethod(propertityName, null);
+			return m.invoke(entity, null);
+		} catch (Exception e) {
+			throw new DataAccessException("", e);
+		}
 	}
 	
 	/**

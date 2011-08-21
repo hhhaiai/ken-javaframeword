@@ -1,11 +1,13 @@
 package com.shine.framework.test;
 
+import java.lang.reflect.Field;
 import java.util.List;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.shine.framework.dao.GenericDao;
+import com.shine.framework.entity.BaseEntity;
 import com.shine.framework.test.entity.TestUser;
 
 public class SHTest {

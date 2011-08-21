@@ -1,4 +1,4 @@
-package com.shine.framework.entity;
+package com.shine.framework.dao.util;
 
 /**
  * 分页实体

@@ -8,8 +8,7 @@ import org.hibernate.criterion.DetachedCriteria;
 import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 
-import com.shine.framework.entity.BaseEntity;
-import com.shine.framework.entity.Pagination;
+import com.shine.framework.dao.util.Pagination;
 
 /**
  * 数据库基本操作接口
