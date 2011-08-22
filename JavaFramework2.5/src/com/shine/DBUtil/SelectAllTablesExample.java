@@ -18,7 +18,7 @@ public class SelectAllTablesExample {
 				.init(
 						"E:\\workspace\\JavaFramework2.5\\src\\com\\shine\\DBUtil\\config\\dbXml.xml");
 
-		DBModel dbmodel = DBUtil.getInstance().getAllTables("jdbc/Default",
+		DBModel dbmodel = DBUtil.getInstance().getAllTables("jdbc/MonetDB",
 				null);
 		while (dbmodel.next() != 0) {
 			System.out.println(dbmodel.getDataXml());

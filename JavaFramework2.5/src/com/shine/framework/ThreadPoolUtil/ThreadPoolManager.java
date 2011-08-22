@@ -205,6 +205,28 @@ public class ThreadPoolManager {
 	}
 
 	/**
+	 * 删除线程池中的线程
+	 * 
+	 * @param threadName
+	 */
+	public void deleteThread(String threadName) {
+		pool.remove(threadName);
+	}
+
+	/**
+	 * 删除线程池中指定类型线程数据
+	 * 
+	 * @param type
+	 */
+	public void deleteThreadType(String type) {
+		for (Map.Entry<String, SuperThread> entry : pool.entrySet()) {
+			if (entry.getValue().getType().equals(type)) {
+				pool.remove(entry.getValue().getName());
+			}
+		}
+	}
+
+	/**
 	 * 检查threadmodel
 	 * 
 	 * @param threadModel
