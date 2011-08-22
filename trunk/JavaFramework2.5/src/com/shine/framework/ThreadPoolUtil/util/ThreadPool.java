@@ -2,6 +2,12 @@ package com.shine.framework.ThreadPoolUtil.util;
 
 import java.util.HashMap;
 
+/**
+ * 线程池容器
+ * 
+ * @author viruscodecn@gmail.com
+ * 
+ */
 @SuppressWarnings("serial")
 public class ThreadPool extends HashMap<String, SuperThread> {
 	private int maxThread = 1000;

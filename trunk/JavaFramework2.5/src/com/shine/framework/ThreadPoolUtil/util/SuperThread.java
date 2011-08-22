@@ -1,7 +1,14 @@
 package com.shine.framework.ThreadPoolUtil.util;
 
+import com.shine.framework.ThreadPoolUtil.ThreadPoolManager;
 import com.shine.framework.ThreadPoolUtil.model.ThreadModel;
 
+/**
+ * 线程池原始线程
+ * 
+ * @author viruscodecn@gmail.com
+ * 
+ */
 public class SuperThread extends Thread {
 	private ThreadModel threadModel;
 	private boolean busy = false;
@@ -36,6 +43,9 @@ public class SuperThread extends Thread {
 					e.printStackTrace();
 				}
 			}
+
+			// 删除线程池中的线程
+			ThreadPoolManager.getManager().deleteThread(this.getName());
 			System.out.println("Thread" + threadModel.getThreadName()
 					+ " is closing!");
 		}

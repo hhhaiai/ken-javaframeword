@@ -31,10 +31,10 @@ public class DBUtil {
 
 	private static DBUtil util = null;
 	// 缓存提交sql
-	private int batchSqlSize = 500;
+	private int batchSqlSize = 1000;
 	private int maxBatchSqlSize = 1000;
 	private int incomeBatchSqlSize = 100;
-	private int batchThreadSize = 10;
+	private int batchThreadSize = 60;
 	private int maxBatchThreadSize = 50;
 	private BatchMap map = new BatchMap();
 	// 异步查询线程数
@@ -433,6 +433,21 @@ public class DBUtil {
 	}
 
 	/**
+	 * 把整表数据加载到model里面
+	 * 
+	 * @param tableName
+	 * @return
+	 */
+	public DBModel executeQueryTable(String jndi, String tableName) {
+		try {
+			return executeQuery(jndi, "select * from " + tableName);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	/**
 	 * 查询缓存数据
 	 * 
 	 * @param sql
@@ -464,8 +479,8 @@ public class DBUtil {
 
 			}
 			if (!dbModel.isEmpty()) {
-				dbModel.setConnection(DBManager.getInstance().getConnection(jndi),
-					sql);
+				dbModel.setConnection(DBManager.getInstance().getConnection(
+						jndi), sql);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -788,6 +803,15 @@ public class DBUtil {
 	}
 
 	/**
+	 * 清除批量提交的缓冲sql
+	 * 
+	 * @param jndi
+	 */
+	public void cleanBatchUpdate(String jndi) {
+		map.updateDB(jndi);
+	}
+
+	/**
 	 * 批量更新数据
 	 * 
 	 * @param jndi
@@ -903,5 +927,4 @@ public class DBUtil {
 	public void setMaxBatchThreadSize(int maxBatchThreadSize) {
 		this.maxBatchThreadSize = maxBatchThreadSize;
 	}
-
 }

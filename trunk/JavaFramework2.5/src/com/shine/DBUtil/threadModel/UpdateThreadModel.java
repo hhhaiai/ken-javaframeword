@@ -21,7 +21,8 @@ public class UpdateThreadModel extends ThreadModel {
 
 				ArrayList<String> list = (ArrayList<String>) args[1];
 				if (list.size() != 0) {
-					DBUtil.getInstance().executeBatchUpdate(jndi, list);
+					DBUtil.getInstance().executeBatchUpdate(jndi,
+							(ArrayList) list.clone());
 					list.clear();
 				}
 			}
