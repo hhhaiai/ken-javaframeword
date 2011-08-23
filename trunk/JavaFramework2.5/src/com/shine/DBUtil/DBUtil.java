@@ -803,6 +803,19 @@ public class DBUtil {
 	}
 
 	/**
+	 * 集群缓存执行
+	 * 
+	 * @param clusterJndi
+	 * @param sql
+	 */
+	public void addClusterBatchUpdate(String clusterJndi, String sql) {
+		ClusterList list = DBManager.getInstance()
+				.getClusterConnectionNameList(clusterJndi);
+		for (String jndi : list)
+			map.addSql(jndi, sql);
+	}
+
+	/**
 	 * 清除批量提交的缓冲sql
 	 * 
 	 * @param jndi

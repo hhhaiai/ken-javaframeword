@@ -19,6 +19,7 @@ public class BatchExample {
 			String sql = "insert into test1(test) value('"+i+"')";
 			DBUtil.getInstance().addBatchUpdate("jdbc/test", sql);
 		}
+		DBUtil.getInstance().cleanBatchUpdate("jdbc/test");
 
 	}
 }
