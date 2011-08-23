@@ -279,11 +279,11 @@ public class SynchronousDBUtils {
 				.init(
 						"E:\\workspace\\JavaFramework2.5\\src\\com\\shine\\DBUtil\\config\\dbXml.xml");
 
-		// System.out.println(SynchronousDBUtils.getUtils().moirrorMonetdbTable(
-		// "jdbc/flow", "rawnetflow_hour_12", "jdbc/MonetDB",
-		// "rawnetflow_hour_12"));
+		System.out.println(SynchronousDBUtils.getUtils().moirrorMonetdbTable(
+				"jdbc/flow", "rawnetflow_hour_12", "jdbc/MonetDB",
+				"rawnetflow_hour_12"));
 
-		SynchronousDBUtils.getUtils().synchronousTabel("jdbc/flow",
-				"rawnetflow_hour_16", "jdbc/MonetDB", "rawnetflow_hour_12");
+//		SynchronousDBUtils.getUtils().synchronousTabel("jdbc/flow",
+//				"rawnetflow_hour_16", "jdbc/MonetDB", "rawnetflow_hour_12");
 	}
 }
