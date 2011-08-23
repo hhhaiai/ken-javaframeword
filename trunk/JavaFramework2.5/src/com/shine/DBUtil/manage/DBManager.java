@@ -21,6 +21,12 @@ import com.shine.DBUtil.utils.ClusterList;
 import com.shine.framework.core.util.FileUtil;
 import com.shine.framework.core.util.XmlUitl;
 
+/**
+ * 连接池管理工具
+ * 
+ * @author viruscodecn@gmail.com
+ * 
+ */
 public class DBManager extends HashMap<String, DBPool> {
 	/**
 	 * 
@@ -226,7 +232,7 @@ public class DBManager extends HashMap<String, DBPool> {
 		jdbcUrl.append(File.separator);
 		jdbcUrl.append("cache.db");
 		initSqliteJndi(jdbcCache, jdbcUrl.toString());
-		jdbcUrl=null;
+		jdbcUrl = null;
 	}
 
 	/**
