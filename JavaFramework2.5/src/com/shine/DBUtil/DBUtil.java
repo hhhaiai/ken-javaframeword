@@ -31,10 +31,10 @@ public class DBUtil {
 
 	private static DBUtil util = null;
 	// 缓存提交sql
-	private int batchSqlSize = 1000;
+	private int batchSqlSize = 500;
 	private int maxBatchSqlSize = 1000;
 	private int incomeBatchSqlSize = 100;
-	private int batchThreadSize = 60;
+	private int batchThreadSize = 10;
 	private int maxBatchThreadSize = 50;
 	private BatchMap map = new BatchMap();
 	// 异步查询线程数
