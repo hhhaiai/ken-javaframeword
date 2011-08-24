@@ -8,6 +8,7 @@ import org.hibernate.metadata.ClassMetadata;
 
 import com.shine.framework.dao.BaseDao;
 import com.shine.framework.dao.util.ArrayUtil;
+import com.shine.framework.dao.util.Pagination;
 import com.shine.framework.dao.util.QueryAnalyzer;
 import com.shine.framework.dao.util.QuerySQL;
 import com.shine.framework.entity.BaseEntity;
@@ -91,8 +92,21 @@ public class BaseDaoImpl extends GenericDaoImpl implements BaseDao{
 
 	@Override
 	public List list(QueryAnalyzer queryFilter) {
-		// TODO Auto-generated method stub
-		return null;
+		QuerySQL querySql = queryFilter.buildQuerySQL();
+		Pagination page = queryFilter.getPage();
+		String hql = querySql.getSql();
+		String[] params = querySql.getParams();
+		Object[] values = querySql.getValues();
+		if(page==null){
+			if(values==null||values.length<1)
+				return this.find(hql);
+			else if(params!=null&&params.length>0)
+				return this.find(hql, params, values);
+			else
+				return this.find(hql, values);
+		}else{
+			return this.list(hql, params, values, page);
+		}
 	}
 
 	
