@@ -17,7 +17,7 @@
     <!-- 查询线数 -->
     <select-therad-size>20</select-therad-size>
     <!-- 批量执行SQL数 -->
-    <batch-sql>100</batch-sql>
+    <batch-sql>40</batch-sql>
     <!-- 路由配置 -->
     <routers>
         <router>
