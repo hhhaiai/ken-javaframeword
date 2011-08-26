@@ -25,9 +25,7 @@ public class BatchMap extends HashMap<String, ArrayList<String>> {
 			this.get(jndi).add(sql);
 
 			if (this.get(jndi).size() > DBUtil.getInstance().getBatchSqlSize() - 1) {
-				ArrayList<String> list = (ArrayList<String>) this.get(jndi)
-						.clone();
-				updateDB(jndi, list);
+				updateDB(jndi, (ArrayList<String>) this.get(jndi).clone());
 				this.get(jndi).clear();
 			}
 		} else {
