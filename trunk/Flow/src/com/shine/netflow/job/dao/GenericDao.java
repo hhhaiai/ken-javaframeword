@@ -5,5 +5,6 @@ package com.shine.netflow.job.dao;
  */
 public class GenericDao {
 	/** JNDI数据库命名 */
-	public static final String JNDI = "jdbc/flow";
+	public static final String JNDI_MYSQL = "jdbc/flow";
+	public static final String JNDI_MONETDB = "jdbc/MonetDB";
 }

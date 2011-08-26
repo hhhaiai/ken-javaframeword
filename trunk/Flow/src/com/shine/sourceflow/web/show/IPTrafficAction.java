@@ -8,6 +8,8 @@ import com.shine.sourceflow.service.show.IPTrafficService;
  */
 public class IPTrafficAction extends GenericAction {
 	private static final long serialVersionUID = 1730268592434335250L;
+	public static final String IP_SRC = "ipSrc";
+	public static final String IP_DST = "ipDst";
 	
 	public IPTrafficAction() {
 		this.dto = new IPTrafficDTO();
@@ -16,7 +18,7 @@ public class IPTrafficAction extends GenericAction {
 	
 	public String list() {
 		this.dto.init(this.request);
-		this.dbModel = this.service.query(this.dto);
+		this.dbModels = this.service.query(this.dto);
 		return "list";
 	}
 }

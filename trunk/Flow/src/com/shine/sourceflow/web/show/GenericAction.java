@@ -1,5 +1,8 @@
 package com.shine.sourceflow.web.show;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts2.interceptor.ServletRequestAware;
@@ -14,12 +17,13 @@ import com.shine.sourceflow.service.show.GenericService;
  */
 public abstract class GenericAction extends ActionSupport implements ServletRequestAware {
 	private static final long serialVersionUID = -7590066531210423396L;
+	public static final String DATA_DEFAULT = "default";
 	
 	protected HttpServletRequest request;
 	protected GenericService service;
 	protected GenericDTO dto;
-	protected DBModel dbModel;
-	
+	protected Map<String, DBModel> dbModels = new HashMap<String, DBModel>();
+
 	public GenericAction() {
 		
 	}
@@ -29,10 +33,10 @@ public abstract class GenericAction extends ActionSupport implements ServletRequ
 	}
 	
 	public GenericDTO getDto() {
-		return dto;
+		return this.dto;
 	}
 	
-	public DBModel getDbModel() {
-		return dbModel;
+	public Map<String, DBModel> getDbModels() {
+		return this.dbModels;
 	}
 }

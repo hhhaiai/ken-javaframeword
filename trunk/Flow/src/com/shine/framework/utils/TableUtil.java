@@ -35,7 +35,7 @@ public class TableUtil {
 	 */
 	public static String getTomorrowTable() {
 		return "rawnetflow_date_"
-				+ DateUtil.getCompactDate(DateUtil.getNextDate());
+				+ DateUtil.getCompactDate(DateUtil.tomorrow());
 	}
 
 	/**
