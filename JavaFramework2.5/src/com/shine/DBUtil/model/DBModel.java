@@ -287,7 +287,8 @@ public class DBModel extends ArrayList<DBRowModel> {
 		int i = 0;
 		while (rs.next()) {
 			// 防止数据溢出
-			if (i > maxRows) {
+			if (i > maxRows - 1) {
+				rs.absolute(rs.getRow()-1);
 				break;
 			}
 
