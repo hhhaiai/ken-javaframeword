@@ -11,10 +11,8 @@ public class NetflowImpl implements NetFlowIf {
 	public void handle(List<RawNetFlow> list) {
 		for (RawNetFlow flow : list) {
 			DBUtil.getInstance().addBatchUpdate("jdbc/flow",
-					flow.toSQL(TableUtil.getCurrentHourTable()));
-			DBUtil.getInstance().addBatchUpdate("jdbc/flow",
-					flow.toSQL(TableUtil.getTodayTable()));
-			DBUtil.getInstance().addBatchUpdate("jdbc/flow",
+					flow.toSQL(TableUtil.getCurrentMonthTable()));
+			DBUtil.getInstance().addBatchUpdate("jdbc/MonetDB",
 					flow.toSQL(TableUtil.getCurrentMonthTable()));
 		}
 	}

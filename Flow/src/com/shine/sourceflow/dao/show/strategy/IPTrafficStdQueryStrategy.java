@@ -1,7 +1,5 @@
 package com.shine.sourceflow.dao.show.strategy;
 
-import java.util.Date;
-
 import com.shine.framework.utils.DateUtil;
 import com.shine.framework.utils.TableUtil;
 import com.shine.sourceflow.model.show.GenericDTO;
@@ -10,89 +8,111 @@ import com.shine.sourceflow.model.show.GenericDTO;
  * IP流量标准查询策略
  */
 public class IPTrafficStdQueryStrategy implements IQueryStrategy {
-	private static final String SQL_FIELD = "src_ip,dst_ip,sum(bytes) as total_bytes";
-	private static final String SQL_ORDERBY = "";
+	private static final String SQL_SRCIP_FIELD = "src_ip,sum(bytes) as total_bytes";
+	private static final String SQL_DSTIP_FIELD = "dst_ip,sum(bytes) as total_bytes";
+	private static final String SQL_SRCIP_GROUPBY = "group by src_ip";
+	private static final String SQL_DSTIP_GROUPBY = "group by dst_ip";
+	private static final String SQL_ORDERBY = "order by total_bytes desc";
+
+	@Override
+	public String[] createHourlyQuerySQL(GenericDTO dto) {
+		String srcipSql = this.createGenericSQL(
+				dto, SQL_SRCIP_FIELD, TableUtil.getMonthTable(dto.getDate()),
+				DateUtil.getDetailTime(DateUtil.getIntervalOfHour(-1)), 
+				DateUtil.getDetailTime(), SQL_SRCIP_GROUPBY);
+		
+		String dstipSql = this.createGenericSQL(
+				dto, SQL_DSTIP_FIELD, TableUtil.getMonthTable(dto.getDate()),
+				DateUtil.getDetailTime(DateUtil.getIntervalOfHour(-1)), 
+				DateUtil.getDetailTime(), SQL_DSTIP_GROUPBY);
+		String[] sqls = {srcipSql, dstipSql};
+		return sqls;
+	}
+
+	@Override
+	public String[] createDailyQuerySQL(GenericDTO dto) {
+		String srcipSql = this.createGenericSQL(
+				dto, SQL_SRCIP_FIELD, TableUtil.getMonthTable(dto.getDate()),
+				DateUtil.getDetailTime(DateUtil.getDateBegin(
+				DateUtil.stringToDate(dto.getDate(),
+				DateUtil.DATE_PATTERN_DEFAULT))), 
+				DateUtil.getDetailTime(DateUtil.getDateEnd(
+				DateUtil.stringToDate(dto.getDate(), 
+				DateUtil.DATE_PATTERN_DEFAULT))), SQL_SRCIP_GROUPBY);
+		String dstipSql = this.createGenericSQL(
+				dto, SQL_DSTIP_FIELD, TableUtil.getMonthTable(dto.getDate()),
+				DateUtil.getDetailTime(DateUtil.getDateBegin(
+				DateUtil.stringToDate(dto.getDate(), 
+				DateUtil.DATE_PATTERN_DEFAULT))), 
+				DateUtil.getDetailTime(DateUtil.getDateEnd(
+				DateUtil.stringToDate(dto.getDate(), 
+				DateUtil.DATE_PATTERN_DEFAULT))), SQL_DSTIP_GROUPBY);
+		String[] sqls = {srcipSql, dstipSql};
+		return sqls;
+	}
+
+	@Override
+	public String[] createMonthlyQuerySQL(GenericDTO dto) {
+		String srcipSql = this.createGenericSQL(
+				dto, SQL_SRCIP_FIELD, TableUtil.getMonthTable(dto.getDate()),
+				DateUtil.getDetailTime(DateUtil.getMonthBegin(
+				DateUtil.stringToDate(dto.getDate(),
+				DateUtil.DATE_PATTERN_DEFAULT))), 
+				DateUtil.getDetailTime(DateUtil.getMonthEnd(
+				DateUtil.stringToDate(dto.getDate(), 
+				DateUtil.DATE_PATTERN_DEFAULT))), SQL_SRCIP_GROUPBY);
+		String dstipSql = this.createGenericSQL(
+				dto, SQL_DSTIP_FIELD, TableUtil.getMonthTable(dto.getDate()),
+				DateUtil.getDetailTime(DateUtil.getMonthBegin(
+				DateUtil.stringToDate(dto.getDate(),
+				DateUtil.DATE_PATTERN_DEFAULT))), 
+				DateUtil.getDetailTime(DateUtil.getMonthEnd(
+				DateUtil.stringToDate(dto.getDate(), 
+				DateUtil.DATE_PATTERN_DEFAULT))), SQL_DSTIP_GROUPBY);
+		String[] sqls = {srcipSql, dstipSql};
+		return sqls;
+	}
+
+	@Override
+	public String[] createWeeklyQuerySQL(GenericDTO dto) {
+		String srcipSql = this.createGenericSQL(
+				dto, SQL_SRCIP_FIELD, TableUtil.getMonthTable(dto.getDate()),
+				DateUtil.getDetailTime(DateUtil.getWeekBegin(
+				DateUtil.stringToDate(dto.getDate(), 
+				DateUtil.DATE_PATTERN_DEFAULT))), 
+				DateUtil.getDetailTime(DateUtil.getWeekEnd(
+				DateUtil.stringToDate(dto.getDate(), 
+				DateUtil.DATE_PATTERN_DEFAULT))), SQL_SRCIP_GROUPBY);
+		String dstipSql = this.createGenericSQL(
+				dto, SQL_DSTIP_FIELD, TableUtil.getMonthTable(dto.getDate()),
+				DateUtil.getDetailTime(DateUtil.getWeekBegin(
+				DateUtil.stringToDate(dto.getDate(), 
+				DateUtil.DATE_PATTERN_DEFAULT))), 
+				DateUtil.getDetailTime(DateUtil.getWeekEnd(
+				DateUtil.stringToDate(dto.getDate(), 
+				DateUtil.DATE_PATTERN_DEFAULT))), SQL_DSTIP_GROUPBY);
+		String[] sqls = {srcipSql, dstipSql};
+		return sqls;
+	}
 	
-	@Override
-	public String createDailyQuerySQL(GenericDTO dto) {
+	private String createGenericSQL(
+			GenericDTO dto, String field, String tableName, 
+			String bBegin, String bEnd, String groupby) {
 		StringBuffer sql = new StringBuffer();
 		sql.append("select ");
-		sql.append(SQL_FIELD);
+		sql.append(field);
 		sql.append(" from ");
-		sql.append(TableUtil.getDateTable(dto.getDate()));
-		sql.append(" group by src_ip ");
+		sql.append(tableName);
+		sql.append(" where log_time between '");
+		sql.append(bBegin);
+		sql.append("' and '");
+		sql.append(bEnd);
+		sql.append("' ");
+		sql.append(groupby);
+		sql.append(" ");
 		sql.append(SQL_ORDERBY);
-		sql.append(" limit 0, ");
+		sql.append(" limit ");
 		sql.append(dto.getTopPageN());
 		return sql.toString();
-	}
-
-	@Override
-	public String createHourlyQuerySQL(GenericDTO dto) {
-		StringBuffer sql = new StringBuffer();
-		if (this.isToday(dto.getDate())) {
-			sql.append("select ");
-			sql.append(SQL_FIELD);
-			sql.append(" from ");
-			sql.append(TableUtil.getCurrentHourTable());
-			sql.append(" group by src_ip ");
-			sql.append(SQL_ORDERBY);
-			sql.append(" limit 0, ");
-			sql.append(dto.getTopPageN());
-		} else {
-			sql.append("select ");
-			sql.append(SQL_FIELD);
-			sql.append(" from ");
-			sql.append(TableUtil.getDateTable(dto.getDate()));
-			sql.append(" group by src_ip ");
-			sql.append(SQL_ORDERBY);
-			sql.append(" limit 0, ");
-			sql.append(dto.getTopPageN());
-		}
-		return sql.toString();
-	}
-
-	@Override
-	public String createMonthlyQuerySQL(GenericDTO dto) {
-		StringBuffer sql = new StringBuffer();
-		sql.append("select ");
-		sql.append(SQL_FIELD);
-		sql.append(" from ");
-		sql.append(TableUtil.getMonthTable(dto.getDate()));
-		sql.append(" group by src_ip ");
-		sql.append(SQL_ORDERBY);
-		sql.append(" limit 0, ");
-		sql.append(dto.getTopPageN());
-		return sql.toString();
-	}
-
-	@Override
-	public String createWeeklyQuerySQL(GenericDTO dto) {
-		Date beginDate = DateUtil.getDateBegin(DateUtil.stringToDate((dto.getDate())));
-		Date endDate = DateUtil.getDateEnd((DateUtil.stringToDate((dto.getDate()))));
-		StringBuffer sql = new StringBuffer();
-		sql.append("select ");
-		sql.append(SQL_FIELD);
-		sql.append(" from ");
-		sql.append(TableUtil.getMonthTable(dto.getDate()));
-		sql.append(" where log_time >= ");
-		sql.append(DateUtil.getDetailTime(beginDate));
-		sql.append(" and log_time <= ");
-		sql.append(DateUtil.getDetailTime(endDate));
-		sql.append(" group by src_ip ");
-		sql.append(SQL_ORDERBY);
-		sql.append(" limit 0, ");
-		sql.append(dto.getTopPageN());
-		return sql.toString();
-	}
-	
-	/**
-	 * 判断日期是否为今天
-	 * 
-	 * @param date
-	 * @return
-	 */
-	private boolean isToday(String date) {
-		return date.equals(DateUtil.getDetailDate());
 	}
 }

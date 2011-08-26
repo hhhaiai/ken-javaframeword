@@ -12,7 +12,7 @@ public class CreateMonthlyTableJob implements QuartzJob {
 	private static final String TRIGGER_NAME = "DBCreateMonthlyTable";
 	private static final int TRIGGER_DATOFMONTH = 1;
 	private static final int TRIGGER_HOUR = 0;
-	private static final int TRIGGER_MINUTE = 1;
+	private static final int TRIGGER_MINUTE = 0;
 	
 	private CreateMonthlyTableDao dao = new CreateMonthlyTableDao();
 
