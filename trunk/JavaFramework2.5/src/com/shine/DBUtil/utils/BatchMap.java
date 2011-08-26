@@ -19,17 +19,37 @@ public class BatchMap extends HashMap<String, ArrayList<String>> {
 	 * @param jndi
 	 * @param sql
 	 */
+	@SuppressWarnings("unchecked")
 	public void addSql(String jndi, String sql) {
 		if (this.containsKey(jndi)) {
 			this.get(jndi).add(sql);
 
 			if (this.get(jndi).size() > DBUtil.getInstance().getBatchSqlSize() - 1) {
-				updateDB(jndi);
+				ArrayList<String> list = (ArrayList<String>) this.get(jndi)
+						.clone();
+				updateDB(jndi, list);
+				this.get(jndi).clear();
 			}
 		} else {
-			ArrayList<String> list = new ArrayList<String>();
-			this.put(jndi, list);
-			list = null;
+			this.put(jndi, new ArrayList<String>());
+			addSql(jndi, sql);
+		}
+	}
+
+	/**
+	 * 批量提交数据
+	 * 
+	 * @param jndi
+	 * @param list
+	 */
+	public void updateDB(String jndi, ArrayList<String> list) {
+		System.out.println("批量执行sql");
+		if (ThreadPoolManager.getManager().getIdleThread("dbUpdate") != null) {
+			ThreadPoolManager.getManager().getIdleThread("dbUpdate").setValues(
+					jndi, list);
+		} else {
+			DBUtil.getInstance().autoAddBatchThread();
+			DBUtil.getInstance().autoBatchCache();
 		}
 	}
 
@@ -38,15 +58,11 @@ public class BatchMap extends HashMap<String, ArrayList<String>> {
 	 * 
 	 * @param jndi
 	 */
+	@SuppressWarnings("unchecked")
 	public void updateDB(String jndi) {
-		System.out.println("批量执行sql");
-		if (ThreadPoolManager.getManager().getIdleThread("dbUpdate") != null) {
-			ThreadPoolManager.getManager().getIdleThread("dbUpdate").setValues(
-					jndi, ((ArrayList<String>) this.get(jndi)).clone());
-		} else {
-			DBUtil.getInstance().autoAddBatchThread();
-			DBUtil.getInstance().autoBatchCache();
+		if (this.containsKey(jndi)) {
+			this.updateDB(jndi, (ArrayList<String>) this.get(jndi).clone());
+			this.get(jndi).clear();
 		}
-		this.get(jndi).clear();
 	}
 }

@@ -17,7 +17,7 @@ public class SelectAllColumnsExample {
 						"E:\\workspace\\JavaFramework2.5\\src\\com\\shine\\DBUtil\\config\\dbXml.xml");
 
 		DBModel dbmodel = DBUtil.getInstance().getTableColumns("jdbc/MonetDB",
-				null,"rawnetflow_hour_12");
+				null,"test");
 		while (dbmodel.next() != 0) {
 			System.out.println(dbmodel.getDataXml());
 		}
