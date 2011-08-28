@@ -18,7 +18,7 @@ public class ProcessThreadModel extends ThreadModel {
 	public ProcessThreadModel() {
 		flowResults = new ArrayList<RawNetFlow>();
 
-		this.setType("process");
+		this.setType("netflowProcess");
 	}
 
 	/**

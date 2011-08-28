@@ -61,20 +61,20 @@ public class NetflowRecevice extends UdpRecevice {
 	@Override
 	public void recevice(String ip, int port, byte[] data) {
 		if (list.size() > cache) {
-			if (ThreadPoolManager.getManager().getIdleThread("process") != null) {
+			if (ThreadPoolManager.getManager().getIdleThread("netflowProcess") != null) {
 
-				ThreadPoolManager.getManager().getIdleThread("process")
+				ThreadPoolManager.getManager().getIdleThread("netflowProcess")
 						.setValues(((ArrayList) list).clone());
 				list.clear();
 			} else {
 				System.err.println("数据包过多，抛弃部分数据,并且升级系统....");
-				NetflowManager.getManager().autoUpdate();
+				NetflowManager.getManager().autoUpdate(port);
 				list.clear();
 			}
 		} else {
 			int versionNum = NetFlowUtil.toIntNumber(data, 0, 2);
 			if ((versionNum > 9) || (versionNum <= 0)) {
-				//System.err.println("接收到不符合要求数据包....");
+				// System.err.println("接收到不符合要求数据包....");
 				return;
 			}
 
@@ -83,7 +83,7 @@ public class NetflowRecevice extends UdpRecevice {
 			if (rooteIP != null) {
 				SourceNetFlow sourceNetFlow = new SourceNetFlow();
 				sourceNetFlow.setRouteId(Integer.parseInt(rooteIP));
-//				sourceNetFlow.setVersionNum(versionNum);
+				// sourceNetFlow.setVersionNum(versionNum);
 				sourceNetFlow.setNetflowData(data);
 				list.add(sourceNetFlow);
 				sourceNetFlow = null;

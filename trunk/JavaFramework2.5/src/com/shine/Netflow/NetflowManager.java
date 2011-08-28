@@ -1,6 +1,8 @@
 package com.shine.Netflow;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.shine.Netflow.netflowIf.NetFlowIf;
@@ -28,7 +30,8 @@ public class NetflowManager {
 	private int maxCache = 1000;
 	private int incomeCache = 10;
 
-	private int port;
+	// netflow接收端口列表
+	private List<Integer> ports = new ArrayList<Integer>();
 
 	public static NetflowManager getManager() {
 		if (manager == null)
@@ -55,7 +58,7 @@ public class NetflowManager {
 	public void startReceiver(String host, int port, int cache, int threadSize) {
 		this.cache = cache;
 		this.threadSize = threadSize;
-		this.port = port;
+		this.ports.add(port);
 
 		// 初始化线程池
 		initThreadPool(threadSize);
@@ -66,6 +69,28 @@ public class NetflowManager {
 		UdpManager.getManager().addRecevice(port, new NetflowRecevice(cache));
 		// 启动udp接收线程
 		UdpManager.getManager().startRecevice();
+	}
+
+	/**
+	 * 关闭netflow
+	 */
+	public void stopReceiver() {
+		for (int port : this.ports) {
+			stopReceiver(port);
+		}
+		ThreadPoolManager.getManager().stopThreadPool("netflowProcess");
+	}
+
+	/**
+	 * 关闭端口
+	 * 
+	 * @param port
+	 */
+	public void stopReceiver(int port) {
+		if (this.ports.contains(port)) {
+			UdpManager.getManager().stopRecevice(port);
+		} else
+			System.err.println("无法升级netflow，因为不存在端口:" + port);
 	}
 
 	/**
@@ -100,9 +125,13 @@ public class NetflowManager {
 	/**
 	 * 自动升级系统
 	 */
-	public void autoUpdate() {
-		autoAddThread();
-		autoAddCache();
+	public void autoUpdate(int port) {
+		if (this.ports.contains(port)) {
+			autoAddThread();
+			autoAddCache(port);
+		} else
+			System.err.println("无法升级netflow，因为不存在端口:" + port);
+
 	}
 
 	/**
@@ -122,7 +151,7 @@ public class NetflowManager {
 	/**
 	 * 升级缓存
 	 */
-	public void autoAddCache() {
+	public void autoAddCache(int port) {
 		if (cache < maxCache) {
 			cache = cache + incomeCache;
 			UdpManager.getManager().addRecevice(port,
