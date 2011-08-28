@@ -49,7 +49,6 @@
 	<classpathentry kind="lib" path="lib/maplefetion-core-2.5.1.jar"/>
 	<classpathentry kind="lib" path="lib/monetdb-1.11-jdbc.jar"/>
 	<classpathentry kind="lib" path="lib/mysql-connector-java-3.0.10-stable-bin.jar"/>
-	<classpathentry kind="lib" path="lib/ognl-2.6.11.jar"/>
 	<classpathentry kind="lib" path="lib/org-jofc-0.8.20110729.jar"/>
 	<classpathentry kind="lib" path="lib/poi-3.7-20101029.jar"/>
 	<classpathentry kind="lib" path="lib/poi-scratchpad-3.7-20101029.jar"/>
@@ -62,8 +61,6 @@
 	<classpathentry kind="lib" path="lib/slf4j-simple-1.3.1.jar"/>
 	<classpathentry kind="lib" path="lib/sqlitejdbc-v056.jar"/>
 	<classpathentry kind="lib" path="lib/StarJFlvLib.jar"/>
-	<classpathentry kind="lib" path="lib/struts2-convention-plugin-2.1.6.jar"/>
-	<classpathentry kind="lib" path="lib/struts2-core-2.1.6.jar"/>
 	<classpathentry kind="lib" path="lib/swt-linux.jar"/>
 	<classpathentry kind="lib" path="lib/swt-windows.jar"/>
 	<classpathentry kind="lib" path="lib/swt.jar"/>
@@ -71,7 +68,6 @@
 	<classpathentry kind="lib" path="lib/tomcat-juli.jar"/>
 	<classpathentry kind="lib" path="lib/tools.jar"/>
 	<classpathentry kind="lib" path="lib/xom-1.2.5.jar"/>
-	<classpathentry kind="lib" path="lib/xwork-2.1.2.jar"/>
 	<classpathentry kind="lib" path="lib/yuicompressor-2.4.6.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
