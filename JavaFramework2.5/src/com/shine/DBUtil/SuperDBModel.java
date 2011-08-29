@@ -72,7 +72,9 @@ public final class SuperDBModel extends DBModel {
 		sql.append(tableName);
 		sql.append(" where 1=1");
 		for (String option : options) {
+			sql.append(" ");
 			sql.append(option);
+			sql.append(" ");
 		}
 	}
 
