@@ -1,0 +1,95 @@
+/* button.css */
+.gui_btn_wrap{
+  overflow:hidden;
+	cursor:default;
+  -moz-user-select:none ;/*for ff*/
+}
+.gui_btn_pos_wrap{
+	height:100%;
+  overflow:hidden;/*in ie6, if child's position is relative or absolute, it wont inherit parent'overflow if parent's position is auto*/
+  position:relative;
+	padding:0 5px;
+}
+.gui_btn_left{
+  position:absolute;
+  left:0px;
+	top:0px;
+  height:100%;
+  width:5px;
+	background-repeat:no-repeat;
+}
+.gui_btn_left_img{
+  background-image:url(../../img/default/gui/button/btn_bg_left.gif);
+}
+.gui_btn_right{
+  position:absolute;
+  right:0px;
+	top:0px;
+  height:100%;
+  width:5px;
+	background-repeat:no-repeat;
+}
+.gui_btn_right_img{
+  background-image:url(../../img/default/gui/button/btn_bg_right.gif);
+}
+.gui_btn_icon{
+  position:absolute;
+  left:5px;
+  width:16px;
+  height:100%;
+	background:center no-repeat;
+}
+.gui_btn_close_icon{/* ?url */
+  position:absolute;
+  right:7px;
+  width:8px;
+	height:100%;
+	background: url(../../img/default/gui/bar/icon_close.gif) 0% 60% no-repeat;
+}
+.gui_btn_split_menuitem{
+  position:absolute;
+  right:5px;
+  width:8px;
+	height:100%;
+}
+.gui_btn_split_menuitem_img{/* ?url */
+	background:url(../../img/default/gui/button/btn_arrow_right.gif) center no-repeat;
+}
+
+.gui_btn_text_wrap{
+  height:100%;
+	background-repeat:repeat-x;
+}
+.gui_btn_text_wrap_img{/*btn middle part bg*/
+  background-image:url(../../img/default/gui/button/btn_bg_middle.gif);
+}
+.gui_btn_text{
+  width:100%;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+/*active tab style
+*/
+.gui_activetab_left_img{
+  background-image:url(../../img/default/gui/button/btn_bg_middle.gif);
+}
+.gui_activetab_text_wrap_img{
+  background-image:url(../../img/default/gui/button/btn_bg_middle.gif);
+}
+.gui_activetab_right_img{
+  background-image:url(../../img/default/gui/button/btn_bg_middle.gif);
+}
+
+.sys_button_left_img{
+  background-image:url(../../img/default/gui/button/system/btn_bg_left.gif);
+	background-position:0 24px;
+}
+.sys_button_text_wrap_img{
+  background-image:url(../../img/default/gui/button/system/btn_bg_middle.gif);
+	background-position:0 24px;
+}
+.sys_button_right_img{
+  background-image:url(../../img/default/gui/button/system/btn_bg_right.gif);
+	background-position:0 24px;
+}

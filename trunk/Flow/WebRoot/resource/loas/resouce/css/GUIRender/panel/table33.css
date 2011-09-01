@@ -1,0 +1,43 @@
+/*table33.css
+*/
+table.GUIRender_table33{
+}
+.GUIRender_table33 .ne, .GUIRender_table33 .e, .GUIRender_table33 .se, .GUIRender_table33 .sw, .GUIRender_table33 .w, .GUIRender_table33 .nw{
+  font-size:1px;
+}
+.GUIRender_table33 .ne, .GUIRender_table33 .nw, .GUIRender_table33 .se, .GUIRender_table33 .sw{
+	background-repeat:no-repeat;
+}
+.GUIRender_table33 .n{
+  font-weight:bold;
+	color:#006699;
+  background-image:url(../../../img/default/GUIRender/panel/table33/n.gif);
+}
+.GUIRender_table33 .ne{
+  width:4px;
+  background-image:url(../../../img/default/GUIRender/panel/table33/ne.gif);
+}
+.GUIRender_table33 .e{
+  background-image:url(../../../img/default/GUIRender/panel/table33/e.gif);
+}
+.GUIRender_table33 .se{
+  background-image:url(../../../img/default/GUIRender/panel/table33/se.gif);
+}
+.GUIRender_table33 .s{
+  background-image:url(../../../img/default/GUIRender/panel/table33/s.gif);
+}
+.GUIRender_table33 .sw{
+  height:49px; 
+	background-image:url(../../../img/default/GUIRender/panel/table33/sw.gif);
+}
+.GUIRender_table33 .w{
+  background-image:url(../../../img/default/GUIRender/panel/table33/w.gif);
+}
+.GUIRender_table33 .nw{
+  width:5px;
+	height:36px;
+  background-image:url(../../../img/default/GUIRender/panel/table33/nw.gif);
+}
+.GUIRender_table33 .content{
+  background-image:url(../../../img/default/GUIRender/panel/table33/bg.gif);
+}

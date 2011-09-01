@@ -1,0 +1,10 @@
+/* tableLayout.css
+ */
+.gui_tableLayout .header{
+  overflow:hidden;
+	height:20px;
+	padding-left:5px;
+	font-weight:bold;
+	color:#006699;
+	background:#C6D5FD url(../../img/default/gui/panel/collaspe_headBg.gif);
+}

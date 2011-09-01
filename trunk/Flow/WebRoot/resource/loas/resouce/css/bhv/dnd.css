@@ -1,0 +1,18 @@
+/* dnd.css
+*/
+.bhv_ghost_resize, .bhv_ghost_select{
+  z-index : 10000;
+	position:absolute;
+	left:0;
+	top:0;
+}
+.bhv_ghost_resize{
+	border:1px dotted #333;
+}
+.bhv_ghost_select{
+  background-color:#D7EBFF;
+	border:1px solid blue;
+	opacity : 0.5;
+	filter:Alpha(opacity=50);
+	cursor:default;
+}

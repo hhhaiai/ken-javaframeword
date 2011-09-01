@@ -1,0 +1,57 @@
+/* splitPanle.css */
+
+.html, .body{
+ width:100%;
+ height:100%;
+ overflow:hidden;
+}
+.gui_splitPanel_tb{
+  overflow:auto;
+  width:100%;
+}
+.gui_splitPanel_lr{
+  overflow:auto;
+  float:left;
+	clear:none;
+  height:100%;
+}
+.gui_splitPanel_tb_sb{
+  width:100%;
+	height:5px;
+	font-size:1px;
+	overflow:hidden;
+	cursor:n-resize;
+}
+.gui_splitPanel_lr_sb{
+  float:left;
+	clear:none;
+  height:100%;
+	width:5px;
+	font-size:1px;
+	overflow:hidden;
+	cursor:e-resize;
+}
+.gui_splitPanel_tb_sb .tg{
+	background:url(../../img/default/gui/layout/h_separator.gif)  no-repeat center;
+	cursor:pointer;
+	position:relative;
+	width:32px;
+	height:100%;
+	left:45%;
+}
+.gui_splitPanel_tb_sb .tgWrap, .gui_splitPanel_lr_sb .tgWrap{
+  position:relative;
+	left:0;
+	top:0;
+	width:100%;
+	height:100%;
+	overflow:hidden;
+}
+.gui_splitPanel_lr_sb .tg{
+	background:url(../../img/default/gui/layout/v_separator.gif) no-repeat center;
+	cursor:pointer;
+	position:relative;
+	width:100%;
+	height:32px;
+	top:45%;
+}

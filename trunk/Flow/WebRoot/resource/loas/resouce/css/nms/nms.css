@@ -1,0 +1,21 @@
+/* nms.css
+for basic NMS nodes and maps;
+*/
+.NMS_backboardMap{
+  position:relative;
+	left:0;
+	top:0;
+	background-repeat:no-repeat;
+	margin:auto;
+}
+.NMS_portStatusNode{
+	cursor:pointer;
+	background-position:center;
+	background-repeat:no-repeat;
+	clear:none;
+	float:left;
+}
+.NMS_PSNGroupNode{
+  position:absolute;
+	width:auto;
+}

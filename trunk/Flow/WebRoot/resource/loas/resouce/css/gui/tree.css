@@ -1,0 +1,51 @@
+/* tree.css
+*/
+ul.gui_tree{
+  cursor:default;
+}
+.gui_tree input{
+  border:none;
+  width:16px;
+  height:16px;
+  margin:0;
+  padding:0;
+}
+.gui_tree li{
+  padding:1px 0;
+  list-style:none;
+  width:100% ;
+  white-space:nowrap;
+}
+.gui_tree .collapsed{
+  background: no-repeat url(../../img/default/gui/tree/closed.gif);
+}
+.gui_tree .blank{
+  background:none;
+}
+.gui_tree .expanded{
+  background: no-repeat url(../../img/default/gui/tree/opened.gif);
+}
+.gui_tree .contentCtn{
+  height:18px;
+  line-height:16px;
+  margin-left:16px;
+  background-repeat:no-repeat;
+  cursor:pointer;
+}
+.gui_tree .textCtn{
+  margin-left:5px;
+}
+.gui_tree .childNodesCtn{
+  padding-left:16px;
+  display:none;
+  width:auto !important;
+  width:100%;
+}
+.gui_tree .focused{
+  color:#FFF;
+  background-color:#316AC5;
+}
+.gui_tree .disabled{
+  color:gray;/*#CAC8BB*/
+	cursor:default !important;
+}
