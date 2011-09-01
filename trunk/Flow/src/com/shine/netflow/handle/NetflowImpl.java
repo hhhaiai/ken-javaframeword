@@ -10,9 +10,7 @@ import com.shine.framework.utils.TableUtil;
 public class NetflowImpl implements NetFlowIf {
 	public void handle(List<RawNetFlow> list) {
 		for (RawNetFlow flow : list) {
-			DBUtil.getInstance().addBatchUpdate("jdbc/flow",
-					flow.toSQL(TableUtil.getCurrentMonthTable()));
-			DBUtil.getInstance().addBatchUpdate("jdbc/MonetDB",
+			DBUtil.getInstance().addClusterBatchUpdate("jdbc/Cluster",
 					flow.toSQL(TableUtil.getCurrentMonthTable()));
 		}
 	}
