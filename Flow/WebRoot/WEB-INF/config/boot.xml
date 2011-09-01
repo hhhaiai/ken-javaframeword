@@ -17,12 +17,16 @@
     <!-- 查询线数 -->
     <select-therad-size>20</select-therad-size>
     <!-- 批量执行SQL数 -->
-    <batch-sql>40</batch-sql>
+    <batch-sql>100</batch-sql>
     <!-- 路由配置 -->
     <routers>
         <router>
             <id>0</id>
             <ip-address>127.0.0.1</ip-address>
+        </router>
+        <router>
+            <id>1</id>
+            <ip-address>10.44.128.250</ip-address>
         </router>
     </routers>
     <!-- 计划任务 -->

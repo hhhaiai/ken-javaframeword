@@ -6,9 +6,14 @@
 <struts>
     <package name="flow" extends="base" namespace="/">
         <!-- IP流量统计 -->
-        <action name="iptraffic_*" 
+        <action name="ipTraffic_*" 
                 class="com.shine.sourceflow.web.show.IPTrafficAction" method="{1}">
             <result name="list">/show/ipTraffic.jsp</result>
+        </action>
+        <!-- IP分组流量统计 -->
+        <action name="ipGroupTraffic_*" 
+                class="com.shine.sourceflow.web.show.IPGroupTrafficAction" method="{1}">
+            <result name="list">/show/ipGroupTraffic.jsp</result>
         </action>
     </package>
 </struts>
