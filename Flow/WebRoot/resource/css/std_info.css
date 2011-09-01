@@ -118,14 +118,14 @@
 }
 .std_info .pane .head .h_left{
 	width:8px;
-	background:url(../image/system/mix/homepage/bg_pane_left.gif) no-repeat;
+	background:url(../image/default/mix/homepage/bg_pane_left.gif) no-repeat;
 }
 .std_info .pane .head .h_right{
 	width:8px;
-	background:url(../image/system/mix/homepage/bg_pane_right.gif) no-repeat;
+	background:url(../image/default/mix/homepage/bg_pane_right.gif) no-repeat;
 }
 .std_info .pane .head .h_center{
-	background:url(../image/system/mix/homepage/bg_pane_center.gif) repeat-x;
+	background:url(../image/default/mix/homepage/bg_pane_center.gif) repeat-x;
 	font-weight:bold;
 	color:#28417A;
 }
@@ -178,46 +178,39 @@
 	margin:2em auto;
 }
 /**
- * @name hash_info
- * style for hash table content.
+ * data_list: for list data table.
+ * data_fields: for fields data table.
+ * 
  */
-.std_info table.hash_info {
-	text-align:left;
-}
-.std_info table.hash_info td, .std_info table.hash_info th {
-	vertical-align:top;
-	line-height:14px;
-	padding:5px 0;/*for multi lines content*/
-}
-.std_info table.hash_info th {
-	font-weight:normal;
-	width:100px;
-	white-space:nowrap;
-	text-align:left;
-}
-/**
- * @name data_list
- * style for list data table.
- */
-.std_info .data_list{
+.std_info .data_list,
+.std_info .data_fields{
 	width:100%;
 }
-.std_info .data_list th, .std_info .data_list td{
+.std_info .data_list th,
+.std_info .data_list td,
+.std_info .data_fields th,
+.std_info .data_fields td{
 	border-bottom:solid 1px #eee;
-	line-height:14px;
+	line-height:16px;
 	padding:3px;
 	text-align:left;
 }
-.std_info .data_list th{
+.std_info .data_list th,
+.std_info .data_fields th{
 	background-color:#eee;
 	font-weight:normal;
+}
+.std_info .data_fields th{
+	width:118px;
+	border-top:solid 1px #fff;
 }
 .std_info .three_line_form{
 	width:100%;
 	border-top:solid 1px #000;
 	border-bottom:solid 1px #000;
 }
-.std_info .three_line_form th, .std_info .three_line_form td{
+.std_info .three_line_form th,
+.std_info .three_line_form td{
 	line-height:14px;
 	padding:3px;
 	text-align:left;
@@ -225,6 +218,94 @@
 .std_info .three_line_form th{
 	border-bottom:solid 1px #000;
 }
+
+/**
+ * form fields layout
+ */
+.std_info .fields_layout{
+	width:100%;
+	vertical-align:top;
+}
+.std_info .fields_layout th.label{
+	width:100px;
+	padding-left:24px;
+	font-weight:normal;
+	vertical-align:top;
+	text-align:left;
+}
+.std_info .fields_layout td{
+	height:25px;
+	line-height:22px;
+	padding:3px 0;
+	text-align:left;
+	vertical-align:top;
+}
+.std_info .fields_layout .assist_col{
+	width:300px;
+}
+.std_info .fields_layout .assist_pane{
+	border-left:solid 1px #eee;
+	padding-left:1em;
+}
+.std_info .fields_layout .assist_pane ul{
+	list-style:none;
+}
+.std_info .fields_layout .assist_pane h5.assist_title{
+	text-align:left;
+}
+
+.std_info .fields_layout .checkbox_list_ctn{
+	border:solid 1px #eee;
+	height:80px;
+	line-height:16px;
+	overflow:auto;
+}
+.std_info .fields_layout .checkbox_list_ctn input{
+	margin-right:5px ;
+}
+.std_info .form_action_bar{
+	border-top:solid 1px #ccc;
+	margin-top:3em;
+	padding-top:2em;
+	height:30px;
+	padding-left:148px;
+}
+
+.std_info .asterisk{
+	color:red;
+}
+.std_info .field{
+	width:200px;
+	height:18px;
+}
+.std_info textarea.field{
+	width:200px;
+	height:auto;
+}
+.std_info select.field{
+	width:204px;
+}
+/**
+ * cols4 style for 4 columns table layout.
+ */
+.std_info .cols4 .field{
+	width:150px;
+}
+.std_info .cols4 select.field{
+	width:154px;
+}
+/**
+ * cols4_2 is style for the second column of cols4 table layout(including 
+ * data_list and fields_layout).
+ * The width of this col should be set to avoid the browser's auto-width merchanism.
+ */
+.std_info .fields_layout .cols4_2{
+	width:245px;
+}
+.std_info .data_fields .cols4_2{
+	width:239px;
+}
+
 /**
  * @name title_list
  * style for title list.
@@ -290,58 +371,16 @@
 }
 
 /**
- * form fields layout
+ * Defaultly, we use form_tip to show action message, 
+ * but form_msg here is to make old version work well.
  */
-.std_info .fields_layout{
-	width:100%;
-	text-align:left;
-}
-.std_info .fields_layout th.label{
-	font-weight:lighter;
-	padding-left:24px;
-	width:100px;
-}
-.std_info .fields_layout td{
-	height:30px;
-	line-height:30px;
-	vertical-align:middle;
-}
-.std_info .fields_layout .checkbox_list_ctn{
+.std_info .form_msg{
 	border:solid 1px #eee;
-	height:80px;
-	line-height:16px;
-	overflow:auto;
-}
-.std_info .fields_layout .checkbox_list_ctn input{
-	margin-right:5px ;
-}
-.std_info .form_action_bar{
-	border-top:solid 1px #ccc;
-	margin-top:3em;
-	padding-top:2em;
-	height:30px;
-	padding-left:148px;
-}
-.std_info .asterisk{
-	color:red;
-}
-.std_info .field{
-	width:200px;
-}
-.std_info select.field{
-	width:204px;
-}
-.std_info .cols_2 .field{
-	width:150px;
-}
-.std_info .cols_2 select.field{
-	width:154px;
-}
-.std_info .cols_3 .field{
-	width:100px;
-}
-.std_info .cols_3 select.field{
-	width:104px;
+	background-color:#FFC;
+	/*height:20px;*/
+	line-height:20px;
+	padding:0 1em;
+	display:none;
 }
 
 /**
