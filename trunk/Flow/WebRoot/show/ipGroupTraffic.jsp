@@ -5,7 +5,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
-<title>IP流量</title>
+<title>IP分组流量</title>
 <script type="text/javascript" src="${rootPath}resource/js/rl/src/RealLight.js"></script>
 </script>
 <script language="javascript">   
@@ -13,7 +13,7 @@ rl.importCss("nf:std_info");
 rl.importJs("gui.indicator.ProgressBar");
 rl.importJs("nf:reportQuery");
 rl.importJs("nf:queryDialog");
-rl.addAutoDecoArea("mainForm", "queryDialogContent", "ipSrcTrafficList", "ipDstTrafficList");
+rl.addAutoDecoArea("mainForm", "queryDialogContent", "ipGroupTrafficList");
 
 rl.gui.indicator.ProgressBar.prototype.barSkinRule = function(progress){
     return progress <= 25 ? "green" : 
@@ -24,7 +24,7 @@ rl.gui.indicator.ProgressBar.prototype.barSkinRule = function(progress){
 // 查询
 function query(){
     var mainForm = document.mainForm;
-    mainForm.action = "${rootPath}ipTraffic_list";
+    mainForm.action = "${rootPath}ipGroupTraffic_list";
     mainForm.submit(); 
 }
 </script>
@@ -48,8 +48,8 @@ function query(){
             </a>
 		</div>
         <!-- 查询页面 END -->
-        <h3 class="title">IP流量统计</h3>
-        <!-- IP流量统计 START -->
+        <h3 class="title">IP分组流量统计</h3>
+        <!-- IP分组流量统计 START -->
         <div class="report">
             <!-- 查询框 START -->
             <div class="rpt_search">
@@ -103,23 +103,27 @@ function query(){
                 </div>
             </div>
             <!-- 查询框 END -->
-            <!-- 以源IP分组数据展现 START -->
+            <!-- IP分组数据展现 START -->
             <div>
-            <table id="ipSrcTrafficList" class="data_list" width=100% cellSpacing=0 cellPadding=0 border=0>
-            <s:if test="#request.dbModels['ipSrc'].size > 0">
+            <table id="ipGroupTrafficList" class="data_list" width=100% cellSpacing=0 cellPadding=0 border=0>
+            <s:if test="#request.dbModels['default'].size > 0">
             <tr>
-            	<th>&nbsp;</th>
-                <th>源ip地址</th>
-            	<th>流量(MB)</th>
+                <th>&nbsp;</th>
+                <th>IP分组名</th>
+                <th>流入(MB)</th>
+                <th>百分比</th>
+                <th>流出(MB)</th>
                 <th>百分比</th>
                 <th>流量趋势</th>
             </tr>
-            <s:iterator value="#request.dbModels['ipSrc']" status="dbModel">
+            <s:iterator value="#request.dbModels['default']" status="dbModel">
             <tr>
-            	<td><s:property value="#dbModels['ipSrc'].index + 1" /></td>
-            	<td><a href="javascript:void(0);"><s:property value="dbModels['ipSrc'][#dbModel.index]['src_ip']" /></a></td>
-                <td><s:property value="dbModels['ipSrc'][#dbModel.index]['format_bytes_total']" /></td>
-                <td><span ctype="ProgressBar" barSkin="green" progress="<s:property value="dbModels['ipDst'][#dbModel.index]['percentage']" />"></span></td>
+                <td><s:property value="#dbModels['default'].index + 1" /></td>
+                <td><a href="javascript:void(0);"><s:property value="dbModels['default'][#dbModel.index]['ip_alias']" /></a></td>
+                <td><s:property value="dbModels['default'][#dbModel.index]['src_ip_total']" /></td>
+                <td><span ctype="ProgressBar" barSkin="green" progress="<s:property value="dbModels['default'][#dbModel.index]['src_ip_percentage']" />"></span></td>
+                <td><s:property value="dbModels['default'][#dbModel.index]['dst_ip_total']" /></td>
+                <td><span ctype="ProgressBar" barSkin="green" progress="<s:property value="dbModels['default'][#dbModel.index]['dst_ip_percentage']" />"></span></td>
                 <td><img height="14" width="14" src="${rootPath}resource/image/icons/trend.png" border="0"></td>
             </tr>
             </s:iterator>
@@ -127,36 +131,9 @@ function query(){
             <s:else><center><img src="${rootPath}resource/image/default/no_data.gif" /></center></s:else>
             </table>
             </div>
-            <!-- 以源IP分组数据展现 END -->
-            <!-- 以目标IP分组数据展现 START -->
-            <div>
-            <table id="ipDstTrafficList" class="data_list" width=100% cellSpacing=0 cellPadding=0 border=0>
-            <s:if test="#request.dbModels['ipDst'].size > 0">
-            <tr>
-            	<th>&nbsp;</th>
-                <th>目标ip地址</th>
-            	<th>流量(MB)</th>
-                <th>百分比</th>
-                <th>流量趋势</th>
-            </tr>
-            <s:iterator value="#request.dbModels['ipDst']" status="dbModel">
-            <tr>
-            	<td><s:property value="#dbModels['ipDst'].index + 1" /></td>
-            	<td><a href="javascript:void(0);"><s:property value="dbModels['ipDst'][#dbModel.index]['dst_ip']" /></a></td>
-                <td>
-                <s:property value="dbModels['ipDst'][#dbModel.index]['format_bytes_total']" />
-                </td>
-                <td><span ctype="ProgressBar" barSkin="green" progress="<s:property value="dbModels['ipDst'][#dbModel.index]['percentage']" />"></span></td>
-                <td><img height="14" width="14" src="${rootPath}resource/image/icons/trend.png" border="0"></td>
-            </tr>
-            </s:iterator>
-            </s:if>
-            <s:else><center><img src="${rootPath}resource/image/default/no_data.gif" /></center></s:else>
-            </table>
-            </div>
-            <!-- 以目标IP分组数据展现 END -->
+            <!-- IP分组数据展现 END -->
         </div>
-        <!-- IP流量统计 END -->
+        <!-- IP流分组量统计 END -->
     </div>
 </div>
 </body>
