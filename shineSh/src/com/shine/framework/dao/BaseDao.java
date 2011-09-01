@@ -9,9 +9,16 @@ import com.shine.framework.entity.BaseEntity;
 /**
  * 数据库操作扩展功能(复杂查询等)
  * @author JiangKunpeng	2011.05.04
- * @version 2011.08.21
+ * @version 2011.09.01
  */
 public interface BaseDao extends GenericDao{
+	
+	/**
+	 * 通过实体和主键值查询
+	 * @param entity	需设置主键值
+	 * @return
+	 */
+	public BaseEntity get(BaseEntity entity);
 	
 	/**
 	 * 删除

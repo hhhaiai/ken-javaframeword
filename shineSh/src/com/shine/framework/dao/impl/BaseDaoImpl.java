@@ -25,6 +25,25 @@ public class BaseDaoImpl extends GenericDaoImpl implements BaseDao{
 	}
 	
 	@Override
+	public BaseEntity get(BaseEntity entity) {
+		ClassMetadata cm = getClassMetadata(entity.getClass());
+		String pkName = cm.getIdentifierPropertyName();
+		Object v = getEntityPropertityValue(entity, pkName);
+		String t = cm.getIdentifierType().getName();
+		Serializable s = null;
+		if("string".equals(t))
+			s = v.toString();
+		else if(t.startsWith("int"))
+			s = Integer.parseInt(v.toString());
+		else if("long".equals(t))
+			s = Long.parseLong(v.toString());
+		else 
+			s = v.toString();
+		Object o = get(entity.getClass(), s);
+		return (BaseEntity)o;
+	}
+
+	@Override
 	public void delete(BaseEntity entity) {
 		ClassMetadata cm = getClassMetadata(entity.getClass());
 		String pkName = cm.getIdentifierPropertyName();
