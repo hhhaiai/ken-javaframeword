@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+    "http://struts.apache.org/dtds/struts-2.1.7.dtd">
+
+<struts>
+    <package name="allocation" extends="base" namespace="/">
+        <!-- IP分组流量配置 -->
+        <action name="ipGroupTrafficConfig_*" 
+                class="com.shine.sourceflow.web.allocation.IPGroupTrafficConfigAction" method="{1}">
+            <result name="list">/allocation/ipGroup/list.jsp</result>
+            <result name="add">/allocation/ipGroup/add.jsp</result>
+            <result name="add_success" type="redirectAction">
+                ipGroupTrafficConfig_list
+            </result>
+            <result name="edit">/allocation/ipGroup/edit.jsp</result>
+            <result name="edit_success" type="redirectAction">
+                ipGroupTrafficConfig_list
+            </result>
+        </action>
+    </package>
+</struts>
