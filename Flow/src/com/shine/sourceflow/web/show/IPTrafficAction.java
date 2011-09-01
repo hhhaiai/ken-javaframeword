@@ -1,7 +1,8 @@
 package com.shine.sourceflow.web.show;
 
-import com.shine.sourceflow.model.show.IPTrafficDTO;
+import com.shine.sourceflow.model.show.IPTrafficDto;
 import com.shine.sourceflow.service.show.IPTrafficService;
+import com.shine.sourceflow.web.GenericAction;
 
 /**
  * IP流量
@@ -12,13 +13,7 @@ public class IPTrafficAction extends GenericAction {
 	public static final String IP_DST = "ipDst";
 	
 	public IPTrafficAction() {
-		this.dto = new IPTrafficDTO();
+		this.dto = new IPTrafficDto();
 		this.service = new IPTrafficService();
-	}
-	
-	public String list() {
-		this.dto.init(this.request);
-		this.dbModels = this.service.query(this.dto);
-		return "list";
 	}
 }

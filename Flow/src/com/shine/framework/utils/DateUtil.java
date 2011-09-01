@@ -39,9 +39,6 @@ public final class DateUtil {
     public static final String DATE_PATTERN_COMPACT 	= "yyyyMMdd";
     public static final String MONTH_PATTERN_COMPACT 	= "yyyyMM";
 	
-	/** 当前日期 */
-	private static Date currentDate = new Date();
-	
 	private DateUtil() {
 	}
 	
@@ -51,7 +48,7 @@ public final class DateUtil {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		System.out.println(DateUtil.getIntervalOfHour(-1));
+		System.out.println(DateUtil.getCurrentDate());
 	}
 
 	/**
@@ -60,7 +57,7 @@ public final class DateUtil {
 	 * @return 当前日期
 	 */
 	public static Date getCurrentDate() {
-		return DateUtil.currentDate;
+		return new Date();
 	}
 	
 	/**
@@ -73,7 +70,7 @@ public final class DateUtil {
 	 */
 	public static Date getTodayAt(int hour, int minute, int second) {
 		return DateUtil.getDateAt(
-				DateUtil.currentDate, hour, minute, second);
+				DateUtil.getCurrentDate(), hour, minute, second);
 	}
 	
 	/**
@@ -127,7 +124,7 @@ public final class DateUtil {
 	 * @return 当前日期开始时间
 	 */
 	public static Date getDateBegin() {
-        return DateUtil.getDateBegin(DateUtil.currentDate);
+        return DateUtil.getDateBegin(DateUtil.getCurrentDate());
     }
 	
 	/**
@@ -151,7 +148,7 @@ public final class DateUtil {
 	 * @return 当前日期结束时间
 	 */
 	public static Date getDateEnd() {
-        return DateUtil.getDateEnd(DateUtil.currentDate);  
+        return DateUtil.getDateEnd(DateUtil.getCurrentDate());  
     }
 	
 	/**
@@ -176,7 +173,7 @@ public final class DateUtil {
 	 * @return 本周开始日期
 	 */
 	public static Date getWeekBegin() {
-		return DateUtil.getWeekBegin(DateUtil.currentDate);
+		return DateUtil.getWeekBegin(DateUtil.getCurrentDate());
 	}
 	
 	/**
@@ -203,7 +200,7 @@ public final class DateUtil {
 	 * @return 本周结束日期
 	 */
 	public static Date getWeekEnd() {
-		return DateUtil.getWeekEnd(DateUtil.currentDate);
+		return DateUtil.getWeekEnd(DateUtil.getCurrentDate());
 	}
 	
 	/**
@@ -231,7 +228,7 @@ public final class DateUtil {
 	 * @return 当月开始日期
 	 */
 	public static Date getMonthBegin() {
-        return DateUtil.getMonthBegin(DateUtil.currentDate);
+        return DateUtil.getMonthBegin(DateUtil.getCurrentDate());
     }
 	
 	/**
@@ -255,7 +252,7 @@ public final class DateUtil {
 	 * @return 当月结束日期
 	 */
 	public static Date getMonthEnd() {
-        return DateUtil.getMonthEnd(DateUtil.currentDate);  
+        return DateUtil.getMonthEnd(DateUtil.getCurrentDate());  
     }
 	
 	/**
@@ -279,7 +276,7 @@ public final class DateUtil {
 	 * @return 该年开始日期
 	 */
 	public static Date getYearBegin() {
-        return DateUtil.getYearBegin(DateUtil.currentDate);  
+        return DateUtil.getYearBegin(DateUtil.getCurrentDate());  
     }
 	
 	/**
@@ -303,7 +300,7 @@ public final class DateUtil {
 	 * @return 该年结束日期
 	 */
 	public static Date getYearEnd() {
-        return DateUtil.getYearEnd(DateUtil.currentDate);  
+        return DateUtil.getYearEnd(DateUtil.getCurrentDate());  
     }
 	
 	/**
@@ -330,7 +327,7 @@ public final class DateUtil {
 	 */
 	public static String dateToString(String format) {
 		SimpleDateFormat dateFormat = new SimpleDateFormat(format);
-		return dateFormat.format(DateUtil.currentDate);
+		return dateFormat.format(DateUtil.getCurrentDate());
 	}
 	
 	/**
@@ -558,7 +555,7 @@ public final class DateUtil {
 	 * @return
 	 */
 	public static Date getIntervalOfHour(int interval) {
-		return DateUtil.getIntervalOfHour(DateUtil.currentDate, interval);
+		return DateUtil.getIntervalOfHour(DateUtil.getCurrentDate(), interval);
 	}
 	
 	/**
@@ -582,7 +579,7 @@ public final class DateUtil {
 	 * @return 距离当天日期间隔的日期
 	 */
 	public static Date getIntervalOfDate(int interval) {
-		return DateUtil.getIntervalOfDate(DateUtil.currentDate, interval);
+		return DateUtil.getIntervalOfDate(DateUtil.getCurrentDate(), interval);
 	}
 	
 	/**
@@ -629,7 +626,7 @@ public final class DateUtil {
 	 * @return 距离指定月份间隔的日期
 	 */
 	public static Date getIntervalOfMonth(int interval) {
-		return DateUtil.getIntervalOfMonth(DateUtil.currentDate, interval);
+		return DateUtil.getIntervalOfMonth(DateUtil.getCurrentDate(), interval);
 	}
 	
 	/**
@@ -653,7 +650,7 @@ public final class DateUtil {
 	 * @return 距离指定年间隔的日期
 	 */
 	public static Date getIntervalOfYear(int interval) {
-		return DateUtil.getIntervalOfYear(DateUtil.currentDate, interval);
+		return DateUtil.getIntervalOfYear(DateUtil.getCurrentDate(), interval);
 	}
 	
 	/**

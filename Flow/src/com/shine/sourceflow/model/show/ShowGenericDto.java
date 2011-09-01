@@ -7,11 +7,9 @@ import java.util.TreeMap;
 import javax.servlet.http.HttpServletRequest;
 
 import com.shine.framework.core.util.DateUtil;
+import com.shine.sourceflow.model.GenericDto;
 
-/**
- * 通用DTO
- */
-public class GenericDTO {
+public class ShowGenericDto extends GenericDto {
 	/** 周期选择列表 */
 	private Map<Integer, String> statPeriodList;
 	
@@ -27,10 +25,7 @@ public class GenericDTO {
 	/** 要查询的前N页 */
 	private int topPageN = 10;
 	
-	/** 额外参数 */
-	private Map<String, String> extraParams = new HashMap<String, String>();
-	
-	public GenericDTO() {
+	public ShowGenericDto() {
 		this.statPeriodList = new HashMap<Integer, String>();
 		this.statPeriodList.put(1, "日报表");
 		this.statPeriodList.put(2, "周报表");
@@ -86,13 +81,5 @@ public class GenericDTO {
 	
 	public int getTopPageN() {
 		return topPageN;
-	}
-	
-	public String getExtraParams(String key) {
-		return this.extraParams.get(key);
-	}
-	
-	public void setExtraParams(String key, String value) {
-		this.extraParams.put(key, value);
 	}
 }

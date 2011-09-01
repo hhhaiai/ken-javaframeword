@@ -2,7 +2,7 @@ package com.shine.sourceflow.dao.show.strategy;
 
 import com.shine.framework.utils.DateUtil;
 import com.shine.framework.utils.TableUtil;
-import com.shine.sourceflow.model.show.GenericDTO;
+import com.shine.sourceflow.model.show.ShowGenericDto;
 
 /**
  * IP流量标准查询策略
@@ -15,7 +15,7 @@ public class IPTrafficStdQueryStrategy implements IQueryStrategy {
 	private static final String SQL_ORDERBY = "order by total_bytes desc";
 
 	@Override
-	public String[] createHourlyQuerySQL(GenericDTO dto) {
+	public String[] createHourlyQuerySQL(ShowGenericDto dto) {
 		String srcipSql = this.createGenericSQL(
 				dto, SQL_SRCIP_FIELD, TableUtil.getMonthTable(dto.getDate()),
 				DateUtil.getDetailTime(DateUtil.getIntervalOfHour(-1)), 
@@ -30,7 +30,7 @@ public class IPTrafficStdQueryStrategy implements IQueryStrategy {
 	}
 
 	@Override
-	public String[] createDailyQuerySQL(GenericDTO dto) {
+	public String[] createDailyQuerySQL(ShowGenericDto dto) {
 		String srcipSql = this.createGenericSQL(
 				dto, SQL_SRCIP_FIELD, TableUtil.getMonthTable(dto.getDate()),
 				DateUtil.getDetailTime(DateUtil.getDateBegin(
@@ -52,7 +52,7 @@ public class IPTrafficStdQueryStrategy implements IQueryStrategy {
 	}
 
 	@Override
-	public String[] createMonthlyQuerySQL(GenericDTO dto) {
+	public String[] createMonthlyQuerySQL(ShowGenericDto dto) {
 		String srcipSql = this.createGenericSQL(
 				dto, SQL_SRCIP_FIELD, TableUtil.getMonthTable(dto.getDate()),
 				DateUtil.getDetailTime(DateUtil.getMonthBegin(
@@ -74,7 +74,7 @@ public class IPTrafficStdQueryStrategy implements IQueryStrategy {
 	}
 
 	@Override
-	public String[] createWeeklyQuerySQL(GenericDTO dto) {
+	public String[] createWeeklyQuerySQL(ShowGenericDto dto) {
 		String srcipSql = this.createGenericSQL(
 				dto, SQL_SRCIP_FIELD, TableUtil.getMonthTable(dto.getDate()),
 				DateUtil.getDetailTime(DateUtil.getWeekBegin(
@@ -96,7 +96,7 @@ public class IPTrafficStdQueryStrategy implements IQueryStrategy {
 	}
 	
 	private String createGenericSQL(
-			GenericDTO dto, String field, String tableName, 
+			ShowGenericDto dto, String field, String tableName, 
 			String bBegin, String bEnd, String groupby) {
 		StringBuffer sql = new StringBuffer();
 		sql.append("select ");
@@ -113,6 +113,99 @@ public class IPTrafficStdQueryStrategy implements IQueryStrategy {
 		sql.append(SQL_ORDERBY);
 		sql.append(" limit ");
 		sql.append(dto.getTopPageN());
+		return sql.toString();
+	}
+
+	@Override
+	public String[] createDailySumSQL(ShowGenericDto dto) {
+		String srcipSql = this.createGenericSumSQL(
+				TableUtil.getMonthTable(dto.getDate()),
+				DateUtil.getDetailTime(DateUtil.getDateBegin(
+				DateUtil.stringToDate(dto.getDate(),
+				DateUtil.DATE_PATTERN_DEFAULT))), 
+				DateUtil.getDetailTime(DateUtil.getDateEnd(
+				DateUtil.stringToDate(dto.getDate(), 
+				DateUtil.DATE_PATTERN_DEFAULT))));
+		String dstipSql = this.createGenericSumSQL(
+				TableUtil.getMonthTable(dto.getDate()),
+				DateUtil.getDetailTime(DateUtil.getDateBegin(
+				DateUtil.stringToDate(dto.getDate(), 
+				DateUtil.DATE_PATTERN_DEFAULT))), 
+				DateUtil.getDetailTime(DateUtil.getDateEnd(
+				DateUtil.stringToDate(dto.getDate(), 
+				DateUtil.DATE_PATTERN_DEFAULT))));
+		String[] sqls = {srcipSql, dstipSql};
+		return sqls;
+	}
+
+	@Override
+	public String[] createHourlySumSQL(ShowGenericDto dto) {
+		String srcipSql = this.createGenericSumSQL(
+				TableUtil.getMonthTable(dto.getDate()),
+				DateUtil.getDetailTime(DateUtil.getIntervalOfHour(-1)), 
+				DateUtil.getDetailTime());
+		
+		String dstipSql = this.createGenericSumSQL(
+				TableUtil.getMonthTable(dto.getDate()),
+				DateUtil.getDetailTime(DateUtil.getIntervalOfHour(-1)), 
+				DateUtil.getDetailTime());
+		String[] sqls = {srcipSql, dstipSql};
+		return sqls;
+	}
+
+	@Override
+	public String[] createMonthlySumSQL(ShowGenericDto dto) {
+		String srcipSql = this.createGenericSumSQL(
+				TableUtil.getMonthTable(dto.getDate()),
+				DateUtil.getDetailTime(DateUtil.getMonthBegin(
+				DateUtil.stringToDate(dto.getDate(),
+				DateUtil.DATE_PATTERN_DEFAULT))), 
+				DateUtil.getDetailTime(DateUtil.getMonthEnd(
+				DateUtil.stringToDate(dto.getDate(), 
+				DateUtil.DATE_PATTERN_DEFAULT))));
+		String dstipSql = this.createGenericSumSQL(
+				TableUtil.getMonthTable(dto.getDate()),
+				DateUtil.getDetailTime(DateUtil.getMonthBegin(
+				DateUtil.stringToDate(dto.getDate(),
+				DateUtil.DATE_PATTERN_DEFAULT))), 
+				DateUtil.getDetailTime(DateUtil.getMonthEnd(
+				DateUtil.stringToDate(dto.getDate(), 
+				DateUtil.DATE_PATTERN_DEFAULT))));
+		String[] sqls = {srcipSql, dstipSql};
+		return sqls;
+	}
+
+	@Override
+	public String[] createWeeklySumSQL(ShowGenericDto dto) {
+		String srcipSql = this.createGenericSumSQL(
+				TableUtil.getMonthTable(dto.getDate()),
+				DateUtil.getDetailTime(DateUtil.getWeekBegin(
+				DateUtil.stringToDate(dto.getDate(), 
+				DateUtil.DATE_PATTERN_DEFAULT))), 
+				DateUtil.getDetailTime(DateUtil.getWeekEnd(
+				DateUtil.stringToDate(dto.getDate(), 
+				DateUtil.DATE_PATTERN_DEFAULT))));
+		String dstipSql = this.createGenericSumSQL(
+				TableUtil.getMonthTable(dto.getDate()),
+				DateUtil.getDetailTime(DateUtil.getWeekBegin(
+				DateUtil.stringToDate(dto.getDate(), 
+				DateUtil.DATE_PATTERN_DEFAULT))), 
+				DateUtil.getDetailTime(DateUtil.getWeekEnd(
+				DateUtil.stringToDate(dto.getDate(), 
+				DateUtil.DATE_PATTERN_DEFAULT))));
+		String[] sqls = {srcipSql, dstipSql};
+		return sqls;
+	}
+	
+	private String createGenericSumSQL(String tableName, String bBegin, String bEnd) {
+		StringBuffer sql = new StringBuffer();
+		sql.append("select sum(bytes) as bytes_sum from ");
+		sql.append(tableName);
+		sql.append(" where log_time between '");
+		sql.append(bBegin);
+		sql.append("' and '");
+		sql.append(bEnd);
+		sql.append("'");
 		return sql.toString();
 	}
 }
