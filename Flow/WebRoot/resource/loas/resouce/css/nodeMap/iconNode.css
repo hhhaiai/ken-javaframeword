@@ -1,0 +1,36 @@
+/* iconNode.css
+css for nodeMap. iconNode
+*/
+.iconNode{
+  position:absolute;
+  left:0;
+  top:0;
+  width:50px;
+  text-align:center;
+  z-index:1;
+}
+.iconNode_normal .icon{
+  cursor:default;
+}
+.iconNode_normal .title{
+  width:100%;
+  height:16px;
+  line-height:16px;
+  overflow:hidden;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+  -o-text-overflow:ellipsis;
+	cursor:default;
+}
+.iconNode_focused .title{
+  height:auto;
+  line-height:inherit;
+	overflow:auto;
+  white-space:normal;
+	cursor:text;
+  border:dotted 1px #666;
+}
+.iconNode_selected .title{
+  background-color:#316AC5;
+  color:#FFF;
+}

@@ -1,0 +1,35 @@
+/* CSS Document */
+
+.gui_verticalmenu_wrap{
+	cursor:default;
+  -moz-user-select:none ;/*for ff*/
+}
+.gui_verticalmenu_pos_wrap{
+  position:relative;
+	left:0px;
+	top:0px;
+	background-color:#EEF7FF;/* must be same as gui_accordionmenu_wrap. */
+}
+.gui_verticalmenu_bar_wrap{/* ? */
+}
+.gui_verticalmenu_head{
+  height:25px;
+	border:solid 1px #76ABD3;
+	color:#F0F8FF;
+	border-left:none;
+	border-right:none;
+	background: repeat-x url(../../img/default/gui/bar/accordionmenu_head_bg.gif);
+}
+.gui_verticalmenu_arrow_up, .gui_verticalmenu_arrow_down{
+  position:absolute;
+  right:10px;
+}
+.gui_verticalmenu_arrow_up{
+	top:5px;
+  background-image:url(../../img/default/gui/bar/arrow_up.gif);
+}
+.gui_verticalmenu_arrow_down{
+  background-image:url(../../img/default/gui/bar/arrow_down.gif);
+	bottom:5px !important;
+	bottom:30px;/*fix ie6: this value = gui_verticalmenu_head.height(25px) + this.bottom(5px)*/
+}

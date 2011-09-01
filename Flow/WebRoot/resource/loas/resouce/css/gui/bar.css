@@ -1,0 +1,34 @@
+/* CSS Document */
+
+.gui_toolbar_wrap{
+	cursor:default;
+  -moz-user-select:none ;/*for ff*/
+}
+.gui_toolbar_pos_wrap{
+  position:relative;
+	left:0px;
+	top:0px;
+  overflow:hidden;
+	height:100%;
+	width:auto;
+}
+.gui_toolbar_item_container{
+  position:absolute;
+}
+.gui_toolbar_arrow_left{/*for test*/
+  position:absolute;
+  right:15px;
+	top:0px;
+}
+.gui_toolbar_arrow_left_img{
+  background-image:url(../../img/default/gui/bar/arrow_left.gif);
+}
+.gui_toolbar_arrow_right{/*for test*/
+  position:absolute;
+  right:0px;
+	top:0px;
+}
+.gui_toolbar_arrow_right_img{
+  background-image:url(../../img/default/gui/bar/arrow_right.gif);
+}
+

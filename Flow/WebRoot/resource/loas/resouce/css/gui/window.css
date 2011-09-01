@@ -1,0 +1,132 @@
+/* window.css
+*/
+.gui_wnd{
+  position:absolute;
+  left:0;
+  top:0;
+  table-layout:fixed;
+}
+.gui_wnd .head{
+  cursor:default;
+}
+.gui_wnd .titleBar{
+  background: 0 bottom url(../../img/default/gui/window/n.gif);
+  position:relative;
+  left:0;
+  top:0;
+  height:23px; 
+  -moz-user-select:none ;
+}
+.gui_wnd .title{
+  position:absolute;
+  top:0;
+  left:20px;
+  background-position:3px;
+  height:23px; 
+  line-height:23px;
+  width:100px;
+  color:#FFF;
+  font-weight:bold;
+  overflow:hidden;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+  -o-text-overflow:ellipsis;
+}
+.gui_wnd .icon{
+  position:absolute;
+  top:3px;
+  left:2px;
+  width:16px;
+  height:16px;
+  background:url(../../img/default/gui/button/system/sv_logo.gif) no-repeat;
+}
+.gui_wnd .biSystemMenu{
+  position:absolute;
+  right:-1px;
+  top:-3px;
+  height:18px;
+  width:95px;
+}
+.biSystemMenu .biLeft, 
+.biSystemMenu .biMinimize,
+.biSystemMenu .biMaximize, 
+.biSystemMenu .biClose{
+  height:100%;
+  float:right;
+}
+.biSystemMenu .biLeft{
+  background:url(../../img/default/gui/window/bi.gif) no-repeat;
+  width:4px;
+}
+.biSystemMenu .biMinimize{
+  background:url(../../img/default/gui/window/bi.gif) -4px 0 no-repeat;
+  width:23px;
+}
+.biSystemMenu .biMaximize{
+  background:url(../../img/default/gui/window/bi.gif) -27px 0 no-repeat;
+  width:26px;
+}
+.biSystemMenu .biMinimize_reset{
+  background-position: -56px 0;
+}
+.biSystemMenu .biMaximize_reset{
+  background-position: -53px 0;
+}
+.biSystemMenu .biClose{
+  background:url(../../img/default/gui/window/bi.gif) no-repeat;
+  background-position:-79px 0;
+  width:42px;
+}
+.gui_wnd .nw, 
+.gui_wnd .n,
+.gui_wnd .ne, 
+.gui_wnd .e, 
+.gui_wnd .se, 
+.gui_wnd .s, 
+.gui_wnd .sw, 
+.gui_wnd .w{
+  font-size:1px;
+  overflow:hidden;
+}
+.gui_wnd .nw{
+  background-image:url(../../img/default/gui/window/nw.gif);
+  width:3px;
+  height:3px;
+  cursor:nw-resize;
+}
+.gui_wnd .n{
+  background-image: url(../../img/default/gui/window/n.gif);
+  cursor:n-resize;
+}
+.gui_wnd .ne{
+  background-image: url(../../img/default/gui/window/ne.gif);
+  width:3px;
+  cursor:ne-resize;
+}
+.gui_wnd .e{
+  background-image: url(../../img/default/gui/window/e.gif);
+  cursor:e-resize;
+}
+.gui_wnd .se{
+  background-image: url(../../img/default/gui/window/se.gif);
+  cursor:se-resize;
+}
+.gui_wnd .s{
+  background-image: url(../../img/default/gui/window/s.gif);
+  cursor:s-resize;
+}
+.gui_wnd .sw{
+  background-image: url(../../img/default/gui/window/sw.gif);
+  height:3px;
+  cursor:sw-resize;
+}
+.gui_wnd .w{
+  background-image: url(../../img/default/gui/window/w.gif);
+  cursor:w-resize;
+}
+.gui_wnd .body{
+  width:100%;
+}
+.gui_wnd .center{
+  background-color:#FFFFFF;
+}

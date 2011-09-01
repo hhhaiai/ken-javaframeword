@@ -1,0 +1,11 @@
+/* linkNode.css
+css for nodeMap. linkNode
+*/
+
+v\:*{ behavior:url(#default#VML); }
+.linkNode{
+  position:absolute;
+  left:0;
+  top:0;
+  z-index:0;
+}

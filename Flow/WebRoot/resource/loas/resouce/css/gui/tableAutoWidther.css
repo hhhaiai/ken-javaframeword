@@ -1,0 +1,14 @@
+.gui_table_widther_collapse div{
+	width:100%;
+	overflow:hidden;
+	height:18px;
+	line-height:18px;
+	white-space:nowrap;
+	text-overflow:ellipsis;
+	-o-text-overflow:ellipsis;
+}
+.gui_table_widther_expand div{
+	overflow:visible;
+	white-space:normal;
+	height:auto;
+}
