@@ -7,7 +7,7 @@
     <constant name="struts.devMode" value="true"/>
 	<package name="base" extends="struts-default" abstract="true">
 		<global-results>
-			<result name="exception">/common/exception.jsp</result>
+			<result name="exception">/common/commonException.jsp</result>
 		</global-results>
 		<global-exception-mappings>
 			<exception-mapping result="exception" exception="java.lang.Exception"></exception-mapping>

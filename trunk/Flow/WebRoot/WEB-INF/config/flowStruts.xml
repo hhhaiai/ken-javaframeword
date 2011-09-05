@@ -15,5 +15,10 @@
                 class="com.shine.sourceflow.web.show.IPGroupTrafficAction" method="{1}">
             <result name="list">/show/ipGroupTraffic.jsp</result>
         </action>
+        <!-- 应用流量统计 -->
+        <action name="appTraffic_*" 
+                class="com.shine.sourceflow.web.show.AppTrafficAction" method="{1}">
+            <result name="list">/show/appTraffic.jsp</result>
+        </action>
     </package>
 </struts>

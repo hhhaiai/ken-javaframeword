@@ -18,5 +18,18 @@
                 ipGroupTrafficConfig_list
             </result>
         </action>
+        <!-- 应用流量配置 -->
+        <action name="appTrafficConfig_*" 
+                class="com.shine.sourceflow.web.allocation.AppTrafficConfigAction" method="{1}">
+            <result name="list">/allocation/appConfig/list.jsp</result>
+            <result name="add">/allocation/appConfig/add.jsp</result>
+            <result name="add_success" type="redirectAction">
+                appTrafficConfig_list
+            </result>
+            <result name="edit">/allocation/appConfig/edit.jsp</result>
+            <result name="edit_success" type="redirectAction">
+                appTrafficConfig_list
+            </result>
+        </action>
     </package>
 </struts>
