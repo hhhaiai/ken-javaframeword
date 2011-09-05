@@ -68,7 +68,7 @@ public abstract class GenericAction extends
 	 * 
 	 * @return
 	 */
-	public String list(){
+	public String list() {
 		this.dto.init(this.request);
 		this.dbModels = this.service.list(this.dto);
 		return DATA_LIST;
