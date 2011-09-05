@@ -2,12 +2,8 @@ package com.shine.sourceflow.model.allocation;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.shine.sourceflow.model.GenericDto;
-
-public class IPGroupConfigDto extends GenericDto {
-	private static String PER_PAGE = "20";
-	private static String CUR_PAGE = "1";
-	
+public class IPGroupConfigDto extends ConfigGenericDto {
+	@Override
 	public void init(HttpServletRequest request) {
 		String groupId = request.getParameter("groupId");
 		String[] groupIds = request.getParameterValues("ipGroups");

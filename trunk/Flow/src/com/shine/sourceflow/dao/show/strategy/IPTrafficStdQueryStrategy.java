@@ -117,8 +117,8 @@ public class IPTrafficStdQueryStrategy implements IQueryStrategy {
 	}
 
 	@Override
-	public String[] createDailySumSQL(ShowGenericDto dto) {
-		String srcipSql = this.createGenericSumSQL(
+	public String createDailySumSQL(ShowGenericDto dto) {
+		String sql = this.createGenericSumSQL(
 				TableUtil.getMonthTable(dto.getDate()),
 				DateUtil.getDetailTime(DateUtil.getDateBegin(
 				DateUtil.stringToDate(dto.getDate(),
@@ -126,36 +126,21 @@ public class IPTrafficStdQueryStrategy implements IQueryStrategy {
 				DateUtil.getDetailTime(DateUtil.getDateEnd(
 				DateUtil.stringToDate(dto.getDate(), 
 				DateUtil.DATE_PATTERN_DEFAULT))));
-		String dstipSql = this.createGenericSumSQL(
-				TableUtil.getMonthTable(dto.getDate()),
-				DateUtil.getDetailTime(DateUtil.getDateBegin(
-				DateUtil.stringToDate(dto.getDate(), 
-				DateUtil.DATE_PATTERN_DEFAULT))), 
-				DateUtil.getDetailTime(DateUtil.getDateEnd(
-				DateUtil.stringToDate(dto.getDate(), 
-				DateUtil.DATE_PATTERN_DEFAULT))));
-		String[] sqls = {srcipSql, dstipSql};
-		return sqls;
+		return sql.toString();
 	}
 
 	@Override
-	public String[] createHourlySumSQL(ShowGenericDto dto) {
-		String srcipSql = this.createGenericSumSQL(
+	public String createHourlySumSQL(ShowGenericDto dto) {
+		String sql = this.createGenericSumSQL(
 				TableUtil.getMonthTable(dto.getDate()),
 				DateUtil.getDetailTime(DateUtil.getIntervalOfHour(-1)), 
 				DateUtil.getDetailTime());
-		
-		String dstipSql = this.createGenericSumSQL(
-				TableUtil.getMonthTable(dto.getDate()),
-				DateUtil.getDetailTime(DateUtil.getIntervalOfHour(-1)), 
-				DateUtil.getDetailTime());
-		String[] sqls = {srcipSql, dstipSql};
-		return sqls;
+		return sql.toString();
 	}
 
 	@Override
-	public String[] createMonthlySumSQL(ShowGenericDto dto) {
-		String srcipSql = this.createGenericSumSQL(
+	public String createMonthlySumSQL(ShowGenericDto dto) {
+		String sql = this.createGenericSumSQL(
 				TableUtil.getMonthTable(dto.getDate()),
 				DateUtil.getDetailTime(DateUtil.getMonthBegin(
 				DateUtil.stringToDate(dto.getDate(),
@@ -163,21 +148,12 @@ public class IPTrafficStdQueryStrategy implements IQueryStrategy {
 				DateUtil.getDetailTime(DateUtil.getMonthEnd(
 				DateUtil.stringToDate(dto.getDate(), 
 				DateUtil.DATE_PATTERN_DEFAULT))));
-		String dstipSql = this.createGenericSumSQL(
-				TableUtil.getMonthTable(dto.getDate()),
-				DateUtil.getDetailTime(DateUtil.getMonthBegin(
-				DateUtil.stringToDate(dto.getDate(),
-				DateUtil.DATE_PATTERN_DEFAULT))), 
-				DateUtil.getDetailTime(DateUtil.getMonthEnd(
-				DateUtil.stringToDate(dto.getDate(), 
-				DateUtil.DATE_PATTERN_DEFAULT))));
-		String[] sqls = {srcipSql, dstipSql};
-		return sqls;
+		return sql.toString();
 	}
 
 	@Override
-	public String[] createWeeklySumSQL(ShowGenericDto dto) {
-		String srcipSql = this.createGenericSumSQL(
+	public String createWeeklySumSQL(ShowGenericDto dto) {
+		String sql = this.createGenericSumSQL(
 				TableUtil.getMonthTable(dto.getDate()),
 				DateUtil.getDetailTime(DateUtil.getWeekBegin(
 				DateUtil.stringToDate(dto.getDate(), 
@@ -185,16 +161,7 @@ public class IPTrafficStdQueryStrategy implements IQueryStrategy {
 				DateUtil.getDetailTime(DateUtil.getWeekEnd(
 				DateUtil.stringToDate(dto.getDate(), 
 				DateUtil.DATE_PATTERN_DEFAULT))));
-		String dstipSql = this.createGenericSumSQL(
-				TableUtil.getMonthTable(dto.getDate()),
-				DateUtil.getDetailTime(DateUtil.getWeekBegin(
-				DateUtil.stringToDate(dto.getDate(), 
-				DateUtil.DATE_PATTERN_DEFAULT))), 
-				DateUtil.getDetailTime(DateUtil.getWeekEnd(
-				DateUtil.stringToDate(dto.getDate(), 
-				DateUtil.DATE_PATTERN_DEFAULT))));
-		String[] sqls = {srcipSql, dstipSql};
-		return sqls;
+		return sql.toString();
 	}
 	
 	private String createGenericSumSQL(String tableName, String bBegin, String bEnd) {
