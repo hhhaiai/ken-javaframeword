@@ -5,9 +5,13 @@
 		      actionData="flow/ipTraffic_list" />
 		<item id="1004" text="IP分组流量" icon="groups.gif" 
 		      actionData="flow/ipGroupTraffic_list" />
+        <item id="1005" text="应用流量" icon="app.gif" 
+              actionData="flow/appTraffic_list" />
 	</item>
 	<item id="2001" text="设置" icon="cfg.gif">
         <item id="2002" text="IP分组配置" icon="flow_process.gif"
             actionData="allocation/ipGroupTrafficConfig_list" />
+        <item id="2003" text="应用流量" icon="app_config.gif"
+            actionData="allocation/appTrafficConfig_list" />
     </item>
 </items>
