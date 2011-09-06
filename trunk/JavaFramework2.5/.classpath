@@ -4,7 +4,6 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk1.6.0_18"/>
 	<classpathentry kind="lib" path="lib/activation.jar"/>
 	<classpathentry kind="lib" path="lib/ant-1.6.4.jar"/>
-	<classpathentry kind="lib" path="lib/antlr-2.7.2.jar"/>
 	<classpathentry kind="lib" path="lib/bsh-2.0b4.jar"/>
 	<classpathentry kind="lib" path="lib/c3p0-0.9.1.2.jar"/>
 	<classpathentry kind="lib" path="lib/commons-beanutils-1.8.3.jar"/>
@@ -23,7 +22,6 @@
 	<classpathentry kind="lib" path="lib/edtftpj.jar"/>
 	<classpathentry kind="lib" path="lib/ezmorph-1.0.6.jar"/>
 	<classpathentry kind="lib" path="lib/Filters.jar"/>
-	<classpathentry kind="lib" path="lib/freemarker-2.3.13.jar"/>
 	<classpathentry kind="lib" path="lib/gpsparser.jar"/>
 	<classpathentry kind="lib" path="lib/htmlcleaner2_1.jar"/>
 	<classpathentry kind="lib" path="lib/htmlparser.jar"/>

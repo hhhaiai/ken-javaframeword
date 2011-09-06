@@ -15,6 +15,8 @@ public class SnmpUtils {
 	private String community;
 	private int port = 161;
 	private int version = 0;
+	
+	
 
 	/**
 	 * 初始化
@@ -182,6 +184,7 @@ public class SnmpUtils {
 			for (String s : list) {
 				System.out.println(s);
 			}
+			util.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

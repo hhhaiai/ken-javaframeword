@@ -25,6 +25,16 @@ public class ReflectionUtil {
 	}
 
 	/**
+	 * 获取class
+	 * @param classPath
+	 * @return
+	 * @throws Exception
+	 */
+	public static Class<?> getClass(String classPath) throws Exception {
+		return Class.forName(classPath);
+	}
+
+	/**
 	 * 获取某个对象的属性 如果这个属性是非公有的，这里会报IllegalAccessException
 	 * 
 	 * @param object
