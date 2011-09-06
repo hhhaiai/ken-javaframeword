@@ -4,6 +4,7 @@ import java.sql.SQLException;
 
 import com.shine.DBUtil.manage.DBManager;
 import com.shine.DBUtil.model.DBModel;
+import com.shine.DBUtil.model.DBRowModel;
 
 /**
  * 
@@ -54,28 +55,68 @@ public final class SuperDBModel extends DBModel {
 	 * 
 	 * @param values
 	 */
-	public void insert(String... values) {
+	public int insert(String... values) {
 		if (this.columnName.size() == values.length) {
-			DBUtil.getInstance().executeUpdate(jndi, createInsertSql(values));
+			return DBUtil.getInstance().executeUpdate(jndi,
+					createInsertSql(values));
 		} else {
 			System.err.println(this.jndi + "插入" + tableName + "数据库列数不对!");
 		}
+		return 0;
 	}
 
-	public void delete(String... options) {
-
+	/**
+	 * 删除数据
+	 * 
+	 * @param sqlOptions
+	 */
+	public int delete(String sqlOptions) {
+		if (sqlOptions != null) {
+			return DBUtil.getInstance().executeUpdate(jndi,
+					createDeleteSql(sqlOptions));
+		} else {
+			System.err.println(this.jndi + "删除数据条件不可以为null");
+		}
+		return 0;
 	}
 
-	public void createDeleteSql(String... options) {
+	/**
+	 * 删除行数据
+	 * 
+	 * @param dbRow
+	 * @return
+	 */
+	public int delete(DBRowModel dbRow) {
+		if (dbRow != null) {
+			return DBUtil.getInstance().executeUpdate(jndi,
+					createDeleteSql(dbRow.toDeleteSql()));
+		} else {
+			System.err.println(this.jndi + "删除数据DBRowModel不可以为null");
+		}
+		return 0;
+	}
+
+	public int update(String updateSql) {
+		return 0;
+	}
+
+	public int update(String option, String updateValueSql) {
+		return 0;
+	}
+
+	/**
+	 * 生成删除语句
+	 * 
+	 * @param sqlOptions
+	 * @return
+	 */
+	public String createDeleteSql(String sqlOptions) {
 		StringBuffer sql = new StringBuffer();
 		sql.append("delete from ");
 		sql.append(tableName);
-		sql.append(" where 1=1");
-		for (String option : options) {
-			sql.append(" ");
-			sql.append(option);
-			sql.append(" ");
-		}
+		sql.append(" where 1=1 and ");
+		sql.append(sqlOptions);
+		return sql.toString();
 	}
 
 	/**

@@ -22,6 +22,7 @@ import org.dom4j.io.XMLWriter;
  * 
  * @author viruscodecn@gmail.com
  * @version Framework 2010.10.26
+ * @url http://blog.csdn.net/arjick/article/details/6251777
  */
 public class XmlConverUtil {
 	/**
