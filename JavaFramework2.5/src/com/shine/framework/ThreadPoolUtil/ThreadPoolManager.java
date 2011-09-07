@@ -18,6 +18,9 @@ public class ThreadPoolManager {
 	private static ThreadPoolManager manager = new ThreadPoolManager();
 	private ThreadPool pool = new ThreadPool();
 	private boolean state = false;
+	
+	//init thread pool size
+	//private int threadPool=;
 
 	public ThreadPoolManager() {
 	}
