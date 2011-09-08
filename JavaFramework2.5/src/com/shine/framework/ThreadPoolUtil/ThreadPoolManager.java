@@ -15,7 +15,7 @@ import com.shine.framework.core.util.DateUtil;
  * 线程池管理
  * 
  * @author viruscodecn@gmail.com
- * @blog
+ * @blog http://blog.csdn.net/arjick/article/details/6759191
  * 
  */
 public class ThreadPoolManager {
