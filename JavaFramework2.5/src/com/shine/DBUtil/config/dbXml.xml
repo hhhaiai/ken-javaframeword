@@ -46,7 +46,8 @@
 		initSize="2" minPoolSize="1" maxPoolSize="10" maxStatements="50"
 		maxIdleTime="60" />
 	<!-- 集群 -->
-	<Cluster jndiCluster="jdbc/Cluster" mainDB="jdbc/Cluster1">
+	<Cluster jndiCluster="jdbc/Cluster" mainDB="jdbc/Cluster1"
+		synchronous="off" synchronousTime="00:00" protect="on">
 		<Resource jndi="jdbc/Cluster1" />
 		<Resource jndi="jdbc/Cluster2" />
 	</Cluster>
