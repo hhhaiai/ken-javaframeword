@@ -22,10 +22,11 @@ import com.shine.framework.Udp.UdpManager;
  * db util java数据库操作类库
  * 
  * @author viruscodecn@gmail.com
- * @url 概述 http://blog.csdn.net/arjick/article/details/6656401
- * @url 配置连接和分页查询 http://blog.csdn.net/arjick/article/details/6656456
- * @url 多线程异步查询 http://blog.csdn.net/arjick/article/details/6656488
- * @url 缓冲多线程插入 http://blog.csdn.net/arjick/article/details/6656537
+ * @blog 概述 http://blog.csdn.net/arjick/article/details/6656401
+ * @blog 配置连接和分页查询 http://blog.csdn.net/arjick/article/details/6656456
+ * @blog 多线程异步查询 http://blog.csdn.net/arjick/article/details/6656488
+ * @blog 缓冲多线程插入 http://blog.csdn.net/arjick/article/details/6656537
+ * @blog 数据库集群 http://blog.csdn.net/arjick/article/details/6758872
  */
 public class DBUtil {
 
