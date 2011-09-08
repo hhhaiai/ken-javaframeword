@@ -2,7 +2,6 @@ package com.shine.framework.ThreadPoolUtil;
 
 import java.util.Map;
 
-import com.shine.DBUtil.threadModel.UpdateThreadModel;
 import com.shine.framework.ThreadPoolUtil.model.FreeModel;
 import com.shine.framework.ThreadPoolUtil.model.FreeThreadModel;
 import com.shine.framework.ThreadPoolUtil.model.ThreadModel;
