@@ -2,7 +2,11 @@ package com.shine.framework.ThreadPoolUtil;
 
 import java.util.Map;
 
+import com.shine.DBUtil.threadModel.UpdateThreadModel;
+import com.shine.framework.ThreadPoolUtil.model.FreeModel;
+import com.shine.framework.ThreadPoolUtil.model.FreeThreadModel;
 import com.shine.framework.ThreadPoolUtil.model.ThreadModel;
+import com.shine.framework.ThreadPoolUtil.util.FreeModelMap;
 import com.shine.framework.ThreadPoolUtil.util.SuperThread;
 import com.shine.framework.ThreadPoolUtil.util.ThreadPool;
 import com.shine.framework.core.util.DateUtil;
@@ -15,17 +19,23 @@ import com.shine.framework.core.util.DateUtil;
  * 
  */
 public class ThreadPoolManager {
-	private static ThreadPoolManager manager = new ThreadPoolManager();
+	private static ThreadPoolManager manager = null;
 	private ThreadPool pool = new ThreadPool();
 	private boolean state = false;
-	
-	//init thread pool size
-	//private int threadPool=;
+
+	private FreeModelMap map = new FreeModelMap();
+
+	// init thread pool size
+	private int initThreadPool = 2;
+	// max thread pool size
+	private int maxThreadPool = 100;
 
 	public ThreadPoolManager() {
 	}
 
 	public static ThreadPoolManager getManager() {
+		if (manager == null)
+			manager = new ThreadPoolManager();
 		return manager;
 	}
 
@@ -59,6 +69,56 @@ public class ThreadPoolManager {
 	public synchronized void restartThreadPool() {
 		this.stopThreadPool();
 		this.startThreadPool();
+	}
+
+	public void initFreeThreadPool(int initThreadPool, int maxThreadPool) {
+		this.initThreadPool = initThreadPool;
+		this.maxThreadPool = maxThreadPool;
+		initFreeThreadPool();
+	}
+
+	/**
+	 * 初始化自由线程
+	 */
+	public void initFreeThreadPool() {
+		for (int i = 0; i < initThreadPool; i++) {
+			addFreeThread(i);
+		}
+	}
+
+	/**
+	 * 扩展自由线程
+	 */
+	public synchronized SuperThread incomeFreeThreadPool() {
+		if (initThreadPool < maxThreadPool) {
+			initThreadPool++;
+			addFreeThread(initThreadPool);
+			System.err.println("扩展自由线程线程数" + initThreadPool);
+			return this.getIdleThread("freeThreadModel");
+		} else {
+			System.err.println("自由线程已经达到最大值" + maxThreadPool);
+			return null;
+		}
+	}
+
+	/**
+	 * 加入批量提交线程
+	 * 
+	 * @param i
+	 */
+	private void addFreeThread(int i) {
+		FreeThreadModel model = new FreeThreadModel();
+		model.setThreadName("freeThread" + i);
+		this.addThread(model);
+		model = null;
+	}
+
+	public synchronized SuperThread getFreeThread() {
+		if (this.getIdleThread("freeThreadModel") != null) {
+			return this.getIdleThread("freeThreadModel");
+		} else {
+			return incomeFreeThreadPool();
+		}
 	}
 
 	/**
@@ -252,12 +312,47 @@ public class ThreadPoolManager {
 		return "thread" + DateUtil.getCurrentDateTimeDetailAsId();
 	}
 
+	public void putFreeModel(String modleName, String jarPath,
+			String classPath, String method) {
+		FreeModel model = new FreeModel(jarPath, classPath, method);
+		map.put(modleName, model);
+		model = null;
+	}
+
+	public void deleteFreeModel(String modleName) {
+		map.remove(modleName);
+	}
+
 	public ThreadPool getPool() {
 		return pool;
 	}
 
 	public void setPool(ThreadPool pool) {
 		this.pool = pool;
+	}
+
+	public FreeModelMap getMap() {
+		return map;
+	}
+
+	public void setMap(FreeModelMap map) {
+		this.map = map;
+	}
+
+	public int getInitThreadPool() {
+		return initThreadPool;
+	}
+
+	public void setInitThreadPool(int initThreadPool) {
+		this.initThreadPool = initThreadPool;
+	}
+
+	public int getMaxThreadPool() {
+		return maxThreadPool;
+	}
+
+	public void setMaxThreadPool(int maxThreadPool) {
+		this.maxThreadPool = maxThreadPool;
 	}
 
 }
