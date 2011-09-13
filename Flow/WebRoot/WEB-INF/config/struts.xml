@@ -4,13 +4,16 @@
     "http://struts.apache.org/dtds/struts-2.1.7.dtd">
 
 <struts>
+    <constant name="struts.i18n.encoding" value="UTF-8"/>
+    <constant name="struts.i18n.reload" value="true"/>
+    <constant name="struts.configuration.xml.reload" value="true"/>
     <constant name="struts.devMode" value="true"/>
 	<package name="base" extends="struts-default" abstract="true">
 		<global-results>
 			<result name="exception">/common/commonException.jsp</result>
 		</global-results>
 		<global-exception-mappings>
-			<exception-mapping result="exception" exception="java.lang.Exception"></exception-mapping>
+			<exception-mapping result="exception" exception="java.lang.Exception" />
 		</global-exception-mappings>
 	</package>
 	<include file="../config/flowStruts.xml" />
