@@ -47,6 +47,9 @@ public abstract class GenericAction extends
 	/** 查询返回数据，可能有多条不同查询结果集 */
 	protected Map<String, DBModel> dbModels = new HashMap<String, DBModel>();
 	
+	/** 查询报表JSON返回值，可能有多个报表 */
+	protected Map<String, String> charts = new HashMap<String, String>();
+	
 	public void setServletRequest(HttpServletRequest request) {
 		this.request = request;
 	}
@@ -57,6 +60,10 @@ public abstract class GenericAction extends
 
 	public Map<String, DBModel> getDbModels() {
 		return this.dbModels;
+	}
+	
+	public Map<String, String> getCharts() {
+		return this.charts;
 	}
 	
 	public DBModel getDefaultDbModel() {

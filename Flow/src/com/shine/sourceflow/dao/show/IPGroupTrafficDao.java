@@ -26,10 +26,14 @@ public class IPGroupTrafficDao extends ShowGenericDao {
 			srcDBModel.get(i).put("src_ip_percentage", srcIpPercentage);
 			
 			// 计算目标IP总流量
-			Double dstIpTotal = Double.parseDouble(dstDBModel.get(i).get("total_bytes"));
-			String dstIpTotalFormat = bytesFormat.format(dstIpTotal / 1048576);
-			Double computeDstIpPer = (srcIpTotal / bytesSum) * 100;
-			String dstIpPercentage = perFormat.format(computeDstIpPer);
+			String dstIpTotalFormat = "0";
+			String dstIpPercentage = "0";
+			if (dstDBModel.size() > i) {
+				double dstIpTotal = Double.parseDouble(dstDBModel.get(i).get("total_bytes"));
+				dstIpTotalFormat = bytesFormat.format(dstIpTotal / 1048576);
+				double computeDstIpPer = (srcIpTotal / bytesSum) * 100;
+				dstIpPercentage = perFormat.format(computeDstIpPer);
+			}
 			srcDBModel.get(i).put("dst_ip_total", dstIpTotalFormat);
 			srcDBModel.get(i).put("dst_ip_percentage", dstIpPercentage);
 		}
