@@ -5,8 +5,10 @@
 <%
     String rootPath = request.getContextPath() + "/";
     String imagePath = rootPath + "/resource/image/";
+    String jsPath = rootPath + "/resource/js/";
     request.setAttribute("rootPath",rootPath);
     request.setAttribute("imagePath",imagePath);
+    request.setAttribute("jsPath",jsPath);
     
     response.setHeader("Pragma","No-cache"); 
     response.setHeader("Cache-Control","no-cache"); 
