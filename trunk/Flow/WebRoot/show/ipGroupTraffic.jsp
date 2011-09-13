@@ -6,8 +6,12 @@
 <html>
 <head>
 <title>IP分组流量</title>
-<script type="text/javascript" src="${rootPath}resource/js/rl/src/RealLight.js"></script>
+<script type="text/javascript" src="${jsPath}rl/src/RealLight.js"></script>
+<script type="text/javascript" src="${jsPath}amcharts/flash/swfobject.js"></script>
+<script type="text/javascript" src="${jsPath}amcharts/javascript/amcharts.js"></script>
+<script type="text/javascript" src="${jsPath}amcharts/javascript/raphael.js"></script>
 </script>
+<!-- 页面显示框架 -->
 <script language="javascript">   
 rl.importCss("nf:std_info");
 rl.importJs("gui.indicator.ProgressBar");
@@ -26,6 +30,32 @@ function query(){
     var mainForm = document.mainForm;
     mainForm.action = "${rootPath}ipGroupTraffic_list";
     mainForm.submit(); 
+}
+</script>
+
+<!-- 加载报表 -->
+<script type="text/javascript">
+// 初始化
+var params = 
+{
+	bgcolor:"#FFFFFF"
+};
+var flashVars = 
+{
+	path: "${jsPath}amcharts/flash/",
+	chart_data: "<c:out value="${charts['default']}" escapeXml="false" />",
+	chart_settings: "<settings><data_type>csv</data_type><legend><enabled>0</enabled></legend><pie><inner_radius>30</inner_radius><height>10</height><angle>10</angle><gradient></gradient></pie><animation><start_time>1</start_time><pull_out_time>1</pull_out_time></animation><data_labels><show>{title}:{value}</show><max_width>100</max_width></data_labels></settings>"
+};
+
+// 如果浏览器支持flash则以flash显示，否则以JavaScript显示
+if (swfobject.hasFlashPlayerVersion("8")) {
+	swfobject.embedSWF("${jsPath}amcharts/flash/ampie.swf", "chartdiv", "100%", "400", "8.0.0", "${jsPath}amcharts/flash/expressInstall.swf", flashVars, params);
+} else {
+	var amFallback = new AmCharts.AmFallback();
+	amFallback.chartSettings = flashVars.chart_settings;
+	amFallback.chartData = flashVars.chart_data;
+	amFallback.type = "pie";
+	amFallback.write("chartdiv");
 }
 </script>
 <style type="text/css">
@@ -105,8 +135,8 @@ function query(){
             <!-- 查询框 END -->
             <!-- IP分组数据展现 START -->
             <div>
-            <table id="ipGroupTrafficList" class="data_list" width=100% cellSpacing=0 cellPadding=0 border=0>
             <s:if test="#request.dbModels['default'].size > 0">
+            <table id="ipGroupTrafficList" class="data_list" width=100% cellSpacing=0 cellPadding=0 border=0>
             <tr>
                 <th>&nbsp;</th>
                 <th>IP分组名</th>
@@ -127,9 +157,13 @@ function query(){
                 <td><img height="14" width="14" src="${rootPath}resource/image/icons/trend.png" border="0"></td>
             </tr>
             </s:iterator>
-            </s:if>
-            <s:else><center><img src="${rootPath}resource/image/default/no_data.gif" /></center></s:else>
             </table>
+            <!-- 数据报表 START -->
+            <div style="text-align:center; margin-top: 5px;border:solid 1px #95C4D9;">流入百分比
+            <div id="chartdiv" style="width: 100%; height: 400px;"></div></div>
+            <!-- 数据报表 END -->
+            </s:if>
+            <s:else><div style="text-align:center"><img src="${rootPath}resource/image/default/no_data.gif" /></div></s:else>
             </div>
             <!-- IP分组数据展现 END -->
         </div>

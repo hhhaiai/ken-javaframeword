@@ -5,18 +5,19 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
-<title>IP流量</title>
+<title>应用流量</title>
+<script type="text/javascript" src="${rootPath}resource/js/rl/src/RealLight.js"></script>
 <script type="text/javascript" src="${jsPath}amcharts/flash/swfobject.js"></script>
 <script type="text/javascript" src="${jsPath}amcharts/javascript/amcharts.js"></script>
 <script type="text/javascript" src="${jsPath}amcharts/javascript/raphael.js"></script>
-<script type="text/javascript" src="${jsPath}rl/src/RealLight.js"></script>
 </script>
+<!-- 页面显示框架 -->
 <script language="javascript">   
 rl.importCss("nf:std_info");
 rl.importJs("gui.indicator.ProgressBar");
 rl.importJs("nf:reportQuery");
 rl.importJs("nf:queryDialog");
-rl.addAutoDecoArea("mainForm", "queryDialogContent", "ipSrcTrafficList", "ipDstTrafficList");
+rl.addAutoDecoArea("mainForm", "queryDialogContent", "appTrafficList");
 
 rl.gui.indicator.ProgressBar.prototype.barSkinRule = function(progress){
     return progress <= 25 ? "green" : 
@@ -27,7 +28,7 @@ rl.gui.indicator.ProgressBar.prototype.barSkinRule = function(progress){
 // 查询
 function query(){
     var mainForm = document.mainForm;
-    mainForm.action = "${rootPath}ipTraffic_list";
+    mainForm.action = "${rootPath}appTraffic_list";
     mainForm.submit(); 
 }
 </script>
@@ -39,21 +40,23 @@ var params =
 {
 	bgcolor:"#FFFFFF"
 };
-var flashVarsSrc = 
+var flashVars = 
 {
 	path: "${jsPath}amcharts/flash/",
-	chart_data: "<s:property value="charts['ipSrc']" />",
-	chart_settings: "<settings><data_type>csv</data_type><legend><enabled>0</enabled></legend><pie><inner_radius>30</inner_radius><height>7</height><angle>10</angle><gradient></gradient></pie><animation><start_time>1</start_time><pull_out_time>1</pull_out_time></animation><data_labels><show>IP:{title}</show><max_width>100</max_width></data_labels></settings>"
-};
-var flashVarsDst = 
-{
-	path: "${jsPath}amcharts/flash/",
-	chart_data: "<s:property value="charts['ipDst']" />",
-	chart_settings: "<settings><data_type>csv</data_type><legend><enabled>0</enabled></legend><pie><inner_radius>30</inner_radius><height>7</height><angle>10</angle><gradient></gradient></pie><animation><start_time>1</start_time><pull_out_time>1</pull_out_time></animation><data_labels><show>IP:{title}</show><max_width>100</max_width></data_labels></settings>"
+	chart_data: "USA;19544\nJapan;5455\nFrance;2313\nGermany;2208\nUK;2057\nIndia;1771\nRussia;1495\nSouth Korea;1281\n",
+	chart_settings: "<settings><data_type>csv</data_type><legend><enabled>0</enabled></legend><pie><inner_radius>30</inner_radius><height>7</height><angle>10</angle><gradient></gradient></pie><animation><start_time>1</start_time><pull_out_time>1</pull_out_time></animation><data_labels><show>{title}</show><max_width>100</max_width></data_labels></settings>"
 };
 
-swfobject.embedSWF("${jsPath}amcharts/flash/ampie.swf", "chartdivsrc", "600", "400", "8.0.0", "${jsPath}amcharts/flash/expressInstall.swf", flashVarsSrc, params);
-swfobject.embedSWF("${jsPath}amcharts/flash/ampie.swf", "chartdivdst", "600", "400", "8.0.0", "${jsPath}amcharts/flash/expressInstall.swf", flashVarsDst, params);
+// 如果浏览器支持flash则以flash显示，否则以JavaScript显示
+if (swfobject.hasFlashPlayerVersion("8")) {
+	swfobject.embedSWF("${jsPath}amcharts/flash/ampie.swf", "chartdiv", "600", "400", "8.0.0", "${jsPath}amcharts/flash/expressInstall.swf", flashVars, params);
+} else {
+	var amFallback = new AmCharts.AmFallback();
+	amFallback.chartSettings = flashVars.chart_settings;
+	amFallback.chartData = flashVars.chart_data;
+	amFallback.type = "pie";
+	amFallback.write("chartdiv");
+}
 </script>
 <style type="text/css">
 .data_list .rl_progressbar td{
@@ -75,8 +78,8 @@ swfobject.embedSWF("${jsPath}amcharts/flash/ampie.swf", "chartdivdst", "600", "4
             </a>
 		</div>
         <!-- 查询页面 END -->
-        <h3 class="title">IP流量统计</h3>
-        <!-- IP流量统计 START -->
+        <h3 class="title">应用流量统计</h3>
+        <!-- 应用流量统计 START -->
         <div class="report">
             <!-- 查询框 START -->
             <div class="rpt_search">
@@ -130,66 +133,42 @@ swfobject.embedSWF("${jsPath}amcharts/flash/ampie.swf", "chartdivdst", "600", "4
                 </div>
             </div>
             <!-- 查询框 END -->
-            <!-- 以源IP分组数据展现 START -->
+            <!-- 应用流量数据展现 START -->
             <div>
-            <s:if test="#request.dbModels['ipSrc'].size > 0">
-            <table id="ipSrcTrafficList" class="data_list" width=100% cellSpacing=0 cellPadding=0 border=0>
+            <s:if test="#request.dbModels['default'].size > 0">
+            <table id="appTrafficList" class="data_list" width=100% cellSpacing=0 cellPadding=0 border=0>
             <tr>
-            	<th>&nbsp;</th>
-                <th width="200px">源ip地址</th>
-            	<th>流量(MB)</th>
+                <th>&nbsp;</th>
+                <th>应用程序</th>
+                <th>总流量(MB)</th>
+                <th>流入(MB)</th>
+                <th>百分比</th>
+                <th>流出(MB)</th>
                 <th>百分比</th>
                 <th>流量趋势</th>
             </tr>
-            <s:iterator value="#request.dbModels['ipSrc']" status="dbModel">
+            <s:iterator value="#request.dbModels['default']" status="dbModel">
             <tr>
-            	<td><s:property value="#dbModels['ipSrc'].index + 1" /></td>
-            	<td><a href="javascript:void(0);"><s:property value="dbModels['ipSrc'][#dbModel.index]['src_ip']" /></a></td>
-                <td><s:property value="dbModels['ipSrc'][#dbModel.index]['format_bytes_total']" /></td>
-                <td><span ctype="ProgressBar" barSkin="green" progress="<s:property value="dbModels['ipDst'][#dbModel.index]['percentage']" />"></span></td>
+                <td><s:property value="#dbModels['default'].index + 1" /></td>
+                <td><a href="javascript:void(0);"><s:property value="dbModels['default'][#dbModel.index]['app_alias']" /></a></td>
+                <td><s:property value="dbModels['default'][#dbModel.index]['total_bytes_all']" /></td>
+                <td><s:property value="dbModels['default'][#dbModel.index]['total_bytes_in']" /></td>
+                <td><span ctype="ProgressBar" barSkin="green" progress="<s:property value="dbModels['default'][#dbModel.index]['bytes_in_percentage']" />"></span></td>
+                <td><s:property value="dbModels['default'][#dbModel.index]['total_bytes_out']" /></td>
+                <td><span ctype="ProgressBar" barSkin="green" progress="<s:property value="dbModels['default'][#dbModel.index]['bytes_out_percentage']" />"></span></td>
                 <td><img height="14" width="14" src="${rootPath}resource/image/icons/trend.png" border="0"></td>
             </tr>
             </s:iterator>
             </table>
-            <!-- 源IP数据报表 START -->
-			<div id="chartdivsrc" style="width: 100%; height: 400px;"></div>
-            <!-- 源IP数据报表 END -->
+            <!-- 数据报表 START -->
+            <div id="chartdiv" style="width:100%; height:400px; text-align:center"></div>
+            <!-- 数据报表 END -->
             </s:if>
             <s:else><div style="text-align:center"><img src="${rootPath}resource/image/default/no_data.gif" /></div></s:else>
             </div>
-            <!-- 以源IP分组数据展现 END -->
-            <!-- 以目标IP分组数据展现 START -->
-            <div>
-            <s:if test="#request.dbModels['ipDst'].size > 0">
-            <table id="ipDstTrafficList" class="data_list" width=100% cellSpacing=0 cellPadding=0 border=0>
-            <tr>
-            	<th>&nbsp;</th>
-                <th width="200px">目标ip地址</th>
-            	<th>流量(MB)</th>
-                <th>百分比</th>
-                <th>流量趋势</th>
-            </tr>
-            <s:iterator value="#request.dbModels['ipDst']" status="dbModel">
-            <tr>
-            	<td><s:property value="#dbModels['ipDst'].index + 1" /></td>
-            	<td><a href="javascript:void(0);"><s:property value="dbModels['ipDst'][#dbModel.index]['dst_ip']" /></a></td>
-                <td>
-                <s:property value="dbModels['ipDst'][#dbModel.index]['format_bytes_total']" />
-                </td>
-                <td><span ctype="ProgressBar" barSkin="green" progress="<s:property value="dbModels['ipDst'][#dbModel.index]['percentage']" />"></span></td>
-                <td><img height="14" width="14" src="${rootPath}resource/image/icons/trend.png" border="0"></td>
-            </tr>
-            </s:iterator>
-            </table>
-            <!-- 目标IP数据报表 START -->
-            <div id="chartdivdst" style="width: 100%; height: 400px;"></div>
-            <!-- 目标IP数据报表 END -->
-            </s:if>
-            <s:else><div style="text-align:center"><img src="${rootPath}resource/image/default/no_data.gif" /></div></s:else>
-            </div>
-            <!-- 以目标IP分组数据展现 END -->
+            <!-- 应用流量数据展现 END -->
         </div>
-        <!-- IP流量统计 END -->
+        <!-- 应用流量量统计 END -->
     </div>
 </div>
 </body>
