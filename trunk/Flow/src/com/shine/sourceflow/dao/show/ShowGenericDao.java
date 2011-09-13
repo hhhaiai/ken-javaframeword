@@ -53,7 +53,9 @@ public abstract class ShowGenericDao extends GenericDao {
 			}
 			DecimalFormat perFormat = new DecimalFormat("0.00");
 			DecimalFormat bytesFormat = new DecimalFormat("0");
-			double bytesSum = Double.parseDouble(dbModelSum.get(0).get("bytes_sum"));
+			String bytesSumStr = dbModelSum.get(0).get("bytes_sum") == null ?
+					"0" : dbModelSum.get(0).get("bytes_sum");
+			double bytesSum = Double.parseDouble(bytesSumStr);
 			// 对查询数据进行统计
 			this.handleModel(dbModels, dbModelSrcip, dbModelDstip, perFormat, bytesFormat, bytesSum);
 		}
