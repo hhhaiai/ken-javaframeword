@@ -19,6 +19,7 @@ public class PieChartsHelper {
 	private String backGroudColor = "0xffffff";
 	private String showDataTips = "true";
 	private String showAllDataTips = "false";
+	private String labelPosition = "callout";
 	private String legend = "true";
 
 	private List<PieChartModel> pieList = null;
@@ -53,6 +54,7 @@ public class PieChartsHelper {
 		dataElement.addAttribute("clickType", clickType);
 		dataElement.addAttribute("showDataTips", showDataTips);
 		dataElement.addAttribute("showAllDataTips", showAllDataTips);
+		dataElement.addAttribute("labelPosition", labelPosition);
 		dataElement.addAttribute("legend", legend);
 
 		for (PieChartModel model : pieList) {
@@ -136,6 +138,14 @@ public class PieChartsHelper {
 
 	public void setLegend(String legend) {
 		this.legend = legend;
+	}
+
+	public String getLabelPosition() {
+		return labelPosition;
+	}
+
+	public void setLabelPosition(String labelPosition) {
+		this.labelPosition = labelPosition;
 	}
 
 }

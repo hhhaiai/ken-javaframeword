@@ -41,19 +41,20 @@ public class ChartsTag extends BodyTagSupport {
 					.println("<param name='allowScriptAccess' value='sameDomain' />");
 			out.println("<param name='allowFullScreen' value='true' />");
 			out.println("<param name='flashvars' value='" + flashVars + "' />");
-			out.println("<object type='application/x-shockwave-flash' data='"
-					+ flashUrl + "' width='100%' height='100%'>");
-			out.println("<param name='quality' value='high' />");
-			out.println("<param name='bgcolor' value='#ffffff' />");
-			out
-					.println("<param name='allowScriptAccess' value='sameDomain' />");
-			out.println("<param name='allowFullScreen' value='true' />");
-			out.println("<param name='flashvars' value='" + flashVars + "' />");
-			out
-					.println("<p>Either scripts and active content are not permitted to run or Adobe Flash Player version 10.0.0 or greater is not installed.</p>");
-			out
-					.println(" <a href='http://www.adobe.com/go/getflashplayer'><img src='http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif' alt='Get Adobe Flash Player' /></a>");
-			out.println("</object>");
+//			out.println("<object type='application/x-shockwave-flash' data='"
+//					+ flashUrl + "' width='" + width + "' height='" + height
+//					+ "'>");
+//			out.println("<param name='quality' value='high' />");
+//			out.println("<param name='bgcolor' value='#ffffff' />");
+//			out
+//					.println("<param name='allowScriptAccess' value='sameDomain' />");
+//			out.println("<param name='allowFullScreen' value='true' />");
+//			out.println("<param name='flashvars' value='" + flashVars + "' />");
+//			out
+//					.println("<p>Either scripts and active content are not permitted to run or Adobe Flash Player version 10.0.0 or greater is not installed.</p>");
+//			out
+//					.println(" <a href='http://www.adobe.com/go/getflashplayer'><img src='http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif' alt='Get Adobe Flash Player' /></a>");
+//			out.println("</object>");
 			out.println("</object>");
 		} catch (Exception e) {
 			System.out.println("you have input invalid parameters");
