@@ -18,8 +18,8 @@ public class ColumnsChartsHelper {
 	private String autoRefreshTime = "180";
 	private String debug = "off";
 	private String backGroudColor = "0xffffff";
-	private String verticalTitle = "price";
-	private String horizontalTitle = "date";
+	private String verticalTitle = "";
+	private String horizontalTitle = "";
 	private String type = "clustered";
 	private String showDataTips = "true";
 	private String showAllDataTips = "false";
@@ -87,4 +87,110 @@ public class ColumnsChartsHelper {
 		columnsChartsList.clear();
 		aixList.clear();
 	}
+
+	public List<Colunms> getColumnsChartsList() {
+		return columnsChartsList;
+	}
+
+	public void setColumnsChartsList(List<Colunms> columnsChartsList) {
+		this.columnsChartsList = columnsChartsList;
+	}
+
+	public List<String> getAixList() {
+		return aixList;
+	}
+
+	public void setAixList(List<String> aixList) {
+		this.aixList = aixList;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getAutoRefreshPolicy() {
+		return autoRefreshPolicy;
+	}
+
+	public void setAutoRefreshPolicy(String autoRefreshPolicy) {
+		this.autoRefreshPolicy = autoRefreshPolicy;
+	}
+
+	public String getAutoRefreshTime() {
+		return autoRefreshTime;
+	}
+
+	public void setAutoRefreshTime(String autoRefreshTime) {
+		this.autoRefreshTime = autoRefreshTime;
+	}
+
+	public String getDebug() {
+		return debug;
+	}
+
+	public void setDebug(String debug) {
+		this.debug = debug;
+	}
+
+	public String getBackGroudColor() {
+		return backGroudColor;
+	}
+
+	public void setBackGroudColor(String backGroudColor) {
+		this.backGroudColor = backGroudColor;
+	}
+
+	public String getVerticalTitle() {
+		return verticalTitle;
+	}
+
+	public void setVerticalTitle(String verticalTitle) {
+		this.verticalTitle = verticalTitle;
+	}
+
+	public String getHorizontalTitle() {
+		return horizontalTitle;
+	}
+
+	public void setHorizontalTitle(String horizontalTitle) {
+		this.horizontalTitle = horizontalTitle;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public String getShowDataTips() {
+		return showDataTips;
+	}
+
+	public void setShowDataTips(String showDataTips) {
+		this.showDataTips = showDataTips;
+	}
+
+	public String getShowAllDataTips() {
+		return showAllDataTips;
+	}
+
+	public void setShowAllDataTips(String showAllDataTips) {
+		this.showAllDataTips = showAllDataTips;
+	}
+
+	public String getLegend() {
+		return legend;
+	}
+
+	public void setLegend(String legend) {
+		this.legend = legend;
+	}
+	
+	
 }

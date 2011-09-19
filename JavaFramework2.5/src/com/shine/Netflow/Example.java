@@ -11,7 +11,7 @@ public class Example {
 		System.out.println("netflow 接收器 启动");
 
 		// 加入路由路径
-		NetflowManager.getManager().getRouteMap().put("127.0.0.1", "0");
+		NetflowManager.getManager().getRouteMap().put("198.168.1.1", "0");
 		// 加入处理接口
 		NetflowManager.getManager().getNetflowHandleMap().put("print",
 				new NetFlowImpl());
