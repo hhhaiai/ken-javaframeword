@@ -15,6 +15,7 @@ import net.sf.json.JsonConfig;
 
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.ServletRequestAware;
+import org.apache.struts2.interceptor.ServletResponseAware;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -27,7 +28,7 @@ import com.shine.sourceflow.utils.Pagination;
  * 通用ACTION
  */
 public abstract class GenericAction extends 
-		ActionSupport implements ServletRequestAware {
+		ActionSupport implements ServletRequestAware, ServletResponseAware {
 	private static final long serialVersionUID = -1601552356762245009L;
 	public static final String DATA_DEFAULT = "default";
 	
@@ -36,22 +37,30 @@ public abstract class GenericAction extends
 
 	/** 数据增删改查返回值 */
 	public static final String DATA_LIST = "list";
+
 	public static final String DATA_ADD = "add";
 	public static final String DATA_EDIT = "edit";
 	public static final String DATA_DELETE = "delete";
 	
 	protected HttpServletRequest request;
+	protected HttpServletResponse response;
 	protected GenericService service;
 	protected GenericDto dto;
 	
 	/** 查询返回数据，可能有多条不同查询结果集 */
-	protected Map<String, DBModel> dbModels = new HashMap<String, DBModel>();
+	protected static Map<String, DBModel> dbModels = new HashMap<String, DBModel>();
 	
 	/** 查询报表JSON返回值，可能有多个报表 */
 	protected Map<String, String> charts = new HashMap<String, String>();
 	
+	@Override
 	public void setServletRequest(HttpServletRequest request) {
 		this.request = request;
+	}
+	
+	@Override
+	public void setServletResponse(HttpServletResponse response) {
+		this.response = response;
 	}
 
 	public GenericDto getDto() {
@@ -59,7 +68,7 @@ public abstract class GenericAction extends
 	}
 
 	public Map<String, DBModel> getDbModels() {
-		return this.dbModels;
+		return dbModels;
 	}
 	
 	public Map<String, String> getCharts() {
@@ -67,7 +76,7 @@ public abstract class GenericAction extends
 	}
 	
 	public DBModel getDefaultDbModel() {
-		return this.dbModels.get(DATA_DEFAULT);
+		return dbModels.get(DATA_DEFAULT);
 	}
 	
 	/**
@@ -77,7 +86,7 @@ public abstract class GenericAction extends
 	 */
 	public String list() {
 		this.dto.init(this.request);
-		this.dbModels = this.service.list(this.dto);
+		dbModels = this.service.list(this.dto);
 		return DATA_LIST;
 	}
 	
@@ -146,15 +155,14 @@ public abstract class GenericAction extends
 		if(data == null || contentType == null) return;
 		
 		ActionContext.getContext().getActionInvocation().getProxy().setExecuteResult(false);
-		HttpServletResponse response = ServletActionContext.getResponse();
 		OutputStream os = null;
 		try {
-			response.setContentType(contentType);
-			response.setCharacterEncoding("UTF-8");
-			response.setHeader("Pragma","No-cache");
-			response.setHeader("Cache-Control","no-cache");
-			response.setDateHeader("Expires", 0);
-			os = response.getOutputStream();
+			this.response.setContentType(contentType);
+			this.response.setCharacterEncoding("UTF-8");
+			this.response.setHeader("Pragma","No-cache");
+			this.response.setHeader("Cache-Control","no-cache");
+			this.response.setDateHeader("Expires", 0);
+			os = this.response.getOutputStream();
 			os.write(data);
 		} catch (Throwable e) {
 			e.printStackTrace();

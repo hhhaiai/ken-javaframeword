@@ -15,7 +15,7 @@ public class ConfigGenericAction extends GenericAction {
 	 */
 	public String getJsonList() {
 		this.dto.init(this.request);
-		this.dbModels = this.service.list(this.dto);
+		dbModels = this.service.list(this.dto);
 		DBModel dbModel = this.getDefaultDbModel();
 		this.printOutJsonArray(dbModel, this.service.getPagination());
 		return null;
@@ -40,7 +40,7 @@ public class ConfigGenericAction extends GenericAction {
 	@Override
 	public String edit() {
 		this.dto.init(this.request);
-		this.dbModels = this.service.listById(dto);
+		dbModels = this.service.listById(dto);
 		return DATA_EDIT;
 	}
 	

@@ -1,5 +1,7 @@
 package com.shine.sourceflow.web.show;
 
+import java.util.List;
+
 import com.shine.DBUtil.model.DBModel;
 import com.shine.sourceflow.model.show.IPTrafficDto;
 import com.shine.sourceflow.service.show.IPTrafficService;
@@ -16,11 +18,11 @@ public class IPTrafficAction extends ShowGenericAction {
 		this.dto = new IPTrafficDto();
 		this.service = new IPTrafficService();
 	}
-
+	
 	@Override
 	protected void generateCharts() {
 		StringBuffer cvsStrSrc = new StringBuffer();
-		DBModel dbModelSrc = this.dbModels.get(IP_SRC);
+		DBModel dbModelSrc = dbModels.get(IP_SRC);
 		for (int i = 0; i < dbModelSrc.size(); i++) {
 			cvsStrSrc.append(dbModelSrc.get(i).getString("src_ip"));
 			cvsStrSrc.append(";");
@@ -30,7 +32,7 @@ public class IPTrafficAction extends ShowGenericAction {
 		this.charts.put(IP_SRC, cvsStrSrc.toString());
 		
 		StringBuffer cvsStrDst = new StringBuffer();
-		DBModel dbModelDst = this.dbModels.get(IP_DST);
+		DBModel dbModelDst = dbModels.get(IP_DST);
 		for (int i = 0; i < dbModelDst.size(); i++) {
 			cvsStrDst.append(dbModelDst.get(i).getString("dst_ip"));
 			cvsStrDst.append(";");
@@ -38,5 +40,20 @@ public class IPTrafficAction extends ShowGenericAction {
 			cvsStrDst.append("\\n");
 		}
 		this.charts.put(IP_DST, cvsStrDst.toString());
+	}
+
+	@Override
+	protected List<String> getTableDatas() {
+		return null;
+	}
+
+	@Override
+	protected String getTableTitles() {
+		return null;
+	}
+
+	@Override
+	protected String getPDFTitle() {
+		return null;
 	}
 }
