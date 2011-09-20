@@ -31,6 +31,13 @@ function query(){
     mainForm.action = "${rootPath}appTraffic_list";
     mainForm.submit(); 
 }
+
+// 具体IP查询
+function showDetail(ipAddress) {
+	document.mainForm.action ='${rootPath}detail/appTrafficDetail_list?ipAddress=' + ipAddress;
+	document.mainForm.target = "_self";
+	document.mainForm.submit();
+}
 </script>
 
 <!-- 加载报表 -->
@@ -43,20 +50,11 @@ var params =
 var flashVars = 
 {
 	path: "${jsPath}amcharts/flash/",
-	chart_data: "USA;19544\nJapan;5455\nFrance;2313\nGermany;2208\nUK;2057\nIndia;1771\nRussia;1495\nSouth Korea;1281\n",
-	chart_settings: "<settings><data_type>csv</data_type><legend><enabled>0</enabled></legend><pie><inner_radius>30</inner_radius><height>7</height><angle>10</angle><gradient></gradient></pie><animation><start_time>1</start_time><pull_out_time>1</pull_out_time></animation><data_labels><show>{title}</show><max_width>100</max_width></data_labels></settings>"
+	chart_data: "<c:out value="${charts['default']}" escapeXml="false" />",
+	chart_settings: "<settings><data_type>csv</data_type><plot_area><margins><left>50</left><right>40</right><top>50</top><bottom>50</bottom></margins></plot_area><grid><category><dashed>1</dashed><dash_length>4</dash_length></category><value><dashed>1</dashed><dash_length>4</dash_length></value></grid><axes><category><width>1</width><color>E7E7E7</color></category><value><width>1</width><color>E7E7E7</color></value></axes><values><value><min>0</min></value></values><legend><enabled>1</enabled></legend><angle>0</angle><column><type>3d column</type><width>15</width><alpha>100</alpha><spacing>10</spacing><hover_brightness>0</hover_brightness><balloon_text>{title}: {value}(MB)</balloon_text><grow_time>2</grow_time></column><depth>15</depth><angle>25</angle><graphs><graph gid='0'><title>流出流量</title><color>4BBF4B</color></graph><graph gid='1'><title>流入流量</title><color>C0DBFD</color></graph></graphs><labels><label lid='0'><text><![CDATA[<b>应用流量</b>]]></text><y>5</y><text_color>000000</text_color><text_size>16</text_size><align>center</align></label></labels></settings>"
 };
 
-// 如果浏览器支持flash则以flash显示，否则以JavaScript显示
-if (swfobject.hasFlashPlayerVersion("8")) {
-	swfobject.embedSWF("${jsPath}amcharts/flash/ampie.swf", "chartdiv", "600", "400", "8.0.0", "${jsPath}amcharts/flash/expressInstall.swf", flashVars, params);
-} else {
-	var amFallback = new AmCharts.AmFallback();
-	amFallback.chartSettings = flashVars.chart_settings;
-	amFallback.chartData = flashVars.chart_data;
-	amFallback.type = "pie";
-	amFallback.write("chartdiv");
-}
+swfobject.embedSWF("${jsPath}amcharts/flash/amcolumn2.swf", "chartdiv", "100%", "400", "8.0.0", "${jsPath}amcharts/flash/expressInstall.swf", flashVars, params);
 </script>
 <style type="text/css">
 .data_list .rl_progressbar td{
@@ -78,7 +76,7 @@ if (swfobject.hasFlashPlayerVersion("8")) {
             </a>
 		</div>
         <!-- 查询页面 END -->
-        <h3 class="title">应用流量统计</h3>
+        <h3 class="title">应用流量</h3>
         <!-- 应用流量统计 START -->
         <div class="report">
             <!-- 查询框 START -->
@@ -145,18 +143,16 @@ if (swfobject.hasFlashPlayerVersion("8")) {
                 <th>百分比</th>
                 <th>流出(MB)</th>
                 <th>百分比</th>
-                <th>流量趋势</th>
             </tr>
             <s:iterator value="#request.dbModels['default']" status="dbModel">
             <tr>
                 <td><s:property value="#dbModels['default'].index + 1" /></td>
-                <td><a href="javascript:void(0);"><s:property value="dbModels['default'][#dbModel.index]['app_alias']" /></a></td>
+                <td><a href="javascript:void(0);" onclick="showDetail('<s:property value="dbModels['default'][#dbModel.index]['ip_address']" />');"><s:property value="dbModels['default'][#dbModel.index]['app_alias']" /></a></td>
                 <td><s:property value="dbModels['default'][#dbModel.index]['total_bytes_all']" /></td>
                 <td><s:property value="dbModels['default'][#dbModel.index]['total_bytes_in']" /></td>
                 <td><span ctype="ProgressBar" barSkin="green" progress="<s:property value="dbModels['default'][#dbModel.index]['bytes_in_percentage']" />"></span></td>
                 <td><s:property value="dbModels['default'][#dbModel.index]['total_bytes_out']" /></td>
                 <td><span ctype="ProgressBar" barSkin="green" progress="<s:property value="dbModels['default'][#dbModel.index]['bytes_out_percentage']" />"></span></td>
-                <td><img height="14" width="14" src="${rootPath}resource/image/icons/trend.png" border="0"></td>
             </tr>
             </s:iterator>
             </table>
