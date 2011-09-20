@@ -31,6 +31,14 @@ function query(){
     mainForm.action = "${rootPath}ipGroupTraffic_list";
     mainForm.submit(); 
 }
+
+// 导出PDF
+function exportPdf() {
+    var flashMovie = document.getElementById('chartdiv');
+	if (flashMovie) {
+		flashMovie.exportImage('${rootPath}ipGroupTraffic_exportPDF?fileName=ipGroupTraffic.pdf'); 
+	}
+}
 </script>
 
 <!-- 加载报表 -->
@@ -44,19 +52,10 @@ var flashVars =
 {
 	path: "${jsPath}amcharts/flash/",
 	chart_data: "<c:out value="${charts['default']}" escapeXml="false" />",
-	chart_settings: "<settings><data_type>csv</data_type><legend><enabled>0</enabled></legend><pie><inner_radius>30</inner_radius><height>10</height><angle>10</angle><gradient></gradient></pie><animation><start_time>1</start_time><pull_out_time>1</pull_out_time></animation><data_labels><show>{title}:{value}</show><max_width>100</max_width></data_labels></settings>"
+	chart_settings: "<settings><data_type>csv</data_type><plot_area><margins><left>50</left><right>40</right><top>50</top><bottom>50</bottom></margins></plot_area><grid><category><dashed>1</dashed><dash_length>4</dash_length></category><value><dashed>1</dashed><dash_length>4</dash_length></value></grid><axes><category><width>1</width><color>E7E7E7</color></category><value><width>1</width><color>E7E7E7</color></value></axes><values><value><min>0</min></value></values><legend><enabled>1</enabled></legend><angle>0</angle><column><type>3d column</type><width>15</width><alpha>80</alpha><spacing>10</spacing><hover_brightness>10</hover_brightness><balloon_text>{title}: {value}(MB)</balloon_text><grow_time>2</grow_time></column><depth>15</depth><angle>25</angle><graphs><graph gid='0'><title>流出流量</title><color>4BBF4B</color></graph><graph gid='1'><title>流入流量</title><color>C0DBFD</color></graph></graphs><labels><label lid='0'><text><![CDATA[<b>IP分组流量</b>]]></text><y>5</y><text_color>000000</text_color><text_size>16</text_size><align>center</align></label></labels></settings>"
 };
 
-// 如果浏览器支持flash则以flash显示，否则以JavaScript显示
-if (swfobject.hasFlashPlayerVersion("8")) {
-	swfobject.embedSWF("${jsPath}amcharts/flash/ampie.swf", "chartdiv", "100%", "400", "8.0.0", "${jsPath}amcharts/flash/expressInstall.swf", flashVars, params);
-} else {
-	var amFallback = new AmCharts.AmFallback();
-	amFallback.chartSettings = flashVars.chart_settings;
-	amFallback.chartData = flashVars.chart_data;
-	amFallback.type = "pie";
-	amFallback.write("chartdiv");
-}
+swfobject.embedSWF("${jsPath}amcharts/flash/amcolumn2.swf", "chartdiv", "100%", "400", "8.0.0", "${jsPath}amcharts/flash/expressInstall.swf", flashVars, params);
 </script>
 <style type="text/css">
 .data_list .rl_progressbar td{
@@ -144,7 +143,6 @@ if (swfobject.hasFlashPlayerVersion("8")) {
                 <th>百分比</th>
                 <th>流出(MB)</th>
                 <th>百分比</th>
-                <th>流量趋势</th>
             </tr>
             <s:iterator value="#request.dbModels['default']" status="dbModel">
             <tr>
@@ -154,13 +152,11 @@ if (swfobject.hasFlashPlayerVersion("8")) {
                 <td><span ctype="ProgressBar" barSkin="green" progress="<s:property value="dbModels['default'][#dbModel.index]['src_ip_percentage']" />"></span></td>
                 <td><s:property value="dbModels['default'][#dbModel.index]['dst_ip_total']" /></td>
                 <td><span ctype="ProgressBar" barSkin="green" progress="<s:property value="dbModels['default'][#dbModel.index]['dst_ip_percentage']" />"></span></td>
-                <td><img height="14" width="14" src="${rootPath}resource/image/icons/trend.png" border="0"></td>
             </tr>
             </s:iterator>
             </table>
             <!-- 数据报表 START -->
-            <div style="text-align:center; margin-top: 5px;border:solid 1px #95C4D9;">流入百分比
-            <div id="chartdiv" style="width: 100%; height: 400px;"></div></div>
+            <div id="chartdiv" style="width: 100%; height: 400px;"></div>
             <!-- 数据报表 END -->
             </s:if>
             <s:else><div style="text-align:center"><img src="${rootPath}resource/image/default/no_data.gif" /></div></s:else>

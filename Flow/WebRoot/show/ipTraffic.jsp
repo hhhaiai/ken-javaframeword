@@ -30,6 +30,29 @@ function query(){
     mainForm.action = "${rootPath}ipTraffic_list";
     mainForm.submit(); 
 }
+
+// 具体IP查询
+function showDetail(ipAddress, ipType) {
+	document.mainForm.action ='${rootPath}detail/ipTrafficDetail_list?ipType=' + ipType + '&ipAddress=' + ipAddress;
+	document.mainForm.target = "_self";
+	document.mainForm.submit();
+}
+
+// 导出PDF
+function exportPdf() {
+    /*var flashMovie = document.getElementById('chartdivsrc');
+	if (flashMovie) {
+		flashMovie.exportImage('${rootPath}ipTraffic_exportPDF'); 
+	}*/
+}
+
+// 导出图片
+function exportImage() {
+	var flashMovie = document.getElementById('chartdivsrc');
+	if (flashMovie) {
+		flashMovie.exportImage('${rootPath}ipTraffic_exportImage'); 
+	}
+} 
 </script>
 
 <!-- 加载报表 -->
@@ -43,17 +66,17 @@ var flashVarsSrc =
 {
 	path: "${jsPath}amcharts/flash/",
 	chart_data: "<s:property value="charts['ipSrc']" />",
-	chart_settings: "<settings><data_type>csv</data_type><legend><enabled>0</enabled></legend><pie><inner_radius>30</inner_radius><height>7</height><angle>10</angle><gradient></gradient></pie><animation><start_time>1</start_time><pull_out_time>1</pull_out_time></animation><data_labels><show>IP:{title}</show><max_width>100</max_width></data_labels></settings>"
+	chart_settings: "<settings><data_type>csv</data_type><legend><enabled>0</enabled></legend><pie><inner_radius>30</inner_radius><height>10</height><angle>30</angle><gradient></gradient></pie><animation><start_time>2</start_time><pull_out_time>1</pull_out_time><start_effect>strong</start_effect><sequenced>1</sequenced></animation><data_labels><show>IP:{title}</show><max_width>100</max_width></data_labels><balloon><enabled></enabled><color></color><alpha>80</alpha><text_color></text_color><text_size></text_size><show><![CDATA[IP:{title}: {value}(MB) ({percents}‰)]]></show></balloon><labels><label lid='0'><text><![CDATA[源ip流量]]></text><y>10</y><text_size>14</text_size><align>center</align></label></labels></settings>"
 };
 var flashVarsDst = 
 {
 	path: "${jsPath}amcharts/flash/",
 	chart_data: "<s:property value="charts['ipDst']" />",
-	chart_settings: "<settings><data_type>csv</data_type><legend><enabled>0</enabled></legend><pie><inner_radius>30</inner_radius><height>7</height><angle>10</angle><gradient></gradient></pie><animation><start_time>1</start_time><pull_out_time>1</pull_out_time></animation><data_labels><show>IP:{title}</show><max_width>100</max_width></data_labels></settings>"
+	chart_settings: "<settings><data_type>csv</data_type><legend><enabled>0</enabled></legend><pie><inner_radius>30</inner_radius><height>10</height><angle>30</angle><gradient></gradient></pie><animation><start_time>2</start_time><pull_out_time>1</pull_out_time><start_effect>strong</start_effect><sequenced>1</sequenced></animation><data_labels><show>IP:{title}</show><max_width>100</max_width></data_labels><balloon><enabled></enabled><color></color><alpha>80</alpha><text_color></text_color><text_size></text_size><show><![CDATA[IP:{title}: {value}(MB) ({percents}‰)]]></show></balloon><labels><label lid='0'><text><![CDATA[目标ip流量]]></text><y>10</y><text_size>14</text_size><align>center</align></label></labels></settings>"
 };
 
-swfobject.embedSWF("${jsPath}amcharts/flash/ampie.swf", "chartdivsrc", "600", "400", "8.0.0", "${jsPath}amcharts/flash/expressInstall.swf", flashVarsSrc, params);
-swfobject.embedSWF("${jsPath}amcharts/flash/ampie.swf", "chartdivdst", "600", "400", "8.0.0", "${jsPath}amcharts/flash/expressInstall.swf", flashVarsDst, params);
+swfobject.embedSWF("${jsPath}amcharts/flash/ampie2.swf", "chartdivsrc", "100%", "400", "8.0.0", "${jsPath}amcharts/flash/expressInstall.swf", flashVarsSrc, params);
+swfobject.embedSWF("${jsPath}amcharts/flash/ampie2.swf", "chartdivdst", "100%", "400", "8.0.0", "${jsPath}amcharts/flash/expressInstall.swf", flashVarsDst, params);
 </script>
 <style type="text/css">
 .data_list .rl_progressbar td{
@@ -139,20 +162,19 @@ swfobject.embedSWF("${jsPath}amcharts/flash/ampie.swf", "chartdivdst", "600", "4
                 <th width="200px">源ip地址</th>
             	<th>流量(MB)</th>
                 <th>百分比</th>
-                <th>流量趋势</th>
             </tr>
             <s:iterator value="#request.dbModels['ipSrc']" status="dbModel">
             <tr>
             	<td><s:property value="#dbModels['ipSrc'].index + 1" /></td>
-            	<td><a href="javascript:void(0);"><s:property value="dbModels['ipSrc'][#dbModel.index]['src_ip']" /></a></td>
+            	<td><a href="javascript:void(0);" onclick="showDetail('<s:property value="dbModels['ipSrc'][#dbModel.index]['src_ip']" />', 1);"><s:property value="dbModels['ipSrc'][#dbModel.index]['src_ip']" /></a></td>
                 <td><s:property value="dbModels['ipSrc'][#dbModel.index]['format_bytes_total']" /></td>
                 <td><span ctype="ProgressBar" barSkin="green" progress="<s:property value="dbModels['ipDst'][#dbModel.index]['percentage']" />"></span></td>
-                <td><img height="14" width="14" src="${rootPath}resource/image/icons/trend.png" border="0"></td>
             </tr>
             </s:iterator>
             </table>
             <!-- 源IP数据报表 START -->
 			<div id="chartdivsrc" style="width: 100%; height: 400px;"></div>
+            <input type="button" value="导出图片" onClick="exportImage();" />
             <!-- 源IP数据报表 END -->
             </s:if>
             <s:else><div style="text-align:center"><img src="${rootPath}resource/image/default/no_data.gif" /></div></s:else>
