@@ -21,4 +21,17 @@
             <result name="list">/show/appTraffic.jsp</result>
         </action>
     </package>
+    
+    <package name="detail" extends="base" namespace="/detail">
+        <!-- IP流量统计 -->
+        <action name="ipTrafficDetail_*" 
+                class="com.shine.sourceflow.web.show.detail.IPTrafficDetailAction" method="{1}">
+            <result name="list">/show/detail/ipTrafficDetail.jsp</result>
+        </action>
+        <!-- 应用流量统计 -->
+        <action name="appTrafficDetail_*" 
+                class="com.shine.sourceflow.web.show.detail.AppTrafficDetailAction" method="{1}">
+            <result name="list">/show/detail/appTrafficDetail.jsp</result>
+        </action>
+    </package>
 </struts>

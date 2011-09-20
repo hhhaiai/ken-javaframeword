@@ -5,6 +5,7 @@
 
 <struts>
     <constant name="struts.i18n.encoding" value="UTF-8"/>
+    <constant name="struts.custom.i18n.resources" value="globalMessages" />
     <constant name="struts.i18n.reload" value="true"/>
     <constant name="struts.configuration.xml.reload" value="true"/>
     <constant name="struts.devMode" value="true"/>
