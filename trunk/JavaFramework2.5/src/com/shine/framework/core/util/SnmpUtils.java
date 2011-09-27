@@ -4,54 +4,46 @@ import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.shine.framework.core.interfaces.SnmpInterface;
+
 import snmp.SNMPObject;
 import snmp.SNMPSequence;
 import snmp.SNMPVarBindList;
 import snmp.SNMPv1CommunicationInterface;
 
-public class SnmpUtils {
+public class SnmpUtils implements SnmpInterface {
 	private SNMPv1CommunicationInterface comInterface = null;
 	private String ip;
 	private String community;
 	private int port = 161;
 	private int version = 0;
-	
-	
 
-	/**
-	 * 初始化
-	 * 
-	 * @param ip
-	 * @param community
-	 * @param port
-	 * @throws Exception
-	 */
+	
 	public SnmpUtils(String ip, String community, int port) throws Exception {
+		init(ip, community, port);
+	}
+
+	
+	public SnmpUtils(String ip, String community) throws Exception {
+		init(ip, community);
+	}
+
+	@Override
+	public void init(String ip, String community, int port) throws Exception {
 		InetAddress hostAddress = InetAddress.getByName(ip);
 		comInterface = new SNMPv1CommunicationInterface(version, hostAddress,
 				community, port);
 	}
 
-	/**
-	 * 初始化
-	 * 
-	 * @param ip
-	 * @param community
-	 * @throws Exception
-	 */
-	public SnmpUtils(String ip, String community) throws Exception {
+	@Override
+	public void init(String ip, String community) throws Exception {
 		InetAddress hostAddress = InetAddress.getByName(ip);
 		comInterface = new SNMPv1CommunicationInterface(version, hostAddress,
 				community);
-
 	}
 
-	/**
-	 * 获取value
-	 * 
-	 * @param oid
-	 * @return
-	 */
+	
+	@Override
 	public String getOidValueString(String oid) {
 		if (comInterface == null) {
 			System.out.println("Snmp初始化出错");
@@ -68,12 +60,8 @@ public class SnmpUtils {
 		return null;
 	}
 
-	/**
-	 * 获取table
-	 * 
-	 * @param oid
-	 * @return
-	 */
+	
+	@Override
 	public List<String> getTableView(String oid) {
 		if (comInterface == null) {
 			System.out.println("Snmp初始化出错");
@@ -96,12 +84,8 @@ public class SnmpUtils {
 		return null;
 	}
 
-	/**
-	 * 获取table
-	 * 
-	 * @param oid
-	 * @return
-	 */
+	
+	@Override
 	public List<String> getTableView(String oid[]) {
 		if (comInterface == null) {
 			System.out.println("Snmp初始化出错");
@@ -124,13 +108,8 @@ public class SnmpUtils {
 		return null;
 	}
 
-	/**
-	 * 重新连接
-	 * 
-	 * @param ip
-	 * @param community
-	 * @param port
-	 */
+	
+	@Override
 	public void reconnection(String ip, String community, int port) {
 		try {
 			if (comInterface != null)
@@ -144,9 +123,8 @@ public class SnmpUtils {
 		}
 	}
 
-	/**
-	 * 重新连接
-	 */
+	
+	@Override
 	public void reconnection() {
 		try {
 			if (comInterface != null)
@@ -160,9 +138,8 @@ public class SnmpUtils {
 		}
 	}
 
-	/**
-	 * 关闭
-	 */
+	
+	@Override
 	public void close() {
 		try {
 			if (comInterface != null)
@@ -178,7 +155,7 @@ public class SnmpUtils {
 	public static void main(String[] args) {
 		SnmpUtils util = null;
 		try {
-			String[] oid = { "1.3.6.1.4.1.311.1.7.2.1.1"};
+			String[] oid = { "1.3.6.1.4.1.311.1.7.2.1.1" };
 			util = new SnmpUtils("192.168.2.18", "public", 161);
 			List<String> list = util.getTableView(oid);
 			for (String s : list) {
