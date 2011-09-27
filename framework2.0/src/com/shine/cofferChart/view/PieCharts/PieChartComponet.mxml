@@ -13,12 +13,13 @@
 			import com.shine.cofferChart.control.MainControl;
 			import com.shine.cofferChart.model.pieCharts.PieChartsModel;
 			
+			import mx.charts.LegendItem;
 			import mx.charts.events.ChartItemEvent;
 			import mx.charts.series.items.PieSeriesItem;
+			import mx.controls.Alert;
 			import mx.graphics.IFill;
 			import mx.graphics.SolidColor;
 			import mx.utils.StringUtil;
-			import mx.controls.Alert;
 			
 			[Bindable]
 			private var title:String="";
@@ -34,8 +35,13 @@
 				this.initData();
 			}
 			
-			private function initData():void{
-				pieChartModel.setXml(XML(MainControl.getInstance().getString("dataXml")));
+			public function initData():void{
+				
+				this.dataXml=MainControl.getInstance().getString("dataXml");
+				
+				pieChartModel.setXml(XML(this.dataXml));
+
+				
 				
 				//设置基本属性
 				if(pieChartModel.getString("title")==null||pieChartModel.getString("title").length==0){
@@ -46,7 +52,12 @@
 				
 				clickType=pieChartModel.getString("clickType");
 				
+				//labelPosition=none|callout|inside|insideWithCallout|outside
+				pieSeries.setStyle("labelPosition",pieChartModel.getString("labelPosition"));
+				
+				
 				this.dataXmlList=XML(MainControl.getInstance().getString("dataXml")).child("node");
+
 				
 				//显示特性
 				if (pieChartModel.getString("showDataTips") == "true")
@@ -57,11 +68,15 @@
 				{
 					pieChart.showDataTips=false;
 				}
+				
 				if (pieChartModel.getString("showAllDataTips") == "true")
 				{
 					pieChart.showAllDataTips=true;
 					pieChart.showDataTips=false;
+				}else{
+					pieChart.showAllDataTips=false;
 				}
+
 				
 				//图例
 				if (pieChartModel.getString("legend") == "true")
@@ -78,7 +93,7 @@
 			
 			private function pieSeries_labelFunc(item:Object, field:String, index:Number, percentValue:Number):String
 			{
-				return StringUtil.substitute("{0} {2}({1}%)", item.@label, percentValue.toFixed(1), item.@value);
+				return item.@description;
 			}
 			
 			/**
@@ -87,6 +102,14 @@
 			private function pieSeries_fillFunc(item:PieSeriesItem, index:Number):IFill
 			{
 				var curItem:PieSeriesItem=PieSeriesItem(item);
+				
+				var legendItem:LegendItem=new LegendItem;
+				legendItem.label=String(curItem.item.@label);
+				var fill:IFill=new SolidColor(uint(curItem.item.@color), 1.0);
+				legendItem.setStyle("fill", fill);
+				legendItem.setStyle("fontWeight", "bold");
+				legend.addChild(legendItem);
+					
 				return new SolidColor(uint(curItem.item.@color), 1.0);
 			}
 			
@@ -121,7 +144,8 @@
 						 field="@value"
 						 nameField="@label"
 						 labelPosition="callout"
-						 labelFunction="pieSeries_labelFunc">
+						 labelFunction="pieSeries_labelFunc" 
+						 fillFunction="pieSeries_fillFunc">
 			   <mx:stroke>
 				   <mx:Stroke color="black"
 							  weight="0"/>
@@ -129,6 +153,5 @@
 		   </mx:PieSeries>
 	   </PieCharts:series>
 	</PieCharts:PieChart>
-	<mx:Legend id="legend"
-			   dataProvider="{pieChart}" height="25"/>
+	<mx:Legend id="legend"  height="25"/>
 </view:ChartComponet>

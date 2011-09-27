@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- url:http://blog.csdn.net/arjick/article/details/6702268 -->
 <view:BaseSimpleContainer xmlns:fx="http://ns.adobe.com/mxml/2009" 
 						  xmlns:s="library://ns.adobe.com/flex/spark" 
 						  xmlns:mx="library://ns.adobe.com/flex/mx" 
 						  xmlns:view="com.shine.framework.core.view.*" 
-						  creationComplete="{complete()}">
+						  creationComplete="{complete()}" backgroundColor="0xffffff">
 	<view:layout>
 		<s:BasicLayout/>
 	</view:layout>
@@ -14,6 +15,7 @@
 		<![CDATA[
 			import com.shine.cofferChart.control.MainControl;
 			import com.shine.cofferChart.view.ColumnCharts.ColumnChartComponet;
+			import com.shine.cofferChart.view.DashboardCharts.DashboardChartComponet;
 			import com.shine.cofferChart.view.LineCharts.LineChartComponet;
 			import com.shine.cofferChart.view.PieCharts.PieChartComponet;
 			import com.shine.framework.core.util.BaseHttpServiceUtil;
@@ -23,12 +25,14 @@
 			private var lineChartComponet:LineChartComponet=null;
 			private var pieChartComponet:PieChartComponet=null;
 			private var columnChartComponet:ColumnChartComponet=null;
+			private var dashboradChartComponet:DashboardChartComponet=null;
 			
 			private function complete():void{
 				this.completeLoading();
 				
+				MainControl.getInstance().add(this);
+				
 				refresh();
-				initComponent();
 			}
 			
 			public function refresh():void{
@@ -58,26 +62,53 @@
 					this.autoRefreshMethod=refresh;
 					this.autoRefresh();
 				}
+				
+				initComponent();
 			}
 			
 			
 			//初始化组件
 			public function initComponent():void{
 				if(MainControl.getInstance().getString("type")=="lineChart"){
-					lineChartComponet=new LineChartComponet;
-					lineChartComponet.width=this.width;
-					lineChartComponet.height=this.height;
-					this.addElement(lineChartComponet);
+					if(lineChartComponet==null){
+						lineChartComponet=new LineChartComponet;
+						lineChartComponet.x=0;
+						lineChartComponet.y=0;
+						lineChartComponet.width=this.width;
+						lineChartComponet.height=this.height;
+						this.addElement(lineChartComponet);
+					}else
+						lineChartComponet.initData();
 				}else if(MainControl.getInstance().getString("type")=="pieChart"){
-					pieChartComponet=new PieChartComponet;
-					pieChartComponet.width=this.width;
-					pieChartComponet.height=this.height;
-					this.addElement(pieChartComponet);
+					if(pieChartComponet==null){
+						pieChartComponet=new PieChartComponet;
+						pieChartComponet.x=0;
+						pieChartComponet.y=0;
+						pieChartComponet.width=this.width;
+						pieChartComponet.height=this.height;
+						this.addElement(pieChartComponet);
+					}else
+						pieChartComponet.initData();
 				}else if(MainControl.getInstance().getString("type")=="columnChart"){
-					columnChartComponet=new ColumnChartComponet;
-					columnChartComponet.width=this.width;
-					columnChartComponet.height=this.height;
-					this.addElement(columnChartComponet);
+					if(columnChartComponet==null){
+						columnChartComponet=new ColumnChartComponet;
+						columnChartComponet.x=0;
+						columnChartComponet.y=0;
+						columnChartComponet.width=this.width;
+						columnChartComponet.height=this.height;
+						this.addElement(columnChartComponet);
+					}else
+						columnChartComponet.initData();
+				}else if(MainControl.getInstance().getString("type")=="dashboardChart"){
+					if(dashboradChartComponet==null){
+						dashboradChartComponet=new DashboardChartComponet;
+						dashboradChartComponet.x=0;
+						dashboradChartComponet.y=0;
+						dashboradChartComponet.width=this.width;
+						dashboradChartComponet.height=this.height;
+						this.addElement(dashboradChartComponet);
+					}else
+						dashboradChartComponet.initData();
 				}
 			}
 		]]>

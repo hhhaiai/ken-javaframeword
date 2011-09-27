@@ -4,11 +4,46 @@
 						  xmlns:mx="library://ns.adobe.com/flex/mx" 
 						  xmlns:view="com.shine.framework.core.view.*" 
 						  dowloadPicturePolicy="on"
-						  dowloadPictureName="charts.jpg">
+						  dowloadPictureName="charts.jpg" creationComplete="{chartComponentComplete()}">
 	<view:layout>
 		<s:BasicLayout/>
 	</view:layout>
-	<fx:Declarations>
-		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
-	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import com.shine.cofferChart.CofferCharts;
+			import com.shine.cofferChart.control.MainControl;
+			
+			import mx.controls.Alert;
+			
+			public var dataXml:String="";
+			
+			private function chartComponentComplete():void{
+				initRightContext();
+			}
+			
+			private function initRightContext():void
+			{
+				var contextMenu2:ContextMenu=ContextMenu(this.contextMenu);
+				
+				var refeshPicContextMenuItem:ContextMenuItem=new ContextMenuItem("刷新");
+				refeshPicContextMenuItem.addEventListener(ContextMenuEvent.MENU_ITEM_SELECT, refeshData);
+				contextMenu2.customItems.push(refeshPicContextMenuItem);	
+				
+				var debugPicContextMenuItem:ContextMenuItem=new ContextMenuItem("调试");
+				debugPicContextMenuItem.addEventListener(ContextMenuEvent.MENU_ITEM_SELECT, showData);
+				contextMenu2.customItems.push(debugPicContextMenuItem);	
+				
+				
+				this.contextMenu=contextMenu2;
+			}
+			
+			private function refeshData(event:ContextMenuEvent):void{
+				(MainControl.getInstance().get("CofferCharts") as CofferCharts).refresh();
+			}
+			
+			private function showData(event:ContextMenuEvent):void{
+				Alert.show(dataXml,"debug");
+			}
+		]]>
+	</fx:Script>
 </view:BaseSimpleContainer>

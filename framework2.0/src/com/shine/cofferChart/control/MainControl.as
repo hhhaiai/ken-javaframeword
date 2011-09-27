@@ -1,8 +1,8 @@
 package com.shine.cofferChart.control
 {
-	import com.shine.framework.core.model.BaseXmlModel;
+	import com.shine.framework.core.control.BaseControl;
 	
-	public class MainControl extends BaseXmlModel
+	public class MainControl extends BaseControl
 	{
 		private static var _instance:MainControl;
 		public function MainControl(enforcer:SingletonEnforcer)

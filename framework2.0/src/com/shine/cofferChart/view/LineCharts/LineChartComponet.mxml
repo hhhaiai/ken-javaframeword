@@ -6,7 +6,7 @@
 						  xmlns:LineCharts="com.shine.cofferChart.view.LineCharts.*" 
 						  creationComplete="{complete()}">
 	<view:layout>
-		<s:VerticalLayout gap="0" horizontalAlign="center" />
+		<s:VerticalLayout gap="0" horizontalAlign="center" verticalAlign="middle" />
 	</view:layout>
 	<fx:Script>
 		<![CDATA[
@@ -38,8 +38,10 @@
 				this.initData();
 			}
 			
-			private function initData():void{
-				lineChartModel.setXml(XML(MainControl.getInstance().getString("dataXml")));
+			public function initData():void{
+				this.dataXml=MainControl.getInstance().getString("dataXml");
+				
+				lineChartModel.setXml(XML(this.dataXml));
 				
 				//设置基本属性
 				if(lineChartModel.getString("title")==null||lineChartModel.getString("title").length==0){
@@ -47,6 +49,7 @@
 					titleLable.height=0;
 				}else
 					this.title=lineChartModel.getString("title");
+				
 				this.lineForm=lineChartModel.getString("form");
 				this.dataXmlList=XML(MainControl.getInstance().getString("dataXml")).child("node");
 				this.verticalTitle=lineChartModel.getString("verticalTitle");
@@ -69,6 +72,9 @@
 					lineLineSeries.push(lineSeries);
 				}
 				lineChart.series=lineLineSeries;
+				
+				linearAxis.maximum=lineChartModel.getMaxSize();
+				linearAxis.minimum=lineChartModel.getMinSize();
 				
 				//设置是否提示
 				if (lineChartModel.getString("showDataTips") == "true")
@@ -106,11 +112,11 @@
 						  showDataTips="true"
 						  showAllDataTips="false"
 						  dataProvider="{dataXmlList}"
-						  width="100%"
-						  height="{this.height-titleLable.height-legend.height}">
+						  width="90%"
+						  height="{(this.height-titleLable.height-legend.height)*8/10}">
 		<!-- vertical axis -->
 		<LineCharts:verticalAxis>
-			<mx:LinearAxis baseAtZero="false"
+			<mx:LinearAxis id="linearAxis" baseAtZero="false"
 						   title="{verticalTitle}"/>
 		</LineCharts:verticalAxis>
 			
@@ -129,5 +135,5 @@
 		</LineCharts:horizontalAxisRenderers>
 	</LineCharts:LineChart>
 	<mx:Legend id="legend"
-			   dataProvider="{lineChart}" height="25"/>
+			   dataProvider="{lineChart}" height="20"/>
 </view:ChartComponet>

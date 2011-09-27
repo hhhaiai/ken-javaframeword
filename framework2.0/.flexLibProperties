@@ -94,6 +94,9 @@
     <classEntry path="com.shine.cofferChart.view.ColumnCharts.ColumnChart"/>
     <classEntry path="com.shine.cofferChart.view.ColumnCharts.ColumnChartComponet"/>
     <classEntry path="com.shine.cofferChart.model.columnCharts.ColumnsChartsModel"/>
+    <classEntry path="com.shine.framework.core.control.BaseControl"/>
+    <classEntry path="com.shine.cofferChart.view.DashboardCharts.DashboardChartComponet"/>
+    <classEntry path="com.shine.cofferChart.model.dashboardCharts.DashboardChartsModel"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

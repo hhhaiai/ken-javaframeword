@@ -42,8 +42,10 @@
 				this.initData();
 			}
 			
-			private function initData():void{
-				columnChartModel.setXml(XML(MainControl.getInstance().getString("dataXml")));
+			public function initData():void{
+				this.dataXml=MainControl.getInstance().getString("dataXml");
+				
+				columnChartModel.setXml(XML(this.dataXml));
 				
 				//设置基本属性
 				if(columnChartModel.getString("title")==null||columnChartModel.getString("title").length==0){
@@ -75,7 +77,6 @@
 				columnChart.series=columnSeriesArray;
 				
 				//更新图例
-				
 				if (columnsArrayCollection.length != 0)
 				{
 					legend.removeAllChildren();
@@ -146,9 +147,14 @@
 							  height="{this.height-legend.height-titleLable.height}" >
 		<ColumnCharts:horizontalAxis>
 			<mx:CategoryAxis id="ca"
-							 categoryField="@label"/>
+							 categoryField="@label" title="{this.horizontalTitle}"/>
 		</ColumnCharts:horizontalAxis>
 		
+		<!-- vertical axis -->
+		<ColumnCharts:verticalAxis>
+			<mx:LinearAxis  id="columnAxis" baseAtZero="false"
+						   title="{this.verticalTitle}"/>
+		</ColumnCharts:verticalAxis>
 		
 		<ColumnCharts:horizontalAxisRenderers>
 			<mx:AxisRenderer axis="{ca}"
