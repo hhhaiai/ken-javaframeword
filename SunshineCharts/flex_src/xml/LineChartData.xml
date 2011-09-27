@@ -1,13 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<data title="" autoRefreshPolicy="on" autoRefreshTime="180" debug="off"
-	backGroudColor="0xffffff" verticalTitle="price" horizontalTitle="date"
-	form="curve" showDataTips="true" showAllDataTips="false" legend="true">
+<data title="123" autoRefreshPolicy="on" autoRefreshTime="180" debug="off"
+	backGroudColor="0xffffff" verticalTitle="tomcat class loading"
+	horizontalTitle="时间" form="curve" showDataTips="true" showAllDataTips="false"
+	legend="false">
 	<lines>
-		<line value="line1" label="线1" color="0x00ffff" />
-		<line value="line2" label="线2" color="0xffff00" />
+		<line value="loadedClassCount" label="loadedClassCount" color="0x5f9f9e" />
+		<line value="TotalLoadedClassCount" label="TotalLoadedClassCount"
+			color="0xef7b11" />
+		<line value="unloadedClassCount" label="unloadedClassCount"
+			color="0xbfbf36" />
 	</lines>
-	<node label="1" line1="100" line2="100" />
-	<node label="2" line1="0" line2="300" />
-	<node label="3" line1="100" line2="100" />
+	<node label="14:04" loadedClassCount="8218" TotalLoadedClassCount="8284"
+		unloadedClassCount="66" />
+	<node label="14:10" loadedClassCount="8371" TotalLoadedClassCount="8437"
+		unloadedClassCount="66" />
+	<node label="14:15" loadedClassCount="8318" TotalLoadedClassCount="8470"
+		unloadedClassCount="152" />
+	<node label="14:21" loadedClassCount="8332" TotalLoadedClassCount="8484"
+		unloadedClassCount="152" />
+	<node label="14:26" loadedClassCount="8356" TotalLoadedClassCount="8508"
+		unloadedClassCount="152" />
 </data>

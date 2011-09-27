@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<data title="" autoRefreshPolicy="on" autoRefreshTime="180" debug="off" backGroudColor="0xffffff" clickType="pop" showDataTips="true" showAllDataTips="false" legend="true">
-   <node label="p1" value="10" color="0xffff00" description="饼1"/>
-   <node label="p2" value="10" color="0xff00ff" description="饼2"/>
-   <node label="p3" value="10" color="0x00ffff" description="饼3"/>
+<data debug="on" showDataTips="true" legend="true"
+	autoRefreshPolicy="off" labelPosition="none" autoRefreshTime="180"
+	title="" showAllDataTips="false" clickType="pop" backGroudColor="0xffffff">
+	<node value="31403000" label="未知_8小时43分钟23秒" description="未知_8小时43分钟23秒"
+		color="0x000000" />
+	<node value="8728000" label="可用_2小时25分钟28秒" description="可用_2小时25分钟28秒"
+		color="0x00ff00" />
+	<node value="360000" label="不可用_6分钟" description="不可用_6分钟" color="0x000000" />
 </data>

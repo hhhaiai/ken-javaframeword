@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<data title="" autoRefreshPolicy="on" autoRefreshTime="180" debug="off" backGroudColor="0xffffff" verticalTitle="price" horizontalTitle="date" type="clustered" showDataTips="true" showAllDataTips="false" legend="true">
+<data title="" autoRefreshPolicy="on" autoRefreshTime="180" debug="off"
+	backGroudColor="0xffffff" verticalTitle="price" horizontalTitle="date"
+	type="clustered" showDataTips="true" showAllDataTips="false" legend="true">
    <columns>
       <column value="colunms1" label="线1" color="0x00ffff"/>
       <column value="colunms2" label="线1" color="0xffff00"/>
