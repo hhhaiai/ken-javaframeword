@@ -16,11 +16,6 @@ public class DashboardChartsHelper {
 	private String autoRefreshTime = "180";
 	private String debug = "off";
 	private String backGroudColor = "0xffffff";
-	private String verticalTitle = "";
-	private String horizontalTitle = "";
-	private String showDataTips = "true";
-	private String showAllDataTips = "false";
-	private String legend = "true";
 	private String value="";
 	/**
 	 * 输出xml数据
@@ -35,11 +30,6 @@ public class DashboardChartsHelper {
 		dataElement.addAttribute("autoRefreshTime", autoRefreshTime);
 		dataElement.addAttribute("debug", debug);
 		dataElement.addAttribute("backGroudColor", backGroudColor);
-//		dataElement.addAttribute("verticalTitle", verticalTitle);
-//		dataElement.addAttribute("horizontalTitle", horizontalTitle);
-//		dataElement.addAttribute("showDataTips", showDataTips);
-//		dataElement.addAttribute("showAllDataTips", showAllDataTips);
-//		dataElement.addAttribute("legend", legend);
 		dataElement.addAttribute("value",value);
 		return XmlUitl.doc2String(document);
 	}
@@ -82,46 +72,6 @@ public class DashboardChartsHelper {
 
 	public void setBackGroudColor(String backGroudColor) {
 		this.backGroudColor = backGroudColor;
-	}
-
-	public String getVerticalTitle() {
-		return verticalTitle;
-	}
-
-	public void setVerticalTitle(String verticalTitle) {
-		this.verticalTitle = verticalTitle;
-	}
-
-	public String getHorizontalTitle() {
-		return horizontalTitle;
-	}
-
-	public void setHorizontalTitle(String horizontalTitle) {
-		this.horizontalTitle = horizontalTitle;
-	}
-
-	public String getShowDataTips() {
-		return showDataTips;
-	}
-
-	public void setShowDataTips(String showDataTips) {
-		this.showDataTips = showDataTips;
-	}
-
-	public String getShowAllDataTips() {
-		return showAllDataTips;
-	}
-
-	public void setShowAllDataTips(String showAllDataTips) {
-		this.showAllDataTips = showAllDataTips;
-	}
-
-	public String getLegend() {
-		return legend;
-	}
-
-	public void setLegend(String legend) {
-		this.legend = legend;
 	}
 	
 	public String getValue() {
