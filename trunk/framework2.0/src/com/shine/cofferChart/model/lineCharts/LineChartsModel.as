@@ -4,6 +4,7 @@ package com.shine.cofferChart.model.lineCharts
 	import com.shine.framework.core.util.XMLArrayCollection;
 	import com.shine.framework.core.util.XMLUtils;
 	
+	
 	public class LineChartsModel extends BaseXmlModel
 	{
 		public var linesArrayCollection:XMLArrayCollection=new XMLArrayCollection;
@@ -21,6 +22,34 @@ package com.shine.cofferChart.model.lineCharts
 			
 			nodesArrayCollection.removeAll();
 			nodesArrayCollection=XMLUtils.saxXmlNodeByTag(value,["node"]);
+		}
+		
+		public function getMaxSize():int{
+			var maxInt:int=0;
+			if(nodesArrayCollection.length!=0){
+				for each(var baseXmlModel:BaseXmlModel in nodesArrayCollection){
+					for each(var lineBaseXmlModel:BaseXmlModel in linesArrayCollection){
+						if(baseXmlModel.getInt(lineBaseXmlModel.getString("value"))>maxInt){
+							maxInt=baseXmlModel.getInt(lineBaseXmlModel.getString("value"));
+						}
+					}
+				}
+			}
+			return maxInt+5;
+		}
+		
+		public function getMinSize():int{
+			var minInt:int=0;
+			if(nodesArrayCollection.length!=0){
+				for each(var baseXmlModel:BaseXmlModel in nodesArrayCollection){
+					for each(var lineBaseXmlModel:BaseXmlModel in linesArrayCollection){
+						if(baseXmlModel.getInt(lineBaseXmlModel.getString("value"))<minInt)
+							minInt=baseXmlModel.getInt(lineBaseXmlModel.getString("value"));
+						
+					}
+				}
+			}
+			return minInt-5;
 		}
 	}
 }

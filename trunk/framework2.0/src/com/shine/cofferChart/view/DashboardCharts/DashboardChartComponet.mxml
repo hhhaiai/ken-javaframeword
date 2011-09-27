@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<view:ChartComponet xmlns:fx="http://ns.adobe.com/mxml/2009" 
+					xmlns:s="library://ns.adobe.com/flex/spark" 
+					xmlns:mx="library://ns.adobe.com/flex/mx" 
+					xmlns:view="com.shine.cofferChart.view.*"
+					creationComplete="{complete()}" xmlns:view1="com.shine.framework.Dashboard.view.*" >
+	<view:layout>
+		<s:VerticalLayout gap="0" horizontalAlign="center" />
+	</view:layout>
+	<fx:Script>
+		<![CDATA[
+			import com.shine.cofferChart.control.MainControl;
+			import com.shine.cofferChart.model.dashboardCharts.DashboardChartsModel;
+			import com.shine.framework.Dashboard.skin.DashBoardTenSkin;
+			
+			import mx.controls.Alert;
+			
+			private var dashboardChartsModel:DashboardChartsModel=new DashboardChartsModel;
+			
+			[Bindable]
+			private var title:String="";
+			
+			private function complete():void{
+				this.completeLoading();
+				this.initData();
+			}
+			
+			public function initData():void{
+				this.dataXml=MainControl.getInstance().getString("dataXml");
+				dashboardChartsModel.setXml(XML(this.dataXml));
+				
+				//设置基本属性
+				if(dashboardChartsModel.getString("title")==null||dashboardChartsModel.getString("title").length==0){
+					dashboardCharts.height=dashboardCharts.height+titleLable.height;
+					titleLable.height=0;
+				}else
+					this.title=dashboardChartsModel.getString("title");
+				
+				DashBoardTenSkin(dashboardCharts.skin).setValue(dashboardChartsModel.getInt("value"));
+			}
+		]]>
+	</fx:Script>
+	<mx:Label id="titleLable"
+			  text="{title}"
+			  fontSize="12" height="20"/>
+	<view1:Dashboard id="dashboardCharts"  
+					 width="100%"
+					 height="{this.height-titleLable.height}"
+					 y="{titleLable.height}"
+					 skinClass="com.shine.framework.Dashboard.skin.DashBoardTenSkin" />  
+</view:ChartComponet>

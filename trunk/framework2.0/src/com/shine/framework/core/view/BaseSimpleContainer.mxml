@@ -58,6 +58,8 @@
 			//toop Type toopTipType="text" or toopTipType="html"
 			public var toopTipType:String="text";
 			
+			
+			
 			public function loadInit():void
 			{
 				loading=new Image;
@@ -249,6 +251,18 @@
 				if(this.parent!=null){
 					this.parent.setChildIndex(this,this.parent.numChildren-1);
 				}
+			}
+			
+			public function addDownFileRightContext(label:String,fileName:String,filePath:String):void{
+				
+			}
+			
+			public function cleanDownFileRightContext():void{
+				
+			}
+			
+			public function removeDownFileRightContext():void{
+				
 			}
 		]]>
 	</fx:Script>

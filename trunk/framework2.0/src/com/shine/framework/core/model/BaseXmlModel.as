@@ -104,5 +104,10 @@ package com.shine.framework.core.model
 		public function getNumber(key:String):int{
 			return Number(this.getString(key));
 		}
+		
+		//获取xml的name
+		public function getName():String{
+			return String(XML(this.xml).name());
+		}
 	}
 }
