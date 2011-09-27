@@ -20,6 +20,8 @@ public class LineChartsHelper {
 	private String backGroudColor = "0xffffff";
 	private String verticalTitle = "price";
 	private String horizontalTitle = "date";
+	//线条阴影
+	private String seriesFilter = "on";
 	private String form = "curve";
 	private String showDataTips = "true";
 	private String showAllDataTips = "false";
@@ -55,6 +57,7 @@ public class LineChartsHelper {
 		dataElement.addAttribute("backGroudColor", backGroudColor);
 		dataElement.addAttribute("verticalTitle", verticalTitle);
 		dataElement.addAttribute("horizontalTitle", horizontalTitle);
+		dataElement.addAttribute("seriesFilter", seriesFilter);
 		dataElement.addAttribute("form", form);
 		dataElement.addAttribute("showDataTips", showDataTips);
 		dataElement.addAttribute("showAllDataTips", showAllDataTips);
@@ -182,6 +185,14 @@ public class LineChartsHelper {
 
 	public void setLegend(String legend) {
 		this.legend = legend;
+	}
+
+	public String getSeriesFilter() {
+		return seriesFilter;
+	}
+
+	public void setSeriesFilter(String seriesFilter) {
+		this.seriesFilter = seriesFilter;
 	}
 
 }
