@@ -10,7 +10,6 @@ import com.shine.Netflow.receiver.NetflowRecevice;
 import com.shine.Netflow.threadModel.ProcessThreadModel;
 import com.shine.framework.ThreadPoolUtil.ThreadPoolManager;
 import com.shine.framework.Udp.UdpManager;
-import com.shine.framework.Udp.model.PrintRecevice;
 
 /**
  * Netflow接收解析器
