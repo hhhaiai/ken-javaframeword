@@ -8,8 +8,8 @@ public class Example {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		SnmptrapManager.getManager().addRecevice("test","127.0.0.1", 162, 10);
+        System.err.println("Snmp trap 启动成功!!!");
 	}
 
 }

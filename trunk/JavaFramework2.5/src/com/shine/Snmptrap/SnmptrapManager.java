@@ -1,19 +1,23 @@
 package com.shine.Snmptrap;
 
+import com.shine.Snmptrap.utils.SnmptrapMap;
+
 public class SnmptrapManager {
 	private static SnmptrapManager manager = null;
 
-	public SnmptrapManager getManager() {
+	private SnmptrapMap map = new SnmptrapMap();
+
+	public static SnmptrapManager getManager() {
 		if (manager == null)
 			manager = new SnmptrapManager();
 		return manager;
 	}
 
-	public void startRecevice(String host, int port, int cache) {
+	public void addRecevice(String tag, String host, int port, int threadSize) {
 
 	}
 
-	public void stopRecevice() {
+	public void stopRecevice(String tag) {
 
 	}
 
