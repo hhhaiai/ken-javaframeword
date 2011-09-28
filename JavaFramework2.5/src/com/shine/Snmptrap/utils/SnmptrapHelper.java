@@ -80,9 +80,32 @@ public class SnmptrapHelper implements CommandResponder {
 		USM usm = new USM(SecurityProtocols.getInstance(), new OctetString(MPv3
 				.createLocalEngineID()), 0);
 		SecurityModels.getInstance().addSecurityModel(usm);
-		snmp.listen();
-		snmp.addCommandResponder(this);
-		System.out.println("开始监听Trap信息!");
+	}
+
+	/**
+	 * 启动监听
+	 * 
+	 * @throws IOException
+	 */
+	public void start() throws IOException {
+		if (snmp != null) {
+			snmp.listen();
+			snmp.addCommandResponder(this);
+			System.out.println("开始监听Trap信息!");
+		} else {
+			System.err.println("启动监听Trap信息出错!");
+		}
+	}
+
+	/**
+	 * 停止监听
+	 * 
+	 * @throws IOException
+	 */
+	public void stop() throws IOException {
+		if (snmp != null) {
+			snmp.close();
+		}
 	}
 
 	/**
@@ -107,5 +130,6 @@ public class SnmptrapHelper implements CommandResponder {
 			IOException {
 		SnmptrapHelper helper = new SnmptrapHelper();
 		helper.init();
+		helper.start();
 	}
 }
