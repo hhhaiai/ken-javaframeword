@@ -27,11 +27,11 @@ public class SnmptrapManager {
 	 */
 	public void addRecevice(String tag, String host, int port, int threadSize) {
 		try {
-			if(map.containsKey("tag")){
+			if (map.containsKey("tag")) {
 				System.out.println("已经初始化了相关接收器!!!");
-				
+
 			}
-				
+
 			SnmptrapHelper helper = new SnmptrapHelper();
 			helper.init(host, port, threadSize);
 			map.put(tag, helper);
@@ -67,6 +67,14 @@ public class SnmptrapManager {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public void removeRecevice() {
+
+	}
+
+	public void removeRecevice(String tag) {
+
 	}
 
 	public void loadTraslator() {
