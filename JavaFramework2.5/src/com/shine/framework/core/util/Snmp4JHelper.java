@@ -22,7 +22,7 @@ import org.snmp4j.transport.DefaultUdpTransportMapping;
 
 import com.shine.framework.core.interfaces.SnmpInterface;
 
-public class Snmp4JUtils implements SnmpInterface {
+public class Snmp4JHelper implements SnmpInterface {
 	private int port;
 	protected Snmp snmp;
 	private TransportMapping transport;
@@ -31,11 +31,11 @@ public class Snmp4JUtils implements SnmpInterface {
 	protected static final int DEFAULT_TIMEOUT = 8000;
 	protected int timeOut = DEFAULT_TIMEOUT;
 
-	public Snmp4JUtils(String ip, String community, int port) throws Exception {
+	public Snmp4JHelper(String ip, String community, int port) throws Exception {
 		init(ip, community, port);
 	}
 
-	public Snmp4JUtils(String ip, String community) throws Exception {
+	public Snmp4JHelper(String ip, String community) throws Exception {
 		init(ip, community);
 	}
 
@@ -47,7 +47,7 @@ public class Snmp4JUtils implements SnmpInterface {
 			snmp.listen();
 		} catch (IOException ioe) {
 			close();
-			Logger.getLogger(Snmp4JUtils.class).error(ioe);
+			Logger.getLogger(Snmp4JHelper.class).error(ioe);
 		}
 		this.port = port;
 		createTarget(ip, community);
@@ -62,7 +62,7 @@ public class Snmp4JUtils implements SnmpInterface {
 			snmp.listen();
 		} catch (IOException ioe) {
 			close();
-			Logger.getLogger(Snmp4JUtils.class).error(ioe);
+			Logger.getLogger(Snmp4JHelper.class).error(ioe);
 		}
 		this.port = 161;
 		createTarget(ip, community);

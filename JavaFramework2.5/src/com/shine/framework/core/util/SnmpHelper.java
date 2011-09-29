@@ -11,7 +11,7 @@ import snmp.SNMPSequence;
 import snmp.SNMPVarBindList;
 import snmp.SNMPv1CommunicationInterface;
 
-public class SnmpUtils implements SnmpInterface {
+public class SnmpHelper implements SnmpInterface {
 	private SNMPv1CommunicationInterface comInterface = null;
 	private String ip;
 	private String community;
@@ -19,12 +19,12 @@ public class SnmpUtils implements SnmpInterface {
 	private int version = 0;
 
 	
-	public SnmpUtils(String ip, String community, int port) throws Exception {
+	public SnmpHelper(String ip, String community, int port) throws Exception {
 		init(ip, community, port);
 	}
 
 	
-	public SnmpUtils(String ip, String community) throws Exception {
+	public SnmpHelper(String ip, String community) throws Exception {
 		init(ip, community);
 	}
 
@@ -153,10 +153,10 @@ public class SnmpUtils implements SnmpInterface {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		SnmpUtils util = null;
+		SnmpHelper util = null;
 		try {
 			String[] oid = { "1.3.6.1.4.1.311.1.7.2.1.1" };
-			util = new SnmpUtils("192.168.2.18", "public", 161);
+			util = new SnmpHelper("192.168.2.18", "public", 161);
 			List<String> list = util.getTableView(oid);
 			for (String s : list) {
 				System.out.println(s);

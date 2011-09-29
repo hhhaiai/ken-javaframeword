@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.shine.framework.core.util.SnmpUtils;
+import com.shine.framework.core.util.SnmpHelper;
 
 /**
  * IIS监控管理类
@@ -32,13 +32,13 @@ public class IISUtils {
 	 */
 	public static Map<String, String> getIISDataInfo(String ip, String community, int port) {
 		Map<String, String> map = new HashMap<String, String>();
-		SnmpUtils snmpUtils = null;
+		SnmpHelper snmpUtils = null;
 		String[] oid = { "1.3.6.1.4.1.311.1.7.3.1.1",
 				"1.3.6.1.4.1.311.1.7.3.1.2", "1.3.6.1.4.1.311.1.7.3.1.3",
 				"1.3.6.1.4.1.311.1.7.3.1.5", "1.3.6.1.4.1.311.1.7.3.1.5",
 				"1.3.6.1.4.1.311.1.7.3.1.6" };
 		try {
-			snmpUtils = new SnmpUtils(ip, community, port);
+			snmpUtils = new SnmpHelper(ip, community, port);
 			List<String> dataList = snmpUtils.getTableView(oid);
 			map.put("totalBytesSentHighWord", dataList.get(0));
 			map.put("totalBytesSentLowWord", dataList.get(1));
@@ -74,7 +74,7 @@ public class IISUtils {
 	public static Map<String, String> getIISConnectionInfo(String ip,
 			String community, int port) {
 		Map<String, String> map = new HashMap<String, String>();
-		SnmpUtils snmpUtils = null;
+		SnmpHelper snmpUtils = null;
 		String[] oid = { "1.3.6.1.4.1.311.1.7.3.1.7",
 				"1.3.6.1.4.1.311.1.7.3.1.8", "1.3.6.1.4.1.311.1.7.3.1.9",
 				"1.3.6.1.4.1.311.1.7.3.1.10", "1.3.6.1.4.1.311.1.7.3.1.11",
@@ -82,7 +82,7 @@ public class IISUtils {
 				"1.3.6.1.4.1.311.1.7.3.1.14", "1.3.6.1.4.1.311.1.7.3.1.15",
 				"1.3.6.1.4.1.311.1.7.3.1.16" };
 		try {
-			snmpUtils = new SnmpUtils(ip, community, port);
+			snmpUtils = new SnmpHelper(ip, community, port);
 			List<String> dataList = snmpUtils.getTableView(oid);
 			map.put("currentAnonymousUsers", dataList.get(0));
 			map.put("currentNonAnonymousUsers", dataList.get(1));
@@ -136,7 +136,7 @@ public class IISUtils {
 	 */
 	public static Map<String, String> getIISRequestInfo(String ip, String community, int port) {
 		Map<String, String> map = new HashMap<String, String>();
-		SnmpUtils snmpUtils = null;
+		SnmpHelper snmpUtils = null;
 		String[] oid = { "1.3.6.1.4.1.311.1.7.3.1.17",
 				"1.3.6.1.4.1.311.1.7.3.1.18", "1.3.6.1.4.1.311.1.7.3.1.19",
 				"1.3.6.1.4.1.311.1.7.3.1.20", "1.3.6.1.4.1.311.1.7.3.1.21",
@@ -151,7 +151,7 @@ public class IISUtils {
 				"1.3.6.1.4.1.311.1.7.3.1.38" };
 
 		try {
-			snmpUtils = new SnmpUtils(ip, community, port);
+			snmpUtils = new SnmpHelper(ip, community, port);
 			List<String> dataList = snmpUtils.getTableView(oid);
 			map.put("totalOptions", dataList.get(0));
 			map.put("totalGets", dataList.get(1));
@@ -202,13 +202,13 @@ public class IISUtils {
 	 */
 	public static Map<String, String> getIISBlockInfo(String ip, String community, int port) {
 		Map<String, String> map = new HashMap<String, String>();
-		SnmpUtils snmpUtils = null;
+		SnmpHelper snmpUtils = null;
 		String[] oid = { "1.3.6.1.4.1.311.1.7.3.1.39",
 				"1.3.6.1.4.1.311.1.7.3.1.40", "1.3.6.1.4.1.311.1.7.3.1.41",
 				"1.3.6.1.4.1.311.1.7.3.1.42", "1.3.6.1.4.1.311.1.7.3.1.43",
 				"1.3.6.1.4.1.311.1.7.3.1.44", "1.3.6.1.4.1.311.1.7.3.1.45" };
 		try {
-			snmpUtils = new SnmpUtils(ip, community, port);
+			snmpUtils = new SnmpHelper(ip, community, port);
 			List<String> dataList = snmpUtils.getTableView(oid);
 			map.put("currentBlockedRequests", dataList.get(0));
 			map.put("totalBlockedRequests", dataList.get(1));
