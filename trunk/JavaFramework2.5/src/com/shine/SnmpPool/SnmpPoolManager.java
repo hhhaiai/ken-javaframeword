@@ -1,5 +1,7 @@
 package com.shine.SnmpPool;
 
+import java.util.List;
+
 import com.shine.SnmpPool.utils.SnmpPool;
 
 /**
@@ -20,6 +22,18 @@ public class SnmpPoolManager {
 	}
 
 	public String getOidValue(String name, String oid) {
+		return null;
+	}
+
+	public List<String> getOidValue(String name, String oid[]) {
+		return null;
+	}
+
+	public List<String> getTableValue(String name, String oid) {
+		return null;
+	}
+
+	public List<String> getTableValue(String name, String oid[]) {
 		return null;
 	}
 

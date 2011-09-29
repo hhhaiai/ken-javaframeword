@@ -4,6 +4,12 @@ import java.util.List;
 
 import com.shine.framework.MibBrowser.model.MibModel;
 
+/**
+ * mib 文件分析类库
+ * 
+ * @author
+ * 
+ */
 public class MibBrowserUtils {
 	/**
 	 * 获取所有mib
