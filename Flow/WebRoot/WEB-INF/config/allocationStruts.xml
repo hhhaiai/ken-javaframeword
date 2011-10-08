@@ -31,5 +31,31 @@
                 appTrafficConfig_list
             </result>
         </action>
+        <!-- 协议流量配置 -->
+        <action name="protocolTrafficConfig_*" 
+                class="com.shine.sourceflow.web.allocation.ProtocolTrafficConfigAction" method="{1}">
+            <result name="list">/allocation/protocolConfig/list.jsp</result>
+            <result name="add">/allocation/protocolConfig/add.jsp</result>
+            <result name="add_success" type="redirectAction">
+                protocolTrafficConfig_list
+            </result>
+            <result name="edit">/allocation/protocolConfig/edit.jsp</result>
+            <result name="edit_success" type="redirectAction">
+                protocolTrafficConfig_list
+            </result>
+        </action>
+        <!-- 会话流量配置 -->
+        <action name="sessionTrafficConfig_*" 
+                class="com.shine.sourceflow.web.allocation.SessionTrafficConfigAction" method="{1}">
+            <result name="list">/allocation/sessionConfig/list.jsp</result>
+            <result name="add">/allocation/sessionConfig/add.jsp</result>
+            <result name="add_success" type="redirectAction">
+                sessionTrafficConfig_list
+            </result>
+            <result name="edit">/allocation/sessionConfig/edit.jsp</result>
+            <result name="edit_success" type="redirectAction">
+                sessionTrafficConfig_list
+            </result>
+        </action>
     </package>
 </struts>

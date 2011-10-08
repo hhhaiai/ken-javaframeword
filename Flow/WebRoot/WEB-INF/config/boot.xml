@@ -7,7 +7,7 @@
     <!-- netflow接收端口 -->
     <port>6696</port>
     <!-- 监听主机 -->
-    <host>127.0.0.1</host>
+    <host>0.0.0.0</host>
     <!-- 接收数据时的缓存条数 -->
     <receive-cache>20</receive-cache>
     <!-- 处理线程数 -->
@@ -17,7 +17,7 @@
     <!-- 查询线数 -->
     <select-therad-size>20</select-therad-size>
     <!-- 批量执行SQL数 -->
-    <batch-sql>100</batch-sql>
+    <batch-sql>500</batch-sql>
     <!-- 路由配置 -->
     <routers>
         <router>

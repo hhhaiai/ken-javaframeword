@@ -1,5 +1,5 @@
-<items id="1000" text="网络流量" initID="1001">
-	<item id="1001" text="首页" icon="flow.gif" />
+<items id="1000" text="网络流量" initID="1007">
+	<!-- <item id="1001" text="首页" icon="flow.gif" /> -->
 	<item id="1002" text="网络流量" icon="app.gif">
 		<item id="1003" text="IP流量" icon="flow_mine.gif" 
 		      actionData="flow/ipTraffic_list" />
@@ -7,11 +7,19 @@
 		      actionData="flow/ipGroupTraffic_list" />
         <item id="1005" text="应用流量" icon="process_info.gif" 
               actionData="flow/appTraffic_list" />
+        <item id="1006" text="协议流量" icon="protocol.gif" 
+              actionData="flow/protocolTraffic_list" />
+        <item id="1007" text="会话流量" icon="session.gif" 
+              actionData="flow/sessionTraffic_list" />
 	</item>
 	<item id="2001" text="设置" icon="cfg.gif">
-        <item id="2002" text="IP分组配置" icon="flow_process.gif"
+        <item id="2002" text="IP分组流量配置" icon="flow_process.gif"
             actionData="allocation/ipGroupTrafficConfig_list" />
-        <item id="2003" text="应用流量" icon="app_config.gif"
+        <item id="2003" text="应用流量配置" icon="app_config.gif"
             actionData="allocation/appTrafficConfig_list" />
+        <item id="2004" text="协议流量配置" icon="protocol_config.gif"
+            actionData="allocation/protocolTrafficConfig_list" />
+        <item id="2005" text="会话流量配置" icon="session_config.gif"
+            actionData="allocation/sessionTrafficConfig_list" />
     </item>
 </items>
