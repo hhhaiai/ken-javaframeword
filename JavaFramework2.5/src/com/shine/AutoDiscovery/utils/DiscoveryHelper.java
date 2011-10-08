@@ -1,9 +1,12 @@
 package com.shine.AutoDiscovery.utils;
 
 public class DiscoveryHelper {
+	// 发现名称
 	private String label;
+	// 返回url
 	private String returnUrl;
 
+	// 发现类型 com.shine.AutoDiscovery.utils.DeviceType
 	public String type;
 
 	// 共同体community1,community2
@@ -17,10 +20,7 @@ public class DiscoveryHelper {
 
 	public String status = "";
 
-	// 正在发现的状态
-	public static String DISCOVERING = "discovering";
-	//
-	public static String COMPLETE = "complete";
+	
 
 	public DiscoveryHelper() {
 
