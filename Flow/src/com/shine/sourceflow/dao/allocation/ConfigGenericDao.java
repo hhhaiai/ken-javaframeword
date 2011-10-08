@@ -78,7 +78,7 @@ public abstract class ConfigGenericDao extends GenericDao {
 	protected abstract String createQuerySql(GenericDto dto);
 	
 	/**
-	 * 添加IP分组
+	 * 添加数据
 	 * 
 	 * @param dto
 	 */
@@ -97,7 +97,7 @@ public abstract class ConfigGenericDao extends GenericDao {
 	protected abstract String createInsertSql(GenericDto dto);
 	
 	/**
-	 * 更新IP分组配置
+	 * 更新数据
 	 */
 	@Override
 	public void edit(GenericDto dto) {
@@ -114,7 +114,7 @@ public abstract class ConfigGenericDao extends GenericDao {
 	protected abstract String createUpdateSql(GenericDto dto);
 	
 	/**
-	 * 删除IP分组
+	 * 删除数据
 	 */
 	@Override
 	public void delete(GenericDto dto) {

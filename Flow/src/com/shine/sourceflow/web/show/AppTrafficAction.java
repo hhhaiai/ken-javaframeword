@@ -1,8 +1,10 @@
 package com.shine.sourceflow.web.show;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.shine.DBUtil.model.DBModel;
+import com.shine.DBUtil.model.DBRowModel;
 import com.shine.sourceflow.model.show.AppTrafficDto;
 import com.shine.sourceflow.service.show.AppTrafficService;
 
@@ -34,16 +36,33 @@ public class AppTrafficAction extends ShowGenericAction {
 
 	@Override
 	protected List<String> getTableDatas() {
-		return null;
+		List<String> tableDatas = new ArrayList<String>();
+		DBModel dbModel = this.getDefaultDbModel();
+		for (DBRowModel rowModel : dbModel) {
+			StringBuffer data = new StringBuffer();
+			data.append(rowModel.getString("app_alias"));
+			data.append(",");
+			data.append(rowModel.getString("total_bytes_all"));
+			data.append(",");
+			data.append(rowModel.getString("total_bytes_in"));
+			data.append(",");
+			data.append(rowModel.getString("bytes_in_percentage"));
+			data.append(",");
+			data.append(rowModel.getString("total_bytes_out"));
+			data.append(",");
+			data.append(rowModel.getString("bytes_out_percentage"));
+			tableDatas.add(data.toString());
+		}
+		return tableDatas;
 	}
 
 	@Override
 	protected String getTableTitles() {
-		return null;
+		return "应用程序,总流量(MB),流入(MB),百分比,流出(MB),百分比";
 	}
 
 	@Override
 	protected String getPDFTitle() {
-		return null;
+		return "应用流量";
 	}
 }

@@ -24,7 +24,10 @@ public class AppTrafficDao extends ShowGenericDao {
 			dbModelTrafficIn.get(i).put("total_bytes_in", totalBytesInFormat);
 			dbModelTrafficIn.get(i).put("bytes_in_percentage", bytesInPercentage);
 			// 流出流量
-			double totalBytesOut = Double.parseDouble(dbModelTrafficOut.get(i).get("bytes_total"));
+			double totalBytesOut = 0;
+			if (dbModelTrafficOut.size() > i) {
+				totalBytesOut = Double.parseDouble(dbModelTrafficOut.get(i).get("bytes_total"));
+			}
 			String totalBytesOutFormat = bytesFormat.format(totalBytesOut / 1048576);
 			String bytesOutPercentage = perFormat.format((totalBytesOut / bytesSum) * 100);
 			dbModelTrafficIn.get(i).put("total_bytes_out", totalBytesOutFormat);
