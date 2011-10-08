@@ -17,7 +17,7 @@ public class DiscoveryHelper {
 
 	public String status = "";
 
-	//正在发现的状态
+	// 正在发现的状态
 	public static String DISCOVERING = "discovering";
 	//
 	public static String COMPLETE = "complete";
@@ -36,6 +36,10 @@ public class DiscoveryHelper {
 
 	public void initDiscoveryThread() {
 		System.out.println("初始化发现线程");
+	}
+
+	public void cleanDisCoveryThread() {
+		System.out.println("销毁发现线程");
 	}
 
 	public void startDiscovery() {
