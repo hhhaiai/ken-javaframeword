@@ -4,7 +4,7 @@ import com.shine.framework.utils.DateUtil;
 import com.shine.framework.utils.TableUtil;
 import com.shine.sourceflow.model.show.ShowGenericDto;
 
-public class IPGroupTrafficStdQueryStrategy implements IQueryStrategy {
+public class SessionTrafficStdQuery implements IQueryStrategy {
 	@Override
 	public String[] createDailyQuerySQL(ShowGenericDto dto) {
 		String inSql = this.createGenericSql(dto, 
@@ -46,16 +46,18 @@ public class IPGroupTrafficStdQueryStrategy implements IQueryStrategy {
 	private String createGenericSql(ShowGenericDto dto, 
 			String tableName, String fCondition, String bBegin, String bEnd) {
 		StringBuffer sql = new StringBuffer();
-		sql.append("select b.ip_alias, sum(a.bytes) as total_bytes from ");
+		sql.append("select b.session_alias, sum(a.bytes) as total_bytes from ");
 		sql.append(tableName);
-		sql.append(" as a, ip_group_config as b where ");
+		sql.append(" as a, session_config as b where ");
 		sql.append(fCondition);
-		sql.append(" between b.ip_start_address and b.ip_end_address and ");
+		sql.append(" = b.first_ip or ");
+		sql.append(fCondition);
+		sql.append(" = b.second_ip and ");
 		sql.append("a.log_time between '");
 		sql.append(bBegin);
 		sql.append("' and '");
 		sql.append(bEnd);
-		sql.append("' group by b.ip_alias limit ");
+		sql.append("' group by b.session_alias limit ");
 		sql.append(dto.getTopPageN());
 		return sql.toString();
 	}

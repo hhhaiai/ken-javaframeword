@@ -4,11 +4,11 @@ import com.shine.framework.utils.DateUtil;
 import com.shine.framework.utils.TableUtil;
 import com.shine.sourceflow.model.show.ShowGenericDto;
 
-public class IPGroupTrafficStdQueryStrategy implements IQueryStrategy {
+public class ProtocolTrafficStdQuery implements IQueryStrategy {
 	@Override
 	public String[] createDailyQuerySQL(ShowGenericDto dto) {
 		String inSql = this.createGenericSql(dto, 
-				TableUtil.getMonthTable(dto.getDate()), "a.src_ip",
+				TableUtil.getMonthTable(dto.getDate()), "a.src_port",
 				DateUtil.getDetailTime(DateUtil.getDateBegin(
 				DateUtil.stringToDate(dto.getDate(),
 				DateUtil.DATE_PATTERN_DEFAULT))), 
@@ -17,7 +17,7 @@ public class IPGroupTrafficStdQueryStrategy implements IQueryStrategy {
 				DateUtil.DATE_PATTERN_DEFAULT))));
 		
 		String outSql = this.createGenericSql(dto, 
-				TableUtil.getMonthTable(dto.getDate()), "a.dst_ip",
+				TableUtil.getMonthTable(dto.getDate()), "a.dst_port",
 				DateUtil.getDetailTime(DateUtil.getDateBegin(
 				DateUtil.stringToDate(dto.getDate(),
 				DateUtil.DATE_PATTERN_DEFAULT))), 
@@ -31,12 +31,12 @@ public class IPGroupTrafficStdQueryStrategy implements IQueryStrategy {
 	@Override
 	public String[] createHourlyQuerySQL(ShowGenericDto dto) {
 		String inSql = this.createGenericSql(dto, 
-				TableUtil.getMonthTable(dto.getDate()), "a.src_ip",
+				TableUtil.getMonthTable(dto.getDate()), "a.src_port",
 				DateUtil.getDetailTime(DateUtil.getIntervalOfHour(-1)), 
 				DateUtil.getDetailTime());
 		
 		String outSql = this.createGenericSql(dto, 
-				TableUtil.getMonthTable(dto.getDate()), "a.dst_ip",
+				TableUtil.getMonthTable(dto.getDate()), "a.dst_port",
 				DateUtil.getDetailTime(DateUtil.getIntervalOfHour(-1)), 
 				DateUtil.getDetailTime());
 		String[] sqls = {inSql, outSql};
@@ -46,16 +46,16 @@ public class IPGroupTrafficStdQueryStrategy implements IQueryStrategy {
 	private String createGenericSql(ShowGenericDto dto, 
 			String tableName, String fCondition, String bBegin, String bEnd) {
 		StringBuffer sql = new StringBuffer();
-		sql.append("select b.ip_alias, sum(a.bytes) as total_bytes from ");
+		sql.append("select b.protocol_alias, sum(a.bytes) as total_bytes from ");
 		sql.append(tableName);
-		sql.append(" as a, ip_group_config as b where ");
+		sql.append(" as a, protocol_config as b where ");
 		sql.append(fCondition);
-		sql.append(" between b.ip_start_address and b.ip_end_address and ");
+		sql.append(" = b.ip_port and ");
 		sql.append("a.log_time between '");
 		sql.append(bBegin);
 		sql.append("' and '");
 		sql.append(bEnd);
-		sql.append("' group by b.ip_alias limit ");
+		sql.append("' group by b.protocol_alias limit ");
 		sql.append(dto.getTopPageN());
 		return sql.toString();
 	}
@@ -63,7 +63,7 @@ public class IPGroupTrafficStdQueryStrategy implements IQueryStrategy {
 	@Override
 	public String[] createMonthlyQuerySQL(ShowGenericDto dto) {
 		String inSql = this.createGenericSql(dto, 
-				TableUtil.getMonthTable(dto.getDate()), "a.src_ip",
+				TableUtil.getMonthTable(dto.getDate()), "a.src_port",
 				DateUtil.getDetailTime(DateUtil.getMonthBegin(
 				DateUtil.stringToDate(dto.getDate(),
 				DateUtil.DATE_PATTERN_DEFAULT))), 
@@ -72,7 +72,7 @@ public class IPGroupTrafficStdQueryStrategy implements IQueryStrategy {
 				DateUtil.DATE_PATTERN_DEFAULT))));
 		
 		String outSql = this.createGenericSql(dto, 
-				TableUtil.getMonthTable(dto.getDate()), "a.dst_ip",
+				TableUtil.getMonthTable(dto.getDate()), "a.dst_port",
 				DateUtil.getDetailTime(DateUtil.getMonthBegin(
 				DateUtil.stringToDate(dto.getDate(),
 				DateUtil.DATE_PATTERN_DEFAULT))), 
@@ -86,7 +86,7 @@ public class IPGroupTrafficStdQueryStrategy implements IQueryStrategy {
 	@Override
 	public String[] createWeeklyQuerySQL(ShowGenericDto dto) {
 		String inSql = this.createGenericSql(dto, 
-				TableUtil.getMonthTable(dto.getDate()), "a.src_ip",
+				TableUtil.getMonthTable(dto.getDate()), "a.src_port",
 				DateUtil.getDetailTime(DateUtil.getWeekBegin(
 				DateUtil.stringToDate(dto.getDate(),
 				DateUtil.DATE_PATTERN_DEFAULT))), 
@@ -95,7 +95,7 @@ public class IPGroupTrafficStdQueryStrategy implements IQueryStrategy {
 				DateUtil.DATE_PATTERN_DEFAULT))));
 		
 		String outSql = this.createGenericSql(dto, 
-				TableUtil.getMonthTable(dto.getDate()), "a.dst_ip",
+				TableUtil.getMonthTable(dto.getDate()), "a.dst_port",
 				DateUtil.getDetailTime(DateUtil.getWeekBegin(
 				DateUtil.stringToDate(dto.getDate(),
 				DateUtil.DATE_PATTERN_DEFAULT))), 
