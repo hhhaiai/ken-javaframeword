@@ -1,5 +1,8 @@
 package com.shine.AutoDiscovery.utils;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DiscoveryHelper {
 	// 发现名称
 	private String label;
@@ -25,6 +28,8 @@ public class DiscoveryHelper {
 
 	// ip分组存放容器
 	private DisCoveryIpAddress disCoveryIpAddress = new DisCoveryIpAddress();
+	// 共同体容器
+	private List<String> communitysList = new ArrayList<String>();
 
 	public DiscoveryHelper() {
 
