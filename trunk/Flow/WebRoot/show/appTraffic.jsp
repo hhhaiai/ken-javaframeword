@@ -38,6 +38,14 @@ function showDetail(ipAddress) {
 	document.mainForm.target = "_self";
 	document.mainForm.submit();
 }
+
+// 导出PDF
+function exportPdf() {
+    var flashMovie = document.getElementById('chartdiv');
+	if (flashMovie) {
+		flashMovie.exportImage('${rootPath}appTraffic_exportPDF?fileName=应用流量报表.pdf'); 
+	}
+}
 </script>
 
 <!-- 加载报表 -->
@@ -56,11 +64,6 @@ var flashVars =
 
 swfobject.embedSWF("${jsPath}amcharts/flash/amcolumn2.swf", "chartdiv", "100%", "400", "8.0.0", "${jsPath}amcharts/flash/expressInstall.swf", flashVars, params);
 </script>
-<style type="text/css">
-.data_list .rl_progressbar td{
-    border:none;
-}
-</style>
 </head>
 <body>
 <div class="std_info">
@@ -141,18 +144,22 @@ swfobject.embedSWF("${jsPath}amcharts/flash/amcolumn2.swf", "chartdiv", "100%", 
                 <th>总流量(MB)</th>
                 <th>流入(MB)</th>
                 <th>百分比</th>
+                <th></th>
                 <th>流出(MB)</th>
                 <th>百分比</th>
+                <th></th>
             </tr>
             <s:iterator value="#request.dbModels['default']" status="dbModel">
             <tr>
-                <td><s:property value="#dbModels['default'].index + 1" /></td>
+                <td><s:property value="#dbModel.index + 1" /></td>
                 <td><a href="javascript:void(0);" onclick="showDetail('<s:property value="dbModels['default'][#dbModel.index]['ip_address']" />');"><s:property value="dbModels['default'][#dbModel.index]['app_alias']" /></a></td>
                 <td><s:property value="dbModels['default'][#dbModel.index]['total_bytes_all']" /></td>
                 <td><s:property value="dbModels['default'][#dbModel.index]['total_bytes_in']" /></td>
                 <td><span ctype="ProgressBar" barSkin="green" progress="<s:property value="dbModels['default'][#dbModel.index]['bytes_in_percentage']" />"></span></td>
+                <td><s:property value="dbModels['default'][#dbModel.index]['bytes_in_percentage']" />%</td>
                 <td><s:property value="dbModels['default'][#dbModel.index]['total_bytes_out']" /></td>
                 <td><span ctype="ProgressBar" barSkin="green" progress="<s:property value="dbModels['default'][#dbModel.index]['bytes_out_percentage']" />"></span></td>
+                <td><s:property value="dbModels['default'][#dbModel.index]['bytes_out_percentage']" />%</td>
             </tr>
             </s:iterator>
             </table>

@@ -53,6 +53,9 @@ function getPage(pageNo, totalPage, ipAddress, ipType){
             </a>
 		</div>
         <!-- 查询页面 END -->
+        <h3 class="title">
+        	<s:if test="dto.ipType == 1">源</s:if><s:else>目标</s:else>IP(${dto.ipAddress})流量统计
+        </h3>
         <!-- IP详细展现 START -->
         <div class="report">
             <!-- 查询框 START -->
@@ -114,20 +117,36 @@ function getPage(pageNo, totalPage, ipAddress, ipType){
             <table id="ipList" class="data_list" width=100% cellSpacing=0 cellPadding=0 border=0>
             <tr>
                 <th>&nbsp;</th>
+                <s:if test="dto.ipType == 1">
                 <th>源IP地址</th>
                 <th>源IP端口</th>
                 <th>目标IP地址</th>
                 <th>目标IP端口</th>
+                </s:if>
+                <s:else>
+                <th>目标IP地址</th>
+                <th>目标IP端口</th>
+                <th>源IP地址</th>
+                <th>源IP端口</th>
+                </s:else>
                 <th>字节(MB)</th>
                 <th>时间</th>
             </tr>
             <s:iterator value="#request.dbModels['default']" status="dbModel">
             <tr>
                 <td><s:property value="#dbModels['default'].index + 1" /></td>
+                <s:if test="dto.ipType == 1">
                 <td><s:property value="dbModels['default'][#dbModel.index]['src_ip']" /></td>
                 <td><s:property value="dbModels['default'][#dbModel.index]['src_port']" /></td>
                 <td><s:property value="dbModels['default'][#dbModel.index]['dst_ip']" /></td>
                 <td><s:property value="dbModels['default'][#dbModel.index]['dst_port']" /></td>
+                </s:if>
+                <s:else>
+                <td><s:property value="dbModels['default'][#dbModel.index]['dst_ip']" /></td>
+                <td><s:property value="dbModels['default'][#dbModel.index]['dst_port']" /></td>
+                <td><s:property value="dbModels['default'][#dbModel.index]['src_ip']" /></td>
+                <td><s:property value="dbModels['default'][#dbModel.index]['src_port']" /></td>
+                </s:else>
                 <td>
                 <s:text name="global.format.number">
                 <s:param value="dbModels['default'][#dbModel.index]['bytes'] / 1048576"/>

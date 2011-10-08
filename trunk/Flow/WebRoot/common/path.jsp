@@ -3,9 +3,11 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%
-    String rootPath = request.getContextPath() + "/";
-    String imagePath = rootPath + "/resource/image/";
-    String jsPath = rootPath + "/resource/js/";
+    String path = request.getContextPath();
+    String rootPath = request.getScheme() + "://"
+        + request.getServerName() + ":" + request.getServerPort() + path + "/";
+    String imagePath = rootPath + "resource/image/";
+    String jsPath = rootPath + "resource/js/";
     request.setAttribute("rootPath",rootPath);
     request.setAttribute("imagePath",imagePath);
     request.setAttribute("jsPath",jsPath);

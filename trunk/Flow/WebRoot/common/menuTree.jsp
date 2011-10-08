@@ -11,7 +11,7 @@
 rl._stopAutoRenderBody = true;
 rl.createNamespace("nf.config", {
     urlOfSysMenu : "${rootPath}common/conf/sysMenu.xml",
-    menuTreeIniOpenTo : "1001",
+    menuTreeIniOpenTo : "1003",
     menuTreeIconRoot : "${rootPath}resource/image/menu/"
 });
 rl.importJs("nf:treeNav");

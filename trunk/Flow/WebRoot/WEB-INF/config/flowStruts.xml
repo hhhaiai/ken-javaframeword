@@ -20,8 +20,19 @@
                 class="com.shine.sourceflow.web.show.AppTrafficAction" method="{1}">
             <result name="list">/show/appTraffic.jsp</result>
         </action>
+        <!-- 协议流量统计 -->
+        <action name="protocolTraffic_*" 
+                class="com.shine.sourceflow.web.show.ProtocolTrafficAction" method="{1}">
+            <result name="list">/show/protocolTraffic.jsp</result>
+        </action>
+        <!-- 会话流量统计 -->
+        <action name="sessionTraffic_*" 
+                class="com.shine.sourceflow.web.show.SessionTrafficAction" method="{1}">
+            <result name="list">/show/sessionTraffic.jsp</result>
+        </action>
     </package>
     
+    <!-- 详细统计 -->
     <package name="detail" extends="base" namespace="/detail">
         <!-- IP流量统计 -->
         <action name="ipTrafficDetail_*" 
@@ -32,6 +43,15 @@
         <action name="appTrafficDetail_*" 
                 class="com.shine.sourceflow.web.show.detail.AppTrafficDetailAction" method="{1}">
             <result name="list">/show/detail/appTrafficDetail.jsp</result>
+        </action>
+    </package>
+    
+    <!-- 流量趋势 -->
+    <package name="trend" extends="base" namespace="/trend">
+        <!-- IP流量 -->
+        <action name="ipTrafficTrend_*" 
+            class="com.shine.sourceflow.web.show.trend.IPTrafficTrendAction" method="{1}">
+            <result name="list">/show/trend/ipTrafficTrend.jsp</result>
         </action>
     </package>
 </struts>

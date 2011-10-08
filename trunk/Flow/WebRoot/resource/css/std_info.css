@@ -17,19 +17,45 @@
 .std_info .page_wrapper{
 	margin:30px 0 50px 25px;
 }
+/**
+ * @limit_770
+ * limit page width.
+ */
 .std_info .limit_770{
 	width:770px;
 }
-.std_info .ct_main {
+/**
+ * @name l_single_col
+ * Single column layout
+ */
+.std_info .l_single_col .l_main {
+	width:920px;
+}
+.std_info .l_single_col .l_main .group{
+	width:890px;
+}
+.std_info .l_single_col .l_main .group .g_body{
+	width:870px;
+}
+/**
+ * @name l_db_cols
+ * Double columns layout, formed of l_main, l_side
+ */
+.std_info .l_db_cols .l_main{
 	float:left;
 	width:700px;
 }
-.std_info .ct_side {
+.std_info .l_db_cols .l_main .group{
+	width:670px;
+	margin-left:16px;
+}
+.std_info .l_db_cols .l_side {
 	width:220px;
 	float:right;
 	margin-right:12px !important;
 	margin-right:6px;
 }
+
 .std_info .indent {
 	margin-left:2em;
 }
@@ -97,7 +123,7 @@
 .std_info .group .g_body p{
 	margin:1em 0;
 }
-.std_info .pane{
+.std_info .l_side .group{
 	float:right;
 	width:210px;
 	margin:0;
@@ -105,29 +131,14 @@
 	margin-left:5px;
 	margin-bottom:9px;
 }
-.std_info .pane .head{
-	width:100%;
-	height:22px;
-	clear:both;
-}
-.std_info .pane .body,
-.std_info .pane .bar{
+.std_info .l_side .group .g_body,
+.std_info .l_side .group .g_bar{
 	width:190px;
 	margin:5px auto;
 	clear:both;
 }
-.std_info .pane .head .h_left{
-	width:8px;
-	background:url(../image/default/mix/homepage/bg_pane_left.gif) no-repeat;
-}
-.std_info .pane .head .h_right{
-	width:8px;
-	background:url(../image/default/mix/homepage/bg_pane_right.gif) no-repeat;
-}
-.std_info .pane .head .h_center{
-	background:url(../image/default/mix/homepage/bg_pane_center.gif) repeat-x;
-	font-weight:bold;
-	color:#28417A;
+.std_info .l_side .group .g_body{
+	padding:0;
 }
 /**
  * @name report
@@ -191,7 +202,7 @@
 .std_info .data_fields th,
 .std_info .data_fields td{
 	border-bottom:solid 1px #eee;
-	line-height:16px;
+	line-height:18px;
 	padding:3px;
 	text-align:left;
 }
@@ -199,6 +210,9 @@
 .std_info .data_fields th{
 	background-color:#eee;
 	font-weight:normal;
+}
+.std_info .data_fields{
+	table-layout:fixed\9;
 }
 .std_info .data_fields th{
 	width:118px;
@@ -241,7 +255,7 @@
 	vertical-align:top;
 }
 .std_info .fields_layout .assist_col{
-	width:300px;
+	width:360px;
 }
 .std_info .fields_layout .assist_pane{
 	border-left:solid 1px #eee;
@@ -274,6 +288,10 @@
 .std_info .asterisk{
 	color:red;
 }
+.std_info .std_tip{
+	color:#999;
+	line-height:16px;
+}
 .std_info .field{
 	width:200px;
 	height:18px;
@@ -300,7 +318,7 @@
  * The width of this col should be set to avoid the browser's auto-width merchanism.
  */
 .std_info .fields_layout .cols4_2{
-	width:245px;
+	width:250px;
 }
 .std_info .data_fields .cols4_2{
 	width:239px;
@@ -308,7 +326,7 @@
 
 /**
  * @name title_list
- * style for title list.
+ * style for title list: title + timestamp
  */
 .std_info .title_list li{
 	list-style:none;
@@ -321,6 +339,47 @@
 .std_info .title_list li.more{
 	text-align:right;
 }
+/**
+ * @icon_topic_list
+ * icon topic list: icon + topic(title + description + actions bar)
+ */
+.std_info .icon_topic_list{
+	line-height:18px;
+	width:100%;
+}
+.std_info .icon_topic_list td{
+	padding-bottom:1.5em;
+}
+.std_info .icon_topic_list .title{
+	float:left;
+}
+.std_info .icon_topic_list .icon_ctn{
+	width:40px;
+}
+.std_info .icon_topic_list .desc{
+	color:#999;
+}
+.std_info .icon_topic_list div.desc{
+}
+.std_info .icon_topic_list .stamp{
+	float:right;
+	color:#999;
+}
+.std_info .icon_topic_list .bar{
+	margin-top:0.5em;
+}
+.std_info .icon_topic_list .bar a{
+	color:#28417A;
+}
+.std_info .icon_topic_list .bar a:hover{
+	color:#F90;
+}
+/*default width for l_db_cols layout*/
+.std_info .l_db_cols .icon_topic_list title,
+.std_info .l_db_cols .icon_topic_list div.desc{
+	width:500px;
+}
+
 /**
  * @name search_list
  * style for search results list.
@@ -368,6 +427,56 @@
 }
 .std_info .basic_info .res_info{
 	vertical-align:top;
+}
+
+/**
+ * tabs
+ */
+.std_info .tabs{
+	width:100%;
+}
+.std_info .tabs .tabbar{
+	float:left;
+	clear:both;
+	width:100%;
+	border-bottom:solid 1px #ddd;
+}
+.std_info .tabs .tabbar ul,
+.std_info .tabs .tabbar li{
+	list-style:none;
+	margin:0;
+	padding:0;
+}
+.std_info .tabs .tabbar ul{
+	margin-left:12px;
+}
+.std_info .tabs .tabbar .tab{
+	cursor:pointer;
+	float:left;
+	margin:0 3px;
+	padding:3px 5px;
+	height:16px;
+	line-height:18px;
+}
+.std_info .tabs .tabbar .active{
+	background-color:#eee;
+	border:solid 1px #ddd;
+	border-bottom:none;
+	padding:2px 4px;
+	padding-bottom:3px;
+}
+.std_info .tabs .tabbar .x_btn{
+	float:right;
+	margin-left:10px;
+}
+.std_info .tabs .tab_stack{
+	clear:both;
+}
+.std_info .tabs .tab_stack .tab_body{
+	display:none;
+}
+.std_info .tabs .tab_stack .active{
+	display:block;
 }
 
 /**

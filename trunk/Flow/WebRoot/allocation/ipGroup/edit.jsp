@@ -26,38 +26,36 @@ function toEdit(){
 	<form name="mainForm" method="post">
     	<input type="hidden" name="groupId" value="<s:property value="dbModels['default'][0]['group_id']" />" />
 		<div class="group">
-			<fieldset class="wrapper">
-				<div class="g_body">
-				<table cellpadding="0" cellspacing="0" border="0" class="fields_layout">
-					<tr>
-						<th class="label">IP分组名 <span class="asterisk">*</span></th>
-						<td>
-                        <input class="field" name="ipAlias" 
-                        value="<s:property value="dbModels['default'][0]['ip_alias']" />" dataType="Require" />
-                        </td>
-					</tr>
-                    <tr>
-						<th class="label">开始地址 <span class="asterisk">*</span></th>
-						<td>
-                        <input class="field" name="ipStartAddress" 
-                        value="<s:property value="dbModels['default'][0]['ip_start_address']" />" dataType="Ip" />
-                        </td>
-					</tr>
-                    <tr>
-						<th class="label">结束地址 <span class="asterisk">*</span></th>
-						<td>
-                        <input class="field" name="ipEndAddress" 
-                        value="<s:property value="dbModels['default'][0]['ip_end_address']" />" dataType="Ip" />
-                        </td>
-					</tr>
-				</table>
-                </div>
-            </fieldset>
+            <div class="g_body">
+            <table cellpadding="0" cellspacing="0" border="0" class="fields_layout">
+                <tr>
+                    <th class="label">IP分组名 <span class="asterisk">*</span></th>
+                    <td>
+                    <input class="field" name="ipAlias" 
+                    value="<s:property value="dbModels['default'][0]['ip_alias']" />" dataType="Require" />
+                    </td>
+                </tr>
+                <tr>
+                    <th class="label">开始地址 <span class="asterisk">*</span></th>
+                    <td>
+                    <input class="field" name="ipStartAddress" 
+                    value="<s:property value="dbModels['default'][0]['ip_start_address']" />" dataType="Ip" />
+                    </td>
+                </tr>
+                <tr>
+                    <th class="label">结束地址 <span class="asterisk">*</span></th>
+                    <td>
+                    <input class="field" name="ipEndAddress" 
+                    value="<s:property value="dbModels['default'][0]['ip_end_address']" />" dataType="Ip" />
+                    </td>
+                </tr>
+            </table>
+            </div>
         </div>
         <div class="form_action_bar">
             <button type="button" onclick="toEdit();">保 存</button>
             &nbsp;
-            <button type="button" onclick="javascript:history.go(-1)">返回</button>
+            <button type="button" onclick="javascript:history.go(-1)">取消</button>
         </div>
 	</form>
 	</div>
