@@ -5,7 +5,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
+import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.List;
 import java.util.StringTokenizer;
 
 /**
@@ -209,9 +211,7 @@ public class NetworkUtils {
 		long startIpLong = ipToLong(startIp);
 		long endIpLong = ipToLong(endIp);
 
-		if (ipLong >= startIpLong && ipLong <= endIpLong)
-			return true;
-		return false;
+		return ipInRange(ipLong, startIpLong, endIpLong);
 	}
 
 	/**
@@ -228,6 +228,11 @@ public class NetworkUtils {
 		return false;
 	}
 
+	/**
+	 * 获取本地ip
+	 * 
+	 * @return
+	 */
 	public static String getLocalIP() {
 		try {
 			Enumeration nis = NetworkInterface.getNetworkInterfaces();
@@ -336,8 +341,55 @@ public class NetworkUtils {
 		}
 	}
 
+	/**
+	 * 获取该ip的网络地址
+	 * 
+	 * @param ipAddress
+	 * @return
+	 */
 	public static String getNetAddress(String ipAddress) {
 		int dotLoc = ipAddress.lastIndexOf(".");
 		return ipAddress.substring(0, dotLoc) + ".0";
+	}
+
+	/**
+	 * 获取该范围的所有ip
+	 * 
+	 * @param startIp
+	 * @param endIp
+	 * @return
+	 */
+	public static List<String> getAllIpAddress(String startIp, String endIp) {
+		long startIpLong = ipToLong(startIp);
+		long endIpLong = ipToLong(endIp);
+
+		List<String> list = new ArrayList<String>();
+		for (long l = startIpLong; l < endIpLong + 1; l++) {
+			list.add(longToIp(l));
+		}
+		return list;
+	}
+
+	/**
+	 * 获取改范围所有ip，long型的
+	 * 
+	 * @param startIpLong
+	 * @param endIpLong
+	 * @return
+	 */
+	public static List<Long> getAllIpAddress(long startIpLong, long endIpLong) {
+		List<Long> list = new ArrayList<Long>();
+		for (long l = startIpLong; l < endIpLong + 1; l++) {
+			list.add(l);
+		}
+		return list;
+	}
+
+	public static void main(String args[]) {
+		List<String> list = NetworkUtils.getAllIpAddress("127.0.0.1",
+				"127.0.0.3");
+		for (String s : list) {
+			System.out.println(s);
+		}
 	}
 }
