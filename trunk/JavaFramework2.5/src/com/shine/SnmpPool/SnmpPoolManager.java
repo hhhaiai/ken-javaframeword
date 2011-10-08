@@ -53,6 +53,13 @@ public class SnmpPoolManager {
 	}
 
 	/**
+	 * 增加snmpthread
+	 */
+	private void autoAddSnmpThread() {
+
+	}
+
+	/**
 	 * 加入snmp接收器
 	 * 
 	 * @param name
@@ -120,6 +127,7 @@ public class SnmpPoolManager {
 					name, "getOidValueString", oid, object, methodName);
 		} else {
 			System.err.println("异步查询线程不够");
+			autoAddSnmpThread();
 		}
 	}
 
