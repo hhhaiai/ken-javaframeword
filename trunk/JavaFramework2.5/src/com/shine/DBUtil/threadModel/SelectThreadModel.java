@@ -5,6 +5,12 @@ import com.shine.DBUtil.model.DBModel;
 import com.shine.framework.ThreadPoolUtil.model.ThreadModel;
 import com.shine.framework.core.util.ReflectionUtil;
 
+/**
+ * 数据异步查询线程model
+ * 
+ * @author viruscodecn@gmal.com
+ * 
+ */
 public class SelectThreadModel extends ThreadModel {
 	protected String methodName;
 	protected Object object;
