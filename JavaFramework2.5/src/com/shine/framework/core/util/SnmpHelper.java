@@ -4,26 +4,31 @@ import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.shine.framework.core.interfaces.SnmpInterface;
-
 import snmp.SNMPObject;
 import snmp.SNMPSequence;
 import snmp.SNMPVarBindList;
 import snmp.SNMPv1CommunicationInterface;
 
-public class SnmpHelper implements SnmpInterface {
+/**
+ * snmp 基础操作包
+ * 
+ * @author viruscodecn@gmail.com
+ * 
+ */
+public class SnmpHelper extends SnmpAbstract {
 	private SNMPv1CommunicationInterface comInterface = null;
 	private String ip;
 	private String community;
 	private int port = 161;
 	private int version = 0;
 
-	
+	public SnmpHelper() {
+	}
+
 	public SnmpHelper(String ip, String community, int port) throws Exception {
 		init(ip, community, port);
 	}
 
-	
 	public SnmpHelper(String ip, String community) throws Exception {
 		init(ip, community);
 	}
@@ -42,7 +47,6 @@ public class SnmpHelper implements SnmpInterface {
 				community);
 	}
 
-	
 	@Override
 	public String getOidValueString(String oid) {
 		if (comInterface == null) {
@@ -50,17 +54,19 @@ public class SnmpHelper implements SnmpInterface {
 			return null;
 		}
 		try {
+			this.state = true;
 			SNMPVarBindList newVars = comInterface.getMIBEntry(oid);
 			SNMPSequence pair = (SNMPSequence) (newVars.getSNMPObjectAt(0));
 			SNMPObject snmpValue = pair.getSNMPObjectAt(1);
 			return snmpValue.toString();
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			this.state = false;
 		}
 		return null;
 	}
 
-	
 	@Override
 	public List<String> getTableView(String oid) {
 		if (comInterface == null) {
@@ -68,6 +74,7 @@ public class SnmpHelper implements SnmpInterface {
 			return null;
 		}
 		try {
+			this.state = true;
 			List<String> list = new ArrayList<String>();
 			SNMPVarBindList tableVars = comInterface.retrieveMIBTable(oid);
 
@@ -80,11 +87,12 @@ public class SnmpHelper implements SnmpInterface {
 			return list;
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			this.state = false;
 		}
 		return null;
 	}
 
-	
 	@Override
 	public List<String> getTableView(String oid[]) {
 		if (comInterface == null) {
@@ -92,6 +100,7 @@ public class SnmpHelper implements SnmpInterface {
 			return null;
 		}
 		try {
+			this.state = true;
 			List<String> list = new ArrayList<String>();
 			SNMPVarBindList tableVars = comInterface.retrieveMIBTable(oid);
 
@@ -104,11 +113,12 @@ public class SnmpHelper implements SnmpInterface {
 			return list;
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			this.state = false;
 		}
 		return null;
 	}
 
-	
 	@Override
 	public void reconnection(String ip, String community, int port) {
 		try {
@@ -123,7 +133,6 @@ public class SnmpHelper implements SnmpInterface {
 		}
 	}
 
-	
 	@Override
 	public void reconnection() {
 		try {
@@ -138,7 +147,6 @@ public class SnmpHelper implements SnmpInterface {
 		}
 	}
 
-	
 	@Override
 	public void close() {
 		try {

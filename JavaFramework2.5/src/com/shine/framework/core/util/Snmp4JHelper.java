@@ -20,9 +20,7 @@ import org.snmp4j.smi.OctetString;
 import org.snmp4j.smi.VariableBinding;
 import org.snmp4j.transport.DefaultUdpTransportMapping;
 
-import com.shine.framework.core.interfaces.SnmpInterface;
-
-public class Snmp4JHelper implements SnmpInterface {
+public class Snmp4JHelper extends SnmpAbstract {
 	private int port;
 	protected Snmp snmp;
 	private TransportMapping transport;
@@ -30,6 +28,10 @@ public class Snmp4JHelper implements SnmpInterface {
 	protected static final int RETRIES = 2;
 	protected static final int DEFAULT_TIMEOUT = 8000;
 	protected int timeOut = DEFAULT_TIMEOUT;
+
+	public Snmp4JHelper() {
+
+	}
 
 	public Snmp4JHelper(String ip, String community, int port) throws Exception {
 		init(ip, community, port);
