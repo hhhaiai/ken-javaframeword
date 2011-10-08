@@ -26,6 +26,7 @@ public class ReflectionUtil {
 
 	/**
 	 * 获取class
+	 * 
 	 * @param classPath
 	 * @return
 	 * @throws Exception
@@ -48,6 +49,18 @@ public class ReflectionUtil {
 		Field field = objectClass.getField(fieldName);
 		Object property = field.get(object);
 		return property;
+	}
+
+	/**
+	 * 获取所有构造方法
+	 * 
+	 * @param className
+	 * @return
+	 * @throws Exception
+	 */
+	public static Constructor[] getAllConstructorByClassName(String className)
+			throws Exception {
+		return Class.forName(className).getConstructors();
 	}
 
 	/**
