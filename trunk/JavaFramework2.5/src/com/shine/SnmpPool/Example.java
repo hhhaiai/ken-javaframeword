@@ -3,6 +3,8 @@ package com.shine.SnmpPool;
 public class Example {
 
 	/**
+	 * 普通例子
+	 * 
 	 * @param args
 	 * @throws Exception
 	 */
