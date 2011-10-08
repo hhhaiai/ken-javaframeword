@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 	<!--
-		port="port1,port2,port3" community="community1,community2,community3"
+		ipAddress="192.168.1.1,192.168.2.1-291.168.2.125"port="port1,port2,port3"
+		community="community1,community2,community3"
 	-->
 <config>
-	<discovery ip="" mask="" port="" community="" userName=""
-		password="" />
+	<discovery ipAddress="192.168.2.1-192.168.2.255" port="161"
+		community="public" userName="" password="" />
 </config>

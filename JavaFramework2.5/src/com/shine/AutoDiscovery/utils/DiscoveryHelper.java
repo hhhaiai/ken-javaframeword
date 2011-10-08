@@ -9,6 +9,11 @@ public class DiscoveryHelper {
 	// 发现类型 com.shine.AutoDiscovery.utils.DeviceType
 	public String type;
 
+	// 发现状态 com.shine.AutoDiscovery.utils.DisCoveryStatus
+	public String status;
+
+	// 检索的ip地址 ip="192.168.1.1,192.168.2.1-291.168.2.125"
+	public String ipAddress;
 	// 共同体community1,community2
 	public String communitys;
 	// port1,port2
@@ -18,9 +23,8 @@ public class DiscoveryHelper {
 	// password1,password2
 	public String passwords;
 
-	public String status = "";
-
-	
+	// ip分组存放容器
+	private DisCoveryIpAddress disCoveryIpAddress = new DisCoveryIpAddress();
 
 	public DiscoveryHelper() {
 
@@ -30,8 +34,15 @@ public class DiscoveryHelper {
 
 	}
 
-	public void init(String xmlPath) {
+	public DiscoveryHelper(String ipAddress, String ports, String communitys,
+			String names, String passwords) {
+		this.ipAddress = ipAddress;
+		this.ports = ports;
+		this.communitys = communitys;
+		this.names = names;
+		this.passwords = passwords;
 
+		disCoveryIpAddress.parseIp(this.ipAddress);
 	}
 
 	public void initDiscoveryThread() {
