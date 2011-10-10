@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<BusinessView>
+	<Nodes>
+		<Node type="MSB" id="3" image="appicon/123.jpg" name="aabvvcc2"
+			message="名称:aabvvcc2  类型:业务视图" x="5" y="5" health="96" alert1="0"
+			alert2="1" alert3="2" alert4="3" />
+	</Nodes>
+	<Lines />
+	<Tree name="aabvvcc2" root="true">
+		<node name="Applications Manager" root="true" />
+	</Tree>
+	<alarms />
+</BusinessView>
+

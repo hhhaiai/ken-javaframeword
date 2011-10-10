@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+
+ADOBE SYSTEMS INCORPORATED
+Copyright 2008 Adobe Systems Incorporated
+All Rights Reserved.
+
+NOTICE: Adobe permits you to use, modify, and distribute this file
+in accordance with the terms of the license agreement accompanying it.
+
+-->
+
+<!--- The default skin class for a Spark SkinnableContainer container.  
+
+@see spark.components.SkinnableContainer
+
+@langversion 3.0
+@playerversion Flash 10
+@playerversion AIR 1.5
+@productversion Flex 4
+-->
+<Skin xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns="library://ns.adobe.com/flex/spark" 
+		xmlns:fb="http://ns.adobe.com/flashbuilder/2009" alpha.disabled="0.5" height.normal="78">
+	<fx:Metadata>[HostComponent("com.shine.framework.core.view.BaseSimpleContainer")]</fx:Metadata>
+	
+	<states>
+		<State name="normal" />
+		<State name="disabled" />
+	</states>
+	
+	<Group x="-0.543457" y="0.874512">
+		<Path winding="nonZero" data="M39.8145 16.7695L1.90137 16.7695 0.543457 0.5 41.1729 0.5 39.8145 16.7695Z" >
+			<fill>
+				<SolidColor color="#ee2a29"/>
+			</fill>
+			<stroke>
+				<SolidColorStroke color="#ffffff" caps="none" weight="1" joints="miter" miterLimit="4"/>
+			</stroke>
+		</Path>
+		<Group x="1.21875" y="1.11182">
+			<Path alpha="0.55" winding="nonZero" data="M38.8008 5.84912L39.2793 0 0 0 0.493652 5.84912 38.8008 5.84912Z" >
+				<fill>
+					<LinearGradient x="19.6401" y="5.84912" scaleX="5.84912" rotation="-90">
+						<GradientEntry color="#ffffff" alpha="0" ratio="0"/>
+						<GradientEntry color="#ffffff" ratio="1"/>
+					</LinearGradient>
+				</fill>
+			</Path>
+		</Group>
+		<Group x="37.7988" y="21.2236">
+			<Path alpha="0.55" winding="nonZero" data="M0 0" >
+				<fill>
+					<LinearGradient scaleX="0" rotation="-90">
+						<GradientEntry color="#ffffff" alpha="0" ratio="0"/>
+						<GradientEntry color="#ffffff" ratio="1"/>
+					</LinearGradient>
+				</fill>
+			</Path>
+		</Group>
+		<Path winding="nonZero" data="M38.4658 37.0435L3.25146 37.0435 1.89355 20.7739 39.8232 20.7739 38.4658 37.0435Z" >
+			<fill>
+				<SolidColor color="#b65da4"/>
+			</fill>
+			<stroke>
+				<SolidColorStroke color="#ffffff" caps="none" weight="1" joints="miter" miterLimit="4"/>
+			</stroke>
+		</Path>
+		<Group x="2.56885" y="21.3857">
+			<Path alpha="0.55" winding="nonZero" data="M36.1021 5.84912L36.5806 0 0 0 0.493652 5.84912 36.1021 5.84912Z" >
+				<fill>
+					<LinearGradient x="18.2905" y="5.84912" scaleX="5.84912" rotation="-90">
+						<GradientEntry color="#ffffff" alpha="0" ratio="0"/>
+						<GradientEntry color="#ffffff" ratio="1"/>
+					</LinearGradient>
+				</fill>
+			</Path>
+		</Group>
+		<Group x="36.8535" y="42.4438">
+			<Path alpha="0.55" winding="nonZero" data="M0 0" >
+				<fill>
+					<LinearGradient scaleX="0" rotation="-90">
+						<GradientEntry color="#ffffff" alpha="0" ratio="0"/>
+						<GradientEntry color="#ffffff" ratio="1"/>
+					</LinearGradient>
+				</fill>
+			</Path>
+		</Group>
+		<Group x="36.4961" y="41.4316">
+			<Path alpha="0.55" winding="nonZero" data="M0 0" >
+				<fill>
+					<LinearGradient scaleX="0" rotation="-90">
+						<GradientEntry color="#ffffff" alpha="0" ratio="0"/>
+						<GradientEntry color="#ffffff" ratio="1"/>
+					</LinearGradient>
+				</fill>
+			</Path>
+		</Group>
+		<Path winding="nonZero" data="M37.0283 57.2505L4.51465 57.2505 3.2915 40.9819 38.5205 40.9819 37.0283 57.2505Z" >
+			<fill>
+				<SolidColor color="#f47521"/>
+			</fill>
+			<stroke>
+				<SolidColorStroke color="#ffffff" caps="none" weight="1" joints="miter" miterLimit="4"/>
+			</stroke>
+		</Path>
+		<Group x="3.9668" y="41.5933">
+			<Path alpha="0.55" winding="nonZero" data="M33.4014 5.84912L33.8789 0 0 0 0.493652 5.84912 33.4014 5.84912Z" >
+				<fill>
+					<LinearGradient x="16.9399" y="5.84912" scaleX="5.84912" rotation="-90">
+						<GradientEntry color="#ffffff" alpha="0" ratio="0"/>
+						<GradientEntry color="#ffffff" ratio="1"/>
+					</LinearGradient>
+				</fill>
+			</Path>
+		</Group>
+		<Group x="34.9443" y="62.1108">
+			<Path alpha="0.55" winding="nonZero" data="M0 0" >
+				<fill>
+					<LinearGradient scaleX="0" rotation="-90">
+						<GradientEntry color="#ffffff" alpha="0" ratio="0"/>
+						<GradientEntry color="#ffffff" ratio="1"/>
+					</LinearGradient>
+				</fill>
+			</Path>
+		</Group>
+		<Group x="35.3887" y="62.7061">
+			<Path alpha="0.55" winding="nonZero" data="M0 0" >
+				<fill>
+					<LinearGradient scaleX="0" rotation="-90">
+						<GradientEntry color="#ffffff" alpha="0" ratio="0"/>
+						<GradientEntry color="#ffffff" ratio="1"/>
+					</LinearGradient>
+				</fill>
+			</Path>
+		</Group>
+		<Group x="35.0313" y="61.6938">
+			<Path alpha="0.55" winding="nonZero" data="M0 0" >
+				<fill>
+					<LinearGradient scaleX="0" rotation="-90">
+						<GradientEntry color="#ffffff" alpha="0" ratio="0"/>
+						<GradientEntry color="#ffffff" ratio="1"/>
+					</LinearGradient>
+				</fill>
+			</Path>
+		</Group>
+		<Path winding="nonZero" data="M35.5635 77.5137L5.74902 77.5137 4.52637 61.2441 37.0557 61.2441 35.5635 77.5137Z" >
+			<fill>
+				<SolidColor color="#eee935"/>
+			</fill>
+			<stroke>
+				<SolidColorStroke color="#ffffff" caps="none" weight="1" joints="miter" miterLimit="4"/>
+			</stroke>
+		</Path>
+		<Group x="5.20166" y="61.856">
+			<Path alpha="0.55" winding="nonZero" data="M30.7007 5.84912L31.1802 0 0 0 0.493164 5.84912 30.7007 5.84912Z" >
+				<fill>
+					<LinearGradient x="15.5903" y="5.84912" scaleX="5.84912" rotation="-90">
+						<GradientEntry color="#ffffff" alpha="0" ratio="0"/>
+						<GradientEntry color="#ffffff" ratio="1"/>
+					</LinearGradient>
+				</fill>
+			</Path>
+		</Group>
+	</Group>
+	
+	<VGroup y="7" width="40" height="100" horizontalAlign="center" gap="7">
+		<Label id="valueLabel1" text="0" />
+		<Label id="valueLabel2" text="0" />
+		<Label id="valueLabel3" text="0"  />
+		<Label id="valueLabel4" text="0" />
+	</VGroup>
+</Skin>
