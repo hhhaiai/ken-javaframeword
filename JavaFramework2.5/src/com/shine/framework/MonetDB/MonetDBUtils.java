@@ -1,9 +1,13 @@
 package com.shine.framework.MonetDB;
 
-import java.io.File;
-
 import com.shine.framework.core.util.CmdUtil;
 
+/**
+ * MonetDB数据库控制器
+ * 
+ * @author viruscodecn@gmail.com
+ * 
+ */
 public class MonetDBUtils {
 	/**
 	 * 启动monetDB
