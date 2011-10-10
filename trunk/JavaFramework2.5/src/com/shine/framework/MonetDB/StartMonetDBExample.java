@@ -8,7 +8,7 @@ public class StartMonetDBExample {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		MonetDBUtils.startMonetDB("E:\\Program Files\\MonetDB\\");
+		MonetDBUtils.startMonetDB("E:\\Program Files\\MonetDB\\MonetDB5\\");
 
 	}
 
