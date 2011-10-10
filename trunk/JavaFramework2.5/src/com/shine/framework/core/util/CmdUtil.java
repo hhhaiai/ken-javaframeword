@@ -29,7 +29,7 @@ public class CmdUtil {
 					sb.append(line + "\r\n");
 					line = br.readLine();
 				}
-				//System.out.println(sb.toString());
+				// System.out.println(sb.toString());
 
 				try {
 					pro.waitFor();
@@ -79,6 +79,9 @@ public class CmdUtil {
 		try {
 			Runtime run = Runtime.getRuntime();
 			Process pro = run.exec(filePath);
+			// 删除file
+			FileUtil.deleteFile(filePath.replace("\"", ""));
+
 			BufferedReader br = null;
 			StringBuffer sb = new StringBuffer();
 			InputStreamReader isr = new InputStreamReader(pro.getInputStream(),
@@ -88,7 +91,9 @@ public class CmdUtil {
 			while (line != null) {
 				sb.append(line + "\r\n");
 				line = br.readLine();
+				System.err.println(line);
 			}
+
 			try {
 				pro.waitFor();
 			} catch (InterruptedException e) {
@@ -137,7 +142,7 @@ public class CmdUtil {
 	 */
 	public static String createBatFile(String... cmd) {
 		if (System.getProperty("os.name").toLowerCase().indexOf("windows") != -1) {
-			String path = System.getProperty("user.dir") + File.separator 
+			String path = System.getProperty("user.dir") + File.separator
 					+ "temp" + DateUtil.getCurrentDateTimeAsId() + ".bat";
 			FileUtil.createFile(path);
 			StringBuffer content = new StringBuffer();
@@ -147,7 +152,8 @@ public class CmdUtil {
 			FileUtil.writeFile(path, content.toString());
 			return "\"" + path + "\"";
 		} else {
-			String path = System.getProperty("user.dir") + File.separator + "temp.sh";
+			String path = System.getProperty("user.dir") + File.separator
+					+ "temp.sh";
 			FileUtil.createFile(path);
 			StringBuffer content = new StringBuffer();
 			content.append("#!/bin/sh").append("\n");
@@ -173,10 +179,13 @@ public class CmdUtil {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public static void main(String[] args) {
 		try {
-			Runtime.getRuntime().exec("cmd /c start /D\"D:\\ProgramFiles\\apache-tomcat-6.0.24\\bin\" shutdown.bat");
+			Runtime
+					.getRuntime()
+					.exec(
+							"cmd /c start /D\"D:\\ProgramFiles\\apache-tomcat-6.0.24\\bin\" shutdown.bat");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
