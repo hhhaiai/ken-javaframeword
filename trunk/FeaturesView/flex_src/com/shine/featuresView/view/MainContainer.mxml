@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<view:BaseMainContainer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+						xmlns:s="library://ns.adobe.com/flex/spark" 
+						xmlns:mx="library://ns.adobe.com/flex/mx" 
+						xmlns:view="com.shine.framework.core.view.*" 
+						creationComplete="{complete()}" 
+						xmlns:topo="com.shine.featuresView.view.topo.*" 
+						xmlns:view1="com.shine.featuresView.view.*" 
+						xmlns:addLine="com.shine.featuresView.view.addLine.*" 
+						xmlns:code="http://code.google.com/p/flexlib/">
+	<view:layout>
+		<s:BasicLayout/>
+	</view:layout>
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import com.shine.featuresView.control.MainContorl;
+			import com.shine.featuresView.model.BusinessModel;
+			import com.shine.featuresView.util.NodeUtil;
+			import com.shine.framework.core.model.BaseXmlModel;
+			import com.shine.framework.core.model.XmlModel;
+			import com.shine.framework.core.util.BaseHttpServiceUtil;
+			import com.shine.framework.core.util.DataUtil;
+			import com.shine.topo.util.TopoLinesArrayCollection;
+			import com.shine.topo.util.TopoNodeArrayCollection;
+			import com.shine.topo.view.node.BaseNodeContainer;
+			import com.shine.framework.core.util.SystemUtils;
+			
+			import mx.controls.Alert;
+			
+			[Embed(source='appicon/add_line.gif')]
+			private static const add_line:Class;
+			
+			[Embed(source='appicon/delete_line.gif')]
+			private static const delete_line:Class;
+			
+			[Embed(source='appicon/save.gif')]
+			private static const save_image:Class;
+			
+			[Embed(source='appicon/view_fullscreen.gif')]
+			private static const full_screen:Class;
+			
+			private function complete():void{
+				MainContorl.getInstance().add(this);
+				
+				initXml();
+			}
+			
+			public function initXml():void{
+				var httpService:BaseHttpServiceUtil=new BaseHttpServiceUtil;
+				httpService.getResultXml(String(MainContorl.getInstance().get("dataUrl")),getXmlRusult)
+			    //httpService.getResultXml("xml/bizview.xml",getXmlRusult);
+			}
+			
+			private function getXmlRusult(value:XML):void{
+				var xmlModel:XmlModel=new XmlModel;
+				xmlModel.initModel(DataUtil.StringReplaceAll(value.toXMLString(),"&","#"));
+				MainContorl.getInstance().add(xmlModel);
+				
+				businessTopoContainer.deleteAllTopoNode();
+				var businessModel:BusinessModel=new BusinessModel;
+				businessModel.setXml(value);
+				MainContorl.getInstance().add(businessModel);
+				
+				//初始化设备
+				var topoNodeArrayCollection:TopoNodeArrayCollection=NodeUtil.getAllNode(businessModel.modelArrayCollection);
+				businessTopoContainer.addTopoNodeList(topoNodeArrayCollection);
+				MainContorl.getInstance().add(topoNodeArrayCollection);
+				
+				for each(var baseNodeContainer:BaseNodeContainer in topoNodeArrayCollection){
+					if(baseNodeContainer.baseXmlModel.getString("active")!=null)
+						baseNodeContainer.setActive();
+						
+				}
+				
+				//businessTopoContainer.addTopoBusinessNodeList(NodeUtil.getAllBusinessNode(businessModel.modelArrayCollection));
+				//初始化链路
+				var topoLinesArrayCollection:TopoLinesArrayCollection=NodeUtil.getAllLine(businessModel.lineArrayCollection,topoNodeArrayCollection);
+				businessTopoContainer.addTopoLineList(topoLinesArrayCollection);
+				MainContorl.getInstance().add(topoLinesArrayCollection);
+				
+				businessTopoContainer.initBaseInfoContainer();
+				
+				
+				if(XML(businessModel.xml).child("Tree").length()!=0&&XML(XML(businessModel.xml).Tree).child("node").length()!=0){
+					featuresViewTree.sunshineTree.setXml(XML(XML(XML(businessModel.xml).Tree).node));
+				}
+				
+				
+
+				featureAlarmDataGrid.cleanDataGridRow();
+				for each(var baseXmlModel:BaseXmlModel in businessModel.alarmArrayCollection){
+					featureAlarmDataGrid.addRowByModel(baseXmlModel);
+				}
+				
+				topoNodeArrayCollection=null;
+				this.completeLoading();
+			}
+			
+			private function addLine():void{
+				addNewLineView.show();
+			}
+			
+			private function removeLine():void{
+				deleteLineView.show();
+			}
+			
+			private function hSliderResize():void{
+				valueLabel.text=String(hSlider.value)+"%";
+				
+				var topoNodeArrayCollection:TopoNodeArrayCollection=MainContorl.getInstance().get("TopoNodeArrayCollection") as TopoNodeArrayCollection;
+				for each(var baseNodeContainer:BaseNodeContainer in topoNodeArrayCollection){
+					baseNodeContainer.x=baseNodeContainer.ox*hSlider.value/100;
+					baseNodeContainer.y=baseNodeContainer.oy*hSlider.value/100;
+				}
+			}
+			
+			private function save():void{
+				for each(var baseNodeContainer:BaseNodeContainer in MainContorl.getInstance().get("TopoNodeArrayCollection") as TopoNodeArrayCollection){
+					baseNodeContainer.savePoint();
+					(MainContorl.getInstance().get("XmlModel") as XmlModel).editXml("Node",["id"],[baseNodeContainer.baseXmlModel.getString("id")],["x","y"],[String(baseNodeContainer.ox),String(baseNodeContainer.oy)]);
+				}
+				
+				var obj:Object = new Object();
+				obj.xml = DataUtil.StringReplaceAll((MainContorl.getInstance().get("XmlModel") as XmlModel).getXml(),"#","&");
+				
+				
+				var baseHttpService:BaseHttpServiceUtil=new BaseHttpServiceUtil;
+				baseHttpService.postResultXml((MainContorl.getInstance().get("BusinessModel") as BusinessModel).getString("saveUrl"),null,obj);
+			}
+			
+			private function fullScreeen():void{
+				if(featuresViewTree.visible){
+					featuresViewTree.visible=false;
+					featuresViewTree.width=0;
+					featureAlarmDataGrid.visible=false;
+					featureAlarmDataGrid.height=0;
+					businessTopoContainer.width=businessTopoContainer.width+200;
+					businessTopoContainer.height=businessTopoContainer.height+150;
+				}else{
+					featuresViewTree.visible=true;
+					featuresViewTree.width=200;
+					featureAlarmDataGrid.visible=true;
+					featureAlarmDataGrid.height=150;
+					businessTopoContainer.width=businessTopoContainer.width-200;
+					businessTopoContainer.height=businessTopoContainer.height-150;
+				}
+			}
+		]]>
+	</fx:Script>
+	<s:VGroup width="100%" height="100%" gap="0">
+		<s:HGroup x="0" y="0" width="100%" height="30" verticalAlign="middle" horizontalAlign="center" gap="10">
+			<!--<mx:Button icon="{add_line}" toolTip="添加连线" click="{addLine()}" visible="false"/>
+			<mx:Button icon="{delete_line}" toolTip="删除连线" click="{removeLine()}"  visible="false"/>-->
+			<mx:Button icon="{save_image}" toolTip="保存" click="{save()}" />
+			<mx:Button  icon="{full_screen}" toolTip="全屏" click="{fullScreeen()}" />
+			<s:VGroup width="150" height="30" gap="0" horizontalAlign="center">
+				<s:HSlider id="hSlider" width="150" maximum="150" minimum="60" value="100" liveDragging="true" change="{hSliderResize()}"  />
+				<s:Label text="缩放视图" />
+			</s:VGroup>
+			<s:Label id="valueLabel" width="50" text="100%" />
+		</s:HGroup>
+		<s:HGroup width="100%" height="{this.height-180}" gap="0">
+			<topo:BusinessTopoContainer id="businessTopoContainer" width="{this.width-200}" height="100%" topoBackgroupPolicy="false" topoBackgroupImagePath="appicon/backgroup.jpg" />
+			<view1:FeaturesViewTree id="featuresViewTree" width="200" height="100%"/>
+		</s:HGroup>
+		<view1:FeatureAlarmDataGrid id="featureAlarmDataGrid" width="100%" height="150" />
+	</s:VGroup>
+	<addLine:AddNewLineView id="addNewLineView" visible="false" x="{this.width/2-addNewLineView.width/2}" y="40" />
+	<addLine:DeleteLineView id="deleteLineView" visible="false" x="{this.width/2-deleteLineView.width/2}" y="40" />
+</view:BaseMainContainer>

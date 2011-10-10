@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<view:BaseSimpleContainer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+						  xmlns:s="library://ns.adobe.com/flex/spark" 
+						  xmlns:mx="library://ns.adobe.com/flex/mx" 
+						  xmlns:view="com.shine.framework.core.view.*" 
+						  creationComplete="{complete()}" 
+						  width="400" height="300" 
+						  xmlns:addLine="com.shine.featuresView.view.addLine.*">
+	<view:layout>
+		<s:BasicLayout/>
+	</view:layout>
+	<fx:Script>
+		<![CDATA[
+			import com.shine.featuresView.control.MainContorl;
+			import com.shine.featuresView.view.Line.FeaturesLine;
+			import com.shine.featuresView.view.topo.BusinessTopoContainer;
+			import com.shine.framework.core.model.BaseXmlModel;
+			import com.shine.framework.core.model.XmlModel;
+			import com.shine.topo.util.TopoLinesArrayCollection;
+			import com.shine.topo.util.TopoNodeArrayCollection;
+			import com.shine.topo.view.node.BaseNodeContainer;
+			
+			import mx.controls.Alert;
+			
+			[Embed(source='appicon/add_line.gif')]
+			private static const add_line:Class;
+			
+			private function complete():void{
+				this.completeLoading();
+				
+				//MainControl.getInstance()
+			}
+			
+			private function handleXml():XML{
+			    var xml:XML=XML("<node label='结点' icon='/images/fl/root.gif' />");
+				
+				var topoNodeArrayCollection:TopoNodeArrayCollection=MainContorl.getInstance().get("TopoNodeArrayCollection") as TopoNodeArrayCollection;
+				for each(var baseNodeContainer:BaseNodeContainer in topoNodeArrayCollection){
+					var monitorXMl:XML=XML("<node id='"+baseNodeContainer.baseXmlModel.getString("id")+"' label='"+baseNodeContainer.baseXmlModel.getString("name")+"' icon='/images/fl/node.gif' />");
+					xml.appendChild(monitorXMl);
+					monitorXMl=null;	
+				}
+				return xml;
+			}
+			
+			private function addLine():void{
+				if(startTree.selectXML==null||endTree.selectXML==null){
+					Alert.show("请选择两端设备","提示");
+					return
+				}
+				
+				if(startTree.selectXML.@id==endTree.selectXML.@id){
+					Alert.show("不可以选择相同的节点","提示");
+					return
+				}
+				
+				
+				var lineXML:XML=XML("<Line start = '"+startTree.selectXML.@id+"' end = '"+endTree.selectXML.@id+"'/>");
+				if((MainContorl.getInstance().get("TopoLinesArrayCollection") as TopoLinesArrayCollection).checkTopoLineByXml(lineXML.toXMLString())){
+					Alert.show("已经存在相同连线","提示");
+				}else{
+					
+					if((MainContorl.getInstance().get("TopoLinesArrayCollection") as TopoLinesArrayCollection).checkTopoLineByXml("<Line start = '"+endTree.selectXML.@id+"' end = '"+startTree.selectXML.@id+"'/>")){
+						Alert.show("已经存在相同连线","提示");
+						return
+					}
+					
+					addLines();
+					
+					
+					(MainContorl.getInstance().get("XmlModel") as XmlModel).addChildNode("Lines",lineXML);
+					
+					var topoNodeArrayCollection:TopoNodeArrayCollection=MainContorl.getInstance().get("TopoNodeArrayCollection") as TopoNodeArrayCollection;
+					
+					var featureLine:FeaturesLine=new FeaturesLine;
+					featureLine.initTopoLine(new BaseXmlModel(lineXML.toXMLString()),topoNodeArrayCollection.getNodeByAttribute("id",startTree.selectXML.@id),topoNodeArrayCollection.getNodeByAttribute("id",endTree.selectXML.@id));
+					(MainContorl.getInstance().get("TopoLinesArrayCollection") as TopoLinesArrayCollection).addTopoLine(featureLine);
+					(MainContorl.getInstance().get("BusinessTopoContainer") as BusinessTopoContainer).addTopoLine(featureLine);
+				}
+				
+				this.visible=false;
+			}
+			
+			public function show():void{
+				startTree.dataProvider=handleXml();
+				startTree.selectXML=null;
+				endTree.dataProvider=handleXml();
+				endTree.selectXML=null;
+				
+				
+				this.visible=true;
+			}
+			
+			private function addLines():void{
+				if(!(MainContorl.getInstance().get("XmlModel") as XmlModel).checkTag(["Lines"]))
+					(MainContorl.getInstance().get("XmlModel") as XmlModel).addChildNode("BusinessView",XML("<Lines />"));
+			}
+		]]>
+	</fx:Script>
+	<mx:Panel width="100%" height="100%" title="增加连线" titleIcon="{add_line}">
+		<s:VGroup id="vGroup" width="100%" height="100%" horizontalAlign="center" gap="10" >
+			<s:Label height="5" alpha="0" />
+			<s:HGroup width="100%" height="{this.height-90}" horizontalAlign="center" verticalAlign="middle">
+				<addLine:MonitorTree id="startTree" width="180" height="100%"  />
+				<addLine:MonitorTree id="endTree" width="180" height="100%" />
+			</s:HGroup>
+			<s:HGroup width="100%" height="20" horizontalAlign="center">
+				<s:Button label="确定" click="{addLine()}" />
+				<s:Button label="取消" click="{this.visible=false}" />
+			</s:HGroup>
+		</s:VGroup>
+	</mx:Panel>
+</view:BaseSimpleContainer>

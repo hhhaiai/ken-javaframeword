@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<BusinessView saveUrl="/GraphicalView.do?method=saveMap&amp;viewid=10000035">
+	<Nodes>
+		<Node type="UrlMonitor" id="10000034" name="http://www.163.com" message="名称:www.163.com&#xA;类型:Url监视器&#xA;www.163.com的健康状况为严重. &lt;br&gt;根本原因 &lt;br&gt;1. 应答时间 2310&gt;2000 ms (阈值).&lt;br&gt;" image="/images/fl/url_1.gif" url="/showresource.do?method=showResourceForResourceID&amp;resourceid=10000034" x="0" y="0" />
+		<Node type="HAI" id="10000035" name="MyApp" message="名称:MyApp&#xA;类型:监视器组&#xA;MyApp的健康状况为严重. &lt;br&gt;根本原因 &lt;br&gt;&lt;ol&gt;&lt;li&gt;www.163.com的健康状况为严重. &lt;br&gt;根本原因 &lt;br&gt;1. 应答时间 2310&gt;2000 ms (阈值).&lt;br&gt;&lt;/li&gt;&lt;li&gt;资源abc停止。&lt;br&gt;因为资源不可用所以健康状态为严重&lt;/li&gt;&lt;/ol&gt;" image="/images/fl/hai_1.gif" health="20" x="0" y="0" />
+		<Node type="UrlMonitor" id="10000033" name="http://abc.com.cn" message="名称:abc&#xA;类型:Url监视器&#xA;资源abc停止。&lt;br&gt;因为资源不可用所以健康状态为严重" image="/images/fl/url_1.gif" url="/showresource.do?method=showResourceForResourceID&amp;resourceid=10000033" x="0" y="0" />
+	</Nodes>
+	<Lines>
+		<Line start="10000035" end="10000034" />
+		<Line start="10000035" end="10000033" />
+	</Lines>
+	<Tree name="resourceTree" root="true" icon="/images/fl/root.gif">
+		<node name="监视器组" root="true" icon="/images/fl/root.gif">
+			<node name="MyApp" root="true" icon="/images/fl/root.gif">
+				<node id="10000033" name="http://abc.com.cn" icon="/images/fl/node.gif" />
+				<node id="10000034" name="http://www.163.com" icon="/images/fl/node.gif" />
+			</node>
+		</node>
+	</Tree>
+	<alarms>
+		<alarm id="10000045" alias="www.163.com" group="监视器组" status="严重" content="www.163.com的健康状况为严重. 根本原因 1. 应答时间 2310&gt;2000 ms (阈值)." logTime="2011-04-09 21:45:52" />
+		<alarm id="10000047" alias="MyApp" group="监视器组" status="严重" content="MyApp的健康状况为严重. 根本原因 www.163.com的健康状况为严重. 根本原因 1. 应答时间 2310&gt;2000 ms (阈值).资源abc停止。因为资源不可用所以健康状态为严重" logTime="2011-04-09 21:45:52" />
+		<alarm id="10000041" alias="www.163.com" group="Url监视器" status="&lt;img src='/images/fl/status4.gif'/&gt;警告" content="www.163.com的健康状况为警告. 根本原因 1. 应答时间 1504&gt;1500 ms (阈值)." logTime="2011-04-09 21:34:57" />
+		<alarm id="10000043" alias="MyApp" group="监视器组" status="&lt;img src='/images/fl/status1.gif'/&gt;严重" content="MyApp的健康状况为严重. 根本原因 资源abc停止。因为资源不可用所以健康状态为严重" logTime="2011-04-09 21:34:57" />
+		<alarm id="10000037" alias="www.163.com" group="Url监视器" status="&lt;img src='/images/fl/status1.gif'/&gt;严重" content="www.163.com的健康状况为严重. 根本原因 1. 应答时间 2205&gt;2000 ms (阈值)." logTime="2011-04-09 21:25:16" />
+		<alarm id="10000039" alias="MyApp" group="监视器组" status="&lt;img src='/images/fl/status1.gif'/&gt;严重" content="MyApp的健康状况为严重. 根本原因 www.163.com的健康状况为严重. 根本原因 1. 应答时间 2205&gt;2000 ms (阈值).资源abc停止。因为资源不可用所以健康状态为严重" logTime="2011-04-09 21:25:16" />
+		<alarm id="10000035" alias="www.163.com" group="Url监视器" status="&lt;img src='/images/fl/status4.gif'/&gt;警告" content="www.163.com的健康状况为警告. 根本原因 1. 应答时间 1958&gt;1500 ms (阈值)." logTime="2011-04-09 21:20:13" />
+		<alarm id="10000033" alias="MyApp" group="监视器组" status="&lt;img src='/images/fl/status1.gif'/&gt;严重" content="MyApp的健康状况为严重. 根本原因 资源abc停止。因为资源不可用所以健康状态为严重" logTime="2011-04-09 21:15:11" />
+		<alarm id="10000027" alias="www.163.com" group="Url监视器" status="&lt;img src='/images/fl/status1.gif'/&gt;严重" content="www.163.com的健康状况为严重. 根本原因 1. 应答时间 2076&gt;2000 ms (阈值)." logTime="2011-04-08 23:57:57" />
+		<alarm id="10000029" alias="MyApp" group="监视器组" status="&lt;img src='/images/fl/status1.gif'/&gt;严重" content="MyApp的健康状况为严重. 根本原因 www.163.com的健康状况为严重. 根本原因 1. 应答时间 2076&gt;2000 ms (阈值).资源abc停止。因为资源不可用所以健康状态为严重" logTime="2011-04-08 23:57:57" />
+		<alarm id="10000025" alias="www.163.com" group="Url监视器" status="&lt;img src='/images/fl/status4.gif'/&gt;警告" content="www.163.com的健康状况为警告. 根本原因 1. 应答时间 1775&gt;1500 ms (阈值)." logTime="2011-04-08 23:47:53" />
+		<alarm id="10000023" alias="MyApp" group="监视器组" status="&lt;img src='/images/fl/status1.gif'/&gt;严重" content="MyApp的健康状况为严重. 根本原因 资源abc停止。因为资源不可用所以健康状态为严重" logTime="2011-04-08 23:37:50" />
+		<alarm id="10000017" alias="www.163.com" group="Url监视器" status="&lt;img src='/images/fl/status1.gif'/&gt;严重" content="www.163.com的健康状况为严重. 根本原因 1. 应答时间 2089&gt;2000 ms (阈值)." logTime="2011-04-08 23:32:49" />
+		<alarm id="10000019" alias="MyApp" group="监视器组" status="&lt;img src='/images/fl/status1.gif'/&gt;严重" content="MyApp的健康状况为严重. 根本原因 www.163.com的健康状况为严重. 根本原因 1. 应答时间 2089&gt;2000 ms (阈值).资源abc停止。因为资源不可用所以健康状态为严重" logTime="2011-04-08 23:32:49" />
+		<alarm id="10000014" alias="www.163.com" group="Url监视器" status="&lt;img src='/images/fl/status4.gif'/&gt;警告" content="www.163.com的健康状况为警告. 根本原因 1. 应答时间 1524&gt;1500 ms (阈值)." logTime="2011-04-08 23:27:47" />
+		<alarm id="10000011" alias="MyApp" group="监视器组" status="&lt;img src='/images/fl/status1.gif'/&gt;严重" content="MyApp的健康状况为严重. 根本原因 资源abc停止。因为资源不可用所以健康状态为严重" logTime="2011-04-08 23:14:31" />
+		<alarm id="10000003" alias="abc" group="Url监视器" status="&lt;img src='/images/fl/status1.gif'/&gt;严重" content="资源abc停止。因为资源不可用所以健康状态为严重" logTime="2011-04-08 22:14:25" />
+	</alarms>
+</BusinessView>
+

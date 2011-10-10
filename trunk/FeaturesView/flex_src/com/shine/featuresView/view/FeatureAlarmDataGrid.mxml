@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<view:SunshineDataGrid xmlns:fx="http://ns.adobe.com/mxml/2009" 
+					   xmlns:s="library://ns.adobe.com/flex/spark" 
+					   xmlns:mx="library://ns.adobe.com/flex/mx" 
+					   xmlns:view="com.shine.framework.core.view.*" 
+					   creationComplete="{complete()}" 
+					   itemRendererClass="{new ClassFactory(com.shine.featuresView.view.AlarmDataGrid)}">
+	<fx:Declarations>
+		<fx:XML id="titleXml"  xmlns="">
+			<nodes>
+				<node width="20%">
+					<ename>taskName</ename>
+					<cname>任务名</cname>
+				</node>
+				<node width="10%">
+					<ename>processor</ename>
+					<cname>处理人</cname>
+				</node>
+				<node width="10%">
+					<ename>result</ename>
+					<cname>处理结果</cname>
+				</node>
+				<node width="40%">
+					<ename>opinion</ename>
+					<cname>处理意见</cname>
+				</node>
+				<node width="20%">
+					<ename>logTime</ename>
+					<cname>处理时间</cname>
+				</node>
+			</nodes>
+		</fx:XML>
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import com.shine.featuresView.control.MainContorl;
+			import com.shine.topo.util.TopoNodeArrayCollection;
+			import com.shine.topo.view.node.BaseNodeContainer;
+			
+			import mx.controls.Alert;
+			
+			private function complete():void{
+				MainContorl.getInstance().add(this);
+				
+				this.addEventListener(MouseEvent.CLICK, click);
+			}
+			
+			public function click(event:MouseEvent):void
+			{
+				var topoNodeArrayCollection:TopoNodeArrayCollection=MainContorl.getInstance().get("TopoNodeArrayCollection") as TopoNodeArrayCollection;
+				for each(var baseNodeContainer:BaseNodeContainer in topoNodeArrayCollection){
+					if(baseNodeContainer.baseXmlModel.getString("id")==XML(XML(XMLList(this.dataProvider)[0]).child("taskId")).toString())
+						baseNodeContainer.setSelect();
+					else{
+						if(baseNodeContainer.selectStatement)
+							baseNodeContainer.cancelSelect();
+					}
+						
+				}
+				
+			}
+		]]>
+	</fx:Script>
+</view:SunshineDataGrid>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<view:BaseSimpleContainer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+						  xmlns:s="library://ns.adobe.com/flex/spark" 
+						  xmlns:mx="library://ns.adobe.com/flex/mx" 
+						  xmlns:view="com.shine.framework.core.view.*" 
+						  width="400" height="300" 
+						  creationComplete="{complete()}" xmlns:addLine="com.shine.featuresView.view.addLine.*">
+	<view:layout>
+		<s:BasicLayout/>
+	</view:layout>
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import com.shine.featuresView.control.MainContorl;
+			import com.shine.featuresView.view.Line.FeaturesLine;
+			import com.shine.featuresView.view.MainContainer;
+			import com.shine.featuresView.view.topo.BusinessTopoContainer;
+			import com.shine.framework.core.model.XmlModel;
+			import com.shine.topo.util.TopoLinesArrayCollection;
+			
+			import mx.controls.Alert;
+			
+			[Embed(source='appicon/delete_line.gif')]
+			private static const delete_line:Class;
+			
+			private function complete():void{
+				this.completeLoading();
+			}
+			
+			private function handleXml():XML{
+				var xml:XML=XML("<node label='链路' icon='/images/fl/root.gif' />");
+				
+                var topoListArrayCollection:TopoLinesArrayCollection=MainContorl.getInstance().get("TopoLinesArrayCollection") as TopoLinesArrayCollection;
+				for each(var featurnsLine:FeaturesLine in topoListArrayCollection){
+					var lineXml:XML=XML("<node start='"+featurnsLine.baseXmModel.getString("start")+"' end='"+featurnsLine.baseXmModel.getString("end")+"' label='"+featurnsLine.startNode.baseXmlModel.getString("name")+"---"+featurnsLine.endNode.baseXmlModel.getString("name")+"' icon='/images/fl/node.gif' />");
+					xml.appendChild(lineXml);
+				}
+				
+				return xml;
+			}
+			public function show():void{
+				tree.dataProvider=handleXml();
+				tree.selectXML=null;
+				this.visible=true;
+			}
+			
+			public function deleteLine():void{
+				if(tree.selectXML==null){
+					Alert.show("请选择链路","提示");
+					return;
+				}
+				
+				
+				
+				var lineXML:XML=XML("<Line start = '"+tree.selectXML.@start+"' end = '"+tree.selectXML.@end+"'/>");
+				
+				//(MainContorl.getInstance().get("XmlModel") as XmlModel).deleteXml(lineXML.toXMLString());
+				var i:int=0;
+				var xml:XML=(MainContorl.getInstance().get("XmlModel") as XmlModel).getXml();
+				for each(var dataXml:XML in XML(xml.Lines).Line){
+					if(xml.@start==tree.selectXML.@start&&xml.@end==tree.selectXML.@end){
+						delete XML(xml.lines).children()[i];
+						break;
+					}
+					i++;
+				}
+				(MainContorl.getInstance().get("XmlModel") as XmlModel).initXmlValue(xml.toXMLString());
+				
+				
+				
+				var featuresLine:FeaturesLine=(MainContorl.getInstance().get("TopoLinesArrayCollection") as TopoLinesArrayCollection).getTopoLineByXml(lineXML.toXMLString()) as FeaturesLine;
+				
+				(MainContorl.getInstance().get("TopoLinesArrayCollection") as TopoLinesArrayCollection).removeTopoLineByXml(lineXML.toXMLString());
+				(MainContorl.getInstance().get("BusinessTopoContainer") as BusinessTopoContainer).deleteTopoLine(featuresLine);
+				this.visible=false;
+			}
+		]]>
+	</fx:Script>
+	<mx:Panel id="panel" width="100%" height="100%" title="删除连线" titleIcon="{delete_line}">
+		<s:VGroup width="100%" height="100%" gap="10" horizontalAlign="center">
+			<s:Label height="5" alpha="0" />
+			<addLine:MonitorTree id="tree" width="350" height="80%" />
+			<s:HGroup width="100%" height="20" horizontalAlign="center">
+				<s:Button label="确定" click="{deleteLine()}" />
+				<s:Button label="取消" click="{this.visible=false}" />
+			</s:HGroup>
+		</s:VGroup>
+	</mx:Panel>
+</view:BaseSimpleContainer>

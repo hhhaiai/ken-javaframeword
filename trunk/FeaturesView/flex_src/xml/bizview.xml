@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<BusinessView>
+	<Nodes>
+		<Node id="start" name="事件申报" type="start"
+			image="/nms4/resource/image/config/start_event_empty.png" x="276" y="12"
+			message="任务名称:事件申报&lt;br&gt;处理人:李朝&lt;br&gt;处理时间:2011-05-27 14:47:56.0&lt;br&gt;处理结果:&lt;br&gt;处理意见:" />
+		<Node id="evaluatePosition" name="evaluatePosition" type="decision"
+			image="/nms4/resource/image/config/gateway_exclusive.png" x="276" y="84"
+			message="任务名称:evaluatePosition" />
+		<Node id="leaderFirstApprove" name="科长审批" type="task"
+			image="/nms4/resource/image/config/task_empty.png" x="462" y="135"
+			message="任务名称:&lt;br&gt;处理人:谢少华&lt;br&gt;处理时间:2011-05-27 14:48:26.0&lt;br&gt;处理结果:同意&lt;br&gt;处理意见:asdfasdfa"
+			active="true" />
+		<Node id="techAccept" name="技术科受理" type="task"
+			image="/nms4/resource/image/config/task_empty.png" x="47" y="180"
+			message="任务名称:技术科受理" />
+		<Node id="evaluateExpense" name="evaluateExpense" type="decision"
+			image="/nms4/resource/image/config/gateway_exclusive.png" x="279" y="305"
+			message="任务名称:evaluateExpense" />
+		<Node id="leaderSecondApprove" name="科长审批" type="task"
+			image="/nms4/resource/image/config/task_empty.png" x="465" y="261"
+			message="任务名称:科长审批" />
+		<Node id="techLeaderApprove" name="技术科长审批" type="task"
+			image="/nms4/resource/image/config/task_empty.png" x="462" y="365"
+			message="任务名称:技术科长审批" />
+		<Node id="financeLeaderApprove" name="计财科长审批" type="task"
+			image="/nms4/resource/image/config/task_empty.png" x="465" y="485"
+			message="任务名称:计财科长审批" />
+		<Node id="evaluateExpensive" name="evaluateExpensive" type="decision"
+			image="/nms4/resource/image/config/gateway_exclusive.png" x="289" y="477"
+			message="任务名称:evaluateExpensive" />
+		<Node id="presidentApprove" name="检察长审批" type="task"
+			image="/nms4/resource/image/config/task_empty.png" x="473" y="641"
+			message="任务名称:检察长审批" />
+		<Node id="techHandle" name="技术科处理" type="task"
+			image="/nms4/resource/image/config/task_empty.png" x="42" y="480"
+			message="任务名称:技术科处理" />
+		<Node id="applyerConfirm" name="申请人确认" type="task"
+			image="/nms4/resource/image/config/task_empty.png" x="41" y="603"
+			message="任务名称:申请人确认" />
+		<Node id="endOK" name="结束(完成)" type="end"
+			image="/nms4/resource/image/config/end_event_terminate.png" x="70" y="718"
+			message="任务名称:结束(完成)" />
+		<Node id="endReject" name="结束(退回)" type="end"
+			image="/nms4/resource/image/config/end_event_terminate.png" x="680"
+			y="320" message="任务名称:结束(退回)" />
+	</Nodes>
+	<Lines>
+		<Line start="start" end="evaluatePosition" color="0xf08080" message="123"/>
+		<Line start="evaluatePosition" end="leaderFirstApprove" color="f08080" message="123"/>
+		<Line start="evaluatePosition" end="techAccept" color="0000cd" message="123"/>
+		<Line start="leaderFirstApprove" end="techAccept" color="0000cd" message="123" />
+		<Line start="leaderFirstApprove" end="endReject" color="0000cd" message="123" />
+		<Line start="techAccept" end="evaluateExpense" color="#0000cd"  message="123"/>
+		<Line start="evaluateExpense" end="leaderSecondApprove" color="#0000cd" message="123" />
+		<Line start="evaluateExpense" end="techLeaderApprove" color="#0000cd" message="123"/>
+		<Line start="evaluateExpense" end="techHandle" color="#0000cd" message="123"/>
+		<Line start="leaderSecondApprove" end="techLeaderApprove" color="#0000cd" message="123"/>
+		<Line start="leaderSecondApprove" end="endReject" color="#0000cd" message="123"/>
+		<Line start="techLeaderApprove" end="financeLeaderApprove" color="#0000cd" message="123"/>
+		<Line start="techLeaderApprove" end="endReject" color="#0000cd" message="123"/>
+		<Line start="financeLeaderApprove" end="evaluateExpensive" color="#0000cd" message="123"/>
+		<Line start="financeLeaderApprove" end="endReject" color="#0000cd" message="123"/>
+		<Line start="evaluateExpensive" end="presidentApprove" color="#0000cd" message="123" />
+		<Line start="evaluateExpensive" end="techHandle" color="#0000cd" message="123" />
+		<Line start="presidentApprove" end="techHandle" color="#0000cd" message="123" />
+		<Line start="presidentApprove" end="endReject" color="#0000cd" message="123" />
+		<Line start="techHandle" end="applyerConfirm" color="#0000cd" message="123" />
+		<Line start="applyerConfirm" end="endOK" color="#0000cd" message="123" />
+	</Lines>
+	<Logs>
+		<Log taskId="start" taskName="事件申报" processor="李朝" result=""
+			opinion="" logTime="2011-05-27 14:47:56.0" />
+		<Log taskId="leaderFirstApprove" taskName="" processor="谢少华"
+			result="同意" opinion="asdfasdfa" logTime="2011-05-27 14:48:26.0" />
+	</Logs>
+	<Tree name="resourceTree" root="true"
+		icon="/nms4/resource/image/config/root.gif">
+		<node name="任务" root="true" icon="/nms4/resource/image/config/root.gif">
+			<node id="start" name="事件申报" icon="/nms4/resource/image/config/node.gif" />
+			<node id="leaderFirstApprove" name="科长审批"
+				icon="/nms4/resource/image/config/node.gif" />
+			<node id="techAccept" name="技术科受理"
+				icon="/nms4/resource/image/config/node.gif" />
+			<node id="leaderSecondApprove" name="科长审批"
+				icon="/nms4/resource/image/config/node.gif" />
+			<node id="techLeaderApprove" name="技术科长审批"
+				icon="/nms4/resource/image/config/node.gif" />
+			<node id="financeLeaderApprove" name="计财科长审批"
+				icon="/nms4/resource/image/config/node.gif" />
+			<node id="presidentApprove" name="检察长审批"
+				icon="/nms4/resource/image/config/node.gif" />
+			<node id="techHandle" name="技术科处理"
+				icon="/nms4/resource/image/config/node.gif" />
+			<node id="applyerConfirm" name="申请人确认"
+				icon="/nms4/resource/image/config/node.gif" />
+			<node id="endOK" name="结束(完成)" icon="/nms4/resource/image/config/node.gif" />
+			<node id="endReject" name="结束(退回)" icon="/nms4/resource/image/config/node.gif" />
+		</node>
+	</Tree>
+</BusinessView>
+

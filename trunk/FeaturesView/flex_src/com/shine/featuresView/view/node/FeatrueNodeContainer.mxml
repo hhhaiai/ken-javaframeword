@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<node:BaseNodeContainer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+						xmlns:s="library://ns.adobe.com/flex/spark" 
+						xmlns:mx="library://ns.adobe.com/flex/mx" 
+						xmlns:node="com.shine.topo.view.node.*"
+						creationComplete="{complete()}" 
+						click="click(event)" 
+						width="32" height="32">
+	<node:layout>
+		<s:BasicLayout/>
+	</node:layout>
+	<fx:Script>
+		<![CDATA[
+			import com.shine.featuresView.control.MainContorl;
+			import com.shine.topo.util.TopoNodeArrayCollection;
+			import com.shine.framework.core.util.EventUtil;
+			
+			import mx.controls.Alert;
+			
+			private function complete():void{
+				this.completeLoading();
+			}
+			
+			//刷新label位置
+			public override function refreshLabel():void{
+				if(topoLabel!=null){
+					topoLabel.x=this.x;
+					topoLabel.y=getBottomRightY();
+					topoLabel.setHtml(this.baseXmlModel.getString("name"));
+					topoLabel.setUrl(this.baseXmlModel.getString("url"));
+				}
+			}
+			
+			private function click(event:MouseEvent):void{
+				var topoNodeArrayCollection:TopoNodeArrayCollection=MainContorl.getInstance().get("TopoNodeArrayCollection") as TopoNodeArrayCollection;
+				for each(var baseNodeContainer:BaseNodeContainer in topoNodeArrayCollection){
+					if(baseNodeContainer.selectStatement)
+					    baseNodeContainer.cancelSelect();
+				}
+				this.setSelect();
+			}
+			
+			
+		]]>
+	</fx:Script>
+</node:BaseNodeContainer>

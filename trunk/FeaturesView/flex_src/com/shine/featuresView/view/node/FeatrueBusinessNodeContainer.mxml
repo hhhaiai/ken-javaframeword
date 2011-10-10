@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<node:BaseBusinessNodeContainer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+								xmlns:s="library://ns.adobe.com/flex/spark" 
+								xmlns:mx="library://ns.adobe.com/flex/mx" 
+								xmlns:node="com.shine.topo.view.node.*" 
+								creationComplete="{complete()}" 
+								width="220" height="150" 
+								backgroundAlpha="0.5">
+	<node:layout>
+		<s:BasicLayout/>
+	</node:layout>
+	<fx:Script>
+		<![CDATA[
+			import com.shine.featuresView.skin.Dashboard80;
+			import com.shine.featuresView.view.AlarmValueContainer;
+			import com.shine.framework.Dashboard.view.Dashboard;
+			import com.shine.framework.GaugeExplorer.Gauge;
+			import com.shine.framework.core.model.BaseXmlModel;
+			import com.shine.featuresView.skin.AlarmValueSkin;
+			
+			import mx.controls.Alert;
+			import mx.controls.Button;
+			import mx.controls.Image;
+			import mx.events.FlexEvent;
+			
+			import spark.components.Group;
+			import spark.components.Label;
+			import spark.components.VGroup;
+			
+			private var dashboard:Dashboard;
+			private var alarmValueContainer:AlarmValueContainer;
+			
+			private function complete():void{
+				this.completeLoading();
+				
+				initGauge();
+			}
+			
+			public override function initBusinessNode(value:BaseXmlModel):void{
+				initNode(value);
+				
+				this.topoImage.alpha=0.5;
+			}
+			
+			private function initGauge():void{
+				var label:Label=new Label;
+				label.text=this.baseXmlModel.getString("name");
+				label.x=60;
+				label.y=5;
+				label.setStyle("fontWeight","bold");
+				this.addElement(label);
+				
+				dashboard=new Dashboard;
+				dashboard.x=20;
+				dashboard.y=20;
+				dashboard.setStyle("skinClass",Dashboard80);
+				dashboard.addEventListener(FlexEvent.CREATION_COMPLETE,setDashboardValue);
+				this.addElement(dashboard);
+				
+				var label1:Label=new Label;
+				label1.text="健康度";
+				label1.x=55;
+				label1.y=130;
+				this.addElement(label1);
+				
+				alarmValueContainer=new AlarmValueContainer;
+				alarmValueContainer.x=150;
+				alarmValueContainer.y=40;
+				alarmValueContainer.addEventListener(FlexEvent.CREATION_COMPLETE,setAlarmValueContainer);
+				this.addElement(alarmValueContainer);
+				
+				var label2:Label=new Label;
+				label2.text="告警数";
+				label2.x=150;
+				label2.y=130;
+				this.addElement(label2);
+			}
+			
+			public function setDashboardValue(event:FlexEvent):void{
+				Dashboard80(dashboard.skin).setValue(this.baseXmlModel.getInt("health"));
+			}
+			
+			public function setAlarmValueContainer(event:FlexEvent):void{
+				AlarmValueSkin(alarmValueContainer.skin).valueLabel1.text=this.baseXmlModel.getString("alert1");
+				AlarmValueSkin(alarmValueContainer.skin).valueLabel2.text=this.baseXmlModel.getString("alert2");
+				AlarmValueSkin(alarmValueContainer.skin).valueLabel3.text=this.baseXmlModel.getString("alert3");
+				AlarmValueSkin(alarmValueContainer.skin).valueLabel4.text=this.baseXmlModel.getString("alert4");
+			}
+		]]>
+	</fx:Script>
+</node:BaseBusinessNodeContainer>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<BusinessView>
+	<Nodes>
+		<Node type="MSB" id="3" image="appicon/123.jpg" name="aabvvcc2"
+			message="名称:aabvvcc2  类型:业务视图" x="5" y="5" health="96" alert1="0"
+			alert2="1" alert3="2" alert4="3" />
+		<Node type="UrlMonitor" id="10000038" name="http://afunms:9900"
+			message="名称:AppManager Home Page&#xA;类型:UrlMonitor&#xA;AppManager Home Page的健康状况为正常. &lt;br&gt;根本原因 &lt;br&gt;1. AppManager Home Page为启用&lt;br&gt;2. 应答时间 0&lt;=1500 ms (阈值).&lt;br&gt;"
+			image="appicon/app_1.gif"
+			url="/showresource.do?method=showResourceForResourceID&amp;resourceid=10000038"
+			x="77" y="237" />
+		<Node type="Windows XP" id="10000034" name="afunms"
+			message="名称:afunms&#xA;类型:Windows XP&#xA;afunms的健康状况为正常. &lt;br&gt;根本原因 &lt;br&gt;1. afunms为启用&lt;br&gt;"
+			image="appicon/app_1.gif"
+			url="/showresource.do?method=showResourceForResourceID&amp;resourceid=10000034"
+			x="250" y="0" />
+		<Node type="MYSQL-DB-server" id="10000035" name="IF-afunms_MYSQL-DB-server_13326"
+			message="名称:afunms_MYSQL-DB-server_13326&#xA;类型:MYSQL-DB-server&#xA;afunms_MYSQL-DB-server_13326的健康状况为正常. &lt;br&gt;根本原因 &lt;br&gt;1. 连接时间 0&lt;=1500 ms (阈值).&lt;br&gt;2. afunms_MYSQL-DB-server_13326为启用&lt;br&gt;3. 从属IO正在运行&lt;br&gt;"
+			image="appicon/app_1.gif"
+			url="/showresource.do?method=showResourceForResourceID&amp;resourceid=10000035"
+			x="237" y="77" />
+		<Node type="Apache-server" id="10000036" name="IF-afunms_Apache-server_9900"
+			message="名称:afunms_Apache-server_9900&#xA;类型:Apache-server&#xA;afunms_Apache-server_9900的健康状况为正常. &lt;br&gt;根本原因 &lt;br&gt;1. afunms_Apache-server_9900为启用&lt;br&gt;2. 应答时间 0&lt;=1500 ms (阈值).&lt;br&gt;"
+			image="appicon/app_1.gif"
+			url="/showresource.do?method=showResourceForResourceID&amp;resourceid=10000036"
+			x="202" y="146" />
+		<Node type="Port-Test" id="10000037" name="IF-afunms_Port-Test_9900"
+			message="名称:afunms-9900&#xA;类型:Port-Test&#xA;afunms-9900的健康状况为正常. &lt;br&gt;根本原因 &lt;br&gt;1. 应答时间 0&lt;=1500 ms (阈值).&lt;br&gt;2. afunms-9900为启用&lt;br&gt;"
+			image="appicon/app_1.gif"
+			url="/showresource.do?method=showResourceForResourceID&amp;resourceid=10000037"
+			x="146" y="202" />
+		<Node type="Tomcat-server" id="10000040" name="IF-afunms_Tomcat-server_9900"
+			message="名称:afunms_Tomcat-server_9900&#xA;类型:Tomcat-server&#xA;afunms_Tomcat-server_9900的健康状况为正常. &lt;br&gt;根本原因 &lt;br&gt;1. 平均应答时间 16&lt;=1500 ms (阈值).&lt;br&gt;2. afunms_Tomcat-server_9900为启用&lt;br&gt;"
+			image="appicon/app_1.gif"
+			url="/showresource.do?method=showResourceForResourceID&amp;resourceid=10000040"
+			x="0" y="250" />
+		<Node type="HAI" id="10000031" name="Applications Manager"
+			message="名称:Applications Manager&#xA;类型:监视器组&#xA;Applications Manager的健康状况为正常. &lt;br&gt;根本原因 &lt;br&gt;健康状态为正常  "
+			image="appicon/app_1.gif" health="100" x="415" y="148" />
+	</Nodes>
+	<Lines>
+		<Line start="3" end="10000031" />
+		<Line start="10000031" end="10000038" />
+		<Line start="10000031" end="10000034" />
+		<Line start="10000031" end="10000035" />
+		<Line start="10000031" end="10000036" />
+		<Line start="10000031" end="10000037" />
+		<Line start="10000031" end="10000040" />
+	</Lines>
+	<Tree name="aabvvcc2" root="true">
+		<node name="Applications Manager" root="true">
+			<node id="10000034" name="afunms" />
+			<node id="10000035" name="IF-afunms_MYSQL-DB-server_13326" />
+			<node id="10000036" name="IF-afunms_Apache-server_9900" />
+			<node id="10000037" name="IF-afunms_Port-Test_9900" />
+			<node id="10000038" name="http://afunms:9900" />
+			<node id="10000040" name="IF-afunms_Tomcat-server_9900" />
+		</node>
+	</Tree>
+	<alarms>
+		<alarm id="1" alias="路由器_C3640_192.168.100.1" group="测试组" status="升级"
+			alarmImage="config/level_normal.gif"
+			returnType="js:methodName" returnUrl=""
+			content="设备接口[Dialer0]_下行带宽利用率,连续3次阀值越界.阀值=80%,告警前值=696%,告警触发值=1427%"
+			logTime="2010-04-16 13:58:14" detailUrl="" deleteUrl="" ip="" />
+	</alarms>
+</BusinessView>
+

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx" 
+			   xmlns:view="com.shine.featuresView.view.*"
+			   initialize="{init()}" >
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import com.shine.featuresView.control.MainContorl;
+			import com.shine.featuresView.model.BusinessModel;
+			import com.shine.framework.core.model.XmlModel;
+			import com.shine.framework.core.util.BaseHttpServiceUtil;
+			import com.shine.framework.core.util.DataUtil;
+			import com.shine.topo.util.TopoNodeArrayCollection;
+			import com.shine.topo.view.node.BaseNodeContainer;
+			
+			import mx.controls.Alert;
+			
+			private function init():void{
+				var dataUrl:String=ExternalInterface.call("getXMLURL");
+				MainContorl.getInstance().put("dataUrl",dataUrl);
+				ExternalInterface.addCallback("setXMLUrl",setXMLUrl);
+				ExternalInterface.addCallback("getXML",getXML);
+				ExternalInterface.addCallback("postXml",postXml);
+				
+				if(this.parameters.dataUrl!=null){
+					MainContorl.getInstance().put("dataUrl",String(this.parameters.dataUrl));
+				}
+			}
+			
+			public function setXMLUrl(value:String):void{
+				Alert.show(value);
+				MainContorl.getInstance().put("dataUrl",value);
+				
+				mainContainer.initXml();
+			}
+			
+			public function getXML():String{
+//				for each(var baseNodeContainer:BaseNodeContainer in MainContorl.getInstance().get("TopoNodeArrayCollection") as TopoNodeArrayCollection){
+//					baseNodeContainer.savePoint();
+//					(MainContorl.getInstance().get("XmlModel") as XmlModel).editXml("Node",["id"],[baseNodeContainer.baseXmlModel.getString("id")],["x","y"],[String(baseNodeContainer.ox),String(baseNodeContainer.oy)]);
+//				}
+//				Alert.show(DataUtil.StringReplaceAll((MainContorl.getInstance().get("XmlModel") as XmlModel).getXml(),"&","#"));
+				//return DataUtil.StringReplaceAll((MainContorl.getInstance().get("XmlModel") as XmlModel).getXml(),"&","#");
+				
+				postXml((MainContorl.getInstance().get("BusinessModel") as BusinessModel).getString("saveUrl"));
+				return "";
+			}
+			
+			public function postXml(value:String){
+				for each(var baseNodeContainer:BaseNodeContainer in MainContorl.getInstance().get("TopoNodeArrayCollection") as TopoNodeArrayCollection){
+					baseNodeContainer.savePoint();
+					(MainContorl.getInstance().get("XmlModel") as XmlModel).editXml("Node",["id"],[baseNodeContainer.baseXmlModel.getString("id")],["x","y"],[String(baseNodeContainer.ox),String(baseNodeContainer.oy)]);
+				}
+				
+				var obj:Object = new Object();
+				obj.xml = DataUtil.StringReplaceAll((MainContorl.getInstance().get("XmlModel") as XmlModel).getXml(),"#","&");
+				
+				
+				var baseHttpService:BaseHttpServiceUtil=new BaseHttpServiceUtil;
+				baseHttpService.postResultXml(value,null,obj);
+			}
+		]]>
+	</fx:Script>
+	<view:MainContainer id="mainContainer" width="100%" height="100%" />
+</s:Application>
