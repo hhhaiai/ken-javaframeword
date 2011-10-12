@@ -1,5 +1,7 @@
 package com.shine.AutoDiscovery;
 
+import com.shine.AutoDiscovery.utils.DiscoveryHelper;
+
 public class Example {
 
 	/**
@@ -8,7 +10,10 @@ public class Example {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		DiscoveryHelper helper = new DiscoveryHelper(
+				"10.144.199.1,192.168.1.1-192.168.1.10", "", "", "", "");
+
+		helper.startDiscovery();
 
 	}
 
