@@ -1,6 +1,7 @@
 package com.shine.MultiProcess;
 
 import com.shine.MultiProcess.utils.ProcessMap;
+import com.shine.MultiProcess.utils.ProcessUtils;
 
 /**
  * 多进程管理器
@@ -14,7 +15,7 @@ public class MultiProcessManager {
 	// 进程容器
 	private ProcessMap processMap = new ProcessMap();
 	// jvm path
-	private String jvmPath = "";
+	private String jvmPath = "java";
 
 	public static MultiProcessManager getManager() {
 		return manager;
@@ -32,8 +33,9 @@ public class MultiProcessManager {
 
 	}
 
-	public void addProcessByJar(String name, String jarPath) {
-
+	public void addProcessByJar(String name, String jarPath, String... args) {
+		System.out.println(ProcessUtils.createJarCommon(this.jvmPath, jarPath,
+				args));
 	}
 
 	public void closeProcess(String name) {

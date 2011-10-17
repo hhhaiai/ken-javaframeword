@@ -11,8 +11,11 @@ public class MultiProcessThreadModel extends ThreadModel {
 
 	@Override
 	public void excute(Object... args) {
-		// TODO Auto-generated method stub
+		if (args.length != 0) {
 
+		} else {
+          System.err.println();
+		}
 	}
 
 }
