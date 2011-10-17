@@ -14,7 +14,7 @@ public class MultiProcessThreadModel extends ThreadModel {
 		if (args.length != 0) {
 
 		} else {
-          System.err.println();
+          System.err.println("多进程参数出错，请修改.....");
 		}
 	}
 

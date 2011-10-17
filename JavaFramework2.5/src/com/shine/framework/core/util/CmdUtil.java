@@ -7,7 +7,7 @@ import java.io.InputStreamReader;
 
 public class CmdUtil {
 	/**
-	 * 执行cmd命令
+	 * 批量执行cmd命令
 	 * 
 	 * @param cmd
 	 */
