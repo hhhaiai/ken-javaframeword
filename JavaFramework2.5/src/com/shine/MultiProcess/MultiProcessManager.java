@@ -1,11 +1,20 @@
 package com.shine.MultiProcess;
 
-import com.shine.MultiProcess.utils.ProcessUtils;
+import com.shine.MultiProcess.utils.ProcessMap;
 
+/**
+ * 多进程管理器
+ * 
+ * @author viruscodecn@gmail.com
+ * 
+ */
 public class MultiProcessManager {
 	private static MultiProcessManager manager = new MultiProcessManager();
-	
-	private ProcessUtils processUtil=new ProcessUtils();
+
+	// 进程容器
+	private ProcessMap processMap = new ProcessMap();
+	// jvm path
+	private String jvmPath = "";
 
 	public static MultiProcessManager getManager() {
 		return manager;
@@ -19,7 +28,11 @@ public class MultiProcessManager {
 
 	}
 
-	public void addProcess(String name, String jarPath) {
+	public void addProcess(String name, String... common) {
+
+	}
+
+	public void addProcessByJar(String name, String jarPath) {
 
 	}
 
@@ -33,5 +46,13 @@ public class MultiProcessManager {
 
 	public String operaProcess(String name, String commnd) {
 		return null;
+	}
+
+	public String getJvmPath() {
+		return jvmPath;
+	}
+
+	public void setJvmPath(String jvmPath) {
+		this.jvmPath = jvmPath;
 	}
 }
