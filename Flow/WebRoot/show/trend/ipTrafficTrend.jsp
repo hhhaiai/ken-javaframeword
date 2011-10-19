@@ -33,7 +33,7 @@ var params =
 var flashVars = 
 {
 	path: "${jsPath}amcharts/flash/",
-	chart_data: "2001-09-01;0.389\n2002-09-02;0.404\n2003-09-01;0.415\n2004-09-01;0.422\n2005-09-01;0.426",
+	chart_data: "09-01;389\n09-02;404\n09-03;415\n09-04;422\n09-05;426",
 	chart_settings: "<settings><hide_bullets_count>18</hide_bullets_count><data_type>csv</data_type><plot_area><margins><left>50</left><right>40</right><top>55</top><bottom>30</bottom></margins></plot_area><grid><x><alpha>10</alpha><approx_count>8</approx_count></x><y_left><alpha>10</alpha></y_left></grid><axes><x><width>1</width><color>0D8ECF</color></x><y_left><width>1</width><color>0D8ECF</color></y_left></axes><indicator><color>0D8ECF</color><x_balloon_text_color>FFFFFF</x_balloon_text_color><line_alpha>50</line_alpha><selection_color>0D8ECF</selection_color><selection_alpha>20</selection_alpha></indicator><zoom_out_button><text_color_hover>FF0F00</text_color_hover></zoom_out_button><help><button><color>FCD202</color><text_color>000000</text_color><text_color_hover>FF0F00</text_color_hover></button><balloon><color>FCD202</color><text_color>000000</text_color></balloon></help><graphs><graph gid='0'><title>IP流量</title><color>B0DE09</color><color_hover>FF0F00</color_hover><line_width>2</line_width><fill_alpha>30</fill_alpha><bullet>round</bullet></graph></graphs><labels><label lid='0'><text><![CDATA[<b>IP流量趋势</b>]]></text><y>15</y><text_size>16</text_size><align>center</align></label></labels></settings>"
 };
 swfobject.embedSWF("${jsPath}amcharts/flash/amline.swf", "chartdiv", "600", "400", "8.0.0", "${jsPath}amcharts/flash/expressInstall.swf", flashVars, params);
