@@ -24,7 +24,7 @@ public class DetailGenericDao extends GenericDao {
 		// 查询IP
 		if (sql != null) {
 			DBModel dbModel =
-				DBUtil.getInstance().executeQuery(GenericDao.JNDI_MONETDB, sql);
+				DBUtil.getInstance().executeQuery(GenericDao.JNDI_DEFAULT, sql);
 			try {
 				dbModel.next();
 			} catch (SQLException e) {
@@ -36,7 +36,7 @@ public class DetailGenericDao extends GenericDao {
 		}
 		// 查询总页数
 		DBModel dbModelCount =
-			DBUtil.getInstance().executeQuery(GenericDao.JNDI_MONETDB, count);
+			DBUtil.getInstance().executeQuery(GenericDao.JNDI_DEFAULT, count);
 		try {
 			dbModelCount.next();
 		} catch (SQLException e) {

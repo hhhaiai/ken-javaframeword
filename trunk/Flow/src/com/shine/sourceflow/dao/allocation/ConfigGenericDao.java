@@ -30,7 +30,7 @@ public abstract class ConfigGenericDao extends GenericDao {
 		// 查询数据
 		Map<String, DBModel> dbModels = new HashMap<String, DBModel>();
 		String sql = this.createQuerySql();
-		DBModel dbModel = DBUtil.getInstance().executeQuery(GenericDao.JNDI_MONETDB, sql);
+		DBModel dbModel = DBUtil.getInstance().executeQuery(GenericDao.JNDI_DEFAULT, sql);
 		try {
 			dbModel.next();
 		} catch (SQLException e) {
@@ -59,7 +59,7 @@ public abstract class ConfigGenericDao extends GenericDao {
 	public Map<String, DBModel> listById(GenericDto dto) {
 		String sql = this.createQuerySql(dto);
 		Map<String, DBModel> dbModels = new HashMap<String, DBModel>();
-		DBModel dbModel = DBUtil.getInstance().executeQuery(GenericDao.JNDI_MONETDB, sql);
+		DBModel dbModel = DBUtil.getInstance().executeQuery(GenericDao.JNDI_DEFAULT, sql);
 		try {
 			dbModel.next();
 		} catch (SQLException e) {
@@ -135,7 +135,7 @@ public abstract class ConfigGenericDao extends GenericDao {
 	 */
 	public int count(GenericDto dto) {
 		String sql = "select count(1) as total from " + this.getTableName();
-		DBModel dbModel = DBUtil.getInstance().executeQuery(JNDI_MONETDB, sql);
+		DBModel dbModel = DBUtil.getInstance().executeQuery(JNDI_DEFAULT, sql);
 		try {
 			dbModel.next();
 		} catch (SQLException e) {
