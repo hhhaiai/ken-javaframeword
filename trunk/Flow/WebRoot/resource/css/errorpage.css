@@ -1,0 +1,85 @@
+@charset "utf-8";
+body {
+	background:#ECF5FD;
+	font-size:14px;
+}
+.content{
+	margin:2% auto;
+}
+.circular {
+	border:0px solid red;
+	background:#F5FAFE;
+	width:70%;
+}
+.btn {
+	background:url(../image/default/mix/errorpage/btn.gif);
+	color: #FFF;
+	border: 0px;
+	width: 75px;
+	height: 30px;
+	float: right;
+	margin-top: 9%;
+}
+.btn_over {
+	background:url(../image/default/mix/errorpage/btn_over.gif);
+	color: #FFF;
+	border: 0px;
+	width: 75px;
+	height: 30px;
+	float: right;
+	margin-top: 9%;
+}
+.circular .td1 {
+	width:9px;
+	height:9px;
+	background: url(../image/default/mix/errorpage/circular_bg4.gif) 0 0px no-repeat;
+}
+.circular .td2 {
+	height:9px;
+	background: url(../image/default/mix/errorpage/circular_bg2.gif) 0 0px repeat-x;
+}
+.circular .td3 {
+	width:9px;
+	height:9px;
+	background: url(../image/default/mix/errorpage/circular_bg4.gif) 0 -10px no-repeat;
+}
+.circular .td4 {
+	width:9px;
+	height:9px;
+	background: url(../image/default/mix/errorpage/circular_bg3.gif) -11px 0px repeat-y;
+}
+.circular .td5 {
+	width:9px;
+	height:9px;
+	background: url(../image/default/mix/errorpage/circular_bg4.gif) 0px -20px no-repeat;
+}
+.circular .td6 {
+	height:9px;
+	background: url(../image/default/mix/errorpage/circular_bg2.gif) 0px -10px repeat-x;
+}
+.circular .td7 {
+	width:9px;
+	height:9px;
+	background: url(../image/default/mix/errorpage/circular_bg4.gif) 0 -30px no-repeat;
+}
+.circular .td8 {
+	width:9px;
+	height:9px;
+	background: url(../image/default/mix/errorpage/circular_bg3.gif) 0 0px repeat-y;
+}
+.err_title{
+	line-height:20px;
+	padding-left:10px;
+}
+#mainInfo{
+	text-align:left;
+	line-height:20px;
+	padding:10px;
+}
+.details{
+	padding:10px;
+	line-height:20px;
+	color:red;
+	display:none;
+	overflow:hidden;
+}
