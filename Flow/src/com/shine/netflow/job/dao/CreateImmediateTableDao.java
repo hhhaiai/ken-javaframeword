@@ -18,17 +18,21 @@ public class CreateImmediateTableDao extends GenericDao {
 	 */
 	public void createTable() {
 		// 创建MYSQL数据表
-		DBUtil.getInstance().executeBatchUpdate(JNDI_MYSQL, this.createMysqlSqls());
-		// 创建MONETDB数据表
-		if (!this.checkCurrentTableExists()) {
-			String createCurMonthSql = NetflowHelper.getHelper().createMonetDBTableSql(
-					TableUtil.getCurrentMonthTable());
-			DBUtil.getInstance().executeUpdate(JNDI_MONETDB, createCurMonthSql);
+		if (DBManager.getInstance().isDBPoolExists(JNDI_MYSQL)) {
+			DBUtil.getInstance().executeBatchUpdate(JNDI_MYSQL, this.createMysqlSqls());
 		}
-		if (!this.checkNextMonthTableExists()) {
-			String createNextMonthSql = NetflowHelper.getHelper().createMonetDBTableSql(
-					TableUtil.getNextMonthTable());
-			DBUtil.getInstance().executeUpdate(JNDI_MONETDB, createNextMonthSql);
+		// 创建MONETDB数据表
+		if (DBManager.getInstance().isDBPoolExists(JNDI_MONETDB)) {
+			if (!this.checkCurrentTableExists()) {
+				String createCurMonthSql = NetflowHelper.getHelper().createMonetDBTableSql(
+						TableUtil.getCurrentMonthTable());
+				DBUtil.getInstance().executeUpdate(JNDI_MONETDB, createCurMonthSql);
+			}
+			if (!this.checkNextMonthTableExists()) {
+				String createNextMonthSql = NetflowHelper.getHelper().createMonetDBTableSql(
+						TableUtil.getNextMonthTable());
+				DBUtil.getInstance().executeUpdate(JNDI_MONETDB, createNextMonthSql);
+			}
 		}
 	}
 
