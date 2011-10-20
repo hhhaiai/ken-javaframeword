@@ -23,7 +23,7 @@ public abstract class ShowGenericDao extends GenericDao {
 		if (sql.length > 1 && sql[0] != null && sql[1] != null) {
 			// 根据源IP查询数据
 			DBModel dbModelSrcip =
-				DBUtil.getInstance().executeQuery(GenericDao.JNDI_MONETDB, sql[0]);
+				DBUtil.getInstance().executeQuery(GenericDao.JNDI_DEFAULT, sql[0]);
 			try {
 				dbModelSrcip.next();
 			} catch (SQLException e) {
@@ -33,7 +33,7 @@ public abstract class ShowGenericDao extends GenericDao {
 			}
 			// 根据目标IP查询数据
 			DBModel dbModelDstip = 
-				DBUtil.getInstance().executeQuery(GenericDao.JNDI_MONETDB, sql[1]);
+				DBUtil.getInstance().executeQuery(GenericDao.JNDI_DEFAULT, sql[1]);
 			try {
 				dbModelDstip.next();
 			} catch (SQLException e) {
@@ -43,7 +43,7 @@ public abstract class ShowGenericDao extends GenericDao {
 			}
 			// 查询总流量
 			DBModel dbModelSum =
-				DBUtil.getInstance().executeQuery(GenericDao.JNDI_MONETDB, sum);
+				DBUtil.getInstance().executeQuery(GenericDao.JNDI_DEFAULT, sum);
 			try {
 				dbModelSum.next();
 			} catch (SQLException e) {
