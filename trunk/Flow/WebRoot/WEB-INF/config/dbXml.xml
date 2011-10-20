@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <config cache="true" cacheTime="600" cachePath="cache">
     <!-- Mysql数据库 -->
-	<Resource jndi="jdbc/flow" driverClass="com.mysql.jdbc.Driver"
-		dbUserName="root" dbPassWord="root"
-		jdbcUrl="jdbc:mysql://127.0.0.1:3306/flow?useUnicode=true&amp;characterEncoding=utf-8"
-		initSize="20" minPoolSize="20" maxPoolSize="100" maxStatements="100"
-		maxIdleTime="100" />
+    <Resource jndi="jdbc/flow" driverClass="com.mysql.jdbc.Driver"
+        dbUserName="root" dbPassWord="root"
+        jdbcUrl="jdbc:mysql://192.168.2.18:6666/flow?useUnicode=true&amp;characterEncoding=utf-8"
+        initSize="10" minPoolSize="10" maxPoolSize="20" maxStatements="20"
+        maxIdleTime="100" />
     <!-- monetDB数据库 -->
     <Resource jndi="jdbc/MonetDB" driverClass="nl.cwi.monetdb.jdbc.MonetDriver"
-        dbUserName="monetdb" dbPassWord="monetdb" jdbcUrl="jdbc:monetdb://127.0.0.1:50000/demo"
-        initSize="20" minPoolSize="20" maxPoolSize="100" maxStatements="100"
+        dbUserName="monetdb" dbPassWord="monetdb" jdbcUrl="jdbc:monetdb://192.168.2.18:50000/demo"
+        initSize="10" minPoolSize="10" maxPoolSize="20" maxStatements="20"
         maxIdleTime="100" />
     <!-- 集群 -->
     <Cluster jndiCluster="jdbc/Cluster" mainDB="jdbc/flow">
