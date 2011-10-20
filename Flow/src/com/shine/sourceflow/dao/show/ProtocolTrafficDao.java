@@ -21,7 +21,7 @@ public class ProtocolTrafficDao extends ShowGenericDao {
 			DecimalFormat bytesFormat, double bytesSum) {
 		for (int i = 0; i < srcDBModel.size(); i++) {
 			// 计算源端口协议总流量
-			Double srcProtocolTotal = Double.parseDouble(srcDBModel.get(i).get("total_bytes"));
+			double srcProtocolTotal = Double.parseDouble(srcDBModel.get(i).get("total_bytes"));
 			String srcProtocolTotalFormat = bytesFormat.format(srcProtocolTotal / 1048576);
 			Double computeSrcProtocolPer = (srcProtocolTotal / bytesSum) * 100;
 			String srcProtocolPercentage = perFormat.format(computeSrcProtocolPer);
@@ -31,14 +31,17 @@ public class ProtocolTrafficDao extends ShowGenericDao {
 			// 计算目标端口协议总流量
 			String dstProtocolTotalFormat = "0";
 			String dstProtocolPercentage = "0";
+			double dstProtocolTotal = 0;
 			if (dstDBModel.size() > i) {
-				double dstProtocolTotal = Double.parseDouble(dstDBModel.get(i).get("total_bytes"));
+				dstProtocolTotal = Double.parseDouble(dstDBModel.get(i).get("total_bytes"));
 				dstProtocolTotalFormat = bytesFormat.format(dstProtocolTotal / 1048576);
 				double computeDstProtocolPer = (srcProtocolTotal / bytesSum) * 100;
 				dstProtocolPercentage = perFormat.format(computeDstProtocolPer);
 			}
 			srcDBModel.get(i).put("dst_protocol_total", dstProtocolTotalFormat);
 			srcDBModel.get(i).put("dst_protocol_percentage", dstProtocolPercentage);
+			
+			srcDBModel.get(i).put("protocol_total", bytesFormat.format((srcProtocolTotal + dstProtocolTotal) / 1048576));
 		}
 		dbModels.put(GenericAction.DATA_DEFAULT, srcDBModel);
 	}

@@ -137,6 +137,7 @@ swfobject.embedSWF("${jsPath}amcharts/flash/amcolumn2.swf", "chartdiv", "100%", 
             <tr>
                 <td><s:property value="#dbModel.index + 1" /></td>
                 <td><a href="javascript:void(0);"><s:property value="dbModels['default'][#dbModel.index]['session_alias']" /></a></td>
+                <td><s:property value="dbModels['default'][#dbModel.index]['session_total']" /></td>
                 <td><s:property value="dbModels['default'][#dbModel.index]['src_session_total']" /></td>
                 <td><span ctype="ProgressBar" barSkin="green" progress="<s:property value="dbModels['default'][#dbModel.index]['src_session_percentage']" />"></span></td>
                 <td><s:property value="dbModels['default'][#dbModel.index]['src_session_percentage']" />%</td>
