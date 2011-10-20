@@ -463,6 +463,16 @@ public class DBManager extends HashMap<String, DBPool> {
 		return null;
 	}
 
+	/**
+	 * 判断指定JNDI的数据库连接池是否存在
+	 * 
+	 * @param jndi
+	 * @return
+	 */
+	public boolean isDBPoolExists(String jndi) {
+		return map.get(jndi) == null ? false : true;
+	}
+	
 	public String getXmlfile() {
 		return xmlfile;
 	}
