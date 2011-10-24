@@ -38,7 +38,7 @@ public class NetFlow {
 				"select-therad-size").getText());
 		DBUtil.getInstance().initThreadConfig(bathSqlSize, bathThreadSize,
 				selectThreadSize);
-		DBUtil.getInstance().init(configMgr.getConfigPath() + "dbXML.xml");
+		DBUtil.getInstance().init(configMgr.getConfigPath() + "dbXml.xml");
 		// 启动任务调度
 		JobUtil.getInstance().init();
 		// 加入路由路径
