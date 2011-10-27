@@ -18,19 +18,21 @@ public class FreeThreadModel extends ThreadModel {
 				FreeModelMap map = ThreadPoolManager.getManager().getMap();
 				if (map.containsKey(args[0])) {
 					FreeModel model = map.get(String.valueOf(args[0]));
-					if (model.getJarPath() != null
-							&& model.getJarPath().length() != 0) {
+					if (model.getFreeModelType().equals("jar")) {
 						JarLoader.executeJarClass(model.getJarPath(), model
 								.getClassPath(), model.getMethod(),
 								getArgs(args));
-					} else {
+					} else if (model.getFreeModelType().equals("class")) {
 						ReflectionUtil.invokeMethod(model.getClassPath(), model
+								.getMethod(), getArgs(args));
+					} else if (model.getFreeModelType().equals("object")) {
+						ReflectionUtil.invokeMethod(model.getO(), model
 								.getMethod(), getArgs(args));
 					}
 					model = null;
 				}
 				map = null;
-			} 
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

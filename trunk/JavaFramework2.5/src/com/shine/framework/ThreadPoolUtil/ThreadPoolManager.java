@@ -311,6 +311,14 @@ public class ThreadPoolManager {
 		return "thread" + DateUtil.getCurrentDateTimeDetailAsId();
 	}
 
+	/**
+	 * 加入线程处理器
+	 * 
+	 * @param modleName
+	 * @param jarPath
+	 * @param classPath
+	 * @param method
+	 */
 	public void putFreeModel(String modleName, String jarPath,
 			String classPath, String method) {
 		FreeModel model = new FreeModel(jarPath, classPath, method);
@@ -318,6 +326,37 @@ public class ThreadPoolManager {
 		model = null;
 	}
 
+	/**
+	 * 加入线程处理器
+	 * 
+	 * @param modleName
+	 * @param o
+	 * @param method
+	 */
+	public void putFreeModel(String modleName, Object o, String method) {
+		FreeModel model = new FreeModel(o, method);
+		map.put(modleName, model);
+		model = null;
+	}
+
+	/**
+	 * 加入线程处理器
+	 * 
+	 * @param modleName
+	 * @param classPath
+	 * @param method
+	 */
+	public void putFreeModel(String modleName, String classPath, String method) {
+		FreeModel model = new FreeModel(classPath, method);
+		map.put(modleName, model);
+		model = null;
+	}
+
+	/**
+	 * 删除线程处理器
+	 * 
+	 * @param modleName
+	 */
 	public void deleteFreeModel(String modleName) {
 		map.remove(modleName);
 	}
