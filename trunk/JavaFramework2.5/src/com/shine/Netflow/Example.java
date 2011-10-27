@@ -12,11 +12,12 @@ public class Example {
 
 		// 加入路由路径
 		NetflowManager.getManager().getRouteMap().put("198.168.1.1", "0");
+		NetflowManager.getManager().getRouteMap().put("1.1.1.1", "1");
 		// 加入处理接口
 		NetflowManager.getManager().getNetflowHandleMap().put("print",
 				new NetFlowImpl());
 		// 启动接收
-		NetflowManager.getManager().startReceiver("127.0.0.1", 6696, 10, 2);
+		NetflowManager.getManager().startReceiver("192.168.12.2", 6696, 1, 2);
 	}
 
 }
