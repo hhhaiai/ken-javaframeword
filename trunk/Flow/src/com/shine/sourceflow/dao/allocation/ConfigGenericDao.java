@@ -64,8 +64,9 @@ public abstract class ConfigGenericDao extends GenericDao {
 			dbModel.next();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			dbModel.close();
 		}
-		dbModel.close();
 		dbModels.put(GenericAction.DATA_DEFAULT, dbModel);
 		return dbModels;
 	}
@@ -140,6 +141,8 @@ public abstract class ConfigGenericDao extends GenericDao {
 			dbModel.next();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			dbModel.close();
 		}
 		return Integer.parseInt(dbModel.get(0).get("total"));
 	}
