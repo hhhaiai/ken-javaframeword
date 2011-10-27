@@ -68,5 +68,7 @@
 	<classpathentry kind="lib" path="lib/xom-1.2.5.jar"/>
 	<classpathentry kind="lib" path="lib/yuicompressor-2.4.6.jar"/>
 	<classpathentry kind="lib" path="E:/workspace/JavaFramework2.5/lib/snmp4j-1.10.2.jar"/>
+	<classpathentry kind="lib" path="lib/DdlUtils-1.0.jar"/>
+	<classpathentry kind="lib" path="lib/snmp4j-1.10.2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

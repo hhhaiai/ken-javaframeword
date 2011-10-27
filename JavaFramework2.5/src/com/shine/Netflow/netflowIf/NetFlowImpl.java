@@ -9,9 +9,9 @@ public class NetFlowImpl implements NetFlowIf {
 	@Override
 	public void handle(List<RawNetFlow> list) {
 	    System.out.println("=========================");
-//		for (RawNetFlow flow : list) {
-//			System.out.println("test:" + flow.toString());
-//		}
+		for (RawNetFlow flow : list) {
+			System.out.println("test:" + flow.toString());
+		}
 		System.out.println("=========================");
 	}
 
