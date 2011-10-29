@@ -1,7 +1,5 @@
 package com.shine.framework.PingUtil;
 
-import com.shine.framework.PingUtil.util.PingUtil;
-
 public class Example {
 
 	/**
