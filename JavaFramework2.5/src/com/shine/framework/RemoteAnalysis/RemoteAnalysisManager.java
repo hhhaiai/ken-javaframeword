@@ -8,10 +8,23 @@ import com.shine.framework.RemoteAnalysis.util.RemotePortScanHelper;
 public class RemoteAnalysisManager {
 	private static RemoteAnalysisManager manager = null;
 
+	private RemotePortScanHelper helper = new RemotePortScanHelper();
+
 	public static RemoteAnalysisManager getManager() {
 		if (manager == null)
 			manager = new RemoteAnalysisManager();
 		return manager;
+	}
+
+	/**
+	 * 测试远程端口是否开启
+	 * 
+	 * @param ip
+	 * @param port
+	 * @return
+	 */
+	public boolean testRemotePort(String ip, int port) {
+		return helper.scanPort(ip, port);
 	}
 
 	/**
@@ -24,7 +37,6 @@ public class RemoteAnalysisManager {
 	 */
 	public List<Integer> scanPort(String ip, int minPort, int maxPort) {
 		List<Integer> list = new ArrayList<Integer>();
-		RemotePortScanHelper helper = new RemotePortScanHelper();
 		for (int i = minPort; i <= maxPort; i++) {
 			if (helper.scanPort(ip, i)) {
 				list.add(i);
