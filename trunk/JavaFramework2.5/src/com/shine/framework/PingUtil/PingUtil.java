@@ -1,4 +1,4 @@
-package com.shine.framework.PingUtil.util;
+package com.shine.framework.PingUtil;
 
 import java.net.InetAddress;
 
