@@ -5,6 +5,12 @@ import java.util.List;
 
 import com.shine.framework.PortScan.util.RemotePortScanHelper;
 
+/**
+ * 端口扫描
+ * 
+ * @author viruscodecn@gmail.com
+ * 
+ */
 public class RemoteScanManager {
 	private static RemoteScanManager manager = null;
 

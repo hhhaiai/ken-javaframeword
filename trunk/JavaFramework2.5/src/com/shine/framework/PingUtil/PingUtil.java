@@ -2,6 +2,12 @@ package com.shine.framework.PingUtil;
 
 import java.net.InetAddress;
 
+/**
+ * ping数据测试联通性
+ * 
+ * @author viruscodecn@gmail.com
+ * 
+ */
 public class PingUtil {
 	/**
 	 * ping测试
