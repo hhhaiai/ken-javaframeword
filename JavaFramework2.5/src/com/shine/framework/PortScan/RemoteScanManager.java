@@ -5,14 +5,14 @@ import java.util.List;
 
 import com.shine.framework.PortScan.util.RemotePortScanHelper;
 
-public class RemoteAnalysisManager {
-	private static RemoteAnalysisManager manager = null;
+public class RemoteScanManager {
+	private static RemoteScanManager manager = null;
 
 	private RemotePortScanHelper helper = new RemotePortScanHelper();
 
-	public static RemoteAnalysisManager getManager() {
+	public static RemoteScanManager getManager() {
 		if (manager == null)
-			manager = new RemoteAnalysisManager();
+			manager = new RemoteScanManager();
 		return manager;
 	}
 
