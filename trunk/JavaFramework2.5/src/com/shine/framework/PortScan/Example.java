@@ -10,7 +10,7 @@ public class Example {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		List<Integer> list = RemoteAnalysisManager.getManager().scanPort(
+		List<Integer> list = RemoteScanManager.getManager().scanPort(
 				"192.168.2.18", 0, 200);
 
 		for (int num : list) {
