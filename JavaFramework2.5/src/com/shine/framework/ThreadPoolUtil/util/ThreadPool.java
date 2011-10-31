@@ -17,6 +17,12 @@ public class ThreadPool extends HashMap<String, SuperThread> {
 		super();
 	}
 
+	/**
+	 * 放入线程
+	 * 
+	 * @param name
+	 * @param thread
+	 */
 	public synchronized void putSuperThread(String name, SuperThread thread) {
 		if (name != null && thread != null) {
 			if (maxThread > this.size())

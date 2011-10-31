@@ -16,7 +16,12 @@ public class NetAnalisysManager {
 	}
 
 	private void addThreadModel() {
-     
+
+	}
+
+	public void startNetScan(String startIp, String endIp, Object o,
+			String methodName) {
+
 	}
 
 }
