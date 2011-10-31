@@ -11,5 +11,12 @@ public class NetAnalisysManager {
 		return manager;
 	}
 
+	public void initThreadModel() {
+
+	}
+
+	private void addThreadModel() {
+     
+	}
 
 }
