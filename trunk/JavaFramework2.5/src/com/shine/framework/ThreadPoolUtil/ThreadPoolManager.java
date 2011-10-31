@@ -29,6 +29,8 @@ public class ThreadPoolManager {
 	private int initThreadPool = 2;
 	// max thread pool size
 	private int maxThreadPool = 100;
+	// 空闲线程
+	private int idleThreadPool = 10;
 
 	public ThreadPoolManager() {
 	}
@@ -266,6 +268,10 @@ public class ThreadPoolManager {
 		}
 		return null;
 	}
+
+//	public int getIdleThreadSize(String type) {
+//
+//	}
 
 	/**
 	 * 删除线程池中的线程
