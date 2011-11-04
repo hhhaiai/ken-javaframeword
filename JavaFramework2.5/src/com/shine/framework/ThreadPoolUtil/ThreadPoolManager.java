@@ -115,6 +115,11 @@ public class ThreadPoolManager {
 		model = null;
 	}
 
+	/**
+	 * 获取空闲线程
+	 * 
+	 * @return
+	 */
 	public synchronized SuperThread getFreeThread() {
 		if (this.getIdleThread("freeThreadModel") != null) {
 			return this.getIdleThread("freeThreadModel");
@@ -269,9 +274,10 @@ public class ThreadPoolManager {
 		return null;
 	}
 
-//	public int getIdleThreadSize(String type) {
-//
+//	public synchronized int getIdleThreadSize(String type) {
+//		return 0;
 //	}
+	
 
 	/**
 	 * 删除线程池中的线程

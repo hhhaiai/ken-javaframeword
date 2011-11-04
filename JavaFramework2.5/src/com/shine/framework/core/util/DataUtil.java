@@ -7,7 +7,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-
 public class DataUtil {
 	/**
 	 * check String
@@ -221,21 +220,23 @@ public class DataUtil {
 		else
 			return null;
 	}
-	
+
 	/**
 	 * 比较两个列表
-	 *
+	 * 
 	 * @param list1
 	 * @param list2
 	 * @return 相同返回true，不同返回false
 	 */
 	public static boolean compare(List list1, List list2) {
-		return DataUtil.isNull(list1) && DataUtil.isNull(list2) || !DataUtil.isNull(list1) && !DataUtil.isNull(list2) && list1.equals(list2);
+		return DataUtil.isNull(list1) && DataUtil.isNull(list2)
+				|| !DataUtil.isNull(list1) && !DataUtil.isNull(list2)
+				&& list1.equals(list2);
 	}
 
 	/**
 	 * 数组转换成列表
-	 *
+	 * 
 	 * @param array
 	 * @return
 	 */
@@ -404,5 +405,17 @@ public class DataUtil {
 	public static int genRandom(int start, int end) {
 		return (int) (end + (start - end) * Math.random());
 	}
-}
 
+	/**
+	 * 生成start和end间的随机数,带小数,保留小数点后2位
+	 * 
+	 * @param start
+	 * @param end
+	 * @return
+	 */
+	public static float genRandomFloat(int start, int end) {
+		return (float) (Math.round((float) ((end * 10 + (start * 10 - end * 10)
+				* Math.random()) / 10) * 100)) / 100;
+	}
+
+}
