@@ -28,8 +28,10 @@ public class UpdateThreadModel extends ThreadModel {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			if (args != null)
+				args = null;
 		}
-
 	}
 
 }

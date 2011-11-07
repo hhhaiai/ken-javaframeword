@@ -59,7 +59,7 @@ public class NetflowRecevice extends UdpRecevice {
 	 * 接收到数据
 	 */
 	@Override
-	public void recevice(String ip, int port, byte[] data) {
+	public synchronized void recevice(String ip, int port, byte[] data) {
 		if (list.size() > cache) {
 			if (ThreadPoolManager.getManager().getIdleThread("netflowProcess") != null) {
 
@@ -71,6 +71,7 @@ public class NetflowRecevice extends UdpRecevice {
 				NetflowManager.getManager().autoUpdate(port);
 				list.clear();
 			}
+			list.clear();
 		} else {
 			int versionNum = NetFlowUtil.toIntNumber(data, 0, 2);
 			if ((versionNum > 9) || (versionNum <= 0)) {
