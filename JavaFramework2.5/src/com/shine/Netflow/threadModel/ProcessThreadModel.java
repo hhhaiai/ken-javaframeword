@@ -37,18 +37,23 @@ public class ProcessThreadModel extends ThreadModel {
 					flowResults.add(TranslatorHelper.getHelper().translator(
 							flow.getRouteId(), flow.getNetflowData()));
 				}
-				flows = null;
 
 				// 获取处理器
 				for (NetFlowIf netflowIf : NetflowManager.getManager()
 						.getNetflowHandleMap().values()) {
 					netflowIf.handle((List) ((ArrayList) flowResults).clone());
 				}
-				flowResults.clear();
 				args = null;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			if (flows != null)
+				flows = null;
+			flowResults.clear();
+
+			if (args != null)
+				args = null;
 		}
 	}
 }
