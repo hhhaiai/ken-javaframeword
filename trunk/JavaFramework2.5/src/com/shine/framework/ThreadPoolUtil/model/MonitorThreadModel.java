@@ -7,8 +7,7 @@ public class MonitorThreadModel extends ThreadModel {
 	public MonitorThreadModel() {
 		this.setThreadName("MonitorThread");
 		this.setType("MonitorThreadModel");
-		//this.setTimeOut(300000);
-		this.setTimeOut(1000);
+		this.setTimeOut(600000);
 	}
 
 	@Override
