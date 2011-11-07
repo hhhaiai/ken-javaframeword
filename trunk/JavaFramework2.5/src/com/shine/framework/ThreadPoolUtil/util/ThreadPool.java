@@ -1,6 +1,9 @@
 package com.shine.framework.ThreadPoolUtil.util;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 线程池容器
@@ -33,6 +36,21 @@ public class ThreadPool extends HashMap<String, SuperThread> {
 		} else {
 			System.out.println("系统出错，无法加入新的线程 ");
 		}
+	}
+
+	/**
+	 * 获取所有的类型
+	 * 
+	 * @return
+	 */
+	public List<String> getAllTypes() {
+		List<String> list = new ArrayList<String>();
+		for (Map.Entry<String, SuperThread> entry : this.entrySet()) {
+			if (!list.contains(entry.getValue().getType())) {
+				list.add(entry.getValue().getType());
+			}
+		}
+		return list;
 	}
 
 	public int getMaxThread() {
