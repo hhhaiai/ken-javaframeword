@@ -1,9 +1,11 @@
 package com.shine.framework.ThreadPoolUtil;
 
+import java.util.List;
 import java.util.Map;
 
 import com.shine.framework.ThreadPoolUtil.model.FreeModel;
 import com.shine.framework.ThreadPoolUtil.model.FreeThreadModel;
+import com.shine.framework.ThreadPoolUtil.model.MonitorThreadModel;
 import com.shine.framework.ThreadPoolUtil.model.ThreadModel;
 import com.shine.framework.ThreadPoolUtil.util.FreeModelMap;
 import com.shine.framework.ThreadPoolUtil.util.SuperThread;
@@ -51,6 +53,7 @@ public class ThreadPoolManager {
 	 * 启动线程池
 	 */
 	public synchronized void startThreadPool() {
+		this.addThread(new MonitorThreadModel());
 		if (!this.state) {
 			for (Map.Entry<String, SuperThread> entry : pool.entrySet()) {
 				entry.getValue().start();
@@ -73,6 +76,12 @@ public class ThreadPoolManager {
 		this.startThreadPool();
 	}
 
+	/**
+	 * 初始化自由线程
+	 * 
+	 * @param initThreadPool
+	 * @param maxThreadPool
+	 */
 	public void initFreeThreadPool(int initThreadPool, int maxThreadPool) {
 		this.initThreadPool = initThreadPool;
 		this.maxThreadPool = maxThreadPool;
@@ -159,7 +168,7 @@ public class ThreadPoolManager {
 	 * 
 	 * @param model
 	 */
-	public void addThread(ThreadModel model) {
+	public synchronized void addThread(ThreadModel model) {
 		model = checkThreadModel(model);
 
 		addThread(new SuperThread(model));
@@ -170,7 +179,7 @@ public class ThreadPoolManager {
 	 * 
 	 * @param thread
 	 */
-	public void addThread(SuperThread thread) {
+	public synchronized void addThread(SuperThread thread) {
 		thread = checkSuperThread(thread);
 
 		pool.putSuperThread(thread.getThreadModel().getThreadName(), thread);
@@ -187,7 +196,7 @@ public class ThreadPoolManager {
 	 * 
 	 * @param threadName
 	 */
-	public void killThread(String threadName) {
+	public synchronized void killThread(String threadName) {
 		if (this.state) {
 			for (Map.Entry<String, SuperThread> entry : pool.entrySet()) {
 				entry.getValue().setState(false);
@@ -249,7 +258,7 @@ public class ThreadPoolManager {
 	 * 
 	 * @return
 	 */
-	public SuperThread getIdleThread() {
+	public synchronized SuperThread getIdleThread() {
 		for (Map.Entry<String, SuperThread> entry : pool.entrySet()) {
 			if (!entry.getValue().isBusy()) {
 				return entry.getValue();
@@ -264,7 +273,7 @@ public class ThreadPoolManager {
 	 * @param type
 	 * @return
 	 */
-	public SuperThread getIdleThread(String type) {
+	public synchronized SuperThread getIdleThread(String type) {
 		for (Map.Entry<String, SuperThread> entry : pool.entrySet()) {
 			if (entry.getValue().getType().equals(type)
 					&& !entry.getValue().isBusy()) {
@@ -274,18 +283,39 @@ public class ThreadPoolManager {
 		return null;
 	}
 
-//	public synchronized int getIdleThreadSize(String type) {
-//		return 0;
-//	}
-	
+	/**
+	 * 获取空闲线程数
+	 * 
+	 * @param type
+	 * @return
+	 */
+	public synchronized int getIdleThreadSize(String type) {
+		int num = 0;
+		for (Map.Entry<String, SuperThread> entry : pool.entrySet()) {
+			if (entry.getValue().getType().equals(type)
+					&& !entry.getValue().isBusy()) {
+				num++;
+			}
+		}
+		return num;
+	}
 
 	/**
 	 * 删除线程池中的线程
 	 * 
 	 * @param threadName
 	 */
-	public void deleteThread(String threadName) {
+	public synchronized void deleteThread(String threadName) {
 		pool.remove(threadName);
+	}
+
+	/**
+	 * 删除池中的线程
+	 * 
+	 * @param superThread
+	 */
+	public synchronized void deleteThread(SuperThread superThread) {
+		pool.remove(superThread.getThreadModel().getThreadName());
 	}
 
 	/**
@@ -293,7 +323,7 @@ public class ThreadPoolManager {
 	 * 
 	 * @param type
 	 */
-	public void deleteThreadType(String type) {
+	public synchronized void deleteThreadType(String type) {
 		for (Map.Entry<String, SuperThread> entry : pool.entrySet()) {
 			if (entry.getValue().getType().equals(type)) {
 				pool.remove(entry.getValue().getName());
@@ -372,6 +402,60 @@ public class ThreadPoolManager {
 	 */
 	public void deleteFreeModel(String modleName) {
 		map.remove(modleName);
+	}
+
+	/**
+	 * 回收空闲线程
+	 * 
+	 * @param type
+	 * @param idleThreadSize
+	 */
+	public synchronized void recoverIdleThreadModel(String type,
+			int idleThreadSize) {
+		if (idleThreadSize < this.getIdleThreadSize(type)) {
+			int recoverSize = this.getIdleThreadSize(type) - idleThreadSize;
+			System.out.println("回收线程类型：" + type + " 回收线程数：" + recoverSize);
+			for (int i = 0; i < recoverSize; i++) {
+				this.deleteThread(this.getIdleThread(type));
+			}
+		}
+	}
+
+	/**
+	 * 回收空闲线程
+	 * 
+	 * @param type
+	 */
+	public synchronized void recoverIdleThreadModel(String type) {
+		recoverIdleThreadModel(type, idleThreadPool);
+	}
+
+	/**
+	 * 回收空闲线程
+	 * 
+	 * @param idleThreadSize
+	 */
+	public synchronized void recoverFreeIdleThreadModel(int idleThreadSize) {
+		recoverIdleThreadModel("freeThreadModel", idleThreadSize);
+	}
+
+	/**
+	 * 回收空闲线程
+	 */
+	public synchronized void recoverFreeIdleThreadModel() {
+		recoverIdleThreadModel("freeThreadModel", idleThreadPool);
+	}
+
+	/**
+	 * 回收所有类型的空闲线程
+	 */
+	public synchronized void recoverAllIdleThreadModel() {
+		List<String> list = pool.getAllTypes();
+		if (list != null) {
+			for (String type : list) {
+				recoverIdleThreadModel(type);
+			}
+		}
 	}
 
 	public ThreadPool getPool() {
