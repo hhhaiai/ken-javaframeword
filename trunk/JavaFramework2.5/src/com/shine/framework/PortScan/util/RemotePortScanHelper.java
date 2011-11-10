@@ -27,6 +27,7 @@ public class RemotePortScanHelper {
 			try {
 				if (testPort != null)
 					testPort.close();
+				testPort = null;
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
