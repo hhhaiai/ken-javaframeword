@@ -164,8 +164,8 @@ swfobject.embedSWF("${jsPath}amcharts/flash/ampie.swf", "chartdivdst", "100%", "
             	<td><s:property value="#dbModel.index + 1" /></td>
             	<td><a href="javascript:void(0);" onclick="showDetail('<s:property value="dbModels['ipSrc'][#dbModel.index]['src_ip']" />', 1);"><s:property value="dbModels['ipSrc'][#dbModel.index]['src_ip']" /></a></td>
                 <td><s:property value="dbModels['ipSrc'][#dbModel.index]['format_bytes_total']" /></td>
-                <td><span ctype="ProgressBar" barSkin="green" progress="<s:property value="dbModels['ipDst'][#dbModel.index]['percentage']" />"></td>
-                <td></span><s:property value="dbModels['ipDst'][#dbModel.index]['percentage']" />%</td>
+                <td><span ctype="ProgressBar" barSkin="green" progress="<s:property value="dbModels['ipSrc'][#dbModel.index]['percentage']" />"></td>
+                <td></span><s:property value="dbModels['ipSrc'][#dbModel.index]['percentage']" />%</td>
                 <td><img style="cursor:pointer" height="14" width="14" src="${rootPath}resource/image/icons/trend.png" border="0" onclick="showFlowTrend('<s:property value="dbModels['ipSrc'][#dbModel.index]['src_ip']" />')"></td>
             </tr>
             </s:iterator>
