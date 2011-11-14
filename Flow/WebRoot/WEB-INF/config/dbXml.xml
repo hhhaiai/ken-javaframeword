@@ -7,13 +7,15 @@
         initSize="10" minPoolSize="10" maxPoolSize="20" maxStatements="20"
         maxIdleTime="100" />
     <!-- monetDB数据库 -->
+	<!--
     <Resource jndi="jdbc/MonetDB" driverClass="nl.cwi.monetdb.jdbc.MonetDriver"
         dbUserName="monetdb" dbPassWord="monetdb" jdbcUrl="jdbc:monetdb://127.0.0.1:50000/demo"
         initSize="10" minPoolSize="10" maxPoolSize="20" maxStatements="20"
         maxIdleTime="100" />
+	-->
     <!-- 集群 -->
     <Cluster jndiCluster="jdbc/Cluster" mainDB="jdbc/flow">
         <Resource jndi="jdbc/flow" />
-        <Resource jndi="jdbc/MonetDB" />
+        <!-- <Resource jndi="jdbc/MonetDB" /> -->
     </Cluster>
 </config>
