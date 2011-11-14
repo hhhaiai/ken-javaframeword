@@ -16,14 +16,23 @@ public class IPGroupTrafficDao extends ShowGenericDao {
 	public void handleModel(Map<String, DBModel> dbModels, DBModel srcDBModel,
 			DBModel dstDBModel, DecimalFormat perFormat,
 			DecimalFormat bytesFormat, double bytesSum) {
-		for (int i = 0; i < srcDBModel.size(); i++) {
+		DBModel retModel = srcDBModel;
+		if (srcDBModel.size() < dstDBModel.size()) {
+			retModel = dstDBModel;
+		}
+		int size = srcDBModel.size() > dstDBModel.size() ? srcDBModel.size() : dstDBModel.size();
+		for (int i = 0; i < size; i++) {
 			// 计算源IP总流量
-			Double srcIpTotal = Double.parseDouble(srcDBModel.get(i).get("total_bytes"));
-			String srcIpTotalFormat = bytesFormat.format(srcIpTotal / 1048576);
-			Double computeSrcIpPer = (srcIpTotal / bytesSum) * 100;
-			String srcIpPercentage = perFormat.format(computeSrcIpPer);
-			srcDBModel.get(i).put("src_ip_total", srcIpTotalFormat);
-			srcDBModel.get(i).put("src_ip_percentage", srcIpPercentage);
+			String srcIpTotalFormat = "0";
+			String srcIpPercentage = "0";
+			if (dstDBModel.size() > i) {
+				double srcIpTotal = Double.parseDouble(srcDBModel.get(i).get("total_bytes"));
+				srcIpTotalFormat = bytesFormat.format(srcIpTotal / 1048576);
+				double computeSrcIpPer = (srcIpTotal / bytesSum) * 100;
+				srcIpPercentage = perFormat.format(computeSrcIpPer);
+			}
+			retModel.get(i).put("src_ip_total", srcIpTotalFormat);
+			retModel.get(i).put("src_ip_percentage", srcIpPercentage);
 			
 			// 计算目标IP总流量
 			String dstIpTotalFormat = "0";
@@ -31,12 +40,12 @@ public class IPGroupTrafficDao extends ShowGenericDao {
 			if (dstDBModel.size() > i) {
 				double dstIpTotal = Double.parseDouble(dstDBModel.get(i).get("total_bytes"));
 				dstIpTotalFormat = bytesFormat.format(dstIpTotal / 1048576);
-				double computeDstIpPer = (srcIpTotal / bytesSum) * 100;
+				double computeDstIpPer = (dstIpTotal / bytesSum) * 100;
 				dstIpPercentage = perFormat.format(computeDstIpPer);
 			}
-			srcDBModel.get(i).put("dst_ip_total", dstIpTotalFormat);
-			srcDBModel.get(i).put("dst_ip_percentage", dstIpPercentage);
+			retModel.get(i).put("dst_ip_total", dstIpTotalFormat);
+			retModel.get(i).put("dst_ip_percentage", dstIpPercentage);
 		}
-		dbModels.put(GenericAction.DATA_DEFAULT, srcDBModel);
+		dbModels.put(GenericAction.DATA_DEFAULT, retModel);
 	}
 }

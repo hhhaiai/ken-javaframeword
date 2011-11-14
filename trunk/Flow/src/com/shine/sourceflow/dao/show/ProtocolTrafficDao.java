@@ -19,14 +19,24 @@ public class ProtocolTrafficDao extends ShowGenericDao {
 	public void handleModel(Map<String, DBModel> dbModels, DBModel srcDBModel,
 			DBModel dstDBModel, DecimalFormat perFormat,
 			DecimalFormat bytesFormat, double bytesSum) {
-		for (int i = 0; i < srcDBModel.size(); i++) {
+		DBModel retModel = srcDBModel;
+		if (srcDBModel.size() < dstDBModel.size()) {
+			retModel = dstDBModel;
+		}
+		int size = srcDBModel.size() > dstDBModel.size() ? srcDBModel.size() : dstDBModel.size();
+		for (int i = 0; i < size; i++) {
+			double srcProtocolTotal = 0;
 			// 计算源端口协议总流量
-			double srcProtocolTotal = Double.parseDouble(srcDBModel.get(i).get("total_bytes"));
-			String srcProtocolTotalFormat = bytesFormat.format(srcProtocolTotal / 1048576);
-			Double computeSrcProtocolPer = (srcProtocolTotal / bytesSum) * 100;
-			String srcProtocolPercentage = perFormat.format(computeSrcProtocolPer);
-			srcDBModel.get(i).put("src_protocol_total", srcProtocolTotalFormat);
-			srcDBModel.get(i).put("src_protocol_percentage", srcProtocolPercentage);
+			String srcProtocolTotalFormat = "0";
+			String srcProtocolPercentage = "0";
+			if (srcDBModel.size() > i) {
+				srcProtocolTotal = Double.parseDouble(srcDBModel.get(i).get("total_bytes"));
+				srcProtocolTotalFormat = bytesFormat.format(srcProtocolTotal / 1048576);
+				Double computeSrcProtocolPer = (srcProtocolTotal / bytesSum) * 100;
+				srcProtocolPercentage = perFormat.format(computeSrcProtocolPer);
+			}
+			retModel.get(i).put("src_protocol_total", srcProtocolTotalFormat);
+			retModel.get(i).put("src_protocol_percentage", srcProtocolPercentage);
 			
 			// 计算目标端口协议总流量
 			String dstProtocolTotalFormat = "0";
@@ -38,11 +48,10 @@ public class ProtocolTrafficDao extends ShowGenericDao {
 				double computeDstProtocolPer = (srcProtocolTotal / bytesSum) * 100;
 				dstProtocolPercentage = perFormat.format(computeDstProtocolPer);
 			}
-			srcDBModel.get(i).put("dst_protocol_total", dstProtocolTotalFormat);
-			srcDBModel.get(i).put("dst_protocol_percentage", dstProtocolPercentage);
-			
-			srcDBModel.get(i).put("protocol_total", bytesFormat.format((srcProtocolTotal + dstProtocolTotal) / 1048576));
+			retModel.get(i).put("dst_protocol_total", dstProtocolTotalFormat);
+			retModel.get(i).put("dst_protocol_percentage", dstProtocolPercentage);
+			retModel.get(i).put("protocol_total", bytesFormat.format((srcProtocolTotal + dstProtocolTotal) / 1048576));
 		}
-		dbModels.put(GenericAction.DATA_DEFAULT, srcDBModel);
+		dbModels.put(GenericAction.DATA_DEFAULT, retModel);
 	}
 }
