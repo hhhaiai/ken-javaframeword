@@ -49,7 +49,7 @@ function exportImage() {
 // 流量趋势
 function showFlowTrend(ip) {
 	var mainForm = document.mainForm;
-	mainForm.action ='${rootPath}trend/ipTrafficTrend_list';
+	mainForm.action ='${rootPath}trend/ipTrafficTrend_list?ipAddress=' + ip;
 	mainForm.submit();
 }
 </script>

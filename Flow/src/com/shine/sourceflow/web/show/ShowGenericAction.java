@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javaf.framework.pdf.PDFParser;
-import javaf.framework.pdf.element.IElement;
+import javaf.framework.pdf.element.IPDFElement;
 import javaf.framework.pdf.element.impl.PDFImage;
 import javaf.framework.pdf.element.impl.PDFParagraph;
 import javaf.framework.pdf.element.impl.PDFTable;
@@ -134,7 +134,7 @@ public abstract class ShowGenericAction extends GenericAction {
 		PDFParser pdfParser = PDFParser.getInstance();
 		// TODO 此为WINDOWS字体，在LINUX需注意，需做判断
 		pdfParser.setFont("C:/WINDOWS/Fonts/simfang.ttf", BaseFont.IDENTITY_H);
-		List<IElement> pdfElements = new ArrayList<IElement>();
+		List<IPDFElement> pdfElements = new ArrayList<IPDFElement>();
 		
 		// 生成PDF标题
 		PDFParagraph pdfParagraph = new PDFParagraph(this.getPDFTitle());
