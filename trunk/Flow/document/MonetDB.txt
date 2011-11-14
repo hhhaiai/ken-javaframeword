@@ -1,0 +1,3 @@
+NOTE!!!
+卸载MonetDB时需同时删除C:\Users\admin\AppData\Roaming\MonetDB5目录下所有文件
+C:\cygwin\home\monet\i386\install\var
