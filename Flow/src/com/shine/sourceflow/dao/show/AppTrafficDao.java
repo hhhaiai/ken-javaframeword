@@ -16,13 +16,22 @@ public class AppTrafficDao extends ShowGenericDao {
 	public void handleModel(Map<String, DBModel> dbModels, DBModel dbModelTrafficIn,
 			DBModel dbModelTrafficOut, DecimalFormat perFormat,
 			DecimalFormat bytesFormat, double bytesSum) {
-		for (int i = 0; i < dbModelTrafficIn.size(); i++) {
+		DBModel retModel = dbModelTrafficIn;
+		if (dbModelTrafficIn.size() < dbModelTrafficOut.size()) {
+			retModel = dbModelTrafficOut;
+		}
+		int size = dbModelTrafficIn.size() > dbModelTrafficOut.size() ? 
+				dbModelTrafficIn.size() : dbModelTrafficOut.size();
+		for (int i = 0; i <size; i++) {
 			// 流入流量
-			double totalBytesIn = Double.parseDouble(dbModelTrafficIn.get(i).get("bytes_total"));
+			double totalBytesIn = 0;
+			if (dbModelTrafficIn.size() > i) {
+				totalBytesIn = Double.parseDouble(dbModelTrafficIn.get(i).get("bytes_total"));
+			}
 			String totalBytesInFormat = bytesFormat.format(totalBytesIn / 1048576);
 			String bytesInPercentage = perFormat.format((totalBytesIn / bytesSum) * 100);
-			dbModelTrafficIn.get(i).put("total_bytes_in", totalBytesInFormat);
-			dbModelTrafficIn.get(i).put("bytes_in_percentage", bytesInPercentage);
+			retModel.get(i).put("total_bytes_in", totalBytesInFormat);
+			retModel.get(i).put("bytes_in_percentage", bytesInPercentage);
 			// 流出流量
 			double totalBytesOut = 0;
 			if (dbModelTrafficOut.size() > i) {
@@ -30,12 +39,12 @@ public class AppTrafficDao extends ShowGenericDao {
 			}
 			String totalBytesOutFormat = bytesFormat.format(totalBytesOut / 1048576);
 			String bytesOutPercentage = perFormat.format((totalBytesOut / bytesSum) * 100);
-			dbModelTrafficIn.get(i).put("total_bytes_out", totalBytesOutFormat);
-			dbModelTrafficIn.get(i).put("bytes_out_percentage", bytesOutPercentage);
+			retModel.get(i).put("total_bytes_out", totalBytesOutFormat);
+			retModel.get(i).put("bytes_out_percentage", bytesOutPercentage);
 			// 总流量
 			String totalBytesAllFormat = bytesFormat.format((totalBytesIn + totalBytesOut) / 1048576);
-			dbModelTrafficIn.get(i).put("total_bytes_all", totalBytesAllFormat);
+			retModel.get(i).put("total_bytes_all", totalBytesAllFormat);
 		}
-		dbModels.put(GenericAction.DATA_DEFAULT, dbModelTrafficIn);
+		dbModels.put(GenericAction.DATA_DEFAULT, retModel);
 	}
 }
