@@ -8,7 +8,7 @@ import com.shine.sourceflow.utils.Pagination;
 
 public abstract class GenericDao {
 	/** JNDI */
-	public static final String JNDI_DEFAULT = "jdbc/flow";
+	public static final String JNDI_DEFAULT = "jdbc/MonetDB";
 	public static final String JNDI_MONETDB = "jdbc/MonetDB";
 	public static final String JNDI_MYSQL = "jdbc/flow";
 	public static final String JNDI_CLUSTER = "jdbc/Cluster";
