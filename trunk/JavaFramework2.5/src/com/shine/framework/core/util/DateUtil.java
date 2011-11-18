@@ -7,7 +7,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-//import org.snmp4j.smi.OctetString;
 
 /**
  * 时间处理工具
