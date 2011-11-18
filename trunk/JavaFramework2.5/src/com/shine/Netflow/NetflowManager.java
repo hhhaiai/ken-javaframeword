@@ -22,12 +22,19 @@ public class NetflowManager {
 	private Map<String, String> routeMap = new HashMap<String, String>();
 	private Map<String, NetFlowIf> netflowHandleMap = new HashMap<String, NetFlowIf>();
 
+	// 线程配置
 	private int threadSize = 20;
 	private int maxThreadSize = 200;
 
+	// 缓冲区配置
 	private int cache = 20;
 	private int maxCache = 1000;
 	private int incomeCache = 10;
+
+	// 保护模式，慎用，会大量丢失数据
+	private boolean protectPolicy = false;
+	// 保护模式时间，单位s
+	private int protectTime = 60;
 
 	// netflow接收端口列表
 	private List<Integer> ports = new ArrayList<Integer>();
@@ -192,4 +199,21 @@ public class NetflowManager {
 	public void setMaxThreadSize(int maxThreadSize) {
 		this.maxThreadSize = maxThreadSize;
 	}
+
+	public boolean isProtectPolicy() {
+		return protectPolicy;
+	}
+
+	public void setProtectPolicy(boolean protectPolicy) {
+		this.protectPolicy = protectPolicy;
+	}
+
+	public int getProtectTime() {
+		return protectTime;
+	}
+
+	public void setProtectTime(int protectTime) {
+		this.protectTime = protectTime;
+	}
+
 }

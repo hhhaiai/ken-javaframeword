@@ -12,6 +12,7 @@ import com.shine.Netflow.translator.TranslatorHelper;
 import com.shine.Netflow.utils.NetFlowUtil;
 import com.shine.framework.ThreadPoolUtil.ThreadPoolManager;
 import com.shine.framework.Udp.model.UdpRecevice;
+import com.shine.framework.core.util.DateUtil;
 
 /**
  * netflow接收器 用于接收并且解析netflow
@@ -23,6 +24,8 @@ public class NetflowRecevice extends UdpRecevice {
 
 	private int cache = 20;
 	private List<SourceNetFlow> list = new ArrayList<SourceNetFlow>();
+
+	private String lastTime = "";
 
 	/**
 	 * 初始接收器
@@ -61,8 +64,23 @@ public class NetflowRecevice extends UdpRecevice {
 	@Override
 	public synchronized void recevice(String ip, int port, byte[] data) {
 		if (list.size() > cache) {
+			// 开启保护模式后，在保护时间内进入一个缓冲区数据数据
+			if (lastTime.length() == 0) {
+				lastTime = DateUtil.getCurrentDateTime();
+			} else {
+				if (NetflowManager.getManager().isProtectPolicy()) {
+					String time = DateUtil.getCurrentDateTime();
+					if ((DateUtil.dateTimeToLong(time) - DateUtil
+							.dateTimeToLong(lastTime)) < NetflowManager
+							.getManager().getProtectTime()) {
+						list.clear();
+						return;
+					} else {
+						lastTime = DateUtil.getCurrentDateTime();
+					}
+				}
+			}
 			if (ThreadPoolManager.getManager().getIdleThread("netflowProcess") != null) {
-
 				ThreadPoolManager.getManager().getIdleThread("netflowProcess")
 						.setValues(((ArrayList) list).clone());
 				list.clear();
