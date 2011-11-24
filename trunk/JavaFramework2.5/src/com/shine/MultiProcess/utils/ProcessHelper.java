@@ -60,6 +60,10 @@ public class ProcessHelper {
 			return false;
 	}
 
+	public void addResult(String s) {
+		this.result.append(s);
+	}
+
 	public String getName() {
 		return name;
 	}
@@ -83,6 +87,15 @@ public class ProcessHelper {
 	public void setP(Process p) {
 		this.p = p;
 	}
+
+	public StringBuffer getResult() {
+		return result;
+	}
+
+	public void setResult(StringBuffer result) {
+		this.result = result;
+	}
+
 }
 
 /**
