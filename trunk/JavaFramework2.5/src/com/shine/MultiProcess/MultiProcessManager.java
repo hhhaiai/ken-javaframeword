@@ -1,5 +1,6 @@
 package com.shine.MultiProcess;
 
+import com.shine.MultiProcess.utils.ProcessHelper;
 import com.shine.MultiProcess.utils.ProcessMap;
 import com.shine.MultiProcess.utils.ProcessUtils;
 
@@ -29,21 +30,58 @@ public class MultiProcessManager {
 
 	}
 
-	public void addProcess(String name, String... common) {
-
+	/**
+	 * 以独立进程执行命令
+	 * 
+	 * @param name
+	 * @param common
+	 */
+	public void addProcess(String name, String common) {
+		ProcessHelper helper = new ProcessHelper();
+		helper.setName(name);
+		helper.setCommon(common);
+		processMap.put(name, helper);
+		helper = null;
 	}
 
+	/**
+	 * 已独立进程启动jar
+	 * 
+	 * @param name
+	 * @param jarPath
+	 * @param args
+	 */
 	public void addProcessByJar(String name, String jarPath, String... args) {
-		System.out.println(ProcessUtils.createJarCommon(this.jvmPath, jarPath,
+		addProcess(name, ProcessUtils.createJarCommon(this.jvmPath, jarPath,
 				args));
 	}
 
-	public void closeProcess(String name) {
-
+	/**
+	 * 启动指定进程
+	 * 
+	 * @param name
+	 */
+	public void startProcess(String name) {
+		if (processMap.get(name).isReady())
+			processMap.get(name).start();
 	}
 
-	public void close() {
+	/**
+	 * 关闭指定进程
+	 * 
+	 * @param name
+	 */
+	public void closeProcess(String name) {
+		processMap.get(name).close();
+	}
 
+	/**
+	 * 关闭所有进程
+	 */
+	public void close() {
+		for (ProcessHelper helper : processMap.values()) {
+			helper.close();
+		}
 	}
 
 	public String operaProcess(String name, String commnd) {
