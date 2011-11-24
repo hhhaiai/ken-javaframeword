@@ -12,5 +12,14 @@ public class Example {
 				.getManager()
 				.addProcessByJar("test",
 						"C:\\Program Files\\Java\\jakarta-jmeter-2.3.4\\bin\\ApacheJMeter.jar");
+		MultiProcessManager.getManager().startProcess("test");
+
+		MultiProcessManager
+				.getManager()
+				.addProcessByJar("test1",
+						"C:\\Program Files\\Java\\jakarta-jmeter-2.3.4\\bin\\ApacheJMeter.jar");
+		MultiProcessManager.getManager().startProcess("test1");
+
+		MultiProcessManager.getManager().closeProcess("test");
 	}
 }
