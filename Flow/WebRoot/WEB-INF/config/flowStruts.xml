@@ -53,5 +53,15 @@
             class="com.shine.sourceflow.web.show.trend.IPTrafficTrendAction" method="{1}">
             <result name="list">/show/trend/ipTrafficTrend.jsp</result>
         </action>
+        <!-- IP分组流量 -->
+        <action name="ipGroupTrafficTrend_*" 
+            class="com.shine.sourceflow.web.show.trend.IPGroupTrafficTrendAction" method="{1}">
+            <result name="list">/show/trend/ipGroupTrafficTrend.jsp</result>
+        </action>
+        <!-- 协议流量 -->
+        <action name="protocolTrafficTrend_*" 
+            class="com.shine.sourceflow.web.show.trend.ProtocolTrafficTrendAction" method="{1}">
+            <result name="list">/show/trend/protocolTrafficTrend.jsp</result>
+        </action>
     </package>
 </struts>

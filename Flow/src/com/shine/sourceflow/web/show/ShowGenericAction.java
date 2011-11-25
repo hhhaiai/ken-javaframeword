@@ -15,6 +15,8 @@ import javaf.framework.pdf.element.IPDFElement;
 import javaf.framework.pdf.element.impl.PDFImage;
 import javaf.framework.pdf.element.impl.PDFParagraph;
 import javaf.framework.pdf.element.impl.PDFTable;
+import javaf.framework.util.SysUtil;
+import javaf.framework.util.UUIDUtil;
 
 import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
@@ -24,6 +26,8 @@ import org.apache.struts2.ServletActionContext;
 import com.lowagie.text.Paragraph;
 import com.lowagie.text.pdf.BaseFont;
 import com.lowagie.text.pdf.PdfPCell;
+import com.shine.framework.config.ConfigManager;
+import com.shine.sourceflow.utils.RequestData;
 import com.shine.sourceflow.web.GenericAction;
 import com.sun.image.codec.jpeg.JPEGCodec;
 import com.sun.image.codec.jpeg.JPEGEncodeParam;
@@ -232,5 +236,39 @@ public abstract class ShowGenericAction extends GenericAction {
 		g.drawImage(result, 0, 0, width, height, null);
 		g.dispose();
 		return result;
+	}
+	
+	/**
+	 * 导出PDF
+	 */
+	public void dumpPDF() {
+		StringBuffer appurl = new StringBuffer(100);
+		appurl.append(request.getScheme()).append("://");
+		appurl.append(request.getServerName()).append(":");
+		appurl.append(request.getServerPort()).append(request.getContextPath());
+		appurl.append("/"); 
+		
+		String method = request.getParameter("method");
+		StringBuffer cmd = new StringBuffer(200);
+		cmd.append(ConfigManager.getManager().getSysPath());
+		String targetFile = ConfigManager.getManager().getSysPath();
+		RequestData extor = new RequestData(request);
+		if (System.getProperty("os.name").startsWith("Windows")) {
+			targetFile += "software\\temp\\" + UUIDUtil.getRandomId() + ".pdf";
+			
+			cmd.append("software\\wkhtmltopdf\\wkhtmltopdf.exe");
+			cmd.append(" \"").append(appurl).append(method).append("?exportPdf=true&");
+			cmd.append(extor.getParaString()).append("\" ");		
+			cmd.append(targetFile);			
+		} else {
+			targetFile += "software/temp/" + UUIDUtil.getRandomId() + ".pdf";			
+			cmd.append("software/wkhtmltopdf/wkhtmltopdf-i386");
+			cmd.append(" ").append(appurl).append(method).append("?exportPdf=true&");
+			cmd.append(extor.getParaString().replaceAll(" ", "%20")).append(" ");
+			cmd.append(targetFile);
+		}
+		SysUtil.exeCmd(cmd.toString());
+
+		this.download(targetFile, "FlowReport.pdf");
 	}
 }

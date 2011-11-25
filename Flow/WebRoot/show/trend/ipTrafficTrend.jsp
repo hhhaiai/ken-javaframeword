@@ -43,7 +43,7 @@ swfobject.embedSWF("${jsPath}amcharts/flash/amline.swf", "chartdiv", "600", "400
 <div class="std_info">
     <div class="page_wrapper limit_770">
     	<!-- 查询页面 START -->
-        <div class="top_bar limit_770">
+        <!-- <div class="top_bar limit_770">
 			<a title="显示/隐藏 查询" onClick="toggleSearch();" class="icon_btn" href="javascript:void(0);">
             <img src="${rootPath}resource/image/icons/search.gif" /> 查询
             </a>
@@ -51,7 +51,7 @@ swfobject.embedSWF("${jsPath}amcharts/flash/amline.swf", "chartdiv", "600", "400
             <a title="导出为pdf文件" onClick="exportPdf();return false;" class="icon_btn" href="javascript:void(0);" >
             <img src="${rootPath}resource/image/icons/export_pdf.gif" /> 导出PDF
             </a>
-		</div>
+		</div> -->
         <!-- 查询页面 END -->
         <h3 class="title">IP流量趋势</h3>
         <!-- IP流量趋势统计 START -->
@@ -95,6 +95,12 @@ swfobject.embedSWF("${jsPath}amcharts/flash/amline.swf", "chartdiv", "600", "400
                 </div>
             </div>
             <!-- 查询框 END -->
+            <div>
+            	<c:out value="${dto.ipAddress}"/>
+                <c:forEach var="periodList" items="${dto.statPeriodList}">
+                    <c:if test="${periodList.key == dto.statPeroid}"><c:out value="${periodList.value}"/></c:if>
+                </c:forEach>
+            </div>
             <div id="chartdiv" style="width:600px; height:400px; background-color:#FFFFFF"></div>
         </div>
         <!-- IP流量趋势统计 END -->

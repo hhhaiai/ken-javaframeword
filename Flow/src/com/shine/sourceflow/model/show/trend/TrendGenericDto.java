@@ -24,6 +24,9 @@ public class TrendGenericDto extends GenericDto {
 	/** 当前选择IP地址 */
 	private String ipAddress = "";
 	
+	/** IP分组ID */
+	private String ipGroupId = "";
+	
 	public TrendGenericDto() {
 		this.statPeriodList = new HashMap<Integer, String>();
 		this.statPeriodList.put(1, "日报表");
@@ -55,6 +58,11 @@ public class TrendGenericDto extends GenericDto {
 		if (ipAddress != null) {
 			this.ipAddress = ipAddress;
 		}
+		// IP别名
+		String ipGroupId = request.getParameter("ipGroupId");
+		if (ipGroupId != null) {
+			this.ipGroupId = ipGroupId;
+		}
 	}
 	
 	public Map<Integer, String> getStatPeriodList() {
@@ -71,6 +79,10 @@ public class TrendGenericDto extends GenericDto {
 	
 	public String getIpAddress() {
 		return this.ipAddress;
+	}
+	
+	public String getIpGroupId() {
+		return this.ipGroupId;
 	}
 	
 	public String getDate() {

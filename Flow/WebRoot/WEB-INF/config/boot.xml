@@ -10,6 +10,9 @@
     <host>0.0.0.0</host>
     <!-- 接收数据时的缓存条数 -->
     <receive-cache>20</receive-cache>
+    <!-- 是否开启数据接收保护模式 -->
+    <protect-policy>1</protect-policy>
+    <protect-time>60</protect-time>
     <!-- 处理线程数 -->
     <process-thread-size>20</process-thread-size>
     <!-- 提交线程数 -->

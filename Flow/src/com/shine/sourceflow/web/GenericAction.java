@@ -1,6 +1,8 @@
 package com.shine.sourceflow.web;
 
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
@@ -176,6 +178,42 @@ public abstract class GenericAction extends
 			try {
 				os.close();
 			} catch (IOException e) {
+			}
+		}
+	}
+	
+	/**
+	 * 下载文件
+	 * @param srcFullName 服务器上完整文件名
+	 * @param saveAsName 客户端保存的文件名
+	 * @return
+	 */
+	protected void download(String srcFullName,String saveAsName) {
+		HttpServletResponse response = ServletActionContext.getResponse();
+		InputStream is = null;
+		OutputStream os = null;
+		try {
+			response.setContentType("application/x-msdownload;charset=UTF-8");
+			response.setHeader("Content-Disposition","attachment; filename=" + saveAsName);
+			os = response.getOutputStream();			
+			is = new FileInputStream(srcFullName);
+			byte[] b = new byte[1024];
+			while (is.read(b) != -1)
+				os.write(b);			
+			b = null;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				os.flush();
+				ServletActionContext.getPageContext().getOut().clear();
+				ServletActionContext.getPageContext().pushBody();
+			} catch (Exception e) {
+			}
+			try{
+				os.close();
+				is.close();
+			} catch (Exception e) {
 			}
 		}
 	}

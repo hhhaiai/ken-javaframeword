@@ -1,5 +1,6 @@
 package com.shine.sourceflow.web.show.trend;
 
+import java.text.DecimalFormat;
 import java.util.Map;
 
 import com.shine.DBUtil.model.DBModel;
@@ -17,11 +18,19 @@ public class IPTrafficTrendAction extends TrendGenericAction {
 	@Override
 	protected void generateCharts() {
 		StringBuffer cvsStr = new StringBuffer();
+		DecimalFormat format = new DecimalFormat("0.00");
 		for (Map.Entry<String, DBModel> entry : dbModels.entrySet()) {
 			if (!entry.getValue().isEmpty()) {
 				cvsStr.append(entry.getKey());
 				cvsStr.append(";");
-				cvsStr.append(entry.getValue().get(0).getString("total_bytes"));
+				cvsStr.append(format.format(Double.
+						parseDouble(entry.getValue().get(0).
+						getString("total_bytes")) / 1048576));
+				cvsStr.append("\\n");
+			} else {
+				cvsStr.append(entry.getKey());
+				cvsStr.append(";");
+				cvsStr.append("0");
 				cvsStr.append("\\n");
 			}
 		}
