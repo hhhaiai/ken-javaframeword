@@ -56,8 +56,12 @@ public class NetFlow {
 		// 设置数据接收保护策略
 		boolean isProtectPolicy = "1".equals(configMgr.getAttribute(
 				"protect-policy").getText()) ? true : false;
-		int protectTime = Integer.parseInt(
-				configMgr.getAttribute("protect-time").getText());
+		int protectTime = Integer.parseInt(configMgr.getAttribute(
+				"protect-time").getText());
+		// 保护模式提示
+		if (isProtectPolicy) {
+			System.out.println("保护模式启动，保护时间设置为：" + protectTime);
+		}
 		NetflowManager.getManager().setProtectPolicy(isProtectPolicy);
 		NetflowManager.getManager().setProtectTime(protectTime);
 		// 启动接收
@@ -73,6 +77,6 @@ public class NetFlow {
 	}
 
 	public void close() {
-
+		NetflowManager.getManager().stopReceiver();
 	}
 }

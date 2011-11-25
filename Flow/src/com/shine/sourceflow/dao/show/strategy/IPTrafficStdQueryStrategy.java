@@ -8,13 +8,13 @@ import com.shine.sourceflow.model.show.ShowGenericDto;
  * IP流量标准查询策略
  */
 public class IPTrafficStdQueryStrategy implements IQueryStrategy {
+
 	private static final String SQL_SRCIP_FIELD = "src_ip,sum(bytes) as total_bytes";
 	private static final String SQL_DSTIP_FIELD = "dst_ip,sum(bytes) as total_bytes";
 	private static final String SQL_SRCIP_GROUPBY = "group by src_ip";
 	private static final String SQL_DSTIP_GROUPBY = "group by dst_ip";
 	private static final String SQL_ORDERBY = "order by total_bytes desc";
 
-	@Override
 	public String[] createHourlyQuerySQL(ShowGenericDto dto) {
 		String srcipSql = this.createGenericSQL(
 				dto, SQL_SRCIP_FIELD, TableUtil.getMonthTable(dto.getDate()),
@@ -29,7 +29,6 @@ public class IPTrafficStdQueryStrategy implements IQueryStrategy {
 		return sqls;
 	}
 
-	@Override
 	public String[] createDailyQuerySQL(ShowGenericDto dto) {
 		String srcipSql = this.createGenericSQL(
 				dto, SQL_SRCIP_FIELD, TableUtil.getMonthTable(dto.getDate()),
@@ -51,7 +50,6 @@ public class IPTrafficStdQueryStrategy implements IQueryStrategy {
 		return sqls;
 	}
 
-	@Override
 	public String[] createMonthlyQuerySQL(ShowGenericDto dto) {
 		String srcipSql = this.createGenericSQL(
 				dto, SQL_SRCIP_FIELD, TableUtil.getMonthTable(dto.getDate()),
@@ -73,7 +71,6 @@ public class IPTrafficStdQueryStrategy implements IQueryStrategy {
 		return sqls;
 	}
 
-	@Override
 	public String[] createWeeklyQuerySQL(ShowGenericDto dto) {
 		String srcipSql = this.createGenericSQL(
 				dto, SQL_SRCIP_FIELD, TableUtil.getMonthTable(dto.getDate()),
@@ -116,7 +113,6 @@ public class IPTrafficStdQueryStrategy implements IQueryStrategy {
 		return sql.toString();
 	}
 
-	@Override
 	public String createDailySumSQL(ShowGenericDto dto) {
 		String sql = this.createGenericSumSQL(
 				TableUtil.getMonthTable(dto.getDate()),
@@ -129,7 +125,6 @@ public class IPTrafficStdQueryStrategy implements IQueryStrategy {
 		return sql.toString();
 	}
 
-	@Override
 	public String createHourlySumSQL(ShowGenericDto dto) {
 		String sql = this.createGenericSumSQL(
 				TableUtil.getMonthTable(dto.getDate()),
@@ -138,7 +133,6 @@ public class IPTrafficStdQueryStrategy implements IQueryStrategy {
 		return sql.toString();
 	}
 
-	@Override
 	public String createMonthlySumSQL(ShowGenericDto dto) {
 		String sql = this.createGenericSumSQL(
 				TableUtil.getMonthTable(dto.getDate()),
@@ -151,7 +145,6 @@ public class IPTrafficStdQueryStrategy implements IQueryStrategy {
 		return sql.toString();
 	}
 
-	@Override
 	public String createWeeklySumSQL(ShowGenericDto dto) {
 		String sql = this.createGenericSumSQL(
 				TableUtil.getMonthTable(dto.getDate()),

@@ -18,7 +18,6 @@ public class CreateDailyTableJob implements QuartzJob {
 	public CreateDailyTableJob() {
 	}
 
-	@Override
 	public Trigger createTrigger() {
 		Trigger trigger = TriggerUtils.makeDailyTrigger(TRIGGER_HOUR,
 				TRIGGER_MINUTE);
@@ -26,7 +25,6 @@ public class CreateDailyTableJob implements QuartzJob {
 		return trigger;
 	}
 
-	@Override
 	public void execute(JobExecutionContext context)
 			throws JobExecutionException {
 		
