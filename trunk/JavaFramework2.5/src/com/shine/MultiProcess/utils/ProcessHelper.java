@@ -1,5 +1,7 @@
 package com.shine.MultiProcess.utils;
 
+import java.util.List;
+
 public class ProcessHelper {
 	private String name;
 	private String common;
@@ -12,6 +14,10 @@ public class ProcessHelper {
 	private PorcessRunnable processRunnable;
 	// 关闭数据线程
 	private PorcessCloseRunnable porcessCloseRunnable;
+	// 等待命令队列
+	private List<String> porcessList;
+	// 是否具有可操作性
+	private boolean operaAble = true;
 
 	/**
 	 * 启动进程
@@ -96,6 +102,14 @@ public class ProcessHelper {
 		this.result = result;
 	}
 
+	public boolean isOperaAble() {
+		return operaAble;
+	}
+
+	public void setOperaAble(boolean operaAble) {
+		this.operaAble = operaAble;
+	}
+
 }
 
 /**
@@ -158,6 +172,36 @@ class PorcessCloseRunnable extends Thread {
 				break;
 			}
 			i++;
+		}
+	}
+
+	public ProcessHelper getHelper() {
+		return helper;
+	}
+
+	public void setHelper(ProcessHelper helper) {
+		this.helper = helper;
+	}
+}
+
+/**
+ * 多进程操作教程
+ * @author viruscodecn@gmail.com
+ *
+ */
+class PorcessExecRunnable extends Thread {
+	private ProcessHelper helper;
+
+	public void run() {
+		while (true) {
+			if (helper.isComplete()) {
+				if (helper.isOperaAble()) {
+					helper.setOperaAble(false);
+					
+					helper.setOperaAble(true);
+					break;
+				}
+			}
 		}
 	}
 
