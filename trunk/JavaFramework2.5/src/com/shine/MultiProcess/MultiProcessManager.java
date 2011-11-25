@@ -8,6 +8,8 @@ import com.shine.MultiProcess.utils.ProcessUtils;
  * 多进程管理器
  * 
  * @author viruscodecn@gmail.com
+ * @blog http://blog.csdn.net/arjick/article/details/7011314
+ * @blog http://blog.csdn.net/arjick/article/details/7011490
  * 
  */
 public class MultiProcessManager {
