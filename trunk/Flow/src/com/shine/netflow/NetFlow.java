@@ -53,6 +53,13 @@ public class NetFlow {
 		// 加入处理接口
 		NetflowManager.getManager().getNetflowHandleMap().put("print",
 				new NetflowImpl());
+		// 设置数据接收保护策略
+		boolean isProtectPolicy = "1".equals(configMgr.getAttribute(
+				"protect-policy").getText()) ? true : false;
+		int protectTime = Integer.parseInt(
+				configMgr.getAttribute("protect-time").getText());
+		NetflowManager.getManager().setProtectPolicy(isProtectPolicy);
+		NetflowManager.getManager().setProtectTime(protectTime);
 		// 启动接收
 		String host = configMgr.getAttribute("host").getText();
 		int port = Integer.parseInt(configMgr.getAttribute("port").getText());

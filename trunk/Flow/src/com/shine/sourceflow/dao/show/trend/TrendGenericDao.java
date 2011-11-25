@@ -3,6 +3,7 @@ package com.shine.sourceflow.dao.show.trend;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 import com.shine.DBUtil.DBUtil;
 import com.shine.DBUtil.model.DBModel;
@@ -11,26 +12,46 @@ import com.shine.sourceflow.dao.show.trend.strategy.ITrendQueryStrategy;
 import com.shine.sourceflow.model.GenericDto;
 import com.shine.sourceflow.model.show.trend.TrendGenericDto;
 
-public class TrendGenericDao extends GenericDao {
+public abstract class TrendGenericDao extends GenericDao {
 	protected ITrendQueryStrategy queryStrategy;
 	
 	@Override
 	public Map<String, DBModel> list(GenericDto dto) {
-		Map<String, DBModel> dbModels = new HashMap<String, DBModel>();
-		Map<String, String> sqls = this.createQuerySQL((TrendGenericDto)dto);
-		for (Map.Entry<String, String> entry : sqls.entrySet()) {
-			DBModel dbModel = DBUtil.getInstance().executeQuery(GenericDao.JNDI_DEFAULT, entry.getValue());
-			try {
-				dbModel.next();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			} finally {
-				dbModel.close();
+		Map<String, DBModel> dbSrcModels = new TreeMap<String, DBModel>();
+		Map<String, DBModel> dbDstModels = new TreeMap<String, DBModel>();
+		Map<String, String[]> sqls = this.createQuerySQL((TrendGenericDto)dto);
+		for (Map.Entry<String, String[]> entry : sqls.entrySet()) {
+			if (entry.getValue().length > 0) {
+				String sql = entry.getValue()[0];
+				DBModel dbModel = DBUtil.getInstance().
+					executeQuery(GenericDao.JNDI_DEFAULT, sql);
+				try {
+					dbModel.next();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				} finally {
+					dbModel.close();
+				}
+				dbSrcModels.put(entry.getKey(), dbModel);
 			}
-			dbModels.put(entry.getKey(), dbModel);
+			if (entry.getValue().length > 1) {
+				DBModel dbModel = DBUtil.getInstance().
+					executeQuery(GenericDao.JNDI_DEFAULT, entry.getValue()[1]);
+				try {
+					dbModel.next();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				} finally {
+					dbModel.close();
+				}
+				dbDstModels.put(entry.getKey(), dbModel);
+			}
 		}
-		return dbModels;
+		return this.handleDbModels(dbSrcModels, dbDstModels);
 	}
+	
+	protected abstract Map<String, DBModel> handleDbModels(Map<String, DBModel> dbSrcModels,
+			Map<String, DBModel> dbDstModels);
 	
 	/**
 	 * 根据不同策略创建查询语句
@@ -38,7 +59,7 @@ public class TrendGenericDao extends GenericDao {
 	 * @param dto
 	 * @return
 	 */
-	protected Map<String, String> createQuerySQL(TrendGenericDto dto) {
+	protected Map<String, String[]> createQuerySQL(TrendGenericDto dto) {
 		int statPeriod = dto.getStatPeroid();
 		switch(statPeriod) {
 		case 1:

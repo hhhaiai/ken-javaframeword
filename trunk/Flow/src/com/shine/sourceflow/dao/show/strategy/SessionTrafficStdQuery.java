@@ -58,6 +58,11 @@ public class SessionTrafficStdQuery implements IQueryStrategy {
 		sql.append(" = b.first_ip or ");
 		sql.append(fCondition);
 		sql.append(" = b.second_ip ");
+		sql.append("and a.log_time between '");
+		sql.append(bBegin);
+		sql.append("' and '");
+		sql.append(bEnd);
+		sql.append("'");
 		sql.append("group by b.session_alias limit ");
 		sql.append(dto.getTopPageN());
 		return sql.toString();

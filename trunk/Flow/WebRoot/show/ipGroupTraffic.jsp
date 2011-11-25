@@ -6,14 +6,16 @@
 <html>
 <head>
 <title>IP分组流量</title>
+<link rel="stylesheet" href="${cssPath}std_info.css" />
 <script type="text/javascript" src="${jsPath}rl/src/RealLight.js"></script>
 <script type="text/javascript" src="${jsPath}amcharts/flash/swfobject.js"></script>
 <script type="text/javascript" src="${jsPath}amcharts/javascript/amcharts.js"></script>
+<script type="text/javascript" src="${jsPath}amcharts/javascript/amfallback.js"></script>
 <script type="text/javascript" src="${jsPath}amcharts/javascript/raphael.js"></script>
 </script>
 <!-- 页面显示框架 -->
 <script language="javascript">   
-rl.importCss("nf:std_info");
+//rl.importCss("nf:std_info");
 rl.importJs("gui.indicator.ProgressBar");
 rl.importJs("nf:reportQuery");
 rl.importJs("nf:queryDialog");
@@ -34,10 +36,16 @@ function query(){
 
 // 导出PDF
 function exportPdf() {
-    var flashMovie = document.getElementById('chartdiv');
-	if (flashMovie) {
-		flashMovie.exportImage('${rootPath}ipGroupTraffic_exportPDF?fileName=ipGroupTraffic.pdf'); 
-	}
+    var mainForm = document.mainForm;
+	mainForm.action = "${rootPath}ipGroupTraffic_dumpPDF?method=ipGroupTraffic_list";
+	mainForm.submit();
+}
+
+// 流量趋势
+function showFlowTrend(ipGroupId) {
+	var mainForm = document.mainForm;
+	mainForm.action ='${rootPath}trend/ipGroupTrafficTrend_list?ipGroupId=' + ipGroupId;
+	mainForm.submit();
 }
 </script>
 
@@ -55,7 +63,16 @@ var flashVars =
 	chart_settings: "<settings><data_type>csv</data_type><plot_area><margins><left>50</left><right>40</right><top>50</top><bottom>50</bottom></margins></plot_area><grid><category><dashed>1</dashed><dash_length>4</dash_length></category><value><dashed>1</dashed><dash_length>4</dash_length></value></grid><axes><category><width>1</width><color>E7E7E7</color></category><value><width>1</width><color>E7E7E7</color></value></axes><values><value><min>0</min></value></values><legend><enabled>1</enabled></legend><angle>0</angle><column><type>3d column</type><width>15</width><alpha>80</alpha><spacing>10</spacing><hover_brightness>10</hover_brightness><balloon_text>{title}: {value}(MB)</balloon_text><grow_time>2</grow_time></column><depth>15</depth><angle>25</angle><graphs><graph gid='0'><title>流出流量</title><color>4BBF4B</color></graph><graph gid='1'><title>流入流量</title><color>C0DBFD</color></graph></graphs><labels><label lid='0'><text><![CDATA[<b>IP分组流量</b>]]></text><y>5</y><text_color>000000</text_color><text_size>16</text_size><align>center</align></label></labels></settings>"
 };
 
-swfobject.embedSWF("${jsPath}amcharts/flash/amcolumn2.swf", "chartdiv", "100%", "400", "8.0.0", "${jsPath}amcharts/flash/expressInstall.swf", flashVars, params);
+window.onload = function()
+{
+	var amFallback = new AmCharts.AmFallback();
+    amFallback.chartSettings = flashVars.chart_settings;
+	amFallback.chartData = flashVars.chart_data;
+	amFallback.type = "column";
+	amFallback.write("chartdiv");
+}
+
+//swfobject.embedSWF("${jsPath}amcharts/flash/amcolumn2.swf", "chartdiv", "100%", "400", "8.0.0", "${jsPath}amcharts/flash/expressInstall.swf", flashVars, params);
 </script>
 </head>
 <body>
@@ -140,6 +157,7 @@ swfobject.embedSWF("${jsPath}amcharts/flash/amcolumn2.swf", "chartdiv", "100%", 
                 <th>流出(MB)</th>
                 <th>百分比</th>
                 <th></th>
+                <th>流量趋势</th>
             </tr>
             <s:iterator value="#request.dbModels['default']" status="dbModel">
             <tr>
@@ -151,6 +169,9 @@ swfobject.embedSWF("${jsPath}amcharts/flash/amcolumn2.swf", "chartdiv", "100%", 
                 <td><s:property value="dbModels['default'][#dbModel.index]['dst_ip_total']" /></td>
                 <td><span ctype="ProgressBar" barSkin="green" progress="<s:property value="dbModels['default'][#dbModel.index]['dst_ip_percentage']" />"></span></td>
                 <td><s:property value="dbModels['default'][#dbModel.index]['dst_ip_percentage']" />%</td>
+                <td>
+                <img style="cursor:pointer" height="14" width="14" src="${rootPath}resource/image/icons/trend.png" border="0" onclick="showFlowTrend('<s:property value="dbModels['default'][#dbModel.index]['group_id']" />')">
+                </td>
             </tr>
             </s:iterator>
             </table>

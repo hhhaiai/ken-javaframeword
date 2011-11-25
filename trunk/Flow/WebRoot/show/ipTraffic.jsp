@@ -6,13 +6,15 @@
 <html>
 <head>
 <title>IP流量</title>
+<link rel="stylesheet" href="${cssPath}std_info.css" />
 <script type="text/javascript" src="${jsPath}amcharts/flash/swfobject.js"></script>
 <script type="text/javascript" src="${jsPath}amcharts/javascript/amcharts.js"></script>
+<script type="text/javascript" src="${jsPath}amcharts/javascript/amfallback.js"></script>
 <script type="text/javascript" src="${jsPath}amcharts/javascript/raphael.js"></script>
 <script type="text/javascript" src="${jsPath}rl/src/RealLight.js"></script>
 </script>
 <script language="javascript">
-rl.importCss("nf:std_info");
+//rl.importCss("nf:std_info");
 rl.importJs("gui.indicator.ProgressBar");
 rl.importJs("nf:reportQuery");
 rl.importJs("nf:queryDialog");
@@ -31,6 +33,13 @@ function query(){
     mainForm.submit(); 
 }
 
+// 导出PDF
+function exportPdf() {
+	var mainForm = document.mainForm;
+	mainForm.action = "${rootPath}ipTraffic_dumpPDF?method=ipTraffic_list";
+	mainForm.submit();
+}
+
 // 具体IP查询
 function showDetail(ipAddress, ipType) {
 	document.mainForm.action ='${rootPath}detail/ipTrafficDetail_list?ipType=' + ipType + '&ipAddress=' + ipAddress;
@@ -47,9 +56,9 @@ function exportImage() {
 } 
 
 // 流量趋势
-function showFlowTrend(ip) {
+function showFlowTrend(ip, ipType) {
 	var mainForm = document.mainForm;
-	mainForm.action ='${rootPath}trend/ipTrafficTrend_list?ipAddress=' + ip;
+	mainForm.action ='${rootPath}trend/ipTrafficTrend_list?ipAddress=' + ip + '&ipType=' + ipType;
 	mainForm.submit();
 }
 </script>
@@ -65,18 +74,38 @@ var flashVarsSrc =
 {
 	path: "${jsPath}amcharts/flash/",
 	chart_data: "<s:property value="charts['ipSrc']" />",
-	chart_settings: "<settings><data_type>csv</data_type><legend><enabled>0</enabled></legend><pie><inner_radius>30</inner_radius><height>7</height><angle>10</angle><gradient></gradient></pie><animation><start_time>2</start_time><pull_out_time>1</pull_out_time><start_effect>strong</start_effect><sequenced>1</sequenced></animation><data_labels><show>IP:{title}</show><max_width>100</max_width></data_labels><labels><label lid='0'><text><![CDATA[源ip流量]]></text><y>10</y><text_size>14</text_size><align>center</align></label></labels></settings>"
+	chart_settings: "<settings><data_type>csv</data_type><legend><enabled>0</enabled></legend><pie><inner_radius>30</inner_radius><height>7</height><angle>10</angle><gradient></gradient></pie><animation><start_time>0</start_time><pull_out_time>1</pull_out_time><start_effect>strong</start_effect><sequenced>1</sequenced></animation><data_labels><show>IP:{title}</show><max_width>100</max_width></data_labels><labels><label lid='0'><text><![CDATA[源ip流量]]></text><y>10</y><text_size>14</text_size><align>center</align></label></labels></settings>"
 };
 var flashVarsDst = 
 {
 	path: "${jsPath}amcharts/flash/",
 	chart_data: "<s:property value="charts['ipDst']" />",
-	chart_settings: "<settings><data_type>csv</data_type><legend><enabled>0</enabled></legend><pie><inner_radius>30</inner_radius><height>7</height><angle>10</angle><gradient></gradient></pie><animation><start_time>1</start_time><pull_out_time>1</pull_out_time><start_effect>strong</start_effect><sequenced>1</sequenced></animation><data_labels><show>IP:{title}</show><max_width>100</max_width></data_labels><labels><label lid='0'><text><![CDATA[目标ip流量]]></text><y>10</y><text_size>14</text_size><align>center</align></label></labels></settings>"
+	chart_settings: "<settings><data_type>csv</data_type><legend><enabled>0</enabled></legend><pie><inner_radius>30</inner_radius><height>7</height><angle>10</angle><gradient></gradient></pie><animation><start_time>0</start_time><pull_out_time>1</pull_out_time><start_effect>strong</start_effect><sequenced>1</sequenced></animation><data_labels><show>IP:{title}</show><max_width>100</max_width></data_labels><labels><label lid='0'><text><![CDATA[目标ip流量]]></text><y>10</y><text_size>14</text_size><align>center</align></label></labels></settings>"
 };
 
-swfobject.embedSWF("${jsPath}amcharts/flash/ampie.swf", "chartdivsrc", "100%", "400", "8.0.0", "${jsPath}amcharts/flash/expressInstall.swf", flashVarsSrc, params);
-swfobject.embedSWF("${jsPath}amcharts/flash/ampie.swf", "chartdivdst", "100%", "400", "8.0.0", "${jsPath}amcharts/flash/expressInstall.swf", flashVarsDst, params);
+window.onload = function()
+{
+	var amFallback = new AmCharts.AmFallback();
+	amFallback.chartSettings = flashVarsSrc.chart_settings;
+	amFallback.chartData = flashVarsSrc.chart_data;
+	amFallback.type = "pie";
+	amFallback.write("chartdivsrc");
+	
+	var amFallback2 = new AmCharts.AmFallback();
+	amFallback2.chartSettings = flashVarsDst.chart_settings;
+	amFallback2.chartData = flashVarsDst.chart_data;
+	amFallback2.type = "pie";
+	amFallback2.write("chartdivdst");
+}
+
+//swfobject.embedSWF("${jsPath}amcharts/flash/ampie.swf", "chartdivsrc", "100%", "400", "8.0.0", "${jsPath}amcharts/flash/expressInstall.swf", flashVarsSrc, params);
+//swfobject.embedSWF("${jsPath}amcharts/flash/ampie.swf", "chartdivdst", "100%", "400", "8.0.0", "${jsPath}amcharts/flash/expressInstall.swf", flashVarsDst, params);
 </script>
+<style type="text/css">
+tspan {
+	
+}
+</style>
 </head>
 <body>
 <div class="std_info">
@@ -166,7 +195,7 @@ swfobject.embedSWF("${jsPath}amcharts/flash/ampie.swf", "chartdivdst", "100%", "
                 <td><s:property value="dbModels['ipSrc'][#dbModel.index]['format_bytes_total']" /></td>
                 <td><span ctype="ProgressBar" barSkin="green" progress="<s:property value="dbModels['ipSrc'][#dbModel.index]['percentage']" />"></td>
                 <td></span><s:property value="dbModels['ipSrc'][#dbModel.index]['percentage']" />%</td>
-                <td><img style="cursor:pointer" height="14" width="14" src="${rootPath}resource/image/icons/trend.png" border="0" onclick="showFlowTrend('<s:property value="dbModels['ipSrc'][#dbModel.index]['src_ip']" />')"></td>
+                <td><img style="cursor:pointer" height="14" width="14" src="${rootPath}resource/image/icons/trend.png" border="0" onclick="showFlowTrend('<s:property value="dbModels['ipSrc'][#dbModel.index]['src_ip']" />', 1)"></td>
             </tr>
             </s:iterator>
             </table>
@@ -199,7 +228,9 @@ swfobject.embedSWF("${jsPath}amcharts/flash/ampie.swf", "chartdivdst", "100%", "
                 </td>
                 <td><span ctype="ProgressBar" barSkin="green" progress="<s:property value="dbModels['ipDst'][#dbModel.index]['percentage']" />"></span></td>
                 <td><s:property value="dbModels['ipDst'][#dbModel.index]['percentage']" />%</td>
-                <td><img height="14" width="14" src="${rootPath}resource/image/icons/trend.png" border="0"></td>
+                <td>
+                <img style="cursor:pointer" height="14" width="14" src="${rootPath}resource/image/icons/trend.png" border="0" onclick="showFlowTrend('<s:property value="dbModels['ipDst'][#dbModel.index]['dst_ip']" />', 2)">
+                </td>
             </tr>
             </s:iterator>
             </table>

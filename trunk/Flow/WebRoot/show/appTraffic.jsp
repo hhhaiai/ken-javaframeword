@@ -6,14 +6,16 @@
 <html>
 <head>
 <title>应用流量</title>
+<link rel="stylesheet" href="${cssPath}std_info.css" />
 <script type="text/javascript" src="${rootPath}resource/js/rl/src/RealLight.js"></script>
 <script type="text/javascript" src="${jsPath}amcharts/flash/swfobject.js"></script>
 <script type="text/javascript" src="${jsPath}amcharts/javascript/amcharts.js"></script>
+<script type="text/javascript" src="${jsPath}amcharts/javascript/amfallback.js"></script>
 <script type="text/javascript" src="${jsPath}amcharts/javascript/raphael.js"></script>
 </script>
 <!-- 页面显示框架 -->
 <script language="javascript">   
-rl.importCss("nf:std_info");
+//rl.importCss("nf:std_info");
 rl.importJs("gui.indicator.ProgressBar");
 rl.importJs("nf:reportQuery");
 rl.importJs("nf:queryDialog");
@@ -41,10 +43,9 @@ function showDetail(ipAddress) {
 
 // 导出PDF
 function exportPdf() {
-    var flashMovie = document.getElementById('chartdiv');
-	if (flashMovie) {
-		flashMovie.exportImage('${rootPath}appTraffic_exportPDF?fileName=应用流量报表.pdf'); 
-	}
+    var mainForm = document.mainForm;
+	mainForm.action = "${rootPath}appTraffic_dumpPDF?method=appTraffic_list";
+	mainForm.submit();
 }
 </script>
 

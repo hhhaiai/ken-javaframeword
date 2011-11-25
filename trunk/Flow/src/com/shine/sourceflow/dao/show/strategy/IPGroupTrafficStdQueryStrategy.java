@@ -46,7 +46,7 @@ public class IPGroupTrafficStdQueryStrategy implements IQueryStrategy {
 	private String createGenericSql(ShowGenericDto dto, 
 			String tableName, String fCondition, String bBegin, String bEnd) {
 		StringBuffer sql = new StringBuffer();
-		sql.append("select b.ip_alias, sum(a.bytes) as total_bytes from ");
+		sql.append("select b.ip_alias, b.group_id, sum(a.bytes) as total_bytes from ");
 		sql.append(tableName);
 		sql.append(" as a, ip_group_config as b where ");
 		sql.append(fCondition);
