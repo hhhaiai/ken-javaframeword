@@ -3,6 +3,8 @@ package com.shine.MultiProcess;
 public class Example {
 
 	/**
+	 * 基础例子
+	 * 
 	 * @param args
 	 */
 	public static void main(String[] args) {

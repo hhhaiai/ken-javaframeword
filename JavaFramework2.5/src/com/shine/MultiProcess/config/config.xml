@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xml-body>
-
-</xml-body>
+<config>
+	<process name="" type="" clazz="" pathc="" />
+</config>
