@@ -15,7 +15,6 @@ public class CreateImmediateTableJob implements QuartzJob {
 	
 	private CreateImmediateTableDao dao = new CreateImmediateTableDao();
 
-	@Override
 	public Trigger createTrigger() {
 		Trigger trigger = TriggerUtils.makeImmediateTrigger(
 				TRIGGER_REPEAT_COUNT, TRIGGER_REPEAT_INTERVAL);
@@ -23,7 +22,6 @@ public class CreateImmediateTableJob implements QuartzJob {
 		return trigger;
 	}
 
-	@Override
 	public void execute(JobExecutionContext arg0) throws JobExecutionException {
 		// TODO 记录日志
 		// 开始任务调度

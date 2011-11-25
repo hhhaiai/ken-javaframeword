@@ -16,7 +16,6 @@ public class CreateMonthlyTableJob implements QuartzJob {
 	
 	private CreateMonthlyTableDao dao = new CreateMonthlyTableDao();
 
-	@Override
 	public Trigger createTrigger() {
 		Trigger trigger = TriggerUtils.makeMonthlyTrigger(TRIGGER_DATOFMONTH,
 				TRIGGER_HOUR, TRIGGER_MINUTE);
@@ -24,7 +23,6 @@ public class CreateMonthlyTableJob implements QuartzJob {
 		return trigger;
 	}
 
-	@Override
 	public void execute(JobExecutionContext arg0) throws JobExecutionException {
 		// TODO 记录日志
 		// 开始任务调度
