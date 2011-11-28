@@ -1,5 +1,10 @@
 package com.shine.MultiProcess.utils;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProcessHelper {
@@ -14,15 +19,26 @@ public class ProcessHelper {
 	private PorcessRunnable processRunnable;
 	// 关闭数据线程
 	private PorcessCloseRunnable porcessCloseRunnable;
+	// 操作线程
+	private PorcessExecRunnable porcessExecRunnable;
+
 	// 等待命令队列
-	private List<String> porcessList;
+	private List<String> porcessList = new ArrayList<String>();
 	// 是否具有可操作性
 	private boolean operaAble = true;
+	// 是否回显每个执行结果
+	private boolean echoAble = true;
 
 	/**
 	 * 启动进程
 	 */
 	public void start() {
+		if (porcessExecRunnable == null) {
+			porcessExecRunnable = new PorcessExecRunnable();
+			porcessExecRunnable.setHelper(this);
+			porcessExecRunnable.start();
+		}
+
 		if (processRunnable == null) {
 			processRunnable = new PorcessRunnable();
 			processRunnable.setHelper(this);
@@ -39,6 +55,30 @@ public class ProcessHelper {
 			porcessCloseRunnable = new PorcessCloseRunnable();
 			porcessCloseRunnable.setHelper(this);
 			porcessCloseRunnable.start();
+		}
+	}
+
+	/**
+	 * 操作进程
+	 * 
+	 * @param Commnd
+	 */
+	public void operaProcess() {
+		if (this.isComplete()) {
+			if (this.isOperaAble()) {
+				this.setOperaAble(false);
+				try {
+					if (this.getPorcessList().size() != 0) {
+						String s = this.getPorcessList().remove(0);
+						System.out.println(s);
+						p.getOutputStream().write((s + " \n").getBytes());
+						p.getOutputStream().flush();
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				this.setOperaAble(true);
+			}
 		}
 	}
 
@@ -68,6 +108,10 @@ public class ProcessHelper {
 
 	public void addResult(String s) {
 		this.result.append(s);
+	}
+
+	public void addOperaCommon(String commnd) {
+		porcessList.add(commnd);
 	}
 
 	public String getName() {
@@ -110,6 +154,22 @@ public class ProcessHelper {
 		this.operaAble = operaAble;
 	}
 
+	public boolean isEchoAble() {
+		return echoAble;
+	}
+
+	public void setEchoAble(boolean echoAble) {
+		this.echoAble = echoAble;
+	}
+
+	public List<String> getPorcessList() {
+		return porcessList;
+	}
+
+	public void setPorcessList(List<String> porcessList) {
+		this.porcessList = porcessList;
+	}
+
 }
 
 /**
@@ -123,6 +183,8 @@ class PorcessRunnable extends Thread {
 	private Process p;
 
 	public void run() {
+		BufferedReader br = null;
+		InputStreamReader isr = null;
 		try {
 			p = Runtime.getRuntime().exec(helper.getCommon());
 			helper.setP(p);
@@ -131,8 +193,31 @@ class PorcessRunnable extends Thread {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
+
+			isr = new InputStreamReader(p.getInputStream(), "utf-8");
+			br = new BufferedReader(isr);
+			String line = br.readLine();
+			while (line != null) {
+				helper.addResult(line + "\r\n");
+				if (helper.isEchoAble())
+					System.out.println(line + "\r\n");
+				line = br.readLine();
+			}
 		} catch (Throwable t) {
 			t.getStackTrace();
+		} finally {
+			try {
+				if (br != null) {
+					br.close();
+					br = null;
+				}
+				if (isr != null) {
+					isr.close();
+					isr = null;
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -186,22 +271,16 @@ class PorcessCloseRunnable extends Thread {
 
 /**
  * 多进程操作教程
+ * 
  * @author viruscodecn@gmail.com
- *
+ * 
  */
 class PorcessExecRunnable extends Thread {
 	private ProcessHelper helper;
 
 	public void run() {
 		while (true) {
-			if (helper.isComplete()) {
-				if (helper.isOperaAble()) {
-					helper.setOperaAble(false);
-					
-					helper.setOperaAble(true);
-					break;
-				}
-			}
+			helper.operaProcess();
 		}
 	}
 
