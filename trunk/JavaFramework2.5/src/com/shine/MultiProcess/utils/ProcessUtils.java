@@ -9,6 +9,7 @@ public class ProcessUtils {
 	 * @param args
 	 * @return
 	 */
+
 	public static String createJarCommon(String jvmPath, String jarPath,
 			String... args) {
 		StringBuffer s = new StringBuffer();
@@ -31,6 +32,9 @@ public class ProcessUtils {
 		}
 		return s.toString();
 	}
-	
-	
+
+	public static String createClassCommon() {
+		return null;
+	}
+
 }

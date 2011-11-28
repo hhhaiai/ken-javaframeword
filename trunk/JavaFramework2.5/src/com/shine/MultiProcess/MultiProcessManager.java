@@ -58,6 +58,11 @@ public class MultiProcessManager {
 				args));
 	}
 
+	public void addProcessByClass(String name, String classPath,
+			String className, String... args) {
+
+	}
+
 	/**
 	 * 启动指定进程
 	 * 
