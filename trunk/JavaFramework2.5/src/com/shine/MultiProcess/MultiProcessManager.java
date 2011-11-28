@@ -92,6 +92,7 @@ public class MultiProcessManager {
 	}
 
 	public String operaProcess(String name, String commnd) {
+		processMap.get(name).addOperaCommon(commnd);
 		return null;
 	}
 
