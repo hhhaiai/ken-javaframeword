@@ -16,5 +16,4 @@ public class CommunicationExample {
 		MultiProcessManager.getManager().operaProcess("test", "test2");
 
 	}
-
 }
