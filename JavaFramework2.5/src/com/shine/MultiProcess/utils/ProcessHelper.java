@@ -21,6 +21,8 @@ public class ProcessHelper {
 	private PorcessCloseRunnable porcessCloseRunnable;
 	// 操作线程
 	private PorcessExecRunnable porcessExecRunnable;
+	// 接收线程
+	private PorcessReceviceRunnable porcessReceviceRunnable;
 
 	// 等待命令队列
 	private List<String> porcessList = new ArrayList<String>();
@@ -44,6 +46,12 @@ public class ProcessHelper {
 			processRunnable.setHelper(this);
 			processRunnable.setP(p);
 			processRunnable.start();
+		}
+
+		if (porcessReceviceRunnable == null) {
+			porcessReceviceRunnable = new PorcessReceviceRunnable();
+			porcessReceviceRunnable.setHelper(this);
+			porcessReceviceRunnable.start();
 		}
 	}
 
@@ -70,9 +78,9 @@ public class ProcessHelper {
 				try {
 					if (this.getPorcessList().size() != 0) {
 						String s = this.getPorcessList().remove(0);
-						System.out.println(s);
 						p.getOutputStream().write((s + " \n").getBytes());
 						p.getOutputStream().flush();
+						s = null;
 					}
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -183,8 +191,6 @@ class PorcessRunnable extends Thread {
 	private Process p;
 
 	public void run() {
-		BufferedReader br = null;
-		InputStreamReader isr = null;
 		try {
 			p = Runtime.getRuntime().exec(helper.getCommon());
 			helper.setP(p);
@@ -193,31 +199,8 @@ class PorcessRunnable extends Thread {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-
-			isr = new InputStreamReader(p.getInputStream(), "utf-8");
-			br = new BufferedReader(isr);
-			String line = br.readLine();
-			while (line != null) {
-				helper.addResult(line + "\r\n");
-				if (helper.isEchoAble())
-					System.out.println(line + "\r\n");
-				line = br.readLine();
-			}
 		} catch (Throwable t) {
 			t.getStackTrace();
-		} finally {
-			try {
-				if (br != null) {
-					br.close();
-					br = null;
-				}
-				if (isr != null) {
-					isr.close();
-					isr = null;
-				}
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
 		}
 	}
 
@@ -281,6 +264,64 @@ class PorcessExecRunnable extends Thread {
 	public void run() {
 		while (true) {
 			helper.operaProcess();
+		}
+	}
+
+	public ProcessHelper getHelper() {
+		return helper;
+	}
+
+	public void setHelper(ProcessHelper helper) {
+		this.helper = helper;
+	}
+}
+
+/**
+ * 进程接收线程
+ * 
+ * @author viruscodecn@gmail.com
+ * 
+ */
+class PorcessReceviceRunnable extends Thread {
+	private ProcessHelper helper;
+
+	public void run() {
+		BufferedReader br = null;
+		InputStreamReader isr = null;
+
+		try {
+			while (true) {
+				if (helper.getP() != null) {
+					isr = new InputStreamReader(helper.getP().getInputStream());
+					break;
+				}
+			}
+			br = new BufferedReader(isr);
+			while (true) {
+				String line = br.readLine();
+				if (line != null) {
+					helper.addResult(line + "\r\n");
+					if (helper.isEchoAble())
+						System.out.println(line + "\r\n");
+				} else {
+					return;
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (br != null) {
+					br.close();
+					br = null;
+				}
+				if (isr != null) {
+					isr.close();
+					isr = null;
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 

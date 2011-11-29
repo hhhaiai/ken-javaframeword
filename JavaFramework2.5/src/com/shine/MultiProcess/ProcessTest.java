@@ -1,14 +1,15 @@
 package com.shine.MultiProcess;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 
-public class MyTest {
+public class ProcessTest {
 
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) throws Exception {
-		System.out.println("process启动");
+		System.out.println("process start");
 		// TODO Auto-generated method stub
 		// 定义在循环外部 只创建一个对象
 		BufferedReader bfr = new BufferedReader(
@@ -19,12 +20,11 @@ public class MyTest {
 
 			String strLine = bfr.readLine();
 			if (strLine != null) {
-				System.out.println("hi" + strLine);
+				System.out.println("order:" + strLine);
 			} else {
 				return;
 			}
 		}
-
 	}
 
 }
