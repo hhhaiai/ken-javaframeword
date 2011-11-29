@@ -30,7 +30,10 @@ public class TestInOut implements Runnable {
 		// 是实例方法，并且必须根据当前的运行时对象对其进行调用
 		System.out.println("abc");
 		try {
-			p = Runtime.getRuntime().exec("C:\\Program Files\\Java\\jre6\\bin\\java -jar F:\\下载\\javaFramework2_5_5.jar");// 启动子进程
+			p = Runtime
+					.getRuntime()
+					.exec(
+							"C:\\Program Files\\Java\\jre6\\bin\\java -jar  F:\\下载\\javaFramework2_5_5.jar");// 启动子进程
 			new Thread(this).start(); // 启动线程
 			// new Thread(new TestInOut()).start();这种写法存在问题，无线递归，实例方法被调用
 			// 就又会实例化一个TestInOut对象 然后无限循环
@@ -50,16 +53,25 @@ public class TestInOut implements Runnable {
 	}
 
 	public void send() {
+		OutputStream ops = null;
 		try {
-			OutputStream ops = p.getOutputStream();
 			while (true) {
-				// OutputStream的write方法无法写入字符串调用getBytes()方法写入单个字符
-				ops.write("help/r/n".getBytes());
-
+				if (p != null) {
+					ops = p.getOutputStream();
+					// OutputStream的write方法无法写入字符串调用getBytes()方法写入单个字符
+					ops.write("help\n".getBytes());
+					ops.flush();
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-
+		} finally {
+			try {
+				if (ops != null)
+					ops.close();
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
 		}
 	}
 
