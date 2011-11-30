@@ -14,9 +14,7 @@ public abstract class Plugin {
 	private String description;
 	private String status;
 
-	private String libPath;
 	private String sqlPath;
-	private String webPath;
 
 	public Plugin() {
 
@@ -113,27 +111,11 @@ public abstract class Plugin {
 		this.status = status;
 	}
 
-	public String getLibPath() {
-		return libPath;
-	}
-
-	public void setLibPath(String libPath) {
-		this.libPath = libPath;
-	}
-
 	public String getSqlPath() {
 		return sqlPath;
 	}
 
 	public void setSqlPath(String sqlPath) {
 		this.sqlPath = sqlPath;
-	}
-
-	public String getWebPath() {
-		return webPath;
-	}
-
-	public void setWebPath(String webPath) {
-		this.webPath = webPath;
 	}
 }
