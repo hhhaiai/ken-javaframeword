@@ -46,7 +46,7 @@ public class SessionTrafficStdQuery implements IQueryStrategy {
 	private String createGenericSql(ShowGenericDto dto, 
 			String tableName, String fCondition, String bBegin, String bEnd) {
 		StringBuffer sql = new StringBuffer();
-		sql.append("select b.session_alias, sum(a.bytes) as total_bytes from ");
+		sql.append("select b.session_id, b.session_alias, sum(a.bytes) as total_bytes from ");
 		sql.append(tableName);
 		sql.append(" as a, session_config as b where ");
 		sql.append("a.log_time between '");

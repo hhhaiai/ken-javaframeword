@@ -47,6 +47,13 @@ function exportPdf() {
 	mainForm.action = "${rootPath}appTraffic_dumpPDF?method=appTraffic_list";
 	mainForm.submit();
 }
+
+// 流量趋势
+function showFlowTrend(appId) {
+	var mainForm = document.mainForm;
+	mainForm.action ='${rootPath}trend/appTrafficTrend_list?appId=' + appId;
+	mainForm.submit();
+}
 </script>
 
 <!-- 加载报表 -->
@@ -63,7 +70,16 @@ var flashVars =
 	chart_settings: "<settings><data_type>csv</data_type><plot_area><margins><left>50</left><right>40</right><top>50</top><bottom>50</bottom></margins></plot_area><grid><category><dashed>1</dashed><dash_length>4</dash_length></category><value><dashed>1</dashed><dash_length>4</dash_length></value></grid><axes><category><width>1</width><color>E7E7E7</color></category><value><width>1</width><color>E7E7E7</color></value></axes><values><value><min>0</min></value></values><legend><enabled>1</enabled></legend><angle>0</angle><column><type>3d column</type><width>15</width><alpha>100</alpha><spacing>10</spacing><hover_brightness>0</hover_brightness><balloon_text>{title}: {value}(MB)</balloon_text><grow_time>2</grow_time></column><depth>15</depth><angle>25</angle><graphs><graph gid='0'><title>流出流量</title><color>4BBF4B</color></graph><graph gid='1'><title>流入流量</title><color>C0DBFD</color></graph></graphs><labels><label lid='0'><text><![CDATA[<b>应用流量</b>]]></text><y>5</y><text_color>000000</text_color><text_size>16</text_size><align>center</align></label></labels></settings>"
 };
 
-swfobject.embedSWF("${jsPath}amcharts/flash/amcolumn2.swf", "chartdiv", "100%", "400", "8.0.0", "${jsPath}amcharts/flash/expressInstall.swf", flashVars, params);
+window.onload = function()
+{
+	var amFallback = new AmCharts.AmFallback();
+    amFallback.chartSettings = flashVars.chart_settings;
+	amFallback.chartData = flashVars.chart_data;
+	amFallback.type = "column";
+	amFallback.write("chartdiv");
+}
+
+//swfobject.embedSWF("${jsPath}amcharts/flash/amcolumn2.swf", "chartdiv", "100%", "400", "8.0.0", "${jsPath}amcharts/flash/expressInstall.swf", flashVars, params);
 </script>
 </head>
 <body>
@@ -149,18 +165,26 @@ swfobject.embedSWF("${jsPath}amcharts/flash/amcolumn2.swf", "chartdiv", "100%", 
                 <th>流出(MB)</th>
                 <th>百分比</th>
                 <th></th>
+                <th>流量趋势</th>
             </tr>
             <s:iterator value="#request.dbModels['default']" status="dbModel">
             <tr>
                 <td><s:property value="#dbModel.index + 1" /></td>
                 <td><a href="javascript:void(0);" onclick="showDetail('<s:property value="dbModels['default'][#dbModel.index]['ip_address']" />');"><s:property value="dbModels['default'][#dbModel.index]['app_alias']" /></a></td>
-                <td><s:property value="dbModels['default'][#dbModel.index]['total_bytes_all']" /></td>
+                <td>
+                <s:text name="global.format.number">
+                <s:param value="(dbModels['default'][#dbModel.index]['total_bytes_in'] + dbModels['default'][#dbModel.index]['total_bytes_out']) / 1"/>
+                </s:text>
+                </td>
                 <td><s:property value="dbModels['default'][#dbModel.index]['total_bytes_in']" /></td>
                 <td><span ctype="ProgressBar" barSkin="green" progress="<s:property value="dbModels['default'][#dbModel.index]['bytes_in_percentage']" />"></span></td>
                 <td><s:property value="dbModels['default'][#dbModel.index]['bytes_in_percentage']" />%</td>
                 <td><s:property value="dbModels['default'][#dbModel.index]['total_bytes_out']" /></td>
                 <td><span ctype="ProgressBar" barSkin="green" progress="<s:property value="dbModels['default'][#dbModel.index]['bytes_out_percentage']" />"></span></td>
                 <td><s:property value="dbModels['default'][#dbModel.index]['bytes_out_percentage']" />%</td>
+                <td>
+                <img style="cursor:pointer" height="14" width="14" src="${rootPath}resource/image/icons/trend.png" border="0" onclick="showFlowTrend('<s:property value="dbModels['default'][#dbModel.index]['app_id']" />')">
+                </td>
             </tr>
             </s:iterator>
             </table>

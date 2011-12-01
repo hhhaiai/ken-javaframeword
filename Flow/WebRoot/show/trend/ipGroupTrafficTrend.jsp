@@ -16,13 +16,6 @@ rl.importCss("nf:std_info");
 rl.importJs("nf:reportQuery");
 rl.importJs("nf:queryDialog");
 rl.addAutoDecoArea("mainForm");
-
-// 查询
-function query(){
-    var mainForm = document.mainForm;
-    mainForm.action = "${rootPath}ipTraffic_list";
-    mainForm.submit(); 
-}
 </script>
 <script type="text/javascript">
 var params = 
@@ -43,15 +36,17 @@ swfobject.embedSWF("${jsPath}amcharts/flash/amline.swf", "chartdiv", "600", "400
 <div class="std_info">
     <div class="page_wrapper limit_770">
     	<!-- 查询页面 START -->
-        <!-- <div class="top_bar limit_770">
-			<a title="显示/隐藏 查询" onClick="toggleSearch();" class="icon_btn" href="javascript:void(0);">
+        <div class="top_bar limit_770">
+       		<a title="后退" onClick='history.back();return false;' class="icon_btn" href="javascript:void(0);">
+            <img src="${imagePath}icons/back.gif" /> 后退</a>
+			<!-- <a title="显示/隐藏 查询" onClick="toggleSearch();" class="icon_btn" href="javascript:void(0);">
             <img src="${rootPath}resource/image/icons/search.gif" /> 查询
             </a>
             <span class="sep">&nbsp;</span>
             <a title="导出为pdf文件" onClick="exportPdf();return false;" class="icon_btn" href="javascript:void(0);" >
             <img src="${rootPath}resource/image/icons/export_pdf.gif" /> 导出PDF
-            </a>
-		</div> -->
+            </a> -->
+		</div>
         <!-- 查询页面 END -->
         <h3 class="title">IP分组流量趋势</h3>
         <!-- IP流量趋势统计 START -->

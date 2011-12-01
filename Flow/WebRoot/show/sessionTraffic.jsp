@@ -40,6 +40,13 @@ function exportPdf() {
 	mainForm.action = "${rootPath}sessionTraffic_dumpPDF?method=sessionTraffic_list";
 	mainForm.submit();
 }
+
+// 流量趋势
+function showFlowTrend(ipGroupId) {
+	var mainForm = document.mainForm;
+	mainForm.action ='${rootPath}trend/sessionTrafficTrend_list?sessionId=' + ipGroupId;
+	mainForm.submit();
+}
 </script>
 
 <!-- 加载报表 -->
@@ -150,18 +157,26 @@ window.onload = function()
                 <th>流出(MB)</th>
                 <th>百分比</th>
                 <th></th>
+                <th>流量趋势</th>
             </tr>
             <s:iterator value="#request.dbModels['default']" status="dbModel">
             <tr>
                 <td><s:property value="#dbModel.index + 1" /></td>
-                <td><a href="javascript:void(0);"><s:property value="dbModels['default'][#dbModel.index]['session_alias']" /></a></td>
-                <td><s:property value="dbModels['default'][#dbModel.index]['session_total']" /></td>
+                <td><s:property value="dbModels['default'][#dbModel.index]['session_alias']" /></td>
+                <td>
+                <s:text name="global.format.number">
+                <s:param value="(dbModels['default'][#dbModel.index]['src_session_total'] + dbModels['default'][#dbModel.index]['dst_session_total']) / 1"/>
+                </s:text>
+                </td>
                 <td><s:property value="dbModels['default'][#dbModel.index]['src_session_total']" /></td>
                 <td><span ctype="ProgressBar" barSkin="green" progress="<s:property value="dbModels['default'][#dbModel.index]['src_session_percentage']" />"></span></td>
                 <td><s:property value="dbModels['default'][#dbModel.index]['src_session_percentage']" />%</td>
                 <td><s:property value="dbModels['default'][#dbModel.index]['dst_session_total']" /></td>
                 <td><span ctype="ProgressBar" barSkin="green" progress="<s:property value="dbModels['default'][#dbModel.index]['dst_session_percentage']" />"></span></td>
                 <td><s:property value="dbModels['default'][#dbModel.index]['dst_session_percentage']" />%</td>
+                <td>
+                <img style="cursor:pointer" height="14" width="14" src="${rootPath}resource/image/icons/trend.png" border="0" onclick="showFlowTrend('<s:property value="dbModels['default'][#dbModel.index]['session_id']" />')">
+                </td>
             </tr>
             </s:iterator>
             </table>

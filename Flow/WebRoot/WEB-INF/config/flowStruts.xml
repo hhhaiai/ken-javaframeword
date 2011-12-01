@@ -63,5 +63,15 @@
             class="com.shine.sourceflow.web.show.trend.ProtocolTrafficTrendAction" method="{1}">
             <result name="list">/show/trend/protocolTrafficTrend.jsp</result>
         </action>
+        <!-- 会话流量 -->
+        <action name="sessionTrafficTrend_*" 
+            class="com.shine.sourceflow.web.show.trend.SessionTrafficTrendAction" method="{1}">
+            <result name="list">/show/trend/sessionTrafficTrend.jsp</result>
+        </action>
+        <!-- 应用流量 -->
+        <action name="appTrafficTrend_*" 
+            class="com.shine.sourceflow.web.show.trend.AppTrafficTrendAction" method="{1}">
+            <result name="list">/show/trend/appTrafficTrend.jsp</result>
+        </action>
     </package>
 </struts>

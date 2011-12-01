@@ -46,7 +46,7 @@ public class ProtocolTrafficStdQuery implements IQueryStrategy {
 	private String createGenericSql(ShowGenericDto dto, 
 			String tableName, String fCondition, String bBegin, String bEnd) {
 		StringBuffer sql = new StringBuffer();
-		sql.append("select b.protocol_alias, sum(a.bytes) as total_bytes from ");
+		sql.append("select b.protocol_id, b.protocol_alias, sum(a.bytes) as total_bytes from ");
 		sql.append(tableName);
 		sql.append(" as a, protocol_config as b where ");
 		sql.append(fCondition);

@@ -11,7 +11,7 @@
     <!-- 接收数据时的缓存条数 -->
     <receive-cache>20</receive-cache>
     <!-- 是否开启数据接收保护模式 -->
-    <protect-policy>1</protect-policy>
+    <protect-policy>0</protect-policy>
     <protect-time>60</protect-time>
     <!-- 处理线程数 -->
     <process-thread-size>20</process-thread-size>
@@ -34,6 +34,10 @@
         <router>
             <id>2</id>
             <ip-address>192.168.11.61</ip-address>
+        </router>
+        <router>
+            <id>2</id>
+            <ip-address>192.168.1.1</ip-address>
         </router>
     </routers>
     <!-- 计划任务 -->
