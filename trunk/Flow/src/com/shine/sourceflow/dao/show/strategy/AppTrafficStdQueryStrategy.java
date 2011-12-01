@@ -59,7 +59,7 @@ public class AppTrafficStdQueryStrategy implements IQueryStrategy {
 	private String createGenericSql(ShowGenericDto dto, 
 			String tableName, String fCondition, String bBegin, String bEnd) {
 		StringBuffer sql = new StringBuffer();
-		sql.append("select b.app_alias, b.ip_address, sum(a.bytes) as bytes_total from ");
+		sql.append("select b.app_id, b.app_alias, b.ip_address, sum(a.bytes) as bytes_total from ");
 		sql.append(tableName);
 		sql.append(" as a, app_config as b where ");
 		sql.append(fCondition);

@@ -1,7 +1,6 @@
 package com.shine.sourceflow.dao.show.trend;
 
 import java.sql.SQLException;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -35,8 +34,9 @@ public abstract class TrendGenericDao extends GenericDao {
 				dbSrcModels.put(entry.getKey(), dbModel);
 			}
 			if (entry.getValue().length > 1) {
+				String sql = entry.getValue()[1];
 				DBModel dbModel = DBUtil.getInstance().
-					executeQuery(GenericDao.JNDI_DEFAULT, entry.getValue()[1]);
+					executeQuery(GenericDao.JNDI_DEFAULT, sql);
 				try {
 					dbModel.next();
 				} catch (SQLException e) {

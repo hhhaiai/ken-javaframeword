@@ -27,6 +27,15 @@ public class TrendGenericDto extends GenericDto {
 	/** IP分组ID */
 	private String ipGroupId = "";
 	
+	/** 协议ID */
+	private String protocolId = "";
+	
+	/** 会话ID */
+	private String sessionId = "";
+	
+	/** 应用ID */
+	private String appId = "";
+	
 	public TrendGenericDto() {
 		this.statPeriodList = new HashMap<Integer, String>();
 		this.statPeriodList.put(1, "日报表");
@@ -63,6 +72,21 @@ public class TrendGenericDto extends GenericDto {
 		if (ipGroupId != null) {
 			this.ipGroupId = ipGroupId;
 		}
+		// 协议ID
+		String protocolId = request.getParameter("protocolId");
+		if (protocolId != null) {
+			this.protocolId = protocolId;
+		}
+		// 会话ID
+		String sessionId = request.getParameter("sessionId");
+		if (sessionId != null) {
+			this.sessionId = protocolId;
+		}
+		// 应用ID
+		String appId = request.getParameter("appId");
+		if (appId != null) {
+			this.appId = appId;
+		}
 	}
 	
 	public Map<Integer, String> getStatPeriodList() {
@@ -83,6 +107,18 @@ public class TrendGenericDto extends GenericDto {
 	
 	public String getIpGroupId() {
 		return this.ipGroupId;
+	}
+	
+	public String getProtocolId() {
+		return this.protocolId;
+	}
+	
+	public String getSessionId() {
+		return this.sessionId;
+	}
+	
+	public String getAppId() {
+		return this.appId;
 	}
 	
 	public String getDate() {

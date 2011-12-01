@@ -162,8 +162,12 @@ window.onload = function()
             <s:iterator value="#request.dbModels['default']" status="dbModel">
             <tr>
                 <td><s:property value="#dbModel.index + 1" /></td>
-                <td><a href="javascript:void(0);"><s:property value="dbModels['default'][#dbModel.index]['protocol_alias']" /></a></td>
-                <td><s:property value="dbModels['default'][#dbModel.index]['protocol_total']"/></td>
+                <td><s:property value="dbModels['default'][#dbModel.index]['protocol_alias']" /></td>
+                <td>
+                <s:text name="global.format.number">
+                <s:param value="(dbModels['default'][#dbModel.index]['src_protocol_total'] + dbModels['default'][#dbModel.index]['dst_protocol_total']) / 1"/>
+                </s:text>
+                </td>
                 <td><s:property value="dbModels['default'][#dbModel.index]['src_protocol_total']" /></td>
                 <td><span ctype="ProgressBar" barSkin="green" progress="<s:property value="dbModels['default'][#dbModel.index]['src_protocol_percentage']" />"></span></td>
                 <td><s:property value="dbModels['default'][#dbModel.index]['src_protocol_percentage']" />%</td>
