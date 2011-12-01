@@ -4,9 +4,20 @@ import java.util.List;
 
 public abstract class SnmpAbstract {
 
-	// 运行状态
+	// 运行状态(Use this attribute judge Class SnmpAbstract subclass is busy now)
 	protected boolean state = false;
+	
+	protected int version = 0;
+	
+	public int getVersion() {
+		return version;
+	}
 
+	public void setVersion(int version) {
+		this.version = version;
+	}
+
+	// Thread State
 	public boolean isState() {
 		return state;
 	}
@@ -43,6 +54,14 @@ public abstract class SnmpAbstract {
 	 */
 	public abstract String getOidValueString(String oid);
 
+	/**
+	 * 获取value
+	 * @param oid
+	 * @param v
+	 * @return
+	 */
+	public abstract String getOidValueString(String oid,int v);
+	
 	/**
 	 * 获取table
 	 * 

@@ -1,12 +1,17 @@
 package com.shine.SnmpPool;
 
 import java.util.List;
+import java.util.Map;
+
+import org.dom4j.Element;
 
 import com.shine.SnmpPool.threadmodel.SnmpThreadModel;
 import com.shine.SnmpPool.utils.SnmpPool;
 import com.shine.framework.ThreadPoolUtil.ThreadPoolManager;
+import com.shine.framework.ThreadPoolUtil.util.SuperThread;
 import com.shine.framework.core.util.ReflectionUtil;
 import com.shine.framework.core.util.SnmpAbstract;
+import com.shine.framework.core.util.XmlUitl;
 
 /**
  * snmp采集池的管理器
@@ -16,9 +21,16 @@ import com.shine.framework.core.util.SnmpAbstract;
  */
 public class SnmpPoolManager {
 	private static SnmpPoolManager manager = null;
-
+	//常量
+	private static final String SNMP4J="com.shine.framework.core.util.SnmpHelper4j";
+	private static final String JAVASNMP="com.shine.framework.core.util.SnmpHelper";
+	private static final String APATCHESNMP="";
+	
+	public boolean statu=false;
+	
 	private int threadSize = 2;
-
+	
+	//Snmp池引用
 	private SnmpPool snmpPool = new SnmpPool();
 
 	public static SnmpPoolManager getManager() {
@@ -48,7 +60,6 @@ public class SnmpPoolManager {
 	 */
 	public void init(int threadSize) {
 		this.threadSize = threadSize;
-
 		init();
 	}
 
@@ -64,15 +75,15 @@ public class SnmpPoolManager {
 	 * 
 	 * @param name
 	 * @param ip
-	 * @param community
+	 * @param community 团体名
 	 * @param port
 	 * @param poolSize
 	 * @throws Exception
 	 */
 	public void addSnmp(String name, String ip, String community, int port,
 			int poolSize) throws Exception {
-		addSnmp(name, ip, community, port, poolSize,
-				"com.shine.framework.core.util.SnmpHelper");
+			addSnmp(name, ip, community, port, poolSize,
+				"com.shine.framework.core.util.SnmpHelper4j");
 	}
 
 	/**
@@ -91,7 +102,8 @@ public class SnmpPoolManager {
 		try {
 			for (int i = 0; i < poolSize; i++) {
 				SnmpAbstract snmpAbstract = (SnmpAbstract) ReflectionUtil
-						.getClasstoObject(classPath);
+						.getClasstoObject(classPath);//Use Java Reflection Create Instance
+				//采集数据初始化入口
 				snmpAbstract.init(ip, community, port);
 				snmpPool.addSnmp(name, snmpAbstract);
 			}
@@ -239,7 +251,106 @@ public class SnmpPoolManager {
 	public void close() {
 		this.snmpPool.close();
 	}
-
+	
+	/**
+	 * 是否存Snmp版本预设值
+	 * @return
+	 */
+	public Map<String,String> isExistSnmpPreprocess(String ip){
+		List<Element> list =null;
+		try{
+			list = XmlUitl.getAllElementByPath("C:\\Users\\yangyang\\workspace\\JavaFrameWork2.5\\src\\com\\shine\\SnmpPool\\config\\snmpv.xml","snmpv");
+			for(Element e:list){
+				Map<String,String> ma=XmlUitl.getAllAttribute(e);
+				if(ip.equals(ma.get("ip"))){
+					return ma;
+				}
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			list=null;
+		}
+		return null;
+	}
+	/**
+	 * Snmp Pool是否存在连接器
+	 * @param name
+	 * @return
+	 */
+	public SnmpAbstract snmpPoolIsHaveSnmpHelper(String name){
+		SnmpAbstract snmpabstract = getIdleSnmp(name);
+		if(snmpabstract!=null){
+			return snmpabstract;
+		}
+		return null;
+	}
+	/**
+	 * 加载Snmp采集数据
+	 */
+	public void getSnmpData(String name,String ip,String comunity,int port, String oid, Object object,
+			String methodName){
+		//取出池中存在的连接器
+		SnmpAbstract snmpabstract= snmpPoolIsHaveSnmpHelper(name);
+		if(snmpabstract!=null){
+			//取一空闲线程，传入参数后，则线程自动加载完成任务。
+			System.out.println("从 Snmp Pool 重新加载...");
+			ThreadPoolManager.getManager().getIdleThread("snmpGet").setValues(snmpabstract,oid,object, methodName);
+			
+		}else{
+			this.selectSnmpHelperProcess(name,ip,comunity,port,oid,object,methodName);
+		}
+	}
+	/**
+	 * 获取SNMP采集器实现类
+	 * @param vflag
+	 * @return
+	 */
+	public String getSnmpProcess(String vflag){
+		if(SnmpPoolManager.SNMP4J.equals(vflag)){
+			return SnmpPoolManager.SNMP4J;
+		}else if(SnmpPoolManager.JAVASNMP.equals(vflag)){
+			return SnmpPoolManager.JAVASNMP;
+		}else if(SnmpPoolManager.APATCHESNMP.equals(vflag)){
+			return "";
+		}
+		return null;
+	}	
+	/**
+	 * SNMP数据采集
+	 */
+	public void selectSnmpHelperProcess(String name,String ip,String community,int port, String oid, Object object,
+			String methodName){
+		Map<String,String> snmpMap = null;
+		try{
+			snmpMap = this.isExistSnmpPreprocess(ip);
+			//存在SNMP预设值
+			if(snmpMap!=null){
+				String vstr = snmpMap.get("vstr");
+				String tip = snmpMap.get("ip");
+				int version = Integer.parseInt(snmpMap.get("version"));
+				int tport = Integer.parseInt(snmpMap.get("port"));
+				String processClass = this.getSnmpProcess(vstr);
+				if(processClass!=null || !"".equals(processClass)){
+					SnmpAbstract snmpAbstract = (SnmpAbstract) ReflectionUtil.getClasstoObject(processClass);
+					//初始化信息来源于snmpv.xml
+					snmpAbstract.setVersion(version);//预设版本
+					snmpAbstract.init(tip, community, tport);
+					ThreadPoolManager.getManager().getIdleThread("snmpGet").setValues(snmpAbstract,oid,object, methodName);
+				}
+				
+				
+			//不存在SNMP版本预设值
+			}else{
+						
+					
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			snmpMap=null;
+		}
+	}
+	
 	public int getThreadSize() {
 		return threadSize;
 	}
@@ -248,4 +359,11 @@ public class SnmpPoolManager {
 		this.threadSize = threadSize;
 	}
 
+	public boolean isStatu() {
+		return statu;
+	}
+
+	public void setStatu(boolean statu) {
+		this.statu = statu;
+	}
 }

@@ -10,16 +10,18 @@ import com.shine.framework.core.util.SnmpAbstract;
  * 
  * @author viruscodecn@gmail.com
  * 
+ * 
  */
 public class SnmpThreadModel extends ThreadModel {
 	protected String methodName;
 	protected Object object;
 
 	public SnmpThreadModel() {
-		this.setType("snmpGet");
+		
+		this.setType("snmpGet"); 
 		this.setTimeOut(1000);
 	}
-
+	
 	public SnmpThreadModel(Object object, String methodName) {
 		this.object = object;
 		this.methodName = methodName;
@@ -31,15 +33,19 @@ public class SnmpThreadModel extends ThreadModel {
 	public void excute(Object... args) {
 		try {
 			if (args != null && args.length != 0) {
-				SnmpAbstract snmpAbstract = SnmpPoolManager.getManager()
-						.getIdleSnmp((String) args[0]);
-				Object o = ReflectionUtil.invokeMethod(snmpAbstract,
-						(String) args[1], args[2]);
-				ReflectionUtil.invokeMethod(args[3], (String) args[4], o);
+				SnmpAbstract snmpAbstract = (SnmpAbstract) args[0];
+				Object o = snmpAbstract.getOidValueString((String)args[1],snmpAbstract.getVersion());
+				System.out.println(o.toString());
+				if(o==null){
+					SnmpPoolManager.getManager().setStatu(false);
+				}else{
+					SnmpPoolManager.getManager().setStatu(true);	
+				}
+				//ReflectionUtil.invokeMethod(args[2], (String) args[3],o);
+				
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-
 }
