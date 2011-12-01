@@ -22,12 +22,22 @@ public class NetScanUtil {
 	 */
 	public static List<String> netScan(String startIp, String endIp) {
 		List<String> ipList = new ArrayList<String>();
-		List<String> list = NetworkUtils.getAllIpAddress(startIp, endIp);
-		for (String ip : list) {
+		return netScan(ipList);
+	}
+
+	/**
+	 * 扫描ip
+	 * 
+	 * @param ips
+	 * @return
+	 */
+	public static List<String> netScan(List<String> ips) {
+		List<String> ipList = new ArrayList<String>();
+		for (String ip : ips) {
 			if (PingUtil.isReachable(ip))
 				ipList.add(ip);
 		}
-		list = null;
+		ips = null;
 		return ipList;
 	}
 }
