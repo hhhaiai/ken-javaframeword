@@ -176,4 +176,10 @@ public class SnmpHelper extends SnmpAbstract {
 			util.close();
 		}
 	}
+
+	@Override
+	public String getOidValueString(String oid, int v) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
