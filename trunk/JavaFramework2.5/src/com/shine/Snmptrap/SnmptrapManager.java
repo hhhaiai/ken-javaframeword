@@ -29,7 +29,6 @@ public class SnmptrapManager {
 		try {
 			if (map.containsKey("tag")) {
 				System.out.println("已经初始化了相关接收器!!!");
-
 			}
 
 			SnmptrapHelper helper = new SnmptrapHelper();
