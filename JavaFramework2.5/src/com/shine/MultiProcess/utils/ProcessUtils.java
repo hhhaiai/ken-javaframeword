@@ -33,8 +33,15 @@ public class ProcessUtils {
 		return s.toString();
 	}
 
-	public static String createClassCommon() {
-		return null;
+	public static String createClassCommon(String jvmPath, String classPath,String className,
+			String... args) {
+		StringBuffer s = new StringBuffer();
+		if (System.getProperty("os.name").toLowerCase().indexOf("windows") != -1) {
+			
+		} else {
+
+		}
+		return s.toString();
 	}
 
 }

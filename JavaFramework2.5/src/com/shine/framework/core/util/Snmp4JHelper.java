@@ -145,4 +145,10 @@ public class Snmp4JHelper extends SnmpAbstract {
 		}
 	}
 
+	@Override
+	public String getOidValueString(String oid, int v) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

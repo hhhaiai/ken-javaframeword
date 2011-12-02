@@ -2,7 +2,6 @@ package com.shine.NetAnalisys.threadModel;
 
 import java.util.List;
 
-import com.shine.NetAnalisys.util.NetScanUtil;
 import com.shine.NetAnalisys.util.PortScanUtil;
 import com.shine.framework.ThreadPoolUtil.model.MethodThreadModel;
 import com.shine.framework.core.util.ReflectionUtil;
