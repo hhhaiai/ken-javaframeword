@@ -18,6 +18,8 @@ public class NetAnalisysManager {
 	private static NetAnalisysManager manager = null;
 
 	private int netScanSize = 10;
+	
+	private int netPortSize = 10;
 
 	public static NetAnalisysManager getManager() {
 		if (manager == null)
@@ -28,6 +30,8 @@ public class NetAnalisysManager {
 	public void initThreadModel() {
 		for (int i = 0; i < netScanSize; i++) {
 			addNetScanThreadModel(i);
+		}
+		for (int i = 0; i < netPortSize; i++) {
 			addNetPortThreadModel(i);
 		}
 		ThreadPoolManager.getManager().startThreadPool();
@@ -102,5 +106,13 @@ public class NetAnalisysManager {
 
 	public void setNetScanSize(int netScanSize) {
 		this.netScanSize = netScanSize;
+	}
+	
+	public int getNetPortSize() {
+		return netPortSize;
+	}
+	
+	public void setNetPortSize(int netPortSize) {
+		this.netPortSize = netPortSize;
 	}
 }
