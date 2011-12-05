@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.shine.framework.PingUtil.PingUtil;
-import com.shine.framework.core.util.NetworkUtils;
 
 /**
  * 扫描ip
@@ -21,8 +20,7 @@ public class NetScanUtil {
 	 * @return
 	 */
 	public static List<String> netScan(String startIp, String endIp) {
-		List<String> ipList = new ArrayList<String>();
-		return netScan(ipList);
+		return netScan(NetWorkUtil.seperateIpList(startIp, endIp));
 	}
 
 	/**
