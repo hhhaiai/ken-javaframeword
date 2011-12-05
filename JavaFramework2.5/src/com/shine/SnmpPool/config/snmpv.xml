@@ -2,7 +2,4 @@
 <snmpvs>
 	<snmpv ip="192.168.2.18" port="161" vstr="com.shine.framework.core.util.SnmpHelper4j"  version="0" />
 	<snmpv ip="192.168.2.19" port="161" vstr="com.shine.framework.core.util.SnmpHelper4j"  version="0" />
-	<snmpv ip="192.168.2.20" port="161" vstr="com.shine.framework.core.util.SnmpHelper4j"  version="0" />
-	<snmpv ip="192.168.2.21" port="161" vstr="com.shine.framework.core.util.SnmpHelper4j"  version="0" />
-	<snmpv ip="192.168.2.22" port="161" vstr="com.shine.framework.core.util.SnmpHelper4j"  version="0" />	
 </snmpvs>

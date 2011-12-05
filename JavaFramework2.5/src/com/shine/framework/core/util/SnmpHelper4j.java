@@ -59,15 +59,16 @@ public class SnmpHelper4j extends SnmpAbstract {
 	public SnmpHelper4j(String ip, String community) throws Exception{
 		this.init(ip, community);
 	}
-	public SnmpHelper4j(String ip, String community, int port) throws Exception{
-		this.init(ip, community, port);
+	public SnmpHelper4j(String ip, String community, int port,int v) throws Exception{
+		this.init(ip, community, port,v);
 	}
 	/**
 	 * 初始化
 	 */
 	@Override
-	public void init(String ip, String community, int port) throws Exception {
+	public void init(String ip, String community, int port,int v) throws Exception {
 		this.port=port;
+		this.version=v;
 		this.init(ip, community);	
 	}
 	
@@ -229,37 +230,11 @@ public class SnmpHelper4j extends SnmpAbstract {
 		    this.version=snmpv;
 			Vector<VariableBinding> v = response.getResponse().getVariableBindings();
 			for(VariableBinding var:v){
-			   return var.getOid().toString()+"  IP: "+this.ip + "  Snmp4j"+" snmpv"+(this.version+1);		    		 
+			   return var.getOid().toString()+"(IP: "+this.ip + ":Snmp4j"+":snmpv"+(this.version+1)+")";		    		 
 			}
 			     
 		}
 		return null;
-	}
-	/**
-	 * 是否存在Snmp版本预设值
-	 * @param ip
-	 * @param v1
-	 * @param v2
-	 * @param port
-	 * @return
-	 */
-	private int preProccess(String ip){
-		List<Element> list =null;
-		try{
-			list = XmlUitl.getAllElementByPath("C:\\Users\\yangyang\\workspace\\JavaFrameWork2.5\\src\\com\\shine\\SnmpPool\\config\\snmpv.xml","snmpv");
-			for(Element e:list){
-				Map<String,String> ma=XmlUitl.getAllAttribute(e);
-				if(ip.equals(ma.get("ip"))){
-					int _snmpVersion=Integer.parseInt(ma.get("version"));
-					return _snmpVersion;
-				}
-			}
-		}catch(Exception e){
-			e.printStackTrace();
-		}finally{
-			list=null;
-		}
-		return 5;
 	}
 	@Override
 	public List<String> getTableView(String oid) {

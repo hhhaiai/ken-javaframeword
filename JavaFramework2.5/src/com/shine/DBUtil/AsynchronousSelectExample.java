@@ -3,10 +3,22 @@ package com.shine.DBUtil;
 import com.shine.DBUtil.model.DBModel;
 
 public class AsynchronousSelectExample {
+	private String uu = "213";
 
 	public void getReusltModel(DBModel dbModel) {
-		System.err.println(dbModel.getDataXml());
+		System.err.println(uu + dbModel.getDataXml());
 		dbModel.close();
+	}
+
+	public void test() {
+		this.setUu("aaaaaaaa");
+		DBUtil
+				.getInstance()
+				.init(
+						"C:\\Users\\yangyang\\workspace\\JavaFramework2.5\\src\\com\\shine\\DBUtil\\config\\dbXml.xml");
+		DBUtil.getInstance().asynchronousExecuteQuery("jdbc/Default",
+				"select * from admin_dept", this, "getReusltModel",
+				true);
 	}
 
 	/**
@@ -15,15 +27,17 @@ public class AsynchronousSelectExample {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		DBUtil
-				.getInstance()
-				.init(
-						"E:\\workspace\\JavaFramework2.5\\src\\com\\shine\\DBUtil\\config\\dbXml.xml");
 
 		AsynchronousSelectExample example = new AsynchronousSelectExample();
-		DBUtil.getInstance().asynchronousExecuteQuery("jdbc/Default",
-				"select * from gdzfw_bag_video_link", example,
-				"getReusltModel", true);
-
+		example.test();
 	}
+
+	public String getUu() {
+		return uu;
+	}
+
+	public void setUu(String uu) {
+		this.uu = uu;
+	}
+
 }

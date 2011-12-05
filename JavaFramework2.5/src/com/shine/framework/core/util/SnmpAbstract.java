@@ -4,28 +4,12 @@ import java.util.List;
 
 public abstract class SnmpAbstract {
 
-	// 运行状态(Use this attribute judge Class SnmpAbstract subclass is busy now)
 	protected boolean state = false;
-	
 	protected int version = 0;
+	protected String ip;
+	protected int port;
+	protected String implementClass;
 	
-	public int getVersion() {
-		return version;
-	}
-
-	public void setVersion(int version) {
-		this.version = version;
-	}
-
-	// Thread State
-	public boolean isState() {
-		return state;
-	}
-
-	public void setState(boolean state) {
-		this.state = state;
-	}
-
 	/**
 	 * 初始化
 	 * 
@@ -34,7 +18,7 @@ public abstract class SnmpAbstract {
 	 * @param port
 	 * @throws Exception
 	 */
-	public abstract void init(String ip, String community, int port)
+	public abstract void init(String ip, String community, int port,int v)
 			throws Exception;
 
 	/**
@@ -93,4 +77,44 @@ public abstract class SnmpAbstract {
 	public abstract void reconnection();
 
 	public abstract void close();
+	
+	public int getVersion() {
+		return version;
+	}
+
+	public void setVersion(int version) {
+		this.version = version;
+	}
+
+	//Thread State
+	public boolean isState() {
+		return state;
+	}
+
+	public void setState(boolean state) {
+		this.state = state;
+	}
+	public String getIp() {
+		return ip;
+	}
+
+	public void setIp(String ip) {
+		this.ip = ip;
+	}
+
+	public int getPort() {
+		return port;
+	}
+
+	public void setPort(int port) {
+		this.port = port;
+	}
+
+	public String getImplementClass() {
+		return implementClass;
+	}
+
+	public void setImplementClass(String implementClass) {
+		this.implementClass = implementClass;
+	}	
 }
