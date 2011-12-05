@@ -33,8 +33,8 @@ public class Snmp4JHelper extends SnmpAbstract {
 
 	}
 
-	public Snmp4JHelper(String ip, String community, int port) throws Exception {
-		init(ip, community, port);
+	public Snmp4JHelper(String ip, String community, int port,int v) throws Exception {
+		init(ip, community, port,v);
 	}
 
 	public Snmp4JHelper(String ip, String community) throws Exception {
@@ -42,7 +42,7 @@ public class Snmp4JHelper extends SnmpAbstract {
 	}
 
 	@Override
-	public void init(String ip, String community, int port) throws Exception {
+	public void init(String ip, String community, int port,int v) throws Exception {
 		try {
 			transport = new DefaultUdpTransportMapping();
 			snmp = new Snmp(transport);

@@ -3,6 +3,7 @@ package com.shine.framework.core.util;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -229,7 +230,7 @@ public class XmlUitl {
 		}
 		return map;
 	}
-	
+
 	/**
 	 * 批量修改结点的属性
 	 * 
@@ -327,16 +328,73 @@ public class XmlUitl {
 		return null;
 	}
 
+	/**
+	 * 删除根节点下的所有子节点
+	 */
+	public static void deleteAllSubElement(String xmlPath) throws Exception {
+		Element rootElement = getRootElement(xmlPath);
+		List<Element> list = getAllElement(rootElement);
+		for (int i = 0; i < list.size(); i++) {
+			rootElement.remove(list.get(i));
+		}
+		saveXmlFile(rootElement, xmlPath);
+	}
+
+	/**
+	 * 
+	 * 获取根节点
+	 * 
+	 * @param xmlPath
+	 * @return
+	 * @throws Exception
+	 */
+	public static Element getRootElement(String xmlPath) throws Exception {
+		return getFileDocument(xmlPath).getRootElement();
+	}
+
+	/**
+	 * 创建节点(SNMP采集)
+	 * 
+	 */
+	public static void createSubElement(String xmlPath, String elementName,
+			String ip, int port, String vstr, int version) throws Exception {
+		Element rootElement = getRootElement(xmlPath);
+		rootElement.addElement(elementName).addAttribute("ip", ip)
+				.addAttribute("port", "" + port).addAttribute("vstr", vstr)
+				.addAttribute("version", "" + version);
+		saveXmlFile(rootElement, xmlPath);
+	}
+	
+	/**
+	 * 
+	 * 
+	 * @param ip
+	 * @param xmlPath
+	 * @return
+	 */
+	public static void preProccess(String xmlPath,String ip, int port, String vstr, int version)
+			throws Exception {
+		List<Element> list = getAllElementByPath(xmlPath, "snmpv");
+		Element elment = null;
+		for (Element e : list) {
+			Map<String, String> ma = getAllAttribute(e);
+			if (ip.equals(ma.get("ip"))) {
+				elment=e;
+				elment.setAttributeValue("ip",ip);
+				elment.setAttributeValue("port",""+port);
+				elment.setAttributeValue("vstr",vstr);
+				elment.setAttributeValue("version",""+version);
+			}
+		}
+		saveXmlFile(elment, xmlPath);
+	}
+
 	public static void main(String args[]) {
 		try {
-			List<Element> list = XmlUitl
-					.getAllElementByPath(
-							"E:\\workspace\\ManageSystem\\WebRoot\\WEB-INF\\config\\config.xml",
-							"detail");
-			Element ele = list.get(0);
-			ele.addAttribute("webappPath", "123");
-			System.out.println(XmlUitl.doc2String(ele.getDocument()));
-		} catch (DocumentException e) {
+			//XmlUitl
+			//		.deleteAllSubElement("C:\\Users\\yangyang\\workspace\\JavaFrameWork2.5\\src\\com\\shine\\SnmpPool\\config\\snmpv.xml");
+			XmlUitl.preProccess("C:\\Users\\yangyang\\workspace\\JavaFrameWork2.5\\src\\com\\shine\\SnmpPool\\config\\snmpv.xml", "192.168.1.1", 161, "", 1);
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
