@@ -18,7 +18,7 @@ public class NetScanThreadModel extends MethodThreadModel {
 		super();
 		this.setType("netScanThreadModel");
 	}
-
+	
 	@Override
 	public void excute(Object... args) {
 		try {
