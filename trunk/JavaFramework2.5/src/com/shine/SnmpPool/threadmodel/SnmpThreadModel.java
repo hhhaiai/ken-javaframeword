@@ -7,6 +7,7 @@ import com.shine.SnmpPool.SnmpPoolManager;
 import com.shine.framework.ThreadPoolUtil.model.ThreadModel;
 import com.shine.framework.core.util.ReflectionUtil;
 import com.shine.framework.core.util.SnmpAbstract;
+import com.shine.framework.core.util.XmlUitl;
 
 /**
  * SNMP异步获取SNMP数据
@@ -78,6 +79,17 @@ public class SnmpThreadModel extends ThreadModel {
 							"Port-oid", snmpabstract);
 
 					// 生成预设值，保存到xml文件中
+					boolean flag = XmlUitl.isExistRecord("",snmpabstract.getIp());
+					if(flag){
+						String ip=snmpabstract.getIp();
+						String port = ""+snmpabstract.getPort();
+						String vstr = snmpabstract.getImplementClass();
+						String version = ""+snmpabstract.getVersion();
+						String[] data ={ip,port,vstr,version};
+						XmlUitl.modifyXml("src/com/shine/SnmpPool/config/snmpv.xml",data);
+					}else{
+						XmlUitl.createSubElement("src/com/shine/SnmpPool/config/snmpv.xml",snmpabstract.getIp(),snmpabstract.getPort(),snmpabstract.getImplementClass(),snmpabstract.getVersion());
+					}
 					
 					System.out.println("最终采集设备数据-->" + resutlData);
 				}

@@ -51,7 +51,7 @@ public class SnmpPoolManager {
 		// 清空预设文件采集器历史记录
 		try {
 			XmlUitl
-					.deleteAllSubElement("C:\\Users\\yangyang\\workspace\\JavaFrameWork2.5\\src\\com\\shine\\SnmpPool\\config\\snmpv.xml");
+					.deleteAllSubElement("src/com/shine/SnmpPool/config/snmpv.xml");
 		} catch (Exception e) {
 			// 可以自定义异常处理
 			e.printStackTrace();
@@ -265,9 +265,10 @@ public class SnmpPoolManager {
 	private Map<String, String> isExistSnmpPreprocess(String ip) {
 		List<Element> list = null;
 		try {
+			
 			list = XmlUitl
 					.getAllElementByPath(
-							"C:\\Users\\yangyang\\workspace\\JavaFrameWork2.5\\src\\com\\shine\\SnmpPool\\config\\snmpv.xml",
+							"src/com/shine/SnmpPool/config/snmpv.xml",
 							"snmpv");
 			for (Element e : list) {
 				Map<String, String> ma = XmlUitl.getAllAttribute(e);
