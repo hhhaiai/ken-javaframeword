@@ -356,44 +356,81 @@ public class XmlUitl {
 	 * 创建节点(SNMP采集)
 	 * 
 	 */
-	public static void createSubElement(String xmlPath, String elementName,
+	public static void createSubElement(String xmlPath,
 			String ip, int port, String vstr, int version) throws Exception {
-		Element rootElement = getRootElement(xmlPath);
-		rootElement.addElement(elementName).addAttribute("ip", ip)
+		Document document = getFileDocument(xmlPath);
+		Element rootElement = document.getRootElement();
+		rootElement.addElement("snmpv").addAttribute("ip", ip)
 				.addAttribute("port", "" + port).addAttribute("vstr", vstr)
 				.addAttribute("version", "" + version);
-		saveXmlFile(rootElement, xmlPath);
+		saveAndFormatXML(document, xmlPath);
 	}
-	
+
 	/**
 	 * 
+	 * 修改节点(SNMP采集)
 	 * 
 	 * @param ip
 	 * @param xmlPath
 	 * @return
 	 */
-	public static void preProccess(String xmlPath,String ip, int port, String vstr, int version)
+	public static void modifyXml(String xmlPath, String[] data)
 			throws Exception {
-		List<Element> list = getAllElementByPath(xmlPath, "snmpv");
-		Element elment = null;
-		for (Element e : list) {
-			Map<String, String> ma = getAllAttribute(e);
-			if (ip.equals(ma.get("ip"))) {
-				elment=e;
-				elment.setAttributeValue("ip",ip);
-				elment.setAttributeValue("port",""+port);
-				elment.setAttributeValue("vstr",vstr);
-				elment.setAttributeValue("version",""+version);
+		String ip = data[0];
+		Document document = getFileDocument(xmlPath);
+		Element rootElement = document.getRootElement();
+		Element element = (Element) rootElement
+				.selectSingleNode("//snmpvs/snmpv[@ip='" + ip + "']");
+		if (element != null) {
+			int flag = 0;
+			for (Iterator<Element> i = element.attributeIterator(); i.hasNext();) {
+				Attribute attribute = (Attribute) i.next();
+				// 修改属性值
+				attribute.setValue(data[flag]);
+				flag++;
 			}
 		}
-		saveXmlFile(elment, xmlPath);
+		// 保存修改
+		saveAndFormatXML(document, xmlPath);
+	}
+
+	/**
+	 * 格式化XML输出，并保存
+	 * 
+	 * @param document
+	 * @throws Exception
+	 */
+	public static void saveAndFormatXML(Document document, String xmlPath)
+			throws Exception {
+		XMLWriter writer = new XMLWriter(new FileWriter(xmlPath));
+		writer.write(document);
+		writer.close();
+	}
+
+	/**
+	 * 是否存在预设值
+	 * 
+	 * @return
+	 */
+	public static Boolean isExistRecord(String xmlPath, String ip)
+			throws Exception {
+		Element rootElement = getRootElement(xmlPath);
+		Element element = (Element) rootElement
+				.selectSingleNode("//snmpvs/snmpv[@ip='" + ip + "']");
+		if(element!=null){
+			return true;
+		}
+		return false;
 	}
 
 	public static void main(String args[]) {
 		try {
-			//XmlUitl
-			//		.deleteAllSubElement("C:\\Users\\yangyang\\workspace\\JavaFrameWork2.5\\src\\com\\shine\\SnmpPool\\config\\snmpv.xml");
-			XmlUitl.preProccess("C:\\Users\\yangyang\\workspace\\JavaFrameWork2.5\\src\\com\\shine\\SnmpPool\\config\\snmpv.xml", "192.168.1.1", 161, "", 1);
+			 String[] str = { "192.168.1.1", "162",
+			 "com.shine.framework.core.util.SnmpHelper", "100" };
+			 XmlUitl
+			 .modifyXml(
+			 "src/com/shine/SnmpPool/config/snmpv.xml",
+			 str);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
