@@ -79,7 +79,7 @@ public class SnmpThreadModel extends ThreadModel {
 							"Port-oid", snmpabstract);
 
 					// 生成预设值，保存到xml文件中
-					boolean flag = XmlUitl.isExistRecord("",snmpabstract.getIp());
+					boolean flag = XmlUitl.isExistRecord("src/com/shine/SnmpPool/config/snmpv.xml",snmpabstract.getIp());
 					if(flag){
 						String ip=snmpabstract.getIp();
 						String port = ""+snmpabstract.getPort();
