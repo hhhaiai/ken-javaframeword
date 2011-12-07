@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <snmpvs>
-<snmpv ip="192.168.2.18" port="161" version="0"/>
+<snmpv ip="192.168.2.18" port="161" vstr="com.shine.framework.core.util.SnmpHelper4j" version="0"/>
 </snmpvs>
