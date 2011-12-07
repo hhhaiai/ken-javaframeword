@@ -44,6 +44,7 @@ public class SnmpThreadModel extends ThreadModel {
 				if (rmsg != null) {
 					// 第一次预设值采集成功
 					resutlData = rmsg + " ----一次采集";
+					snmpabstract.setImplementClass(currentClassPath);
 				} else {
 					// 测试当前实现类其它(v1/v2/v3)版本进行采集数据
 					String otherMsg = snmpabstract
