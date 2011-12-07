@@ -82,7 +82,7 @@ public class SnmpHelper4j extends SnmpAbstract {
 		StringBuffer tstr = new StringBuffer(this.protol).append(":").append(ip).append("/").append(this.port);
 		this.targetAddress = GenericAddress.parse(tstr.toString()); 
 		this.tm = new DefaultUdpTransportMapping();
-		this.snmp = new Snmp(this.tm);		
+		this.snmp = new Snmp(this.tm);
 	}
     /**
      * OID值
@@ -292,13 +292,55 @@ public class SnmpHelper4j extends SnmpAbstract {
 	public void setVersion(int version) {
 		this.version = version;
 	}
+	public Snmp getSnmp() {
+		return snmp;
+	}
+	public void setSnmp(Snmp snmp) {
+		this.snmp = snmp;
+	}
+	public String getIp() {
+		return ip;
+	}
+	public void setIp(String ip) {
+		this.ip = ip;
+	}
+	public String getCommunity() {
+		return community;
+	}
+	public void setCommunity(String community) {
+		this.community = community;
+	}
+	public int getPort() {
+		return port;
+	}
+	public void setPort(int port) {
+		this.port = port;
+	}
+	public TransportMapping getTm() {
+		return tm;
+	}
+	public void setTm(TransportMapping tm) {
+		this.tm = tm;
+	}
+	public Address getTargetAddress() {
+		return targetAddress;
+	}
+	public void setTargetAddress(Address targetAddress) {
+		this.targetAddress = targetAddress;
+	}
+	public String getProtol() {
+		return protol;
+	}
+	public void setProtol(String protol) {
+		this.protol = protol;
+	}
 	/**
 	 * @param args
 	 */
-	public static void main(String[] args) throws Exception {	
+	//public static void main(String[] args) throws Exception {	
 		//SnmpHelper4j sh = new SnmpHelper4j("192.168.2.18", "public", 161);
 		//System.out.println(sh.getOidValueString("1.3.6.1.2.1.1.1.0"));
 		//boolean is = sh.preProccess("192.168.2.19","snmp4j",0,160);
 		//System.out.println(is);
-	}
+	//}
 }

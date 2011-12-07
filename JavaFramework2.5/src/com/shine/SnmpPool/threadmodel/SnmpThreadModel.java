@@ -58,7 +58,7 @@ public class SnmpThreadModel extends ThreadModel {
 							snmpabstract = (SnmpAbstract) ReflectionUtil
 									.getClasstoObject(antherClassPath);
 							snmpabstract.init((String) args[0], "public",
-									(Integer) args[2], (Integer) args[3]);
+									(Integer)args[2], (Integer) args[3]);
 							String info = snmpabstract
 									.getOidValueString((String) args[4]);
 							if (info != null) {
@@ -88,6 +88,11 @@ public class SnmpThreadModel extends ThreadModel {
 						String[] data ={ip,port,vstr,version};
 						XmlUitl.modifyXml("src/com/shine/SnmpPool/config/snmpv.xml",data);
 					}else{
+						System.out.println("ip:"+snmpabstract.getIp());
+						System.out.println("port:"+snmpabstract.getPort());
+						System.out.println("class:"+snmpabstract.getImplementClass());
+						System.out.println("ip:"+snmpabstract.getIp());
+						System.out.println("version:"+snmpabstract.getVersion());
 						XmlUitl.createSubElement("src/com/shine/SnmpPool/config/snmpv.xml",snmpabstract.getIp(),snmpabstract.getPort(),snmpabstract.getImplementClass(),snmpabstract.getVersion());
 					}
 					

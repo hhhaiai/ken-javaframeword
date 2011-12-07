@@ -5,10 +5,11 @@ import java.util.List;
 public abstract class SnmpAbstract {
 
 	protected boolean state = false;
-	protected int version = 0;
-	protected String ip;
-	protected int port;
-	protected String implementClass;
+	public int version = 0;
+	public String ip;
+	public int port;
+	public String implementClass;
+	public String community="public";
 	
 	/**
 	 * 初始化
@@ -77,7 +78,15 @@ public abstract class SnmpAbstract {
 	public abstract void reconnection();
 
 	public abstract void close();
-	
+
+	public boolean isState() {
+		return state;
+	}
+
+	public void setState(boolean state) {
+		this.state = state;
+	}
+
 	public int getVersion() {
 		return version;
 	}
@@ -86,14 +95,6 @@ public abstract class SnmpAbstract {
 		this.version = version;
 	}
 
-	//Thread State
-	public boolean isState() {
-		return state;
-	}
-
-	public void setState(boolean state) {
-		this.state = state;
-	}
 	public String getIp() {
 		return ip;
 	}
@@ -116,5 +117,15 @@ public abstract class SnmpAbstract {
 
 	public void setImplementClass(String implementClass) {
 		this.implementClass = implementClass;
-	}	
+	}
+
+	public String getCommunity() {
+		return community;
+	}
+
+	public void setCommunity(String community) {
+		this.community = community;
+	}
+	
+	
 }
