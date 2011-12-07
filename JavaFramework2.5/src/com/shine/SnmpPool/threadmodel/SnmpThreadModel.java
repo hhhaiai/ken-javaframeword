@@ -89,11 +89,6 @@ public class SnmpThreadModel extends ThreadModel {
 						String[] data ={ip,port,vstr,version};
 						XmlUitl.modifyXml("src/com/shine/SnmpPool/config/snmpv.xml",data);
 					}else{
-						System.out.println("ip:"+snmpabstract.getIp());
-						System.out.println("port:"+snmpabstract.getPort());
-						System.out.println("class:"+snmpabstract.getImplementClass());
-						System.out.println("ip:"+snmpabstract.getIp());
-						System.out.println("version:"+snmpabstract.getVersion());
 						XmlUitl.createSubElement("src/com/shine/SnmpPool/config/snmpv.xml",snmpabstract.getIp(),snmpabstract.getPort(),snmpabstract.getImplementClass(),snmpabstract.getVersion());
 					}
 					
