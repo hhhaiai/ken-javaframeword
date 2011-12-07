@@ -10,6 +10,7 @@ import com.shine.SnmpPool.utils.SnmpPool;
 import com.shine.framework.ThreadPoolUtil.ThreadPoolManager;
 import com.shine.framework.core.util.ReflectionUtil;
 import com.shine.framework.core.util.SnmpAbstract;
+import com.shine.framework.core.util.SnmpHelper4j;
 import com.shine.framework.core.util.XmlUitl;
 
 /**
@@ -353,7 +354,7 @@ public class SnmpPoolManager {
 				System.out.println("....不存在预设版本....");
 				SnmpAbstract snmpAbstract = (SnmpAbstract) ReflectionUtil
 						.getClasstoObject(this.getDefaultSnmpProcess());
-				snmpAbstract.init(ip, "public", port, 0);
+				snmpAbstract.init(ip, "public", port, 0);	
 				ThreadPoolManager.getManager().getIdleThread("snmpGet")
 						.setValues(ip, port, 0, snmpAbstract, oid,
 								"getOidValueString");
