@@ -11,7 +11,7 @@ public class FtpHelper {
 	}
 
 	public FtpHelper(String ip, int port, String name, String password) {
-
+		
 	}
 
 	/**
