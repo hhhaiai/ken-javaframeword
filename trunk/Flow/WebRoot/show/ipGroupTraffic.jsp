@@ -37,7 +37,7 @@ function query(){
 // 导出PDF
 function exportPdf() {
     var mainForm = document.mainForm;
-	mainForm.action = "${rootPath}ipGroupTraffic_dumpPDF?method=ipGroupTraffic_list";
+	mainForm.action = "${rootPath}ipGroupTraffic_dumpPDF?method=ipGroupTraffic_list&isPdf=1";
 	mainForm.submit();
 }
 
@@ -63,16 +63,22 @@ var flashVars =
 	chart_settings: "<settings><data_type>csv</data_type><plot_area><margins><left>50</left><right>40</right><top>50</top><bottom>50</bottom></margins></plot_area><grid><category><dashed>1</dashed><dash_length>4</dash_length></category><value><dashed>1</dashed><dash_length>4</dash_length></value></grid><axes><category><width>1</width><color>E7E7E7</color></category><value><width>1</width><color>E7E7E7</color></value></axes><values><value><min>0</min></value></values><legend><enabled>1</enabled></legend><angle>0</angle><column><type>3d column</type><width>15</width><alpha>80</alpha><spacing>10</spacing><hover_brightness>10</hover_brightness><balloon_text>{title}: {value}(MB)</balloon_text><grow_time>2</grow_time></column><depth>15</depth><angle>25</angle><graphs><graph gid='0'><title>流入流量</title><color>4BBF4B</color></graph><graph gid='1'><title>流出流量</title><color>C0DBFD</color></graph></graphs><labels><label lid='0'><text><![CDATA[<b>IP分组流量</b>]]></text><y>5</y><text_color>000000</text_color><text_size>16</text_size><align>center</align></label></labels></settings>"
 };
 
-window.onload = function()
+/*window.onload = function()
 {
 	var amFallback = new AmCharts.AmFallback();
     amFallback.chartSettings = flashVars.chart_settings;
 	amFallback.chartData = flashVars.chart_data;
 	amFallback.type = "column";
 	amFallback.write("chartdiv");
-}
+	
+	var textDom = document.getElementsByTagName("text");
+	var textLength = textDom.length;
+	var theLength = textLength - 4;
+	var theDom = textDom[theLength];
+	theDom.style.display="none";
+}*/
 
-//swfobject.embedSWF("${jsPath}amcharts/flash/amcolumn2.swf", "chartdiv", "100%", "400", "8.0.0", "${jsPath}amcharts/flash/expressInstall.swf", flashVars, params);
+swfobject.embedSWF("${jsPath}amcharts/flash/amcolumn2.swf", "chartdiv", "100%", "400", "8.0.0", "${jsPath}amcharts/flash/expressInstall.swf", flashVars, params);
 </script>
 </head>
 <body>

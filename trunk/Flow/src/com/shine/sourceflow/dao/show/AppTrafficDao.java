@@ -38,20 +38,21 @@ public class AppTrafficDao extends ShowGenericDao {
 			double totalBytesOut = Double.parseDouble(dbModelTrafficOut.get(i).get("bytes_total"));
 			String totalBytesOutFormat = bytesFormat.format(totalBytesOut / 1048576);
 			String bytesOutPercentage = perFormat.format((totalBytesOut / bytesSum) * 100);
-			DBRowModel dbRowModel = new DBRowModel();
 			DBRowModel theModel = this.getSameModel(dbModelTrafficOut.get(i).get("app_id"), retModel);
 			if (theModel != null) {
-				dbRowModel = theModel;
+				theModel.put("total_bytes_out", totalBytesOutFormat);
+				theModel.put("bytes_out_percentage", bytesOutPercentage);
 			} else {
+				DBRowModel dbRowModel = new DBRowModel();
 				dbRowModel.put("total_bytes_in", "0");
 				dbRowModel.put("bytes_in_percentage", "0");
+				dbRowModel.put("total_bytes_out", totalBytesOutFormat);
+				dbRowModel.put("bytes_out_percentage", bytesOutPercentage);
 				dbRowModel.put("app_id", dbModelTrafficOut.get(i).get("app_id"));
 				dbRowModel.put("app_alias", dbModelTrafficOut.get(i).get("app_alias"));
 				dbRowModel.put("ip_address", dbModelTrafficOut.get(i).get("ip_address"));
+				retModel.add(dbRowModel);
 			}
-			dbRowModel.put("total_bytes_out", totalBytesOutFormat);
-			dbRowModel.put("bytes_out_percentage", bytesOutPercentage);
-			retModel.add(dbRowModel);
 		}
 		dbModels.put(GenericAction.DATA_DEFAULT, retModel);
 	}

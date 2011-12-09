@@ -39,19 +39,20 @@ public class IPGroupTrafficDao extends ShowGenericDao {
 			String dstIpTotalFormat = bytesFormat.format(dstIpTotal / 1048576);
 			double computeDstIpPer = (dstIpTotal / bytesSum) * 100;
 			String dstIpPercentage = perFormat.format(computeDstIpPer);
-			DBRowModel dbRowModel = new DBRowModel();
 			DBRowModel theModel = this.getSameModel(dstDBModel.get(i).get("group_id"), retModel);
 			if (theModel != null) {
-				dbRowModel = theModel;
+				theModel.put("dst_ip_total", dstIpTotalFormat);
+				theModel.put("dst_ip_percentage", dstIpPercentage);
 			} else {
+				DBRowModel dbRowModel = new DBRowModel();
 				dbRowModel.put("src_ip_total", "0");
 				dbRowModel.put("src_ip_percentage", "0");
+				dbRowModel.put("dst_ip_total", dstIpTotalFormat);
+				dbRowModel.put("dst_ip_percentage", dstIpPercentage);
 				dbRowModel.put("group_id", dstDBModel.get(i).get("group_id"));
 				dbRowModel.put("ip_alias", dstDBModel.get(i).get("ip_alias"));
+				retModel.add(dbRowModel);
 			}
-			dbRowModel.put("dst_ip_total", dstIpTotalFormat);
-			dbRowModel.put("dst_ip_percentage", dstIpPercentage);
-			retModel.add(dbRowModel);
 		}
 		dbModels.put(GenericAction.DATA_DEFAULT, retModel);
 	}

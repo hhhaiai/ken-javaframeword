@@ -42,19 +42,20 @@ public class SessionTrafficDao extends ShowGenericDao {
 			String dstIpTotalFormat = bytesFormat.format(dstIpTotal / 1048576);
 			double computeDstIpPer = (dstIpTotal / bytesSum) * 100;
 			String dstIpPercentage = perFormat.format(computeDstIpPer);
-			DBRowModel dbRowModel = new DBRowModel();
 			DBRowModel theModel = this.getSameModel(dstDBModel.get(i).get("session_id"), retModel);
 			if (theModel != null) {
-				dbRowModel = theModel;
+				theModel.put("dst_session_total", dstIpTotalFormat);
+				theModel.put("dst_session_percentage", dstIpPercentage);
 			} else {
+				DBRowModel dbRowModel = new DBRowModel();
 				dbRowModel.put("src_session_total", "0");
 				dbRowModel.put("src_session_percentage", "0");
 				dbRowModel.put("session_id", dstDBModel.get(i).get("session_id"));
 				dbRowModel.put("session_alias", dstDBModel.get(i).get("session_alias"));
+				dbRowModel.put("dst_session_total", dstIpTotalFormat);
+				dbRowModel.put("dst_session_percentage", dstIpPercentage);
+				retModel.add(dbRowModel);
 			}
-			dbRowModel.put("dst_session_total", dstIpTotalFormat);
-			dbRowModel.put("dst_session_percentage", dstIpPercentage);
-			retModel.add(dbRowModel);
 		}
 		dbModels.put(GenericAction.DATA_DEFAULT, retModel);
 	}

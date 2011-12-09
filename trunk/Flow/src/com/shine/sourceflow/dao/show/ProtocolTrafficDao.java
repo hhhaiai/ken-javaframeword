@@ -43,19 +43,20 @@ public class ProtocolTrafficDao extends ShowGenericDao {
 			String dstProtocolTotalFormat = bytesFormat.format(dstProtocolTotal / 1048576);
 			double computeDstProtocolPer = (dstProtocolTotal / bytesSum) * 100;
 			String dstProtocolPercentage = perFormat.format(computeDstProtocolPer);
-			DBRowModel dbRowModel = new DBRowModel();
 			DBRowModel theModel = this.getSameModel(dstDBModel.get(i).get("protocol_id"), retModel);
 			if (theModel != null) {
-				dbRowModel = theModel;
+				theModel.put("dst_protocol_total", dstProtocolTotalFormat);
+				theModel.put("dst_protocol_percentage", dstProtocolPercentage);
 			} else {
+				DBRowModel dbRowModel = new DBRowModel();
 				dbRowModel.put("src_protocol_total", "0");
 				dbRowModel.put("src_protocol_percentage", "0");
+				dbRowModel.put("dst_protocol_total", dstProtocolTotalFormat);
+				dbRowModel.put("dst_protocol_percentage", dstProtocolPercentage);
 				dbRowModel.put("protocol_id", dstDBModel.get(i).get("protocol_id"));
 				dbRowModel.put("protocol_alias", dstDBModel.get(i).get("protocol_alias"));
+				retModel.add(dbRowModel);
 			}
-			dbRowModel.put("dst_protocol_total", dstProtocolTotalFormat);
-			dbRowModel.put("dst_protocol_percentage", dstProtocolPercentage);
-			retModel.add(dbRowModel);
 		}
 		dbModels.put(GenericAction.DATA_DEFAULT, retModel);
 	}
