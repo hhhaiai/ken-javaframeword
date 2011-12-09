@@ -146,5 +146,4 @@ public class FtpManager {
 	public String dir(String ip, int port, String folderPath) {
 		return null;
 	}
-
 }
