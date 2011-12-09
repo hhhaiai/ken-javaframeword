@@ -9,26 +9,31 @@
         <action name="ipTraffic_*" 
                 class="com.shine.sourceflow.web.show.IPTrafficAction" method="{1}">
             <result name="list">/show/ipTraffic.jsp</result>
+            <result name="listPdf">/show/pdf/ipTrafficPdf.jsp</result>
         </action>
         <!-- IP分组流量统计 -->
         <action name="ipGroupTraffic_*" 
                 class="com.shine.sourceflow.web.show.IPGroupTrafficAction" method="{1}">
             <result name="list">/show/ipGroupTraffic.jsp</result>
+            <result name="listPdf">/show/pdf/ipGroupTrafficPdf.jsp</result>
         </action>
         <!-- 应用流量统计 -->
         <action name="appTraffic_*" 
                 class="com.shine.sourceflow.web.show.AppTrafficAction" method="{1}">
             <result name="list">/show/appTraffic.jsp</result>
+            <result name="listPdf">/show/pdf/appTrafficPdf.jsp</result>
         </action>
         <!-- 协议流量统计 -->
         <action name="protocolTraffic_*" 
                 class="com.shine.sourceflow.web.show.ProtocolTrafficAction" method="{1}">
             <result name="list">/show/protocolTraffic.jsp</result>
+            <result name="listPdf">/show/pdf/protocolTrafficPdf.jsp</result>
         </action>
         <!-- 会话流量统计 -->
         <action name="sessionTraffic_*" 
                 class="com.shine.sourceflow.web.show.SessionTrafficAction" method="{1}">
             <result name="list">/show/sessionTraffic.jsp</result>
+            <result name="listPdf">/show/pdf/sessionTrafficPdf.jsp</result>
         </action>
     </package>
     

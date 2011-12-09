@@ -46,7 +46,12 @@ public abstract class ShowGenericAction extends GenericAction {
 		this.dto.init(this.request);
 		dbModels = this.service.list(this.dto);
 		this.generateCharts();
-		return DATA_LIST;
+		String isPdf = this.request.getParameter("isPdf");
+		if ("1".equals(isPdf)) {
+			return DATA_LIST + "Pdf";
+		} else {
+			return DATA_LIST;
+		}
 	}
 	
 	/**

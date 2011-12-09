@@ -44,7 +44,7 @@ function showDetail(ipAddress) {
 // 导出PDF
 function exportPdf() {
     var mainForm = document.mainForm;
-	mainForm.action = "${rootPath}appTraffic_dumpPDF?method=appTraffic_list&isPdf=1";
+	mainForm.action = "${rootPath}appTraffic_dumpPDF?method=appTraffic_list";
 	mainForm.submit();
 }
 
