@@ -294,7 +294,7 @@ public class FtpHelper {
 		//检查路径
 		File file = null;
 		//获取文件名
-		String tempName = "1.pptx";
+		String tempName = "1.pptx"; //测试
 		if(this.checkFileExist(localPath))
 			file = new File(localPath+File.separator+tempName);
 		try{
