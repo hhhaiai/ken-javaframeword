@@ -266,7 +266,7 @@ public class FtpHelper {
 				if(ftpfile.getName().equals(fileName)){
 					File localFilePath = new File(localPath + File.separator + ftpfile.getName());
 					output = new BufferedOutputStream(new FileOutputStream(localFilePath));
-					success = ftp.retrieveFile(remotePath, output);
+					success = ftp.retrieveFile(ftpfile.getName(), output);
 				}
 			}
 			if (!success) {
@@ -276,7 +276,6 @@ public class FtpHelper {
 			throw e;
 		} finally {
 			if (output != null) {
-				output.flush();
 				output.close();
 			}
 		}
