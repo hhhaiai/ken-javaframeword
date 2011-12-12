@@ -1,10 +1,12 @@
 package com.shine.Ftp.util;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -282,12 +284,52 @@ public class FtpHelper {
 	 */
 	public Boolean downloadFileToLocalPath(String remoteFilePath, String localPath) throws Exception{
 		
-		boolean success  = false;
-		InputStream input = ftp.retrieveFileStream(remoteFilePath);
-		byte[] buff = new byte[1024];
+		boolean success  = false ;
 		
-		
-		
+		InputStream input = null ;
+		BufferedInputStream binput = null ;
+		OutputStream outStream = null ;
+		BufferedOutputStream bout = null ;
+
+		//检查路径
+		File file = null;
+		//获取文件名
+		String tempName = "1.pptx";
+		if(this.checkFileExist(localPath))
+			file = new File(localPath+File.separator+tempName);
+		try{
+			input = ftp.retrieveFileStream(remoteFilePath);
+			binput = new BufferedInputStream(input);
+			
+			outStream = new FileOutputStream(file);
+			bout = new BufferedOutputStream(outStream);
+			
+			byte[] buff = new byte[1024*5];
+			int length;
+			while((length=binput.read(buff))!=-1){
+				bout.write(buff,0,length);
+				bout.flush(); 
+			}
+		}catch(Exception e){
+			throw e;
+		}finally{
+			if(bout!=null){
+				bout.close();
+				bout = null;
+			}
+			if(outStream!=null){
+				outStream.close();
+				outStream = null;
+			}
+			if(binput!=null){
+				binput.close();
+				binput = null ;
+			}
+			if(input!=null){
+				input.close();
+				input = null;
+			}
+		}
 		return success;
 	}
 	
@@ -383,7 +425,7 @@ public class FtpHelper {
 	}
 	
 	/**
-	 * 检查文件是否存在
+	 * 检查本地路径是否存在
 	 * 
 	 * @param filePath
 	 * @return
@@ -393,7 +435,7 @@ public class FtpHelper {
 		boolean flag = false;
 		File file = new File(filePath);
 		if (!file.exists()) {
-			throw new Exception("文件不存在,请检查!");
+			throw new Exception("路径不存在,请检查!");
 		} else {
 			flag = true;
 		}
@@ -517,10 +559,11 @@ public class FtpHelper {
 			//fu.uploadFile("C:\\文档\\java开发SNMP协议.pptx","QQ.pptx","/ftp");
 		    
 			//下载文件到本地路径文件
-			fu.downloadFile("/QQ.pptx","c:\\test\\1.pptx");
-			
+			//fu.downloadFile("/QQ.pptx","c:\\test\\1.pptx");
+			fu.downloadFileToLocalPath("/QQ.pptx","C:"+File.separator+"test");
 		} catch (Exception e) {
-			System.out.println("异常信息：" + e.getMessage());
+			//System.out.println("异常信息：" + e.getMessage());
+			e.printStackTrace();
 		}
 	}
 }
