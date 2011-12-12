@@ -189,7 +189,7 @@ public class FtpHelper {
 				file = new File(localFile);
 			}
 			input = new FileInputStream(file);
-			
+
 			// 改变当前路径到指定路径
 			this.changeDirectory(remoteFoldPath);
 			success = ftp.storeFile(newName, input);
@@ -251,20 +251,22 @@ public class FtpHelper {
 		BufferedOutputStream output = null;
 		boolean success = false;
 		try {
-			//检查本地路径
+			// 检查本地路径
 			this.checkFileExist(localPath);
 			// 改变工作路径
 			this.changeDirectory(remotePath);
 			// 列出当前工作路径下的文件列表
 			List<FTPFile> fileList = this.getFileList();
-			if(fileList==null || fileList.size()==0){
+			if (fileList == null || fileList.size() == 0) {
 				System.out.println("服务器当前路径下不存在文件！");
 				return success;
 			}
-			for(FTPFile ftpfile:fileList){
-				if(ftpfile.getName().equals(fileName)){
-					File localFilePath = new File(localPath + File.separator + ftpfile.getName());
-					output = new BufferedOutputStream(new FileOutputStream(localFilePath));
+			for (FTPFile ftpfile : fileList) {
+				if (ftpfile.getName().equals(fileName)) {
+					File localFilePath = new File(localPath + File.separator
+							+ ftpfile.getName());
+					output = new BufferedOutputStream(new FileOutputStream(
+							localFilePath));
 					success = ftp.retrieveFile(ftpfile.getName(), output);
 				}
 			}
@@ -280,32 +282,28 @@ public class FtpHelper {
 		}
 		return success;
 	}
-	
+
 	/**
 	 * 从FTP服务器下载文件
+	 * 
 	 * @param remoteFilePath
-	 * 				FTP路径及文件名(包含文件名)
+	 *            FTP路径及文件名(包含文件名)
 	 * @param localPath
-	 *              本地路径
+	 *            本地路径
 	 * @return
 	 * @throws Exception
 	 */
-	public Boolean downloadFile(String remoteFilePath,String localPath) throws Exception {
-	
+	public Boolean downloadFile(String remoteFilePath, String localPath)
+			throws Exception {
+
 		boolean flag = false;
-		if(remoteFilePath==null || "".equals(remoteFilePath)){
-			System.out.println("下载文件不能为空!");
-			return flag;
-		}
-		String[] args = remoteFilePath.split("/") ;
-		if(args.length==0){
-			System.out.println("指明下载文件名");
-		}
-		
-		return flag ;
-	
+
+		this.downloadFile("", "", localPath);
+
+		return flag;
+
 	}
-	
+
 	/**
 	 * 从FTP服务器获取文件流
 	 * 
@@ -362,14 +360,14 @@ public class FtpHelper {
 	}
 
 	/**
-	 * 服务器路径是否存在
+	 * 改变FTP服务器当前工作路径
 	 * 
 	 * @param remoteFoldPath
 	 */
 	public Boolean changeDirectory(String remoteFoldPath) throws Exception {
 		boolean flag = false;
 		if (remoteFoldPath != null) {
-			flag = ftp.changeWorkingDirectory(remoteFoldPath);
+			flag = existDirectory(remoteFoldPath);
 			if (!flag) {
 				throw new Exception("服务器路径不存!");
 			} else {
@@ -381,13 +379,33 @@ public class FtpHelper {
 	}
 
 	/**
+	 * 服务器路径是否存在
+	 * @param remoteFoldPath(不包含文件)
+	 * @return
+	 * @throws Exception
+	 */
+	public boolean existDirectory(String remoteFoldPath) throws Exception {
+		boolean flag = false;
+		List<FTPFile> ftpFileArr= this.getFileList(remoteFoldPath);
+		for (FTPFile ftpFile : ftpFileArr) {
+			if (ftpFile.isDirectory()
+					&& ftpFile.getName().equalsIgnoreCase(remoteFoldPath)) {
+				flag = true;
+				break;
+			}
+		}
+		return flag;
+	}
+
+	/**
 	 * 检查FTP服务器文件是否存在
 	 * 
 	 * @param remoteFilePath
 	 * @return
 	 */
-	public Boolean checkFtpServerFile(String remoteFilePath) {
-
+	public Boolean checkFtpServerFile(String remoteFilePath) throws Exception {
+		boolean flag = false;
+		
 		return false;
 	}
 
@@ -399,7 +417,7 @@ public class FtpHelper {
 	 * @throws Exception
 	 */
 	public Boolean deleteFtpServerFile(String remoteFilePath) throws Exception {
-		
+
 		return ftp.deleteFile(remoteFilePath);
 	}
 
@@ -425,9 +443,25 @@ public class FtpHelper {
 	 * @return
 	 */
 	public boolean deleteFold(String remoteFoldPath) throws Exception {
-		
-		// If Directory is empty
-		return ftp.removeDirectory(remoteFoldPath);
+		boolean success = false ;
+		List<FTPFile> list = this.getFileList(remoteFoldPath);
+		if(list==null || list.size()==0)
+			return ftp.removeDirectory(remoteFoldPath);
+		for (FTPFile ftpFile : list){
+			String name = ftpFile.getName();
+			if(ftpFile.isDirectory()){
+				success = deleteFold(remoteFoldPath+"\\"+name);
+				if(!success){
+					break;
+				}
+			}else{
+				success = ftp.deleteFile(remoteFoldPath+"\\"+name);
+				if(!success){
+					break;
+				}
+			}
+		}
+		return success;
 	}
 
 	/**
@@ -543,24 +577,23 @@ public class FtpHelper {
 	/**
 	 * 主方法(测试)
 	 * 
-	 * 问题：
-	 * 问题一：上传时命名的新文件名不能有中文，否则上传失败.
+	 * 问题： 问题一：上传时命名的新文件名不能有中文，否则上传失败.
 	 * 
 	 * @param args
 	 */
 	public static void main(String[] args) {
 		try {
 			FtpHelper fu = new FtpHelper();
-			fu.connectFTPServer("192.168.2.18", 21, "administrator",
-							"sunshine");
+			// fu.connectFTPServer("192.168.2.18", 21, "administrator",
+			// "sunshine");
 			// 上传文件到FTP根目录
 			// fu.uploadFile("C:\\文档\\java开发SNMP协议.pptx","javaSNMP.pptx");
 			// 上传文件到指定的FTP路径
 			// fu.uploadFile("C:\\文档\\java开发SNMP协议.pptx","javaSNMP.pptx","/ftp");
 
 			// 下载文件到本地路径文件
-			fu.downloadFile("/javaSNMP.pptx","c:\\test\\");
-
+			// fu.downloadFile("/ddd.txt","c:\\test\\");
+			fu.checkFtpServerFile("/ddd.txt");
 			// List<String> list = fu.getFtpServerFileList("/");
 			// for(String str:list){
 			// System.out.println(str);
