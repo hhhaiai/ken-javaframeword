@@ -52,16 +52,24 @@ public class XmlConverUtil {
 	 * @param list
 	 * @return
 	 */
-	public static String listtoXml(List list) {
+	public static String listtoXml(List list) throws Exception {
 		Document document = DocumentHelper.createDocument();
 		Element nodesElement = document.addElement("nodes");
+		int i = 0;
 		for (Object o : list) {
 			Element nodeElement = nodesElement.addElement("node");
-			for (Object obj : ((Map) o).keySet()) {
+			if (o instanceof Map) {
+				for (Object obj : ((Map) o).keySet()) {
+					Element keyElement = nodeElement.addElement("key");
+					keyElement.addAttribute("label", String.valueOf(obj));
+					keyElement.setText(String.valueOf(((Map) o).get(obj)));
+				}
+			} else {
 				Element keyElement = nodeElement.addElement("key");
-				keyElement.addAttribute("label", String.valueOf(obj));
-				keyElement.setText(String.valueOf(((Map) o).get(obj)));
+				keyElement.addAttribute("label", String.valueOf(i));
+				keyElement.setText(String.valueOf(o));
 			}
+			i++;
 		}
 		return doc2String(document);
 	}
@@ -177,9 +185,18 @@ public class XmlConverUtil {
 		return s;
 	}
 
-	public static void main(String args[]) {
+	public static void main(String args[]) throws Exception {
+		// XmlConverUtil util = new XmlConverUtil();
+		// String xml =
+		// "{\"node\":{\"key\":{\"@lable\":\"key1\",\"#text\":\"value1\"}}}";
+		// System.out.println(util.jsontoXml(xml));
+
+		// 您好！你可以测一下试试！
 		XmlConverUtil util = new XmlConverUtil();
-		String xml = "{\"node\":{\"key\":{\"@lable\":\"key1\",\"#text\":\"value1\"}}}";
-		System.out.println(util.jsontoXml(xml));
+		List<String> str = new ArrayList<String>();
+		str.add("1");
+		str.add("2");
+		System.out.println(util.listtoXml(str));
+
 	}
 }
