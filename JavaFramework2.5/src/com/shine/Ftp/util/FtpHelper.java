@@ -65,8 +65,13 @@ public class FtpHelper {
 				ftp.connect(this.server, this.port);
 			else
 				ftp.connect(this.server,21);
-			ftp.login(this.uname, this.password);
-
+			
+			if (!ftp.login(this.uname, this.password)) {    
+				   ftp.logout();    
+				   ftp = null;
+				   return ftp;
+			 }   
+			
 			// 文件类型,默认是ASCII
 			ftp.setFileType(FTPClient.BINARY_FILE_TYPE);
 
@@ -285,7 +290,6 @@ public class FtpHelper {
 	public Boolean downloadFileToLocalPath(String remoteFilePath, String localPath) throws Exception{
 		
 		boolean success  = false ;
-		
 		InputStream input = null ;
 		BufferedInputStream binput = null ;
 		OutputStream outStream = null ;
@@ -331,7 +335,7 @@ public class FtpHelper {
 			}
 		}
 		return success;
-	}
+	}	
 	
 	/**
 	 * 获取FTP服务器上指定路径下的文件列表
@@ -363,7 +367,7 @@ public class FtpHelper {
 	}
 	
 	/**
-	 * 列出FTP服务器文件列表信息
+	 * 列出文件列表信息
 	 * @param nlist
 	 * @param ftpFiles
 	 * @return
@@ -397,7 +401,27 @@ public class FtpHelper {
 		}
 
 	}
-
+	
+	/**
+	 * 检查FTP服务器文件是否存在
+	 * @param remoteFilePath
+	 * @return
+	 */
+	public Boolean checkFtpServerFile(String remoteFilePath){
+		
+		return false;
+	}
+	
+	/**
+	 * 删除文件
+	 * @param remoteFilePath
+	 * @return
+	 * @throws Exception
+	 */
+	public Boolean deleteFtpServerFile(String remoteFilePath) throws Exception{
+		return ftp.deleteFile(remoteFilePath);
+	}
+	
 	/**
 	 * 创建目录
 	 * @param remoteFoldPath
@@ -417,11 +441,9 @@ public class FtpHelper {
 	 * @param remoteFoldPath
 	 * @return
 	 */
-	public boolean deleteFold(String remoteFoldPath){
-	
-		
-		
-		return false;
+	public boolean deleteFold(String remoteFoldPath) throws Exception{
+		//If Directory is empty
+		return ftp.removeDirectory(remoteFoldPath) ;
 	}
 	
 	/**
@@ -561,9 +583,9 @@ public class FtpHelper {
 			//下载文件到本地路径文件
 			//fu.downloadFile("/QQ.pptx","c:\\test\\1.pptx");
 			fu.downloadFileToLocalPath("/QQ.pptx","C:"+File.separator+"test");
+			
 		} catch (Exception e) {
-			//System.out.println("异常信息：" + e.getMessage());
-			e.printStackTrace();
+			System.out.println("异常信息：" + e.getMessage());
 		}
 	}
 }
