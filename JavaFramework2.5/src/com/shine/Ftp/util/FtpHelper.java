@@ -1,10 +1,10 @@
 package com.shine.Ftp.util;
 
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -117,16 +117,17 @@ public class FtpHelper {
 	 * @param newName
 	 * @throws Exception
 	 */
-	public void uploadFile(String localFile, String newName) throws Exception {
+	public Boolean uploadFile(String localFile, String newName) throws Exception {
 		InputStream input = null;
+		boolean success = false;
 		try {
 			File file = null;
 			if (checkFileExist(localFile)) {
 				file = new File(localFile);
 			}
 			input = new FileInputStream(file);
-			boolean result = ftp.storeFile(newName, input);
-			if (!result) {
+			success = ftp.storeFile(newName, input);
+			if (!success) {
 				throw new Exception("文件上传失败!");
 			}
 		} catch (Exception e) {
@@ -136,6 +137,7 @@ public class FtpHelper {
 				input.close();
 			}
 		}
+		return success;
 	}
 
 	/**
@@ -145,10 +147,11 @@ public class FtpHelper {
 	 * @param newName
 	 * @throws Exception
 	 */
-	public void uploadFile(InputStream input, String newName) throws Exception {
+	public Boolean uploadFile(InputStream input, String newName) throws Exception {
+		boolean success = false;
 		try {
-			boolean result = ftp.storeFile(newName, input);
-			if (!result) {
+			success = ftp.storeFile(newName, input);
+			if (!success) {
 				throw new Exception("文件上传失败!");
 			}
 		} catch (Exception e) {
@@ -158,7 +161,7 @@ public class FtpHelper {
 				input.close();
 			}
 		}
-
+		return success;
 	}
 
 	/**
@@ -169,9 +172,10 @@ public class FtpHelper {
 	 * @param remoteFoldPath
 	 * @throws Exception
 	 */
-	public void uploadFile(String localFile, String newName,
+	public Boolean uploadFile(String localFile, String newName,
 			String remoteFoldPath) throws Exception {
 		InputStream input = null;
+		boolean success = false;
 		try {
 			File file = null;
 			if (checkFileExist(localFile)) {
@@ -181,8 +185,8 @@ public class FtpHelper {
 
 			// 改变当前路径到指定路径
 			this.changeDirectory(remoteFoldPath);
-			boolean result = ftp.storeFile(newName, input);
-			if (!result) {
+			success = ftp.storeFile(newName, input);
+			if (!success) {
 				throw new Exception("文件上传失败!");
 			}
 
@@ -193,6 +197,7 @@ public class FtpHelper {
 				input.close();
 			}
 		}
+		return success ;
 	}
 
 	/**
@@ -203,13 +208,14 @@ public class FtpHelper {
 	 * @param remoteFoldPath
 	 * @throws Exception
 	 */
-	public void uploadFile(InputStream input, String newName,
+	public Boolean uploadFile(InputStream input, String newName,
 			String remoteFoldPath) throws Exception {
+		boolean success = false;
 		try {
 			// 改变当前路径到指定路径
 			this.changeDirectory(remoteFoldPath);
-			boolean result = ftp.storeFile(newName, input);
-			if (!result) {
+			success = ftp.storeFile(newName, input);
+			if (!success) {
 				throw new Exception("文件上传失败!");
 			}
 		} catch (Exception e) {
@@ -219,49 +225,72 @@ public class FtpHelper {
 				input.close();
 			}
 		}
+		return success ;
 	}
 
 	/**
-	 * 从FTP指定的路径下载文件
+	 * 从FTP服务器下载文件
 	 * 
-	 * @param remotePath
-	 * @param localPath
+	 * @param remotePath  远程文件名称 
+	 * 
+	 * @param localPath 本地路径及文件名
 	 */
-	public void downloadFile(String remotePath, String localPath)
+	public Boolean downloadFile(String remoteFilePath, String localFilePath)
 			throws Exception {
 
-		OutputStream output = null;
+		BufferedOutputStream output = null;
+		boolean success = false;
 		try {
 			File file = null;
-			if (checkFileExist(localPath)) {
-				file = new File(localPath);
+			if (checkFileExist(localFilePath)) {
+				file = new File(localFilePath);
 			}
-			output = new FileOutputStream(file);
-			boolean result = ftp.retrieveFile(remotePath, output);
-			if (!result) {
+			output = new BufferedOutputStream(new FileOutputStream(file));
+			success = ftp.retrieveFile(remoteFilePath, output);
+			if (!success) {
 				throw new Exception("文件下载失败!");
 			}
 		} catch (Exception e) {
 			throw e;
 		} finally {
 			if (output != null) {
+				output.flush();
 				output.close();
 			}
 		}
-
+		return success;
 	}
-
+	
 	/**
-	 * 从FTP指定的路径下载文件
+	 * 从FTP服务器获取下载文件流
 	 * 
 	 * @param remoteFilePath
 	 * @return
 	 * @throws Exception
 	 */
-	public InputStream downFile(String remoteFilePath) throws Exception {
+	public InputStream downloadFile(String remoteFilePath) throws Exception {
 		return ftp.retrieveFileStream(remoteFilePath);
 	}
-
+	
+	/**
+	 * 从FTP服务器下载文件
+	 * 
+	 * @param remoteFilePath 远程文件
+	 * @param localPath  本地路径
+	 * @return
+	 * @throws Exception
+	 */
+	public Boolean downloadFileToLocalPath(String remoteFilePath, String localPath) throws Exception{
+		
+		boolean success  = false;
+		InputStream input = ftp.retrieveFileStream(remoteFilePath);
+		byte[] buff = new byte[1024];
+		
+		
+		
+		return success;
+	}
+	
 	/**
 	 * 获取FTP服务器上指定路径下的文件列表
 	 * 
@@ -389,6 +418,7 @@ public class FtpHelper {
 		return null;
 	}
 
+	
 	/**
 	 * 关闭FTP连接
 	 * 
@@ -480,9 +510,15 @@ public class FtpHelper {
 		try {
 			FtpHelper fu = new FtpHelper();
 			fu.connectFTPServer("192.168.2.18", 21, "administrator", "sunshine");
+			
+			//上传文件到FTP根目录
 			//fu.uploadFile("C:\\文档\\java开发SNMP协议.pptx","QQ.pptx");
+			//上传文件到指定的FTP路径
+			//fu.uploadFile("C:\\文档\\java开发SNMP协议.pptx","QQ.pptx","/ftp");
 		    
-			fu.downFile("/QQ.pptx");
+			//下载文件到本地路径文件
+			fu.downloadFile("/QQ.pptx","c:\\test\\1.pptx");
+			
 		} catch (Exception e) {
 			System.out.println("异常信息：" + e.getMessage());
 		}
