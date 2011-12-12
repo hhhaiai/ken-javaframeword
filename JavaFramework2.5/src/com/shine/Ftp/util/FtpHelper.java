@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -240,9 +239,9 @@ public class FtpHelper {
 	 * 从FTP服务器下载文件
 	 * 
 	 * @param remotePath
-	 *            FTP路径
+	 *            FTP路径(不包含文件名)
 	 * @param fileName
-	 *            文件名
+	 *            下载文件名
 	 * @param localPath
 	 *            本地路径
 	 */
@@ -281,7 +280,32 @@ public class FtpHelper {
 		}
 		return success;
 	}
-
+	
+	/**
+	 * 从FTP服务器下载文件
+	 * @param remoteFilePath
+	 * 				FTP路径及文件名(包含文件名)
+	 * @param localPath
+	 *              本地路径
+	 * @return
+	 * @throws Exception
+	 */
+	public Boolean downloadFile(String remoteFilePath,String localPath) throws Exception {
+	
+		boolean flag = false;
+		if(remoteFilePath==null || "".equals(remoteFilePath)){
+			System.out.println("下载文件不能为空!");
+			return flag;
+		}
+		String[] args = remoteFilePath.split("/") ;
+		if(args.length==0){
+			System.out.println("指明下载文件名");
+		}
+		
+		return flag ;
+	
+	}
+	
 	/**
 	 * 从FTP服务器获取文件流
 	 * 
@@ -535,7 +559,7 @@ public class FtpHelper {
 			// fu.uploadFile("C:\\文档\\java开发SNMP协议.pptx","javaSNMP.pptx","/ftp");
 
 			// 下载文件到本地路径文件
-			fu.downloadFile("/","javaSNMP.pptx","c:\\test\\");
+			fu.downloadFile("/javaSNMP.pptx","c:\\test\\");
 
 			// List<String> list = fu.getFtpServerFileList("/");
 			// for(String str:list){
