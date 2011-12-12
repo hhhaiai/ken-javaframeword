@@ -59,7 +59,10 @@ public class FTPUtil {
 		ftp = new FTPClient();
 		try {
 			ftp.configure(getFTPClientConfig());
-			ftp.connect(this.server, this.port);
+			if(this.port>0)
+				ftp.connect(this.server, this.port);
+			else
+				ftp.connect(this.server,21);
 			ftp.login(this.uname, this.password);
 
 			// 文件类型,默认是ASCII
@@ -437,13 +440,22 @@ public class FTPUtil {
 	/**
 	 * 主方法(测试)
 	 * 
+	 * 问题：
+	 * 
+	 *    问题一：上传时命名的新文件名不能有中文，否则上传失败.
+	 *    
+	 * 
+	 * 
+	 * 
 	 * @param args
 	 */
 	public static void main(String[] args) {
 		try {
 			FTPUtil fu = new FTPUtil();
-			fu.connectFTPServer("192.168.11.28", 21, "Ftpuser", "sunshine");
-			// fu.uploadFile("C:\\文档\\java开发SNMP协议.pptx");
+			fu.connectFTPServer("192.168.2.18", 21, "administrator", "sunshine");
+			//fu.uploadFile("C:\\文档\\java开发SNMP协议.pptx","QQ.pptx");
+		    
+			fu.downFile("/QQ.pptx");
 		} catch (Exception e) {
 			System.out.println("异常信息：" + e.getMessage());
 		}
