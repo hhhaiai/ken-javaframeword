@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<ftp ip="" port="" name="" password="" path="" />
+	<ftps>
+
+	</ftps>
+</config>
