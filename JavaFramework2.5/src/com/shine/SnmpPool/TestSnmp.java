@@ -3,11 +3,8 @@ package com.shine.SnmpPool;
 public class TestSnmp {
 	
 	public static void main(String args[]) throws Exception{
-		
-		SnmpPoolManager spm = SnmpPoolManager.getManager();//线程池管理对象
-		
 		//首先初始化五个线程放入线程池中，启动并等待任务
-		spm.init(5);
+		SnmpPoolManager.getManager().init(5);
 		
 		//初始化采集池(有连接器测试)
 		//SnmpPoolManager.getManager().addSnmp("Port-oid", "192.168.2.18","public", 161, 2);
