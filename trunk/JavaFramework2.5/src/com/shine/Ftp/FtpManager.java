@@ -146,4 +146,13 @@ public class FtpManager {
 	public String dir(String ip, int port, String folderPath) {
 		return null;
 	}
+
+	/**
+	 * 响应时间
+	 * 
+	 * @return
+	 */
+	public int responseTimes(String ip, int port) {
+		return 0;
+	}
 }
