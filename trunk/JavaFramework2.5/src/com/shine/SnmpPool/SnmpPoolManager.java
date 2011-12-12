@@ -58,7 +58,7 @@ public class SnmpPoolManager {
 			e.printStackTrace();
 		}
 	}
-
+ 
 	/**
 	 * 初始化snmp异步查询线程
 	 * 
