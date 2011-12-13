@@ -18,7 +18,7 @@ public class NetAnalisysManager {
 	private static NetAnalisysManager manager = null;
 
 	private int netScanSize = 10;
-	
+
 	private int netPortSize = 10;
 
 	public static NetAnalisysManager getManager() {
@@ -27,6 +27,9 @@ public class NetAnalisysManager {
 		return manager;
 	}
 
+	/**
+	 * 初始化线程
+	 */
 	public void initThreadModel() {
 		for (int i = 0; i < netScanSize; i++) {
 			addNetScanThreadModel(i);
@@ -37,6 +40,11 @@ public class NetAnalisysManager {
 		ThreadPoolManager.getManager().startThreadPool();
 	}
 
+	/**
+	 * 加入扫描线程
+	 * 
+	 * @param i
+	 */
 	private void addNetScanThreadModel(int i) {
 		NetScanThreadModel threadModel = new NetScanThreadModel();
 		threadModel.setThreadName("netScanThreadModel" + i);
@@ -44,6 +52,11 @@ public class NetAnalisysManager {
 		threadModel = null;
 	}
 
+	/**
+	 * 加入网络端口扫描线程
+	 * 
+	 * @param i
+	 */
 	private void addNetPortThreadModel(int i) {
 		NetPortThreadModel threadModel = new NetPortThreadModel();
 		threadModel.setThreadName("netPortThreadModel" + i);
@@ -51,9 +64,18 @@ public class NetAnalisysManager {
 		threadModel = null;
 	}
 
+	/**
+	 * 启动网络ip扫描
+	 * 
+	 * @param startIp
+	 * @param endIp
+	 * @param o
+	 * @param methodName
+	 */
 	public void startNetScan(String startIp, String endIp, Object o,
 			String methodName) {
-		List<String[]> ipRangeList = NetWorkUtil.seperateIpRange(startIp, endIp);
+		List<String[]> ipRangeList = NetWorkUtil
+				.seperateIpRange(startIp, endIp);
 		int index = 0;
 		while (index < ipRangeList.size()) {
 			// 获取空闲线程，如果线程繁忙则等待
@@ -76,9 +98,19 @@ public class NetAnalisysManager {
 		// ThreadPoolManager.getManager().stopThreadPool();
 	}
 
+	/**
+	 * 启动网络端口扫描
+	 * 
+	 * @param ip
+	 * @param minPort
+	 * @param maxPort
+	 * @param o
+	 * @param methodName
+	 */
 	public void startNetPort(String ip, int minPort, int maxPort, Object o,
 			String methodName) {
-		List<String[]> ipPortList = NetWorkUtil.seperateIpPort(ip, minPort, maxPort);
+		List<String[]> ipPortList = NetWorkUtil.seperateIpPort(ip, minPort,
+				maxPort);
 		int index = 0;
 		while (index < ipPortList.size()) {
 			// 获取空闲线程，如果线程繁忙则等待
@@ -107,11 +139,11 @@ public class NetAnalisysManager {
 	public void setNetScanSize(int netScanSize) {
 		this.netScanSize = netScanSize;
 	}
-	
+
 	public int getNetPortSize() {
 		return netPortSize;
 	}
-	
+
 	public void setNetPortSize(int netPortSize) {
 		this.netPortSize = netPortSize;
 	}
