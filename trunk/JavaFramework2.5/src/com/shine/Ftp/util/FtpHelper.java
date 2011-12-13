@@ -304,10 +304,8 @@ public class FtpHelper {
 	 */
 	public Boolean downloadFile(String remoteFilePath, String localPath)
 			throws Exception {
-
-		boolean flag = false;
 		
-		return flag;
+		return false;
 
 	}
 
@@ -384,7 +382,7 @@ public class FtpHelper {
 	 * @throws Exception
 	 */
 	public boolean existDirectory(String remotepath) throws Exception {
-
+		
 		return false;
 	}
 
@@ -396,9 +394,6 @@ public class FtpHelper {
 	 */
 	public Boolean checkFtpServerFile(String remoteFilePath) throws Exception {
 		
-		boolean flag = false;
-		
-	
 		return false;
 	}
 
@@ -598,7 +593,7 @@ public class FtpHelper {
 			// fu.uploadFile("C:\\文档\\java开发SNMP协议.pptx","javaSNMP.pptx","/ftt");
 
 			// 下载文件到本地路径文件
-			// fu.downloadFile("/ftp","javaSNMP.pptx","c:\\test\\");
+			 fu.downloadFile("ftp","javaSNMP.pptx","c:\\test\\");
 
 		} catch (Exception e) {
 			System.out.println("异常信息：" + e.getMessage());
