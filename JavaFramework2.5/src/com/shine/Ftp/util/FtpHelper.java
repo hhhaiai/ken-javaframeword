@@ -486,12 +486,13 @@ public class FtpHelper {
 		}
 		return flag;
 	}
+	
 	private Document document ;
+	
 	public Element getCurrentElement(){
 		document = DocumentHelper.createDocument();
 		return document.addElement("root");
 	}
-	
 	/**
 	 * 生成目录XML文件
 	 */
@@ -502,7 +503,6 @@ public class FtpHelper {
 			Element currentElement = fatherElement; //当前的目录节点
 			String newRemotePath = remotePath+ftpfile.getName();
 			if(ftpfile.isDirectory()){
-				System.out.println(ftpfile.getName()+"<---is Directory");
 				Element dirElement = fatherElement.addElement("dir") ;
 				dirElement.addAttribute("name",ftpfile.getName());
 				currentElement = dirElement;
