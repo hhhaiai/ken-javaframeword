@@ -67,8 +67,6 @@ public class FtpManager {
 	 */
 	public boolean uploadFile(String ip, int port, String filePath) {
 		
-		
-		
 		return false;
 	}
 
@@ -168,6 +166,11 @@ public class FtpManager {
 	 * @return
 	 */
 	public String dir(String ip, int port) {
+		
+		String key = getFtpPoolKey(ip,port);
+		FtpHelper ftpHelper = this.ftpPool.getFtpHelperByKey(key);
+		
+		
 		return null;
 	}
 
@@ -180,6 +183,8 @@ public class FtpManager {
 	 * @return
 	 */
 	public String dir(String ip, int port, String folderPath) {
+		
+		
 		return null;
 	}
 
@@ -189,6 +194,9 @@ public class FtpManager {
 	 * @return
 	 */
 	public int responseTimes(String ip, int port) {
+		
+		
+		
 		return 0;
 	}
 }
