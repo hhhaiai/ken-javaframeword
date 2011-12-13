@@ -15,8 +15,7 @@ public class FtpPool extends HashMap<String, FtpHelper> {
 	/**
 	 * 添加FTP客户端
 	 * 
-	 * @param key =
-	 *            ip+port
+	 * @param key = ip+port
 	 * @param ftpHelper
 	 */
 	public void addFtpHelper(String key, FtpHelper ftpHelper) {
@@ -88,25 +87,5 @@ public class FtpPool extends HashMap<String, FtpHelper> {
 	public void removeAllFtpHelper() {
 
 		this.clear();
-	}
-
-	/**
-	 * 主方法测试
-	 * 
-	 * @param args
-	 */
-	public static void main(String args[]){
-		try{
-			FtpPool f = new FtpPool();
-			FtpHelper ftp1 = new FtpHelper("192.168.2.18", 21, "administrator",
-					"sunshine");
-			FtpHelper ftp2 = new FtpHelper("192.168.2.18", 21, "administrator",
-					"sunshine");
-			f.addFtpHelper("1", ftp1);
-			f.addFtpHelper("2", ftp2);
-	
-		}catch(Exception e){
-			System.out.println("异常信息："+e.getMessage());
-		}
 	}
 }
