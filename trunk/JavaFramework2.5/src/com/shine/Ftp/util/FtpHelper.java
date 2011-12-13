@@ -41,8 +41,9 @@ public class FtpHelper {
 			this.port = port;
 		}
 		this.uname = uname;
-		this.password = password;	
-		
+		this.password = password;
+		//初始化
+		ftp = new FTPClient();	
 	}
 	/**
 	 * 连接FTP服务器
@@ -54,8 +55,6 @@ public class FtpHelper {
 	 * @throws Exception
 	 */
 	public FTPClient connectFTPServer() throws Exception {
-
-		ftp = new FTPClient();
 		try {
 			ftp.configure(getFTPClientConfig());
 			ftp.connect(this.server, this.port);
@@ -509,6 +508,7 @@ public class FtpHelper {
 
 		try {
 			if (ftp.isConnected())
+				ftp.logout();
 				ftp.disconnect();
 		} catch (Exception e) {
 			throw new Exception("关闭FTP服务出错!");
@@ -576,7 +576,7 @@ public class FtpHelper {
 	/**
 	 * 主方法(测试)
 	 * 
-	 * 问题： 问题一：上传时命名的新文件名不能有中文，否则上传失败.
+	 * 问题：上传时命名的新文件名不能有中文，否则上传失败.
 	 * 
 	 * @param args
 	 */
@@ -585,9 +585,9 @@ public class FtpHelper {
 			FtpHelper fu = new FtpHelper("192.168.2.18", 21, "administrator","sunshine");
 			fu.connectFTPServer();
 			
-			fu.uploadFile("C:\\文档\\java开发SNMP协议.pptx","javaSNMP.pptx");
-			fu.uploadFile("C:\\文档\\java开发SNMP协议.pptx","javaSNMP.pptx","/ftt");
-			fu.downloadFile("ftp","javaSNMP.pptx","c:\\test\\");
+			//fu.uploadFile("C:\\文档\\java开发SNMP协议.pptx","javaSNMP.pptx");
+			//fu.uploadFile("C:\\文档\\java开发SNMP协议.pptx","javaSNMP.pptx","/ftt");
+			//fu.downloadFile("ftp","javaSNMP.pptx","c:\\test\\");
 
 		} catch (Exception e) {
 			System.out.println("异常信息：" + e.getMessage());
