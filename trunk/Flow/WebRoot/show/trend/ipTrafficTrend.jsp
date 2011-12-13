@@ -44,7 +44,7 @@ swfobject.embedSWF("${jsPath}amcharts/flash/amline.swf", "chartdiv", "600", "400
     <div class="page_wrapper limit_770">
     	<!-- 查询页面 START -->
         <div class="top_bar limit_770">
-        	<a title="后退" onClick='history.back();return false;' class="icon_btn" href="javascript:void(0);">
+        	<a title="后退" class="icon_btn" href="javascript:window.history.back(-1);">
             <img src="${imagePath}icons/back.gif" /> 后退</a>
 			<!-- <a title="显示/隐藏 查询" onClick="toggleSearch();" class="icon_btn" href="javascript:void(0);">
             <img src="${rootPath}resource/image/icons/search.gif" /> 查询
@@ -69,7 +69,7 @@ swfobject.embedSWF("${jsPath}amcharts/flash/amline.swf", "chartdiv", "600", "400
                                     <td colspan="3">
                                     <select id="statPeroid" name="statPeroid">
                                     <c:forEach var="periodList" items="${dto.statPeriodList}">
-                                    	<option value="<c:out value="${periodList.key}"/>" 
+                                    	<option value="<c:out value="${periodlist.key}"/>" 
                                         <c:if test="${periodList.key == dto.statPeroid}">selected="selected"</c:if>>
                                         	<c:out value="${periodList.value}"/>
                                         </option>
