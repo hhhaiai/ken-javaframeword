@@ -42,9 +42,9 @@ function exportPdf() {
 
 // 具体IP查询
 function showDetail(ipAddress, ipType) {
-	document.mainForm.action ='${rootPath}detail/ipTrafficDetail_list?ipType=' + ipType + '&ipAddress=' + ipAddress;
-	document.mainForm.target = "_self";
-	document.mainForm.submit();
+	var mainForm = document.mainForm;
+	mainForm.action = '${rootPath}detail/ipTrafficDetail_list?ipType=' + ipType + '&ipAddress=' + ipAddress;
+	mainForm.submit();
 }
 
 // 导出图片
@@ -58,6 +58,8 @@ function exportImage() {
 // 流量趋势
 function showFlowTrend(ip, ipType) {
 	var mainForm = document.mainForm;
+	mainForm.target = "_self";
+	//window.location.href = '${rootPath}trend/ipTrafficTrend_list?ipAddress=' + ip + '&ipType=' + ipType;
 	mainForm.action ='${rootPath}trend/ipTrafficTrend_list?ipAddress=' + ip + '&ipType=' + ipType;
 	mainForm.submit();
 }
@@ -112,11 +114,11 @@ tspan {
     <div class="page_wrapper limit_770">
     	<!-- 查询页面 START -->
         <div class="top_bar limit_770">
-			<a title="显示/隐藏 查询" onClick="toggleSearch();" class="icon_btn" href="javascript:void(0);">
+			<a title="显示/隐藏 查询" onclick="toggleSearch();" class="icon_btn" href="javascript:void(0);">
             <img src="${rootPath}resource/image/icons/search.gif" /> 查询
             </a>
             <span class="sep">&nbsp;</span>
-            <a title="导出为pdf文件" onClick="exportPdf();return false;" class="icon_btn" href="javascript:void(0);" >
+            <a title="导出为pdf文件" onclick="exportPdf();return false;" class="icon_btn" href="javascript:void(0);" >
             <img src="${rootPath}resource/image/icons/export_pdf.gif" /> 导出PDF
             </a>
 		</div>
@@ -179,7 +181,7 @@ tspan {
             <!-- 以源IP分组数据展现 START -->
             <div>
             <s:if test="#request.dbModels['ipSrc'].size > 0">
-            <table id="ipSrcTrafficList" class="data_list" width=100% cellSpacing=0 cellPadding=0 border=0>
+            <table id="ipSrcTrafficList" class="data_list" width=100% cellspacing=0 cellpadding=0 border=0>
             <tr>
             	<th>&nbsp;</th>
                 <th width="200px">源ip地址</th>
@@ -191,9 +193,9 @@ tspan {
             <s:iterator value="#request.dbModels['ipSrc']" status="dbModel">
             <tr>
             	<td><s:property value="#dbModel.index + 1" /></td>
-            	<td><a href="javascript:void(0);" onclick="showDetail('<s:property value="dbModels['ipSrc'][#dbModel.index]['src_ip']" />', 1);"><s:property value="dbModels['ipSrc'][#dbModel.index]['src_ip']" /></a></td>
+            	<td><a href="#" onclick="showDetail('<s:property value="dbModels['ipSrc'][#dbModel.index]['src_ip']" />', 1);"><s:property value="dbModels['ipSrc'][#dbModel.index]['src_ip']" /></a></td>
                 <td><s:property value="dbModels['ipSrc'][#dbModel.index]['format_bytes_total']" /></td>
-                <td><span ctype="ProgressBar" barSkin="green" progress="<s:property value="dbModels['ipSrc'][#dbModel.index]['percentage']" />"></td>
+                <td><span ctype="ProgressBar" barskin="green" progress="<s:property value="dbModels['ipSrc'][#dbModel.index]['percentage']" />"></td>
                 <td></span><s:property value="dbModels['ipSrc'][#dbModel.index]['percentage']" />%</td>
                 <td><img style="cursor:pointer" height="14" width="14" src="${rootPath}resource/image/icons/trend.png" border="0" onclick="showFlowTrend('<s:property value="dbModels['ipSrc'][#dbModel.index]['src_ip']" />', 1)"></td>
             </tr>
@@ -210,7 +212,7 @@ tspan {
             <!-- 以目标IP分组数据展现 START -->
             <div>
             <s:if test="#request.dbModels['ipDst'].size > 0">
-            <table id="ipDstTrafficList" class="data_list" width=100% cellSpacing=0 cellPadding=0 border=0>
+            <table id="ipDstTrafficList" class="data_list" width=100% cellspacing=0 cellpadding=0 border=0>
             <tr>
             	<th>&nbsp;</th>
                 <th width="200px">目标ip地址</th>
@@ -222,11 +224,11 @@ tspan {
             <s:iterator value="#request.dbModels['ipDst']" status="dbModel">
             <tr>
             	<td><s:property value="#dbModel.index + 1" /></td>
-            	<td><a href="javascript:void(0);" onclick="showDetail('<s:property value="dbModels['ipDst'][#dbModel.index]['dst_ip']" />', 2);"><s:property value="dbModels['ipDst'][#dbModel.index]['dst_ip']" /></a></td>
+            	<td><a href="#" onclick="showDetail('<s:property value="dbModels['ipDst'][#dbModel.index]['dst_ip']" />', 2);"><s:property value="dbModels['ipDst'][#dbModel.index]['dst_ip']" /></a></td>
                 <td>
                 <s:property value="dbModels['ipDst'][#dbModel.index]['format_bytes_total']" />
                 </td>
-                <td><span ctype="ProgressBar" barSkin="green" progress="<s:property value="dbModels['ipDst'][#dbModel.index]['percentage']" />"></span></td>
+                <td><span ctype="ProgressBar" barskin="green" progress="<s:property value="dbModels['ipDst'][#dbModel.index]['percentage']" />"></span></td>
                 <td><s:property value="dbModels['ipDst'][#dbModel.index]['percentage']" />%</td>
                 <td>
                 <img style="cursor:pointer" height="14" width="14" src="${rootPath}resource/image/icons/trend.png" border="0" onclick="showFlowTrend('<s:property value="dbModels['ipDst'][#dbModel.index]['dst_ip']" />', 2)">
