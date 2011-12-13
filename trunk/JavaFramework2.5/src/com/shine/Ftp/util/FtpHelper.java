@@ -481,24 +481,6 @@ public class FtpHelper {
 	}
 
 	/**
-	 * 获取文件名,不包括后缀
-	 * 
-	 * @param filePath
-	 * @return
-	 */
-	public String getFileNamePrefix(String filePath) throws Exception {
-
-		boolean flag = this.checkFileExist(filePath);
-		if (flag) {
-			File file = new File(filePath);
-			String fileName = file.getName();
-			String _fileName = fileName.substring(0, fileName.lastIndexOf("."));
-			return _fileName;
-		}
-		return null;
-	}
-
-	/**
 	 * 关闭FTP连接
 	 * 
 	 * @param ftp
@@ -584,11 +566,6 @@ public class FtpHelper {
 		try {
 			FtpHelper fu = new FtpHelper("192.168.2.18", 21, "administrator","sunshine");
 			fu.connectFTPServer();
-			
-			//fu.uploadFile("C:\\文档\\java开发SNMP协议.pptx","javaSNMP.pptx");
-			//fu.uploadFile("C:\\文档\\java开发SNMP协议.pptx","javaSNMP.pptx","/ftt");
-			//fu.downloadFile("ftp","javaSNMP.pptx","c:\\test\\");
-
 		} catch (Exception e) {
 			System.out.println("异常信息：" + e.getMessage());
 		}
