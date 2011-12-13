@@ -4,6 +4,8 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
 import java.util.List;
@@ -13,6 +15,11 @@ import org.apache.commons.net.ftp.FTPClientConfig;
 import org.apache.commons.net.ftp.FTPFile;
 import org.apache.commons.net.ftp.FTPListParseEngine;
 import org.apache.commons.net.ftp.FTPReply;
+import org.dom4j.Document;
+import org.dom4j.DocumentHelper;
+import org.dom4j.Element;
+import org.dom4j.io.OutputFormat;
+import org.dom4j.io.XMLWriter;
 
 public class FtpHelper {
 
@@ -479,7 +486,48 @@ public class FtpHelper {
 		}
 		return flag;
 	}
+	private Document document ;
+	public Element getCurrentElement(){
+		document = DocumentHelper.createDocument();
+		return document.addElement("root");
+	}
+	
+	/**
+	 * 生成目录XML文件
+	 */
+	public void createDirectoryXML(String remotePath,Element fatherElement) throws Exception{
 
+		List<FTPFile> list = this.getFileList();
+		for(FTPFile ftpfile:list){
+			Element currentElement = fatherElement; //当前的目录节点
+			String newRemotePath = remotePath+ftpfile.getName();
+			if(ftpfile.isDirectory()){
+				System.out.println(ftpfile.getName()+"<---is Directory");
+				Element dirElement = fatherElement.addElement("dir") ;
+				dirElement.addAttribute("name",ftpfile.getName());
+				currentElement = dirElement;
+				this.changeDirectory(newRemotePath); //从根目录开始
+				createDirectoryXML(newRemotePath,dirElement);
+			}else{
+				 Element fileElement = fatherElement.addElement("file");//文件节点
+				 fileElement.setText(ftpfile.getName()) ;
+			}
+		}
+	}
+	
+	public void saveXML(){
+		XMLWriter output = new XMLWriter();
+        //输出格式化
+        OutputFormat format = OutputFormat.createPrettyPrint();
+        try {
+            output = new XMLWriter(new FileWriter("src/com/shine/Ftp/config/dir.xml"), format);
+            output.write(this.document);
+            output.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+	}
+	
 	/**
 	 * 关闭FTP连接
 	 * 
@@ -566,6 +614,9 @@ public class FtpHelper {
 		try {
 			FtpHelper fu = new FtpHelper("192.168.2.18", 21, "administrator","sunshine");
 			fu.connectFTPServer();
+			Element fatherElement = fu.getCurrentElement();
+			fu.createDirectoryXML("/", fatherElement);
+			fu.saveXML();
 		} catch (Exception e) {
 			System.out.println("异常信息：" + e.getMessage());
 		}
