@@ -14,9 +14,7 @@ import com.shine.DBUtil.threadModel.SelectThreadModel;
 import com.shine.DBUtil.threadModel.UpdateThreadModel;
 import com.shine.DBUtil.utils.BatchMap;
 import com.shine.DBUtil.utils.ClusterList;
-import com.shine.Netflow.receiver.NetflowRecevice;
 import com.shine.framework.ThreadPoolUtil.ThreadPoolManager;
-import com.shine.framework.Udp.UdpManager;
 
 /**
  * db util java数据库操作类库
