@@ -1,5 +1,8 @@
 package com.shine.Ftp;
 
+import com.shine.Ftp.util.FtpHelper;
+import com.shine.Ftp.util.FtpPool;
+
 /**
  * 
  * ftp管理类
@@ -8,20 +11,50 @@ package com.shine.Ftp;
  * 
  */
 public class FtpManager {
+
 	private static FtpManager manager = null;
+
+	private FtpPool ftpPool = new FtpPool();
 
 	public static FtpManager getManager() {
 		if (manager == null)
 			manager = new FtpManager();
 		return manager;
 	}
-
+	
+	/**
+	 * FTP客户端【加入池中】
+	 * @param ip
+	 * @param port
+	 * @param name
+	 * @param password
+	 */
 	public void addFtpClient(String ip, int port, String name, String password) {
-
+		FtpHelper ftpHelper = new FtpHelper(ip, port, name, password);
+		String key = getFtpPoolKey(ip,port);
+		this.ftpPool.addFtpHelper(key, ftpHelper);
 	}
-
+	
+	/**
+	 * 组装Key【IP+PORT】
+	 * @param ip
+	 * @param port
+	 * @return
+	 */
+	private String getFtpPoolKey(String ip, int port){
+		
+		return new StringBuffer("ip").append(port).toString();
+	}
+	
+	/**
+	 * 从池中【删除FTP客户端】
+	 * @param ip
+	 * @param port
+	 */
 	public void deleteFtpClient(String ip, int port) {
-
+		
+		String key = getFtpPoolKey(ip,port);
+		this.ftpPool.remove(key);
 	}
 
 	/**
@@ -33,6 +66,9 @@ public class FtpManager {
 	 * @return
 	 */
 	public boolean uploadFile(String ip, int port, String filePath) {
+		
+		
+		
 		return false;
 	}
 
