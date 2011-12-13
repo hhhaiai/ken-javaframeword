@@ -34,10 +34,16 @@ public class FtpHelper {
 	 */
 	private int port = 21;
 
-	public FtpHelper() {
-
+	public FtpHelper(String server, int port, String uname,
+			String password){
+		this.server = server;
+		if (this.port > 0){
+			this.port = port;
+		}
+		this.uname = uname;
+		this.password = password;	
+		
 	}
-
 	/**
 	 * 连接FTP服务器
 	 * 
@@ -47,23 +53,12 @@ public class FtpHelper {
 	 * @return
 	 * @throws Exception
 	 */
-	public FTPClient connectFTPServer(String server, int port, String uname,
-			String password) throws Exception {
-
-		// 初始化并保存信息
-		this.server = server;
-		this.port = port;
-		this.uname = uname;
-		this.password = password;
+	public FTPClient connectFTPServer() throws Exception {
 
 		ftp = new FTPClient();
 		try {
 			ftp.configure(getFTPClientConfig());
-			if (this.port > 0)
-				ftp.connect(this.server, this.port);
-			else
-				ftp.connect(this.server, 21);
-
+			ftp.connect(this.server, this.port);
 			if (!ftp.login(this.uname, this.password)) {
 				ftp.logout();
 				ftp = null;
@@ -587,13 +582,12 @@ public class FtpHelper {
 	 */
 	public static void main(String[] args) {
 		try {
-			FtpHelper fu = new FtpHelper();
-			fu.connectFTPServer("192.168.2.18", 21, "administrator","sunshine");
-			// fu.uploadFile("C:\\文档\\java开发SNMP协议.pptx","javaSNMP.pptx");
-			// fu.uploadFile("C:\\文档\\java开发SNMP协议.pptx","javaSNMP.pptx","/ftt");
-
-			// 下载文件到本地路径文件
-			 fu.downloadFile("ftp","javaSNMP.pptx","c:\\test\\");
+			FtpHelper fu = new FtpHelper("192.168.2.18", 21, "administrator","sunshine");
+			fu.connectFTPServer();
+			
+			fu.uploadFile("C:\\文档\\java开发SNMP协议.pptx","javaSNMP.pptx");
+			fu.uploadFile("C:\\文档\\java开发SNMP协议.pptx","javaSNMP.pptx","/ftt");
+			fu.downloadFile("ftp","javaSNMP.pptx","c:\\test\\");
 
 		} catch (Exception e) {
 			System.out.println("异常信息：" + e.getMessage());
