@@ -191,7 +191,10 @@ public class FtpHelper {
 			input = new FileInputStream(file);
 
 			// 改变当前路径到指定路径
-			this.changeDirectory(remoteFoldPath);
+			if (!this.changeDirectory(remoteFoldPath)) {
+				System.out.println("服务器路径不存!");
+				return false;
+			}
 			success = ftp.storeFile(newName, input);
 			if (!success) {
 				throw new Exception("文件上传失败!");
@@ -220,7 +223,10 @@ public class FtpHelper {
 		boolean success = false;
 		try {
 			// 改变当前路径到指定路径
-			this.changeDirectory(remoteFoldPath);
+			if (!this.changeDirectory(remoteFoldPath)) {
+				System.out.println("服务器路径不存!");
+				return false;
+			}
 			success = ftp.storeFile(newName, input);
 			if (!success) {
 				throw new Exception("文件上传失败!");
@@ -254,7 +260,10 @@ public class FtpHelper {
 			// 检查本地路径
 			this.checkFileExist(localPath);
 			// 改变工作路径
-			this.changeDirectory(remotePath);
+			if (!this.changeDirectory(remotePath)) {
+				System.out.println("服务器路径不存在");
+				return false;
+			}
 			// 列出当前工作路径下的文件列表
 			List<FTPFile> fileList = this.getFileList();
 			if (fileList == null || fileList.size() == 0) {
@@ -297,9 +306,7 @@ public class FtpHelper {
 			throws Exception {
 
 		boolean flag = false;
-
-		this.downloadFile("", "", localPath);
-
+		
 		return flag;
 
 	}
@@ -360,41 +367,25 @@ public class FtpHelper {
 	}
 
 	/**
-	 * 改变FTP服务器当前工作路径
+	 * 改变FTP服务器工作路径 
 	 * 
 	 * @param remoteFoldPath
 	 */
 	public Boolean changeDirectory(String remoteFoldPath) throws Exception {
-		boolean flag = false;
-		if (remoteFoldPath != null) {
-			flag = existDirectory(remoteFoldPath);
-			if (!flag) {
-				throw new Exception("服务器路径不存!");
-			} else {
-				flag = true;
-				ftp.changeWorkingDirectory(remoteFoldPath);
-			}
-		}
-		return flag;
+
+		return ftp.changeWorkingDirectory(remoteFoldPath);
 	}
 
 	/**
-	 * 服务器路径是否存在
-	 * @param remoteFoldPath(不包含文件)
+	 * 服务器路径是否存在(不包含文件)
+	 * 
+	 * @param remotepath
 	 * @return
 	 * @throws Exception
 	 */
-	public boolean existDirectory(String remoteFoldPath) throws Exception {
-		boolean flag = false;
-		List<FTPFile> ftpFileArr= this.getFileList(remoteFoldPath);
-		for (FTPFile ftpFile : ftpFileArr) {
-			if (ftpFile.isDirectory()
-					&& ftpFile.getName().equalsIgnoreCase(remoteFoldPath)) {
-				flag = true;
-				break;
-			}
-		}
-		return flag;
+	public boolean existDirectory(String remotepath) throws Exception {
+
+		return false;
 	}
 
 	/**
@@ -404,8 +395,10 @@ public class FtpHelper {
 	 * @return
 	 */
 	public Boolean checkFtpServerFile(String remoteFilePath) throws Exception {
+		
 		boolean flag = false;
 		
+	
 		return false;
 	}
 
@@ -438,29 +431,45 @@ public class FtpHelper {
 
 	/**
 	 * 删除目录
+	 * @param remoteFoldPath
+	 * @return
+	 * @throws Exception
+	 */
+	public boolean deleteFold(String remoteFoldPath) throws Exception {
+		
+		return ftp.removeDirectory(remoteFoldPath) ;
+	}
+
+	/**
+	 * 删除目录以及文件
 	 * 
 	 * @param remoteFoldPath
 	 * @return
 	 */
-	public boolean deleteFold(String remoteFoldPath) throws Exception {
-		boolean success = false ;
+	public boolean deleteFoldAndsubFiles(String remoteFoldPath)
+			throws Exception {
+
+		boolean success = false;
 		List<FTPFile> list = this.getFileList(remoteFoldPath);
-		if(list==null || list.size()==0)
-			return ftp.removeDirectory(remoteFoldPath);
-		for (FTPFile ftpFile : list){
+		if (list == null || list.size() == 0) {
+			return deleteFold(remoteFoldPath);
+		}
+		for (FTPFile ftpFile : list) {
+			
 			String name = ftpFile.getName();
-			if(ftpFile.isDirectory()){
-				success = deleteFold(remoteFoldPath+"\\"+name);
-				if(!success){
+			if (ftpFile.isDirectory()) {
+				success = deleteFoldAndsubFiles(remoteFoldPath + "/" + name);
+				if (!success)
 					break;
-				}
-			}else{
-				success = ftp.deleteFile(remoteFoldPath+"\\"+name);
-				if(!success){
+			} else {
+				success = deleteFtpServerFile(remoteFoldPath + "/" + name);
+				if (!success)
 					break;
-				}
 			}
 		}
+		if (!success)
+			return false;
+		success = deleteFold(remoteFoldPath);
 		return success;
 	}
 
@@ -584,20 +593,13 @@ public class FtpHelper {
 	public static void main(String[] args) {
 		try {
 			FtpHelper fu = new FtpHelper();
-			// fu.connectFTPServer("192.168.2.18", 21, "administrator",
-			// "sunshine");
-			// 上传文件到FTP根目录
+			fu.connectFTPServer("192.168.2.18", 21, "administrator","sunshine");
 			// fu.uploadFile("C:\\文档\\java开发SNMP协议.pptx","javaSNMP.pptx");
-			// 上传文件到指定的FTP路径
-			// fu.uploadFile("C:\\文档\\java开发SNMP协议.pptx","javaSNMP.pptx","/ftp");
+			// fu.uploadFile("C:\\文档\\java开发SNMP协议.pptx","javaSNMP.pptx","/ftt");
 
 			// 下载文件到本地路径文件
-			// fu.downloadFile("/ddd.txt","c:\\test\\");
-			fu.checkFtpServerFile("/ddd.txt");
-			// List<String> list = fu.getFtpServerFileList("/");
-			// for(String str:list){
-			// System.out.println(str);
-			// }
+			// fu.downloadFile("/ftp","javaSNMP.pptx","c:\\test\\");
+
 		} catch (Exception e) {
 			System.out.println("异常信息：" + e.getMessage());
 		}
