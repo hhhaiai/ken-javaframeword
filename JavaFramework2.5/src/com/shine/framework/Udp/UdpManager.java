@@ -12,6 +12,7 @@ import java.util.Map;
 import com.shine.framework.Udp.model.UdpRecevice;
 import com.shine.framework.Udp.utils.UdpHelperMap;
 import com.shine.framework.Udp.utils.UdpSocketHelper;
+import com.shine.framework.Udp.utils.UdpUtil;
 
 public class UdpManager {
 	private static UdpManager manager = new UdpManager();
@@ -75,7 +76,20 @@ public class UdpManager {
 	 * @param port
 	 */
 	public void startRecevice(int port) {
-		map.get(port).startReceive();
+		startRecevice("127.0.0.1", port);
+	}
+
+	/**
+	 * 启动监听线程
+	 * 
+	 * @param host
+	 * @param port
+	 */
+	public void startRecevice(String host, int port) {
+		if (UdpUtil.createKey(host, port) != null)
+			map.get(UdpUtil.createKey(host, port)).startReceive();
+		else
+			System.err.println("start_不存在" + host + "和端口" + port);
 	}
 
 	/**
@@ -93,7 +107,20 @@ public class UdpManager {
 	 * @param port
 	 */
 	public void pauseRecevice(int port) {
-		map.get(port).setReceviceable(false);
+		pauseRecevice("127.0.0.1", port);
+	}
+
+	/**
+	 * 指定端口暂停接受数据，抛弃相关数据包
+	 * 
+	 * @param host
+	 * @param port
+	 */
+	public void pauseRecevice(String host, int port) {
+		if (UdpUtil.createKey(host, port) != null)
+			map.get(UdpUtil.createKey(host, port)).setReceviceable(false);
+		else
+			System.err.println("pause_不存在" + host + "和端口" + port);
 	}
 
 	/**
@@ -111,7 +138,20 @@ public class UdpManager {
 	 * @param port
 	 */
 	public void resumeRecevice(int port) {
-		map.get(port).setReceviceable(true);
+		resumeRecevice("127.0.0.1", port);
+	}
+
+	/**
+	 * 指定端口恢复接收数据 抛弃相关数据包
+	 * 
+	 * @param host
+	 * @param port
+	 */
+	public void resumeRecevice(String host, int port) {
+		if (UdpUtil.createKey(host, port) != null)
+			map.get(UdpUtil.createKey(host, port)).setReceviceable(true);
+		else
+			System.err.println("resume_不存在" + host + "和端口" + port);
 	}
 
 	/**
@@ -124,12 +164,25 @@ public class UdpManager {
 	}
 
 	/**
-	 * 关闭所有监听线程
+	 * 关闭指定监听线程
 	 * 
 	 * @param port
 	 */
 	public void stopRecevice(int port) {
-		map.get(port).close();
+		stopRecevice("127.0.0.1", port);
+	}
+
+	/**
+	 * 关闭指定监听线程
+	 * 
+	 * @param host
+	 * @param port
+	 */
+	public void stopRecevice(String host, int port) {
+		if (UdpUtil.createKey(host, port) != null)
+			map.get(UdpUtil.createKey(host, port)).close();
+		else
+			System.err.println("stop_不存在" + host + "和端口" + port);
 	}
 
 	/**
