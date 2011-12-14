@@ -4,7 +4,6 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-
 import java.io.InputStream;
 import java.util.Arrays;
 import java.util.List;
@@ -14,8 +13,8 @@ import org.apache.commons.net.ftp.FTPClientConfig;
 import org.apache.commons.net.ftp.FTPFile;
 import org.apache.commons.net.ftp.FTPListParseEngine;
 import org.apache.commons.net.ftp.FTPReply;
+import org.dom4j.Document;
 import org.dom4j.Element;
-
 
 import com.shine.framework.core.util.XmlUitl;
 
@@ -502,7 +501,8 @@ public class FtpHelper {
 		Element rootElement = xu.getRootElement("root", data);
 		xu.createXMLDirectory(this, rootElement,xpath);
 		this.xmlPath = xpath ;
-		return null;
+		Document document = xu.getDocument();
+		return XmlUitl.doc2String(document);
 	}
 	
 	/**
@@ -518,7 +518,8 @@ public class FtpHelper {
 		Element rootElement = xu.getRootElement("dir", data);
 		xu.createXMLDirectoryWithRemotePath(this, remotePath, rootElement, xpath);
 		this.xmlPath = xpath;
-		return null;
+		Document document = xu.getDocument();
+		return XmlUitl.doc2String(document);
 	}	
 	
 	/**
@@ -615,7 +616,7 @@ public class FtpHelper {
 			FtpHelper fu = new FtpHelper("192.168.2.18", 21, "administrator","sunshine");
 			fu.connectFTPServer();
 			//fu.getFTPFileStructureXMLToString(tt);
-			fu.getFTPFileStructureXMLToString("/ftp", tt);
+			System.out.println(fu.getFTPFileStructureXMLToString("/", tt));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
