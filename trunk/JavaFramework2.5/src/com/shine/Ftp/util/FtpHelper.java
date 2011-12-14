@@ -42,6 +42,11 @@ public class FtpHelper {
 	 * XML路径
 	 */
 	private String xmlPath=null ;
+	
+	/**
+	 * 响应时间
+	 */
+	private long responseTime;
 
 	public FtpHelper(String server, int port, String uname,
 			String password){
@@ -64,6 +69,7 @@ public class FtpHelper {
 	 * @throws Exception
 	 */
 	public FTPClient connectFTPServer() throws Exception {
+		long start = System.currentTimeMillis();
 		try {
 			ftp.configure(getFTPClientConfig());
 			ftp.connect(this.server, this.port);
@@ -90,6 +96,8 @@ public class FtpHelper {
 				throw new Exception("登录FTP服务器失败,请检查![Server:" + server + "、"
 						+ "User:" + uname + "、" + "Password:" + password);
 			} else {
+				long end = System.currentTimeMillis();
+				responseTime = end-start;
 				return ftp;
 			}
 		} catch (Exception e) {
@@ -523,6 +531,15 @@ public class FtpHelper {
 	}	
 	
 	/**
+	 * 
+	 * @return
+	 */
+	public boolean ftpServerIsconnect(){
+	
+		return this.ftp.isConnected();
+	}
+	
+	/**
 	 * 关闭FTP连接
 	 * 
 	 * @param ftp
@@ -576,6 +593,10 @@ public class FtpHelper {
 	public String getXmlPath() {
 		return xmlPath;
 	}
+	
+	public long getResponseTime() {
+		return responseTime;
+	}
 	/**
 	 * Set Attribute Method
 	 * 
@@ -611,8 +632,9 @@ public class FtpHelper {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		//String tt = "src/com/shine/Ftp/config/dir.xml";
+		
 		//try {
+		    //String tt = "src/com/shine/Ftp/config/dir.xml";
 			//FtpHelper fu = new FtpHelper("192.168.2.18", 21, "administrator","sunshine");
 			//fu.connectFTPServer();
 			//fu.getFTPFileStructureXMLToString(tt);
