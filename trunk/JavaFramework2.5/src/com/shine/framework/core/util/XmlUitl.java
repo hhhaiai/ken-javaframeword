@@ -27,6 +27,7 @@ import org.dom4j.io.XMLWriter;
  * @project JavaFramework 1.0 2010-12-03
  */
 public class XmlUitl {
+
 	// 递归用的遍历结果列表
 	private List<Element> elementList = null;
 
@@ -356,13 +357,13 @@ public class XmlUitl {
 	 * 创建节点(SNMP采集)
 	 * 
 	 */
-	public static void createSubElement(String xmlPath,
-			String ip, int port, String vstr, int version) throws Exception {
+	public static void createSubElement(String xmlPath, String ip, int port,
+			String vstr, int version) throws Exception {
 		Document document = getFileDocument(xmlPath);
 		Element rootElement = document.getRootElement();
-		rootElement.addElement("snmpv").addAttribute("ip", ip)
-				.addAttribute("port", "" + port).addAttribute("vstr", vstr)
-				.addAttribute("version", "" + version);
+		rootElement.addElement("snmpv").addAttribute("ip", ip).addAttribute(
+				"port", "" + port).addAttribute("vstr", vstr).addAttribute(
+				"version", "" + version);
 		saveAndFormatXML(document, xmlPath);
 	}
 
@@ -402,9 +403,12 @@ public class XmlUitl {
 	 */
 	public static void saveAndFormatXML(Document document, String xmlPath)
 			throws Exception {
-		XMLWriter writer = new XMLWriter(new FileWriter(xmlPath));
-		writer.write(document);
-		writer.close();
+		XMLWriter output = new XMLWriter();
+		// 输出格式化
+		OutputFormat format = OutputFormat.createPrettyPrint();
+		output = new XMLWriter(new FileWriter(xmlPath), format);
+		output.write(document);
+		output.close();
 	}
 
 	/**
@@ -417,20 +421,57 @@ public class XmlUitl {
 		Element rootElement = getRootElement(xmlPath);
 		Element element = (Element) rootElement
 				.selectSingleNode("//snmpvs/snmpv[@ip='" + ip + "']");
-		if(element!=null){
+		if (element != null) {
 			return true;
 		}
 		return false;
 	}
 
+	/**
+	 * 创建XML文件
+	 * 
+	 * @return
+	 */
+	public static Document createDocument() {
+
+		return DocumentHelper.createDocument();
+	}
+
+	/**
+	 * 【创建根节点】
+	 * 
+	 * @param document
+	 * @param rootName
+	 * @param data(属性)
+	 * @return
+	 */
+	public static Element createRootElement(Document document, String rootName,
+			String data[][]) {
+
+		return addorEditAttribute(document.addElement(rootName), data);
+	}
+
+	/**
+	 * 【添加节点】并初始化属性,文本值
+	 * @param element(父节点) 
+	 * @param elementName
+	 * @param data(属性)
+	 * @param text
+	 * @return
+	 */
+	public static Element addElement(Element element,String elementName,String[][] data,String text){
+		
+		Element newElement = addorEditAttribute(element.addElement(elementName),data);
+		if(text!=null)
+			newElement.setText(text);
+		return newElement;
+	}
+		
 	public static void main(String args[]) {
 		try {
-			 String[] str = { "192.168.1.1", "162",
-			 "com.shine.framework.core.util.SnmpHelper", "100" };
-			 XmlUitl
-			 .modifyXml(
-			 "src/com/shine/SnmpPool/config/snmpv.xml",
-			 str);
+			String[] str = { "192.168.1.1", "162",
+					"com.shine.framework.core.util.SnmpHelper", "100" };
+			XmlUitl.modifyXml("src/com/shine/SnmpPool/config/snmpv.xml", str);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
