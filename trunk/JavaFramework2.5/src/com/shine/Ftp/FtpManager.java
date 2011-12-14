@@ -50,7 +50,7 @@ public class FtpManager {
 	 */
 	private String getFtpPoolKey(String ip, int port){
 		
-		return new StringBuffer("ip").append(port).toString();
+		return new StringBuffer(ip).append(port).toString();
 	}
 	
 	/**
@@ -218,6 +218,7 @@ public class FtpManager {
 		    }
 			//启动连接FTP服务器
 			ftpHelper.connectFTPServer();
+			
 			if(ftpHelper.getXmlPath()==null){
 				xPath = XMLPATH+key+".xml";
 				return ftpHelper.getFTPFileStructureXMLToString(folderPath, xPath);
