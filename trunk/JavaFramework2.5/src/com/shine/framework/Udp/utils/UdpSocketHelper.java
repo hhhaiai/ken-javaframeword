@@ -232,6 +232,19 @@ public class UdpSocketHelper {
 		}
 	}
 
+	/**
+	 * 获取key
+	 * 
+	 * @return
+	 */
+	public String getKey() {
+		if (socketAddress != null)
+			return UdpUtil.createKey(socketAddress.getAddress()
+					.getHostAddress(), socketAddress.getPort());
+		else
+			return null;
+	}
+
 	public boolean isReceviceable() {
 		return receviceable;
 	}
