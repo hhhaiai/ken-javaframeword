@@ -611,14 +611,14 @@ public class FtpHelper {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		String tt = "src/com/shine/Ftp/config/dir.xml";
-		try {
-			FtpHelper fu = new FtpHelper("192.168.2.18", 21, "administrator","sunshine");
-			fu.connectFTPServer();
+		//String tt = "src/com/shine/Ftp/config/dir.xml";
+		//try {
+			//FtpHelper fu = new FtpHelper("192.168.2.18", 21, "administrator","sunshine");
+			//fu.connectFTPServer();
 			//fu.getFTPFileStructureXMLToString(tt);
-			System.out.println(fu.getFTPFileStructureXMLToString("/", tt));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+			//System.out.println(fu.getFTPFileStructureXMLToString("/", tt));
+		//} catch (Exception e) {
+		//	e.printStackTrace();
+		//}
 	}
 }
