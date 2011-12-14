@@ -4,8 +4,7 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
-import java.io.IOException;
+
 import java.io.InputStream;
 import java.util.Arrays;
 import java.util.List;
@@ -15,10 +14,8 @@ import org.apache.commons.net.ftp.FTPClientConfig;
 import org.apache.commons.net.ftp.FTPFile;
 import org.apache.commons.net.ftp.FTPListParseEngine;
 import org.apache.commons.net.ftp.FTPReply;
-import org.dom4j.Document;
 import org.dom4j.Element;
-import org.dom4j.io.OutputFormat;
-import org.dom4j.io.XMLWriter;
+
 
 import com.shine.framework.core.util.XmlUitl;
 
@@ -41,11 +38,6 @@ public class FtpHelper {
 	 * 连接端口，默认21
 	 */
 	private int port = 21;
-	
-	/**
-	 * 文件目录结构
-	 */
-	private Document document ;
 	
 	/**
 	 * XML路径
@@ -437,7 +429,7 @@ public class FtpHelper {
 	}
 
 	/**
-	 * 删除目录
+	 * 删除目录(目录为空)
 	 * @param remoteFoldPath
 	 * @return
 	 * @throws Exception
@@ -448,7 +440,7 @@ public class FtpHelper {
 	}
 
 	/**
-	 * 删除目录以及文件
+	 * 删除目录以及子文件
 	 * 
 	 * @param remoteFoldPath
 	 * @return
@@ -476,8 +468,8 @@ public class FtpHelper {
 		}
 		if (!success)
 			return false;
-		success = deleteFold(remoteFoldPath);
-		return success;
+		
+		return deleteFold(remoteFoldPath);
 	}
 
 	/**
@@ -496,42 +488,38 @@ public class FtpHelper {
 			flag = true;
 		}
 		return flag;
-	}
-	
+	}	
 	
 	/**
-	 * 创建XML文档，并初始化根节点
-	 * @param rootName
-	 * @param data
+	 * FTP服务器文件目录结构(默认FTP根目录)
+	 * @param xpath(存取XML路径)
 	 * @return
+	 * @throws Exception
 	 */
-	public Element getRootElement(){
-		String[][] data={{"name","path"},{"ftproot","/"}}; 
-		document = XmlUitl.createDocument() ;
-		return XmlUitl.createRootElement(document,"root",data);
+	public String getFTPFileStructureXMLToString(String xpath) throws Exception{
+		XmlUitl xu = new XmlUitl();
+		String[][] data = {{"name","path"},{"ftproot","/"}};
+		Element rootElement = xu.getRootElement("root", data);
+		xu.createXMLDirectory(this, rootElement,xpath);
+		this.xmlPath = xpath ;
+		return null;
 	}
 	
 	/**
-	 * 生成目录XML文件
+	 * FTP服务器文件目录结构
+	 * @param remotePath(Ftp路径)
+	 * @param xpath(存取XML路径)
+	 * @return
+	 * @throws Exception
 	 */
-	public void createDirectoryXML(String remotePath,Element rootElement,String xmlPath) throws Exception{
-
-		List<FTPFile> list = this.getFileList();
-		for(FTPFile ftpfile:list){
-			String newRemotePath = remotePath+ftpfile.getName();
-			if(ftpfile.isDirectory()){
-				String[][] data={{"name","path"},{ftpfile.getName(),newRemotePath}};
-				Element dirElement= XmlUitl.addElement(rootElement,"dir",data,null);			
-				this.changeDirectory(newRemotePath); //从根目录开始
-				createDirectoryXML(newRemotePath,dirElement,xmlPath);
-			}else{
-				String[][] data={{"path"},{newRemotePath}};
-				XmlUitl.addElement(rootElement,"file", data,ftpfile.getName()) ;
-			}
-		}
-		//保存XML文件
-		XmlUitl.saveAndFormatXML(document, xmlPath);
-	}
+	public String getFTPFileStructureXMLToString(String remotePath,String xpath) throws Exception{
+		XmlUitl xu = new XmlUitl();
+		String[][] data = {{"name","path"},{remotePath,remotePath}};
+		Element rootElement = xu.getRootElement("dir", data);
+		xu.createXMLDirectoryWithRemotePath(this, remotePath, rootElement, xpath);
+		this.xmlPath = xpath;
+		return null;
+	}	
 	
 	/**
 	 * 关闭FTP连接
@@ -584,6 +572,9 @@ public class FtpHelper {
 		return port;
 	}
 
+	public String getXmlPath() {
+		return xmlPath;
+	}
 	/**
 	 * Set Attribute Method
 	 * 
@@ -608,6 +599,9 @@ public class FtpHelper {
 		this.port = port;
 	}
 
+	public void setXmlPath(String xmlPath) {
+		this.xmlPath = xmlPath;
+	}
 	/**
 	 * 主方法(测试)
 	 * 
@@ -620,10 +614,10 @@ public class FtpHelper {
 		try {
 			FtpHelper fu = new FtpHelper("192.168.2.18", 21, "administrator","sunshine");
 			fu.connectFTPServer();
-			Element rooElement = fu.getRootElement();
-			fu.createDirectoryXML("/",rooElement,tt);
+			//fu.getFTPFileStructureXMLToString(tt);
+			fu.getFTPFileStructureXMLToString("/ftp", tt);
 		} catch (Exception e) {
-			System.out.println("异常信息：" + e.getMessage());
+			e.printStackTrace();
 		}
 	}
 }
