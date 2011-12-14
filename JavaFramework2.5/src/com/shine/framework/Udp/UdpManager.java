@@ -196,7 +196,22 @@ public class UdpManager {
 	 */
 	public void send(int port, String ip, int recevicePort, String data)
 			throws IOException {
-		map.get(port).send(ip, recevicePort, data);
+		send("127.0.0.1", port, ip, recevicePort, data);
+	}
+
+	/**
+	 * 发送udp数据包
+	 * 
+	 * @param host
+	 * @param port
+	 * @param ip
+	 * @param recevicePort
+	 * @param data
+	 * @throws IOException
+	 */
+	public void send(String host, int port, String ip, int recevicePort,
+			String data) throws IOException {
+		map.get(UdpUtil.createKey(host, port)).send(ip, recevicePort, data);
 	}
 
 	/**
