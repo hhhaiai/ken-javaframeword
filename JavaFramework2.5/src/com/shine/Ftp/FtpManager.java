@@ -259,8 +259,9 @@ public class FtpManager {
 	public static void main(String args[]){
 		FtpManager fm = FtpManager.getManager();
 		fm.addFtpClient("192.168.2.18", 21, "administrator", "sunshine");
-		fm.dir("192.168.2.18", 21);
-		System.out.println("响应时间："+fm.responseTimes("192.168.2.18", 21));
+		//fm.dir("192.168.2.18", 21);
+		fm.dir("192.168.2.18", 21,"ftp");
+		System.out.println("响应时间："+fm.responseTimes("192.168.2.18", 21)+" ms");
 	}
 	
 }
