@@ -15,7 +15,7 @@
 	<classpathentry kind="lib" path="lib/commons-io-1.3.2.jar"/>
 	<classpathentry kind="lib" path="lib/commons-lang-2.4.jar"/>
 	<classpathentry kind="lib" path="lib/commons-logging.jar"/>
-	<classpathentry kind="lib" path="lib/commons-net-2.2.jar"/>
+	<classpathentry kind="lib" path="lib/commons-net-2.2.jar" sourcepath="C:/Users/123/.m2/repository/commons-net/commons-net/2.2/commons-net-2.2-sources.jar"/>
 	<classpathentry kind="lib" path="lib/csvjdbc.jar"/>
 	<classpathentry kind="lib" path="lib/dom4j-1.6.1.jar"/>
 	<classpathentry kind="lib" path="lib/edtftpj.jar"/>
@@ -68,6 +68,7 @@
 	<classpathentry kind="lib" path="lib/yuicompressor-2.4.6.jar"/>
 	<classpathentry kind="lib" path="lib/DdlUtils-1.0.jar"/>
 	<classpathentry kind="lib" path="lib/snmp4j-1.10.2.jar"/>
+	<classpathentry kind="lib" path="lib/jave-1.0.2.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
