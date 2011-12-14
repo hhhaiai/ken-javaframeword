@@ -238,16 +238,29 @@ public class FtpManager {
 	 * 
 	 * @return
 	 */
-	public int responseTimes(String ip, int port) {
-		
-		
+	public long responseTimes(String ip, int port) {
+		String key = getFtpPoolKey(ip,port);
+		try{
+			FtpHelper ftpHelper = this.ftpPool.getFtpHelperByKey(key);
+			if(ftpHelper==null){
+				System.out.println("池中不存在["+key+"]FTP客户端");
+				return 0;
+		    }
+			if(ftpHelper.ftpServerIsconnect()){
+				return ftpHelper.getResponseTime();
+			}else{
+				System.out.println("FTP客户端未连接服务器！");
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 		return 0;
 	}
 	public static void main(String args[]){
 		FtpManager fm = FtpManager.getManager();
 		fm.addFtpClient("192.168.2.18", 21, "administrator", "sunshine");
-		
-		System.out.println(fm.dir("192.168.2.18", 21));
+		fm.dir("192.168.2.18", 21);
+		System.out.println("响应时间："+fm.responseTimes("192.168.2.18", 21));
 	}
 	
 }
