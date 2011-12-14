@@ -41,7 +41,7 @@ public class FtpHelper {
 	/**
 	 * XML路径
 	 */
-	private String xmlPath ;
+	private String xmlPath=null ;
 
 	public FtpHelper(String server, int port, String uname,
 			String password){
