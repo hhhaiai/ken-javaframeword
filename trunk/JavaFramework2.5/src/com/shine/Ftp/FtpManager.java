@@ -19,6 +19,10 @@ public class FtpManager {
 	
 	private static final String XMLPATH="src/com/shine/Ftp/config/";
 
+	private FtpManager(){
+		
+	}
+	
 	public static FtpManager getManager() {
 		if (manager == null)
 			manager = new FtpManager();
@@ -174,8 +178,15 @@ public class FtpManager {
 		String xPath = "";
 		try{
 			FtpHelper ftpHelper = this.ftpPool.getFtpHelperByKey(key);
+			if(ftpHelper==null){
+				System.out.println("池中不存在["+key+"]FTP客户端");
+				return null;
+		    }
+			//启动连接FTP服务器
+			ftpHelper.connectFTPServer();
+			
 			if(ftpHelper.getXmlPath()==null){
-				xPath = XMLPATH+".xml";
+				xPath = XMLPATH+key+".xml";
 				return ftpHelper.getFTPFileStructureXMLToString(xPath);
 			}else{
 				xPath = ftpHelper.getXmlPath();
@@ -201,8 +212,14 @@ public class FtpManager {
 		String xPath = "";
 		try{
 			FtpHelper ftpHelper = this.ftpPool.getFtpHelperByKey(key);
+			if(ftpHelper==null){
+				System.out.println("池中不存在["+key+"]FTP客户端");
+				return null;
+		    }
+			//启动连接FTP服务器
+			ftpHelper.connectFTPServer();
 			if(ftpHelper.getXmlPath()==null){
-				xPath = XMLPATH+".xml";
+				xPath = XMLPATH+key+".xml";
 				return ftpHelper.getFTPFileStructureXMLToString(folderPath, xPath);
 			}else{
 				xPath = ftpHelper.getXmlPath();
@@ -226,7 +243,10 @@ public class FtpManager {
 		return 0;
 	}
 	public static void main(String args[]){
+		FtpManager fm = FtpManager.getManager();
+		fm.addFtpClient("192.168.2.18", 21, "administrator", "sunshine");
 		
+		System.out.println(fm.dir("192.168.2.18", 21));
 	}
 	
 }
