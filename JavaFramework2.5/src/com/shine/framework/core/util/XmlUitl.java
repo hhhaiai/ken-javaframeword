@@ -492,6 +492,28 @@ public class XmlUitl {
 	}	
 	
 	/**
+	 * XML转String
+	 * @param xmlPath(XML路径)
+	 * @return
+	 */
+	public static String doc2String(String xmlPath) {
+		String s = "";
+		try {
+			Document document = getFileDocument(xmlPath);
+			// 使用输出流来进行转化
+			ByteArrayOutputStream out = new ByteArrayOutputStream();
+			// 使用UTF-8编码
+			OutputFormat format = new OutputFormat("   ", true, "UTF-8");
+			XMLWriter writer = new XMLWriter(out, format);
+			writer.write(document);
+			s = out.toString("UTF-8");
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return s;
+	}	
+	
+	/**
 	 * 生成目录XML文件
 	 * @param ftpHelper
 	 * @param remotePath(指定FTP路径)
@@ -520,7 +542,7 @@ public class XmlUitl {
 		}
 		XmlUitl.saveAndFormatXML(this.document, xmlPath);
 	}
-	
+
 	/**
 	 * 生成目录XML文件(默认FTP根目录)
 	 * @param ftpHelper
