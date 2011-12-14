@@ -2,6 +2,7 @@ package com.shine.Ftp;
 
 import com.shine.Ftp.util.FtpHelper;
 import com.shine.Ftp.util.FtpPool;
+import com.shine.framework.core.util.XmlUitl;
 
 /**
  * 
@@ -15,6 +16,8 @@ public class FtpManager {
 	private static FtpManager manager = null;
 
 	private FtpPool ftpPool = new FtpPool();
+	
+	private static final String XMLPATH="src/com/shine/Ftp/config/";
 
 	public static FtpManager getManager() {
 		if (manager == null)
@@ -168,9 +171,19 @@ public class FtpManager {
 	public String dir(String ip, int port) {
 		
 		String key = getFtpPoolKey(ip,port);
-		FtpHelper ftpHelper = this.ftpPool.getFtpHelperByKey(key);
-		
-		
+		String xPath = "";
+		try{
+			FtpHelper ftpHelper = this.ftpPool.getFtpHelperByKey(key);
+			if(ftpHelper.getXmlPath()==null){
+				xPath = XMLPATH+".xml";
+				return ftpHelper.getFTPFileStructureXMLToString(xPath);
+			}else{
+				xPath = ftpHelper.getXmlPath();
+				return XmlUitl.doc2String(xPath);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 		return null;
 	}
 
@@ -184,6 +197,20 @@ public class FtpManager {
 	 */
 	public String dir(String ip, int port, String folderPath) {
 		
+		String key = getFtpPoolKey(ip,port);
+		String xPath = "";
+		try{
+			FtpHelper ftpHelper = this.ftpPool.getFtpHelperByKey(key);
+			if(ftpHelper.getXmlPath()==null){
+				xPath = XMLPATH+".xml";
+				return ftpHelper.getFTPFileStructureXMLToString(folderPath, xPath);
+			}else{
+				xPath = ftpHelper.getXmlPath();
+				return XmlUitl.doc2String(xPath);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}	
 		
 		return null;
 	}
@@ -196,7 +223,10 @@ public class FtpManager {
 	public int responseTimes(String ip, int port) {
 		
 		
-		
 		return 0;
 	}
+	public static void main(String args[]){
+		
+	}
+	
 }
