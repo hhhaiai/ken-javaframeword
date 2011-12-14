@@ -632,7 +632,6 @@ public class FtpHelper {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		
 		//try {
 		    //String tt = "src/com/shine/Ftp/config/dir.xml";
 			//FtpHelper fu = new FtpHelper("192.168.2.18", 21, "administrator","sunshine");
