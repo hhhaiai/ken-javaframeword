@@ -16,10 +16,11 @@ import org.apache.commons.net.ftp.FTPFile;
 import org.apache.commons.net.ftp.FTPListParseEngine;
 import org.apache.commons.net.ftp.FTPReply;
 import org.dom4j.Document;
-import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
 import org.dom4j.io.OutputFormat;
 import org.dom4j.io.XMLWriter;
+
+import com.shine.framework.core.util.XmlUitl;
 
 public class FtpHelper {
 
@@ -40,6 +41,16 @@ public class FtpHelper {
 	 * 连接端口，默认21
 	 */
 	private int port = 21;
+	
+	/**
+	 * 文件目录结构
+	 */
+	private Document document ;
+	
+	/**
+	 * XML路径
+	 */
+	private String xmlPath ;
 
 	public FtpHelper(String server, int port, String uname,
 			String password){
@@ -487,45 +498,39 @@ public class FtpHelper {
 		return flag;
 	}
 	
-	private Document document ;
 	
-	public Element getCurrentElement(){
-		document = DocumentHelper.createDocument();
-		return document.addElement("root");
+	/**
+	 * 创建XML文档，并初始化根节点
+	 * @param rootName
+	 * @param data
+	 * @return
+	 */
+	public Element getRootElement(){
+		String[][] data={{"name","path"},{"ftproot","/"}}; 
+		document = XmlUitl.createDocument() ;
+		return XmlUitl.createRootElement(document,"root",data);
 	}
+	
 	/**
 	 * 生成目录XML文件
 	 */
-	public void createDirectoryXML(String remotePath,Element fatherElement) throws Exception{
+	public void createDirectoryXML(String remotePath,Element rootElement,String xmlPath) throws Exception{
 
 		List<FTPFile> list = this.getFileList();
 		for(FTPFile ftpfile:list){
-			Element currentElement = fatherElement; //当前的目录节点
 			String newRemotePath = remotePath+ftpfile.getName();
 			if(ftpfile.isDirectory()){
-				Element dirElement = fatherElement.addElement("dir") ;
-				dirElement.addAttribute("name",ftpfile.getName());
-				currentElement = dirElement;
+				String[][] data={{"name","path"},{ftpfile.getName(),newRemotePath}};
+				Element dirElement= XmlUitl.addElement(rootElement,"dir",data,null);			
 				this.changeDirectory(newRemotePath); //从根目录开始
-				createDirectoryXML(newRemotePath,dirElement);
+				createDirectoryXML(newRemotePath,dirElement,xmlPath);
 			}else{
-				 Element fileElement = fatherElement.addElement("file");//文件节点
-				 fileElement.setText(ftpfile.getName()) ;
+				String[][] data={{"path"},{newRemotePath}};
+				XmlUitl.addElement(rootElement,"file", data,ftpfile.getName()) ;
 			}
 		}
-	}
-	
-	public void saveXML(){
-		XMLWriter output = new XMLWriter();
-        //输出格式化
-        OutputFormat format = OutputFormat.createPrettyPrint();
-        try {
-            output = new XMLWriter(new FileWriter("src/com/shine/Ftp/config/dir.xml"), format);
-            output.write(this.document);
-            output.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+		//保存XML文件
+		XmlUitl.saveAndFormatXML(document, xmlPath);
 	}
 	
 	/**
@@ -611,12 +616,12 @@ public class FtpHelper {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		String tt = "src/com/shine/Ftp/config/dir.xml";
 		try {
 			FtpHelper fu = new FtpHelper("192.168.2.18", 21, "administrator","sunshine");
 			fu.connectFTPServer();
-			Element fatherElement = fu.getCurrentElement();
-			fu.createDirectoryXML("/", fatherElement);
-			fu.saveXML();
+			Element rooElement = fu.getRootElement();
+			fu.createDirectoryXML("/",rooElement,tt);
 		} catch (Exception e) {
 			System.out.println("异常信息：" + e.getMessage());
 		}
