@@ -36,6 +36,14 @@ public class XmlUitl {
 	// 递归用的遍历结果列表
 	private List<Element> elementList = null;
 
+	public Document getDocument() {
+		return document;
+	}
+
+	public void setDocument(Document document) {
+		this.document = document;
+	}
+
 	public List<Element> getElementList() {
 		return elementList;
 	}
@@ -481,7 +489,7 @@ public class XmlUitl {
 	public Element getRootElement(String rootName,String data[][]){
 		document = XmlUitl.createDocument() ;
 		return XmlUitl.createRootElement(document,rootName,data);
-	}
+	}	
 	
 	/**
 	 * 生成目录XML文件
