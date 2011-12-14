@@ -33,6 +33,7 @@ public class FtpManager {
 	 * FTP客户端【加入池中】
 	 * @param ip
 	 * @param port
+	 * 
 	 * @param name
 	 * @param password
 	 */
