@@ -418,4 +418,32 @@ public class DataUtil {
 				* Math.random()) / 10) * 100)) / 100;
 	}
 
+	/**
+	 * 打乱正常的数字队列
+	 * 
+	 * @param list
+	 * @return
+	 */
+	public static List<Integer> randomList(List<Integer> list) {
+		List<Integer> resultList = new ArrayList<Integer>();
+		int num = list.size();
+		for (int i = 0; i < num; i++) {
+			resultList.add(list.remove(genRandom(0, list.size())));
+		}
+		return resultList;
+	}
+
+	public static void main(String args[]) {
+		List<Integer> list = new ArrayList<Integer>();
+		list.add(1);
+		list.add(2);
+		list.add(3);
+		list.add(4);
+
+		List<Integer> resultList = randomList(list);
+		for (int num : resultList) {
+			System.out.println(num);
+		}
+	}
+
 }
