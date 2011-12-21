@@ -16,21 +16,22 @@ public class FtpManager {
 	private static FtpManager manager = null;
 
 	private FtpPool ftpPool = new FtpPool();
-	
-	private static final String XMLPATH="src/com/shine/Ftp/config/";
 
-	private FtpManager(){
-		
+	private static final String XMLPATH = "src/com/shine/Ftp/config/";
+
+	private FtpManager() {
+
 	}
-	
+
 	public static FtpManager getManager() {
 		if (manager == null)
 			manager = new FtpManager();
 		return manager;
 	}
-	
+
 	/**
 	 * FTP客户端【加入池中】
+	 * 
 	 * @param ip
 	 * @param port
 	 * 
@@ -39,29 +40,29 @@ public class FtpManager {
 	 */
 	public void addFtpClient(String ip, int port, String name, String password) {
 		FtpHelper ftpHelper = new FtpHelper(ip, port, name, password);
-		String key = getFtpPoolKey(ip,port);
+		String key = getFtpPoolKey(ip, port);
 		this.ftpPool.addFtpHelper(key, ftpHelper);
 	}
-	
+
 	/**
-	 * 组装Key【IP+PORT】
+	 * 组装Key【IP+_+PORT】
+	 * 
 	 * @param ip
 	 * @param port
 	 * @return
 	 */
-	private String getFtpPoolKey(String ip, int port){
-		
-		return new StringBuffer(ip).append(port).toString();
+	private String getFtpPoolKey(String ip, int port) {
+		return new StringBuffer(ip).append("_").append(port).toString();
 	}
-	
+
 	/**
 	 * 从池中【删除FTP客户端】
+	 * 
 	 * @param ip
 	 * @param port
 	 */
 	public void deleteFtpClient(String ip, int port) {
-		
-		String key = getFtpPoolKey(ip,port);
+		String key = getFtpPoolKey(ip, port);
 		this.ftpPool.remove(key);
 	}
 
@@ -74,7 +75,7 @@ public class FtpManager {
 	 * @return
 	 */
 	public boolean uploadFile(String ip, int port, String filePath) {
-		
+
 		return false;
 	}
 
@@ -174,26 +175,25 @@ public class FtpManager {
 	 * @return
 	 */
 	public String dir(String ip, int port) {
-		
-		String key = getFtpPoolKey(ip,port);
+		String key = getFtpPoolKey(ip, port);
 		String xPath = "";
-		try{
+		try {
 			FtpHelper ftpHelper = this.ftpPool.getFtpHelperByKey(key);
-			if(ftpHelper==null){
-				System.out.println("池中不存在["+key+"]FTP客户端");
+			if (ftpHelper == null) {
+				System.out.println("池中不存在[" + key + "]FTP客户端");
 				return null;
-		    }
-			//启动连接FTP服务器
+			}
+			// 启动连接FTP服务器
 			ftpHelper.connectFTPServer();
-			
-			if(ftpHelper.getXmlPath()==null){
-				xPath = XMLPATH+key+".xml";
+
+			if (ftpHelper.getXmlPath() == null) {
+				xPath = XMLPATH + key + ".xml";
 				return ftpHelper.getFTPFileStructureXMLToString(xPath);
-			}else{
+			} else {
 				xPath = ftpHelper.getXmlPath();
 				return XmlUitl.doc2String(xPath);
 			}
-		}catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
@@ -208,29 +208,30 @@ public class FtpManager {
 	 * @return
 	 */
 	public String dir(String ip, int port, String folderPath) {
-		
-		String key = getFtpPoolKey(ip,port);
+
+		String key = getFtpPoolKey(ip, port);
 		String xPath = "";
-		try{
+		try {
 			FtpHelper ftpHelper = this.ftpPool.getFtpHelperByKey(key);
-			if(ftpHelper==null){
-				System.out.println("池中不存在["+key+"]FTP客户端");
+			if (ftpHelper == null) {
+				System.out.println("池中不存在[" + key + "]FTP客户端");
 				return null;
-		    }
-			//启动连接FTP服务器
+			}
+			// 启动连接FTP服务器
 			ftpHelper.connectFTPServer();
-			
-			if(ftpHelper.getXmlPath()==null){
-				xPath = XMLPATH+key+".xml";
-				return ftpHelper.getFTPFileStructureXMLToString(folderPath, xPath);
-			}else{
+
+			if (ftpHelper.getXmlPath() == null) {
+				xPath = XMLPATH + key + ".xml";
+				return ftpHelper.getFTPFileStructureXMLToString(folderPath,
+						xPath);
+			} else {
 				xPath = ftpHelper.getXmlPath();
 				return XmlUitl.doc2String(xPath);
 			}
-		}catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
-		}	
-		
+		}
+
 		return null;
 	}
 
@@ -240,19 +241,19 @@ public class FtpManager {
 	 * @return
 	 */
 	public long responseTimes(String ip, int port) {
-		String key = getFtpPoolKey(ip,port);
-		try{
+		String key = getFtpPoolKey(ip, port);
+		try {
 			FtpHelper ftpHelper = this.ftpPool.getFtpHelperByKey(key);
-			if(ftpHelper==null){
-				System.out.println("池中不存在["+key+"]FTP客户端");
+			if (ftpHelper == null) {
+				System.out.println("池中不存在[" + key + "]FTP客户端");
 				return 0;
-		    }
-			if(ftpHelper.ftpServerIsconnect()){
+			}
+			if (ftpHelper.ftpServerIsconnect()) {
 				return ftpHelper.getResponseTime();
-			}else{
+			} else {
 				System.out.println("FTP客户端未连接服务器！");
 			}
-		}catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return 0;
