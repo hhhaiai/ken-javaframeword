@@ -8,6 +8,8 @@ import com.shine.framework.ThreadPoolUtil.model.FreeThreadModel;
 import com.shine.framework.ThreadPoolUtil.model.MonitorThreadModel;
 import com.shine.framework.ThreadPoolUtil.model.ThreadModel;
 import com.shine.framework.ThreadPoolUtil.util.FreeModelMap;
+import com.shine.framework.ThreadPoolUtil.util.MonitorControl;
+import com.shine.framework.ThreadPoolUtil.util.MonitorControlPool;
 import com.shine.framework.ThreadPoolUtil.util.SuperThread;
 import com.shine.framework.ThreadPoolUtil.util.ThreadPool;
 import com.shine.framework.core.util.DateUtil;
@@ -27,12 +29,14 @@ public class ThreadPoolManager {
 
 	private FreeModelMap map = new FreeModelMap();
 
-	// init thread pool size
-	private int initThreadPool = 2;
-	// max thread pool size
-	private int maxThreadPool = 100;
-	// 空闲线程
-	private int idleThreadPool = 10;
+	private MonitorControlPool monitorControlPool = new MonitorControlPool();
+
+	// // init thread pool size
+	// private int initThreadPool = 2;
+	// // max thread pool size
+	// private int maxThreadPool = 100;
+	// // 空闲线程
+	// private int idleThreadPool = 10;
 
 	public ThreadPoolManager() {
 	}
@@ -83,8 +87,11 @@ public class ThreadPoolManager {
 	 * @param maxThreadPool
 	 */
 	public void initFreeThreadPool(int initThreadPool, int maxThreadPool) {
-		this.initThreadPool = initThreadPool;
-		this.maxThreadPool = maxThreadPool;
+		MonitorControl control = new MonitorControl();
+		control.setInitThreadPool(initThreadPool);
+		control.setMaxThreadPool(maxThreadPool);
+		control.setIdleThreadPool(10);
+		monitorControlPool.put("freeThreadModel", control);
 		initFreeThreadPool();
 	}
 
@@ -92,7 +99,8 @@ public class ThreadPoolManager {
 	 * 初始化自由线程
 	 */
 	public void initFreeThreadPool() {
-		for (int i = 0; i < initThreadPool; i++) {
+		for (int i = 0; i < monitorControlPool
+				.getInitThreadPool("freeThreadModel"); i++) {
 			addFreeThread(i);
 		}
 	}
@@ -101,13 +109,15 @@ public class ThreadPoolManager {
 	 * 扩展自由线程
 	 */
 	public synchronized SuperThread incomeFreeThreadPool() {
-		if (initThreadPool < maxThreadPool) {
-			initThreadPool++;
-			addFreeThread(initThreadPool);
-			System.err.println("扩展自由线程线程数" + initThreadPool);
+		int size = getThreadSize("freeThreadModel");
+		if (size < monitorControlPool.getMaxThreadPool("freeThreadModel")) {
+			size++;
+			addFreeThread(size);
+			System.err.println("扩展自由线程线程数" + size);
 			return this.getIdleThread("freeThreadModel");
 		} else {
-			System.err.println("自由线程已经达到最大值" + maxThreadPool);
+			System.err.println("自由线程已经达到最大值"
+					+ monitorControlPool.getMaxThreadPool("freeThreadModel"));
 			return null;
 		}
 	}
@@ -222,6 +232,22 @@ public class ThreadPoolManager {
 			}
 		}
 		return false;
+	}
+
+	/**
+	 * 获取该线程的数量
+	 * 
+	 * @param type
+	 * @return
+	 */
+	public int getThreadSize(String type) {
+		int num = 0;
+		for (Map.Entry<String, SuperThread> entry : pool.entrySet()) {
+			if (entry.getValue().getType().equals(type)) {
+				num++;
+			}
+		}
+		return num;
 	}
 
 	/**
@@ -427,7 +453,7 @@ public class ThreadPoolManager {
 	 * @param type
 	 */
 	public synchronized void recoverIdleThreadModel(String type) {
-		recoverIdleThreadModel(type, idleThreadPool);
+		recoverIdleThreadModel(type, monitorControlPool.getIdleThreadPool(type));
 	}
 
 	/**
@@ -443,7 +469,8 @@ public class ThreadPoolManager {
 	 * 回收空闲线程
 	 */
 	public synchronized void recoverFreeIdleThreadModel() {
-		recoverIdleThreadModel("freeThreadModel", idleThreadPool);
+		recoverIdleThreadModel("freeThreadModel", monitorControlPool
+				.getIdleThreadPool("freeThreadModel"));
 	}
 
 	/**
@@ -472,22 +499,6 @@ public class ThreadPoolManager {
 
 	public void setMap(FreeModelMap map) {
 		this.map = map;
-	}
-
-	public int getInitThreadPool() {
-		return initThreadPool;
-	}
-
-	public void setInitThreadPool(int initThreadPool) {
-		this.initThreadPool = initThreadPool;
-	}
-
-	public int getMaxThreadPool() {
-		return maxThreadPool;
-	}
-
-	public void setMaxThreadPool(int maxThreadPool) {
-		this.maxThreadPool = maxThreadPool;
 	}
 
 }
