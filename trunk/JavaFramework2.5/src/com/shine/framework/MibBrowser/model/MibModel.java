@@ -1,5 +1,36 @@
 package com.shine.framework.MibBrowser.model;
 
-public class MibModel {
+import java.util.HashMap;
 
+public class MibModel {
+	private String oid;
+	private String name;
+	private String detail;
+//	private String syntax;
+//	private String access;
+//	private String status;
+//	private String defVal;
+//	private String indexes;
+//	/**
+//	 * 说明
+//	 */
+//	private String descr;
+	public String getOid() {
+		return oid;
+	}
+	public void setOid(String oid) {
+		this.oid = oid;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getDetail() {
+		return detail;
+	}
+	public void setDetail(String detail) {
+		this.detail = detail;
+	}
 }
