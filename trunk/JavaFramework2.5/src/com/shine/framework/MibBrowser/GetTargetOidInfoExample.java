@@ -5,6 +5,8 @@ import com.shine.framework.MibBrowser.model.MibModel;
 public class GetTargetOidInfoExample {
 
 	/**
+	 * 获取指定oid的信息
+	 * 
 	 * @param args
 	 */
 	public static void main(String[] args) {

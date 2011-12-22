@@ -7,6 +7,8 @@ import com.shine.framework.MibBrowser.model.MibModel;
 public class AllMibLogsExample {
 
 	/**
+	 * 获取指定文档的所有oid信息
+	 * 
 	 * @param args
 	 */
 	public static void main(String[] args) {
