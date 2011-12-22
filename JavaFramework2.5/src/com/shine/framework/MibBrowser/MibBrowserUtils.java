@@ -105,7 +105,7 @@ public class MibBrowserUtils {
 	 * @return
 	 */
 	public static MibModel getOidInfo(List<MibModel> list, String oid) {
-		System.out.println(list.size());
+		//System.out.println(list.size());
 		if(list==null)
 			return null;
 		for (MibModel mibModel : list) {
