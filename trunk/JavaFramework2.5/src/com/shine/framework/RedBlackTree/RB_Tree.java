@@ -11,7 +11,7 @@ public class RB_Tree {
 
 	// 建立二叉查找树
 	public RB_Tree(int[] ints) {
-		for (int i = 1; i < ints.length; i++)
+		for (int i = 0; i < ints.length; i++)
 			insert(ints[i]);
 	}
 
