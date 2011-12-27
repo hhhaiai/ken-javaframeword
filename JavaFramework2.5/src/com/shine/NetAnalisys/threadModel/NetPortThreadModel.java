@@ -6,12 +6,6 @@ import com.shine.NetAnalisys.util.PortScanUtil;
 import com.shine.framework.ThreadPoolUtil.model.MethodThreadModel;
 import com.shine.framework.core.util.ReflectionUtil;
 
-/**
- * 网络端口扫描线程
- * 
- * @author viruscodecn@gmail.com
- * 
- */
 public class NetPortThreadModel extends MethodThreadModel {
 	public NetPortThreadModel() {
 		super();

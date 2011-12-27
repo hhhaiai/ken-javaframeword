@@ -57,7 +57,18 @@ public class ThreadPoolManager {
 	 * 启动线程池
 	 */
 	public synchronized void startThreadPool() {
-		this.addThread(new MonitorThreadModel());
+		this.startThreadPool(true);
+	}
+	
+	/**
+	 * 启动线程池
+	 * 
+	 * @param isMonitor 是否开启监控线程
+	 */
+	public synchronized void startThreadPool(boolean isMonitor) {
+		if (isMonitor) {
+			this.addThread(new MonitorThreadModel());
+		}
 		if (!this.state) {
 			for (Map.Entry<String, SuperThread> entry : pool.entrySet()) {
 				entry.getValue().start();
