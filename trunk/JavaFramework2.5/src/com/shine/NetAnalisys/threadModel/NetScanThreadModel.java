@@ -23,7 +23,6 @@ public class NetScanThreadModel extends MethodThreadModel {
 	public void excute(Object... args) {
 		try {
 			if (args.length != 0) {
-				System.out.println("扫描ip"+(String) args[0]+"到"+(String) args[1]);
 				List<String> list = NetScanUtil.netScan((String) args[0],
 						(String) args[1]);
 				ReflectionUtil.invokeMethod(object, methodName, list);
