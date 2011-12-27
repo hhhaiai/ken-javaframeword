@@ -330,9 +330,9 @@ public class RB_Tree {
 	}
 
 	public static void main(String[] args) {
-		int[] E = { 2, 1, 3, 4 };
+		int[] E = { 2, 1, 3, 4, 8, 6, 7, 5, 0 };
 
-		for (int i = 0; i <4; i++) {
+		for (int i = 0; i < 9; i++) {
 			System.out.print(E[i] + ",");
 		}
 		System.out.println();
