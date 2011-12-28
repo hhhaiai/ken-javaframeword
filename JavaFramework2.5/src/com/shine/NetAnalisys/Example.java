@@ -5,7 +5,7 @@ import com.shine.NetAnalisys.model.NetScanCallBack;
 
 public class Example {
 	public static void main(String args[]) {
-		NetAnalisysManager.getManager().setNetScanSize(150);
+		NetAnalisysManager.getManager().setNetScanSize(10);
 		NetAnalisysManager.getManager().initThreadModel();
 		
 		long curTime = System.currentTimeMillis();
@@ -15,6 +15,8 @@ public class Example {
 			System.out.println("接收IP" + ip + "可ping通");
 		}
 		System.out.println("执行时间" + (System.currentTimeMillis() - curTime));
+		
+		
 //		NetPortCallBack netPortCB = new NetPortCallBack();
 //		NetAnalisysManager.getManager().startNetPort("127.0.0.1", 1, 65535, netPortCB, "callback");
 	}
