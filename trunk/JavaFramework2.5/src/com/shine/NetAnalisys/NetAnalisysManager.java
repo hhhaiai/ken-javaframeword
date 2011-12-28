@@ -19,7 +19,7 @@ public class NetAnalisysManager {
 	private static NetAnalisysManager manager = null;
 
 	private int netScanSize = 10;
-	
+
 	private int netPortSize = 10;
 
 	public static NetAnalisysManager getManager() {
@@ -29,13 +29,22 @@ public class NetAnalisysManager {
 	}
 
 	public void initThreadModel() {
+		initNetScanThreadModel();
+		initNetPortThreadModel();
+	}
+
+	public void initNetScanThreadModel() {
 		for (int i = 0; i < netScanSize; i++) {
 			addNetScanThreadModel(i);
 		}
+		ThreadPoolManager.getManager().startThreadPool();
+	}
+
+	public void initNetPortThreadModel() {
 		for (int i = 0; i < netPortSize; i++) {
 			addNetPortThreadModel(i);
 		}
-		ThreadPoolManager.getManager().startThreadPool(false);
+		ThreadPoolManager.getManager().startThreadPool();
 	}
 
 	private void addNetScanThreadModel(int i) {
@@ -52,9 +61,18 @@ public class NetAnalisysManager {
 		threadModel = null;
 	}
 
-	public void startNetScan(String startIp, String endIp, 
+	/**
+	 * 开始执行网络扫描
+	 * 
+	 * @param startIp
+	 * @param endIp
+	 * @param callback
+	 * @param methodName
+	 */
+	public void startNetScan(String startIp, String endIp,
 			NetAnalyzeCallBack callback, String methodName) {
-		List<String[]> ipRangeList = NetWorkUtil.seperateIpRange(startIp, endIp, 2);
+		List<String[]> ipRangeList = NetWorkUtil.seperateIpRange(startIp,
+				endIp, 2);
 		int index = 0;
 		callback.setAnalyzeFinished(false);
 		long firstTime = System.currentTimeMillis();
@@ -78,8 +96,8 @@ public class NetAnalisysManager {
 				}
 			}
 		}
-		while (ThreadPoolManager.getManager().
-				getIdleThreadSize("netScanThreadModel") != this.netScanSize) {
+		while (ThreadPoolManager.getManager().getIdleThreadSize(
+				"netScanThreadModel") != this.netScanSize) {
 			try {
 				Thread.sleep(500);
 			} catch (InterruptedException e) {
@@ -87,13 +105,23 @@ public class NetAnalisysManager {
 		}
 		callback.setAnalyzeFinished(true);
 		long passTime = System.currentTimeMillis() - firstTime;
-//		System.out.println("执行所需时间:" + passTime);
+		// System.out.println("执行所需时间:" + passTime);
 		// ThreadPoolManager.getManager().stopThreadPool();
 	}
 
-	public void startNetPort(String ip, int minPort, int maxPort, 
+	/**
+	 * 开始执行端口扫描
+	 * 
+	 * @param ip
+	 * @param minPort
+	 * @param maxPort
+	 * @param callback
+	 * @param methodName
+	 */
+	public void startNetPort(String ip, int minPort, int maxPort,
 			NetAnalyzeCallBack callback, String methodName) {
-		List<String[]> ipPortList = NetWorkUtil.seperateIpPort(ip, minPort, maxPort);
+		List<String[]> ipPortList = NetWorkUtil.seperateIpPort(ip, minPort,
+				maxPort);
 		int index = 0;
 		callback.setAnalyzeFinished(false);
 		while (index < ipPortList.size()) {
@@ -117,6 +145,14 @@ public class NetAnalisysManager {
 		callback.setAnalyzeFinished(true);
 	}
 
+	public void stopNetScanThread() {
+		ThreadPoolManager.getManager().stopThreadPool("netScanThreadModel");
+	}
+
+	public void stopNetPortThread() {
+		ThreadPoolManager.getManager().stopThreadPool("netPortThreadModel");
+	}
+
 	public int getNetScanSize() {
 		return netScanSize;
 	}
@@ -124,11 +160,11 @@ public class NetAnalisysManager {
 	public void setNetScanSize(int netScanSize) {
 		this.netScanSize = netScanSize;
 	}
-	
+
 	public int getNetPortSize() {
 		return netPortSize;
 	}
-	
+
 	public void setNetPortSize(int netPortSize) {
 		this.netPortSize = netPortSize;
 	}
