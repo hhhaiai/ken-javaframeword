@@ -137,7 +137,7 @@ tspan {
                                     <td colspan="3">
                                     <select id="statPeroid" name="statPeroid">
                                     <c:forEach var="periodList" items="${dto.statPeriodList}">
-                                    	<option value="<c:out value="${periodlist.key}"/>" 
+                                    	<option value="<c:out value="${periodList.key}"/>" 
                                         <c:if test="${periodList.key == dto.statPeroid}">selected="selected"</c:if>>
                                         	<c:out value="${periodList.value}"/>
                                         </option>
@@ -150,7 +150,7 @@ tspan {
                                     <td colspan="3">
                                     <select  name="topPageN" id="topPageN">
                                     <c:forEach var="pageList" items="${dto.topPageList}">
-                                    	<option value="<c:out value="${pagelist.key}"/>"
+                                    	<option value="<c:out value="${pageList.key}"/>"
                                         <c:if test="${pageList.value == dto.topPageN}">selected="selected"</c:if>>
                                         	<c:out value="${pageList.value}"/>
                                         </option>
@@ -193,11 +193,11 @@ tspan {
             <s:iterator value="#request.dbModels['ipSrc']" status="dbModel">
             <tr>
             	<td><s:property value="#dbModel.index + 1" /></td>
-            	<td><a href="#" onclick="showDetail('<s:property value="dbmodels['ipsrc'][#dbmodel.index]['src_ip']" />', 1);"><s:property value="dbModels['ipSrc'][#dbModel.index]['src_ip']" /></a></td>
+            	<td><a href="#" onclick="showDetail('<s:property value="dbModels['ipSrc'][#dbModel.index]['src_ip']" />', 1);"><s:property value="dbModels['ipSrc'][#dbModel.index]['src_ip']" /></a></td>
                 <td><s:property value="dbModels['ipSrc'][#dbModel.index]['format_bytes_total']" /></td>
-                <td><span ctype="ProgressBar" barskin="green" progress="<s:property value="dbmodels['ipsrc'][#dbmodel.index]['percentage']" />"></td>
+                <td><span ctype="ProgressBar" barskin="green" progress="<s:property value="dbModels['ipSrc'][#dbModel.index]['percentage']" />"></td>
                 <td></span><s:property value="dbModels['ipSrc'][#dbModel.index]['percentage']" />%</td>
-                <td><img style="cursor:pointer" height="14" width="14" src="${rootPath}resource/image/icons/trend.png" border="0" onclick="showFlowTrend('<s:property value="dbmodels['ipsrc'][#dbmodel.index]['src_ip']" />', 1)"></td>
+                <td><img style="cursor:pointer" height="14" width="14" src="${rootPath}resource/image/icons/trend.png" border="0" onclick="showFlowTrend('<s:property value="dbModels['ipSrc'][#dbModel.index]['src_ip']" />', 1)"></td>
             </tr>
             </s:iterator>
             </table>
@@ -224,14 +224,14 @@ tspan {
             <s:iterator value="#request.dbModels['ipDst']" status="dbModel">
             <tr>
             	<td><s:property value="#dbModel.index + 1" /></td>
-            	<td><a href="#" onclick="showDetail('<s:property value="dbmodels['ipdst'][#dbmodel.index]['dst_ip']" />', 2);"><s:property value="dbModels['ipDst'][#dbModel.index]['dst_ip']" /></a></td>
+            	<td><a href="#" onclick="showDetail('<s:property value="dbModels['ipDst'][#dbModel.index]['dst_ip']" />', 2);"><s:property value="dbModels['ipDst'][#dbModel.index]['dst_ip']" /></a></td>
                 <td>
                 <s:property value="dbModels['ipDst'][#dbModel.index]['format_bytes_total']" />
                 </td>
-                <td><span ctype="ProgressBar" barskin="green" progress="<s:property value="dbmodels['ipdst'][#dbmodel.index]['percentage']" />"></span></td>
+                <td><span ctype="ProgressBar" barskin="green" progress="<s:property value="dbModels['ipDst'][#dbModel.index]['percentage']" />"></span></td>
                 <td><s:property value="dbModels['ipDst'][#dbModel.index]['percentage']" />%</td>
                 <td>
-                <img style="cursor:pointer" height="14" width="14" src="${rootPath}resource/image/icons/trend.png" border="0" onclick="showFlowTrend('<s:property value="dbmodels['ipdst'][#dbmodel.index]['dst_ip']" />', 2)">
+                <img style="cursor:pointer" height="14" width="14" src="${rootPath}resource/image/icons/trend.png" border="0" onclick="showFlowTrend('<s:property value="dbModels['ipDst'][#dbModel.index]['dst_ip']" />', 2)">
                 </td>
             </tr>
             </s:iterator>
