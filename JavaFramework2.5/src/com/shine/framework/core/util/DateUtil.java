@@ -267,6 +267,14 @@ public class DateUtil {
 	public static long getCurrentLongTime() {
 		return timeToLong(getCurrentTime());
 	}
+	
+	/**
+	 * 
+	 * @return 当前时间离January 1, 1970, 00:00:00 GMT的毫秒数
+	 */
+	public static long getCurrentLongDateTimeLong() {
+		return (long) (new Date()).getTime();
+	}
 
 	/**
 	 * 
