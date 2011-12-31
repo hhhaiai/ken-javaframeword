@@ -1,18 +1,25 @@
 package com.shine.framework.RedBlackTree;
 
-/**
- * 红黑树的操作 , 重难点都在增加和删除结点上(红黑性质的修复,左右旋转)
- */
-public class RB_Tree {
+public class RebBlackTreeHelper {
+
 	// 哨兵结点即所有叶子结点和根的父结点
 	private static TreeNode nil = new TreeNode("black");
 	// 根结点
 	private TreeNode root = nil;
 
 	// 建立二叉查找树
-	public RB_Tree(int[] ints) {
+	public RebBlackTreeHelper(int[] ints) {
 		for (int i = 0; i < ints.length; i++)
 			insert(ints[i]);
+	}
+
+	public RebBlackTreeHelper() {
+
+	}
+
+	// 查找结点
+	public TreeNode search(int key) {
+		return search(key, root);
 	}
 
 	// 查找结点
@@ -157,10 +164,6 @@ public class RB_Tree {
 
 	// 修复删除操作时破坏的红黑树性质
 	public void RB_delete_fixup(TreeNode x) {
-		/**********************************
-		 ************case1 ************** / | \ *********** case2 case4 case3 ***** \
-		 * ****** case4 **
-		 **********************************/
 		while (x != root && x.color == "black") {
 			/*
 			 * 为保持黑高度不变,把x想象成为有两重黑色,但这显然不符合红黑性质,所以调整方向有两个：
@@ -303,7 +306,7 @@ public class RB_Tree {
 		System.out.print("(" + root.key + root.color + ", ");
 		preorder(root.left);
 		preorder(root.right);
-		if(root.right==nil)
+		if (root.right == nil)
 			System.out.print(") ");
 	}
 
@@ -331,39 +334,5 @@ public class RB_Tree {
 		postorder(root.left);
 		System.out.print(root.key + " ");
 		postorder(root.right);
-	}
-
-	public static void main(String[] args) {
-		int[] E = { 1, 6, 8, 11, 13, 15, 17, 25, 22, 27 };
-
-		for (int i = 0; i < 9; i++) {
-			System.out.print(E[i] + ",");
-		}
-		System.out.println();
-
-		RB_Tree RBtree = new RB_Tree(E);
-		RBtree.preorder();
-
-		RBtree.delete(E[2]);
-		System.out.println();
-		RBtree.preorder();
-	}
-}
-
-// 红黑树结点,比二叉树的结点多了一个color属性
-class TreeNode {
-	int key;
-	String color;
-	TreeNode left;
-	TreeNode right;
-	TreeNode parent;
-
-	public TreeNode(int key) {
-		this.key = key;
-	}
-
-	public TreeNode(String color) {
-		this.color = color;
-		this.key = -1;// 哨兵作为叶子,值要最小
 	}
 }
