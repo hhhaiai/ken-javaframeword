@@ -15,7 +15,7 @@ public class PortScanExample {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		NetAnalisysManager.getManager().setNetPortSize(100);
+		NetAnalisysManager.getManager().setNetPortSize(10);
 		NetAnalisysManager.getManager().initThreadModel();
 		
 
