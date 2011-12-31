@@ -275,10 +275,16 @@ public class SorterUtil {
 
 	public static void main(String args[]) {
 		List<Integer> list = new ArrayList<Integer>();
-		list.add(3);
-		list.add(1);
-		list.add(4);
-		list.add(2);
+		for (int i = 0; i < 10; i++) {
+			list.add(i);
+		}
+
+		list = DataUtil.randomList(list);
+
+		for (int i = 0; i < list.size(); i++) {
+			System.out.print(list.get(i) + ",");
+		}
+		System.out.println();
 
 		// 插入
 		// List<Integer> resultList = SorterUtil.insertSort(list);
@@ -295,14 +301,15 @@ public class SorterUtil {
 		// 快速排序
 		// List<Integer> resultList = SorterUtil.quickSorter(list);
 
-		// 合并查询
+		// 合并排序
 		// List<Integer> resultList = SorterUtil.mergeSort(list);
 
 		// 桶排序
-		List<Integer> resultList = SorterUtil.bucketSorter(list, list.size()+1);
+		List<Integer> resultList = SorterUtil.bucketSorter(list,
+				list.size() + 1);
 
 		for (int i : resultList) {
-			System.out.println(i);
+			System.out.print(i+",");
 		}
 	}
 }

@@ -439,6 +439,7 @@ public class DataUtil {
 		list.add(2);
 		list.add(3);
 		list.add(4);
+		
 
 		List<Integer> resultList = randomList(list);
 		for (int num : resultList) {
