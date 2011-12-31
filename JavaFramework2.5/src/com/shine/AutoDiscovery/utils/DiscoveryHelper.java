@@ -91,6 +91,10 @@ public class DiscoveryHelper {
 		while ((s = this.disCoveryIpAddress.next()) != null) {
 			System.out.println(s);
 		}
+
+		for (String o : this.portsList) {
+			System.out.println(o);
+		}
 	}
 
 	public void closeDisCovery() {

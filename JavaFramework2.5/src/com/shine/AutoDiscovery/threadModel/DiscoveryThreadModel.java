@@ -13,5 +13,4 @@ public class DiscoveryThreadModel extends ThreadModel {
 		// TODO Auto-generated method stub
 
 	}
-
 }
