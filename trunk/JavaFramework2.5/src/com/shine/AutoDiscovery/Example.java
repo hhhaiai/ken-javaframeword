@@ -11,10 +11,10 @@ public class Example {
 	 */
 	public static void main(String[] args) {
 		DiscoveryHelper helper = new DiscoveryHelper(
-				"10.144.199.1,192.168.1.1-192.168.1.10", "3306,10086", "", "", "");
-
+				"10.144.199.1,192.168.2.1-192.168.2.255", "161",
+				"public,cisco", "", "");
+		helper.initDiscoveryThread();
 		helper.startDiscovery();
-
 	}
 
 }

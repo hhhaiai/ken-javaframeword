@@ -30,119 +30,132 @@ import org.snmp4j.smi.VariableBinding;
 import org.snmp4j.transport.DefaultUdpTransportMapping;
 
 public class SnmpHelper4j extends SnmpAbstract {
-	
-	//Snmp Instance
-	private Snmp snmp=null;
-	
+
+	// Snmp Instance
+	private Snmp snmp = null;
+
 	private String ip;
-	
-	//Unit(共同体)
-	private String community="public";
-	
-	//Default Port
+
+	// Unit(共同体)
+	private String community = "public";
+
+	// Default Port
 	private int port = 161;
-	
-	//Snmp version
+
+	// Snmp version
 	private int version = 0;
-	
-	//Transport mapping
+
+	// Transport mapping
 	private TransportMapping tm;
-	
+
 	private Address targetAddress;
-	
-	//Snmp Defualt Use UDP Protocl
-	private String protol="udp";
-	
-	public SnmpHelper4j(){
-		
+
+	// Snmp Defualt Use UDP Protocl
+	private String protol = "udp";
+
+	public SnmpHelper4j() {
+
 	}
-	public SnmpHelper4j(String ip, String community) throws Exception{
+
+	public SnmpHelper4j(String ip, String community) throws Exception {
 		this.init(ip, community);
 	}
-	public SnmpHelper4j(String ip, String community, int port,int v) throws Exception{
-		this.init(ip, community, port,v);
+
+	public SnmpHelper4j(String ip, String community, int port, int v)
+			throws Exception {
+		this.init(ip, community, port, v);
 	}
+
 	/**
 	 * 初始化
 	 */
 	@Override
-	public void init(String ip, String community, int port,int v) throws Exception {
-		this.port=port;
-		this.version=v;
-		this.init(ip, community);	
+	public void init(String ip, String community, int port, int v)
+			throws Exception {
+		this.port = port;
+		this.version = v;
+		this.init(ip, community);
 	}
-	
+
 	/**
 	 * 初始化
 	 */
 	@Override
 	public void init(String ip, String community) throws Exception {
-		this.ip=ip;
-		this.community=community;
-		StringBuffer tstr = new StringBuffer(this.protol).append(":").append(ip).append("/").append(this.port);
-		this.targetAddress = GenericAddress.parse(tstr.toString()); 
+		this.ip = ip;
+		this.community = community;
+		StringBuffer tstr = new StringBuffer(this.protol).append(":")
+				.append(ip).append("/").append(this.port);
+		this.targetAddress = GenericAddress.parse(tstr.toString());
 		this.tm = new DefaultUdpTransportMapping();
 		this.snmp = new Snmp(this.tm);
 	}
-    /**
-     * OID值
-     */
+
+	/**
+	 * OID值
+	 */
 	@Override
-	public String getOidValueString(String oid){
-		for(int i=0;i<=3;i++){
-			return this.getOidValueString(oid,i);
+	public String getOidValueString(String oid) {
+		for (int i = 0; i <= 3; i++) {
+			return this.getOidValueString(oid, i);
 		}
 		return null;
 	}
+
 	/**
 	 * 存在预设值
+	 * 
 	 * @param oid
 	 * @param v
 	 * @return
 	 */
-	public String getOidValueString(String oid,int v){
-		if(v==0 || v==1){
-			String result = getSnmpV1OidValueString(oid,v);
-			if(result!=null){
+	public String getOidValueString(String oid, int v) {
+		if (v == 0 || v == 1) {
+			String result = getSnmpV1OidValueString(oid, v);
+			if (result != null) {
 				return result;
 			}
 		}
-		if(v==3){
+		if (v == 3) {
 			String result = getSnmpV3OidValueString(oid);
-			if(result!=null){
+			if (result != null) {
 				return result;
-			}			
+			}
 		}
 		return null;
 	}
+
 	/**
 	 * 获取SnmpV1/V2版本OID值
+	 * 
 	 * @param oid
 	 * @param snmpv
 	 * @return
 	 */
-	private String getSnmpV1OidValueString(String oid,int snmpv){
+	private String getSnmpV1OidValueString(String oid, int snmpv) {
 		this.state = true;
 		CommunityTarget target = this.setCommunityTarget(snmpv);
-		PDU pdu = this.setPdu(oid);		
-        try{
-        	return getStrResponse(snmpv,pdu,target);
- 		}catch(Exception e){
- 			e.printStackTrace();
- 		}finally{
- 			this.state = false;
- 			this.close();
- 			pdu=null;
- 			target=null;
- 		}
- 		return null;
+		PDU pdu = this.setPdu(oid);
+		try {
+			return getStrResponse(snmpv, pdu, target);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			this.state = false;
+			this.close();
+			pdu = null;
+			target = null;
+		}
+		return null;
 	}
+
 	/**
 	 * Snmp V1/V2 Target
+	 * 
 	 * @param snmpv
 	 * @return
 	 */
-	private CommunityTarget setCommunityTarget(int snmpv){
+	private CommunityTarget setCommunityTarget(int snmpv) {
 		CommunityTarget target = new CommunityTarget();
 		target.setCommunity(new OctetString(this.community));
 		target.setAddress(this.targetAddress);
@@ -151,48 +164,59 @@ public class SnmpHelper4j extends SnmpAbstract {
 		target.setRetries(1);
 		return target;
 	}
+
 	/**
 	 * SnmpV1/v2版本PDU数据
+	 * 
 	 * @param oid
 	 * @return
 	 */
-	private PDU setPdu(String oid){
+	private PDU setPdu(String oid) {
 		PDU pdu = new PDU();
 		pdu.add(new VariableBinding(new OID(oid)));
 		pdu.setType(PDU.GET);
 		return pdu;
 	}
+
 	/**
 	 * 获取SnmpV3版本OID值
+	 * 
 	 * @param oid
 	 * @param snmpv
 	 * @return
 	 */
-	private String getSnmpV3OidValueString(String oid){
+	private String getSnmpV3OidValueString(String oid) {
 		this.state = true;
-		USM usm = new USM(SecurityProtocols.getInstance(),new OctetString(MPv3.createLocalEngineID()), 0);
+		USM usm = new USM(SecurityProtocols.getInstance(), new OctetString(MPv3
+				.createLocalEngineID()), 0);
 		SecurityModels.getInstance().addSecurityModel(usm);
 		ScopedPDU spdu = this.setScopedPDU(oid);
 		UserTarget target = this.setUserTarget();
-		this.snmp.getUSM().addUser(new OctetString("MD5DES"), new UsmUser(new OctetString("MD5DES"), AuthMD5.ID,new OctetString("MD5DESUserAuthPassword"), PrivDES.ID,new OctetString("MD5DESUserPrivPassword")));		
-		try{
-			return getStrResponse(3,spdu,target);
-		}catch(Exception e){
+		this.snmp.getUSM().addUser(
+				new OctetString("MD5DES"),
+				new UsmUser(new OctetString("MD5DES"), AuthMD5.ID,
+						new OctetString("MD5DESUserAuthPassword"), PrivDES.ID,
+						new OctetString("MD5DESUserPrivPassword")));
+		try {
+			return getStrResponse(3, spdu, target);
+		} catch (Exception e) {
 			e.printStackTrace();
-		}finally{
+		} finally {
 			this.state = false;
 			this.close();
-			target=null;
+			target = null;
 			spdu = null;
 			usm = null;
 		}
- 		return null;
+		return null;
 	}
+
 	/**
 	 * V3 Target
+	 * 
 	 * @return
 	 */
-	private UserTarget setUserTarget(){
+	private UserTarget setUserTarget() {
 		UserTarget target = new UserTarget();
 		target.setAddress(this.targetAddress);
 		target.setRetries(1);
@@ -202,49 +226,59 @@ public class SnmpHelper4j extends SnmpAbstract {
 		target.setSecurityName(new OctetString("MD5DES"));
 		return target;
 	}
+
 	/**
 	 * SnmpV3版本Pdu数据
+	 * 
 	 * @param oid
 	 * @return
 	 */
-	private ScopedPDU setScopedPDU(String oid){
+	private ScopedPDU setScopedPDU(String oid) {
 		ScopedPDU spdu = new ScopedPDU();
 		spdu.add(new VariableBinding(new OID(oid)));
 		spdu.setType(ScopedPDU.GET);
 		spdu.setMaxRepetitions(50);
 		return spdu;
 	}
+
 	/**
 	 * OID字符串数据响应
+	 * 
 	 * @param snmpv
 	 * @param pdu
 	 * @param target
 	 * @return
 	 * @throws Exception
 	 */
-	private String getStrResponse(int snmpv,PDU pdu,AbstractTarget target) throws Exception{
+	private String getStrResponse(int snmpv, PDU pdu, AbstractTarget target)
+			throws Exception {
 		this.snmp.listen();
 		ResponseEvent response = this.snmp.send(pdu, target);
 		PDU tpdu = response.getResponse();
-		if (response.getResponse() != null && tpdu.getErrorIndex() == tpdu.noError && tpdu.getErrorStatus() == tpdu.noError) {
-		    this.version=snmpv;
-			Vector<VariableBinding> v = response.getResponse().getVariableBindings();
-			for(VariableBinding var:v){
-			   return var.getOid().toString()+"(IP: "+this.ip + ":Snmp4j"+":snmpv"+(this.version+1)+")";		    		 
+		if (response.getResponse() != null
+				&& tpdu.getErrorIndex() == tpdu.noError
+				&& tpdu.getErrorStatus() == tpdu.noError) {
+			this.version = snmpv;
+			Vector<VariableBinding> v = response.getResponse()
+					.getVariableBindings();
+			for (VariableBinding var : v) {
+				return var.getOid().toString() + "(IP: " + this.ip + ":Snmp4j"
+						+ ":snmpv" + (this.version + 1) + ")";
 			}
-			     
+
 		}
 		return null;
 	}
+
 	@Override
 	public List<String> getTableView(String oid) {
-		
+
 		return null;
 	}
 
 	@Override
 	public List<String> getTableView(String[] oid) {
-		
+
 		return null;
 	}
 
@@ -256,15 +290,17 @@ public class SnmpHelper4j extends SnmpAbstract {
 		try {
 			if (this.tm != null)
 				this.tm.close();
-			this.community=community;
-			StringBuffer tstr = new StringBuffer(this.protol).append(":").append(ip).append("/").append(port);
-			this.targetAddress = GenericAddress.parse(tstr.toString()); 
+			this.community = community;
+			StringBuffer tstr = new StringBuffer(this.protol).append(":")
+					.append(ip).append("/").append(port);
+			this.targetAddress = GenericAddress.parse(tstr.toString());
 			this.tm = new DefaultUdpTransportMapping();
-			this.snmp = new Snmp(this.tm);	
+			this.snmp = new Snmp(this.tm);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
+
 	/**
 	 * 重连接
 	 */
@@ -272,75 +308,91 @@ public class SnmpHelper4j extends SnmpAbstract {
 	public void reconnection() {
 		this.reconnection(this.ip, this.community, this.port);
 	}
+
 	/**
 	 * 关闭监听
 	 */
 	@Override
 	public void close() {
-		try{
-			if(this.tm != null){ 
+		try {
+			if (this.tm != null) {
 				this.tm.close();
 			}
-		}catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public int getVersion() {
 		return version;
 	}
+
 	public void setVersion(int version) {
 		this.version = version;
 	}
+
 	public Snmp getSnmp() {
 		return snmp;
 	}
+
 	public void setSnmp(Snmp snmp) {
 		this.snmp = snmp;
 	}
+
 	public String getIp() {
 		return ip;
 	}
+
 	public void setIp(String ip) {
 		this.ip = ip;
 	}
+
 	public String getCommunity() {
 		return community;
 	}
+
 	public void setCommunity(String community) {
 		this.community = community;
 	}
+
 	public int getPort() {
 		return port;
 	}
+
 	public void setPort(int port) {
 		this.port = port;
 	}
+
 	public TransportMapping getTm() {
 		return tm;
 	}
+
 	public void setTm(TransportMapping tm) {
 		this.tm = tm;
 	}
+
 	public Address getTargetAddress() {
 		return targetAddress;
 	}
+
 	public void setTargetAddress(Address targetAddress) {
 		this.targetAddress = targetAddress;
 	}
+
 	public String getProtol() {
 		return protol;
 	}
+
 	public void setProtol(String protol) {
 		this.protol = protol;
 	}
 	/**
 	 * @param args
 	 */
-	//public static void main(String[] args) throws Exception {	
-		//SnmpHelper4j sh = new SnmpHelper4j("192.168.2.18", "public", 161);
-		//System.out.println(sh.getOidValueString("1.3.6.1.2.1.1.1.0"));
-		//boolean is = sh.preProccess("192.168.2.19","snmp4j",0,160);
-		//System.out.println(is);
-	//}
+	// public static void main(String[] args) throws Exception {
+	// SnmpHelper4j sh = new SnmpHelper4j("192.168.2.18", "public", 161);
+	// System.out.println(sh.getOidValueString("1.3.6.1.2.1.1.1.0"));
+	// boolean is = sh.preProccess("192.168.2.19","snmp4j",0,160);
+	// System.out.println(is);
+	// }
 }

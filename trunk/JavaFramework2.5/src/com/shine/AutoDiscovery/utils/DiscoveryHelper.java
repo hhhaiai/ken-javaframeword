@@ -3,6 +3,11 @@ package com.shine.AutoDiscovery.utils;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.shine.AutoDiscovery.threadModel.DiscoveryThreadModel;
+import com.shine.DBUtil.threadModel.UpdateThreadModel;
+import com.shine.framework.ThreadPoolUtil.ThreadPoolManager;
+import com.shine.framework.ThreadPoolUtil.util.SuperThread;
+
 public class DiscoveryHelper {
 	// 发现名称
 	private String label;
@@ -80,6 +85,23 @@ public class DiscoveryHelper {
 
 	public void initDiscoveryThread() {
 		System.out.println("初始化发现线程");
+
+		for (int i = 0; i < 10; i++) {
+			addDiscoveryThread(i);
+		}
+		ThreadPoolManager.getManager().startThreadPool();
+	}
+
+	/**
+	 * 加入批量提交线程
+	 * 
+	 * @param i
+	 */
+	private void addDiscoveryThread(int i) {
+		DiscoveryThreadModel discoveryThreadModel = new DiscoveryThreadModel();
+		discoveryThreadModel.setThreadName("discoveryThreadModel" + i);
+		ThreadPoolManager.getManager().addThread(discoveryThreadModel);
+		discoveryThreadModel = null;
 	}
 
 	public void cleanDisCoveryThread() {
@@ -87,14 +109,25 @@ public class DiscoveryHelper {
 	}
 
 	public void startDiscovery() {
-		String s = "";
-		while ((s = this.disCoveryIpAddress.next()) != null) {
-			System.out.println(s);
+		String ip = "";
+
+		while ((ip = this.disCoveryIpAddress.next()) != null) {
+			for (String port : this.portsList) {
+				for (String community : this.communitysList) {
+					SuperThread superThread = null;
+					if ((superThread = ThreadPoolManager.getManager()
+							.getIdleThread("DiscoveryThreadModel")) != null) {
+						superThread.setValues(ip, community);
+					} else {
+						try {
+							Thread.sleep(500);
+						} catch (InterruptedException e) {
+						}
+					}
+				}
+			}
 		}
 
-		for (String o : this.portsList) {
-			System.out.println(o);
-		}
 	}
 
 	public void closeDisCovery() {
