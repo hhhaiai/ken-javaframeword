@@ -1,6 +1,7 @@
 package com.shine.DataBaseSource;
 
-import com.shine.DataBaseSource.util.OptionList;
+import com.shine.DataBaseSource.util.DeleteOptionList;
+import com.shine.DataBaseSource.util.UpdateOptionList;
 
 /**
  * 数据库实体类
@@ -12,8 +13,11 @@ public abstract class DBModel {
 	// 加载表名
 	private String tableName;
 
-	// sql条件列表
-	private OptionList list = new OptionList();
+	// 更新sql条件列表
+	private UpdateOptionList updateOptionList = new UpdateOptionList();
+
+	// 删除sql条件列表
+	private DeleteOptionList deleteOptionList = new DeleteOptionList();
 
 	/**
 	 * select每次加载1000行数据
