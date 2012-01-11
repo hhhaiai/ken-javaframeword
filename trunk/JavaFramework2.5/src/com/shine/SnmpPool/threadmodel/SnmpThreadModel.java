@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.shine.SnmpPool.SnmpPoolManager;
+import com.shine.SnmpPool.utils.SnmpXmlUtil;
 import com.shine.framework.ThreadPoolUtil.model.ThreadModel;
 import com.shine.framework.core.util.ReflectionUtil;
 import com.shine.framework.core.util.SnmpAbstract;
@@ -87,9 +88,9 @@ public class SnmpThreadModel extends ThreadModel {
 						String vstr = snmpabstract.getImplementClass();
 						String version = ""+snmpabstract.getVersion();
 						String[] data ={ip,port,vstr,version};
-						XmlUitl.modifyXml("src/com/shine/SnmpPool/config/snmpv.xml",data);
+						SnmpXmlUtil.modifyXml("src/com/shine/SnmpPool/config/snmpv.xml",data);
 					}else{
-						XmlUitl.createSubElement("src/com/shine/SnmpPool/config/snmpv.xml",snmpabstract.getIp(),snmpabstract.getPort(),snmpabstract.getImplementClass(),snmpabstract.getVersion());
+						SnmpXmlUtil.createSubElement("src/com/shine/SnmpPool/config/snmpv.xml",snmpabstract.getIp(),snmpabstract.getPort(),snmpabstract.getImplementClass(),snmpabstract.getVersion());
 					}
 					
 					System.out.println("最终采集设备数据-->" + resutlData);
