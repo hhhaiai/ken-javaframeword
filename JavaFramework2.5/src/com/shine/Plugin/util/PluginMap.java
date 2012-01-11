@@ -4,6 +4,6 @@ import java.util.HashMap;
 
 import com.shine.Plugin.Plugin;
 
-public class PluginMap extends HashMap<Integer, Plugin> {
+public class PluginMap extends HashMap<String, Plugin> {
 
 }

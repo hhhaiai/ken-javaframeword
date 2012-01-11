@@ -1,5 +1,11 @@
 package com.shine.Sniffe;
 
+/**
+ * sniffe捉包分析软件
+ * 
+ * @author viruscodecn@gmail.com
+ * 
+ */
 public class SniffeManager {
 	private static SniffeManager manager = null;
 

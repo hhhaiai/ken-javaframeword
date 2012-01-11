@@ -6,12 +6,12 @@ package com.shine.Plugin;
  * 
  */
 public abstract class Plugin {
-	private int id;
 	private String name;
 	private String type;
 	private String version;
 	private String clazz;
 	private String description;
+	// Plugin状态
 	private String status;
 
 	private String sqlPath;
@@ -20,9 +20,14 @@ public abstract class Plugin {
 
 	}
 
-	public Plugin(int id, String name, String type, String version,
-			String clazz, String description) {
-
+	public Plugin(String name, String type, String version, String clazz,
+			String sqlPath, String description) {
+		this.name = name;
+		this.type = type;
+		this.version = version;
+		this.clazz = clazz;
+		this.sqlPath = sqlPath;
+		this.description = description;
 	}
 
 	public void start() {
@@ -43,25 +48,11 @@ public abstract class Plugin {
 		pluginDestroy();
 	}
 
-	protected void pluginStart() {
-		// 必须现实
-	}
+	protected abstract void pluginStart();
 
-	protected void pluginSleep() {
-		// 必须现实
-	}
+	protected abstract void pluginSleep();
 
-	protected void pluginDestroy() {
-		// 必须现实
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
+	protected abstract void pluginDestroy();
 
 	public String getName() {
 		return name;

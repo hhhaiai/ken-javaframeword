@@ -21,15 +21,16 @@ public class PluginManager {
 
 	public void loadPlugin(Plugin plugin) {
 		plugin.start();
-		map.put(plugin.getId(), plugin);
+		map.put(plugin.getName(), plugin);
 	}
 
-	public void sleepPlugin(String id) {
-		map.get(id).sleep();
+	public void sleepPlugin(String name) {
+		map.get(name).sleep();
 	}
 
-	public void destroy(String id) {
-		map.get(id).destroy();
-		map.remove(id);
+	public void destroy(String name) {
+		map.get(name).destroy();
+		map.remove(name);
 	}
+
 }

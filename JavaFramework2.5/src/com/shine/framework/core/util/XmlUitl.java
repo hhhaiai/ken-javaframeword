@@ -31,8 +31,8 @@ import com.shine.Ftp.util.FtpHelper;
  */
 public class XmlUitl {
 
-	private Document document = null;
-	
+	protected Document document = null;
+
 	// 递归用的遍历结果列表
 	private List<Element> elementList = null;
 
@@ -367,48 +367,6 @@ public class XmlUitl {
 	}
 
 	/**
-	 * 创建节点(SNMP采集)
-	 * 
-	 */
-	public static void createSubElement(String xmlPath, String ip, int port,
-			String vstr, int version) throws Exception {
-		Document document = getFileDocument(xmlPath);
-		Element rootElement = document.getRootElement();
-		rootElement.addElement("snmpv").addAttribute("ip", ip).addAttribute(
-				"port", "" + port).addAttribute("vstr", vstr).addAttribute(
-				"version", "" + version);
-		saveAndFormatXML(document, xmlPath);
-	}
-
-	/**
-	 * 
-	 * 修改节点(SNMP采集)
-	 * 
-	 * @param ip
-	 * @param xmlPath
-	 * @return
-	 */
-	public static void modifyXml(String xmlPath, String[] data)
-			throws Exception {
-		String ip = data[0];
-		Document document = getFileDocument(xmlPath);
-		Element rootElement = document.getRootElement();
-		Element element = (Element) rootElement
-				.selectSingleNode("//snmpvs/snmpv[@ip='" + ip + "']");
-		if (element != null) {
-			int flag = 0;
-			for (Iterator<Element> i = element.attributeIterator(); i.hasNext();) {
-				Attribute attribute = (Attribute) i.next();
-				// 修改属性值
-				attribute.setValue(data[flag]);
-				flag++;
-			}
-		}
-		// 保存修改
-		saveAndFormatXML(document, xmlPath);
-	}
-
-	/**
 	 * 格式化XML输出，并保存
 	 * 
 	 * @param document
@@ -455,7 +413,8 @@ public class XmlUitl {
 	 * 
 	 * @param document
 	 * @param rootName
-	 * @param data(属性)
+	 * @param data
+	 *            (属性)
 	 * @return
 	 */
 	public static Element createRootElement(Document document, String rootName,
@@ -466,34 +425,43 @@ public class XmlUitl {
 
 	/**
 	 * 【添加节点】并初始化属性,文本值
-	 * @param element(父节点) 
+	 * 
+	 * @param element
+	 *            (父节点)
 	 * @param elementName
-	 * @param data(属性)
+	 * @param data
+	 *            (属性)
 	 * @param text
 	 * @return
 	 */
-	public static Element addElement(Element element,String elementName,String[][] data,String text){
-		
-		Element newElement = addorEditAttribute(element.addElement(elementName),data);
-		if(text!=null)
+	public static Element addElement(Element element, String elementName,
+			String[][] data, String text) {
+
+		Element newElement = addorEditAttribute(
+				element.addElement(elementName), data);
+		if (text != null)
 			newElement.setText(text);
 		return newElement;
 	}
-		
+
 	/**
 	 * 创建XML文档，并初始化根节点
+	 * 
 	 * @param rootName
-	 * @param data(属性)
+	 * @param data
+	 *            (属性)
 	 * @return
 	 */
-	public Element getRootElement(String rootName,String data[][]){
-		document = XmlUitl.createDocument() ;
-		return XmlUitl.createRootElement(document,rootName,data);
-	}	
-	
+	public Element getRootElement(String rootName, String data[][]) {
+		document = XmlUitl.createDocument();
+		return XmlUitl.createRootElement(document, rootName, data);
+	}
+
 	/**
 	 * XML转String
-	 * @param xmlPath(XML路径)
+	 * 
+	 * @param xmlPath
+	 *            (XML路径)
 	 * @return
 	 */
 	public static String doc2String(String xmlPath) {
@@ -511,67 +479,13 @@ public class XmlUitl {
 			ex.printStackTrace();
 		}
 		return s;
-	}	
-	
-	/**
-	 * 生成目录XML文件
-	 * @param ftpHelper
-	 * @param remotePath(指定FTP路径)
-	 * @param rootElement
-	 * @param xmlPath
-	 * @throws Exception
-	 */
-	public void createXMLDirectoryWithRemotePath(FtpHelper ftpHelper,String remotePath,Element rootElement,String xmlPath) throws Exception{
-		if(!ftpHelper.changeDirectory(remotePath)){
-			System.out.println("路径不存!");
-			return;
-		}
-		List<FTPFile> list = ftpHelper.getFileList();
-		for(FTPFile ftpfile:list){
-			String newRemotePath = (remotePath+"/"+ftpfile.getName()).replaceAll("//","/");
-			if(ftpfile.isDirectory()){
-				String[][] data={{"name","path"},{ftpfile.getName(),newRemotePath}};
-				Element dirElement= XmlUitl.addElement(rootElement,"dir",data,null);			
-				ftpHelper.changeDirectory(ftpfile.getName()); //从根目录开始
-				String currentWorkPath = ftpHelper.getFtp().printWorkingDirectory();
-				createXMLDirectoryWithRemotePath(ftpHelper,currentWorkPath,dirElement,xmlPath);
-			}else{
-				String[][] data={{"path"},{newRemotePath}};
-				XmlUitl.addElement(rootElement,"file", data,ftpfile.getName()) ;
-			}
-		}
-		XmlUitl.saveAndFormatXML(this.document, xmlPath);
 	}
 
-	/**
-	 * 生成目录XML文件(默认FTP根目录)
-	 * @param ftpHelper
-	 * @param rootElement
-	 * @param xmlPath
-	 * @throws Exception
-	 */
-	public void createXMLDirectory(FtpHelper ftpHelper,Element rootElement,String xmlPath) throws Exception{
-		//默认FTP根目录
-		String remotePath = "/";
-		List<FTPFile> list = ftpHelper.getFileList();
-		for(FTPFile ftpfile:list){
-			String newRemotePath = remotePath+ftpfile.getName();
-			if(ftpfile.isDirectory()){
-				String[][] data={{"name","path"},{ftpfile.getName(),newRemotePath}};
-				XmlUitl.addElement(rootElement,"dir",data,null);			
-			}else{
-				String[][] data={{"path"},{newRemotePath}};
-				XmlUitl.addElement(rootElement,"file", data,ftpfile.getName()) ;
-			}
-		}
-		XmlUitl.saveAndFormatXML(this.document, xmlPath);
-	}
-	
 	public static void main(String args[]) {
 		try {
 			String[] str = { "192.168.1.1", "162",
 					"com.shine.framework.core.util.SnmpHelper", "100" };
-			XmlUitl.modifyXml("src/com/shine/SnmpPool/config/snmpv.xml", str);
+			//XmlUitl.modifyXml("src/com/shine/SnmpPool/config/snmpv.xml", str);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
