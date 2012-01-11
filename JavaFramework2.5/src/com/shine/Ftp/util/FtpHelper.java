@@ -504,7 +504,7 @@ public class FtpHelper {
 	 * @throws Exception
 	 */
 	public String getFTPFileStructureXMLToString(String xpath) throws Exception{
-		XmlUitl xu = new XmlUitl();
+		FtpXmlUtil xu = new FtpXmlUtil();
 		String[][] data = {{"name","path"},{"ftproot","/"}};
 		Element rootElement = xu.getRootElement("root", data);
 		xu.createXMLDirectory(this, rootElement,xpath);
@@ -521,7 +521,7 @@ public class FtpHelper {
 	 * @throws Exception
 	 */
 	public String getFTPFileStructureXMLToString(String remotePath,String xpath) throws Exception{
-		XmlUitl xu = new XmlUitl();
+		FtpXmlUtil xu = new FtpXmlUtil();
 		String[][] data = {{"name","path"},{remotePath,remotePath}};
 		Element rootElement = xu.getRootElement("dir", data);
 		xu.createXMLDirectoryWithRemotePath(this, remotePath, rootElement, xpath);
