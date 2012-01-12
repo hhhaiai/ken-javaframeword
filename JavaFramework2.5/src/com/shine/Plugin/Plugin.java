@@ -1,5 +1,7 @@
 package com.shine.Plugin;
 
+import com.shine.Plugin.util.PluginStatus;
+
 /**
  * 
  * @author viruscodecn@gmail.com
@@ -34,18 +36,21 @@ public abstract class Plugin {
 		System.out
 				.println("=============插件:" + this.name + "正常启动=============");
 		pluginStart();
+		this.status = PluginStatus.RUN;
 	}
 
 	public void sleep() {
 		System.out
 				.println("=============插件:" + this.name + "已经休眠=============");
 		pluginSleep();
+		this.status = PluginStatus.SLEEP;
 	}
 
 	public void destroy() {
 		System.out
 				.println("=============插件:" + this.name + "已经销毁=============");
 		pluginDestroy();
+		this.status = PluginStatus.DESTROY;
 	}
 
 	protected abstract void pluginStart();
@@ -53,6 +58,10 @@ public abstract class Plugin {
 	protected abstract void pluginSleep();
 
 	protected abstract void pluginDestroy();
+
+	public String printPluginStatus() {
+		return this.name + ":" + this.status;
+	}
 
 	public String getName() {
 		return name;
