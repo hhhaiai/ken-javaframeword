@@ -6,8 +6,8 @@ package com.shine.Sniffer;
  * @author viruscodecn@gmail.com
  * 
  */
-public class SniffeManager {
-	private static SniffeManager manager = null;
+public class SnifferManager {
+	private static SnifferManager manager = null;
 
 	private int threadSize = 20;
 	private int maxThreadSize = 200;
@@ -16,9 +16,9 @@ public class SniffeManager {
 	private int maxCache = 1000;
 	private int incomeCache = 10;
 
-	public static SniffeManager getManager() {
+	public static SnifferManager getManager() {
 		if (manager == null)
-			manager = new SniffeManager();
+			manager = new SnifferManager();
 		return manager;
 	}
 
