@@ -1,4 +1,4 @@
-package com.shine.Sniffe.handle;
+package com.shine.Sniffer.handle;
 
 public abstract class SnifferHandle {
 

@@ -1,4 +1,4 @@
-package com.shine.Sniffe;
+package com.shine.Sniffer;
 
 public class Example {
 
