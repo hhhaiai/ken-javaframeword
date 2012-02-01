@@ -1,6 +1,12 @@
 package com.shine.Plugin;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import com.shine.Plugin.util.PluginStatus;
+import com.shine.framework.core.util.XmlConverUtil;
 
 /**
  * 
@@ -60,7 +66,51 @@ public abstract class Plugin {
 	protected abstract void pluginDestroy();
 
 	public String printPluginStatus() {
-		return this.name + ":" + this.status;
+		try {
+			Map<String, String> nameMap = new HashMap<String, String>();
+			nameMap.put("name", this.name);
+
+			Map<String, String> typeMap = new HashMap<String, String>();
+			typeMap.put("type", this.type);
+
+			Map<String, String> versionMap = new HashMap<String, String>();
+			versionMap.put("version", this.version);
+
+			Map<String, String> clazzMap = new HashMap<String, String>();
+			clazzMap.put("clazz", this.clazz);
+
+			Map<String, String> descriptionMap = new HashMap<String, String>();
+			descriptionMap.put("description", this.description);
+
+			Map<String, String> statusMap = new HashMap<String, String>();
+			statusMap.put("status", this.status);
+
+			Map<String, String> sqlPathMap = new HashMap<String, String>();
+			sqlPathMap.put("sqlPath", this.sqlPath);
+
+			List<Map> list = new ArrayList<Map>();
+			list.add(nameMap);
+			list.add(typeMap);
+			list.add(versionMap);
+			list.add(clazzMap);
+			list.add(descriptionMap);
+			list.add(statusMap);
+			list.add(sqlPathMap);
+
+			nameMap = null;
+			typeMap = null;
+			versionMap = null;
+			clazzMap = null;
+			descriptionMap = null;
+			statusMap = null;
+			sqlPathMap = null;
+
+			return XmlConverUtil.listtoXml(list);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	public String getName() {

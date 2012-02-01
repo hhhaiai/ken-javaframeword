@@ -19,15 +19,30 @@ public class PluginManager {
 		return manager;
 	}
 
+	/**
+	 * 载入插件
+	 * 
+	 * @param plugin
+	 */
 	public void loadPlugin(Plugin plugin) {
 		plugin.start();
 		map.put(plugin.getName(), plugin);
 	}
 
+	/**
+	 * 休眠插件
+	 * 
+	 * @param name
+	 */
 	public void sleepPlugin(String name) {
 		map.get(name).sleep();
 	}
 
+	/**
+	 * 删除插件
+	 * 
+	 * @param name
+	 */
 	public void destroy(String name) {
 		map.get(name).destroy();
 		map.remove(name);
