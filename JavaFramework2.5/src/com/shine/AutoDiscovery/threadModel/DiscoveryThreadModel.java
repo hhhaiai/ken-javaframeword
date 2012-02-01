@@ -20,7 +20,8 @@ public class DiscoveryThreadModel extends ThreadModel {
 			SnmpHelper4j snmpAbstract = new SnmpHelper4j();
 			snmpAbstract.init(String.valueOf(args[0]), String.valueOf(args[1]));
 			if (snmpAbstract.getSnmp() != null)
-				System.out.println(String.valueOf(args[0]) + "连接成功");
+				System.out.println(String.valueOf(args[0]) + ":"
+						+ String.valueOf(args[1]) + " 连接成功");
 			else
 				System.out.println(String.valueOf(args[0]) + "连接失败");
 		} catch (Exception e) {
