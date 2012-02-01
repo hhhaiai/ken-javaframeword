@@ -8,8 +8,8 @@ public class Example {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		PluginManager.getManager().loadPlugin(new TestPlugin());
-
+		TestPlugin testPlugin = new TestPlugin();
+		PluginManager.getManager().loadPlugin(testPlugin);
+		System.out.println(testPlugin.printPluginStatus());
 	}
-
 }
