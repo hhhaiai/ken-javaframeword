@@ -10,6 +10,7 @@ import com.shine.framework.core.util.ReflectionUtil;
 import com.shine.framework.core.util.XmlConverUtil;
 
 /**
+ * 插件基类
  * 
  * @author viruscodecn@gmail.com
  * 
