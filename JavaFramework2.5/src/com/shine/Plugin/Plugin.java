@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.shine.Plugin.util.PluginStatus;
+import com.shine.framework.core.util.ReflectionUtil;
 import com.shine.framework.core.util.XmlConverUtil;
 
 /**
@@ -16,8 +17,8 @@ import com.shine.framework.core.util.XmlConverUtil;
 public abstract class Plugin {
 	private String name;
 	private String type;
+	// Plugin的版本信息，版本信息的修改会直接影响到是否重新加载数据库
 	private String version;
-	private String clazz;
 	private String description;
 	// Plugin状态
 	private String status;
@@ -28,12 +29,11 @@ public abstract class Plugin {
 
 	}
 
-	public Plugin(String name, String type, String version, String clazz,
+	public Plugin(String name, String type, String version, String method,
 			String sqlPath, String description) {
 		this.name = name;
 		this.type = type;
 		this.version = version;
-		this.clazz = clazz;
 		this.sqlPath = sqlPath;
 		this.description = description;
 	}
@@ -76,9 +76,6 @@ public abstract class Plugin {
 			Map<String, String> versionMap = new HashMap<String, String>();
 			versionMap.put("version", this.version);
 
-			Map<String, String> clazzMap = new HashMap<String, String>();
-			clazzMap.put("clazz", this.clazz);
-
 			Map<String, String> descriptionMap = new HashMap<String, String>();
 			descriptionMap.put("description", this.description);
 
@@ -92,7 +89,6 @@ public abstract class Plugin {
 			list.add(nameMap);
 			list.add(typeMap);
 			list.add(versionMap);
-			list.add(clazzMap);
 			list.add(descriptionMap);
 			list.add(statusMap);
 			list.add(sqlPathMap);
@@ -100,7 +96,6 @@ public abstract class Plugin {
 			nameMap = null;
 			typeMap = null;
 			versionMap = null;
-			clazzMap = null;
 			descriptionMap = null;
 			statusMap = null;
 			sqlPathMap = null;
@@ -135,14 +130,6 @@ public abstract class Plugin {
 
 	public void setVersion(String version) {
 		this.version = version;
-	}
-
-	public String getClazz() {
-		return clazz;
-	}
-
-	public void setClazz(String clazz) {
-		this.clazz = clazz;
 	}
 
 	public String getDescription() {

@@ -43,7 +43,7 @@ public class PluginManager {
 	 * 
 	 * @param name
 	 */
-	public void destroy(String name) {
+	public void destroyPlugin(String name) {
 		map.get(name).destroy();
 		map.remove(name);
 	}
