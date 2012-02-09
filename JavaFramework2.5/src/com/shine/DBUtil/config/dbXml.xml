@@ -4,7 +4,7 @@
 	logFloderPath="log">
 	<Resource jndi="jdbc/Default" driverClass="com.mysql.jdbc.Driver"
 		dbUserName="root" dbPassWord="root"
-		jdbcUrl="jdbc:mysql://127.0.0.1:3306/nms4?useUnicode=true&amp;characterEncoding=utf-8"
+		jdbcUrl="jdbc:mysql://127.0.0.1:3306/nms4_6?useUnicode=true&amp;characterEncoding=utf-8"
 		initSize="2" minPoolSize="1" maxPoolSize="10" maxStatements="50"
 		maxIdleTime="60" />
 	<Resource jndi="jdbc/flow" driverClass="com.mysql.jdbc.Driver"

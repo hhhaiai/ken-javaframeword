@@ -1,27 +1,34 @@
 package com.shine.DBUtil;
 
+import java.sql.SQLException;
+
 import com.shine.DBUtil.model.DBModel;
 
 public class Example {
 
 	/**
 	 * @param args
+	 * @throws SQLException
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws SQLException {
 		DBUtil
 				.getInstance()
 				.init(
-						"E:\\workspace\\JavaFramework2.0\\src\\com\\shine\\framework\\DBUtil\\config\\dbXml.xml");
-		DBModel map = DBUtil.getInstance().executeQuery(
-				"select * from gdzfw_bag_video_link");
-		System.out.println(map.getDataXml());
-		DBModel map3 = new DBModel();
-		map3.setXmlValue(map.getDataXml());
-		System.out.println();
+						"E:\\workspace\\JavaFramework2.5\\src\\com\\shine\\DBUtil\\config\\dbXml.xml");
+		DBModel map = DBUtil.getInstance().executeQuery("jdbc/Default",
+				"select * from admin_role");
+		if (map.next() != 0)
+			System.out.println(map.getDataXml());
+		
+		
 
-		DBUtil.getInstance().cacheUpdate("11", "1", "11111");
-		DBModel map4 = DBUtil.getInstance().cacheQuery("11", "1");
-		map4.close();
+//		DBModel map3 = new DBModel();
+//		map3.setXmlValue(map.getDataXml());
+//		System.out.println();
+
+		// DBUtil.getInstance().cacheUpdate("11", "1", "11111");
+		// DBModel map4 = DBUtil.getInstance().cacheQuery("11", "1");
+		// map4.close();
 
 		// ///////
 		// DBUtil
