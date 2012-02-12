@@ -12,8 +12,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class RestConrtoller {
 	
 	@RequestMapping(value="",method=RequestMethod.GET)
-	public String topic(HttpServletRequest request){
+	public String topic(HttpServletRequest request,TestUser user){
 		request.setAttribute("msg", "welcome to topic");
+		System.out.println(user.getId());
 		return "test/topic";
 	}
 	
@@ -22,4 +23,5 @@ public class RestConrtoller {
 		request.setAttribute("msg", "ID is"+id);
 		return "test/topic";
 	}
+
 }
