@@ -1,4 +1,4 @@
-package com.shine.test;
+package test.com.shine.rest;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -12,9 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class RestConrtoller {
 	
 	@RequestMapping(value="",method=RequestMethod.GET)
-	public String topic(HttpServletRequest request,TestUser user){
+	public String topic(HttpServletRequest request){
 		request.setAttribute("msg", "welcome to topic");
-		System.out.println(user.getId());
 		return "test/topic";
 	}
 	

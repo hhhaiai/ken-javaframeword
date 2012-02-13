@@ -4,7 +4,8 @@ import javax.servlet.ServletContextEvent;
 
 /**
  * 通用启动器,被系统监听器启动
- * @author JiangKunpeng
+ * @author JiangKunpeng 2012.02.l2
+ * @version 2012.02.12
  *
  */
 public class CommonStarter implements IStarter{

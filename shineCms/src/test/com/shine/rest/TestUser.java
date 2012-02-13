@@ -1,4 +1,4 @@
-package com.shine.test;
+package test.com.shine.rest;
 
 public class TestUser {
 	private String id;

@@ -1,4 +1,4 @@
-package com.shine.test.platform;
+package test.com.shine.platform;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
