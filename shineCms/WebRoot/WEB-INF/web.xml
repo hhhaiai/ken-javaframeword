@@ -32,15 +32,16 @@
 		<url-pattern>/</url-pattern>
 	</filter-mapping>
 	
-	<!-- Spring 与mvc中不要重复 -->
+	<!-- Spring 与mvc中不要重复 org.springframework.web.context.ContextLoaderListener -->
 	<listener>
 		<listener-class>
-			org.springframework.web.context.ContextLoaderListener
+			com.shine.platform.context.ShineContextLoaderListener
 		</listener-class>
 	</listener>
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath:applicationContext.xml</param-value>
+		<param-value>classpath:applicationContext.xml,classpath:com/shine/platform/platformContext.xml,
+		</param-value>
 	</context-param>
 	
 	<!-- spring mvc控制 -->
@@ -57,6 +58,7 @@
 			<!-- 多种路径指定方式
 			<param-value>/WEB-INF/springmvc.xml</param-value>
 			<param-value>classpath*:springmvc.xml</param-value>
+			<param-value>classpath:test/com/shine/platform/platformMvc.xml</param-value>
 			 -->
 			<param-value>classpath:springmvc.xml</param-value>
 		</init-param>
