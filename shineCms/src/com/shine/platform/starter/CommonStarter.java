@@ -11,6 +11,7 @@ import javax.servlet.ServletContextEvent;
 public class CommonStarter implements IStarter{
 	
 	public void start(Object arg) {
+		System.out.println("CommonStartter start....");
 		ServletContextEvent event = (ServletContextEvent)arg;
 	}
 
