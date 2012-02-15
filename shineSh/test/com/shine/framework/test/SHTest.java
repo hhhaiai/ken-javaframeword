@@ -1,13 +1,12 @@
 package com.shine.framework.test;
 
-import java.lang.reflect.Field;
 import java.util.List;
 
+import org.hibernate.SessionFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.shine.framework.dao.GenericDao;
-import com.shine.framework.entity.BaseEntity;
 import com.shine.framework.test.entity.TestUser;
 
 public class SHTest {
@@ -19,6 +18,8 @@ public class SHTest {
 	public static void main(String[] args) {
 		GenericDao dao = null;
 		ApplicationContext context = new ClassPathXmlApplicationContext("com/shine/framework/test/applicationContext.xml");
+		SessionFactory sf = (SessionFactory)context.getBean("sessionFactory");
+
 		dao = (GenericDao)context.getBean("genericDao");
 		List<TestUser> list = dao.find("from TestUser u");
 		System.out.println("MySQL有以下用户：");
