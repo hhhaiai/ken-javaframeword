@@ -20,31 +20,32 @@ public class ShineDispatcherServlet extends DispatcherServlet{
 	
 	@Override
 	public void init(ServletConfig config) throws ServletException {
-		servletName = config.getServletName();
-		servletContext = config.getServletContext();
-		initParameterNames = config.getInitParameterNames();
-		if(initParameterNames!=null){
-			String key = null;
-			while(initParameterNames.hasMoreElements()){
-				key = (String)initParameterNames.nextElement();
-				params.put(key, config.getInitParameter(key));
-			}
-		}
-		ServletConfig sc = new ServletConfig() {
-			public String getServletName() {
-				return servletName;
-			}
-			public ServletContext getServletContext() {
-				return servletContext;
-			}
-			public Enumeration getInitParameterNames() {
-				return initParameterNames;
-			}
-			public String getInitParameter(String name) {
-				return params.get(name);
-			}
-		};
-		super.init(sc);
+		System.out.println("init ShineDispatcherServlet...");
+//		servletName = config.getServletName();
+//		servletContext = config.getServletContext();
+//		initParameterNames = config.getInitParameterNames();
+//		if(initParameterNames!=null){
+//			String key = null;
+//			while(initParameterNames.hasMoreElements()){
+//				key = (String)initParameterNames.nextElement();
+//				params.put(key, config.getInitParameter(key));
+//			}
+//		}
+//		ServletConfig sc = new ServletConfig() {
+//			public String getServletName() {
+//				return servletName;
+//			}
+//			public ServletContext getServletContext() {
+//				return servletContext;
+//			}
+//			public Enumeration getInitParameterNames() {
+//				return initParameterNames;
+//			}
+//			public String getInitParameter(String name) {
+//				return params.get(name);
+//			}
+//		};
+		super.init(config);
 	}
 
 	@Override

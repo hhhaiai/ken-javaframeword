@@ -24,14 +24,7 @@ public class ShineContextLoaderListener extends ContextLoaderListener{
 	private ContextLoader contextLoader;
 
 	@Override
-	public WebApplicationContext initWebApplicationContext(ServletContext servletContext) {
-		System.out.println("initWebApplicationContext....");
-		return super.initWebApplicationContext(servletContext);
-	}
-
-	@Override
 	protected WebApplicationContext createWebApplicationContext(ServletContext sc, ApplicationContext parent) {
-		System.out.println("createWebApplicationContext....");
 //		return super.createWebApplicationContext(sc, parent);
 		Class<?> contextClass = determineContextClass(sc);
 		if (!ConfigurableWebApplicationContext.class.isAssignableFrom(contextClass)) {
@@ -76,7 +69,6 @@ public class ShineContextLoaderListener extends ContextLoaderListener{
 	 * Initialize the root web application context.
 	 */
 	public void contextInitialized(ServletContextEvent event) {
-		System.out.println("contextInitialized.....");
 		this.contextLoader = createContextLoader();
 		if (this.contextLoader == null) {
 			this.contextLoader = this;
@@ -86,17 +78,6 @@ public class ShineContextLoaderListener extends ContextLoaderListener{
 		ApplicationContext springContext = WebApplicationContextUtils.getWebApplicationContext(event.getServletContext());
 		IStarter starter = (IStarter)springContext.getBean("starter");
 		starter.start(event);
-	}
-
-	/**
-	 * Create the ContextLoader to use. Can be overridden in subclasses.
-	 * @return the new ContextLoader
-	 * @deprecated in favor of simply subclassing ContextLoaderListener itself
-	 * (which extends ContextLoader, as of Spring 3.0)
-	 */
-	@Deprecated
-	protected ContextLoader createContextLoader() {
-		return null;
 	}
 
 	/**

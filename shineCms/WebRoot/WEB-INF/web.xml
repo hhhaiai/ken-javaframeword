@@ -26,6 +26,10 @@
 			<param-name>encoding</param-name>
 			<param-value>UTF-8</param-value>
 		</init-param>
+		<init-param>
+			<param-name>forceEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>
 	</filter>
 	<filter-mapping>
 		<filter-name>encodingFilter</filter-name>
@@ -47,9 +51,8 @@
 	<!-- spring mvc控制 -->
 	<servlet>
 		<servlet-name>springmvc</servlet-name>
-		<servlet-class>com.shine.platform.context.ShineDispatcherServlet</servlet-class>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<!-- 
-			org.springframework.web.servlet.DispatcherServlet
 			如果不指定配置文件,则默认查找
 			WEB-INF/[servlet-name]-servlet.xml,既springmvc-serlvet.xml 
 		-->

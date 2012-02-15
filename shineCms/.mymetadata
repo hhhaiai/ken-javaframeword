@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-module
   type="WEB"
-  name="shineCMS"
+  name="shineCms"
   id="myeclipse.1313746891974"
   context-root="/shineCms"
   j2ee-spec="5.0"
-  archive="shineCMS.war">
+  archive="shineCms.war">
   <attributes>
     <attribute name="webrootdir" value="/WebRoot" />
   </attributes>
