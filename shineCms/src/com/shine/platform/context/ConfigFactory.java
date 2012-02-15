@@ -6,7 +6,7 @@ import java.util.Map;
 import javax.servlet.ServletContext;
 
 /**
- * 系统配置共产
+ * 系统配置工厂
  * @author JiangKunpeng 2012.02.15
  * @version 2012.02.15
  */
