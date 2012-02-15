@@ -13,12 +13,15 @@ import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
+import com.shine.platform.plugin.PluginContext;
 import com.shine.platform.starter.IStarter;
 
 /**
- * 系统启动监听器(重写spring上下文监听器)
+ * 系统启动监听器<br/>
+ * (重写spring上下文监听器,加载spring前加载系统参数并扫描系统插件,<br/>
+ * 加载spring同时初始化插件,加载spring后启动插件)
  * @author JiangKunpeng 2012.02.14
- * @version 2012.02.14
+ * @version 2012.02.15
  */
 public class ShineContextLoaderListener extends ContextLoaderListener{
 	private ContextLoader contextLoader;
@@ -69,6 +72,10 @@ public class ShineContextLoaderListener extends ContextLoaderListener{
 	 * Initialize the root web application context.
 	 */
 	public void contextInitialized(ServletContextEvent event) {
+		ConfigFactory.getFactory().init(event.getServletContext());
+		//扫描要加载的插件
+		PluginContext.getContext().init();
+		
 		this.contextLoader = createContextLoader();
 		if (this.contextLoader == null) {
 			this.contextLoader = this;
@@ -78,6 +85,8 @@ public class ShineContextLoaderListener extends ContextLoaderListener{
 		ApplicationContext springContext = WebApplicationContextUtils.getWebApplicationContext(event.getServletContext());
 		IStarter starter = (IStarter)springContext.getBean("starter");
 		starter.start(event);
+		ConfigFactory cf = (ConfigFactory)springContext.getBean("configFactory");
+		System.out.println(cf.getSysPath());
 	}
 
 	/**
