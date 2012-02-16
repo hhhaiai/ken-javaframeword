@@ -14,6 +14,5 @@
            http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
          
 	<bean id="pluginContext" class="com.shine.platform.plugin.PluginContext" scope="singleton"/>
-	<bean id="starter" class="com.shine.platform.starter.CommonStarter" scope="singleton"/>
 	<bean id="configFactory" class="com.shine.platform.context.ConfigFactory" factory-method="getFactory"/>
 </beans>

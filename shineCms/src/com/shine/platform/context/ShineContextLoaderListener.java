@@ -14,7 +14,6 @@ import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import com.shine.platform.plugin.PluginContext;
-import com.shine.platform.starter.IStarter;
 
 /**
  * 系统启动监听器<br/>
@@ -58,6 +57,7 @@ public class ShineContextLoaderListener extends ContextLoaderListener{
 
 		String configLocation = sc.getInitParameter(CONFIG_LOCATION_PARAM);
 		//在这里可以拼上自定义配置文件
+		configLocation = configLocation + ","+ConfigFactory.getFactory().getSpringPluginXmls().get(0);
 		System.out.println(configLocation);
 //		configLocation = "classpath:applicationContext.xml";
 		wac.setParent(parent);
@@ -72,9 +72,10 @@ public class ShineContextLoaderListener extends ContextLoaderListener{
 	 * Initialize the root web application context.
 	 */
 	public void contextInitialized(ServletContextEvent event) {
+		//初始化系统配置工厂
 		ConfigFactory.getFactory().init(event.getServletContext());
-		//扫描要加载的插件
-		PluginContext.getContext().init();
+		//初始化插件
+		PluginContext.getContext().initPlugins();
 		
 		this.contextLoader = createContextLoader();
 		if (this.contextLoader == null) {
@@ -83,10 +84,11 @@ public class ShineContextLoaderListener extends ContextLoaderListener{
 		this.contextLoader.initWebApplicationContext(event.getServletContext());
 		
 		ApplicationContext springContext = WebApplicationContextUtils.getWebApplicationContext(event.getServletContext());
-		IStarter starter = (IStarter)springContext.getBean("starter");
-		starter.start(event);
-		ConfigFactory cf = (ConfigFactory)springContext.getBean("configFactory");
-		System.out.println(cf.getSysPath());
+		
+		//注入Spring上下文到系统配置工厂
+		ConfigFactory.getFactory().setSpringContext(springContext);
+		//启动所有插件
+		PluginContext.getContext().startPlugins();
 	}
 
 	/**

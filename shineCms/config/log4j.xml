@@ -25,7 +25,7 @@
      
     <!-- 根logger的设置-->     
     <root>
-        <priority value ="ERROR"/>     
+        <priority value ="debug"/>     
         <appender-ref ref="console"/>
         <appender-ref ref="logfile"/>        
     </root>     

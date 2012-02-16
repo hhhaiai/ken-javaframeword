@@ -44,7 +44,7 @@
 	</listener>
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath:applicationContext.xml,classpath:com/shine/platform/platformContext.xml,
+		<param-value>classpath:applicationContext.xml
 		</param-value>
 	</context-param>
 	
