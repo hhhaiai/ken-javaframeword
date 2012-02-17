@@ -1,5 +1,6 @@
 package com.shine.platform.context;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -39,11 +40,14 @@ final public class ConfigFactory {
 		loadXmlConfig();
 	}
 	
+	/**
+	 * 加载系统XML配置
+	 */
 	private void loadXmlConfig(){
-		String sysXmlPath = sysPath + "/WEB-INF/classes/system.xml";
+		String sysXmlPath = sysPath + "WEB-INF" + File.separator + "classes" + File.separator + "system.xml";
 		Element root = JDomUtil.file2Doc(sysXmlPath).getRootElement();
 		String bootXmlPath = root.getChildText("boot");
-		bootXmlPath = sysPath + "/WEB-INF/classes/" + bootXmlPath;
+		bootXmlPath = sysPath + "WEB-INF" + File.separator + "classes"+ File.separator + bootXmlPath;
 		Element bootEle = JDomUtil.file2Doc(bootXmlPath).getRootElement();
 		List<Element> plugins = bootEle.getChild("plugins").getChildren();
 		if(plugins!=null){
