@@ -43,6 +43,8 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.context.support.DefaultWebEnvironment;
 import org.springframework.web.context.support.ServletContextResourceLoader;
 
+import com.shine.platform.context.ConfigFactory;
+
 /**
  * Simple extension of {@link javax.servlet.http.HttpServlet} which treats
  * its config parameters (<code>init-param</code> entries within the
@@ -213,12 +215,10 @@ public abstract class HttpServletBean extends HttpServlet implements Environment
 			while (en.hasMoreElements()) {
 				String property = (String) en.nextElement();
 				Object value = config.getInitParameter(property);
+				
+				//对SpringMvc的xml文件和插件注入的SpringMvc配置文件整合
 				if(ConfigLocation.equals(property)){
-					if(value!=null){
-						value = value + ",classpath:test/com/shine/platform/platformMvc.xml";
-					}else{
-						value = "classpath:test/com/shine/platform/platformMvc.xml";
-					}
+					value = ConfigFactory.getFactory().fusionSpringXml((String)value, "SpringMvc");
 				}
 				addPropertyValue(new PropertyValue(property, value));
 				if (missingProps != null) {

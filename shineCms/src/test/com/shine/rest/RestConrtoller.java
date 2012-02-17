@@ -17,7 +17,6 @@ public class RestConrtoller {
 	public String topic(HttpServletRequest request){
 		WebApplicationContext wac = WebApplicationContextUtils.getWebApplicationContext(request.getSession().getServletContext());
 		System.out.println(wac.getBean("sessionFactory"));
-		System.out.println(wac.getBean("starter"));
 		request.setAttribute("msg", "welcome to topic");
 		return "test/topic";
 	}

@@ -20,7 +20,7 @@ import com.shine.platform.plugin.PluginContext;
  * (重写spring上下文监听器,加载spring前加载系统参数并扫描系统插件,<br/>
  * 加载spring同时初始化插件,加载spring后启动插件)
  * @author JiangKunpeng 2012.02.14
- * @version 2012.02.15
+ * @version 2012.02.17
  */
 public class ShineContextLoaderListener extends ContextLoaderListener{
 	private ContextLoader contextLoader;
@@ -55,14 +55,13 @@ public class ShineContextLoaderListener extends ContextLoaderListener{
 			}
 		}
 
+		//将默认的spring配置文件与插件注入的配置文件融合
 		String configLocation = sc.getInitParameter(CONFIG_LOCATION_PARAM);
-		//在这里可以拼上自定义配置文件
-		configLocation = configLocation + ","+ConfigFactory.getFactory().getSpringPluginXmls().get(0);
-		System.out.println(configLocation);
-//		configLocation = "classpath:applicationContext.xml";
+		String fusionConfigLocation = ConfigFactory.getFactory().fusionSpringXml(configLocation, "Spring");
+		
 		wac.setParent(parent);
 		wac.setServletContext(sc);
-		wac.setConfigLocation(configLocation);
+		wac.setConfigLocation(fusionConfigLocation);
 		customizeContext(sc, wac);
 		wac.refresh();
 		return wac;

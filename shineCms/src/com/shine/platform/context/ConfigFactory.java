@@ -1,9 +1,11 @@
 package com.shine.platform.context;
 
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.ServletContext;
 
@@ -23,8 +25,8 @@ final public class ConfigFactory {
 	private Map<String, Object> attributes = new HashMap<String, Object>();
 	private String sysPath;
 	private ApplicationContext springContext;
-	private List<String> springPluginXmls = new ArrayList<String>();
-	private List<String> springMvcPluginXmls = new ArrayList<String>();
+	private Set<String> springPluginXmls = new HashSet<String>();
+	private Set<String> springMvcPluginXmls = new HashSet<String>();
 	private ConfigFactory(){
 	}
 	
@@ -66,6 +68,40 @@ final public class ConfigFactory {
 	public void registerSpringMvcPluginXml(final String xmlPath){
 		springMvcPluginXmls.add(xmlPath);
 	}
+	
+	/**
+	 * 将传入的配置文件和插件加载的Spring配置文件融合并返回
+	 * @param configLocation	Spring自己加载的配置文件
+	 * @param type	Spring:ContextLoaderListener加载的;SpringMvc:DispatcherServlet加载的配置文件
+	 * @return
+	 */
+	public String fusionSpringXml(final String configLocation,final String type){
+		if("Spring".equals(type))
+			return fusionSpringXml(configLocation, getSpringPluginXmls());
+		else if("SpringMvc".equals(type))
+			return fusionSpringXml(configLocation, getSpringMvcPluginXmls());
+		return configLocation;
+	}
+	
+	private String fusionSpringXml(final String configLocation,final Set<String> pluginXmls){
+		Set<String> configs = null;
+		if(configLocation!=null){
+			configs = new HashSet<String>();
+			String[] cls = configLocation.split(",");
+			for (String cl : cls) {
+				configs.add(cl);
+			}
+			configs.addAll(pluginXmls);
+		}else{
+			configs = pluginXmls;
+		}
+		StringBuffer cfsb = new StringBuffer(100);
+		Iterator<String> cfit = configs.iterator();
+		while(cfit.hasNext()){
+			cfsb.append(cfit.next()).append(",");
+		}
+		return cfsb.toString();
+	}
 
 	public String getSysPath() {
 		return sysPath;
@@ -79,10 +115,10 @@ final public class ConfigFactory {
 	public void setSpringContext(ApplicationContext springContext) {
 		this.springContext = springContext;
 	}
-	public List<String> getSpringPluginXmls() {
+	public Set<String> getSpringPluginXmls() {
 		return springPluginXmls;
 	}
-	public List<String> getSpringMvcPluginXmls() {
+	public Set<String> getSpringMvcPluginXmls() {
 		return springMvcPluginXmls;
 	}
 }

@@ -25,6 +25,7 @@ public class PlatformPlugin implements IPlugin{
 		if(logger.isInfoEnabled())
 			logger.info("初始化插件[" + getName() + "]");
 		ConfigFactory.getFactory().registerSpringPluginXml("classpath:com/shine/platform/platformContext.xml");
+		ConfigFactory.getFactory().registerSpringMvcPluginXml("classpath:test/com/shine/platform/platformMvc.xml");
 	}
 
 	public void start() {
