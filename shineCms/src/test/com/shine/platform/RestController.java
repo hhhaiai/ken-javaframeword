@@ -1,4 +1,4 @@
-package test.com.shine.rest;
+package test.com.shine.platform;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -11,14 +11,14 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 
 @Controller
 @RequestMapping("/topic")
-public class RestConrtoller {
+public class RestController {
 	
 	@RequestMapping(value="",method=RequestMethod.GET)
 	public String topic(HttpServletRequest request){
 		WebApplicationContext wac = WebApplicationContextUtils.getWebApplicationContext(request.getSession().getServletContext());
 		System.out.println(wac.getBean("sessionFactory"));
 		request.setAttribute("msg", "welcome to topic");
-		return "test/topic";
+		return "topic";
 	}
 	
 	@RequestMapping(value="/{id}",method=RequestMethod.GET)

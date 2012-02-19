@@ -1,7 +1,7 @@
 package com.shine.platform.plugin;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -9,11 +9,11 @@ import org.apache.commons.logging.LogFactory;
 /**
  * 插件上下文
  * @author JiangKunpeng 2012.02.12
- * @version 2012.02.15
+ * @version 2012.02.19
  */
 public class PluginContext{
 	private static final PluginContext context = new PluginContext();
-	private Map<String, IPlugin> plugins = new HashMap<String, IPlugin>();
+	private List<IPlugin> plugins = new ArrayList<IPlugin>();
 	private Log logger = LogFactory.getLog(getClass());
 	
 	private PluginContext(){
@@ -46,9 +46,18 @@ public class PluginContext{
 	 * @param plugin
 	 */
 	public void registerPlugin(IPlugin plugin){
+		if(plugin.getName()==null){
+			logger.error("插件注入失败,因为缺少名称：" + plugin.getClass().getName());
+			return;
+		}
 		if(logger.isDebugEnabled())
-			logger.debug("注入插件["+plugin.getName()+"-"+plugin.getClass().getName()+"]");
-		plugins.put(plugin.getName(),plugin);
+			logger.debug("注入插件["+plugin.getName()+"->"+plugin.getClass().getName()+"]");
+		for(int i=0;i<plugins.size();i++){
+			IPlugin p = plugins.get(i);
+			if(p.getName().equals(plugin.getName()))
+				plugins.remove(i);
+		}
+		plugins.add(plugin);
 	}
 	
 	/**
@@ -57,7 +66,7 @@ public class PluginContext{
 	public void initPlugins(){
 		if(logger.isDebugEnabled())
 			logger.debug("开始初始化所有插件...");
-		for(IPlugin plugin:plugins.values()){
+		for(IPlugin plugin:plugins){
 			plugin.init();
 		}
 	}
@@ -68,7 +77,7 @@ public class PluginContext{
 	public void startPlugins(){
 		if(logger.isDebugEnabled())
 			logger.debug("开始启动所有插件...");
-		for(IPlugin plugin:plugins.values()){
+		for(IPlugin plugin:plugins){
 			plugin.start();
 		}
 	}
