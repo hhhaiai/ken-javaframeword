@@ -17,7 +17,7 @@
 	<classpathentry kind="lib" path="lib/commons-logging.jar"/>
 	<classpathentry kind="lib" path="lib/commons-net-2.2.jar" sourcepath="C:/Users/123/.m2/repository/commons-net/commons-net/2.2/commons-net-2.2-sources.jar"/>
 	<classpathentry kind="lib" path="lib/csvjdbc.jar"/>
-	<classpathentry kind="lib" path="lib/dom4j-1.6.1.jar"/>
+	<classpathentry kind="lib" path="lib/dom4j-1.6.1.jar" sourcepath="C:/Users/123/.m2/repository/dom4j/dom4j/1.6.1/dom4j-1.6.1-sources.jar"/>
 	<classpathentry kind="lib" path="lib/edtftpj.jar"/>
 	<classpathentry kind="lib" path="lib/ezmorph-1.0.6.jar"/>
 	<classpathentry kind="lib" path="lib/Filters.jar"/>
