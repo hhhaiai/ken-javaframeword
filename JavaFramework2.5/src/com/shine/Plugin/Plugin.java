@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.shine.Plugin.util.PluginStatus;
-import com.shine.framework.core.util.ReflectionUtil;
 import com.shine.framework.core.util.XmlConverUtil;
 
 /**
@@ -33,16 +32,17 @@ public abstract class Plugin {
 
 	}
 
-	public Plugin(String name, String version, String type, String sqlPath,
-			String description) {
-		this.initPlugin(name, version, type, sqlPath, description);
+	public Plugin(String name, String version, String type, String level,
+			String sqlPath, String description) {
+		this.initPlugin(name, version, type, level, sqlPath, description);
 	}
 
 	public void initPlugin(String name, String version, String type,
-			String sqlPath, String description) {
+			String level, String sqlPath, String description) {
 		this.name = name;
 		this.version = version;
 		this.type = type;
+		this.level = level;
 		this.sqlPath = sqlPath;
 		this.description = description;
 	}

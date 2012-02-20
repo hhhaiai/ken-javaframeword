@@ -43,8 +43,28 @@ public class IOCFactory {
 		if (classMap.containsKey(className)) {
 			return ReflectionUtil.getClasstoObject(classMap.get(className));
 		} else {
-			System.out
-					.println(this.getClass().toString() + "服务初始化" + className);
+			System.out.println(this.getClass().toString() + "中服务没有初始化"
+					+ className);
+			return null;
+		}
+	}
+
+	/**
+	 * 反射返回对象
+	 * 
+	 * @param <T>
+	 * @param interfaceClazz
+	 * @param className
+	 * @return
+	 * @throws Exception
+	 */
+	public <T> T getObject(Class<T> interfaceClazz, String className)
+			throws Exception {
+		if (classMap.containsKey(className)) {
+			return (T) ReflectionUtil.getClasstoObject(classMap.get(className));
+		} else {
+			System.out.println(this.getClass().toString() + "中服务没有初始化"
+					+ className);
 			return null;
 		}
 	}
