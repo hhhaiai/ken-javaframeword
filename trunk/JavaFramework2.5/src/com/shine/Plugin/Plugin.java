@@ -16,44 +16,52 @@ import com.shine.framework.core.util.XmlConverUtil;
  * 
  */
 public abstract class Plugin {
-	private String name;
-	private String type;
+	protected String name;
 	// Plugin的版本信息，版本信息的修改会直接影响到是否重新加载数据库
-	private String version;
-	private String description;
+	protected String version;
+	// 插件类型 classpath,jar
+	protected String type;
+	// 插件等级
+	protected String level;
+	protected String description;
 	// Plugin状态
-	private String status;
+	protected String status;
 
-	private String sqlPath;
+	protected String sqlPath;
 
 	public Plugin() {
 
 	}
 
-	public Plugin(String name, String type, String version, String method,
+	public Plugin(String name, String version, String type, String sqlPath,
+			String description) {
+		this.initPlugin(name, version, type, sqlPath, description);
+	}
+
+	public void initPlugin(String name, String version, String type,
 			String sqlPath, String description) {
 		this.name = name;
-		this.type = type;
 		this.version = version;
+		this.type = type;
 		this.sqlPath = sqlPath;
 		this.description = description;
 	}
 
-	public void start() {
+	protected void start() {
 		System.out
 				.println("=============插件:" + this.name + "正常启动=============");
 		pluginStart();
 		this.status = PluginStatus.RUN;
 	}
 
-	public void sleep() {
+	protected void sleep() {
 		System.out
 				.println("=============插件:" + this.name + "已经休眠=============");
 		pluginSleep();
 		this.status = PluginStatus.SLEEP;
 	}
 
-	public void destroy() {
+	protected void destroy() {
 		System.out
 				.println("=============插件:" + this.name + "已经销毁=============");
 		pluginDestroy();
@@ -71,11 +79,11 @@ public abstract class Plugin {
 			Map<String, String> nameMap = new HashMap<String, String>();
 			nameMap.put("name", this.name);
 
-			Map<String, String> typeMap = new HashMap<String, String>();
-			typeMap.put("type", this.type);
-
 			Map<String, String> versionMap = new HashMap<String, String>();
 			versionMap.put("version", this.version);
+
+			Map<String, String> typeMap = new HashMap<String, String>();
+			typeMap.put("type", this.type);
 
 			Map<String, String> descriptionMap = new HashMap<String, String>();
 			descriptionMap.put("description", this.description);
@@ -88,15 +96,15 @@ public abstract class Plugin {
 
 			List<Map> list = new ArrayList<Map>();
 			list.add(nameMap);
-			list.add(typeMap);
 			list.add(versionMap);
+			list.add(typeMap);
 			list.add(descriptionMap);
 			list.add(statusMap);
 			list.add(sqlPathMap);
 
 			nameMap = null;
-			typeMap = null;
 			versionMap = null;
+			typeMap = null;
 			descriptionMap = null;
 			statusMap = null;
 			sqlPathMap = null;
@@ -115,14 +123,6 @@ public abstract class Plugin {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
 	}
 
 	public String getVersion() {
@@ -155,5 +155,21 @@ public abstract class Plugin {
 
 	public void setSqlPath(String sqlPath) {
 		this.sqlPath = sqlPath;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public String getLevel() {
+		return level;
+	}
+
+	public void setLevel(String level) {
+		this.level = level;
 	}
 }
