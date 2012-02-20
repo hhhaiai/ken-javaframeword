@@ -20,8 +20,6 @@ public abstract class Plugin {
 	protected String version;
 	// 插件类型 classpath,jar
 	protected String type;
-	// 插件等级
-	protected String level;
 	protected String description;
 	// Plugin状态
 	protected String status;
@@ -32,17 +30,16 @@ public abstract class Plugin {
 
 	}
 
-	public Plugin(String name, String version, String type, String level,
-			String sqlPath, String description) {
-		this.initPlugin(name, version, type, level, sqlPath, description);
+	public Plugin(String name, String version, String type, String sqlPath,
+			String description) {
+		this.initPlugin(name, version, type, sqlPath, description);
 	}
 
 	public void initPlugin(String name, String version, String type,
-			String level, String sqlPath, String description) {
+			String sqlPath, String description) {
 		this.name = name;
 		this.version = version;
 		this.type = type;
-		this.level = level;
 		this.sqlPath = sqlPath;
 		this.description = description;
 	}
@@ -163,13 +160,5 @@ public abstract class Plugin {
 
 	public void setType(String type) {
 		this.type = type;
-	}
-
-	public String getLevel() {
-		return level;
-	}
-
-	public void setLevel(String level) {
-		this.level = level;
 	}
 }
