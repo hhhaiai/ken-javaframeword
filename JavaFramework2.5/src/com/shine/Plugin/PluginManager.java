@@ -1,6 +1,8 @@
 package com.shine.Plugin;
 
 import com.shine.Plugin.util.PluginMap;
+import com.shine.framework.Ioc.IOCFactory;
+import com.shine.framework.core.util.ZipUtil;
 
 /**
  * 插件管理类
@@ -35,7 +37,8 @@ public class PluginManager {
 	 * @param name
 	 */
 	public void sleepPlugin(String name) {
-		map.get(name).sleep();
+		if (map.containsKey(name))
+			map.get(name).sleep();
 	}
 
 	/**
@@ -44,8 +47,37 @@ public class PluginManager {
 	 * @param name
 	 */
 	public void destroyPlugin(String name) {
-		map.get(name).destroy();
-		map.remove(name);
+		if (map.containsKey(name)) {
+			map.get(name).destroy();
+			map.remove(name);
+		}
 	}
 
+	/**
+	 * 获取插件
+	 * 
+	 * @param name
+	 * @return
+	 */
+	public Plugin getPlugin(String name) {
+		if (map.containsKey(name))
+			return map.get(name);
+		else
+			return null;
+	}
+
+	/**
+	 * 获取插件
+	 * 
+	 * @param <T>
+	 * @param interfaceClazz
+	 * @param name
+	 * @return
+	 */
+	public <T> T getPlugin(Class<T> interfaceClazz, String name) {
+		if (map.containsKey(name))
+			return (T) map.get(name);
+		else
+			return null;
+	}
 }
