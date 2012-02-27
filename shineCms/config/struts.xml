@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+    <constant name="struts.i18n.encoding" value="UTF-8"></constant>
+    <constant name="struts.action.extension" value="do" />
+	<constant name="struts.locale" value="zh_CN" />
+	<constant name="struts.custom.i18n.resources" value="messageResource" />
+	<constant name="struts.objectFactory" value="spring" />
+	<constant name="struts.devMode" value="false" />
+    <constant name="struts.multipart.maxSize" value="50000000" />
+    
+    <package name="base" extends="struts-default" abstract="true">
+    	<interceptors>
+    		<interceptor name="exception" class="com.opensymphony.xwork2.interceptor.ExceptionMappingInterceptor"/>
+    		<interceptor-stack name="appStack">
+    			<interceptor-ref name="defaultStack"/>
+	            <interceptor-ref name="exception"/>
+    		</interceptor-stack>
+    	</interceptors>
+    	<default-interceptor-ref name="appStack"></default-interceptor-ref>
+    	<global-results>
+        	<result name="exception">/manage/exception.jsp</result>
+        	<result name="hint">/manage/hint.jsp</result>
+       	</global-results>
+       	<global-exception-mappings>
+          	<exception-mapping result="exception" exception="java.lang.Exception"/>
+       	</global-exception-mappings>
+    </package>
+
+</struts>

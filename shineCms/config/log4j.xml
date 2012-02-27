@@ -31,6 +31,10 @@
     	<level value = "ERROR"/>
     	<appender-ref ref="console"/>
     </logger>
+    <logger name="com.opensymphony.xwork2" additivity="false">
+    	<level value = "ERROR"/>
+    	<appender-ref ref="console"/>
+    </logger>
     <!-- 根logger的设置-->     
     <root>
         <priority value ="debug"/>     
