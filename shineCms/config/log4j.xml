@@ -23,6 +23,7 @@
         </layout>
     </appender>
      
+    <!-- 
     <logger name="org.springframework" additivity="false">
     	<level value = "ERROR"/>
     	<appender-ref ref="console"/>
@@ -35,9 +36,14 @@
     	<level value = "ERROR"/>
     	<appender-ref ref="console"/>
     </logger>
+    <logger name="org.apache.struts2" additivity="false">
+    	<level value = "ERROR"/>
+    	<appender-ref ref="console"/>
+    </logger>
+     -->
     <!-- 根logger的设置-->     
     <root>
-        <priority value ="debug"/>     
+        <priority value ="INFO"/>     
         <appender-ref ref="console"/>
         <appender-ref ref="logfile"/>        
     </root>     
