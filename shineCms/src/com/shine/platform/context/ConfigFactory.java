@@ -26,6 +26,7 @@ final public class ConfigFactory {
 	private Map<String, Object> attributes = new HashMap<String, Object>();
 	private String sysPath;
 	private ApplicationContext springContext;
+	private Set<String> strutsPluginXmls = new HashSet<String>();
 	private Set<String> springPluginXmls = new HashSet<String>();
 	private Set<String> springMvcPluginXmls = new HashSet<String>();
 	private ConfigFactory(){
@@ -55,6 +56,14 @@ final public class ConfigFactory {
 				PluginContext.getContext().registerPlugin(plugin.getText());
 			}
 		}
+	}
+	
+	/**
+	 * 注入Struts插件配置文件
+	 * @param xmlPath
+	 */
+	public void registerStrutsPluginXml(final String xmlPath){
+		strutsPluginXmls.add(xmlPath);
 	}
 	
 	/**
@@ -124,5 +133,8 @@ final public class ConfigFactory {
 	}
 	public Set<String> getSpringMvcPluginXmls() {
 		return springMvcPluginXmls;
+	}
+	public Set<String> getStrutsPluginXmls() {
+		return strutsPluginXmls;
 	}
 }

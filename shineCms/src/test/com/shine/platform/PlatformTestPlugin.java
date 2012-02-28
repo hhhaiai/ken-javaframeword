@@ -4,6 +4,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.shine.platform.context.ConfigFactory;
+import com.shine.platform.context.StrutsFilterDispatcher;
 import com.shine.platform.plugin.IPlugin;
 
 public class PlatformTestPlugin implements IPlugin{
@@ -21,6 +22,7 @@ public class PlatformTestPlugin implements IPlugin{
 		if(logger.isInfoEnabled())
 			logger.info("初始化插件[" + getName() + "]");
 		ConfigFactory.getFactory().registerSpringMvcPluginXml("classpath:test/com/shine/platform/platformMvc.xml");
+		StrutsFilterDispatcher.registerXML(getClass().getResource("struts.xml").getPath());
 	}
 
 	public void start() {
