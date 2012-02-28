@@ -1,5 +1,6 @@
 package com.shine.platform.context;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -18,7 +19,7 @@ import org.apache.struts2.dispatcher.ng.filter.FilterHostConfig;
 import org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter;
 
 /**
- * 从插件中获取struts配置文件
+ * 通过插件动态加载struts配置文件
  * @author JiangKunpeng 2012.02.28
  * @version 2012.02.28
  */
@@ -53,17 +54,18 @@ public class StrutsFilterDispatcher extends StrutsPrepareAndExecuteFilter{
 	     	    params.put("config", getStrutsXMLs(value));
 	        else
 		        params.put(name, value);
-        }        
+        }
         return new Dispatcher(config.getServletContext(), params);
     }
     
 	private String getStrutsXMLs(String defaultCfg) {     
 	    StringBuffer strutsxmls = new StringBuffer(100);
-	    strutsxmls.append(defaultCfg).append(",");
+	    if(defaultCfg!=null)
+	    	strutsxmls.append(defaultCfg).append(",");
 	    strutsxmls.append(ConfigFactory.getFactory().getSysPath());
-	    strutsxmls.append("WEB-INF/classes/config/struts.xml");
+	    strutsxmls.append("WEB-INF/classes/struts.xml");
         for (String xml : xmls)
-        	strutsxmls.append(",").append(xml);   
+        	strutsxmls.append(",").append(xml);
 		return strutsxmls.toString();    
 	} 
 	

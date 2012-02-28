@@ -21,7 +21,7 @@ public class PlatformTestPlugin implements IPlugin{
 	public void init() {
 		if(logger.isInfoEnabled())
 			logger.info("初始化插件[" + getName() + "]");
-		ConfigFactory.getFactory().registerSpringMvcPluginXml("classpath:test/com/shine/platform/platformMvc.xml");
+		ConfigFactory.getFactory().registerSpringPluginXml("classpath:test/com/shine/platform/testContext.xml");
 		StrutsFilterDispatcher.registerXML(getClass().getResource("struts.xml").getPath());
 	}
 
