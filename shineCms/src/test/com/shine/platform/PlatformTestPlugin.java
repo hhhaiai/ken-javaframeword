@@ -4,7 +4,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.shine.platform.context.ConfigFactory;
-import com.shine.platform.context.StrutsFilterDispatcher;
 import com.shine.platform.plugin.IPlugin;
 
 public class PlatformTestPlugin implements IPlugin{
@@ -19,15 +18,14 @@ public class PlatformTestPlugin implements IPlugin{
 	}
 
 	public void init() {
-		if(logger.isInfoEnabled())
-			logger.info("初始化插件[" + getName() + "]");
+		if(logger.isDebugEnabled())
+			logger.debug("初始化插件[" + getName() + "]");
 		ConfigFactory.getFactory().registerSpringPluginXml("classpath:test/com/shine/platform/testContext.xml");
-		StrutsFilterDispatcher.registerXML(getClass().getResource("struts.xml").getPath());
+		ConfigFactory.getFactory().registerStrutsPluginXml(getClass().getResource("struts.xml").getPath());
 	}
 
 	public void start() {
-		if(logger.isInfoEnabled())
-			logger.info("启动插件[" + getName() + "]");
+		
 	}
 	
 }

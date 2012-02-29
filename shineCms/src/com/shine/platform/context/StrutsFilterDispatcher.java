@@ -1,10 +1,7 @@
 package com.shine.platform.context;
 
-import java.io.File;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.FilterConfig;
@@ -21,10 +18,9 @@ import org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter;
 /**
  * 通过插件动态加载struts配置文件
  * @author JiangKunpeng 2012.02.28
- * @version 2012.02.28
+ * @version 2012.02.29
  */
 public class StrutsFilterDispatcher extends StrutsPrepareAndExecuteFilter{	
-	private static final List<String> xmls = new ArrayList<String>();
 
 	@Override   
 	public void init(FilterConfig filterConfig) throws ServletException  {		
@@ -44,33 +40,35 @@ public class StrutsFilterDispatcher extends StrutsPrepareAndExecuteFilter{
             init.cleanup();
         }
 	}
-	
+	private static final String CONFIG = "config";
     private Dispatcher createDispatcher(HostConfig config) {
         Map<String, String> params = new HashMap<String, String>();
-        for (Iterator e = config.getInitParameterNames(); e.hasNext(); ) {
- 	        String name = (String) e.next();
+        for (Iterator<String> e = config.getInitParameterNames(); e.hasNext(); ) {
+ 	        String name = e.next();
  	        String value = config.getInitParameter(name); 
-	        if(name.equals("config"))
-	     	    params.put("config", getStrutsXMLs(value));
+	        if(CONFIG.equals(name))
+	     	    params.put(CONFIG, getStrutsXMLs(value));
 	        else
 		        params.put(name, value);
         }
         return new Dispatcher(config.getServletContext(), params);
     }
     
-	private String getStrutsXMLs(String defaultCfg) {     
-	    StringBuffer strutsxmls = new StringBuffer(100);
-	    if(defaultCfg!=null)
-	    	strutsxmls.append(defaultCfg).append(",");
-	    strutsxmls.append(ConfigFactory.getFactory().getSysPath());
-	    strutsxmls.append("WEB-INF/classes/struts.xml");
-        for (String xml : xmls)
-        	strutsxmls.append(",").append(xml);
-		return strutsxmls.toString();    
+	private String getStrutsXMLs(String defaultCfg) {
+	    StringBuffer strutsXmls = new StringBuffer(100);
+	    if(defaultCfg!=null){
+	    	strutsXmls.append(defaultCfg);
+	    	for(String xml : ConfigFactory.getFactory().getStrutsPluginXmls()){
+	    		strutsXmls.append(",").append(xml.replaceAll("%20", " "));
+	    	}
+	    }else{
+	    	for(String xml : ConfigFactory.getFactory().getStrutsPluginXmls()){
+	    		strutsXmls.append(xml.replaceAll("%20", " ")).append(",");
+	    	}
+	    	int len = strutsXmls.length();
+	    	if(len>0)
+	    		strutsXmls.delete(len-1, len);
+	    }
+		return strutsXmls.toString();
 	} 
-	
-	public static void registerXML(String xmlPath){
-		if(xmlPath != null)
-			xmls.add(xmlPath.replace("%20", " "));	
-	}
 }

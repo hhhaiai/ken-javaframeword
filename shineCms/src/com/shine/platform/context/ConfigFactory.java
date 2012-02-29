@@ -19,16 +19,16 @@ import com.shine.util.xml.JDomUtil;
 /**
  * 系统配置工厂
  * @author JiangKunpeng 2012.02.15
- * @version 2012.02.15
+ * @version 2012.02.29
  */
 final public class ConfigFactory {
 	private static final ConfigFactory factory = new ConfigFactory();
 	private Map<String, Object> attributes = new HashMap<String, Object>();
 	private String sysPath;
 	private ApplicationContext springContext;
-	private Set<String> strutsPluginXmls = new HashSet<String>();
 	private Set<String> springPluginXmls = new HashSet<String>();
 	private Set<String> springMvcPluginXmls = new HashSet<String>();
+	private Set<String> strutsPluginXmls = new HashSet<String>();
 	private ConfigFactory(){
 	}
 	

@@ -4,6 +4,7 @@
 	<appVendor>姜昆鹏</appVendor>
 	<plugins>
 		<plugin>com.shine.platform.PlatformPlugin</plugin>
+		<plugin>com.shine.platform.security.DefaultUrlSecurityPlugin</plugin>
 		<plugin>test.com.shine.platform.PlatformTestPlugin</plugin>
 	</plugins>
 </boot>
