@@ -3,11 +3,12 @@
 	<appName>Sunshine CMS</appName>
 	<appVendor>广州阳光耐特电子有限公司</appVendor>
 	<project>com.shine.project.shineCms.ShineCmsStarter</project>
-	<indexPage>/WEB-INF/view/project/shineCms/index.jsp</indexPage>
+	<indexPage>sysmgr/login_home.do</indexPage>
 	<beforeXmls>
 		<xml type="spring">classpath:com/shine/project/shineCms/config/applicationContext.xml</xml>
 	</beforeXmls>
 	<plugins>
+		<plugin>com.shine.platform.PlatformPlugin</plugin>
 		<plugin>com.shine.platform.security.DefaultUrlSecurityPlugin</plugin>
 		<plugin>com.shine.common.sysmgr.SysMgrPlugin</plugin>
 	</plugins>

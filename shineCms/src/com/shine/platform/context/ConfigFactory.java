@@ -54,8 +54,8 @@ final public class ConfigFactory {
 		bootXmlPath = sysPath + "WEB-INF" + File.separator + "classes"+ File.separator + bootXmlPath;
 		Element bootEle = JDomUtil.file2Doc(bootXmlPath).getRootElement();
 		
-		appName = bootEle.getAttributeValue("appName");
-		indexPage = bootEle.getAttributeValue("indexPage");
+		appName = bootEle.getChildText("appName");
+		indexPage = bootEle.getChildText("indexPage");
 		
 		List<Element> initXmls = JDomUtil.getSunList(bootEle, "beforeXmls");
 		if(initXmls!=null){
