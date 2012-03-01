@@ -45,7 +45,7 @@ var data = [ {
 	"text" : "node4"
 } ];
 $(document).ready(function() {
-	$("#mytree").omTree( {
+	$("#leadtree").omTree( {
 		dataSource : data
 	});
 });
@@ -193,11 +193,11 @@ ul.nav a:hover,ul.nav a:active,ul.nav a:focus {
 				<!-- end .header -->
 			</div>
 			<div class="sidebar1">
-				<ul id="mytree" />
+				<ul id="leadtree" />
 				<!-- end .sidebar1 -->
 			</div>
 			<div class="content">
-				<iframe id="content-frame" name="content-frame" frameborder="0" src="${platform:getPageName('systemInfo')}"></iframe>
+				<iframe id="content-frame" name="content-frame" frameborder="0" src="${platform:getPageName('pluginManger')}"></iframe>
 				<!-- end .content -->
 			</div>
 			<div class="sidebar2">
