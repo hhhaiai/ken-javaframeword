@@ -12,8 +12,6 @@
            http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
            http://www.springframework.org/schema/aop
            http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
-         
-	<bean id="pluginContext" class="com.shine.platform.plugin.PluginContext" scope="singleton"/>
-	<bean id="configFactory" class="com.shine.platform.context.ConfigFactory" factory-method="getFactory"/>
-	<bean id="indexAction" class="com.shine.platform.web.IndexAction"/>
+           
+	<bean id="loginAction" class="com.shine.common.sysmgr.web.LoginAction"/>
 </beans>

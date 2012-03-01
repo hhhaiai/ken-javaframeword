@@ -1,13 +1,12 @@
 package test.com.shine.platform;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import com.shine.platform.context.ConfigFactory;
+import com.shine.platform.logger.ILogger;
+import com.shine.platform.logger.LoggerFactory;
 import com.shine.platform.plugin.IPlugin;
 
 public class PlatformTestPlugin implements IPlugin{
-	Log logger = LogFactory.getLog(getClass());
+	ILogger logger = LoggerFactory.getLogger(getClass());
 	
 	public void destory() {
 		
@@ -18,15 +17,13 @@ public class PlatformTestPlugin implements IPlugin{
 	}
 
 	public void init() {
-		if(logger.isDebugEnabled())
-			logger.debug("初始化插件[" + getName() + "]");
+		logger.debug("初始化插件[" + getName() + "]");
 		ConfigFactory.getFactory().registerSpringPluginXml("classpath:test/com/shine/platform/testContext.xml");
 		ConfigFactory.getFactory().registerStrutsPluginXml(getClass().getResource("struts.xml").getPath());
 	}
 
 	public void start() {
-		if(logger.isDebugEnabled())
-			logger.debug("启动插件[" + getName() + "]");
+		logger.debug("启动插件[" + getName() + "]");
 	}
 	
 }

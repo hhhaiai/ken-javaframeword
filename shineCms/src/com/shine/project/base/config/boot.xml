@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<boot>
-	<appName>Sunshine CMS</appName>
-	<appVendor>广州阳光耐特电子有限公司</appVendor>
-	<plugins>
-		<plugin>com.shine.platform.PlatformPlugin</plugin>
-	</plugins>
-</boot>

@@ -151,6 +151,19 @@ final public class JDomUtil {
 		}
 		return null;
 	}
+	
+	/**
+	 * 获取指定子节点的所有孙子节点
+	 * @param ele		
+	 * @param nodeName	子节点名
+	 * @return
+	 */
+	public static List getSunList(Element ele,String nodeName){
+		Element node = ele.getChild(nodeName);
+		if(node==null)
+			return null;
+		return node.getChildren();
+	}
 
 	/**
 	 * 更新xml文件

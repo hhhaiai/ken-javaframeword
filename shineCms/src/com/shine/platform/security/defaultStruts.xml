@@ -5,14 +5,14 @@
 
 <struts>
     <constant name="struts.i18n.encoding" value="UTF-8"></constant>
-    <constant name="struts.action.extension" value="do" />
+    <constant name="struts.action.extension" value="do,htm" />
 	<constant name="struts.locale" value="zh_CN" />
 	<constant name="struts.custom.i18n.resources" value="messageResource" />
 	<constant name="struts.objectFactory" value="spring" />
 	<constant name="struts.devMode" value="false" />
     <constant name="struts.multipart.maxSize" value="50000000" />
     
-    <package name="base" extends="struts-default" abstract="true">
+    <package name="back" extends="struts-default" abstract="true">
     	<interceptors>
     		<interceptor name="urlSecurityInterceptor" class="defaultUrlSecurityInterceptor" />
     		<interceptor name="exception" class="com.opensymphony.xwork2.interceptor.ExceptionMappingInterceptor"/>

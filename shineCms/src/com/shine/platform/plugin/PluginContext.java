@@ -3,8 +3,8 @@ package com.shine.platform.plugin;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import com.shine.platform.logger.ILogger;
+import com.shine.platform.logger.LoggerFactory;
 
 /**
  * 插件上下文
@@ -14,7 +14,7 @@ import org.apache.commons.logging.LogFactory;
 public class PluginContext{
 	private static final PluginContext context = new PluginContext();
 	private List<IPlugin> plugins = new ArrayList<IPlugin>();
-	private Log logger = LogFactory.getLog(getClass());
+	private ILogger logger = LoggerFactory.getLogger(getClass());
 	
 	private PluginContext(){
 	}
@@ -50,8 +50,7 @@ public class PluginContext{
 			logger.error("插件注入失败,因为缺少名称：" + plugin.getClass().getName());
 			return;
 		}
-		if(logger.isDebugEnabled())
-			logger.debug("注入插件["+plugin.getName()+"->"+plugin.getClass().getName()+"]");
+		logger.debug("注入插件["+plugin.getName()+"->"+plugin.getClass().getName()+"]");
 		for(int i=0;i<plugins.size();i++){
 			IPlugin p = plugins.get(i);
 			if(p.getName().equals(plugin.getName()))
@@ -64,8 +63,7 @@ public class PluginContext{
 	 * 初始化所有插件
 	 */
 	public void initPlugins(){
-		if(logger.isDebugEnabled())
-			logger.debug("开始初始化所有插件...");
+		logger.debug("开始初始化所有插件...");
 		for(IPlugin plugin:plugins){
 			plugin.init();
 		}
@@ -75,8 +73,7 @@ public class PluginContext{
 	 * 启动所有插件
 	 */
 	public void startPlugins(){
-		if(logger.isDebugEnabled())
-			logger.debug("开始启动所有插件...");
+		logger.debug("开始启动所有插件...");
 		for(IPlugin plugin:plugins){
 			plugin.start();
 		}

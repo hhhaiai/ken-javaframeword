@@ -1,13 +1,12 @@
-package com.shine.util;
-
-import java.util.List;
+package com.shine.framework.dao.util;
 
 /**
  * 数组工具类
  * @author JiangKunpeng	2011.05.27
- * @version 2012.03.01
+ * @version 2011.06.10
  */
 final public class ArrayUtil {
+	
 	private ArrayUtil(){
 	}
 	
@@ -63,38 +62,4 @@ final public class ArrayUtil {
 		}
 		return flag;
 	}
-	
-	/**
-	 * 将值加入List，确保不存在相同值
-	 * @param dest		目标List
-	 * @param value		要加入的值
-	 * @return
-	 */
-	public static List<String> addNoReplaceRepeat(List<String> dest,String value){
-		boolean repeat = false;
-		int len = dest.size();
-		for(int i=0;i<len;i++){
-			if(dest.get(i).equals(value)){
-				repeat = true;
-				break;
-			}
-		}
-		if(!repeat)
-			dest.add(value);
-		return dest;
-	}
-	
-	/**
-	 * 将List全部加入目标List，确保不存在相同值
-	 * @param dest		目标List
-	 * @param values	要加入的值的List(将该List中的所有值加入dest)
-	 * @return
-	 */
-	public static List<String> addAllNoReplaceRepeat(List<String> dest,List<String> values){
-		for(String v:values){
-			addNoReplaceRepeat(dest, v);
-		}
-		return dest;
-	}
-	
 }

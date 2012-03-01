@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+    <package name="sysmgr" extends="back" namespace="/sysmgr">
+    	<action name="login_*" class="loginAction" method="{1}">
+    		<result name="home">/WEB-INF/view/common/sysmgr/login/home.jsp</result>
+    	</action>
+    </package>
+</struts>

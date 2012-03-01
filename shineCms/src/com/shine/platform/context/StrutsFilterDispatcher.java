@@ -15,6 +15,8 @@ import org.apache.struts2.dispatcher.ng.PrepareOperations;
 import org.apache.struts2.dispatcher.ng.filter.FilterHostConfig;
 import org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter;
 
+import com.shine.platform.logger.LoggerFactory;
+
 /**
  * 通过插件动态加载struts配置文件
  * @author JiangKunpeng 2012.02.28
@@ -69,7 +71,7 @@ public class StrutsFilterDispatcher extends StrutsPrepareAndExecuteFilter{
 	    	if(len>0)
 	    		strutsXmls.delete(len-1, len);
 	    }
-	    System.out.println(strutsXmls);
+	    LoggerFactory.getLogger(getClass()).debug("Struts XMLs:\r\n" + (strutsXmls.toString().replaceAll(",", "\r\n")));
 		return strutsXmls.toString();
 	} 
 }

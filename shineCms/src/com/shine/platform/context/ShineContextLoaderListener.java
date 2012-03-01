@@ -13,6 +13,7 @@ import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
+import com.shine.platform.logger.LoggerFactory;
 import com.shine.platform.plugin.PluginContext;
 
 /**
@@ -22,6 +23,7 @@ import com.shine.platform.plugin.PluginContext;
  * @author JiangKunpeng 2012.02.14
  * @version 2012.02.17
  */
+@SuppressWarnings("deprecation")
 public class ShineContextLoaderListener extends ContextLoaderListener{
 	private ContextLoader contextLoader;
 
@@ -58,6 +60,8 @@ public class ShineContextLoaderListener extends ContextLoaderListener{
 		//将默认的spring配置文件与插件注入的配置文件融合
 		String configLocation = sc.getInitParameter(CONFIG_LOCATION_PARAM);
 		String fusionConfigLocation = ConfigFactory.getFactory().fusionSpringXml(configLocation, "Spring");
+		
+		LoggerFactory.getLogger(getClass()).debug("Spring XMLs:\r\n" + (fusionConfigLocation.replaceAll(",", "\r\n")));
 		
 		wac.setParent(parent);
 		wac.setServletContext(sc);

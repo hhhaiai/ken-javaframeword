@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">    
+<hibernate-mapping>
+	<class name="com.shine.common.sysmgr.entity.SysUser" table="SYS_USER" 
+		dynamic-insert="false" dynamic-update="true">
+		<id name="userId" column="ID" type="java.lang.String">
+			<generator class="uuid.hex" />
+		</id>
+		<property name="username" column="USERNAME" type="java.lang.String" length="50" not-null="true"/>
+		<property name="password" column="PASSWORD" type="java.lang.String" length="128" not-null="true"/>
+		<property name="name" column="NAME" type="java.lang.String" length="50" not-null="true"/>
+		
+		<property name="delflag" type="java.lang.Integer" not-null="false" insert="false" update="false">
+			<column name="DELFLAG" sql-type="NUMBER(1);DEFAULT 0" /> 		  
+		</property>
+		<property name="deltime" column="DELTIME" type="java.util.Date" not-null="false" insert="false" update="false"/>
+    </class>
+</hibernate-mapping>

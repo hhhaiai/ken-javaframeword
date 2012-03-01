@@ -21,10 +21,13 @@ import com.shine.util.xml.JDomUtil;
  * @author JiangKunpeng 2012.02.15
  * @version 2012.03.01
  */
+@SuppressWarnings("unchecked")
 final public class ConfigFactory {
 	private static final ConfigFactory factory = new ConfigFactory();
 	private Map<String, Object> attributes = new HashMap<String, Object>();
 	private String sysPath;
+	private String appName;
+	private String indexPage;
 	private ApplicationContext springContext;
 	private List<String> springPluginXmls = new ArrayList<String>();
 	private List<String> springMvcPluginXmls = new ArrayList<String>();
@@ -50,7 +53,19 @@ final public class ConfigFactory {
 		String bootXmlPath = root.getChildText("boot");
 		bootXmlPath = sysPath + "WEB-INF" + File.separator + "classes"+ File.separator + bootXmlPath;
 		Element bootEle = JDomUtil.file2Doc(bootXmlPath).getRootElement();
-		List<Element> plugins = bootEle.getChild("plugins").getChildren();
+		
+		appName = bootEle.getAttributeValue("appName");
+		indexPage = bootEle.getAttributeValue("indexPage");
+		
+		List<Element> initXmls = JDomUtil.getSunList(bootEle, "beforeXmls");
+		if(initXmls!=null){
+			for(Element xml:initXmls){
+				String xmlType = xml.getAttributeValue("type");
+				if("spring".equals(xmlType))
+					registerSpringPluginXml(xml.getValue());
+			}
+		}
+		List<Element> plugins = JDomUtil.getSunList(bootEle, "plugins");
 		if(plugins!=null){
 			for(Element plugin:plugins){
 				PluginContext.getContext().registerPlugin(plugin.getText());
@@ -63,7 +78,7 @@ final public class ConfigFactory {
 	 * @param xmlPath
 	 */
 	public void registerStrutsPluginXml(final String xmlPath){
-		ArrayUtil.addWithReplaceRepeat(strutsPluginXmls, xmlPath);
+		ArrayUtil.addNoReplaceRepeat(strutsPluginXmls, xmlPath);
 	}
 	
 	/**
@@ -71,7 +86,7 @@ final public class ConfigFactory {
 	 * @param xmlPath
 	 */
 	public void registerSpringPluginXml(final String xmlPath){
-		ArrayUtil.addWithReplaceRepeat(springPluginXmls, xmlPath);
+		ArrayUtil.addNoReplaceRepeat(springPluginXmls, xmlPath);
 	}
 	
 	/**
@@ -79,7 +94,7 @@ final public class ConfigFactory {
 	 * @param xmlPath
 	 */
 	public void registerSpringMvcPluginXml(final String xmlPath){
-		ArrayUtil.addWithReplaceRepeat(springMvcPluginXmls, xmlPath);
+		ArrayUtil.addNoReplaceRepeat(springMvcPluginXmls, xmlPath);
 	}
 	
 	/**
@@ -102,9 +117,9 @@ final public class ConfigFactory {
 			configs = new ArrayList<String>();
 			String[] cls = configLocation.split(",");
 			for (String cl : cls) {
-				ArrayUtil.addWithReplaceRepeat(configs, cl);
+				ArrayUtil.addNoReplaceRepeat(configs, cl);
 			}
-			ArrayUtil.addAllWithReplaceRepeat(configs, pluginXmls);
+			ArrayUtil.addAllNoReplaceRepeat(configs, pluginXmls);
 		}else{
 			configs = pluginXmls;
 		}
@@ -118,6 +133,12 @@ final public class ConfigFactory {
 
 	public String getSysPath() {
 		return sysPath;
+	}
+	public String getAppName() {
+		return appName;
+	}
+	public String getIndexPage() {
+		return indexPage;
 	}
 	public Object getAttribute(final String name){
 		return attributes.get(name);
