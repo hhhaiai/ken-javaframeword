@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config cache="true" cacheTime="600" cachePath="cache"
+	batchSqlSize="500" batchThreadSize="10" selectThreadSize="10" log="true"
+	logFloderPath="log">
+	<Resource jndi="jdbc/Default" driverClass="com.mysql.jdbc.Driver"
+		dbUserName="root" dbPassWord="root"
+		jdbcUrl="jdbc:mysql://127.0.0.1:3306/sunshine_cms?useUnicode=true&amp;characterEncoding=utf-8"
+		initSize="2" minPoolSize="1" maxPoolSize="10" maxStatements="50"
+		maxIdleTime="60" />
+</config>

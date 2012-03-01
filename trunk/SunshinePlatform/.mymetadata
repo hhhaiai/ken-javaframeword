@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="SunshinePlatform"
+  id="myeclipse.1330575767391"
+  context-root="/SunshinePlatform"
+  j2ee-spec="5.0"
+  archive="SunshinePlatform.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+
