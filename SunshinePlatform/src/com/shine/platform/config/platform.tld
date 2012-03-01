@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+	version="2.0">
+
+	<description>platform Functions</description>
+	<tlib-version>1.0</tlib-version>
+	<short-name>platform</short-name>
+	<uri>/platform</uri>
+
+	<function>
+		<name>getProjectName</name>
+		<function-class>com.shine.platform.tld.PlatformInfoTld</function-class>
+		<function-signature>java.lang.String getProjectName()</function-signature>
+		<example>${platform:getProjectName()}</example>
+	</function>
+	
+	<function>
+		<name>getIndexName</name>
+		<function-class>com.shine.platform.tld.ProjectInfoTld</function-class>
+		<function-signature>java.lang.String getIndexName()</function-signature>
+		<example>${platform:getIndexName()}</example>
+	</function>
+	
+	<function>
+		<name>getPageName</name>
+		<function-class>com.shine.platform.tld.PageTld</function-class>
+		<function-signature>java.lang.String getPageName(java.lang.String)</function-signature>
+		<example>${platform:getPageName(index)}</example>
+	</function>
+</taglib>

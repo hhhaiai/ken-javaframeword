@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<name>Sunshine内容管理系统</name>
+	<plugins>
+		<plugin name="CmsLogger" apiName="Logger" status="run" type="classpath" />
+		<plugin name="CmsDBdao" apiName="DBDao" status="run" type="classpath" />
+	</plugins>
+	<pages>
+		<page type="index" path="project/sunshinecms/index.jsp" />
+		<page type="main" path="project/sunshinecms/index.jsp" />
+		<page type="system" path="project/sunshinecms/system/system.jsp" />
+		<page type="menu" path="project/sunshinecms/index.jsp" />
+		<page type="logo" path="project/sunshinecms/index.jsp" />
+		<page type="head" path="project/sunshinecms/index.jsp" />
+		<page type="bottom" path="project/sunshinecms/index.jsp" />
+		<page type="content" path="project/sunshinecms/index.jsp" />
+		<page type="left" path="project/sunshinecms/index.jsp" />
+		<page type="right" path="project/sunshinecms/index.jsp" />
+	</pages>
+</config>

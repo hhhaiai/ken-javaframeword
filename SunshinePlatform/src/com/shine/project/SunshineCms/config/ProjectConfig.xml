@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<name>Sunshine内容管理系统</name>
+	<plugins>
+		<plugin name="CmsLogger" apiName="Logger" status="run" type="classpath" />
+		<plugin name="CmsDBdao" apiName="DBDao" status="run" type="classpath" />
+		<plugin name="CmsPage" apiName="Page" status="run" type="classpath" />
+	</plugins>
+</config>
