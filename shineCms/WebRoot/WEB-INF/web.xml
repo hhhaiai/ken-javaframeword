@@ -58,6 +58,10 @@
 		<filter-name>struts2</filter-name>
 		<url-pattern>*.htm</url-pattern>
 	</filter-mapping>
+	<filter-mapping>
+		<filter-name>struts2</filter-name>
+		<url-pattern>*.jsp</url-pattern>
+	</filter-mapping>
 	
 	<!-- spring mvc控制
 	<servlet>

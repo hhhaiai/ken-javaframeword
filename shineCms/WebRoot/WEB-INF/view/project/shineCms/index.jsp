@@ -8,9 +8,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
 <head>
 <title>Sunshine CMS</title>
+<script type="text/javascript">
+	alert(2);
+	function test(){
+		alert(3);
+	}
+</script>
 </head>
   
-<body>
-    Sunshine CMS
+<body onload="test();">
+    Sunshine CMSddddddd
 </body>
 </html>
