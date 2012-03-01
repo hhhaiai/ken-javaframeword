@@ -1,12 +1,11 @@
 package com.shine.platform.context;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import javax.servlet.ServletContext;
 
@@ -14,21 +13,22 @@ import org.jdom.Element;
 import org.springframework.context.ApplicationContext;
 
 import com.shine.platform.plugin.PluginContext;
+import com.shine.util.ArrayUtil;
 import com.shine.util.xml.JDomUtil;
 
 /**
  * 系统配置工厂
  * @author JiangKunpeng 2012.02.15
- * @version 2012.02.29
+ * @version 2012.03.01
  */
 final public class ConfigFactory {
 	private static final ConfigFactory factory = new ConfigFactory();
 	private Map<String, Object> attributes = new HashMap<String, Object>();
 	private String sysPath;
 	private ApplicationContext springContext;
-	private Set<String> springPluginXmls = new HashSet<String>();
-	private Set<String> springMvcPluginXmls = new HashSet<String>();
-	private Set<String> strutsPluginXmls = new HashSet<String>();
+	private List<String> springPluginXmls = new ArrayList<String>();
+	private List<String> springMvcPluginXmls = new ArrayList<String>();
+	private List<String> strutsPluginXmls = new ArrayList<String>();
 	private ConfigFactory(){
 	}
 	
@@ -63,7 +63,7 @@ final public class ConfigFactory {
 	 * @param xmlPath
 	 */
 	public void registerStrutsPluginXml(final String xmlPath){
-		strutsPluginXmls.add(xmlPath);
+		ArrayUtil.addWithReplaceRepeat(strutsPluginXmls, xmlPath);
 	}
 	
 	/**
@@ -71,7 +71,7 @@ final public class ConfigFactory {
 	 * @param xmlPath
 	 */
 	public void registerSpringPluginXml(final String xmlPath){
-		springPluginXmls.add(xmlPath);
+		ArrayUtil.addWithReplaceRepeat(springPluginXmls, xmlPath);
 	}
 	
 	/**
@@ -79,7 +79,7 @@ final public class ConfigFactory {
 	 * @param xmlPath
 	 */
 	public void registerSpringMvcPluginXml(final String xmlPath){
-		springMvcPluginXmls.add(xmlPath);
+		ArrayUtil.addWithReplaceRepeat(springMvcPluginXmls, xmlPath);
 	}
 	
 	/**
@@ -96,15 +96,15 @@ final public class ConfigFactory {
 		return configLocation;
 	}
 	
-	private String fusionSpringXml(final String configLocation,final Set<String> pluginXmls){
-		Set<String> configs = null;
+	private String fusionSpringXml(final String configLocation,final List<String> pluginXmls){
+		List<String> configs = null;
 		if(configLocation!=null){
-			configs = new HashSet<String>();
+			configs = new ArrayList<String>();
 			String[] cls = configLocation.split(",");
 			for (String cl : cls) {
-				configs.add(cl);
+				ArrayUtil.addWithReplaceRepeat(configs, cl);
 			}
-			configs.addAll(pluginXmls);
+			ArrayUtil.addAllWithReplaceRepeat(configs, pluginXmls);
 		}else{
 			configs = pluginXmls;
 		}
@@ -128,13 +128,13 @@ final public class ConfigFactory {
 	public void setSpringContext(ApplicationContext springContext) {
 		this.springContext = springContext;
 	}
-	public Set<String> getSpringPluginXmls() {
+	public List<String> getSpringPluginXmls() {
 		return springPluginXmls;
 	}
-	public Set<String> getSpringMvcPluginXmls() {
+	public List<String> getSpringMvcPluginXmls() {
 		return springMvcPluginXmls;
 	}
-	public Set<String> getStrutsPluginXmls() {
+	public List<String> getStrutsPluginXmls() {
 		return strutsPluginXmls;
 	}
 }

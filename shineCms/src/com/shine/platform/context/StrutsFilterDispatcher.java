@@ -69,6 +69,7 @@ public class StrutsFilterDispatcher extends StrutsPrepareAndExecuteFilter{
 	    	if(len>0)
 	    		strutsXmls.delete(len-1, len);
 	    }
+	    System.out.println(strutsXmls);
 		return strutsXmls.toString();
 	} 
 }

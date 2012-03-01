@@ -25,7 +25,8 @@ public class PlatformTestPlugin implements IPlugin{
 	}
 
 	public void start() {
-		
+		if(logger.isDebugEnabled())
+			logger.debug("启动插件[" + getName() + "]");
 	}
 	
 }
