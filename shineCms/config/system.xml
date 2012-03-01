@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configs>
-	<boot>test/com/shine/boot.xml</boot>
+	<boot>com/shine/project/shineCms/config/boot.xml</boot>
 </configs>

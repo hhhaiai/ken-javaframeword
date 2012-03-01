@@ -4,7 +4,6 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
 	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
-	<display-name>shineCms</display-name>
 	<listener>
 		<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
 	</listener>
@@ -12,10 +11,6 @@
 	<context-param>
 		<param-name>log4jConfigLocation</param-name>
 		<param-value>classpath:log4j.xml</param-value>
-	</context-param>
-	<context-param>
-		<param-name>log4jRefreshInterval</param-name>
-		<param-value>120</param-value>
 	</context-param>
 	
 	<!-- 字符编码过滤器 -->
@@ -40,10 +35,12 @@
 	<listener>
 		<listener-class>com.shine.platform.context.ShineContextLoaderListener</listener-class>
 	</listener>
+	<!-- 
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>classpath:applicationContext.xml</param-value>
 	</context-param>
+	 -->
 	
 	<filter>
 		<filter-name>struts2</filter-name>
@@ -56,6 +53,10 @@
 	<filter-mapping>
 		<filter-name>struts2</filter-name>
 		<url-pattern>*.do</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>struts2</filter-name>
+		<url-pattern>*.htm</url-pattern>
 	</filter-mapping>
 	
 	<!-- spring mvc控制
