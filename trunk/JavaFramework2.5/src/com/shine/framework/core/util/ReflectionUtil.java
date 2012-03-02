@@ -208,4 +208,30 @@ public class ReflectionUtil {
 				.getClass().getInterfaces(), new AopInvocationHandlerImpl(obj));
 	}
 
+	/**
+	 * 检查该object是否实现了该interface
+	 * 
+	 * @param cls
+	 * @param o
+	 * @return
+	 */
+	public static boolean checkClassAndInterface(Class<?> cls, Object o) {
+		Class<?> objectClass = o.getClass();
+		return checkClassAndInterface(cls, objectClass);
+	}
+
+	/**
+	 * 检查该class是否实现了该interface
+	 * 
+	 * @param cls
+	 * @param objectClass
+	 * @return
+	 */
+	public static boolean checkClassAndInterface(Class<?> cls,
+			Class<?> objectClass) {
+		if (cls.isAssignableFrom(objectClass) && !cls.equals(objectClass)) {
+			return true;
+		}
+		return false;
+	}
 }
