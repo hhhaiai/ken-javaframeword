@@ -2,6 +2,7 @@ package com.shine.Plugin;
 
 import com.shine.Plugin.util.PluginMap;
 import com.shine.framework.Ioc.IOCFactory;
+import com.shine.framework.core.util.ReflectionUtil;
 import com.shine.framework.core.util.ZipUtil;
 
 /**
@@ -79,5 +80,22 @@ public class PluginManager {
 			return (T) map.get(name);
 		else
 			return null;
+	}
+
+	/**
+	 * 获取插件
+	 * 
+	 * @param <T>
+	 * @param interfaceClazz
+	 * @return
+	 */
+	public <T> T getPlugin(Class<T> interfaceClazz) throws Exception {
+		for (Plugin p : map.values()) {
+			if (ReflectionUtil.checkClassAndInterface(interfaceClazz, p)) {
+				return (T) p;
+			}
+		}
+		System.out.println("该插件没有实现:" + interfaceClazz.toString());
+		return null;
 	}
 }
