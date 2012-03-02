@@ -42,11 +42,11 @@ public class CmsDBdaoPlugin extends Plugin implements DBDaoIf {
 		DBUtil.getInstance().init(this.cmsDBConfigPath);
 	}
 
-	public ResultSet executeQuery(String sql) {
+	public ResultSet executeQuery(String jndi, String sql) {
 		return DBUtil.getInstance().executeQuery(sql).getRs();
 	}
 
-	public int executeUpdate(String sql) {
+	public int executeUpdate(String jndi, String sql) {
 		return DBUtil.getInstance().executeUpdate(sql);
 	}
 

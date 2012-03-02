@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <config>
 	<name>Sunshine内容管理系统</name>
-	<logo></logo>
+	<logo>/SunshinePlatform/resource/logo/logo.gif</logo>
 	<pageType>Cms</pageType>
 	<index>login</index>
 	<plugins>

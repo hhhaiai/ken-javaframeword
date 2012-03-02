@@ -35,4 +35,11 @@
 		<function-signature>java.lang.String getIndexPage()</function-signature>
 		<example>${platform:getIndexPage()}</example>
 	</function>
+	
+	<function>
+		<name>getLogoImagePath</name>
+		<function-class>com.shine.platform.tld.ProjectInfoTld</function-class>
+		<function-signature>java.lang.String getLogoImagePath()</function-signature>
+		<example>${platform:getLogoImagePath()}</example>
+	</function>
 </taglib>
