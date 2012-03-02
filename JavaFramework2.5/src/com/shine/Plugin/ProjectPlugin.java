@@ -19,6 +19,7 @@ public abstract class ProjectPlugin extends Plugin {
 	private Map<String, Plugin> resourceMap;
 	private String pageType;
 	protected String projectConfigPath;
+	protected String index;
 
 	protected void start() {
 		System.out.println("=============插件:" + this.name
@@ -86,4 +87,13 @@ public abstract class ProjectPlugin extends Plugin {
 	public void setProjectConfigPath(String projectConfigPath) {
 		this.projectConfigPath = projectConfigPath;
 	}
+
+	public String getIndex() {
+		return index;
+	}
+
+	public void setIndex(String index) {
+		this.index = index;
+	}
+
 }
