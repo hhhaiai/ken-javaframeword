@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <config>
 	<name>Sunshine内容管理系统</name>
+	<logo></logo>
+	<pageType>Cms</pageType>
 	<plugins>
-		<plugin name="CmsLogger" apiName="Logger" status="run" type="classpath" />
-		<plugin name="CmsDBdao" apiName="DBDao" status="run" type="classpath" />
-		<plugin name="CmsPage" apiName="Page" status="run" type="classpath" />
+		<plugin name="CmsLogger" type="classpath" />
+		<plugin name="CmsDBdao" type="classpath" />
+		<plugin name="CmsPage" type="classpath" />
 	</plugins>
 </config>

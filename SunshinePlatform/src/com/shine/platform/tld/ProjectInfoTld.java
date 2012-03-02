@@ -11,4 +11,11 @@ public class ProjectInfoTld {
 	public static String getIndexName() {
 		return PlatformManager.getManager().getProjectName();
 	}
+
+	/**
+	 * 获取logo路径path
+	 */
+	public static String getLogoImagePath() {
+		return null;
+	}
 }
