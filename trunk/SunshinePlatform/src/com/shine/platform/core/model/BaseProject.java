@@ -16,19 +16,13 @@ import com.shine.framework.core.util.XmlUitl;
 
 public abstract class BaseProject extends ProjectPlugin {
 
-	@Override
-	protected void pluginStart() {
-		// TODO Auto-generated method stub
-
-	}
-
 	/**
 	 * 加载配置文件
 	 * 
 	 * @param projectConfigPath
 	 * @throws DocumentException
 	 */
-	protected void loadProjectConfigPath(String projectConfigPath)
+	public void loadProjectConfigPath(String projectConfigPath)
 			throws DocumentException {
 		this.projectConfigPath = projectConfigPath;
 		Document doc = XmlUitl.getFileDocument(this.projectConfigPath);
