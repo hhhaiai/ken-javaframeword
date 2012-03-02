@@ -24,10 +24,9 @@
 		<link rel="stylesheet" type="text/css"
 			href="../../resource/css/default/om-default.css" />
 
-		<script type="text/javascript" src="../../resource/js/jquery.min.js" />
-<script type="text/javascript"
-			src="../../resource/js/operamasks-ui.min.js" />
-			
+		<script type="text/javascript" src="../../resource/js/jquery.min.js"></script>
+        <script type="text/javascript"
+			         src="../../resource/js/operamasks-ui.min.js" ></script>
 		<script type="text/javascript">
 		var data=[{"total":126, "rows":
     [
@@ -63,7 +62,8 @@ $(document).ready(function() {
 		} ]
 	});
 });
-</script>
+		</script>
+		
 
 	</head>
 

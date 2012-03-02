@@ -1,7 +1,6 @@
 package com.shine.platform.tld;
 
 import com.shine.Plugin.PluginManager;
-import com.shine.platform.PlatformManager;
 import com.shine.platform.interfaces.PageIf;
 
 public class PageTld {

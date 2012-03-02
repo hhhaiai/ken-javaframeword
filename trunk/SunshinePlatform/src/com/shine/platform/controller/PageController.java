@@ -26,8 +26,14 @@ public class PageController extends BaseController {
 	@RequestMapping(method = RequestMethod.GET)
 	public String page(HttpServletRequest request,
 			HttpServletResponse response, HttpSession session) {
-		return this.redirect(PluginManager.getManager().getPlugin(PageIf.class,
-				"CmsPage").getPage("Cms", request.getParameter("param")));
+		try {
+			return this
+					.redirect(PluginManager.getManager()
+							.getPlugin(PageIf.class).getPage("Cms",
+									request.getParameter("param")));
+		} catch (Exception e) {
+		}
+		return null;
 	}
 
 	@SuppressWarnings("unchecked")
