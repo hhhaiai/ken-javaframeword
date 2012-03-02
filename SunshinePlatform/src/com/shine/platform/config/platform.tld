@@ -28,4 +28,11 @@
 		<function-signature>java.lang.String getPageName(java.lang.String)</function-signature>
 		<example>${platform:getPageName(index)}</example>
 	</function>
+	
+	<function>
+		<name>getIndexPage</name>
+		<function-class>com.shine.platform.tld.ProjectInfoTld</function-class>
+		<function-signature>java.lang.String getIndexPage()</function-signature>
+		<example>${platform:getIndexPage()}</example>
+	</function>
 </taglib>

@@ -1,6 +1,7 @@
 package com.shine.platform.tld;
 
 import com.shine.Plugin.PluginManager;
+import com.shine.platform.PlatformManager;
 import com.shine.platform.interfaces.PageIf;
 
 public class PageTld {
@@ -13,8 +14,13 @@ public class PageTld {
 	public static String getPageName(String pageName) {
 		StringBuffer buffer = new StringBuffer();
 		buffer.append("/SunshinePlatform");
-		buffer.append(PluginManager.getManager().getPlugin(PageIf.class,
-				"CmsPage").getPage("Cms", pageName));
+		try {
+			buffer.append(PluginManager.getManager().getPlugin(PageIf.class)
+					.getPage(
+							PlatformManager.getManager().getProjectPlugin()
+									.getPageType(), pageName));
+		} catch (Exception e) {
+		}
 		return buffer.toString();
 	}
 }
