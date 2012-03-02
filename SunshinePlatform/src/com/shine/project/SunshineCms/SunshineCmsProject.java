@@ -13,7 +13,7 @@ public class SunshineCmsProject extends BaseProject {
 
 	@Override
 	protected void pluginStart() {
-		// TODO Auto-generated method stub
+		
 
 	}
 

@@ -17,6 +17,7 @@ import com.shine.framework.Ioc.IOCFactory;
 import com.shine.framework.core.util.JarLoader;
 import com.shine.framework.core.util.ReflectionUtil;
 import com.shine.framework.core.util.XmlUitl;
+import com.shine.platform.core.model.BaseProject;
 import com.shine.platform.interfaces.LoggerIf;
 
 /**
@@ -39,7 +40,7 @@ public class PlatformManager {
 	// 工程class路径
 	private String projectClassPath = null;
 	// project plugin
-	private ProjectPlugin projectPlugin = null;
+	private BaseProject projectPlugin = null;
 	// plugins 路径
 	private String pluginPath = null;
 	// project 配置文件 路径
@@ -65,14 +66,16 @@ public class PlatformManager {
 				this.projectClassPath = projectClassBuffer.toString();
 				System.out.println(this.projectClassPath);
 				projectClassBuffer = null;
-				projectPlugin = (ProjectPlugin) ReflectionUtil
+				projectPlugin = (BaseProject) ReflectionUtil
 						.getClasstoObject(this.projectClassPath);
 
 				// 加载项目插件
 				this.projectConfigPath = projectPlugin.getClass().getResource(
 						"config/ProjectConfig.xml").getPath().replace("%20",
 						" ");
+
 				PluginManager.getManager().loadPlugin(projectPlugin);
+				projectPlugin.loadProjectConfigPath(projectConfigPath);
 
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -90,7 +93,6 @@ public class PlatformManager {
 	public void destroy() {
 		System.err.println("----[" + this.projectName + "]Destroy ----");
 	}
-
 
 	public String getSysPath() {
 		return sysPath;
@@ -124,11 +126,11 @@ public class PlatformManager {
 		this.projectClassPath = projectClassPath;
 	}
 
-	public ProjectPlugin getProjectPlugin() {
+	public BaseProject getProjectPlugin() {
 		return projectPlugin;
 	}
 
-	public void setProjectPlugin(ProjectPlugin projectPlugin) {
+	public void setProjectPlugin(BaseProject projectPlugin) {
 		this.projectPlugin = projectPlugin;
 	}
 
