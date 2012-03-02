@@ -73,7 +73,6 @@ public class PlatformManager {
 						"config/ProjectConfig.xml").getPath().replace("%20",
 						" ");
 				PluginManager.getManager().loadPlugin(projectPlugin);
-				this.loadPlugins();
 
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -92,50 +91,6 @@ public class PlatformManager {
 		System.err.println("----[" + this.projectName + "]Destroy ----");
 	}
 
-	/**
-	 * 加载插件
-	 */
-	private void loadPlugins() {
-		System.err.println("----[load plugins] ----");
-		try {
-			Document doc = XmlUitl.getFileDocument(this.projectConfigPath);
-			List<Element> pluginList = XmlUitl.getAllTag(doc, "plugin");
-			for (Element element : pluginList) {
-				Map<String, String> map = XmlUitl.getAllAttribute(element);
-				if (map.get("type").equals(PluginTypes.CLASSPATH)) {
-					try {
-						PluginManager.getManager().loadPlugin(
-								(Plugin) ReflectionUtil
-										.getClasstoObject(makeupLocalPlugin(map
-												.get("name"))));
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-				}
-				map = null;
-			}
-			pluginList = null;
-		} catch (DocumentException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * 找寻插件文件
-	 * 
-	 * @param pluginName
-	 * @return
-	 */
-	private String makeupLocalPlugin(String pluginName) {
-		StringBuffer pluginPathBuffer = new StringBuffer();
-		pluginPathBuffer.append("com.shine.plugins.");
-		pluginPathBuffer.append(pluginName);
-		pluginPathBuffer.append(".");
-		pluginPathBuffer.append(pluginName);
-		pluginPathBuffer.append("Plugin");
-		return pluginPathBuffer.toString();
-	}
 
 	public String getSysPath() {
 		return sysPath;
