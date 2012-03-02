@@ -24,7 +24,13 @@ public class PlatformController extends BaseController {
 	public String login(HttpServletRequest request,
 			HttpServletResponse response, HttpSession session) {
 		System.out.println(request.getParameter("id"));
-		return this.redirect(PluginManager.getManager().getPlugin(PageIf.class,
-				"CmsPage").getPage("Cms", "system"));
+		try {
+			return this.redirect(PluginManager.getManager().getPlugin(
+					PageIf.class).getPage(
+					PlatformManager.getManager().getProjectPlugin()
+							.getPageType(), "system"));
+		} catch (Exception e) {
+		}
+		return null;
 	}
 }

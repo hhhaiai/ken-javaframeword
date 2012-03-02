@@ -16,6 +16,6 @@ public class ProjectInfoTld {
 	 * 获取logo路径path
 	 */
 	public static String getLogoImagePath() {
-		return null;
+		return PlatformManager.getManager().getProjectPlugin().getLogoPath();
 	}
 }
