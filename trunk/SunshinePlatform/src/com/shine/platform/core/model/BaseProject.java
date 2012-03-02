@@ -41,6 +41,11 @@ public abstract class BaseProject extends ProjectPlugin {
 		List<Element> pageTypeList = XmlUitl.getAllTag(doc, "pageType");
 		this.setPageType(pageTypeList.get(0).getText());
 		pageTypeList = null;
+		
+		// 加载项目index
+		List<Element> indexTypeList = XmlUitl.getAllTag(doc, "index");
+		this.setIndex(indexTypeList.get(0).getText());
+		indexTypeList = null;
 
 		// 加载插件
 		List<Element> pluginList = XmlUitl.getAllTag(doc, "plugin");
@@ -76,5 +81,4 @@ public abstract class BaseProject extends ProjectPlugin {
 		pluginPathBuffer.append("Plugin");
 		return pluginPathBuffer.toString();
 	}
-
 }
