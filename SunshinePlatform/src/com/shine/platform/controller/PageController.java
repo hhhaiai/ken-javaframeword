@@ -27,10 +27,10 @@ public class PageController extends BaseController {
 	public String page(HttpServletRequest request,
 			HttpServletResponse response, HttpSession session) {
 		try {
-			return this
-					.redirect(PluginManager.getManager()
-							.getPlugin(PageIf.class).getPage("Cms",
-									request.getParameter("param")));
+			return this.redirect(PluginManager.getManager().getPlugin(
+					PageIf.class).getPage(
+					PlatformManager.getManager().getProjectPlugin()
+							.getPageType(), request.getParameter("param")));
 		} catch (Exception e) {
 		}
 		return null;

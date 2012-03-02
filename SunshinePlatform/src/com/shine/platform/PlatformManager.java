@@ -52,6 +52,9 @@ public class PlatformManager {
 		return manager;
 	}
 
+	/**
+	 * 启动平台
+	 */
 	public void start() {
 		if (this.projectName != null) {
 			System.err.println("----[" + this.projectName + "]Starting ----");
