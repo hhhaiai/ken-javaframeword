@@ -7,7 +7,9 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 <script type="text/javascript" src="${path}/r/operamasks-ui/js/jquery.min.js"></script>
 <script type="text/javascript" src="${path}/r/operamasks-ui/js/operamasks-ui.min.js"></script>
-<link rel="stylesheet" href="${path}/r/operamasks-ui/themes/default/om-all.css">
+<script type="text/javascript" src="${path}/r/operamasks-ui/demo/data.js"></script>
+<script type="text/javascript" src="${path}/r/operamasks-ui/demo/demo.js"></script>
+<link rel="stylesheet" href="${path}/r/operamasks-ui/css/default/om-default.css">
 </head>
 
 <body>
