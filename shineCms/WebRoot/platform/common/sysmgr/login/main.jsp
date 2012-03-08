@@ -71,7 +71,7 @@
     <TD style="COLOR: #880000">1725440647</TD></TR>
   <TR>
     <TD align=right>免费模板网：</TD>
-    <TD style="COLOR: #880000"><a href="http://www.865171.cn">www.17tian.com</a>
+    <TD style="COLOR: #880000"><a href="http://www.865171.cn" target="_blank">www.17tian.com</a>
     </TD>
   </TR>
 </TABLE>
