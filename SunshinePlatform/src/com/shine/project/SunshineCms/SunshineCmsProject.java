@@ -14,7 +14,6 @@ public class SunshineCmsProject extends BaseProject {
 	@Override
 	protected void pluginStart() {
 		
-
 	}
 
 }

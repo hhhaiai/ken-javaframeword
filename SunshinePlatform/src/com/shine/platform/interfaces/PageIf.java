@@ -52,6 +52,7 @@ public interface PageIf extends BaseIf {
 			String pageContent);
 
 	/**
+	 * 
 	 * 获取所有上传类型
 	 * 
 	 * @return
