@@ -5,15 +5,15 @@
 <hibernate-mapping>
 	<class name="com.shine.common.sysmgr.entity.SysUser" table="SYS_USER" 
 		dynamic-insert="false" dynamic-update="true">
-		<id name="userId" column="ID" type="java.lang.String" length="50">
+		<id name="userId" column="USERID" type="java.lang.String" length="50">
 			<generator class="uuid.hex" />
 		</id>
 		<property name="username" column="USERNAME" type="java.lang.String" length="50" not-null="true"/>
 		<property name="password" column="PASSWORD" type="java.lang.String" length="128" not-null="true"/>
 		<property name="name" column="NAME" type="java.lang.String" length="50" not-null="true"/>
 		
-		<property name="delflag" type="java.lang.Integer" length="1" not-null="false" insert="false" update="false">
-			<column name="DELFLAG" length="1" />
+		<property name="delflag" type="java.lang.Integer" not-null="false" insert="false" update="false">
+			<column name="DELFLAG" sql-type="int(1)" />
 		</property>
 		<property name="deltime" column="DELTIME" type="java.util.Date" not-null="false" insert="false" update="false"/>
     </class>

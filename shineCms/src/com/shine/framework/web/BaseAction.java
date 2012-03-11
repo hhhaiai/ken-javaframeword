@@ -1,6 +1,10 @@
 package com.shine.framework.web;
 
+import java.util.List;
+
 import com.shine.framework.biz.BaseService;
+import com.shine.framework.dao.util.Pagination;
+import com.shine.framework.dao.util.QueryAnalyzer;
 import com.shine.framework.entity.BaseEntity;
 
 /**
@@ -61,7 +65,16 @@ public abstract class BaseAction<SERVICE extends BaseService> extends GenericAct
 	 * 
 	 */
 	public void listJSON() {
-		
+		try{
+			QueryAnalyzer analyzer = new QueryAnalyzer();
+			analyzer.setClazz(this.getE().getClass());
+			Pagination page = new Pagination(1,15);
+			analyzer.setPage(page);
+			List list = service.list(analyzer);
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 	}
 	
 	/**

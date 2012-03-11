@@ -146,4 +146,10 @@ public class QueryAnalyzer {
 	public void setPage(Pagination page) {
 		this.page = page;
 	}
+	public void setBaseSQL(String baseSQL) {
+		this.baseSQL = baseSQL;
+	}
+	public void setClazz(Class clazz) {
+		this.clazz = clazz;
+	}
 }
