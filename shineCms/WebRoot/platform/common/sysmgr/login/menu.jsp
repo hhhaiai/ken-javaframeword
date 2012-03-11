@@ -39,7 +39,7 @@ function expand(el)
 
 				<TR height=22>
 					<TD style="PADDING-LEFT: 30px" background="${path}r/blue/image/menu_bt.jpg">
-						<A class=menuParent onclick=expand(1) href="javascript:void(0);">关于我们</A>
+						<A class=menuParent onclick=expand(1) href="javascript:void(0);">系统管理</A>
 					</TD>
 				</TR>
 				<TR height=4>
@@ -53,7 +53,7 @@ function expand(el)
 						<IMG height=9 src="${path}r/blue/image/menu_icon.gif" width=9>
 					</TD>
 					<TD>
-						<A class=menuChild href="#" target=main>公司简介</A>
+						<A class=menuChild href="${path}sysmgr/user_enter.do" target="main">用户管理</A>
 					</TD>
 				</TR>
 				<TR height=20>
