@@ -3,6 +3,7 @@ package com.shine.framework.dao.util;
 import java.text.SimpleDateFormat;
 
 import com.shine.framework.exception.DataAccessException;
+import com.shine.platform.logger.LoggerFactory;
 
 /**
  * 查询条件
@@ -130,7 +131,7 @@ public class QueryItem {
 				o = value;
 		}catch(Exception e){
 			o = value;
-			e.printStackTrace();
+			LoggerFactory.getLogger(getClass()).error("条件查询值解析异常", e);
 			throw new DataAccessException("条件查询值解析异常",e);
 		}
 		return o;

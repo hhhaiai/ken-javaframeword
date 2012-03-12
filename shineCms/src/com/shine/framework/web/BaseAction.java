@@ -2,6 +2,9 @@ package com.shine.framework.web;
 
 import java.util.List;
 
+import net.sf.json.JSONArray;
+import net.sf.json.JsonConfig;
+
 import com.shine.framework.biz.BaseService;
 import com.shine.framework.dao.util.Pagination;
 import com.shine.framework.dao.util.QueryAnalyzer;
@@ -71,11 +74,48 @@ public abstract class BaseAction<SERVICE extends BaseService> extends GenericAct
 			Pagination page = new Pagination(1,15);
 			analyzer.setPage(page);
 			List list = service.list(analyzer);
-			
+			printOutJsonList(list, page);
 		}catch(Exception e){
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * 用JSON格式打印List
+	 * @param list
+	 * @param page
+	 */
+	protected void printOutJsonList(List list,Pagination page){
+		printOutJsonList(list, page, new JsonConfig());
+	}
+	
+	/**
+	 * 用JSON格式打印List
+	 * @param list
+	 * @param page
+	 * @param jsonConfig
+	 */
+	protected void printOutJsonList(List list,Pagination page,JsonConfig jsonConfig){
+		StringBuffer jsonStr = new StringBuffer(200);
+		jsonStr.append("{").append("\"total\":").append(page.getTotalRecord()).append(",\"rows\":");
+		jsonStr.append(list2Json(list, jsonConfig));
+		jsonStr.append("}");
+		printOutText(jsonStr.toString());
+	}
+	
+	/**
+	 * List转成Json数组字符串
+	 * @param list
+	 * @param jsonConfig
+	 * @return
+	 */
+	protected String list2Json(List list,JsonConfig jsonConfig){
+		if(list==null)
+			return NullJsonArray;
+		JSONArray jsonarry = JSONArray.fromObject(list, jsonConfig);
+		return jsonarry.toString();
+	}
+	protected static final String NullJsonArray = "[]";
 	
 	/**
 	 * 所有记录列表

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.shine.framework.exception.DataAccessException;
+import com.shine.platform.logger.ILogger;
+import com.shine.platform.logger.LoggerFactory;
 
 /**
  * 查询分析器
@@ -11,7 +13,6 @@ import com.shine.framework.exception.DataAccessException;
  * @version 2011.08.21
  */
 public class QueryAnalyzer {
-	
 	private String sortField;			//排序字段
 	private String sortType;			//排序类型
 	private List<QueryItem> items = new ArrayList<QueryItem>();	//查询条件集合
@@ -46,8 +47,10 @@ public class QueryAnalyzer {
 		QuerySQL qsql = null;
 		String bsql = this.baseSQL;
 		if(bsql==null||bsql.length()==-1){
-			if(clazz==null)
+			if(clazz==null){
+				LoggerFactory.getLogger(getClass()).error("QueryAnalyzer.缺少baseSQL或者class属性值!");
 				throw new DataAccessException("QueryAnalyzer.缺少baseSQL或者class属性值!");
+			}
 			bsql = "from " + clazz.getName() + " tmp where 1=1 ";
 		}
 		qsql = buildCriterionSQL("tmp", false);

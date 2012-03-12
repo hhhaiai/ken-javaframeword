@@ -98,7 +98,6 @@ public class GenericAction extends ActionSupport implements ServletRequestAware,
 		if(data == null || contentType == null) return;
 		
 		ActionContext.getContext().getActionInvocation().getProxy().setExecuteResult(false);
-		HttpServletResponse response = ServletActionContext.getResponse();
 		OutputStream os = null;
 		try {
 			response.setContentType(contentType);

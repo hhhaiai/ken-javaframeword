@@ -24,8 +24,8 @@
     	</interceptors>
     	<default-interceptor-ref name="appStack"></default-interceptor-ref>
     	<global-results>
-        	<result name="exception">/manage/exception.jsp</result>
-        	<result name="hint">/manage/hint.jsp</result>
+        	<result name="exception">/common/exception.jsp</result>
+        	<result name="hint">/common/hint.jsp</result>
        	</global-results>
        	<global-exception-mappings>
           	<exception-mapping result="exception" exception="java.lang.Exception"/>

@@ -29,6 +29,7 @@ import com.shine.framework.dao.callBack.SQLQueryOneCallBack;
 import com.shine.framework.dao.util.Pagination;
 import com.shine.framework.entity.BaseEntity;
 import com.shine.framework.exception.DataAccessException;
+import com.shine.platform.logger.LoggerFactory;
 
 /**
  * 数据库基本操作实现类
@@ -67,7 +68,8 @@ public class GenericDaoImpl extends HibernateDaoSupport implements GenericDao{
 			Method m = entity.getClass().getMethod(propertityName, null);
 			return m.invoke(entity, null);
 		} catch (Exception e) {
-			throw new DataAccessException("", e);
+			LoggerFactory.getLogger(getClass()).error("获取实体属性值异常", e);
+			throw new DataAccessException("获取实体属性值异常", e);
 		}
 	}
 	
