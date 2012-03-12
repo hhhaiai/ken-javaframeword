@@ -12,7 +12,7 @@
 <script type="text/javascript" src="${path}r/operamasks-ui/demo/demo.js"></script>
 <link rel="stylesheet" href="${path}r/operamasks-ui/css/default/om-default.css">
 --%>
-<link rel="stylesheet" href="${path}r/blue/css/admin.css">
+<link rel="stylesheet" href="${path}r/blue/css/home.css">
 </head>
 
 <FRAMESET border=0 frameSpacing=0 rows="60, *" frameBorder=0>

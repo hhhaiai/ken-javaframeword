@@ -5,7 +5,7 @@
 <head>
 <title>Menu</title>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<link rel="stylesheet" href="${path}r/blue/css/admin.css">
+<link rel="stylesheet" href="${path}r/blue/css/home.css">
 <SCRIPT language=javascript>
 function expand(el)
 {
@@ -26,7 +26,7 @@ function expand(el)
 
 <body>
 <TABLE height="100%" cellSpacing=0 cellPadding=0 width=170
-	background="${path}r/blue/image/menu_bg.jpg" border=0>
+	background="${path}r/blue/image/home/menu_bg.jpg" border=0>
 	<TR>
 		<TD vAlign=top align=middle>
 			<TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
@@ -38,7 +38,7 @@ function expand(el)
 			<TABLE cellSpacing=0 cellPadding=0 width=150 border=0>
 
 				<TR height=22>
-					<TD style="PADDING-LEFT: 30px" background="${path}r/blue/image/menu_bt.jpg">
+					<TD style="PADDING-LEFT: 30px" background="${path}r/blue/image/home/menu_bt.jpg">
 						<A class=menuParent onclick=expand(1) href="javascript:void(0);">系统管理</A>
 					</TD>
 				</TR>
@@ -50,7 +50,7 @@ function expand(el)
 				width=150 border=0>
 				<TR height=20>
 					<TD align=middle width=30>
-						<IMG height=9 src="${path}r/blue/image/menu_icon.gif" width=9>
+						<IMG height=9 src="${path}r/blue/image/home/menu_icon.gif" width=9>
 					</TD>
 					<TD>
 						<A class=menuChild href="${path}sysmgr/user_enter.do" target="main">用户管理</A>
@@ -58,7 +58,7 @@ function expand(el)
 				</TR>
 				<TR height=20>
 					<TD align=middle width=30>
-						<IMG height=9 src="${path}r/blue/image/menu_icon.gif" width=9>
+						<IMG height=9 src="${path}r/blue/image/home/menu_icon.gif" width=9>
 					</TD>
 					<TD>
 						<A class=menuChild href="#" target=main>荣誉资质</A>
@@ -66,7 +66,7 @@ function expand(el)
 				</TR>
 				<TR height=20>
 					<TD align=middle width=30>
-						<IMG height=9 src="${path}r/blue/image/menu_icon.gif" width=9>
+						<IMG height=9 src="${path}r/blue/image/home/menu_icon.gif" width=9>
 					</TD>
 					<TD>
 						<A class=menuChild href="#" target=main>分类管理</A>
@@ -74,7 +74,7 @@ function expand(el)
 				</TR>
 				<TR height=20>
 					<TD align=middle width=30>
-						<IMG height=9 src="${path}r/blue/image/menu_icon.gif" width=9>
+						<IMG height=9 src="${path}r/blue/image/home/menu_icon.gif" width=9>
 					</TD>
 					<TD>
 						<A class=menuChild href="#" target=main>子类管理</A>
@@ -86,7 +86,7 @@ function expand(el)
 			</TABLE>
 			<TABLE cellSpacing=0 cellPadding=0 width=150 border=0>
 				<TR height=22>
-					<TD style="PADDING-LEFT: 30px" background=${path}r/blue/image/menu_bt.jpg>
+					<TD style="PADDING-LEFT: 30px" background=${path}r/blue/image/home/menu_bt.jpg>
 						<A class=menuParent onclick=expand(2) href="javascript:void(0);">新闻中心</A>
 					</TD>
 				</TR>
@@ -98,7 +98,7 @@ function expand(el)
 				width=150 border=0>
 				<TR height=20>
 					<TD align=middle width=30>
-						<IMG height=9 src="${path}r/blue/image/menu_icon.gif" width=9>
+						<IMG height=9 src="${path}r/blue/image/home/menu_icon.gif" width=9>
 					</TD>
 					<TD>
 						<A class=menuChild href="#" target=main>公司新闻</A>
@@ -106,7 +106,7 @@ function expand(el)
 				</TR>
 				<TR height=20>
 					<TD align=middle width=30>
-						<IMG height=9 src="${path}r/blue/image/menu_icon.gif" width=9>
+						<IMG height=9 src="${path}r/blue/image/home/menu_icon.gif" width=9>
 					</TD>
 					<TD>
 						<A class=menuChild href="#" target=main>分类管理</A>
@@ -114,7 +114,7 @@ function expand(el)
 				</TR>
 				<TR height=20>
 					<TD align=middle width=30>
-						<IMG height=9 src="${path}r/blue/image/menu_icon.gif" width=9>
+						<IMG height=9 src="${path}r/blue/image/home/menu_icon.gif" width=9>
 					</TD>
 					<TD>
 						<A class=menuChild href="#" target=main>子类管理</A>

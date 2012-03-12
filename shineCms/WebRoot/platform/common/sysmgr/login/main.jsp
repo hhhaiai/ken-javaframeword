@@ -5,22 +5,22 @@
 <head>
 <title>Main</title>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<link rel="stylesheet" href="${path}r/blue/css/admin.css">
+<link rel="stylesheet" href="${path}r/blue/css/home.css">
 </head>
 
 <body>
 <TABLE cellSpacing=0 cellPadding=0 width="100%" align=center border=0>
   <TR height=28>
-    <TD background="${path}r/blue/image/title_bg1.jpg">当前位置: </TD></TR>
+    <TD background="${path}r/blue/image/home/title_bg1.jpg">当前位置: </TD></TR>
   <TR>
     <TD bgColor=#b1ceef height=1></TD></TR>
   <TR height=20>
-    <TD background="${path}r/blue/image/shadow_bg.jpg"></TD>
+    <TD background="${path}r/blue/image/home/shadow_bg.jpg"></TD>
   </TR>
 </TABLE>
 <TABLE cellSpacing=0 cellPadding=0 width="90%" align=center border=0>
   <TR height=100>
-    <TD align=middle width=100><IMG height=100 src="${path}r/blue/image/admin_p.gif" 
+    <TD align=middle width=100><IMG height=100 src="${path}r/blue/image/home/admin_p.gif" 
       width=90></TD>
     <TD width=60>&nbsp;</TD>
     <TD>
@@ -39,7 +39,7 @@
     <TD></TD></TR>
   <TR height=22>
     <TD style="PADDING-LEFT: 20px; FONT-WEIGHT: bold; COLOR: #ffffff" 
-    align=middle background="${path}r/blue/image/title_bg2.jpg">您的相关信息</TD></TR>
+    align=middle background="${path}r/blue/image/home/title_bg2.jpg">您的相关信息</TD></TR>
   <TR bgColor=#ecf4fc height=12>
     <TD></TD></TR>
   <TR height=20>

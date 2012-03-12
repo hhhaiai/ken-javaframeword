@@ -5,15 +5,15 @@
 <head>
 <title>Head</title>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<link rel="stylesheet" href="${path}r/blue/css/admin.css">
+<link rel="stylesheet" href="${path}r/blue/css/home.css">
 </head>
 
 <body>
 <TABLE cellSpacing=0 cellPadding=0 width="100%"
-	background="${path}r/blue/image/header_bg.jpg" border=0>
+	background="${path}r/blue/image/home/header_bg.jpg" border=0>
 	<TR height=56>
 		<TD width=260>
-			<IMG height=56 src="${path}r/blue/image/header_left.jpg" width=260>
+			<IMG height=56 src="${path}r/blue/image/home/header_left.jpg" width=260>
 		</TD>
 		<TD style="FONT-WEIGHT: bold; COLOR: #fff; PADDING-TOP: 20px"
 			align=middle>
@@ -24,7 +24,7 @@
 				href="" target=_top>退出系统</A>
 		</TD>
 		<TD align=right width=268>
-			<IMG height=56 src="${path}r/blue/image/header_right.jpg" width=268>
+			<IMG height=56 src="${path}r/blue/image/home/header_right.jpg" width=268>
 		</TD>
 	</TR>
 </TABLE>
