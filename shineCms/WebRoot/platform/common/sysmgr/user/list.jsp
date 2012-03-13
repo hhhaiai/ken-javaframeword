@@ -16,8 +16,7 @@
     line-height: 24px;
     padding-left: 10px;
     padding-top: 1px;
-    padding-bottom: 3px;
-    font-size: 12px;
+    padding-bottom: 2px;
 }
 .mar {
     margin-top: 10px;
@@ -25,8 +24,77 @@
 </style>
 <script type="text/javascript">
 $(document).ready(function() {
+	var dialog = $("#dialog-form").omDialog({
+        width: 400,
+        autoOpen : false,
+        modal : true,
+        resizable : false,
+        buttons : {
+            "提交" : function(){
+          submitDialog();
+          return false; //阻止form的默认提交动作
+      	},
+            "取消" : function() {
+                $("#dialog-form").omDialog("close");//关闭dialog
+            }
+        }
+    });
+    //显示dialog并初始化里面的输入框的数据
+    var showDialog = function(title,rowData){
+        validator.resetForm();
+        rowData = rowData || {};
+        $("input[name='e.username']",dialog).val(rowData.username);
+        $("input[name='e.name']",dialog).val(rowData.name);
+        dialog.omDialog("option", "title", title);
+        dialog.omDialog("open");//显示dialog
+    };
+    //dialog中点提交按钮时将数据提交到后台并执行相应的add或modify操作
+    var submitDialog = function(){
+        if (validator.form()) {
+	        var submitData={
+	            'e.id':$("input[name='e.id']",dialog).val(),
+	            'e.username':$("input[name='e.username']",dialog).val(),
+	            'e.password':$("input[name='e.password']",dialog).val(),
+	            'e.name':$("input[name='e.name']",dialog).val()
+	        };
+	        $.post('${path}sysmgr/user_saveAjax.do',submitData,function(){
+	            if(isAdd){
+	                $('#grid').omGrid('reload',1);//如果是添加则滚动到第一页并刷新
+	                $.omMessageTip.show({title: "操作成功", content: "添加数据成功", timeout: 1500});
+	            }else{
+	                $('#grid').omGrid('reload');//如果是修改则刷新当前页
+	                $.omMessageTip.show({title: "操作成功", content: "修改数据成功", timeout: 1500});
+	            }
+	            $("#dialog-form").omDialog("close"); //关闭dialog
+	        });
+        }
+    };
+    // 对表单进行校验
+    var validator = $('#userForm').validate({
+        rules : {
+            'e.username' : {
+    			required : true,
+    			maxlength : 5
+    		}, 
+            'e.password' : {required : true},
+            'e.name' : {required : true} 
+        }, 
+        messages : {
+            'e.username' : {
+        		required : "用户名不能为空",
+        		maxlength : "用户名长度不能超过5"
+        	},
+            'e.password' : {required : "密码不能为空"},
+            'e.name' : {required : "姓名不能为空"}
+        }
+    });
+    var isAdd = true; //弹出窗口中是添加操作还是修改操作？
 	$('#btn_add').omButton({
-		icons : {left : '${path}r/blue/image/btn/add.gif'}
+		icons : {left : '${path}r/blue/image/btn/add.gif'},
+		onClick : function(){
+			isAdd = true;
+			showDialog('新增');//显示dialog
+		}
 	});
 	$('#btn_modify').omButton({
 		icons : {left : '${path}r/blue/image/btn/modify.gif'}
@@ -36,6 +104,7 @@ $(document).ready(function() {
 	});
     $('#grid').omGrid({
         dataSource : '${path}sysmgr/user_listJSON.do',
+        singleSelect : false,
         colModel : [ {header : 'ID', name : 'userId', width : 100, align : 'center'}, 
                      {header : '用户名', name : 'username', width : 120, align : 'left'}, 
                      {header : '姓名', name : 'name', align : 'left', width : 'autoExpand'} ]
@@ -51,5 +120,24 @@ $(document).ready(function() {
      <a href="javascript:void(0);" id="btn_delete">删除</a>
 </div>
 <table id="grid"></table>
+<div id="dialog-form">
+    <form id="userForm">
+    <input name="e.id" style="display: none"/>
+    <table>
+        <tr>
+            <td>用户名：</td>
+            <td><input name="e.username" /></td>
+        </tr>
+        <tr>
+            <td>密码：</td>
+            <td><input name="e.password" /></td>
+        </tr>
+        <tr>
+            <td>姓名：</td>
+            <td><input name="e.name" /></td>
+        </tr>
+    </table>
+	</form>
+</div>
 </body>
 </html>
