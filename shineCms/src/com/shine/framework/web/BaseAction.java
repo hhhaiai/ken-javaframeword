@@ -158,7 +158,13 @@ public abstract class BaseAction<SERVICE extends BaseService> extends GenericAct
 	 * 执行新增 返回XML格式结果
 	 */
 	public void saveAjax() {
-		
+		try{
+			service.save(getE());
+			printOutText("保存成功");
+		}catch(Exception e){
+			printOutText("保存失败");
+			e.printStackTrace();
+		}
 	}
 	
 	/**
