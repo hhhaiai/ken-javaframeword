@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page language="java" pageEncoding="UTF-8"%>
 <%@include file="/common/path.jsp"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -7,25 +7,33 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 <script type="text/javascript" src="${path}r/operamasks-ui/js/jquery.min.js"></script>
 <script type="text/javascript" src="${path}r/operamasks-ui/js/operamasks-ui.min.js"></script>
-<script type="text/javascript" src="${path}r/operamasks-ui/demo/data.js"></script>
-<script type="text/javascript" src="${path}r/operamasks-ui/demo/demo.js"></script>
 <link rel="stylesheet" href="${path}r/operamasks-ui/css/default/om-default.css">
-<%--
 <style type="text/css">
-#toolbar {padding: 6px 4px;}
-#toolbar .om-btn {border:none;}
-#toolbar *  {background-color: transparent;background-image: none}
-#toolbar .om-state-hover .om-btn-bg {background: url(images/button-hover-bg.png);}
-#toolbar .om-state-focus .om-btn-bg {background: url(images/button-focus-bg.png);}
-#toolbar .om-state-active .om-btn-bg {background: url(images/button-mousedown-bg.png);}
-#toolbar .om-btn .om-btn-left {background-position: 100% 0px;background-repeat: no-repeat;}
-#toolbar .om-btn .om-btn-center {background-position: 100% -24px;background-repeat: repeat-x;}
-#toolbar .om-btn .om-btn-right {background-position: 100% -48px;background-repeat: no-repeat;}
-span.om-widget-header { background: url("images/header_bg.png") repeat-x scroll 0 0 transparent; color: #23466D; font-weight: bold;}
+.toolbar {
+    background: url("${path}r/blue/image/btn/toolbar_bg.jpg") repeat-x scroll 0 0 #99B5DD;
+    border: 1px solid #808FB8;
+    height: 24px;
+    line-height: 24px;
+    padding-left: 10px;
+    padding-top: 1px;
+    padding-bottom: 3px;
+    font-size: 12px;
+}
+.mar {
+    margin-top: 10px;
+}
 </style>
- --%>
 <script type="text/javascript">
 $(document).ready(function() {
+	$('#btn_add').omButton({
+		icons : {left : '${path}r/blue/image/btn/add.gif'}
+	});
+	$('#btn_modify').omButton({
+		icons : {left : '${path}r/blue/image/btn/modify.gif'}
+	});
+	$('#btn_delete').omButton({
+		icons : {left : '${path}r/blue/image/btn/delete.gif'}
+	});
     $('#grid').omGrid({
         dataSource : '${path}sysmgr/user_listJSON.do',
         colModel : [ {header : 'ID', name : 'userId', width : 100, align : 'center'}, 
@@ -37,12 +45,11 @@ $(document).ready(function() {
 </head>
 
 <body>
-<span id="toolbar" class="om-widget-header om-corner-all">
-	<a id="simpleButton" href="javascript:void(0)">金蝶中间件</a>
-	<a id="button-width"  href="javascript:void(0)"></a>
-	<a id="button-disabled1"  href="javascript:void(0)">被disabled的按钮</a>
-	<a id="button-icons" href="javascript:void(0)">有左icon的按钮</a>
-</span>
+<div class="toolbar mar">
+     <a href="javascript:void(0);" id="btn_add">添加</a>
+     <a href="javascript:void(0);" id="btn_modify">修改</a>
+     <a href="javascript:void(0);" id="btn_delete">删除</a>
+</div>
 <table id="grid"></table>
 </body>
 </html>
