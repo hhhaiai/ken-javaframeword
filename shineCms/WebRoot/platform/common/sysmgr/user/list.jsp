@@ -100,7 +100,33 @@ $(document).ready(function() {
 		icons : {left : '${path}r/blue/image/btn/modify.gif'}
 	});
 	$('#btn_delete').omButton({
-		icons : {left : '${path}r/blue/image/btn/delete.gif'}
+		icons : {left : '${path}r/blue/image/btn/delete.gif'},
+		onClick : function(){
+			var selections=$('#grid').omGrid('getSelections',true);
+            var len = selections.length;
+            if (len == 0) {
+            	alert('请至少选择一行记录');
+                return false;
+            }
+            if(confirm("确认删除所选的"+len+"条记录？")){
+	            //将选择的记录的id传递到后台去并执行delete操作
+	            var ids = '';
+	            for(var i=0;i<len;i++){
+	            	ids += selections[i].userId + ',';
+	            }
+	            ids = ids.substr(0,ids.length-1);
+	            $.post('${path}sysmgr/user_delete.do','id='+ids,function(){
+	                $('#grid').omGrid('reload');//刷新当前页数据
+	                $.omMessageTip.show({title: "操作成功", content: "删除数据成功", timeout: 1500});
+	            });
+            }
+		}
+	});
+	$('#btn_refresh').omButton({
+		icons : {left : '${path}r/blue/image/btn/delete.gif'},
+		onClick : function(){
+			$('#grid').reload();
+		}
 	});
     $('#grid').omGrid({
         dataSource : '${path}sysmgr/user_listJSON.do',
@@ -118,6 +144,7 @@ $(document).ready(function() {
      <a href="javascript:void(0);" id="btn_add">添加</a>
      <a href="javascript:void(0);" id="btn_modify">修改</a>
      <a href="javascript:void(0);" id="btn_delete">删除</a>
+     <a href="javascript:void(0);" id="btn_refresh">刷新</a>
 </div>
 <table id="grid"></table>
 <div id="dialog-form">
