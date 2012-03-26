@@ -190,8 +190,10 @@ public abstract class BaseAction<SERVICE extends BaseService> extends GenericAct
 	 * @return
 	 */
 	public String delete() {
+		System.out.println(extor.getParaString());
 		
-		return DELETE;
+		return null;
+//		return DELETE;
 	}
 	
 	/**

@@ -89,8 +89,9 @@ final public class RequestDataExtractor {
 			paraStr.append(request.getParameter(name));
 			paraStr.append("&");
 	    }
-	    paraStr.delete(paraStr.length() - 1,paraStr.length());
-	    
+	    int len = paraStr.length();
+	    if(len>0)
+	    	paraStr.delete(len-1, len);
 	    return paraStr.toString();
 	}
 	
