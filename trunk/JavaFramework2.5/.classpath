@@ -72,5 +72,6 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="lib/mibble-parser-2.9.2.jar"/>
 	<classpathentry kind="lib" path="lib/java_memcached-release_2.0.1.jar"/>
+	<classpathentry kind="lib" path="lib/jfugue-4.0.3-with-musicxml.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
