@@ -3,6 +3,12 @@ package com.shine.framework.Ioc;
 import com.shine.framework.Ioc.utils.ClassMap;
 import com.shine.framework.core.util.ReflectionUtil;
 
+/**
+ * java ioc工厂
+ * 
+ * @author viruscodecn@gmail.com
+ * 
+ */
 public class IOCFactory {
 	private static IOCFactory factory = null;
 
