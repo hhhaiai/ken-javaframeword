@@ -234,6 +234,7 @@ class PorcessCloseRunnable extends Thread {
 		int i = 0;
 		while (true) {
 			if (helper.isComplete()) {
+				System.out.println("123");
 				if (helper.getP() != null)
 					helper.getP().destroy();
 				helper.setP(null);

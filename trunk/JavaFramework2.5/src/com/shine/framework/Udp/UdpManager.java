@@ -1,19 +1,18 @@
 package com.shine.framework.Udp;
 
 import java.io.IOException;
-import java.net.DatagramPacket;
-import java.net.DatagramSocket;
-import java.net.InetAddress;
-import java.net.InetSocketAddress;
-import java.net.SocketException;
-import java.util.HashMap;
-import java.util.Map;
 
 import com.shine.framework.Udp.model.UdpRecevice;
 import com.shine.framework.Udp.utils.UdpHelperMap;
 import com.shine.framework.Udp.utils.UdpSocketHelper;
 import com.shine.framework.Udp.utils.UdpUtil;
 
+/**
+ * udp操作类
+ * 
+ * @author viruscodecn@gmail.com
+ * 
+ */
 public class UdpManager {
 	private static UdpManager manager = new UdpManager();
 
