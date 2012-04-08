@@ -11,12 +11,21 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
-<title>企业邮件处理系统</title>
+<title>${platform:getIndexName()}</title>
+<script type="text/javascript">
+    function changeCenterPage(pagePath){
+        document.getElementById("mainFrame").src=pagePath
+    }
+</script>
 </head>
 
 <frameset rows="83,*" cols="*" framespacing="0" frameborder="no" border="0">
   <frame src="top.html" name="topFrame" scrolling="No" noresize="noresize" id="topFrame" />
-  <frame src="center.html" name="mainFrame" id="mainFrame" />
+  <frameset rows="*" cols="171,*" framespacing="0" frameborder="no" border="0">
+      <frame src="left.jsp" name="leftFrame" id="leftFrame"  noresize="noresize"/>
+       <frame src="center.html" name="mainFrame" id="mainFrame" />
+  </frameset>
+  <!-- <frame src="center.html" name="mainFrame" id="mainFrame" /> -->
 </frameset>
 <noframes><body>
 </body>
