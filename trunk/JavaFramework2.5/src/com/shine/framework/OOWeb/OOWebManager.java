@@ -2,7 +2,7 @@ package com.shine.framework.OOWeb;
 
 /**
  * 
- * @author 123
+ * @author viruscodecn@gmail.com
  * @lib pygmy-core-ooweb.jar;pygmy-handlers.jar
  */
 public class OOWebManager {
@@ -11,8 +11,4 @@ public class OOWebManager {
 	public static OOWebManager getManager() {
 		return manager;
 	}
-	
-	
-	
-	
 }
