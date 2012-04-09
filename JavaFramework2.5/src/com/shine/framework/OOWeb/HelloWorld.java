@@ -60,7 +60,8 @@ public class HelloWorld {
             "<li><a href='notWebEnabled'>Excluded method (should give a 404)</a></li>" +
             "<li><a href='xmlTest'>XML test (mime type should be overridden to text/xml)</a></li>" +
             "<li><a href='securePage'>Secure Page (manager role needed: login as manager:secret)</a></li>" +
-            "</ul></body></html>";
+            "</ul></body><" +
+            "/html>";
     }
 
     /**

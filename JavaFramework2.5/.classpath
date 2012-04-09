@@ -69,9 +69,9 @@
 	<classpathentry kind="lib" path="lib/DdlUtils-1.0.jar"/>
 	<classpathentry kind="lib" path="lib/snmp4j-1.10.2.jar"/>
 	<classpathentry kind="lib" path="lib/jave-1.0.2.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="lib/mibble-parser-2.9.2.jar"/>
 	<classpathentry kind="lib" path="lib/java_memcached-release_2.0.1.jar"/>
 	<classpathentry kind="lib" path="lib/jfugue-4.0.3-with-musicxml.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk1.6.0_03"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
