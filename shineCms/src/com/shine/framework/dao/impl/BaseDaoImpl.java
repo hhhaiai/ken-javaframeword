@@ -71,6 +71,7 @@ public class BaseDaoImpl extends GenericDaoImpl implements BaseDao{
 
 	@Override
 	public void delete(BaseEntity entity, Serializable[] pkValue) {
+		Serializable[] pk = pkTransform(entity, pkValue);
 		if(entity.isVirtualDelete()){
 			StringBuffer sql = new StringBuffer("100");
 			sql.append("update ").append(entity.getClass().getName());
@@ -80,7 +81,7 @@ public class BaseDaoImpl extends GenericDaoImpl implements BaseDao{
 			}
 			sql.delete(sql.length()-1, sql.length());
 			sql.append(")");
-			executeSQL(sql.toString(), ArrayUtil.mergeArray(new Object[]{1,new Date()}, pkValue));
+			executeSQL(sql.toString(), ArrayUtil.mergeArray(new Object[]{1,new Date()}, pk));
 		}else{
 			StringBuffer sql = new StringBuffer("100");
 			sql.append("delete from ").append(entity.getClass().getName());
@@ -90,7 +91,7 @@ public class BaseDaoImpl extends GenericDaoImpl implements BaseDao{
 			}
 			sql.delete(sql.length()-1, sql.length());
 			sql.append(")");
-			executeSQL(sql.toString(), pkValue);
+			executeSQL(sql.toString(), pk);
 		}
 	}
 	

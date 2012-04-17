@@ -74,6 +74,60 @@ public class GenericDaoImpl extends HibernateDaoSupport implements GenericDao{
 	}
 	
 	/**
+	 * 将主键值转换成实体主键对应的类型
+	 * @param entity
+	 * @param pkValue
+	 * @return
+	 */
+	protected Serializable pkTransform(final BaseEntity entity,final Serializable pkValue){
+		if(pkValue==null)
+			return pkValue;
+		ClassMetadata cm = getClassMetadata(entity.getClass());
+		String t = cm.getIdentifierType().getName();
+		Serializable s = null;
+		if("string".equals(t))
+			s = pkValue.toString();
+		else if(t.startsWith("int"))
+			s = Integer.parseInt(pkValue.toString());
+		else if("long".equals(t))
+			s = Long.parseLong(pkValue.toString());
+		else 
+			s = pkValue.toString();
+		return s;
+	}
+	
+	/**
+	 * 将主键值转换成实体主键对应的类型
+	 * @param entity
+	 * @param pkValue
+	 * @return
+	 */
+	protected Serializable[] pkTransform(final BaseEntity entity,final Serializable[] pkValue){
+		if(pkValue==null)
+			return pkValue;
+		ClassMetadata cm = getClassMetadata(entity.getClass());
+		String t = cm.getIdentifierType().getName();
+		int len = pkValue.length;
+		if("string".equals(t)){
+			String[] ids = new String[len];
+			for(int i=0;i<len;i++)
+				ids[i] = pkValue[i].toString();
+			return ids;
+		}else if(t.startsWith("int")){
+			Integer[] ids = new Integer[len];
+			for(int i=0;i<len;i++)
+				ids[i] = Integer.parseInt(pkValue[i].toString());
+			return ids;
+		}else if("long".equals(t)){
+			Long[] ids = new Long[len];
+			for(int i=0;i<len;i++)
+				ids[i] = Long.parseLong(pkValue[i].toString());
+			return ids;
+		}
+		return pkValue;
+	}
+	
+	/**
 	 * HQL转成SQL
 	 * @param hql
 	 * @return

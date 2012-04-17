@@ -13,6 +13,8 @@ public interface BaseService{
 	
 	public void update(BaseEntity entity);
 	
+	public void delete(BaseEntity entity,String[] ids);
+	
 	public BaseEntity get(BaseEntity entity);
 	
 	public List list(QueryAnalyzer queryFilter);
