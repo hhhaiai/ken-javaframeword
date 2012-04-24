@@ -8,4 +8,6 @@ public class DB4oManager {
 			manager = new DB4oManager();
 		return manager;
 	}
+	
+	
 }
