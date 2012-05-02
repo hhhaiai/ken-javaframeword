@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Set;
+import java.util.UUID;
 
 import com.db4o.Db4oEmbedded;
 import com.db4o.ObjectContainer;
@@ -29,15 +30,13 @@ public class DB4oMap<K, V>
 	implements Cloneable, Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	private static final String DB4OFILENAME = 
-		Thread.currentThread().getContextClassLoader().getResource("").getPath()
-		+ "db4o.dat";
+	public static final String DB4OFILENAME = "db4o.dat";
 	
 	/** 数据库对象 */
 	private ObjectContainer db;
 	
 	/** 数据库物理文件存放路径 */
-	private String filePath = DB4OFILENAME;
+	private String filePath;
 	
 	/** 是否让键值唯一，true时键/值对必须唯一，false时键/值对则可重复插入数据 */
 	private boolean keyUnique = false;
@@ -48,20 +47,18 @@ public class DB4oMap<K, V>
 	
 	private transient Set<Map.Entry<K,V>> entrySet;
 	
-	public static void main(String[] args) {
-		
+	public DB4oMap() {
+		this(Thread.currentThread().getContextClassLoader() .getResource("")
+				.getPath() + UUID.randomUUID().toString() + DB4OFILENAME, false);
 	}
 	
-	public DB4oMap() {
-		this(DB4OFILENAME, false);
+	public DB4oMap(boolean keyUnique) {
+		this(Thread.currentThread().getContextClassLoader() .getResource("")
+				.getPath() + UUID.randomUUID().toString() + DB4OFILENAME, keyUnique);
 	}
 	
 	public DB4oMap(String filePath) {
 		this(filePath, false);
-	}
-	
-	public DB4oMap(boolean keyUnique) {
-		this(DB4OFILENAME, keyUnique);
 	}
 	
 	public DB4oMap(String filePath, boolean keyUnique) {
@@ -72,6 +69,7 @@ public class DB4oMap<K, V>
 			file.delete();
 		}
 		db = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(), filePath);
+		addShutdowHook();
 	}
 	
 	/**
@@ -95,8 +93,11 @@ public class DB4oMap<K, V>
 			ObjectSet<Entry<K, V>> objects = db.queryByExample(new Entry<K, V>(key, null));
 			while (objects.hasNext()) {
 				Entry<K, V> entry = objects.next();
-				foundValue = entry.getValue();
-				db.delete(entry);
+				// 参数key与Map中对应的key必须是相互equals()
+				if (entry.getKey().equals(key)) {
+					foundValue = entry.getValue();
+					db.delete(entry);
+				}
 			};
 		}
 		Entry<K,V> entry = new Entry<K,V>(key, value);
@@ -116,7 +117,13 @@ public class DB4oMap<K, V>
 	public V get(Object key) {
 		check(key);
 		ObjectSet<Entry<K, V>> objects = db.queryByExample(new Entry<K, V>((K) key, null));
-		return objects.hasNext() ? objects.next().getValue() : null;
+		if (objects.hasNext()) {
+			Entry<K, V> entry = objects.next();
+			if (entry.getKey().equals(key)) {
+				return entry.getValue();
+			}
+		}
+		return null;
 	}
 	
 	/**
@@ -132,11 +139,12 @@ public class DB4oMap<K, V>
 		check(key);
 		ObjectSet<Entry<K, V>> objects = db.queryByExample(new Entry<K, V>((K) key, null));
 		Entry<K, V> entry = null;
-		if (objects.hasNext()) {
-			db.delete((entry = objects.next()));
+		if (objects.hasNext() && (entry = objects.next()).getKey().equals(key)) {
+			db.delete(entry);
 			db.commit();
+			return entry.getValue();
 		}
-		return entry == null ? null : entry.getValue();
+		return null;
 	}
 	
 	/**
@@ -149,24 +157,13 @@ public class DB4oMap<K, V>
 		check(key);
 		ObjectSet<Entry<K, V>> objects = db.queryByExample(new Entry<K, V>(key, value));
 		Entry<K, V> entry = null;
-		if (objects.hasNext()) {
-			db.delete((entry = objects.next()));
+		if (objects.hasNext() && (entry = objects.next()).getKey().equals(key) 
+				&& entry.getValue().equals(value)) {
+			db.delete(entry);
 			db.commit();
+			return entry;
 		}
-		return entry;
-	}
-	
-	@SuppressWarnings("unchecked")
-	private final Entry<K, V> removeMapping(Object obj) {
-		Map.Entry<K, V> entry = (Map.Entry<K, V>) obj;
-		ObjectSet<Entry<K, V>> objects = db.queryByExample(entry);
-		Entry<K, V> removeEntry = null;
-		while (objects.hasNext()) {
-			removeEntry = objects.next();
-			db.delete(removeEntry);
-			db.commit();
-		}
-		return removeEntry;
+		return null;
 	}
 	
 	/**
@@ -187,16 +184,28 @@ public class DB4oMap<K, V>
 		return db.queryByExample(entry).size();
 	}
 	
+	/**
+	 * 判断Map中是否存在<code>key</code>
+	 * 提示：判断的依据是<code>key</code>必须和Map中对应的键相互equals()
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public boolean containsKey(Object key) {
-		return db.queryByExample(new Entry<K, V>((K) key, null)).hasNext();
+		check(key);
+		ObjectSet<Entry<K, V>> objects = db.queryByExample(new Entry<K, V>((K) key, null));
+		return objects.hasNext() ? objects.next().getKey().equals(key) : false;
 	}
 	
+	/**
+	 * 判断Map中是否存在<code>value</code>
+	 * 提示：判断的依据是<code>value</code>必须和Map中对应的值相互equals()
+	 */
     @SuppressWarnings("unchecked")
     @Override
 	public boolean containsValue(Object value) {
-    	return db.queryByExample(new Entry<K, V>(null, (V) value)).hasNext();
+    	check(value);
+    	ObjectSet<Entry<K, V>> objects = db.queryByExample(new Entry<K, V>(null, (V) value));
+		return objects.hasNext() ? objects.next().getValue().equals(value) : false;
     }
     
     @Override
@@ -219,9 +228,7 @@ public class DB4oMap<K, V>
 	
 	@Override
 	public void putAll(Map<? extends K, ? extends V> map) {
-		if (map == null) {
-			throw new IllegalArgumentException("map");
-		}
+		check(map);
 		for (Iterator<? extends Map.Entry<? extends K, ? extends V>> i = 
 			map.entrySet().iterator(); i.hasNext();) {
             Map.Entry<? extends K, ? extends V> e = i.next();
@@ -240,7 +247,10 @@ public class DB4oMap<K, V>
 		ObjectSet<Entry<K, V>> objects = db.queryByExample(new Entry<K, V>(key, null));
 		List<V> dataList = new ArrayList<V>();
 		while (objects.hasNext()) {
-			dataList.add(objects.next().getValue());
+			Entry<K, V> entry = objects.next();
+			if (entry.getKey().equals(key)) {
+				dataList.add(entry.getValue());
+			}
 		}
 		return dataList;
 	}
@@ -276,7 +286,10 @@ public class DB4oMap<K, V>
 		check(key);
 		ObjectSet<Entry<K, V>> objects = db.queryByExample(new Entry<K, V>(key, null));
 		while (objects.hasNext()) {
-			db.delete(objects.next());
+			Entry<K, V> entry = objects.next();
+			if (entry.getKey().equals(key)) {
+				db.delete(entry);
+			}
 		}
 		db.commit();
 	}
@@ -291,8 +304,12 @@ public class DB4oMap<K, V>
 		check(key);
 		ObjectSet<Entry<K, V>> objects = db.queryByExample(new Entry<K, V>(key, value));
 		while (objects.hasNext()) {
-			db.delete(objects.next());
+			Entry<K, V> entry = objects.next();
+			if (entry.getKey().equals(key) && entry.getValue().equals(value)) {
+				db.delete(entry);
+			}
 		}
+		db.commit();
 	}
 	
 	/**
@@ -302,6 +319,7 @@ public class DB4oMap<K, V>
 		// 关闭数据库资源
 		if (db != null) {
 			db.close();
+			db = null;
 		}
 		// 删除数据库物理文件
 		File file = new File(filePath);
@@ -313,19 +331,48 @@ public class DB4oMap<K, V>
 	/**
 	 * 检查参数
 	 * 
-	 * @param key
+	 * @param param
 	 */
-	private void check(Object key) {
-		if (key == null) {
-			throw new IllegalArgumentException("key");
+	private void check(Object param) {
+		if (param == null) {
+			throw new IllegalArgumentException();
 		}
 	}
 	
+	/**
+	 * 在JVM关闭的时候，释放资源
+	 */
+	private void addShutdowHook() {
+		Runtime.getRuntime().addShutdownHook(new Thread() {
+           public void run() {
+        	   DB4oMap.this.destroy();
+           }
+		});
+	}
+	
 	@SuppressWarnings("unchecked")
-	private final Entry<K,V> getEntry(Object key) {
+	private final Entry<K, V> removeMapping(Object obj) {
+		Map.Entry<K, V> entry = (Map.Entry<K, V>) obj;
+		ObjectSet<Entry<K, V>> objects = db.queryByExample(entry);
+		Entry<K, V> removeEntry = null;
+		if (objects.hasNext() && (removeEntry = objects.next()).getKey().equals(entry.getKey())
+				&& removeEntry.getValue().equals(entry.getValue())) {
+			db.delete(removeEntry);
+			db.commit();
+			return removeEntry;
+		}
+		return null;
+	}
+	
+	@SuppressWarnings("unchecked")
+	private final Entry<K, V> getEntry(Object key) {
 		check(key);
 		ObjectSet<Entry<K, V>> objects = db.queryByExample(new Entry<K, V>((K) key, null));
-		return objects.hasNext() ? objects.next() : null;
+		Entry<K, V> entry = objects.hasNext() ? objects.next() : null;
+		if (entry != null && entry.getKey().equals(key)) {
+			return entry;
+		}
+		return null;
 	}
 	
 	public static class Entry<K, V> implements Map.Entry<K, V> {
@@ -449,6 +496,7 @@ public class DB4oMap<K, V>
             return candidate != null && candidate.equals(e);
         }
 		
+		@Override
         public boolean remove(Object obj) {
             return DB4oMap.this.removeMapping(obj) != null;
         }
@@ -474,7 +522,7 @@ public class DB4oMap<K, V>
 	private final class ValueIterator extends Db4oIterator<V> {
 		@Override
         public V next() {
-            return nextEntry().value;
+            return nextEntry().getValue();
         }
     }
 	
@@ -486,7 +534,7 @@ public class DB4oMap<K, V>
     }
 	
 	private abstract class Db4oIterator<E> implements Iterator<E> {
-        private ObjectSet<E> objects;
+        private ObjectSet<Entry<K, V>> objects;
         
         private Entry<K, V> current;
 
@@ -500,12 +548,10 @@ public class DB4oMap<K, V>
         	return objects.hasNext();
         }
 
-        @SuppressWarnings("unchecked")
 		protected final Entry<K, V> nextEntry() {
         	if (!objects.hasNext())
                 throw new NoSuchElementException();
-        	Object obj = objects.next();
-        	Entry<K, V> entry = (Entry<K, V>) obj;
+        	Entry<K, V> entry = objects.next();
         	current = entry;
         	return entry;
         }
