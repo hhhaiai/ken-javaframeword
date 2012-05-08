@@ -3,8 +3,8 @@ package com.shine.framework.dao.util;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.shine.framework.entity.BaseEntity;
 import com.shine.framework.exception.DataAccessException;
-import com.shine.platform.logger.ILogger;
 import com.shine.platform.logger.LoggerFactory;
 
 /**
@@ -17,6 +17,7 @@ public class QueryAnalyzer {
 	private String sortType;			//排序类型
 	private List<QueryItem> items = new ArrayList<QueryItem>();	//查询条件集合
 	private String baseSQL;		//基本查询SQL,如果没设置则通过clazz自动生成;如：from entityName where 1=1
+	private BaseEntity entity;	//要查询的实体类 实例
 	private Class clazz;		//生成基本SQL的Class
 	private Pagination page;	//分页实体
 	
@@ -51,7 +52,9 @@ public class QueryAnalyzer {
 				LoggerFactory.getLogger(getClass()).error("QueryAnalyzer.缺少baseSQL或者class属性值!");
 				throw new DataAccessException("QueryAnalyzer.缺少baseSQL或者class属性值!");
 			}
-			bsql = "from " + clazz.getName() + " tmp where 1=1 ";
+			bsql = "FROM " + clazz.getName() + " tmp WHERE 1=1 ";
+			if(entity.isVirtualDelete())
+				bsql += "AND(tmp.delflag is null or tmp.delflag=0) ";
 		}
 		qsql = buildCriterionSQL("tmp", false);
 		if(qsql==null)
@@ -152,7 +155,8 @@ public class QueryAnalyzer {
 	public void setBaseSQL(String baseSQL) {
 		this.baseSQL = baseSQL;
 	}
-	public void setClazz(Class clazz) {
-		this.clazz = clazz;
+	public void setEntity(BaseEntity entity) {
+		this.entity = entity;
+		clazz = entity.getClass();
 	}
 }

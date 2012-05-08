@@ -1,8 +1,10 @@
 package com.shine.framework.web;
 
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -96,11 +98,58 @@ final public class RequestDataExtractor {
 	}
 	
 	/**
-	 * 构建查询条件分析器
-	 * @return
+	 * 萃取并构建查询条件
+	 * @param analyzer
 	 */
-	public QueryAnalyzer buildQueryFilter(){
-		QueryAnalyzer analyzer = new QueryAnalyzer();
-		return analyzer;
+	public void buildQueryItem(final QueryAnalyzer analyzer){
+		Enumeration<String> em = request.getParameterNames();
+		List<String> params = new ArrayList<String>();
+		Map<String, String> ops = new HashMap<String, String>();
+		Map<String, String> values = new HashMap<String, String>();
+		Map<String, String> types = new HashMap<String, String>();
+		while(em.hasMoreElements()){
+			String e = em.nextElement();
+			//字段参数
+			if(e.startsWith("Q_")){
+				String pa = e.substring(2);
+				String name = null;
+				String op = null;
+				int len = pa.length();
+				if(pa.lastIndexOf("_")==len-3){
+					name = pa.substring(0,len-3);
+					op = pa.substring(len-2,len);
+				}else{
+					name = pa;
+				}
+				String value = request.getParameter(e);
+				if(value!=null&&!"".equals(value)){
+					params.add(name);
+					values.put(name, value);
+					if(op!=null)
+						ops.put(name, op);
+				}
+			}
+			//类型
+			if(e.startsWith("T_")){
+				String value = request.getParameter(e);
+				if(value!=null&&!"".equals(value))
+					types.put(e.substring(2), value);
+			}
+		}
+		if(!values.isEmpty()){
+			for(String name:params){
+				String op = ops.get(name);
+				String type = types.get(name);
+				if(op==null)
+					op = "eq";
+				if(type==null)
+					type = "string";
+				analyzer.addItem(name, values.get(name), op, type);
+			}
+		}
+		params = null;
+		ops = null;
+		values = null;
+		types = null;
 	}
 }

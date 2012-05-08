@@ -21,13 +21,20 @@ public interface BaseDao extends GenericDao{
 	public BaseEntity get(BaseEntity entity);
 	
 	/**
-	 * 删除
+	 * 通过实体删除
 	 * @param entity		
 	 */
 	public void delete(BaseEntity entity);
 	
 	/**
-	 * 删除
+	 * 通过主键删除
+	 * @param entity		
+	 * @param pkValue	主键值
+	 */
+	public void delete(BaseEntity entity, Serializable pkValue);
+	
+	/**
+	 * 通过主键删除
 	 * @param entity		
 	 * @param pkValues	主键值
 	 */

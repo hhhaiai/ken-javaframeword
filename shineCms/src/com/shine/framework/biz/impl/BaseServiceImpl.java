@@ -29,6 +29,10 @@ public class BaseServiceImpl extends GenericServiceImpl<BaseDao> implements Base
 		dao.update(entity);
 	}
 	
+	public void delete(BaseEntity entity,String id){
+		dao.delete(entity, id);
+	}
+	
 	public void delete(BaseEntity entity,String[] ids){
 		dao.delete(entity, ids);
 	}

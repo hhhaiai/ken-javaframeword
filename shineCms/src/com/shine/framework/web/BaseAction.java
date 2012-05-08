@@ -13,7 +13,7 @@ import com.shine.framework.entity.BaseEntity;
 /**
  * Action基类,包括通用方法
  * @author JiangKunpeng 2012.03.09
- * @version 2012.03.09
+ * @version 2012.05.08
  * @param <SERVICE>	对应的业务实现类
  */
 public abstract class BaseAction<SERVICE extends BaseService> extends GenericAction{
@@ -70,9 +70,10 @@ public abstract class BaseAction<SERVICE extends BaseService> extends GenericAct
 	public void listJSON() {
 		try{
 			QueryAnalyzer analyzer = new QueryAnalyzer();
-			analyzer.setClazz(this.getE().getClass());
+			analyzer.setEntity(getE());
 			Pagination page = new Pagination(1,15);
 			analyzer.setPage(page);
+			extor.buildQueryItem(analyzer);
 			List list = service.list(analyzer);
 			printOutJsonList(list, page);
 		}catch(Exception e){
@@ -184,15 +185,45 @@ public abstract class BaseAction<SERVICE extends BaseService> extends GenericAct
 		
 	}
 	
+	//逗号分隔符
+	final static String COMMA = ",";
+	/**
+	 * 获取被逗号分隔的数组
+	 * @param paramName
+	 * @return
+	 */
+	protected String[] getSeparateArray(final String paramName){
+		String[] vs = null;
+		String v = extor.getValue(paramName);
+		if(v!=null)
+			vs = v.split(COMMA);
+		return vs;
+	}
+	
+	//统一主键名（在请求中传入）
+	final static String COMMONPK = "id";
 	/**
 	 * 删除
 	 * 
 	 * @return
 	 */
 	public void delete() {
-		String[] ids = extor.getArrayValue("id");
-		if(ids!=null)
-			service.delete(getE(), ids);
+		try{
+			String[] ids = getSeparateArray(COMMONPK);
+			int len = 0;
+			if(ids!=null&&(len=ids.length)>0){
+				if(len==1)
+					service.delete(getE(), ids[0]);
+				else
+					service.delete(getE(), ids);
+			}else{
+				printOutText("没选择要删除的记录");
+			}
+			printOutText("删除成功");
+		}catch(Exception e){
+			printOutText("删除失败");
+			e.printStackTrace();
+		}
 	}
 	
 	/**

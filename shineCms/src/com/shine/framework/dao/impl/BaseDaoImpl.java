@@ -26,19 +26,7 @@ public class BaseDaoImpl extends GenericDaoImpl implements BaseDao{
 	
 	@Override
 	public BaseEntity get(BaseEntity entity) {
-		ClassMetadata cm = getClassMetadata(entity.getClass());
-		String pkName = cm.getIdentifierPropertyName();
-		Object v = getEntityPropertityValue(entity, pkName);
-		String t = cm.getIdentifierType().getName();
-		Serializable s = null;
-		if("string".equals(t))
-			s = v.toString();
-		else if(t.startsWith("int"))
-			s = Integer.parseInt(v.toString());
-		else if("long".equals(t))
-			s = Long.parseLong(v.toString());
-		else 
-			s = v.toString();
+		Serializable s = getPkValue(entity);
 		Object o = get(entity.getClass(), s);
 		return (BaseEntity)o;
 	}
@@ -48,8 +36,8 @@ public class BaseDaoImpl extends GenericDaoImpl implements BaseDao{
 		ClassMetadata cm = getClassMetadata(entity.getClass());
 		String pkName = cm.getIdentifierPropertyName();
 		if(entity.isVirtualDelete()){
-			String sql = "update " + entity.getClass().getName() + 
-				" tmp set tmp.delFlag=?,tmp.delTime=? where tmp." + pkName + " = ?";
+			String sql = "UPDATE " + entity.getClass().getName() + 
+				" tmp SET tmp.delflag=?,tmp.deltime=? WHERE tmp." + pkName + " = ?";
 			executeSQL(sql, new Object[]{1, new Date(), getEntityPropertityValue(entity, pkName)});
 		}else{
 			Object v = getEntityPropertityValue(entity, pkName);
@@ -68,31 +56,47 @@ public class BaseDaoImpl extends GenericDaoImpl implements BaseDao{
 				delete(o);
 		}
 	}
+	
+	@Override
+	public void delete(BaseEntity entity, Serializable pkValue){
+		Serializable pk = pkTransform(entity.getClass(), pkValue);
+		StringBuffer sql = new StringBuffer(100);
+		if(entity.isVirtualDelete()){
+			sql.append("UPDATE ").append(entity.getClass().getName());
+			sql.append(" tmp SET tmp.delflag=?,tmp.deltime=? WHERE tmp.").append(getPkName(entity)).append(" = ?");
+			executeUpdate(sql.toString(), new Object[]{1,new Date(),pk});
+		}else{
+			sql.append("DELETE FROM ").append(entity.getClass().getName());
+			sql.append(" tmp WHERE tmp.").append(getPkName(entity)).append(" = ?");
+			executeUpdate(sql.toString(), new Object[]{pk});
+		}
+		sql = null;
+	}
 
 	@Override
-	public void delete(BaseEntity entity, Serializable[] pkValue) {
-		Serializable[] pk = pkTransform(entity, pkValue);
+	public void delete(BaseEntity entity, Serializable[] pkValue){
+		Serializable[] pk = pkTransform(entity.getClass(), pkValue);
+		StringBuffer sql = new StringBuffer(100);
 		if(entity.isVirtualDelete()){
-			StringBuffer sql = new StringBuffer("100");
-			sql.append("update ").append(entity.getClass().getName());
-			sql.append(" tmp set tmp.delFlag=?,tmp.delTime=? where tmp.").append(getPkName(entity)).append(" in(");
+			sql.append("UPDATE ").append(entity.getClass().getName());
+			sql.append(" tmp SET tmp.delflag=?,tmp.deltime=? WHERE tmp.").append(getPkName(entity)).append(" IN(");
 			for(int i=0;i<pkValue.length;i++){
 				sql.append("?,");
 			}
 			sql.delete(sql.length()-1, sql.length());
 			sql.append(")");
-			executeSQL(sql.toString(), ArrayUtil.mergeArray(new Object[]{1,new Date()}, pk));
+			executeUpdate(sql.toString(), ArrayUtil.mergeArray(new Object[]{1,new Date()}, pk));
 		}else{
-			StringBuffer sql = new StringBuffer("100");
-			sql.append("delete from ").append(entity.getClass().getName());
-			sql.append(" tmp where ").append(getPkName(entity)).append(" in(");
+			sql.append("DELETE FROM ").append(entity.getClass().getName());
+			sql.append(" tmp WHERE tmp.").append(getPkName(entity)).append(" IN(");
 			for(int i=0;i<pkValue.length;i++){
 				sql.append("?,");
 			}
 			sql.delete(sql.length()-1, sql.length());
 			sql.append(")");
-			executeSQL(sql.toString(), pk);
+			executeUpdate(sql.toString(), pk);
 		}
+		sql = null;
 	}
 	
 	@Override
