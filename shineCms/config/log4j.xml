@@ -28,7 +28,7 @@
     	<appender-ref ref="console"/>
     </logger>
     <logger name="org.hibernate" additivity="false">
-    	<level value = "DEBUG"/>
+    	<level value = "INFO"/>
     	<appender-ref ref="console"/>
     </logger>
     <logger name="com.opensymphony.xwork2" additivity="false">
@@ -42,7 +42,7 @@
     
     <!-- 根logger的设置-->     
     <root>
-        <priority value ="DEBUG"/>     
+        <priority value ="INFO"/>     
         <appender-ref ref="console"/>
         <appender-ref ref="logfile"/>        
     </root>     
