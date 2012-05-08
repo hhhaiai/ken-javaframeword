@@ -31,11 +31,30 @@ $(document).ready(function() {
         resizable : false,
         buttons : {
             "提交" : function(){
-          submitDialog();
+          
           return false; //阻止form的默认提交动作
       	},
             "取消" : function() {
                 $("#dialog-form").omDialog("close");//关闭dialog
+            }
+        }
+    });
+	var qdlg = $("#query-form").omDialog({
+        width: 400,
+        autoOpen : false,
+        modal : true,
+        resizable : false,
+        buttons : {
+            "查询" : function(){
+				var q1 = $("input[name='Q_username_eq']",qdlg).val();
+				var q2 = $("input[name='Q_name_lk']",qdlg).val();
+				var url = '${path}sysmgr/user_listJSON.do?Q_username_eq='+q1+'&Q_name_lk='+q2;
+          		$('#grid').omGrid('setData',url);
+          		$("#query-form").omDialog("close");
+        		return false; //阻止form的默认提交动作
+      	},
+            "取消" : function() {
+                $("#query-form").omDialog("close");//关闭dialog
             }
         }
     });
@@ -59,7 +78,8 @@ $(document).ready(function() {
 	        };
 	        $.post('${path}sysmgr/user_saveAjax.do',submitData,function(){
 	            if(isAdd){
-	                $('#grid').omGrid('reload',1);//如果是添加则滚动到第一页并刷新
+	                //$('#grid').omGrid('reload',1);//如果是添加则滚动到第一页并刷新
+	                $('#grid').omGrid('reload');
 	                $.omMessageTip.show({title: "操作成功", content: "添加数据成功", timeout: 1500});
 	            }else{
 	                $('#grid').omGrid('reload');//如果是修改则刷新当前页
@@ -74,18 +94,30 @@ $(document).ready(function() {
         rules : {
             'e.username' : {
     			required : true,
-    			maxlength : 5
+    			maxlength : 50
     		}, 
-            'e.password' : {required : true},
-            'e.name' : {required : true} 
+            'e.password' : {
+    			required : true,
+    			maxlength : 20
+    		},
+            'e.name' : {
+    			required : true,
+    			maxlength : 50
+    		} 
         }, 
         messages : {
             'e.username' : {
         		required : "用户名不能为空",
-        		maxlength : "用户名长度不能超过5"
+        		maxlength : "用户名不能超过50个字符"
         	},
-            'e.password' : {required : "密码不能为空"},
-            'e.name' : {required : "姓名不能为空"}
+            'e.password' : {
+        		required : "密码不能为空",
+        		maxlength : "密码不能超过20个字符"
+        	},
+            'e.name' : {
+        		required : "姓名不能为空",
+        		maxlength : "姓名不能超过50个字符"
+        	}
         }
     });
     var isAdd = true; //弹出窗口中是添加操作还是修改操作？
@@ -115,9 +147,10 @@ $(document).ready(function() {
 	            	ids += selections[i].userId + ',';
 	            }
 	            ids = ids.substr(0,ids.length-1);
-	            $.post('${path}sysmgr/user_delete.do','id='+ids,function(){
-	                $('#grid').omGrid('reload');//刷新当前页数据
-	                $.omMessageTip.show({title: "操作成功", content: "删除数据成功", timeout: 1500});
+	            $.post('${path}sysmgr/user_delete.do','id='+ids,function(rs){
+	                $.omMessageTip.show({title: "提示信息", content: rs, timeout: 2000});
+	                if(rs.indexOf("成功")>0)
+	                	$('#grid').omGrid('reload');//刷新当前页数据
 	            });
             }
 		}
@@ -125,7 +158,7 @@ $(document).ready(function() {
 	$('#btn_refresh').omButton({
 		icons : {left : '${path}r/blue/image/btn/delete.gif'},
 		onClick : function(){
-			$('#grid').reload();
+			qdlg.omDialog("open");
 		}
 	});
     $('#grid').omGrid({
@@ -144,7 +177,7 @@ $(document).ready(function() {
      <a href="javascript:void(0);" id="btn_add">添加</a>
      <a href="javascript:void(0);" id="btn_modify">修改</a>
      <a href="javascript:void(0);" id="btn_delete">删除</a>
-     <a href="javascript:void(0);" id="btn_refresh">刷新</a>
+     <a href="javascript:void(0);" id="btn_refresh">查询</a>
 </div>
 <table id="grid"></table>
 <div id="dialog-form">
@@ -162,6 +195,20 @@ $(document).ready(function() {
         <tr>
             <td>姓名：</td>
             <td><input name="e.name" /></td>
+        </tr>
+    </table>
+	</form>
+</div>
+<div id="query-form">
+    <form id="queryForm">
+    <table>
+        <tr>
+            <td>用户名：</td>
+            <td><input name="Q_username_eq" /></td>
+        </tr>
+        <tr>
+            <td>姓名：</td>
+            <td><input name="Q_name_lk" /></td>
         </tr>
     </table>
 	</form>
