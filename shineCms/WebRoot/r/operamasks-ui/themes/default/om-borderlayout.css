@@ -1,0 +1,141 @@
+/*
+ * $Id: om-borderlayout.css,v 1.7 2012/03/12 01:09:47 chentianzhen Exp $
+ * operamasks-ui borderlayout 1.1
+ *
+ * Copyright 2011, AUTHORS.txt (http://ui.operamasks.org/about)
+ * Dual licensed under the MIT or LGPL Version 2 licenses.
+ * http://ui.operamasks.org/license
+ *
+ * http://ui.operamasks.org/docs/
+ */
+.om-borderlayout-resizable-helper-e { border-right: 5px solid gray; }
+.om-borderlayout-resizable-helper-w { border-left: 5px solid gray; }
+.om-borderlayout-resizable-helper-n { border-top: 5px solid gray; }
+.om-borderlayout-resizable-helper-s { border-bottom: 5px solid gray; }
+.om-borderlayout{
+	position: relative;
+	background-color: #D2E0F2;
+	overflow: hidden;
+}
+.om-borderlayout .om-panel-body{
+	padding: 0px;
+}
+.om-borderlayout .om-borderlayout-region-header .om-icon{
+	background-image: url(images/borderlayout/tools.gif);
+	width: 15px;
+	height: 15px;
+}
+.om-borderlayout-mask{
+	left:0;
+	top:0;
+	background: none repeat scroll 0 0 #FAFAFA;
+    opacity: 0.1;
+	filter:Alpha(Opacity=0.1);    
+    position: absolute;
+}
+.om-borderlayout-region{
+	position: absolute;
+	overflow: visible;
+}
+.om-borderlayout-region .om-borderlayout-region-header .om-panel-tool-close{
+	background-position: 0 0;
+}
+.om-borderlayout-region .om-borderlayout-region-header .om-panel-tool-close-hover{
+	background-position: -15px 0;
+}
+.om-borderlayout-region-south{
+	left: 0px;
+}
+.om-borderlayout-region-south .panel-tool-collapse{
+	background-position: 0 -45px;
+}
+.om-borderlayout-region-south .panel-tool-collapse-hover{
+	background-position: -15px -45px;
+}
+.om-borderlayout-region-north{
+	top: 0px;
+	left: 0px;
+}
+.om-borderlayout-region-north .panel-tool-collapse{
+	background-position: 0 -60px;
+}
+.om-borderlayout-region-north .panel-tool-collapse-hover{
+	background-position: -15px -60px;
+}
+.om-borderlayout-region-west{
+	left: 0px;
+}
+.om-borderlayout-region-west .panel-tool-collapse{
+	background-position: 0 -30px;
+}
+.om-borderlayout-region-west .panel-tool-collapse-hover{
+	background-position: -15px -30px;
+}
+.om-borderlayout-region-east{
+	right: 0px;
+}
+.om-borderlayout-region-east .panel-tool-collapse{
+	background-position: 0 -15px;
+}
+.om-borderlayout-region-east .panel-tool-collapse-hover{
+	background-position: -15px -15px;
+}
+
+.om-borderlayout-proxy{
+	position: absolute;
+	cursor: pointer;
+	background-color: #D2E0F2;
+	border: 1px solid #86A3C4;
+	z-index: 100;
+	display: none;
+}
+.om-borderlayout .om-borderlayout-proxy .om-icon{
+	background-image: url(images/borderlayout/tools.gif);
+	width: 15px;
+	height: 15px;
+}
+.om-borderlayout-proxy-north{
+	height: 26px;
+	left: 0px;
+	top: 0px;
+}
+.om-borderlayout-proxy-north .panel-tool-expand{
+	background-position: 0 -45px;
+}
+.om-borderlayout-proxy-north .panel-tool-expand-hover{
+	background-position: -15px -45px;
+}
+.om-borderlayout-proxy-south{
+	height: 26px;
+	left: 0px;
+	bottom: 0px;
+}
+.om-borderlayout-proxy-south .panel-tool-expand{
+	background-position: 0 -60px;
+}
+.om-borderlayout-proxy-south .panel-tool-expand-hover{
+	background-position: -15px -60px;
+}
+.om-borderlayout-proxy-west{
+	left: 0px;
+	width: 26px;
+}
+.om-borderlayout-proxy-west .panel-tool-expand{
+	background-position: 0 -15px;
+}
+.om-borderlayout-proxy-west .panel-tool-expand-hover{
+	background-position: -15px -15px;
+}
+.om-borderlayout-proxy-east{
+	right: 0px;
+	width: 26px;
+}
+.om-borderlayout-proxy-east .panel-tool-expand{
+	background-position: 0 -30px;
+}
+.om-borderlayout-proxy-east .panel-tool-expand-hover{
+	background-position: -15px -30px;
+}
+.om-borderlayout-proxy-hover{
+	background-color: #D9E8FB;
+}

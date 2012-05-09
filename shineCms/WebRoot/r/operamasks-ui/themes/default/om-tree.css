@@ -1,0 +1,117 @@
+/*
+ * $Id: om-tree.css,v 1.17 2012/03/14 08:14:15 wangfan Exp $
+ * operamasks-ui tree 1.1
+ *
+ * Copyright 2011, AUTHORS.txt (http://ui.operamasks.org/about)
+ * Dual licensed under the MIT or LGPL Version 2 licenses.
+ * http://ui.operamasks.org/license
+ *
+ * http://ui.operamasks.org/docs/
+ */
+.treeview, .treeview ul { 
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+
+.treeview ul {
+	margin-top: 4px;
+}
+
+.treeview .hitarea {
+	background: url(images/tree/treeview-default.gif) -64px -25px no-repeat;
+	height: 16px;
+	width: 16px;
+	margin-left: -16px;
+	float: left;
+	cursor: pointer;
+}
+/* fix for IE6 */
+* html .hitarea {
+	display: inline;
+	float:none;
+}
+
+.treeview li { 
+	margin: 0;
+	padding: 3px 0pt 3px 16px;
+}
+
+.treeview .om-tree-node a:link {
+    color: black;
+    text-decoration: none;
+}
+
+
+.treeview .om-tree-node a:visited {
+    color: black;
+    text-decoration: none;
+}
+
+.treeview .om-tree-node a.selected {
+	padding-top: 0px;
+    background-color: #D9E8FB;
+    color: black;
+    border: 1px #D9E8FB solid;
+    *border: 0px;
+}
+
+#treecontrol { margin: 1em 0; display: none; }
+
+.treeview .om-tree-node a.hover { cursor: pointer;text-decoration: underline; }
+
+.treeview li { background: url(images/tree/treeview-default-line.gif) 0 0 no-repeat;overflow:hidden; }
+.treeview li.collapsable, .treeview li.expandable { background-position: 0 -176px; }
+
+.treeview .expandable-hitarea { background-position: -80px -3px; }
+
+.treeview li.last { background-position: 0 -1766px }
+.treeview li.lastCollapsable, .treeview li.lastExpandable { background-image: url(images/tree/treeview-default.gif); }  
+.treeview li.lastCollapsable { background-position: 0 -111px }
+.treeview li.lastExpandable { background-position: -32px -67px }
+
+.treeview div.lastCollapsable-hitarea, .treeview div.lastExpandable-hitarea { background-position: 0; }
+
+.treeview .placeholder {
+	background: url(images/tree/ajax-loader.gif) 0 0 no-repeat;
+	height: 16px;
+	width: 16px;
+	display: block;
+}
+
+.treeview li { padding: 3px 0 2px 16px; }
+.treeview span.folder, .treeview span.file { padding: 1px 0 1px 16px; display: block;}
+.treeview span.folder { background: url(images/tree/tree-icons.gif) 0 -16px no-repeat;  }
+.treeview li.expandable span.folder { background: url(images/tree/tree-icons.gif) 0 -32px no-repeat;  }
+.treeview span.file { background: url(images/tree/tree-icons.gif) 0 0 no-repeat;}
+
+.treeview .tree-checkbox {
+    background: url(images/tree/checkbox.png) 0 0 no-repeat;
+    width: 13px;
+    height:13px;
+    _overflow:hidden;
+    float:left;
+    cursor: pointer;
+    padding-right: 3px;
+}
+
+.treeview .checkbox_full {
+    background-position:0px -36px;
+}
+
+.treeview .checkbox_part {
+    background-position:0px -48px;
+}
+
+.treeview li.treenode-checkable span.file, .treeview li.treenode-checkable span.folder {
+    margin-left: 16px;
+}
+
+.treeview span.treenode-droppable {border-bottom: 1px dotted #dd0000;}
+/* when we want to use the line hover we may use this style, we can see the style use in the om-tree.js line 435 */
+/* 
+.treeview li.om-tree-node .selection {display: none;}
+.treeview li.hover .selection { display: block; background-color: #D4D4D4; }
+.treeview li.selected .selection { display: block; background-color: #eaf1fb; }
+.selection { height: 17px; position: absolute; left: 0; right: 0; z-index: -1; width: 100%;}
+*/
