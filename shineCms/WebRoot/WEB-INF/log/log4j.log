@@ -1,0 +1,183 @@
+DEBUG: [2012-04-18 15:52:29] [main] (com.shine.platform.plugin.PluginContext:39) - 注入插件[Platform->com.shine.platform.PlatformPlugin]
+DEBUG: [2012-04-18 15:52:29] [main] (com.shine.platform.plugin.PluginContext:39) - 注入插件[默认URL权限插件->com.shine.platform.security.DefaultUrlSecurityPlugin]
+DEBUG: [2012-04-18 15:52:29] [main] (com.shine.platform.plugin.PluginContext:39) - 注入插件[系统管理->com.shine.common.sysmgr.SysMgrPlugin]
+DEBUG: [2012-04-18 15:52:29] [main] (com.shine.platform.plugin.PluginContext:39) - 开始初始化所有插件...
+DEBUG: [2012-04-18 15:52:29] [main] (com.shine.platform.PlatformPlugin:39) - 初始化插件[Platform]
+DEBUG: [2012-04-18 15:52:29] [main] (com.shine.platform.security.DefaultUrlSecurityPlugin:39) - 初始化插件[默认URL权限插件]
+DEBUG: [2012-04-18 15:52:29] [main] (com.shine.common.sysmgr.SysMgrPlugin:39) - 初始化插件[系统管理]
+DEBUG: [2012-04-18 15:52:29] [main] (com.shine.platform.context.ShineContextLoaderListener:39) - Spring XMLs:
+classpath:com/shine/project/shineCms/config/applicationContext.xml
+classpath:com/shine/platform/platformContext.xml
+classpath:com/shine/platform/security/defaultUrlSecurityContext.xml
+classpath:com/shine/common/sysmgr/config/sysmgrContext.xml
+
+DEBUG: [2012-04-18 15:52:34] [main] (com.shine.platform.plugin.PluginContext:39) - 开始启动所有插件...
+DEBUG: [2012-04-18 15:52:34] [main] (com.shine.platform.PlatformPlugin:39) - 启动插件[Platform]
+DEBUG: [2012-04-18 15:52:34] [main] (com.shine.platform.security.DefaultUrlSecurityPlugin:39) - 启动插件[默认URL权限插件]
+DEBUG: [2012-04-18 15:52:34] [main] (com.shine.common.sysmgr.SysMgrPlugin:39) - 启动插件[系统管理]
+DEBUG: [2012-04-18 15:52:34] [main] (com.shine.platform.context.StrutsFilterDispatcher:39) - Struts XMLs:
+struts-default.xml
+struts-plugin.xml
+/D:/workspace/shineCms/WebRoot/WEB-INF/classes/com/shine/platform/platformStruts.xml
+/D:/workspace/shineCms/WebRoot/WEB-INF/classes/com/shine/platform/security/defaultStruts.xml
+/D:/workspace/shineCms/WebRoot/WEB-INF/classes/com/shine/common/sysmgr/config/sysmgrStruts.xml
+DEBUG: [2012-05-08 09:09:44] [main] (com.shine.platform.plugin.PluginContext:39) - 注入插件[Platform->com.shine.platform.PlatformPlugin]
+DEBUG: [2012-05-08 09:09:44] [main] (com.shine.platform.plugin.PluginContext:39) - 注入插件[默认URL权限插件->com.shine.platform.security.DefaultUrlSecurityPlugin]
+DEBUG: [2012-05-08 09:09:44] [main] (com.shine.platform.plugin.PluginContext:39) - 注入插件[系统管理->com.shine.common.sysmgr.SysMgrPlugin]
+DEBUG: [2012-05-08 09:09:44] [main] (com.shine.platform.plugin.PluginContext:39) - 开始初始化所有插件...
+DEBUG: [2012-05-08 09:09:44] [main] (com.shine.platform.PlatformPlugin:39) - 初始化插件[Platform]
+DEBUG: [2012-05-08 09:09:44] [main] (com.shine.platform.security.DefaultUrlSecurityPlugin:39) - 初始化插件[默认URL权限插件]
+DEBUG: [2012-05-08 09:09:44] [main] (com.shine.common.sysmgr.SysMgrPlugin:39) - 初始化插件[系统管理]
+DEBUG: [2012-05-08 09:09:44] [main] (com.shine.platform.context.ShineContextLoaderListener:39) - Spring XMLs:
+classpath:com/shine/project/shineCms/config/applicationContext.xml
+classpath:com/shine/platform/platformContext.xml
+classpath:com/shine/platform/security/defaultUrlSecurityContext.xml
+classpath:com/shine/common/sysmgr/config/sysmgrContext.xml
+
+DEBUG: [2012-05-08 09:09:48] [main] (com.shine.platform.plugin.PluginContext:39) - 开始启动所有插件...
+DEBUG: [2012-05-08 09:09:48] [main] (com.shine.platform.PlatformPlugin:39) - 启动插件[Platform]
+DEBUG: [2012-05-08 09:09:48] [main] (com.shine.platform.security.DefaultUrlSecurityPlugin:39) - 启动插件[默认URL权限插件]
+DEBUG: [2012-05-08 09:09:48] [main] (com.shine.common.sysmgr.SysMgrPlugin:39) - 启动插件[系统管理]
+DEBUG: [2012-05-08 09:09:48] [main] (com.shine.platform.context.StrutsFilterDispatcher:39) - Struts XMLs:
+struts-default.xml
+struts-plugin.xml
+/D:/workspace/shineCms/WebRoot/WEB-INF/classes/com/shine/platform/platformStruts.xml
+/D:/workspace/shineCms/WebRoot/WEB-INF/classes/com/shine/platform/security/defaultStruts.xml
+/D:/workspace/shineCms/WebRoot/WEB-INF/classes/com/shine/common/sysmgr/config/sysmgrStruts.xml
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.BooleanConverter:336) - Setting default value: false
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.BooleanConverter:127) - Converting 'Boolean' value 'false' to type 'Boolean'
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.BooleanConverter:149) -     No conversion required, value is already a Boolean
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.ByteConverter:336) - Setting default value: 0
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.ByteConverter:127) - Converting 'Integer' value '0' to type 'Byte'
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.ByteConverter:158) -     Converted to Byte value '0'
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.CharacterConverter:336) - Setting default value:  
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.CharacterConverter:127) - Converting 'Character' value ' ' to type 'Character'
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.CharacterConverter:149) -     No conversion required, value is already a Character
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.DoubleConverter:336) - Setting default value: 0
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.DoubleConverter:127) - Converting 'Integer' value '0' to type 'Double'
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.DoubleConverter:158) -     Converted to Double value '0.0'
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.FloatConverter:336) - Setting default value: 0
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.FloatConverter:127) - Converting 'Integer' value '0' to type 'Float'
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.FloatConverter:158) -     Converted to Float value '0.0'
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.IntegerConverter:336) - Setting default value: 0
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.IntegerConverter:127) - Converting 'Integer' value '0' to type 'Integer'
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.IntegerConverter:149) -     No conversion required, value is already a Integer
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.LongConverter:336) - Setting default value: 0
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.LongConverter:127) - Converting 'Integer' value '0' to type 'Long'
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.LongConverter:158) -     Converted to Long value '0'
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.ShortConverter:336) - Setting default value: 0
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.ShortConverter:127) - Converting 'Integer' value '0' to type 'Short'
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.ShortConverter:158) -     Converted to Short value '0'
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.BigDecimalConverter:336) - Setting default value: 0.0
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.BigDecimalConverter:127) - Converting 'BigDecimal' value '0.0' to type 'BigDecimal'
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.BigDecimalConverter:149) -     No conversion required, value is already a BigDecimal
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.BigIntegerConverter:336) - Setting default value: 0
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.BigIntegerConverter:127) - Converting 'BigInteger' value '0' to type 'BigInteger'
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.BigIntegerConverter:149) -     No conversion required, value is already a BigInteger
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.BooleanConverter:336) - Setting default value: false
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.BooleanConverter:127) - Converting 'Boolean' value 'false' to type 'Boolean'
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.BooleanConverter:149) -     No conversion required, value is already a Boolean
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.ByteConverter:336) - Setting default value: 0
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.ByteConverter:127) - Converting 'Integer' value '0' to type 'Byte'
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.ByteConverter:158) -     Converted to Byte value '0'
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.CharacterConverter:336) - Setting default value:  
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.CharacterConverter:127) - Converting 'Character' value ' ' to type 'Character'
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.CharacterConverter:149) -     No conversion required, value is already a Character
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.DoubleConverter:336) - Setting default value: 0
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.DoubleConverter:127) - Converting 'Integer' value '0' to type 'Double'
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.DoubleConverter:158) -     Converted to Double value '0.0'
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.FloatConverter:336) - Setting default value: 0
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.FloatConverter:127) - Converting 'Integer' value '0' to type 'Float'
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.FloatConverter:158) -     Converted to Float value '0.0'
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.IntegerConverter:336) - Setting default value: 0
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.IntegerConverter:127) - Converting 'Integer' value '0' to type 'Integer'
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.IntegerConverter:149) -     No conversion required, value is already a Integer
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.LongConverter:336) - Setting default value: 0
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.LongConverter:127) - Converting 'Integer' value '0' to type 'Long'
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.LongConverter:158) -     Converted to Long value '0'
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.ShortConverter:336) - Setting default value: 0
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.ShortConverter:127) - Converting 'Integer' value '0' to type 'Short'
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.ShortConverter:158) -     Converted to Short value '0'
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.StringConverter:336) - Setting default value: 
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.StringConverter:127) - Converting 'String' value '' to type 'String'
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.ArrayConverter:336) - Setting default value: [Z@1cb1278
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.ArrayConverter:127) - Converting 'boolean[]' value '[Z@1cb1278' to type 'boolean[]'
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.ArrayConverter:149) -     No conversion required, value is already a boolean[]
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.ArrayConverter:336) - Setting default value: [B@129aa21
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.ArrayConverter:127) - Converting 'byte[]' value '[B@129aa21' to type 'byte[]'
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.ArrayConverter:149) -     No conversion required, value is already a byte[]
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.ArrayConverter:336) - Setting default value: [C@6076c4
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.ArrayConverter:127) - Converting 'char[]' value '[C@6076c4' to type 'char[]'
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.ArrayConverter:149) -     No conversion required, value is already a char[]
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.ArrayConverter:336) - Setting default value: [D@115798c
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.ArrayConverter:127) - Converting 'double[]' value '[D@115798c' to type 'double[]'
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.ArrayConverter:149) -     No conversion required, value is already a double[]
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.ArrayConverter:336) - Setting default value: [F@df0c3a
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.ArrayConverter:127) - Converting 'float[]' value '[F@df0c3a' to type 'float[]'
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.ArrayConverter:149) -     No conversion required, value is already a float[]
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.ArrayConverter:336) - Setting default value: [I@19bb448
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.ArrayConverter:127) - Converting 'int[]' value '[I@19bb448' to type 'int[]'
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.ArrayConverter:149) -     No conversion required, value is already a int[]
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.ArrayConverter:336) - Setting default value: [J@158fd70
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.ArrayConverter:127) - Converting 'long[]' value '[J@158fd70' to type 'long[]'
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.ArrayConverter:149) -     No conversion required, value is already a long[]
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.ArrayConverter:336) - Setting default value: [S@166de66
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.ArrayConverter:127) - Converting 'short[]' value '[S@166de66' to type 'short[]'
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.ArrayConverter:149) -     No conversion required, value is already a short[]
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.ArrayConverter:336) - Setting default value: [Ljava.math.BigDecimal;@93068a
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.ArrayConverter:127) - Converting 'BigDecimal[]' value '[Ljava.math.BigDecimal;@93068a' to type 'BigDecimal[]'
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.ArrayConverter:149) -     No conversion required, value is already a BigDecimal[]
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.ArrayConverter:336) - Setting default value: [Ljava.math.BigInteger;@928095
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.ArrayConverter:127) - Converting 'BigInteger[]' value '[Ljava.math.BigInteger;@928095' to type 'BigInteger[]'
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.ArrayConverter:149) -     No conversion required, value is already a BigInteger[]
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.ArrayConverter:336) - Setting default value: [Ljava.lang.Boolean;@37c7ee
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.ArrayConverter:127) - Converting 'Boolean[]' value '[Ljava.lang.Boolean;@37c7ee' to type 'Boolean[]'
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.ArrayConverter:149) -     No conversion required, value is already a Boolean[]
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.ArrayConverter:336) - Setting default value: [Ljava.lang.Byte;@26fb32
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.ArrayConverter:127) - Converting 'Byte[]' value '[Ljava.lang.Byte;@26fb32' to type 'Byte[]'
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.ArrayConverter:149) -     No conversion required, value is already a Byte[]
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.ArrayConverter:336) - Setting default value: [Ljava.lang.Character;@13596e0
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.ArrayConverter:127) - Converting 'Character[]' value '[Ljava.lang.Character;@13596e0' to type 'Character[]'
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.ArrayConverter:149) -     No conversion required, value is already a Character[]
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.ArrayConverter:336) - Setting default value: [Ljava.lang.Double;@1445d28
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.ArrayConverter:127) - Converting 'Double[]' value '[Ljava.lang.Double;@1445d28' to type 'Double[]'
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.ArrayConverter:149) -     No conversion required, value is already a Double[]
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.ArrayConverter:336) - Setting default value: [Ljava.lang.Float;@140109f
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.ArrayConverter:127) - Converting 'Float[]' value '[Ljava.lang.Float;@140109f' to type 'Float[]'
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.ArrayConverter:149) -     No conversion required, value is already a Float[]
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.ArrayConverter:336) - Setting default value: [Ljava.lang.Integer;@1033c7e
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.ArrayConverter:127) - Converting 'Integer[]' value '[Ljava.lang.Integer;@1033c7e' to type 'Integer[]'
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.ArrayConverter:149) -     No conversion required, value is already a Integer[]
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.ArrayConverter:336) - Setting default value: [Ljava.lang.Long;@178820c
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.ArrayConverter:127) - Converting 'Long[]' value '[Ljava.lang.Long;@178820c' to type 'Long[]'
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.ArrayConverter:149) -     No conversion required, value is already a Long[]
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.ArrayConverter:336) - Setting default value: [Ljava.lang.Short;@a21c07
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.ArrayConverter:127) - Converting 'Short[]' value '[Ljava.lang.Short;@a21c07' to type 'Short[]'
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.ArrayConverter:149) -     No conversion required, value is already a Short[]
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.ArrayConverter:336) - Setting default value: [Ljava.lang.String;@d78139
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.ArrayConverter:127) - Converting 'String[]' value '[Ljava.lang.String;@d78139' to type 'String[]'
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.ArrayConverter:149) -     No conversion required, value is already a String[]
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.ArrayConverter:336) - Setting default value: [Ljava.lang.Class;@650016
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.ArrayConverter:127) - Converting 'Class[]' value '[Ljava.lang.Class;@650016' to type 'Class[]'
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.ArrayConverter:149) -     No conversion required, value is already a Class[]
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.ArrayConverter:336) - Setting default value: [Ljava.util.Date;@e8b5fe
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.ArrayConverter:127) - Converting 'Date[]' value '[Ljava.util.Date;@e8b5fe' to type 'Date[]'
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.ArrayConverter:149) -     No conversion required, value is already a Date[]
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.ArrayConverter:336) - Setting default value: [Ljava.util.Calendar;@162f58e
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.ArrayConverter:127) - Converting 'Calendar[]' value '[Ljava.util.Calendar;@162f58e' to type 'Calendar[]'
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.ArrayConverter:149) -     No conversion required, value is already a Calendar[]
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.ArrayConverter:336) - Setting default value: [Ljava.io.File;@e2c931
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.ArrayConverter:127) - Converting 'java.io.File[]' value '[Ljava.io.File;@e2c931' to type 'java.io.File[]'
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.ArrayConverter:149) -     No conversion required, value is already a java.io.File[]
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.ArrayConverter:336) - Setting default value: [Ljava.sql.Date;@106bcba
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.ArrayConverter:127) - Converting 'java.sql.Date[]' value '[Ljava.sql.Date;@106bcba' to type 'java.sql.Date[]'
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.ArrayConverter:149) -     No conversion required, value is already a java.sql.Date[]
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.ArrayConverter:336) - Setting default value: [Ljava.sql.Time;@3e4344
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.ArrayConverter:127) - Converting 'java.sql.Time[]' value '[Ljava.sql.Time;@3e4344' to type 'java.sql.Time[]'
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.ArrayConverter:149) -     No conversion required, value is already a java.sql.Time[]
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.ArrayConverter:336) - Setting default value: [Ljava.sql.Timestamp;@9f5742
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.ArrayConverter:127) - Converting 'java.sql.Timestamp[]' value '[Ljava.sql.Timestamp;@9f5742' to type 'java.sql.Timestamp[]'
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.ArrayConverter:149) -     No conversion required, value is already a java.sql.Timestamp[]
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.ArrayConverter:336) - Setting default value: [Ljava.net.URL;@13a567
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.ArrayConverter:127) - Converting 'java.net.URL[]' value '[Ljava.net.URL;@13a567' to type 'java.net.URL[]'
+DEBUG: [2012-05-08 09:11:32] [http-8888-5] (org.apache.commons.beanutils.converters.ArrayConverter:149) -     No conversion required, value is already a java.net.URL[]

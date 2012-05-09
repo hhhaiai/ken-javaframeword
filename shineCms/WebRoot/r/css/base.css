@@ -1,0 +1,41 @@
+@CHARSET "UTF-8";
+body {
+	margin: 0;
+	padding: 0;
+	font-size: 12px;
+	background: #fff;
+	font-family: "宋体";
+	color: #000;
+}
+fieldset, legend, form, img, ul, ol, li, div, table, td, th{
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+h1, h2, h3, h4, h5, h6 {
+	margin: 0;
+	padding: 0;
+	text-align: center;
+}
+input, textarea{
+	margin: 0;
+	padding: 0;
+	font-size: 12px;
+}
+select {
+	height: 20px;
+}
+label {
+	border: none;
+	cursor: default;
+}
+a {
+	text-decoration:none;
+	color:#06C;
+}
+a:hover {
+	color:#F90;
+}
+ul,li{
+	list-style:none;
+}

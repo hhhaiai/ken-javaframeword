@@ -1,16 +1,16 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@include file="/common/path.jsp"%>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
 <title>用户管理</title>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 <script type="text/javascript" src="${path}r/operamasks-ui/js/jquery.min.js"></script>
 <script type="text/javascript" src="${path}r/operamasks-ui/js/operamasks-ui.min.js"></script>
-<link rel="stylesheet" href="${path}r/operamasks-ui/css/default/om-default.css">
+<link rel="stylesheet" href="${path}r/css/base.css"/>
+<link title="默认主题" rel="stylesheet" href="${path}r/operamasks-ui/themes/${themes}/om-all.css">
 <style type="text/css">
 .toolbar {
-    background: url("${path}r/blue/image/btn/toolbar_bg.jpg") repeat-x scroll 0 0 #99B5DD;
+    background: url("${path}r/css/themes/${themes}/image/icon/toolbar_bg.jpg") repeat-x scroll 0 0 #99B5DD;
     border: 1px solid #808FB8;
     height: 24px;
     line-height: 24px;
@@ -122,17 +122,17 @@ $(document).ready(function() {
     });
     var isAdd = true; //弹出窗口中是添加操作还是修改操作？
 	$('#btn_add').omButton({
-		icons : {left : '${path}r/blue/image/btn/add.gif'},
+		icons : {left : '${path}r/css/themes/${themes}/image/icon/add.gif'},
 		onClick : function(){
 			isAdd = true;
 			showDialog('新增');//显示dialog
 		}
 	});
 	$('#btn_modify').omButton({
-		icons : {left : '${path}r/blue/image/btn/modify.gif'}
+		icons : {left : '${path}r/css/themes/${themes}/image/icon/modify.gif'}
 	});
 	$('#btn_delete').omButton({
-		icons : {left : '${path}r/blue/image/btn/delete.gif'},
+		icons : {left : '${path}r/css/themes/${themes}/image/icon/delete.gif'},
 		onClick : function(){
 			var selections=$('#grid').omGrid('getSelections',true);
             var len = selections.length;
@@ -156,7 +156,7 @@ $(document).ready(function() {
 		}
 	});
 	$('#btn_refresh').omButton({
-		icons : {left : '${path}r/blue/image/btn/delete.gif'},
+		icons : {left : '${path}r/css/themes/${themes}/image/icon/delete.gif'},
 		onClick : function(){
 			qdlg.omDialog("open");
 		}

@@ -1,26 +1,26 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@include file="/common/path.jsp"%>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
 <title>Main</title>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<link rel="stylesheet" href="${path}r/blue/css/home.css">
+<link rel="stylesheet" href="${path}r/css/base.css"/>
+<link rel="stylesheet" href="${path}r/css/themes/${themes}/frame.css"/>
 </head>
 
 <body>
 <TABLE cellSpacing=0 cellPadding=0 width="100%" align=center border=0>
   <TR height=28>
-    <TD background="${path}r/blue/image/home/title_bg1.jpg">当前位置: </TD></TR>
+    <TD background="${path}r/css/themes/${themes}/image/frame/title_bg1.jpg">当前位置: </TD></TR>
   <TR>
     <TD bgColor=#b1ceef height=1></TD></TR>
   <TR height=20>
-    <TD background="${path}r/blue/image/home/shadow_bg.jpg"></TD>
+    <TD background="${path}r/css/themes/${themes}/image/frame/shadow_bg.jpg"></TD>
   </TR>
 </TABLE>
 <TABLE cellSpacing=0 cellPadding=0 width="90%" align=center border=0>
   <TR height=100>
-    <TD align=middle width=100><IMG height=100 src="${path}r/blue/image/home/admin_p.gif" 
+    <TD align=middle width=100><IMG height=100 src="${path}r/css/themes/${themes}/image/frame/admin_p.gif" 
       width=90></TD>
     <TD width=60>&nbsp;</TD>
     <TD>
@@ -39,7 +39,7 @@
     <TD></TD></TR>
   <TR height=22>
     <TD style="PADDING-LEFT: 20px; FONT-WEIGHT: bold; COLOR: #ffffff" 
-    align=middle background="${path}r/blue/image/home/title_bg2.jpg">您的相关信息</TD></TR>
+    align=middle background="${path}r/css/themes/${themes}/image/frame/title_bg2.jpg">您的相关信息</TD></TR>
   <TR bgColor=#ecf4fc height=12>
     <TD></TD></TR>
   <TR height=20>
