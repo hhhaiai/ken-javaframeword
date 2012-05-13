@@ -19,7 +19,7 @@
     padding-bottom: 2px;
 }
 .mar {
-    margin-top: 10px;
+    margin-top: 0px;
 }
 </style>
 <script type="text/javascript">
@@ -31,7 +31,7 @@ $(document).ready(function() {
         resizable : false,
         buttons : {
             "提交" : function(){
-          
+          submitDialog();
           return false; //阻止form的默认提交动作
       	},
             "取消" : function() {
