@@ -1,0 +1,76 @@
+.om-itemselector-toolbar{
+    padding: 0 2px;
+    width:20px;
+}
+.om-itemselector-toolbar .om-icon{
+    margin:5px auto;
+}
+
+.om-itemselector fieldset{
+	height:100%;
+	padding: 0;
+	margin: 0;
+	border: 1px solid #B5B8C8;
+}
+
+.om-itemselector fieldset legend{
+    color: #15428B;
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+.om-itemselector-items{
+    overflow-y: auto;
+    overflow-x: hidden;
+    width: 100%;
+}
+.om-itemselector-items dl{
+    margin: 5px 0 0;
+    padding: 0;
+}
+.om-itemselector-items dl dt{
+    padding: 2px 5px;
+    -moz-user-select: none;
+}
+
+.om-itemselector-items dt.om-state-highlight{
+    background: none repeat scroll 0 0 #F9EAC8;
+    color: #000000;
+    border: none;
+}
+.om-itemselector-toolbar .om-icon{
+    background-image: url("images/itemselector/itemselector-toolbar.gif");
+}
+.om-itemselector-tbar-space{
+    background-position: 20px 20px;
+}
+.om-itemselector-tbar-moveTop{
+    background-position: -1px -1px;
+}
+.om-itemselector-tbar-moveUp{
+    background-position: -1px -19px;
+}
+.om-itemselector-tbar-moveDown{
+    background-position: -1px -37px;
+}
+.om-itemselector-tbar-moveBottom{
+    background-position: -1px -55px;
+}
+.om-itemselector-tbar-addAll{
+    background-position: -1px -73px;
+}
+.om-itemselector-tbar-add{
+    background-position: -1px -91px;
+}
+.om-itemselector-tbar-remove{
+    background-position: -1px -109px;
+}
+.om-itemselector-tbar-removeAll{
+    background-position: -1px -127px;
+}
+
+
+.om-itemselector-placeholder{
+    height:15px;
+    border:1px solid #F9EAC8;
+}
