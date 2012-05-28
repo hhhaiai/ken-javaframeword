@@ -6,22 +6,10 @@
 <title>用户管理</title>
 <script type="text/javascript" src="${path}r/operamasks-ui/js/jquery.min.js"></script>
 <script type="text/javascript" src="${path}r/operamasks-ui/js/operamasks-ui.min.js"></script>
+<link title="default" rel="stylesheet" href="${path}r/operamasks-ui/themes/${themes}/om-base.css">
+<link title="default" rel="stylesheet" href="${path}r/operamasks-ui/themes/${themes}/om-all.css">
 <link rel="stylesheet" href="${path}r/css/base.css"/>
-<link title="默认主题" rel="stylesheet" href="${path}r/operamasks-ui/themes/${themes}/om-all.css">
-<style type="text/css">
-.toolbar {
-    background: url("${path}r/css/themes/${themes}/image/icon/toolbar_bg.jpg") repeat-x scroll 0 0 #99B5DD;
-    border: 1px solid #808FB8;
-    height: 24px;
-    line-height: 24px;
-    padding-left: 10px;
-    padding-top: 1px;
-    padding-bottom: 2px;
-}
-.mar {
-    margin-top: 0px;
-}
-</style>
+<link title="default" rel="stylesheet" href="${path}r/css/themes/${themes}/list.css"/>
 <script type="text/javascript">
 $(document).ready(function() {
 	var dialog = $("#dialog-form").omDialog({
@@ -31,7 +19,7 @@ $(document).ready(function() {
         resizable : false,
         buttons : {
             "提交" : function(){
-          submitDialog();
+          
           return false; //阻止form的默认提交动作
       	},
             "取消" : function() {
@@ -48,7 +36,7 @@ $(document).ready(function() {
             "查询" : function(){
 				var q1 = $("input[name='Q_username_eq']",qdlg).val();
 				var q2 = $("input[name='Q_name_lk']",qdlg).val();
-				var url = '${path}sysmgr/user_listJSON.do?Q_username_eq='+q1+'&Q_name_lk='+q2;
+				var url = '${path}sysmgr/user_listJSON.do?Q^S^username^EQ='+q1+'&Q^S^name^LK='+q2;
           		$('#grid').omGrid('setData',url);
           		$("#query-form").omDialog("close");
         		return false; //阻止form的默认提交动作
