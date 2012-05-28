@@ -326,7 +326,7 @@ public class GenericDaoImpl extends HibernateDaoSupport implements GenericDao{
 			
 			//查询分页后结果
 			if(totalRecord>0)
-				return getHibernateTemplate().executeFind(new HQLListCallBack(hql, paramNames, values, page.getMinNum()-1, page.getPageSize()));
+				return getHibernateTemplate().executeFind(new HQLListCallBack(hql, paramNames, values, page.getStart(), page.getPageSize()));
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -369,7 +369,7 @@ public class GenericDaoImpl extends HibernateDaoSupport implements GenericDao{
 			
 			//查询分页后结果
 			if(totalRecord>0)
-				return getHibernateTemplate().executeFind(new SQLListCallBack(sql, paramNames, values, page.getMinNum()-1, page.getPageSize()).addEntity(clazz));
+				return getHibernateTemplate().executeFind(new SQLListCallBack(sql, paramNames, values, page.getStart(), page.getPageSize()).addEntity(clazz));
 		}catch(Exception e){
 			e.printStackTrace();
 		}

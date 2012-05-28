@@ -1,10 +1,8 @@
 package com.shine.framework.web;
 
-import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -97,59 +95,28 @@ final public class RequestDataExtractor {
 	    return paraStr.toString();
 	}
 	
+	private static final String SPLIT = "\\^";	//查询条件参数分隔符
+	private static final String START = "Q^";	//查询条件参数起始值
+	
 	/**
-	 * 萃取并构建查询条件
+	 * 萃取并构建查询条件(参数格式Q^值类型^属性名^对比运算符,具体查看QueryItem)
 	 * @param analyzer
 	 */
 	public void buildQueryItem(final QueryAnalyzer analyzer){
 		Enumeration<String> em = request.getParameterNames();
-		List<String> params = new ArrayList<String>();
-		Map<String, String> ops = new HashMap<String, String>();
-		Map<String, String> values = new HashMap<String, String>();
-		Map<String, String> types = new HashMap<String, String>();
+		String[] splits = null;
 		while(em.hasMoreElements()){
 			String e = em.nextElement();
 			//字段参数
-			if(e.startsWith("Q_")){
-				String pa = e.substring(2);
-				String name = null;
-				String op = null;
-				int len = pa.length();
-				if(pa.lastIndexOf("_")==len-3){
-					name = pa.substring(0,len-3);
-					op = pa.substring(len-2,len);
-				}else{
-					name = pa;
-				}
+			if(e.startsWith(START)){
+				splits = e.split(SPLIT);
+				if(splits==null||splits.length<4)
+					continue;
 				String value = request.getParameter(e);
-				if(value!=null&&!"".equals(value)){
-					params.add(name);
-					values.put(name, value);
-					if(op!=null)
-						ops.put(name, op);
+				if(value!=null&&value.length()>0){
+					analyzer.addItem(splits[2], value, splits[3], splits[1]);
 				}
 			}
-			//类型
-			if(e.startsWith("T_")){
-				String value = request.getParameter(e);
-				if(value!=null&&!"".equals(value))
-					types.put(e.substring(2), value);
-			}
 		}
-		if(!values.isEmpty()){
-			for(String name:params){
-				String op = ops.get(name);
-				String type = types.get(name);
-				if(op==null)
-					op = "eq";
-				if(type==null)
-					type = "string";
-				analyzer.addItem(name, values.get(name), op, type);
-			}
-		}
-		params = null;
-		ops = null;
-		values = null;
-		types = null;
 	}
 }

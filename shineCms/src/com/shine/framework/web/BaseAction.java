@@ -6,6 +6,7 @@ import net.sf.json.JSONArray;
 import net.sf.json.JsonConfig;
 
 import com.shine.framework.biz.BaseService;
+import com.shine.framework.dao.util.DefaultPagination;
 import com.shine.framework.dao.util.Pagination;
 import com.shine.framework.dao.util.QueryAnalyzer;
 import com.shine.framework.entity.BaseEntity;
@@ -13,7 +14,7 @@ import com.shine.framework.entity.BaseEntity;
 /**
  * Action基类,包括通用方法
  * @author JiangKunpeng 2012.03.09
- * @version 2012.05.08
+ * @version 2012.05.28
  * @param <SERVICE>	对应的业务实现类
  */
 public abstract class BaseAction<SERVICE extends BaseService> extends GenericAction{
@@ -69,9 +70,11 @@ public abstract class BaseAction<SERVICE extends BaseService> extends GenericAct
 	 */
 	public void listJSON() {
 		try{
+			System.out.println(extor.getParaString());
 			QueryAnalyzer analyzer = new QueryAnalyzer();
 			analyzer.setEntity(getE());
-			Pagination page = new Pagination(1,15);
+			Pagination page = new DefaultPagination();
+			page.init(extor.getIntValue("start"), extor.getIntValue("limit"));
 			analyzer.setPage(page);
 			extor.buildQueryItem(analyzer);
 			List list = service.list(analyzer);

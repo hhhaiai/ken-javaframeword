@@ -2,7 +2,6 @@ package com.shine.framework.dao.util;
 
 import java.text.SimpleDateFormat;
 
-import com.shine.framework.exception.DataAccessException;
 import com.shine.platform.logger.LoggerFactory;
 
 /**
@@ -75,7 +74,7 @@ public class QueryItem {
 	 */
 	private String getOperatorSQL(){
 		String sql = name;
-		if(operator==null||"".equals(operator)||"eq".equals(operator))
+		if(EQ.equals(operator))
 			sql += " = ";
 		else if(NE.equals(operator))
 			sql += " != ";
@@ -121,7 +120,7 @@ public class QueryItem {
 			else if(DATETIME.equals(type))
 				o = DATETIMEFORMAT.parse(value.toString());
 			else if(type.startsWith(DATEOTHER)){
-				String pattern = type.substring(DATEOTHER.length()-1);
+				String pattern = type.substring(DATEOTHER.length());
 				synchronized(DATEOTHERFORMAT){
 					DATEOTHERFORMAT.applyPattern(pattern);
 					o = DATEOTHERFORMAT.parse(value);
@@ -132,29 +131,29 @@ public class QueryItem {
 		}catch(Exception e){
 			o = value;
 			LoggerFactory.getLogger(getClass()).error("条件查询值解析异常", e);
-			throw new DataAccessException("条件查询值解析异常",e);
+			e.printStackTrace();
 		}
 		return o;
 	}
 	
 	//对比运算符
-	public static final String EQ = "eq";		//等于
-	public static final String NE = "ne";		//不等于
-	public static final String GT = "gt";		//大于
-	public static final String GE = "ge";		//大于等于
-	public static final String LT = "lt";		//小于
-	public static final String LE = "le";		//小于等于
-	public static final String LIKE = "lk";		//模糊匹配
+	public static final String EQ = "EQ";		//等于
+	public static final String NE = "NE";		//不等于
+	public static final String GT = "GT";		//大于
+	public static final String GE = "GE";		//大于等于
+	public static final String LT = "LT";		//小于
+	public static final String LE = "LE";		//小于等于
+	public static final String LIKE = "LK";		//模糊匹配
 	
 	//值类型
-	public static final String STRING = "string";
-	public static final String INTEGER = "integer";
-	public static final String LONG = "long";
-	public static final String DOUBLE = "double";
-	public static final String FLOAT = "float";
-	public static final String DATE = "date";			//yyyy-MM-dd
-	public static final String DATETIME = "datetime";	//yyyy-MM-dd HH:mm:ss
-	public static final String DATEOTHER = "date_";		//自定义格式时间 如：date_yyyy年MM月dd日
+	public static final String STRING = "S";
+	public static final String INTEGER = "I";
+	public static final String LONG = "L";
+	public static final String DOUBLE = "D";
+	public static final String FLOAT = "F";
+	public static final String DATE = "DATE";			//yyyy-MM-dd
+	public static final String DATETIME = "DT";		//yyyy-MM-dd HH:mm:ss
+	public static final String DATEOTHER = "DT_";		//自定义格式时间 如：date_yyyy年MM月dd日
 	
 	private static final SimpleDateFormat DATEFORMAT = new SimpleDateFormat("yyyy-MM-dd");
 	private static final SimpleDateFormat DATETIMEFORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
