@@ -24,6 +24,8 @@ import com.db4o.ObjectSet;
  * 
  * @author qun1988@gmail.com
  * @date 2012.04.25
+ * 
+ * @blog http://blog.csdn.net/arjick/article/details/7652879
  */
 public class DB4oMap<K, V> 
 	extends AbstractMap<K, V> 
