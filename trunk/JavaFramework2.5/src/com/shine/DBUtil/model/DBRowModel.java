@@ -3,7 +3,6 @@ package com.shine.DBUtil.model;
 import java.util.HashMap;
 import java.util.Iterator;
 
-import com.shine.DBUtil.DBUtil;
 
 public class DBRowModel extends HashMap<String, String> {
 	/**
