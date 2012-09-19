@@ -12,9 +12,6 @@ public class ConfigListener implements ServletContextListener {
 	public void contextInitialized(ServletContextEvent event) {
 		// 初始化配置
 		ConfigManager.getManager().init(event.getServletContext());
-		System.out.println("[" + ConfigManager.getManager().
-				getAttribute("version").getText() + "]Starting");
-		
 		Sourceflow.getSourceflow().init();
 	}
 	
