@@ -7,7 +7,7 @@
     <!-- netflow接收端口 -->
     <port>6696</port>
     <!-- 监听主机 -->
-    <host>0.0.0.0</host>
+    <host>127.0.0.1</host>
     <!-- 接收数据时的缓存条数 -->
     <receive-cache>20</receive-cache>
     <!-- 是否开启数据接收保护模式 -->
