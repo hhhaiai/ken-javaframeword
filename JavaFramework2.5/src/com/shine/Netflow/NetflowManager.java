@@ -72,7 +72,7 @@ public class NetflowManager {
 		// 监听端口
 		UdpManager.getManager().addBind(host, port);
 		// 配置接收器
-		UdpManager.getManager().addRecevice(port, new NetflowRecevice(cache));
+		UdpManager.getManager().addRecevice(host, port, new NetflowRecevice(cache));
 		// 启动udp接收线程
 		UdpManager.getManager().startRecevice();
 	}

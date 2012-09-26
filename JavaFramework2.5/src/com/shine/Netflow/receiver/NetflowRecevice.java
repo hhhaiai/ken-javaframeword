@@ -64,6 +64,7 @@ public class NetflowRecevice extends UdpRecevice {
 	@Override
 	public synchronized void recevice(String ip, int port, byte[] data) {
 		if (list.size() > cache) {
+			int versionNum = NetFlowUtil.toIntNumber(data, 0, 2);
 			// 开启保护模式后，在保护时间内进入一个缓冲区数据数据
 			if (lastTime.length() == 0) {
 				lastTime = DateUtil.getCurrentDateTime();
