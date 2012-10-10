@@ -16,74 +16,81 @@ public class ExcelUtils {
 	/**
 	 * 修改单元格数据
 	 * 
+	 * @param sheet
 	 * @param row
 	 * @param colName
 	 * @param value
 	 * @return
 	 */
-	public boolean update(int row, String colName, String value) {
+	public boolean update(int sheet,int row, String colName, String value) {
 		return false;
 	}
 
 	/**
 	 * 修改行数据
 	 * 
+	 * @param sheet
 	 * @param row
 	 * @param values
 	 * @return
 	 */
-	public boolean updateRow(int row, String... values) {
+	public boolean updateRow(int sheet,int row, String... values) {
 		return false;
 	}
 
 	/**
 	 * 插入行数据
 	 * 
+	 * @param sheet
 	 * @param values
 	 * @return
 	 */
-	public boolean insertRow(String... values) {
+	public boolean insertRow(int sheet,String... values) {
 		return false;
 	}
 
 	/**
 	 * 删除行
 	 * 
+	 * @param sheet
 	 * @param row
 	 * @return
 	 */
-	public boolean deleteRow(int row) {
+	public boolean deleteRow(int sheet,int row) {
 		return false;
 	}
 
 	/**
 	 * 删除指定行 key=value
 	 * 
+	 * @param sheet
 	 * @param key
 	 * @param value
 	 * @return
 	 */
-	public boolean delete(String key, String value) {
+	public boolean delete(int sheet,String key, String value) {
 		return false;
 	}
 
 	/**
 	 * 获取所有数据
-	 * 
+	 *
+	 * @param sheet
 	 * @return
 	 */
-	public List<Map> getAllData() {
+	public List<Map> getAllData(int sheet) {
 		return null;
 	}
 
 	/**
 	 * 获取指定行列数据
 	 * 
+	 * @param sheet
 	 * @param row
 	 * @param key
 	 * @return
 	 */
-	public String getData(int row, String key) {
+	public String getData(int sheet,int row, String key) {
 		return null;
 	}
 
