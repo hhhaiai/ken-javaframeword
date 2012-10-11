@@ -14,83 +14,128 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 public class ExcelUtils {
 
 	/**
+	 * 建立excelFile
+	 * 
+	 * @param excelPath
+	 * @return
+	 */
+	public static boolean createExcelFile(String excelPath) {
+		return false;
+	}
+	
+	
+	/**
+	 * 清楚指定内容
+	 * 
+	 * @param excelPath
+	 * @param sheet
+	 * @return
+	 */
+	public static boolean cleanExcelFile(String excelPath,int sheet){
+		return false;
+	}
+	
+	/**
+	 * 获取指定工作簿行数
+	 * 
+	 * @param excelPath
+	 * @param sheet
+	 * @return
+	 */
+	public static int getExcelSheetRowNum(String excelPath,int sheet){
+		return 0;
+	}
+
+	/**
 	 * 修改单元格数据
 	 * 
+	 * @excelPath
 	 * @param sheet
 	 * @param row
 	 * @param colName
 	 * @param value
 	 * @return
 	 */
-	public boolean update(int sheet,int row, String colName, String value) {
+	public static boolean update(String excelPath, int sheet, int row,
+			String colName, String value) {
 		return false;
 	}
 
 	/**
 	 * 修改行数据
 	 * 
+	 * @excelPath
 	 * @param sheet
 	 * @param row
 	 * @param values
 	 * @return
 	 */
-	public boolean updateRow(int sheet,int row, String... values) {
+	public static boolean updateRow(String excelPath, int sheet, int row,
+			String... values) {
 		return false;
 	}
 
 	/**
 	 * 插入行数据
 	 * 
+	 * @excelPath
 	 * @param sheet
 	 * @param values
 	 * @return
 	 */
-	public boolean insertRow(int sheet,String... values) {
+	public static boolean insertRow(String excelPath, int sheet,
+			String... values) {
 		return false;
 	}
 
 	/**
 	 * 删除行
 	 * 
+	 * @excelPath
 	 * @param sheet
 	 * @param row
 	 * @return
 	 */
-	public boolean deleteRow(int sheet,int row) {
+	public static boolean deleteRow(String excelPath, int sheet, int row) {
 		return false;
 	}
 
 	/**
 	 * 删除指定行 key=value
 	 * 
+	 * @excelPath
 	 * @param sheet
 	 * @param key
 	 * @param value
 	 * @return
 	 */
-	public boolean delete(int sheet,String key, String value) {
+	public static boolean delete(String excelPath, int sheet, String key,
+			String value) {
 		return false;
 	}
 
 	/**
 	 * 获取所有数据
-	 *
+	 * 
+	 * @excelPath
 	 * @param sheet
 	 * @return
 	 */
-	public List<Map> getAllData(int sheet) {
+	public static List<Map> getAllData(String excelPath, int sheet) {
 		return null;
 	}
 
 	/**
 	 * 获取指定行列数据
 	 * 
+	 * @excelPath
 	 * @param sheet
 	 * @param row
 	 * @param key
 	 * @return
 	 */
-	public String getData(int sheet,int row, String key) {
+	public static String getData(String excelPath, int sheet, int row,
+			String key) {
 		return null;
 	}
 
