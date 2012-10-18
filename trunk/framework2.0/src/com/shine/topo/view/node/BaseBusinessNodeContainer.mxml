@@ -26,6 +26,7 @@
 				this.height=value.getNumber("height");
 			}
 			
+			
 			public override function addFromLine(value:TopoLine):void{
 				fromLineArrayCollection.addTopoLine(value);
 				value.resetBeginLine(this.getCenterX(),this.getBottomRightY());

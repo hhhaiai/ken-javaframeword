@@ -151,12 +151,15 @@
 			//结束拖动
 			protected function dragEnd(event:MouseEvent):void
 			{
-				if (moveable)
+				stopMove();
+				event.stopPropagation();
+			}
+			
+			public function stopMove():void{
+				if (this.moveable)
 				{
 					this.stopDrag();
 				}
-				
-				event.stopPropagation();
 			}
 			
 			//延迟执行

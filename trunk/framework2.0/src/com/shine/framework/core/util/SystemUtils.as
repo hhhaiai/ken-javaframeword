@@ -9,10 +9,12 @@ package com.shine.framework.core.util
 		{
 		}
 		
+		//获取屏幕宽度
 		public static function getScreenWidth():Number{
 			return Capabilities.screenResolutionX;
 		}
 		
+		//获取屏幕高度
 		public static function getScreenHeight():Number{
 			return Capabilities.screenResolutionY;
 		}
@@ -38,6 +40,7 @@ package com.shine.framework.core.util
 			}
 		}
 		
+		//获取系统的内存
 		public static function getTotleMemory():Number{
 			return System.totalMemory;
 		}

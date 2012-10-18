@@ -2,6 +2,7 @@ package com.shine.framework.Swc
 {
 	import flash.display.Loader;
 	import flash.events.Event;
+	import flash.events.FullScreenEvent;
 	import flash.events.IOErrorEvent;
 	import flash.net.URLLoader;
 	import flash.net.URLLoaderDataFormat;
@@ -30,6 +31,8 @@ package com.shine.framework.Swc
 		public var libraryUrl:String="";
 		//加载完成的方法
 		public var method:Function;
+		//加载失败的方法
+		public var failMethod:Function;
 		
 		
 		public function SwcManager(value:String=null,completeMethod:Function=null)
@@ -46,7 +49,7 @@ package com.shine.framework.Swc
 		}
 		
 		//加载swc
-		public function loadSwc(value:String=null,completeMethod:Function=null):void{
+		public function loadSwc(value:String=null,completeMethod:Function=null,completeFailMethod:Function=null):void{
 			if(value!=null){
 				this.swcUrl=value;
 			}
@@ -54,6 +57,10 @@ package com.shine.framework.Swc
 			if(completeMethod!=null){
 				this.method=completeMethod;
 			}
+			if(completeFailMethod!=null){
+				this.failMethod=completeFailMethod;
+			}
+			
 			if(this.swcUrl!=null){
 				var loader:URLLoader = new URLLoader();
 				loader.addEventListener(Event.COMPLETE,swcLoaded);
@@ -80,6 +87,9 @@ package com.shine.framework.Swc
 		
 		private function error(e:Event):void{
 			Alert.show("加载"+this.swcUrl+"失败");
+			
+			if(failMethod!=null)
+				failMethod.call(this);
 		}
 		
 		private function swfError(e:Event):void{

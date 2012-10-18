@@ -11,14 +11,40 @@
 		<![CDATA[
 			import com.shine.framework.Licence.LicenceManager;
 			
+			import mx.controls.Alert;
+			
+			public var resultValue:Boolean=false;
+			
+			private var method:Function=null;
+			private var failMethodFunction:Function=null;
+			
 			private function complete():void{
 				this.completeLoading();
+			}
+			
+			public function checkLicence(path:String,_method:Function=null,_failMethodFunction:Function=null):void{
+				LicenceManager.getInstance().loadLicence(path,returnMethod,failMethod);	
 				
-				LicenceManager.getInstance().loadLicence("data.swc",returnMethod);
+				this.method=_method;
+				this.failMethodFunction=_failMethodFunction;
 			}
 			
 			private function returnMethod():void{
+				this.visible=!LicenceManager.getInstance().licenceStatus;
+				this.resultValue=LicenceManager.getInstance().licenceStatus;
+				
+				if(method!=null){
+					this.method.call(this);
+				}
+			}
+			
+			private function failMethod():void{
 				this.visible=true;
+				this.resultValue=false;
+				
+				if(failMethodFunction!=null){
+					this.failMethodFunction.call(this);
+				}
 			}
 		]]>
 	</fx:Script>

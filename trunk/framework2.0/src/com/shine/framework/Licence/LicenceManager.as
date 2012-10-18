@@ -9,7 +9,7 @@ package com.shine.framework.Licence
 	public class LicenceManager
 	{
 		private static var _instance:LicenceManager;
-		//licence数据 
+		//licence 明钥 如果留空就不使用名钥加密
 		public var licence:String="";
 		//licence 模式
 		public var licenceConfig:String="";
@@ -32,9 +32,9 @@ package com.shine.framework.Licence
 		}
 		
 		//加载swc
-		public function loadLicence(swcUrl:String,returnMethod:Function=null):void{
+		public function loadLicence(swcUrl:String,returnMethod:Function=null,completeFailMethod:Function=null):void{
 			var swcManage:SwcManager =new SwcManager;
-			swcManage.loadSwc(swcUrl,loadComplete);
+			swcManage.loadSwc(swcUrl,loadComplete,completeFailMethod);
 			if(returnMethod!=null){
 				this.returnMethod=returnMethod;
 			}
@@ -64,10 +64,10 @@ package com.shine.framework.Licence
 					return false;
 				}
 			}
-			return false;
+			return true;
 		}
 		
-		//检查licence name
+		//检查licence Url
 		public function checkLicenceUrl():Boolean{
 			var o:Object=ReferenceUtil.referenceClass("com.shine.framework.Licence.file::LicenceFile");
 			if(o.licenceUrl!=null&&String(o.licenceUrl).length!=0){

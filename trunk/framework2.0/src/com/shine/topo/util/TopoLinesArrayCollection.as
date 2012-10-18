@@ -29,6 +29,17 @@ package com.shine.topo.util
 			return null;
 		}
 		
+		public function getTopoLineByNodeId(startId:String,endId:String):TopoLine{
+			var num:int=this.length;
+			
+			for(var i:int=0;i<num;i++){
+				if(startId==this.getTopoLine(i).baseXmModel.getString("start")&&endId==this.getTopoLine(i).baseXmModel.getString("end")){
+					return this.getTopoLine(i);
+				}
+			}
+			return null;
+		}
+		
 		//加入topo line
 		public function addTopoLine(value:TopoLine):void{
 			this.addItem(value);
