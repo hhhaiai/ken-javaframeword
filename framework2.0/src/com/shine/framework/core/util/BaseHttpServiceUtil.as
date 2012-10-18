@@ -111,6 +111,7 @@ package com.shine.framework.core.util
 		//http service fail method
 		private function failResult(event:FaultEvent):void
 		{
+			Alert.show(event.toString());
 			if (failMethod != null)
 				failMethod.call(this);
 		}

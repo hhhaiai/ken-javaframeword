@@ -8,8 +8,8 @@ package com.shine.framework.core.view
 
 	public class ExpanLine
 	{
-		public var weight:Number=2;
-		public var color:uint=0xd9d6c3;
+		public var weight:Number=1;
+		public var color:uint=0x00CC33;
 		public var line_x1:Number;
 		public var line_x2:Number;
 		public var line_y1:Number;
@@ -21,7 +21,7 @@ package com.shine.framework.core.view
 		public var infoLabe:SunshineLabel;
 		
 		//是否要箭头  
-		public var isArrow:Boolean=true;
+		public var isArrow:Boolean=false;
 		//箭头大小  
 		public var radius:uint=6;
 		

@@ -23,15 +23,17 @@ package com.shine.topo.view.Line
 			this.startNode=startNode;
 			this.endNode=endNode;
 			
-			if(value.getString("color")!=null)
-				this.color=uint(value.getString("color"));
-			
-			if(value.getString("weight")!=null)
-				this.weight=uint(value.getString("weight"));
-		    this.baseXmModel=value;
-
-			if(startNode==null||endNode==null){
-				return;
+			if(value!=null){
+				if(value.getString("color")!=null)
+					this.color=uint(value.getString("color"));
+				
+				if(value.getString("weight")!=null)
+					this.weight=uint(value.getString("weight"));
+				this.baseXmModel=value;
+				
+				if(startNode==null||endNode==null){
+					return;
+				}
 			}
 			
 //			if(value.getString("info")!=null){

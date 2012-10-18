@@ -97,6 +97,10 @@
     <classEntry path="com.shine.framework.core.control.BaseControl"/>
     <classEntry path="com.shine.cofferChart.view.DashboardCharts.DashboardChartComponet"/>
     <classEntry path="com.shine.cofferChart.model.dashboardCharts.DashboardChartsModel"/>
+    <classEntry path="com.shine.framework.Papervision3D.Papervision3DForDaeContainer"/>
+    <classEntry path="com.shine.framework.Papervision3D.view.EdgeContainer"/>
+    <classEntry path="com.shine.framework.Papervision3D.model.ConfigXmlModel"/>
+    <classEntry path="com.shine.framework.Papervision3D.DaeContainer"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

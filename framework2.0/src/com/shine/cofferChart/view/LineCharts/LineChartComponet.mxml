@@ -102,6 +102,10 @@
 					lineChart.height=lineChart.height+legend.height;
 					legend.height=0;
 				}
+				
+				if(lineChartModel.getString("seriesFilter")=="off"){
+					lineChart.seriesFilters=[];
+				}
 			}
 		]]>
 	</fx:Script>
