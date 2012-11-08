@@ -61,6 +61,17 @@ public class UdpManager {
 	}
 
 	/**
+	 * 加入接收器（针对多网卡）
+	 * 
+	 * @param host
+	 * @param port
+	 * @param udpReceviceIf
+	 */
+	public void addRecevice(String host, int port, UdpRecevice udpReceviceIf) {
+		map.addRecevice(host, port, udpReceviceIf);
+	}
+
+	/**
 	 * 启动监听线程
 	 */
 	public void startRecevice() {

@@ -75,5 +75,15 @@
 	<classpathentry kind="lib" path="lib/db4o-8.0.236.16058-all-java5.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk1.7.0_04"/>
 	<classpathentry kind="lib" path="lib/reflectasm-1.05-all.jar"/>
+	<classpathentry kind="lib" path="lib/lucene-core-3.6.1-javadoc.jar"/>
+	<classpathentry kind="lib" path="lib/lucene-core-3.6.1.jar"/>
+	<classpathentry kind="lib" path="lib/lucene-test-framework-3.6.1-javadoc.jar"/>
+	<classpathentry kind="lib" path="lib/lucene-test-framework-3.6.1.jar"/>
+	<classpathentry kind="lib" path="lib/activejdbc-1.4.2-javadoc.jar"/>
+	<classpathentry kind="lib" path="lib/activejdbc-1.4.2-sources.jar"/>
+	<classpathentry kind="lib" path="lib/activejdbc-1.4.2.jar"/>
+	<classpathentry kind="lib" path="lib/activejdbc-instrumentation-1.4.1.jar"/>
+	<classpathentry kind="lib" path="lib/javalite-common-1.4.1.jar"/>
+	<classpathentry kind="lib" path="lib/javassist-3.8.0.GA.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
