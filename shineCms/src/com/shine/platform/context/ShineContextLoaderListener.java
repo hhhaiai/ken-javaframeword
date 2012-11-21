@@ -6,6 +6,7 @@ import javax.servlet.ServletContextEvent;
 import org.springframework.beans.BeanUtils;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextException;
+import org.springframework.orm.hibernate3.LocalSessionFactoryBean;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.context.ConfigurableWebApplicationContext;
 import org.springframework.web.context.ContextLoader;
@@ -87,6 +88,10 @@ public class ShineContextLoaderListener extends ContextLoaderListener{
 		this.contextLoader.initWebApplicationContext(event.getServletContext());
 		
 		ApplicationContext springContext = WebApplicationContextUtils.getWebApplicationContext(event.getServletContext());
+		
+		//注入hibernate映射文件(不行)
+//		LocalSessionFactoryBean sb = (LocalSessionFactoryBean)springContext.getBean("&sessionFactory");
+//		sb.setMappingResources(new String[]{"classpath*:com/shine/common/**/entity/hbm/*.hbm.xml"});
 		
 		//注入Spring上下文到系统配置工厂
 		ConfigFactory.getFactory().setSpringContext(springContext);
