@@ -78,8 +78,17 @@ public class ShineContextLoaderListener extends ContextLoaderListener{
 	public void contextInitialized(ServletContextEvent event) {
 		//初始化系统配置工厂
 		ConfigFactory.getFactory().init(event.getServletContext());
+		
+		//项目启动监听器-加载配置后
+		if(ConfigFactory.getFactory().getProjectStarterListener()!=null)
+			ConfigFactory.getFactory().getProjectStarterListener().afterLoadConfig();
+		
 		//初始化插件
 		PluginContext.getContext().initPlugins();
+		
+		//项目启动监听器-初始化插件后
+		if(ConfigFactory.getFactory().getProjectStarterListener()!=null)
+			ConfigFactory.getFactory().getProjectStarterListener().afterInitPlugins();
 		
 		this.contextLoader = createContextLoader();
 		if (this.contextLoader == null) {
@@ -95,8 +104,17 @@ public class ShineContextLoaderListener extends ContextLoaderListener{
 		
 		//注入Spring上下文到系统配置工厂
 		ConfigFactory.getFactory().setSpringContext(springContext);
+		
+		//项目启动监听器-启动插件前
+		if(ConfigFactory.getFactory().getProjectStarterListener()!=null)
+			ConfigFactory.getFactory().getProjectStarterListener().beforeStartPlugins();
+		
 		//启动所有插件
 		PluginContext.getContext().startPlugins();
+		
+		//项目启动监听器-启动插件后
+		if(ConfigFactory.getFactory().getProjectStarterListener()!=null)
+			ConfigFactory.getFactory().getProjectStarterListener().afterStartPlugins();
 	}
 
 	/**

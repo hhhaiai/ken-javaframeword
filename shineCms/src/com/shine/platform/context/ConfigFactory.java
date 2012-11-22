@@ -19,11 +19,12 @@ import com.shine.util.xml.JDomUtil;
 /**
  * 系统配置工厂
  * @author JiangKunpeng 2012.02.15
- * @version 2012.03.01
+ * @version 2012.11.22
  */
 @SuppressWarnings("unchecked")
 final public class ConfigFactory {
-	private static final ConfigFactory factory = new ConfigFactory();
+	private static final ConfigFactory factory = new ConfigFactory();		//工厂  单例
+	private ServletContext servletContext = null;	//Servlet上下文
 	private Map<String, Object> attributes = new HashMap<String, Object>();
 	private String sysPath;
 	private String appName;
@@ -32,6 +33,7 @@ final public class ConfigFactory {
 	private List<String> springPluginXmls = new ArrayList<String>();
 	private List<String> springMvcPluginXmls = new ArrayList<String>();
 	private List<String> strutsPluginXmls = new ArrayList<String>();
+	private ProjectStarterListener projectStarterListener = null;	//项目启动监听器
 	private ConfigFactory(){
 	}
 	
@@ -40,6 +42,7 @@ final public class ConfigFactory {
 	}
 	
 	public void init(final ServletContext servletContext){
+		this.servletContext = servletContext;
 		sysPath = servletContext.getRealPath("/");
 		loadXmlConfig();
 	}
@@ -54,6 +57,20 @@ final public class ConfigFactory {
 		bootXmlPath = sysPath + "WEB-INF" + File.separator + "classes"+ File.separator + bootXmlPath;
 		Element bootEle = JDomUtil.file2Doc(bootXmlPath).getRootElement();
 		
+		//获取项目启动监听器，如果有配置则实例化
+		String psl = bootEle.getChildText("projectStarterListener");
+		if(psl!=null&&psl.length()>0){
+			try {
+				projectStarterListener = (ProjectStarterListener)Class.forName(psl).newInstance();
+			} catch (Exception e) {
+				throw new IllegalArgumentException("实例化项目启动监听器异常：" + psl, e);
+			}
+		}
+		
+		//如果有项目启动监听器，则执行XML配置加载之前的方法
+		if(projectStarterListener!=null)
+			projectStarterListener.beforeLoadConfig(servletContext);
+		
 		appName = bootEle.getChildText("appName");
 		indexPage = bootEle.getChildText("indexPage");
 		
@@ -63,6 +80,8 @@ final public class ConfigFactory {
 				String xmlType = xml.getAttributeValue("type");
 				if("spring".equals(xmlType))
 					registerSpringPluginXml(xml.getValue());
+				else if("struts".equals(xmlType))
+					registerStrutsPluginXml(xml.getValue());
 			}
 		}
 		List<Element> plugins = JDomUtil.getSunList(bootEle, "plugins");
@@ -157,5 +176,8 @@ final public class ConfigFactory {
 	}
 	public List<String> getStrutsPluginXmls() {
 		return strutsPluginXmls;
+	}
+	public ProjectStarterListener getProjectStarterListener() {
+		return projectStarterListener;
 	}
 }
