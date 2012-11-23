@@ -7,6 +7,12 @@ import com.shine.framework.dao.BaseDao;
 import com.shine.framework.dao.util.QueryAnalyzer;
 import com.shine.framework.entity.BaseEntity;
 
+/**
+ * 复杂业务类(通用的增删改查方法)
+ * @author JiangKunpeng 2011.09.01
+ * @version 2011.09.01
+ *
+ */
 public class BaseServiceImpl extends GenericServiceImpl<BaseDao> implements BaseService{
 	
 	public boolean exist(BaseEntity entity) {

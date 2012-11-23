@@ -14,7 +14,7 @@
            http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
            
 	<bean id="loginAction" class="com.shine.common.sysmgr.web.LoginAction"/>
-	<bean id="sysUserAction" class="com.shine.common.sysmgr.web.SysUserAction">
+	<bean id="sysUserAction" class="com.shine.common.sysmgr.web.SysUserAction" parent="baseAction">
 		<property name="service" ref="baseService"></property>
 	</bean>
 </beans>

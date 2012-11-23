@@ -2,7 +2,6 @@ package com.shine.framework.web;
 
 import java.util.List;
 
-import net.sf.json.JSONArray;
 import net.sf.json.JsonConfig;
 
 import com.shine.framework.biz.BaseService;
@@ -10,6 +9,7 @@ import com.shine.framework.dao.util.DefaultPagination;
 import com.shine.framework.dao.util.Pagination;
 import com.shine.framework.dao.util.QueryAnalyzer;
 import com.shine.framework.entity.BaseEntity;
+import com.shine.framework.web.json.IJsonFormat;
 
 /**
  * Action基类,包括通用方法
@@ -93,6 +93,13 @@ public abstract class BaseAction<SERVICE extends BaseService> extends GenericAct
 		printOutJsonList(list, page, new JsonConfig());
 	}
 	
+	//json格式处理
+	protected IJsonFormat jsonformat;
+	
+	public void setJsonformat(IJsonFormat jsonformat) {
+		this.jsonformat = jsonformat;
+	}
+
 	/**
 	 * 用JSON格式打印List
 	 * @param list
@@ -100,26 +107,8 @@ public abstract class BaseAction<SERVICE extends BaseService> extends GenericAct
 	 * @param jsonConfig
 	 */
 	protected void printOutJsonList(List list,Pagination page,JsonConfig jsonConfig){
-		StringBuffer jsonStr = new StringBuffer(200);
-		jsonStr.append("{").append("\"total\":").append(page.getTotalRecord()).append(",\"rows\":");
-		jsonStr.append(list2Json(list, jsonConfig));
-		jsonStr.append("}");
-		printOutText(jsonStr.toString());
+		printOutText(jsonformat.list2JsonStr(list, page, jsonConfig));
 	}
-	
-	/**
-	 * List转成Json数组字符串
-	 * @param list
-	 * @param jsonConfig
-	 * @return
-	 */
-	protected String list2Json(List list,JsonConfig jsonConfig){
-		if(list==null)
-			return NullJsonArray;
-		JSONArray jsonarry = JSONArray.fromObject(list, jsonConfig);
-		return jsonarry.toString();
-	}
-	protected static final String NullJsonArray = "[]";
 	
 	/**
 	 * 所有记录列表

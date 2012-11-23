@@ -52,7 +52,10 @@
 	<bean id="baseService" class="com.shine.framework.biz.impl.BaseServiceImpl">
 		<property name="dao" ref="baseDao"/>
 	</bean>
-	<!-- 
-	<bean id="baseAction" class="com.shine.framework.web.BaseAction" abstract="true"/>
-	 -->
+	<!-- JSON  -->
+	<bean id="jsonformat" class="com.shine.framework.web.json.OmuiJsonFormat"/> 
+	<bean id="baseAction" class="com.shine.framework.web.BaseAction" abstract="true">
+		<property name="jsonformat" ref="jsonformat" />
+	</bean>
+	
 </beans>
