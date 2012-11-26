@@ -55,6 +55,7 @@
 	<!-- JSON  -->
 	<bean id="jsonformat" class="com.shine.framework.web.json.OmuiJsonFormat"/> 
 	<bean id="baseAction" class="com.shine.framework.web.BaseAction" abstract="true">
+		<property name="service" ref="baseService" />
 		<property name="jsonformat" ref="jsonformat" />
 	</bean>
 	

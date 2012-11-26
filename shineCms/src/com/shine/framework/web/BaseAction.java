@@ -14,7 +14,7 @@ import com.shine.framework.web.json.IJsonFormat;
 /**
  * Action基类,包括通用方法
  * @author JiangKunpeng 2012.03.09
- * @version 2012.05.28
+ * @version 2012.11.23
  * @param <SERVICE>	对应的业务实现类
  */
 public abstract class BaseAction<SERVICE extends BaseService> extends GenericAction{
