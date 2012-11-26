@@ -24,8 +24,8 @@ public class SuperThread extends Thread {
 
 	public void run() {
 		if (threadModel != null) {
-			System.out.println("Thread" + threadModel.getThreadName()
-					+ " is running!");
+//			System.out.println("Thread" + threadModel.getThreadName()
+//					+ " is running!");
 			while (threadModel.getState()) {
 				try {
 					busy = true;
@@ -46,8 +46,8 @@ public class SuperThread extends Thread {
 
 			// 删除线程池中的线程
 			ThreadPoolManager.getManager().deleteThread(this.getName());
-			System.out.println("Thread" + threadModel.getThreadName()
-					+ " is closing!");
+//			System.out.println("Thread" + threadModel.getThreadName()
+//					+ " is closing!");
 		}
 	}
 
