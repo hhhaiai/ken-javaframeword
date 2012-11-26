@@ -6,8 +6,7 @@
 <title>用户管理</title>
 <script type="text/javascript" src="${path}r/operamasks-ui/js/jquery.min.js"></script>
 <script type="text/javascript" src="${path}r/operamasks-ui/js/operamasks-ui.min.js"></script>
-<link title="default" rel="stylesheet" href="${path}r/operamasks-ui/themes/${themes}/om-base.css">
-<link title="default" rel="stylesheet" href="${path}r/operamasks-ui/themes/${themes}/om-all.css">
+<link title="default" rel="stylesheet" href="${path}r/operamasks-ui/css/${themes}/om-${themes}.css">
 <link rel="stylesheet" href="${path}r/css/base.css"/>
 <link title="default" rel="stylesheet" href="${path}r/css/themes/${themes}/list.css"/>
 <script type="text/javascript">
