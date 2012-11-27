@@ -6,8 +6,8 @@
 <title>Sunshine CMS</title>	
 <script type="text/javascript" src="${path}r/operamasks-ui/js/jquery.min.js"></script>
 <script type="text/javascript" src="${path}r/operamasks-ui/js/operamasks-ui.min.js"></script>
-<link title="default" rel="stylesheet" href="${path}r/operamasks-ui/css/${themes}/om-${themes}.css">
 <link rel="stylesheet" href="${path}r/css/base.css"/>
+<link title="default" rel="stylesheet" href="${path}r/operamasks-ui/css/${themes}/om-${themes}.css">
 <style>
 html, body{ width: 100%; height: 100%; padding: 0; margin: 0;overflow: hidden;}
 #center-tab .om-panel-body{
@@ -60,25 +60,25 @@ html, body{ width: 100%; height: 100%; padding: 0; margin: 0;overflow: hidden;}
                 	}
                 }
             });
+            var ifh = tabElement.height() - tabElement.find(".om-tabs-headers").outerHeight() - 4; //为了照顾apusic皮肤，apusic没有2px的padding，只有边框，所以多减去2px
+            $('#3Dbox').height(ifh);
         });
 </script>
 
 </head>
 <body>
-<%-- 
-<div id="top-panel" style="width:100%;height:50px;background-color: gray;">
-	&nbsp;
-</div>
---%>
 <div id="body-panel" style="width: 100%;height:100%;">
-	<div id="north-panel" style="width:100%;height:30px;background-color: gray;"></div>
+	<div id="north-panel" style="width:100%;height:37px;padding:0px;margin:0px;background:url(${path}/r/css/themes/${themes}/image/frame/frame_top_bg.gif)">
+		<div style="float:left;width:147px;height:37px; background:url(${path}/r/css/themes/${themes}/image/frame/frame_top_logo.gif) no-repeat;">
+		</div>
+	</div>
 	<div id="center-panel">
 		<div id="center-tab" >
 			<ul>
-				<li><a href="#tab1">3D盒子</a></li>
+				<li><a href="#tab1">首页</a></li>
 			</ul>
 			<div id="tab1">
-				<iframe id='3Dbox' border=0 frameBorder='no' src='' width='100%'></iframe>
+				<iframe id='3Dbox' border=0 frameBorder='no' src='${path}sysmgr/user_enter.do' width='100%' height='100%'></iframe>
 			</div>
 		</div>
 	</div>
