@@ -1,7 +1,10 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
+<%@page import="com.shine.platform.context.ConfigFactory"%>
 <%
 String path = request.getContextPath() +"/";
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path;
+
+request.setAttribute("appName",ConfigFactory.getFactory().getAppName());
 
 request.setAttribute("path",path);
 request.setAttribute("basePath",basePath);

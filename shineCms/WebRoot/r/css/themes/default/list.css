@@ -1,10 +1,11 @@
 @CHARSET "UTF-8";
+body{padding:5px;}
 .toolbar {
+    /* 
     background: url("image/icon/toolbar_bg.jpg") repeat-x scroll 0 0 #99B5DD;
     border: 1px solid #808FB8;
+    */
     height: 24px;
     line-height: 24px;
-    padding-left: 10px;
-    padding-top: 2px;
-    padding-bottom: 2px;
+    padding : 0 0 5px 0;
 }
