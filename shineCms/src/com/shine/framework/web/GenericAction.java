@@ -28,7 +28,7 @@ import com.shine.util.xml.JDomUtil;
 /**
  * Struts2的Action基类
  * @author JiangKunpeng 2012.03.09
- * @version 2012.03.09
+ * @version 2012.12.17
  */
 public class GenericAction extends ActionSupport implements ServletRequestAware,ServletResponseAware,ServletContextAware,Serializable{
 
@@ -42,6 +42,7 @@ public class GenericAction extends ActionSupport implements ServletRequestAware,
 	
 	protected final static String CONTENT_TYPE_HTML = "text/html;charset=UTF-8";
 	protected final static String CONTENT_TYPE_XML = "text/xml;charset=UTF-8"; 
+	protected final static String CONTENT_TYPE_JSON = "application/json;charset=UTF-8"; 
 	
 	/**
 	 * 输出XML
@@ -73,6 +74,14 @@ public class GenericAction extends ActionSupport implements ServletRequestAware,
 	 */
 	protected void printOutText(String text)  {
 		printOut(text, CONTENT_TYPE_HTML);
+	}
+	
+	/**
+	 * 输出JSON文本
+	 * @param json
+	 */
+	protected void printOutJson(String json){
+		printOut(json, CONTENT_TYPE_JSON);
 	}
 	
 	/**

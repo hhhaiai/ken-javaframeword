@@ -60,16 +60,23 @@ public class GenericDaoImpl extends HibernateDaoSupport implements GenericDao{
 	 * @return
 	 */
 	protected Object getEntityPropertityValue(final BaseEntity entity,final String propertityName){
+		String f = null;
+		String mname = null;
+		Method m = null;
 		try {
-			String f = propertityName.substring(0, 1);
-			String mname = "get" + f.toUpperCase();
+			f = propertityName.substring(0, 1);
+			mname = "get" + f.toUpperCase();
 			if(mname.length()>1)
-				mname = mname + propertityName.substring(1, mname.length()); 
-			Method m = entity.getClass().getMethod(propertityName, null);
+				mname = mname + propertityName.substring(1); 
+			m = entity.getClass().getMethod(mname, null);
 			return m.invoke(entity, null);
 		} catch (Exception e) {
 			LoggerFactory.getLogger(getClass()).error("获取实体属性值异常", e);
 			throw new DataAccessException("获取实体属性值异常", e);
+		} finally{
+			f = null;
+			mname = null;
+			m = null;
 		}
 	}
 	

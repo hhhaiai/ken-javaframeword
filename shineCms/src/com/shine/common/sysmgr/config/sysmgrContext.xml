@@ -15,4 +15,5 @@
            
 	<bean id="loginAction" class="com.shine.common.sysmgr.web.LoginAction"/>
 	<bean id="sysUserAction" class="com.shine.common.sysmgr.web.SysUserAction" parent="baseAction" />
+	<bean id="sysRoleAction" class="com.shine.common.sysmgr.web.SysRoleAction" parent="baseAction" />
 </beans>

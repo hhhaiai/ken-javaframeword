@@ -40,7 +40,8 @@ $(document).ready(function() {
     var navData = [{id:"n1",text:"系统管理",expanded:true},
                  	{id:"n2",text:"内容管理",expanded:true},
                  	{id:"n11",pid:"n1",text:"用户管理",url:"${path}sysmgr/user_enter.do"},
-					{id:"n12",pid:"n2",text:"栏目管理",url:"http://www.apusic.com/homepage/index.faces"}];
+                 	{id:"n12",pid:"n1",text:"角色管理",url:"${path}sysmgr/role_enter.do"},
+					{id:"n13",pid:"n2",text:"栏目管理",url:"http://www.apusic.com/homepage/index.faces"}];
     $("#navTree").omTree({
         dataSource : navData,
         simpleDataModel: true,

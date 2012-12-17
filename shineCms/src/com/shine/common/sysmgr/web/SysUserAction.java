@@ -2,6 +2,7 @@ package com.shine.common.sysmgr.web;
 
 import com.shine.common.sysmgr.entity.SysUser;
 import com.shine.framework.biz.BaseService;
+import com.shine.framework.entity.BaseEntity;
 import com.shine.framework.web.BaseAction;
 
 public class SysUserAction extends BaseAction<BaseService>{
@@ -13,6 +14,11 @@ public class SysUserAction extends BaseAction<BaseService>{
 	@Override
 	public SysUser getE() {
 		return e;
+	}
+
+	@Override
+	protected void setE(BaseEntity e) {
+		this.e = (SysUser)e;
 	}
 
 }

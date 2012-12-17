@@ -2,6 +2,7 @@ package com.shine.framework.web;
 
 import java.util.List;
 
+import net.sf.json.JSONObject;
 import net.sf.json.JsonConfig;
 
 import com.shine.framework.biz.BaseService;
@@ -14,7 +15,7 @@ import com.shine.framework.web.json.IJsonFormat;
 /**
  * Action基类,包括通用方法
  * @author JiangKunpeng 2012.03.09
- * @version 2012.11.23
+ * @version 2012.12.17
  * @param <SERVICE>	对应的业务实现类
  */
 public abstract class BaseAction<SERVICE extends BaseService> extends GenericAction{
@@ -36,6 +37,12 @@ public abstract class BaseAction<SERVICE extends BaseService> extends GenericAct
 	 * @return
 	 */
 	public abstract BaseEntity getE();
+	
+	/**
+	 * 设置实体Entity
+	 * @return
+	 */
+	protected abstract void setE(BaseEntity e);
 	
 	// Service
 	protected SERVICE service;
@@ -78,10 +85,24 @@ public abstract class BaseAction<SERVICE extends BaseService> extends GenericAct
 			analyzer.setPage(page);
 			extor.buildQueryItem(analyzer);
 			List list = service.list(analyzer);
-			printOutJsonList(list, page);
+			printOutJsonList(list, page, getJsonConfig());
 		}catch(Exception e){
 			e.printStackTrace();
 		}
+	}
+	
+	protected static JsonConfig JsonConfig = null;	//JsonConfig 单例,将过滤掉默认不需要的字段
+	
+	/**
+	 * 获取JsonConfig,将过滤掉默认不需要的字段
+	 * @return
+	 */
+	protected JsonConfig getJsonConfig(){
+		if(JsonConfig==null){
+			JsonConfig = new JsonConfig();
+			JsonConfig.setExcludes(new String[]{"delflag","deltime","existSQL","virtualDelete"});
+		}
+		return JsonConfig;
 	}
 	
 	/**
@@ -96,6 +117,10 @@ public abstract class BaseAction<SERVICE extends BaseService> extends GenericAct
 	//json格式处理
 	protected IJsonFormat jsonformat;
 	
+	/**
+	 * 设置Json格式处理接口实现类
+	 * @param jsonformat
+	 */
 	public void setJsonformat(IJsonFormat jsonformat) {
 		this.jsonformat = jsonformat;
 	}
@@ -107,7 +132,25 @@ public abstract class BaseAction<SERVICE extends BaseService> extends GenericAct
 	 * @param jsonConfig
 	 */
 	protected void printOutJsonList(List list,Pagination page,JsonConfig jsonConfig){
-		printOutText(jsonformat.list2JsonStr(list, page, jsonConfig));
+		printOutJson(jsonformat.list2JsonStr(list, page, jsonConfig));
+	}
+	
+	/**
+	 * 用JSON格式打印Object
+	 * @param obj
+	 * @param jsonConfig
+	 */
+	protected void printOutJsonObject(Object obj,JsonConfig jsonConfig){
+		JSONObject jsonobject = JSONObject.fromObject(obj,jsonConfig);
+		printOutJson(jsonobject.toString());
+	}
+	
+	/**
+	 * 用JSON格式打印Object
+	 * @param obj
+	 */
+	protected void printOutJsonObject(Object obj){
+		printOutJsonObject(obj, new JsonConfig());
 	}
 	
 	/**
@@ -134,6 +177,7 @@ public abstract class BaseAction<SERVICE extends BaseService> extends GenericAct
 	 * @return
 	 */
 	public String toEdit() {
+		view();
 		return TOEDIT;
 	}
 
@@ -166,7 +210,6 @@ public abstract class BaseAction<SERVICE extends BaseService> extends GenericAct
 	 * @return
 	 */
 	public String update() {
-		service.update(getE());
 		return UPDATE;
 	}
 	
@@ -174,7 +217,13 @@ public abstract class BaseAction<SERVICE extends BaseService> extends GenericAct
 	 * 执行修改 返回Ajax结果
 	 */
 	public void updateAjax() {
-		
+		try{
+			service.update(getE());
+			printOutText("保存成功");
+		}catch(Exception e){
+			printOutText("保存失败");
+			e.printStackTrace();
+		}
 	}
 	
 	//逗号分隔符
@@ -224,8 +273,17 @@ public abstract class BaseAction<SERVICE extends BaseService> extends GenericAct
 	 * @return
 	 */
 	public String view() {
-		request.setAttribute("entity", service.get(getE()));
+		setE(service.get(getE()));
+		request.setAttribute("entity", getE());
 		return VIEW;
+	}
+	
+	/**
+	 * 获取Entity实例,以JSON字符串打印出
+	 */
+	public void viewAjax(){
+		BaseEntity e = service.get(getE());
+		printOutJsonObject(e, getJsonConfig());
 	}
 	
 }

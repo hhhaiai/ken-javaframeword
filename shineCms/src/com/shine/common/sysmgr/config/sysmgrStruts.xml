@@ -10,5 +10,8 @@
     	<action name="user_*" class="sysUserAction" method="{1}">
     		<result name="enter">/platform/common/sysmgr/user/list.jsp</result>
     	</action>
+    	<action name="role_*" class="sysRoleAction" method="{1}">
+    		<result name="enter">/platform/common/sysmgr/role/list.jsp</result>
+    	</action>
     </package>
 </struts>
