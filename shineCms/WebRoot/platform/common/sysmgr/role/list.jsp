@@ -38,13 +38,15 @@ $(document).ready(function() {
     //dialog中点提交按钮时将数据提交到后台并执行相应的add或modify操作
     var submitDialog = function(){
         if (validator.form()) {
+        	/*
 	        var submitData={
 	            'e.id':$("input[name='e.id']",dialog).val(),
 	            'e.name':$("input[name='e.name']",dialog).val(),
 	            'e.remark':$("textarea[name='e.remark']",dialog).val()
 	        };
+        	*/
 	        var url = "${path}sysmgr/role_"+(isAdd?"save":"update")+"Ajax.do";
-	        $.post(url,submitData,function(){
+	        $.post(url,$("#editForm").serialize(),function(data,status,jqXHR){
 	            if(isAdd){
 	                //$('#grid').omGrid('reload',1);//如果是添加则滚动到第一页并刷新
 	                $('#grid').omGrid('reload');

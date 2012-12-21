@@ -62,7 +62,7 @@ $(document).ready(function() {
 	            'e.password':$("input[name='e.password']",dialog).val(),
 	            'e.name':$("input[name='e.name']",dialog).val()
 	        };
-	        $.post('${path}sysmgr/user_saveAjax.do',submitData,function(){
+	        $.post('${path}sysmgr/user_saveAjax.do',$("#userForm").serialize(),function(){
 	            if(isAdd){
 	                //$('#grid').omGrid('reload',1);//如果是添加则滚动到第一页并刷新
 	                $('#grid').omGrid('reload');
@@ -168,7 +168,7 @@ $(document).ready(function() {
 <table id="grid"></table>
 <div id="dialog-form">
     <form id="userForm">
-    <input name="e.id" style="display: none"/>
+    <input type="hidden" name="e.id"/>
     <table>
         <tr>
             <td>用户名：</td>
@@ -180,7 +180,7 @@ $(document).ready(function() {
         </tr>
         <tr>
             <td>姓名：</td>
-            <td><input name="e.name" /></td>
+            <td><input name="e.name"/></td>
         </tr>
     </table>
 	</form>

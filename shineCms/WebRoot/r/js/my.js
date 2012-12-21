@@ -1,3 +1,11 @@
+/**
+ * 自定义JS方法
+ * @encode UTF-8
+ * @author JiangKunpeng
+ * 修改者      修改时间         版本       修改描述
+ * 
+ */
+
 /** 给URL拼接参数 
  * @param url	原URL
  * @param data	要拼接的参数
