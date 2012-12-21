@@ -77,7 +77,6 @@ public abstract class BaseAction<SERVICE extends BaseService> extends GenericAct
 	 */
 	public void listJSON() {
 		try{
-			System.out.println(extor.getParaString());
 			QueryAnalyzer analyzer = new QueryAnalyzer();
 			analyzer.setEntity(getE());
 			Pagination page = new DefaultPagination();
