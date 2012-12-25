@@ -10,12 +10,13 @@ import com.shine.framework.dao.util.DefaultPagination;
 import com.shine.framework.dao.util.Pagination;
 import com.shine.framework.dao.util.QueryAnalyzer;
 import com.shine.framework.entity.BaseEntity;
+import com.shine.framework.entity.PersistResult;
 import com.shine.framework.web.json.IJsonFormat;
 
 /**
  * Action基类,包括通用方法
  * @author JiangKunpeng 2012.03.09
- * @version 2012.12.17
+ * @version 2012.12.25
  * @param <SERVICE>	对应的业务实现类
  */
 public abstract class BaseAction<SERVICE extends BaseService> extends GenericAction{
@@ -195,10 +196,9 @@ public abstract class BaseAction<SERVICE extends BaseService> extends GenericAct
 	 */
 	public void saveAjax() {
 		try{
-			service.save(getE());
-			printOutText("保存成功");
+			printOutText(service.save(getE()).toJson());
 		}catch(Exception e){
-			printOutText("保存失败");
+			printOutText(new PersistResult(PersistResult.ERROR, PersistResult.MSG_ERROR).toJson());
 			e.printStackTrace();
 		}
 	}
@@ -217,10 +217,9 @@ public abstract class BaseAction<SERVICE extends BaseService> extends GenericAct
 	 */
 	public void updateAjax() {
 		try{
-			service.update(getE());
-			printOutText("保存成功");
+			printOutText(service.update(getE()).toJson());
 		}catch(Exception e){
-			printOutText("保存失败");
+			printOutText(new PersistResult(PersistResult.ERROR, PersistResult.MSG_ERROR).toJson());
 			e.printStackTrace();
 		}
 	}
@@ -248,20 +247,21 @@ public abstract class BaseAction<SERVICE extends BaseService> extends GenericAct
 	 * @return
 	 */
 	public void delete() {
+		PersistResult pr = null;
 		try{
 			String[] ids = getSeparateArray(COMMONPK);
 			int len = 0;
 			if(ids!=null&&(len=ids.length)>0){
 				if(len==1)
-					service.delete(getE(), ids[0]);
+					pr = service.delete(getE(), ids[0]);
 				else
-					service.delete(getE(), ids);
+					pr = service.delete(getE(), ids);
 			}else{
-				printOutText("没选择要删除的记录");
+				pr = new PersistResult(PersistResult.FAILURE, "后台没获取到要删除的记录");
 			}
-			printOutText("删除成功");
+			printOutText(pr.toJson());
 		}catch(Exception e){
-			printOutText("删除失败");
+			printOutText(new PersistResult(PersistResult.ERROR, PersistResult.MSG_ERROR).toJson());
 			e.printStackTrace();
 		}
 	}

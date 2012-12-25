@@ -6,59 +6,30 @@
  * 
  */
 
-/** 给URL拼接参数 
- * @param url	原URL
- * @param data	要拼接的参数
- * return 拼接参数后的URL
+/** 
+ * 所有自定义方法写该类里面,使名称不会冲突 
  */
-function urlAppendData(url,data){
-	if(data==null||data=='')
-		return url;
-	if(url.indexOf('?')!=-1){
-		url = url+'&'+data;
-	}else{
-		url = url+'?'+data;
+function JkpClass(){
+	/**
+	 * 在列表页中执行Ajax增、删、改后的回调函数
+	 * @param data	后台返回的数据
+	 * @param grid	要刷新的grid
+	 * @param dialog	要关掉的窗口
+	 */
+	this.persistBack = function(data,grid,dialog){
+		var rs = eval("("+data+")");
+    	if(rs.code == 1){	//成功
+    		$.omMessageTip.show({title: "操作提示", content: "<font color='blue'>"+rs.msg+"</font>", type:"success", timeout: 2000});
+    		if(grid)
+    			grid.omGrid('reload');	//刷新列表数据
+    		if(dialog)
+            	dialog.omDialog("close"); //关闭dialog
+    	}else if(rs.code == 2){	//失败
+    		$.omMessageTip.show({title: "操作提示", content: "<font color='scarlet'>"+rs.msg+"</font>", type:"warning", timeout: 2000});
+    	}else{	//后台异常
+    		$.omMessageTip.show({title: "操作提示", content: "<font color='red'>"+rs.msg+"</font>", type:"error", timeout: 2000});
+    	}
 	}
-	return url;
 }
 
-/** 把表单数据转成请求字符串 
- * @param form_obj	form
- * return 将表单转成的字符串
- */
-function form2String(form_obj)
-{
-	var query_string='';
-	var and='';
-	if(typeof form_obj == 'string'){
-		form_obj = document.getElementById(form_obj);
-	}
-	var e;
-	for (i=0;i<form_obj.length ;i++)
-	{
-		e=form_obj[i];
-		if (e.name!='')
-		{
-			if (e.type=='select-one')
-			{
-				element_value=e.options[e.selectedIndex].value;
-			}
-			else if (e.type=='checkbox' || e.type=='radio')
-			{
-				if (e.checked==false)
-				{
-					break;	
-				}
-				element_value=e.value;
-			}
-			else
-			{
-				element_value=e.value;
-			}
-			query_string+=and+e.name+'='+element_value.replace(/\&/g,"%26");
-			and="&"
-		}
-		
-	}
-	return query_string;
-}
+var jkp = new JkpClass();

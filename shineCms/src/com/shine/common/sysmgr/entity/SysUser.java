@@ -19,7 +19,12 @@ public class SysUser implements BaseEntity{
 	
 	@Override
 	public QuerySQL getExistSQL() {
-		return null;
+		QuerySQL sql = null;
+		if(userId==null||userId.length()==-1)
+			sql = new QuerySQL("from SysUser u where u.username=?").setValues(new Object[]{username});
+		else
+			sql = new QuerySQL("from SysUser u where u.username=? and u.userId<>?").setValues(new Object[]{username,userId});
+		return sql;
 	}
 
 	@Override

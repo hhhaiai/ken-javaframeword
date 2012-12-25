@@ -18,7 +18,12 @@ public class SysRole implements BaseEntity {
 
 	@Override
 	public QuerySQL getExistSQL() {
-		return null;
+		QuerySQL sql = null;
+		if(roleId==null||roleId.length()==-1)
+			sql = new QuerySQL("from SysRole r where r.name=?").setValues(new Object[]{name});
+		else
+			sql = new QuerySQL("from SysRole r where r.name=? and r.roleId<>?").setValues(new Object[]{name,roleId});
+		return sql;
 	}
 
 	@Override

@@ -104,12 +104,23 @@ public class BaseDaoImpl extends GenericDaoImpl implements BaseDao{
 		QuerySQL qsql = entity.getExistSQL();
 		if(qsql!=null){
 			List list = null;
-			if(qsql.getParams()==null||qsql.getParams().length==-1)
-				list = find(qsql.getSql(), qsql.getValues());
-			else
-				list = find(qsql.getSql(), qsql.getParams(), qsql.getValues());
-			if(list!=null&&!list.isEmpty())
+			String[] params = null;
+			if((params = qsql.getParams())==null||params.length==-1){
+				if(qsql.isHql())
+					list = find(qsql.getSql(), qsql.getValues());
+				else
+					list = listBySQL(entity.getClass(), qsql.getSql(), qsql.getValues());
+			}else{
+				if(qsql.isHql())
+					list = find(qsql.getSql(), params, qsql.getValues());
+				else
+					list = listBySQL(entity.getClass(), qsql.getSql(), params, qsql.getValues());
+			}
+			params = null;
+			if(list!=null&&!list.isEmpty()){
+				list = null;
 				return true;
+			}
 		}
 		return false;
 	}

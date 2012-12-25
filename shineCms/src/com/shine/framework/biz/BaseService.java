@@ -4,18 +4,19 @@ import java.util.List;
 
 import com.shine.framework.dao.util.QueryAnalyzer;
 import com.shine.framework.entity.BaseEntity;
+import com.shine.framework.entity.PersistResult;
 
 public interface BaseService{
 	
 	public boolean exist(BaseEntity entity);
 	
-	public void save(BaseEntity entity);
+	public PersistResult save(BaseEntity entity);
 	
-	public void update(BaseEntity entity);
+	public PersistResult update(BaseEntity entity);
 	
-	public void delete(BaseEntity entity,String id);
+	public PersistResult delete(BaseEntity entity,String id);
 	
-	public void delete(BaseEntity entity,String[] ids);
+	public PersistResult delete(BaseEntity entity,String[] ids);
 	
 	public BaseEntity get(BaseEntity entity);
 	

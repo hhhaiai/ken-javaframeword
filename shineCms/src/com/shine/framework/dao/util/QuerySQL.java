@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * 查询SQL 包括预处理参数/值
  * @author JiangKunpeng	2011.05.17
- * @version 2012.12.11
+ * @version 2012.12.25
  */
 public class QuerySQL implements Serializable{
 
@@ -14,6 +14,7 @@ public class QuerySQL implements Serializable{
 	private String sql;
 	private String[] params;
 	private Object[] values;
+	private boolean isHql = true;	//是否是hql语句，默认为是
 	
 	public QuerySQL(){
 	}
@@ -41,6 +42,13 @@ public class QuerySQL implements Serializable{
 	}
 	public QuerySQL setValues(Object[] values) {
 		this.values = values;
+		return this;
+	}
+	public boolean isHql() {
+		return isHql;
+	}
+	public QuerySQL setHql(boolean isHql) {
+		this.isHql = isHql;
 		return this;
 	}
 }

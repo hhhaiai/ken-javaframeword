@@ -6,6 +6,7 @@
 <title>用户管理</title>
 <script type="text/javascript" src="${path}r/operamasks-ui/js/jquery.min.js"></script>
 <script type="text/javascript" src="${path}r/operamasks-ui/js/operamasks-ui.min.js"></script>
+<script type="text/javascript" src="${path}r/js/my.js"></script>
 <link title="default" rel="stylesheet" href="${path}r/operamasks-ui/css/${themes}/om-${themes}.css">
 <link rel="stylesheet" href="${path}r/css/base.css"/>
 <link title="default" rel="stylesheet" href="${path}r/css/themes/${themes}/list.css"/>
@@ -56,22 +57,8 @@ $(document).ready(function() {
     //dialog中点提交按钮时将数据提交到后台并执行相应的add或modify操作
     var submitDialog = function(){
         if (validator.form()) {
-	        var submitData={
-	            'e.id':$("input[name='e.id']",dialog).val(),
-	            'e.username':$("input[name='e.username']",dialog).val(),
-	            'e.password':$("input[name='e.password']",dialog).val(),
-	            'e.name':$("input[name='e.name']",dialog).val()
-	        };
-	        $.post('${path}sysmgr/user_saveAjax.do',$("#userForm").serialize(),function(){
-	            if(isAdd){
-	                //$('#grid').omGrid('reload',1);//如果是添加则滚动到第一页并刷新
-	                $('#grid').omGrid('reload');
-	                $.omMessageTip.show({title: "操作成功", content: "添加数据成功", timeout: 1500});
-	            }else{
-	                $('#grid').omGrid('reload');//如果是修改则刷新当前页
-	                $.omMessageTip.show({title: "操作成功", content: "修改数据成功", timeout: 1500});
-	            }
-	            $("#dialog-form").omDialog("close"); //关闭dialog
+	        $.post('${path}sysmgr/user_saveAjax.do',$("#userForm").serialize(),function(data){
+	        	jkp.persistBack(data,$('#grid'),$("#dialog-form"));
 	        });
         }
     };
@@ -133,10 +120,8 @@ $(document).ready(function() {
 	            	ids += selections[i].userId + ',';
 	            }
 	            ids = ids.substr(0,ids.length-1);
-	            $.post('${path}sysmgr/user_delete.do','id='+ids,function(rs){
-	                $.omMessageTip.show({title: "提示信息", content: rs, timeout: 2000});
-	                if(rs.indexOf("成功")>0)
-	                	$('#grid').omGrid('reload');//刷新当前页数据
+	            $.post('${path}sysmgr/user_delete.do','id='+ids,function(data){
+	                jkp.persistBack(data,$('#grid'));
 	            });
             }
 		}
