@@ -6,18 +6,16 @@ import net.sf.json.JSONObject;
 import net.sf.json.JsonConfig;
 
 import com.shine.framework.biz.BaseService;
-import com.shine.framework.dao.util.DefaultPagination;
 import com.shine.framework.dao.util.Pagination;
-import com.shine.framework.dao.util.QueryAnalyzer;
 import com.shine.framework.entity.BaseEntity;
 import com.shine.framework.entity.PersistResult;
 import com.shine.framework.web.json.IJsonFormat;
 
 /**
- * Action基类,包括通用方法
+ * 针对通用增删改查等方法写的Action抽象类,目前由AjaxAction和OrdinaryAction继承.
  * @author JiangKunpeng 2012.03.09
- * @version 2012.12.25
- * @param <SERVICE>	对应的业务实现类
+ * @version 2012.12.29
+ * @param <SERVICE>	增删改查Service基类
  */
 public abstract class BaseAction<SERVICE extends BaseService> extends GenericAction{
 
@@ -62,35 +60,7 @@ public abstract class BaseAction<SERVICE extends BaseService> extends GenericAct
 
 		return ENTER;
 	}
-	
-	/**
-	 * 分页列表
-	 * 
-	 * @return
-	 */
-	public String list() {
-		return LIST;
-	}
 
-	/**
-	 * 分页查询 返回JSON格式结果
-	 * 
-	 */
-	public void listJSON() {
-		try{
-			QueryAnalyzer analyzer = new QueryAnalyzer();
-			analyzer.setEntity(getE());
-			Pagination page = new DefaultPagination();
-			page.init(extor.getIntValue("start"), extor.getIntValue("limit"));
-			analyzer.setPage(page);
-			extor.buildQueryItem(analyzer);
-			List list = service.list(analyzer);
-			printOutJsonList(list, page, getJsonConfig());
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-	}
-	
 	protected static JsonConfig JsonConfig = null;	//JsonConfig 单例,将过滤掉默认不需要的字段
 	
 	/**
@@ -154,15 +124,6 @@ public abstract class BaseAction<SERVICE extends BaseService> extends GenericAct
 	}
 	
 	/**
-	 * 所有记录列表
-	 * 
-	 * @return
-	 */
-	public String loadAll() {
-		return LIST;
-	}
-	
-	/**
 	 * 进入新增
 	 * 
 	 * @return
@@ -179,49 +140,6 @@ public abstract class BaseAction<SERVICE extends BaseService> extends GenericAct
 	public String toEdit() {
 		view();
 		return TOEDIT;
-	}
-
-	/**
-	 * 执行新增
-	 * 
-	 * @return
-	 */
-	public String save() {
-		service.save(getE());
-		return SAVE;
-	}
-	
-	/**
-	 * 执行新增 返回XML格式结果
-	 */
-	public void saveAjax() {
-		try{
-			printOutText(service.save(getE()).toJson());
-		}catch(Exception e){
-			printOutText(new PersistResult(PersistResult.ERROR, PersistResult.MSG_ERROR).toJson());
-			e.printStackTrace();
-		}
-	}
-	
-	/**
-	 * 执行修改
-	 * 
-	 * @return
-	 */
-	public String update() {
-		return UPDATE;
-	}
-	
-	/**
-	 * 执行修改 返回Ajax结果
-	 */
-	public void updateAjax() {
-		try{
-			printOutText(service.update(getE()).toJson());
-		}catch(Exception e){
-			printOutText(new PersistResult(PersistResult.ERROR, PersistResult.MSG_ERROR).toJson());
-			e.printStackTrace();
-		}
 	}
 	
 	//逗号分隔符
@@ -246,10 +164,11 @@ public abstract class BaseAction<SERVICE extends BaseService> extends GenericAct
 	 * 
 	 * @return
 	 */
-	public void delete() {
+	protected PersistResult doDelete() {
 		PersistResult pr = null;
+		String[] ids = null;
 		try{
-			String[] ids = getSeparateArray(COMMONPK);
+			ids = getSeparateArray(COMMONPK);
 			int len = 0;
 			if(ids!=null&&(len=ids.length)>0){
 				if(len==1)
@@ -259,11 +178,10 @@ public abstract class BaseAction<SERVICE extends BaseService> extends GenericAct
 			}else{
 				pr = new PersistResult(PersistResult.FAILURE, "后台没获取到要删除的记录");
 			}
-			printOutText(pr.toJson());
-		}catch(Exception e){
-			printOutText(new PersistResult(PersistResult.ERROR, PersistResult.MSG_ERROR).toJson());
-			e.printStackTrace();
+		}finally{
+			ids = null;
 		}
+		return pr;
 	}
 	
 	/**
@@ -275,14 +193,6 @@ public abstract class BaseAction<SERVICE extends BaseService> extends GenericAct
 		setE(service.get(getE()));
 		request.setAttribute("entity", getE());
 		return VIEW;
-	}
-	
-	/**
-	 * 获取Entity实例,以JSON字符串打印出
-	 */
-	public void viewAjax(){
-		BaseEntity e = service.get(getE());
-		printOutJsonObject(e, getJsonConfig());
 	}
 	
 }

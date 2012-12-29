@@ -58,5 +58,7 @@
 		<property name="service" ref="baseService" />
 		<property name="jsonformat" ref="jsonformat" />
 	</bean>
+	<bean id="ajaxAction" class="com.shine.framework.web.AjaxAction" abstract="true" parent="baseAction"/>
+	<bean id="ordinaryAction" class="com.shine.framework.web.OrdinaryAction" abstract="true" parent="baseAction"/>
 	
 </beans>

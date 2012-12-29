@@ -14,6 +14,6 @@
            http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
            
 	<bean id="loginAction" class="com.shine.common.sysmgr.web.LoginAction"/>
-	<bean id="sysUserAction" class="com.shine.common.sysmgr.web.SysUserAction" parent="baseAction" />
-	<bean id="sysRoleAction" class="com.shine.common.sysmgr.web.SysRoleAction" parent="baseAction" />
+	<bean id="sysUserAction" class="com.shine.common.sysmgr.web.SysUserAction" parent="ajaxAction" />
+	<bean id="sysRoleAction" class="com.shine.common.sysmgr.web.SysRoleAction" parent="ajaxAction" />
 </beans>

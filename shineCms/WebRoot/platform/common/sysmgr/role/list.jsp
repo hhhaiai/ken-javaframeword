@@ -39,7 +39,7 @@ $(document).ready(function() {
     //dialog中点提交按钮时将数据提交到后台并执行相应的add或modify操作
     var submitDialog = function(){
         if (validator.form()) {
-	        var url = "${path}sysmgr/role_"+(isAdd?"save":"update")+"Ajax.do";
+	        var url = "${path}sysmgr/role_"+(isAdd?"save":"update")+".do";
 	        $.post(url,$("#editForm").serialize(),function(data){
 	        	jkp.persistBack(data,$('#grid'),$("#dialog-form"));
 	        });
@@ -118,7 +118,7 @@ $(document).ready(function() {
 		}
 	});
     $('#grid').omGrid({
-        dataSource : '${path}sysmgr/role_listJSON.do',
+        dataSource : '${path}sysmgr/role_list.do',
         singleSelect : false,
         colModel : [ {header : 'ID', name : 'roleId', width : 100, align : 'center'}, 
                      {header : '角色名', name : 'name', width:120, align : 'left'}, 

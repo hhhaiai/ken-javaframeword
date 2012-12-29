@@ -35,7 +35,7 @@ $(document).ready(function() {
             "查询" : function(){
 				var q1 = $("input[name='Q_username_eq']",qdlg).val();
 				var q2 = $("input[name='Q_name_lk']",qdlg).val();
-				var url = '${path}sysmgr/user_listJSON.do?Q^S^username^EQ='+q1+'&Q^S^name^LK='+q2;
+				var url = '${path}sysmgr/user_list.do?Q^S^username^EQ='+q1+'&Q^S^name^LK='+q2;
           		$('#grid').omGrid('setData',url);
           		$("#query-form").omDialog("close");
         		return false; //阻止form的默认提交动作
@@ -57,7 +57,7 @@ $(document).ready(function() {
     //dialog中点提交按钮时将数据提交到后台并执行相应的add或modify操作
     var submitDialog = function(){
         if (validator.form()) {
-	        $.post('${path}sysmgr/user_saveAjax.do',$("#userForm").serialize(),function(data){
+	        $.post('${path}sysmgr/user_save.do',$("#userForm").serialize(),function(data){
 	        	jkp.persistBack(data,$('#grid'),$("#dialog-form"));
 	        });
         }
@@ -133,7 +133,7 @@ $(document).ready(function() {
 		}
 	});
     $('#grid').omGrid({
-        dataSource : '${path}sysmgr/user_listJSON.do',
+        dataSource : '${path}sysmgr/user_list.do',
         singleSelect : false,
         colModel : [ {header : 'ID', name : 'userId', width : 100, align : 'center'}, 
                      {header : '用户名', name : 'username', width : 120, align : 'left'}, 
