@@ -35,7 +35,8 @@ $(document).ready(function() {
    	    }]
 	});
     var tabElement = $('#center-tab').omTabs({
-        height : "fit"
+        height : "fit",
+        border : true
     });
     var navData = [{id:"n1",text:"系统管理",expanded:true},
                  	{id:"n2",text:"内容管理",expanded:true},
