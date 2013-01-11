@@ -13,5 +13,8 @@
     	<action name="role_*" class="sysRoleAction" method="{1}">
     		<result name="enter">/platform/common/sysmgr/role/list.jsp</result>
     	</action>
+    	<action name="menu_*" class="sysMenuAction" method="{1}">
+    		<result name="enter">/platform/common/sysmgr/menu/home.jsp</result>
+    	</action>
     </package>
 </struts>

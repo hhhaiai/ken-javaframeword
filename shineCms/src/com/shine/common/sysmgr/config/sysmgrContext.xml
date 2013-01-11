@@ -16,4 +16,5 @@
 	<bean id="loginAction" class="com.shine.common.sysmgr.web.LoginAction"/>
 	<bean id="sysUserAction" class="com.shine.common.sysmgr.web.SysUserAction" parent="ajaxAction" />
 	<bean id="sysRoleAction" class="com.shine.common.sysmgr.web.SysRoleAction" parent="ajaxAction" />
+	<bean id="sysMenuAction" class="com.shine.common.sysmgr.web.SysMenuAction" parent="ajaxAction" />
 </beans>

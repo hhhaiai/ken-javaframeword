@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">    
+<hibernate-mapping>
+	<class name="com.shine.common.sysmgr.entity.SysMenu" table="SYS_MENU" 
+		dynamic-insert="false" dynamic-update="true">
+		<id name="menuId" column="MENUID" type="java.lang.Integer" length="8">
+			<generator class="native" />
+		</id>
+		<property name="pid" column="PID" type="java.lang.Integer" length="8" not-null="true"/>
+		<property name="orderId" column="ORDERID" type="java.lang.Integer" length="4" not-null="true"/>
+		<property name="menuName" column="MENUNAME" type="java.lang.String" length="50" not-null="true"/>
+		<property name="murl" column="MURL" type="java.lang.String" length="500"/>
+		<property name="icon" column="ICON" type="java.lang.String" length="50"/>
+		<property name="remark" column="REMARK" type="java.lang.String" length="100"/>
+		<property name="enable" column="ENABLE" type="java.lang.Integer" length="1"/>
+    </class>
+</hibernate-mapping>
