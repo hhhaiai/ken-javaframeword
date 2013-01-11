@@ -4,7 +4,7 @@
 <html>
 <head>
 <title>${appName}</title>	
-<script type="text/javascript" src="${path}r/operamasks-ui/js/jquery.min.js"></script>
+<script type="text/javascript" src="${path}r/js/jquery.min.js"></script>
 <script type="text/javascript" src="${path}r/operamasks-ui/js/operamasks-ui.min.js"></script>
 <link rel="stylesheet" href="${path}r/css/base.css"/>
 <link title="default" rel="stylesheet" href="${path}r/operamasks-ui/css/${themes}/om-${themes}.css">
@@ -42,7 +42,7 @@ $(document).ready(function() {
                  	{id:"n2",text:"内容管理",expanded:true},
                  	{id:"n11",pid:"n1",text:"用户管理",url:"${path}sysmgr/user_enter.do"},
                  	{id:"n12",pid:"n1",text:"角色管理",url:"${path}sysmgr/role_enter.do"},
-					{id:"n13",pid:"n2",text:"栏目管理",url:"http://www.apusic.com/homepage/index.faces"}];
+					{id:"n13",pid:"n2",text:"菜单权限管理",url:"${path}sysmgr/menu_enter.do"}];
     $("#navTree").omTree({
         dataSource : navData,
         simpleDataModel: true,

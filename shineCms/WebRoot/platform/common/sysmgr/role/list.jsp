@@ -4,7 +4,7 @@
 <html>
 <head>
 <title>角色管理</title>
-<script type="text/javascript" src="${path}r/operamasks-ui/js/jquery.min.js"></script>
+<script type="text/javascript" src="${path}r/js/jquery.min.js"></script>
 <script type="text/javascript" src="${path}r/operamasks-ui/js/operamasks-ui.min.js"></script>
 <script type="text/javascript" src="${path}r/js/my.js"></script>
 <link title="default" rel="stylesheet" href="${path}r/operamasks-ui/css/${themes}/om-${themes}.css">
