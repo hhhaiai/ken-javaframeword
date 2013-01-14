@@ -6,10 +6,10 @@
 <title>角色管理</title>
 <script type="text/javascript" src="${path}r/js/jquery.min.js"></script>
 <script type="text/javascript" src="${path}r/operamasks-ui/js/operamasks-ui.min.js"></script>
-<script type="text/javascript" src="${path}r/js/my.js"></script>
+<script type="text/javascript" src="${path}r/js/shine.js"></script>
 <link title="default" rel="stylesheet" href="${path}r/operamasks-ui/css/${themes}/om-${themes}.css">
 <link rel="stylesheet" href="${path}r/css/base.css"/>
-<link title="default" rel="stylesheet" href="${path}r/css/themes/${themes}/list.css"/>
+<link title="default" rel="stylesheet" href="${path}r/css/themes/${themes}/style.css"/>
 <script type="text/javascript">
 $(document).ready(function() {
 	var dialog = $("#dialog-form").omDialog({
@@ -41,7 +41,7 @@ $(document).ready(function() {
         if (validator.form()) {
 	        var url = "${path}sysmgr/role_"+(isAdd?"save":"update")+".do";
 	        $.post(url,$("#editForm").serialize(),function(data){
-	        	jkp.persistBack(data,$('#grid'),$("#dialog-form"));
+	        	shine.listAjaxBack(data,$('#grid'),$("#dialog-form"));
 	        });
         }
     };
@@ -112,7 +112,7 @@ $(document).ready(function() {
 	            }
 	            ids = ids.substr(0,ids.length-1);
 	            $.post('${path}sysmgr/role_delete.do','id='+ids,function(data){
-	                jkp.persistBack(data,$('#grid'));
+	                shine.listAjaxBack(data,$('#grid'));
 	            });
             }
 		}
