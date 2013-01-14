@@ -15,6 +15,8 @@
     	</action>
     	<action name="menu_*" class="sysMenuAction" method="{1}">
     		<result name="enter">/platform/common/sysmgr/menu/home.jsp</result>
+    		<result name="toAdd">/platform/common/sysmgr/menu/edit.jsp?method=add</result>
+    		<result name="toEdit">/platform/common/sysmgr/menu/edit.jsp</result>
     	</action>
     </package>
 </struts>

@@ -13,8 +13,8 @@
            http://www.springframework.org/schema/aop
            http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
            
-	<bean id="loginAction" class="com.shine.common.sysmgr.web.LoginAction"/>
-	<bean id="sysUserAction" class="com.shine.common.sysmgr.web.SysUserAction" parent="ajaxAction" />
-	<bean id="sysRoleAction" class="com.shine.common.sysmgr.web.SysRoleAction" parent="ajaxAction" />
-	<bean id="sysMenuAction" class="com.shine.common.sysmgr.web.SysMenuAction" parent="ajaxAction" />
+	<bean id="loginAction" class="com.shine.common.sysmgr.web.LoginAction" scope="prototype"/>
+	<bean id="sysUserAction" class="com.shine.common.sysmgr.web.SysUserAction" parent="ajaxAction" scope="prototype"/>
+	<bean id="sysRoleAction" class="com.shine.common.sysmgr.web.SysRoleAction" parent="ajaxAction" scope="prototype"/>
+	<bean id="sysMenuAction" class="com.shine.common.sysmgr.web.SysMenuAction" parent="ajaxAction" scope="prototype"/>
 </beans>
