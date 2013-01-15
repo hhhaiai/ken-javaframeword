@@ -28,6 +28,17 @@ public class SysMenuAction extends AjaxAction<BaseService>{
 
 	@Override
 	public String toAdd() {
+		String pname = null;
+		if(e.getPid()!=0){
+			SysMenu pmenu = new SysMenu();
+			pmenu.setMenuId(e.getPid());
+			pmenu = (SysMenu)service.get(pmenu);
+			if(pmenu!=null)
+				pname = pmenu.getMenuName();
+		}else{
+			pname = "菜单导航";
+		}
+		request.setAttribute("pname", pname);
 		return TOADD;
 	}
 
@@ -44,7 +55,6 @@ public class SysMenuAction extends AjaxAction<BaseService>{
 
 	@Override
 	public void update() {
-		// TODO Auto-generated method stub
 		super.update();
 	}
 
