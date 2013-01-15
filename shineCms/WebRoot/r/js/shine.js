@@ -50,3 +50,20 @@ function ShineClass(){
 }
 
 var shine = new ShineClass();
+
+$.validator.messages = {
+	required: "必填项",
+	number: "请输入数字",
+	digits: "必须为非负整数",
+	date: "日期格式不正确",
+	email: "Email格式不正确",
+	url: "URL地址不正确",
+	minlength: jQuery.format("至少输入{0}字符"),
+	maxlength: jQuery.format("最多输入{0}字符"),
+	rangelength: jQuery.format("字符长度必须在{0}至{1}之间"),
+	min: jQuery.format("不能小于{0}"),
+	max: jQuery.format("不能大于{0}"),
+	equalTo: "请输入相同的值",
+	range: jQuery.format("大小必须在{0}至{1}之间"),
+	accept: "不能上传的文件类型"
+}

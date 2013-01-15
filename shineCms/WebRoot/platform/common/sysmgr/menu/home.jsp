@@ -64,14 +64,21 @@
 	function toAdd(){
 		if (zTree.getSelectedNodes()[0]) {
 			var pid = zTree.getSelectedNodes()[0].id;
-			$("#dialog-modal").omDialog({title:'增加子菜单'});
-			$("#dialog-modal").omDialog('open');
-			var frame = $("#dialog-modal iframe")[0];
+			$("#editDialog").omDialog({title:'增加子菜单'});
+			$("#editDialog").omDialog('open');
+			var frame = $("#editDialog iframe")[0];
 			frame.src = "${path}sysmgr/menu_toAdd.do?e.pid="+pid;
 			/*
 			var newNode = { name:"增加"};
 			zTree.addNodes(zTree.getSelectedNodes()[0], newNode);
 			*/
+		}
+	}
+	
+	//关闭编辑框
+	function closeEditDialog(){
+		if($("#editDialog").omDialog('isOpen')){
+			$("#editDialog").omDialog('close');
 		}
 	}
 	
@@ -115,10 +122,10 @@
 		//加载右键菜单
 		initRightMenu();
 		
-		$( "#dialog-modal").omDialog({
+		$("#editDialog").omDialog({
             autoOpen: false,
             width:400,
-            height:260,
+            height:320,
             modal: true
         });
 		
@@ -141,7 +148,7 @@
 </table>
 
 <div id="rightMenu"></div>
-<div id="dialog-modal">
+<div id="editDialog">
 	<iframe frameborder="0" style="width:100%;height:99%;height:100%\9;" src="about:blank"></iframe>
 </div>
 </body>

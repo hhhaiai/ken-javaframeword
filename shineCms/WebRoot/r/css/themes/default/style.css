@@ -1,4 +1,5 @@
 @CHARSET "UTF-8";
+/* 工具栏 */
 .toolbar {
     /* 
     background: url("image/icon/toolbar_bg.jpg") repeat-x scroll 0 0 #99B5DD;
@@ -8,3 +9,132 @@
     line-height: 24px;
     padding : 0 0 5px 0;
 }
+/* 工具栏 */
+
+/* 盒子 */
+.box1{
+}
+.box1_topcenter{
+	width: 100%;
+	height: 20px;
+	background-image: url(image/box/box1_topcenter.jpg);
+	background-repeat: repeat-x;
+	overflow: hidden;
+	line-height: 20px;
+}
+.box1_topleft{
+	width: 100%;
+	height: 100%;
+	background-image: url(image/box/box1_topleft.jpg);
+	background-repeat: no-repeat;
+	overflow: hidden;
+}
+.box1_topright{
+	width: 100%;
+	height: 100%;
+	background-image: url(image/box/box1_topright.jpg);
+	background-repeat: no-repeat;
+	background-position: 100% 0%;
+	overflow: hidden;
+}
+.box1_middlecenter{
+	width: 100%;
+	background-color: #ffffff;
+}
+.box1_middleleft{
+	width: 100%;
+	background-image: url(image/box/box1_middleleft.jpg);
+	background-repeat: repeat-y;
+}
+.box1_middleright{
+	width: 100%;
+	background-image: url(image/box/box1_middleright.jpg);
+	background-repeat: repeat-y;
+	background-position: 100% 0%;
+}
+.box1_bottomcenter{
+	width: 100%;
+	height: 22px;
+	background-image: url(image/box/box1_bottomcenter.jpg);
+	background-repeat: repeat-x;
+	overflow: hidden;
+	line-height: 22px;
+}
+.box1_bottomleft{
+	width: 100%;
+	height: 100%;
+	background-image: url(image/box/box1_bottomleft.jpg);
+	background-repeat: no-repeat;
+	overflow: hidden;
+}
+.box1_bottomright{
+	width: 100%;
+	height: 100%;
+	background-image: url(image/box/box1_bottomright.jpg);
+	background-repeat: no-repeat;
+	background-position: 100% 0%;
+	overflow: hidden;
+}
+.box1 .boxContent{
+	padding:0 8px 0 18px;
+	margin:0 10px 0 0;
+}
+/* 盒子 */
+
+/* 线条表格 */
+.line_table {
+	background-color: White;
+    border: 1px solid #CCCCCC;
+    border-collapse: collapse;
+}
+.line_table th , .line_table td{
+	border-left: 1.0pt solid windowtext;
+	border-right: 1.0pt solid windowtext;
+	border-bottom: 1.0pt solid windowtext;
+	word-wrap: normal;
+	word-break: keep-all;
+	border-color: #cccccc;
+	height:24px; 
+	padding: 2px 4px 2px 4px;
+}
+/* 线条表格 */
+
+/* 简单表格 */
+.simple_table {
+	background-color: White;
+	border-collapse: collapse;
+}
+.simple_table th , .simple_table td{
+	word-wrap: normal;
+	word-break: keep-all;
+	height:24px; 
+	padding: 2px 4px 2px 4px;
+}
+.simple_table .label{
+	text-align:right;
+	width:100px;
+}
+/* 简单表格 */
+
+/* 简单输入框 */
+.input{
+	border : solid #ADB1C2 1px;
+    height: 18px;
+    line-height: 18px;
+    width: 150px;
+}
+
+/* 表单验证 */
+.red{
+	color: red;
+}
+input.error {
+    border: 1px solid red;
+}
+select.error {
+    border: 1px solid red;
+}
+textarea.error {
+    border: 1px solid red;
+}
+/* 表单验证 */
