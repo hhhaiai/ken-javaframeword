@@ -58,7 +58,7 @@ $(document).ready(function() {
     var submitDialog = function(){
         if (validator.form()) {
 	        $.post('${path}sysmgr/user_save.do',$("#userForm").serialize(),function(data){
-	        	shine.listAjaxBack(data,$('#grid'),$("#dialog-form"));
+	        	$.shine.listAjaxBack(data,$('#grid'),$("#dialog-form"));
 	        });
         }
     };
@@ -121,7 +121,7 @@ $(document).ready(function() {
 	            }
 	            ids = ids.substr(0,ids.length-1);
 	            $.post('${path}sysmgr/user_delete.do','id='+ids,function(data){
-	                shine.listAjaxBack(data,$('#grid'));
+	                $.shine.listAjaxBack(data,$('#grid'));
 	            });
             }
 		}
@@ -142,7 +142,7 @@ $(document).ready(function() {
 });
 </script>
 </head>
-<body>
+<body class="list">
 
 <div class="toolbar mar">
      <a href="javascript:void(0);" id="btn_add">添加</a>

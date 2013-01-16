@@ -20,6 +20,7 @@ public class SysMenuAction extends AjaxAction<BaseService>{
 	public String enter() {
 		QueryAnalyzer analyzer = new QueryAnalyzer();
 		analyzer.setEntity(getE());
+		analyzer.setSortField("orderId");
 		extor.buildQueryItem(analyzer);
 		List list = service.list(analyzer);
 		request.setAttribute(LIST, list);
@@ -44,13 +45,33 @@ public class SysMenuAction extends AjaxAction<BaseService>{
 
 	@Override
 	public String toEdit() {
-		return super.toEdit();
+		view();
+		
+		String pname = null;
+		if(e!=null&&e.getPid()!=0){
+			SysMenu pmenu = new SysMenu();
+			pmenu.setMenuId(e.getPid());
+			pmenu = (SysMenu)service.get(pmenu);
+			if(pmenu!=null)
+				pname = pmenu.getMenuName();
+		}else{
+			pname = "菜单导航";
+		}
+		request.setAttribute("pname", pname);
+		return TOEDIT;
 	}
 
 	@Override
 	public void save() {
-//		super.save();
-		printOutText(new PersistResult(PersistResult.SUCCESS, PersistResult.MSG_SUCCESS).toJson());
+		try{
+			PersistResult pr = service.save(getE());
+			pr.putData("menuid", e.getMenuId());
+			
+			printOutText(pr.toJson());
+		}catch(Exception e){
+			printOutText(new PersistResult(PersistResult.ERROR, PersistResult.MSG_ERROR).toJson());
+			e.printStackTrace();
+		}
 	}
 
 	@Override

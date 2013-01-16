@@ -1,10 +1,10 @@
 @CHARSET "UTF-8";
+/* 加在列表页面的body上 */
+body.list{
+	padding: 5px 5px 0px 5px;
+}
 /* 工具栏 */
 .toolbar {
-    /* 
-    background: url("image/icon/toolbar_bg.jpg") repeat-x scroll 0 0 #99B5DD;
-    border: 1px solid #808FB8;
-    */
     height: 24px;
     line-height: 24px;
     padding : 0 0 5px 0;
@@ -126,6 +126,9 @@
 
 /* 表单验证 */
 .red{
+	color: red;
+}
+.error{
 	color: red;
 }
 input.error {

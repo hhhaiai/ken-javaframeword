@@ -11,6 +11,7 @@
 <script type="text/javascript" src="${path}r/js/jquery.min.js"></script>
 <script type="text/javascript" src="${path}r/operamasks-ui/js/operamasks-ui.min.js"></script>
 <script type="text/javascript" src="${path}r/ztree/js/jquery.ztree.all.min.js"></script>
+<script type="text/javascript" src="${path}r/js/shine.js"></script>
 <script type="text/javascript">
 <!--
 	var zTree,editIframe;
@@ -60,30 +61,48 @@
 		</c:forEach>
 	];
 	
+	var editDialog;	//编辑框
 	//增加子菜单
 	function toAdd(){
 		if (zTree.getSelectedNodes()[0]) {
-			var pid = zTree.getSelectedNodes()[0].id;
-			$("#editDialog").omDialog({title:'增加子菜单'});
-			$("#editDialog").omDialog('open');
-			var frame = $("#editDialog iframe")[0];
-			frame.src = "${path}sysmgr/menu_toAdd.do?e.pid="+pid;
-			/*
-			var newNode = { name:"增加"};
-			zTree.addNodes(zTree.getSelectedNodes()[0], newNode);
-			*/
+			var id = zTree.getSelectedNodes()[0].id;
+			editDialog = $.shine.openDialog({name:"editDialog", title:"增加子菜单", url:"${path}sysmgr/menu_toAdd.do?e.pid="+id, width:400, height:320});
 		}
 	}
-	
+	//编辑菜单
+	function toEdit(){
+		if (zTree.getSelectedNodes()[0]) {
+			var id = zTree.getSelectedNodes()[0].id;
+			editDialog = $.shine.openDialog({name:"editDialog", title:"编辑菜单", url:"${path}sysmgr/menu_toEdit.do?e.menuId="+id, width:400, height:320});
+		}
+	}
+	//删除菜单
+	function toDelete(){
+		if (zTree.getSelectedNodes()[0]) {
+			var id = zTree.getSelectedNodes()[0].id;
+			if(confirm("删除后将不能恢复，确认删除？")){
+				
+			}
+		}
+	}
 	//关闭编辑框
 	function closeEditDialog(){
-		if($("#editDialog").omDialog('isOpen')){
-			$("#editDialog").omDialog('close');
+		if(editDialog.omDialog('isOpen')){
+			editDialog.omDialog('close');
 		}
 	}
-	
-	function addSuccess(){
-		alert("dfdf");
+	//保存菜单成功后调用
+	function saveSuccess(obj){
+		closeEditDialog();
+		var tnode = zTree.getNodeByParam("id",obj["e.menuId"],null);
+		if(tnode!=null){
+			tnode.name=obj["e.menuName"];
+			zTree.updateNode(tnode);
+		}else{
+			var newNode = {id:obj["e.menuId"],pid:obj["e.pid"],name:obj["e.menuName"]};
+			var pnode = zTree.getNodeByParam("id",obj["e.pid"]);
+			zTree.addNodes(pnode, newNode);
+		}
 	}
 	
 	//加载右键菜单
@@ -122,13 +141,6 @@
 		//加载右键菜单
 		initRightMenu();
 		
-		$("#editDialog").omDialog({
-            autoOpen: false,
-            width:400,
-            height:320,
-            modal: true
-        });
-		
 		editIframe = $("#editIframe");
 		editIframe.bind("load", iframeLoadReady);
 	});
@@ -148,8 +160,5 @@
 </table>
 
 <div id="rightMenu"></div>
-<div id="editDialog">
-	<iframe frameborder="0" style="width:100%;height:99%;height:100%\9;" src="about:blank"></iframe>
-</div>
 </body>
 </html>

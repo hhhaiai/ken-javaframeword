@@ -1,35 +1,36 @@
 /**
- * 自定义JS方法
+ * 自定义JS函数
  * @encode UTF-8
  * @author JiangKunpeng
  * 修改者      修改时间         版本       修改描述
  * 
  */
 
-/** 
- * 所有自定义方法写该类里面,使名称不会冲突 
+/**
+ * 自定义JQuery函数
  */
-function ShineClass(){
+$.shine = {
 	/**
 	 * 在列表页中执行Ajax增、删、改后的回调函数
 	 * @param data	后台返回的数据
 	 * @param grid	要刷新的grid
 	 * @param dialog	要关掉的窗口
 	 */
-	this.listAjaxBack = function(data,grid,dialog){
+	listAjaxBack : function(data,grid,dialog){
 		this.showAjaxMsg(data,function(){
 			if(grid)
     			grid.omGrid('reload');	//刷新列表数据
     		if(dialog)
             	dialog.omDialog("close"); //关闭dialog
 		})
-	}
+	},
+	
 	/**
 	 * 显示Ajax提交后的信息提示
 	 * @param data	返回的结果数据
 	 * @param successHandle	返回结果为成功后的回调函数,如果没有则不调用
 	 */
-	this.showAjaxMsg = function(data,successHandle){
+	showAjaxMsg : function(data,successHandle){
 		var rs = eval("("+data+")");
 		var msgObj;
     	if(rs.code == 1){	//成功
@@ -46,11 +47,55 @@ function ShineClass(){
     	}catch(e){
     		$.omMessageTip.show(msgObj);
     	}
+	},
+	
+	/**
+	 * 创建并打开对话框
+	 * @param {Object} opt
+	 * @return {TypeName} 
+	 */
+	openDialog: function(opt){
+		var setting = {
+			name:"",
+			autoOpen: true,
+            width:600,
+            height:400,
+            modal: true,
+            url:""
+		}
+		$.extend(true,setting,opt);
+		var divId = setting.name;
+		var iframeId = "Dialog_Iframe_"+setting.name;
+		var div;
+		if($(divId).length==0){
+			div = $("<div>",{
+				id:divId
+			});
+		}else{
+			div = $(divId)[0];
+		}
+		var iframe;
+		if(setting.url!=""){
+			if($(iframeId).length==0){
+				iframe = $("<iframe>",{
+					id: iframeId,
+					frameborder: 0,
+					src: setting.url,
+					css:{
+						width:"100%",
+						height:"100%"
+		            }
+				});
+			}else{
+				iframe.src = setting.url;
+			}
+			div.html(iframe);
+		}
+		return div.omDialog(setting);
 	}
-}
+};
 
-var shine = new ShineClass();
-
+//针对OM-UI验证器定义中文验证提示
 $.validator.messages = {
 	required: "必填项",
 	number: "请输入数字",
@@ -67,3 +112,24 @@ $.validator.messages = {
 	range: jQuery.format("大小必须在{0}至{1}之间"),
 	accept: "不能上传的文件类型"
 }
+
+//扩展JQuery函数
+$.extend($.fn, {
+	//将表单对象序列化成JSON
+    serializeJson: function(){
+		var serializeObj={};  
+	    var array=this.serializeArray();  
+	    $(array).each(function(){  
+	        if(serializeObj[this.name]){  
+	            if($.isArray(serializeObj[this.name])){  
+	                serializeObj[this.name].push(this.value);  
+	            }else{  
+	                serializeObj[this.name]=[serializeObj[this.name],this.value];  
+	            }  
+	        }else{  
+	            serializeObj[this.name]=this.value;   
+	        }  
+	    });
+	    return serializeObj; 
+    }
+});

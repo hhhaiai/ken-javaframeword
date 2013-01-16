@@ -1,11 +1,15 @@
 package com.shine.framework.entity;
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
+
+import net.sf.json.JSONObject;
 
 /**
  * 持久化结果,保存执行结果
  * @author JiangKunpeng	2012.12.25
- * @version 2012.12.25
+ * @version 2013.01.16
  */
 public class PersistResult implements Serializable{
 
@@ -13,6 +17,7 @@ public class PersistResult implements Serializable{
 	
 	private int code;		//结果编码
 	private String msg;		//提示信息
+	private Map<String, Object> datas = null;	//其他数据
 	
 	public static final int SUCCESS = 1;
 	public static final int FAILURE = 2;
@@ -35,8 +40,26 @@ public class PersistResult implements Serializable{
 	 * @return
 	 */
 	public String toJson(){
-		String json = "{'code':'"+code+"','msg':'"+msg+"'}";
+		String json = null;
+		if(datas==null){
+			json = "{'code':'"+code+"','msg':'"+msg+"'}";
+		}else{
+			JSONObject jsonobj = JSONObject.fromObject(datas);
+			json = "{'code':'"+code+"','msg':'"+msg+"','datas':"+jsonobj.toString()+"}";
+			jsonobj = null;
+		}
 		return json;
+	}
+	
+	/**
+	 * 存放其他数据
+	 * @param key
+	 * @param value
+	 */
+	public void putData(String key,Object value){
+		if(datas==null)
+			datas = new HashMap<String, Object>();
+		datas.put(key, value);
 	}
 	
 	public int getCode() {
@@ -50,5 +73,11 @@ public class PersistResult implements Serializable{
 	}
 	public void setMsg(String msg) {
 		this.msg = msg;
+	}
+	public Map<String, Object> getDatas() {
+		return datas;
+	}
+	public void setDatas(Map<String, Object> datas) {
+		this.datas = datas;
 	}
 }

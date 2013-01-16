@@ -1,5 +1,6 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@include file="/common/path.jsp"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
@@ -19,8 +20,12 @@ function submitForm(){
 	var url = "${path}sysmgr/menu_${param.method eq 'add'?'save':'update'}.do";
 	var formData = $("#editForm").serialize();
     $.post(url,formData,function(data){
-    	shine.showAjaxMsg(data,function(){
-    		window.parent.addSuccess();
+    	$.shine.showAjaxMsg(data,function(){
+    		<c:if test="${param.method eq 'add'}">
+	    		var rs = eval("("+data+")");
+	    		$("#menuId").val(rs.datas.menuid);
+    		</c:if>
+    		window.parent.saveSuccess($("#editForm").serializeJson());
     	});
     });
 }
@@ -34,7 +39,7 @@ $(document).ready(function() {
         rules : {
             'e.menuName' : {
     			required : true,
-    			maxlength : 5
+    			maxlength : 50
     		}, 
             'e.murl' : {
     			required : false,
@@ -50,7 +55,8 @@ $(document).ready(function() {
     		},
     		'e.orderId' : {
     			required : true,
-    			number : true
+    			digits : true,
+    			max : 9999
     		}
         }
     });
@@ -70,7 +76,7 @@ $(document).ready(function() {
 			<div class="box1_middleright">
 				<div class="boxContent" style="overflow: visible;">
 					<form id="editForm" method="post">
-						<input type="hidden" name="e.menuId" value="${e.menuId}"/>
+						<input type="hidden" id="menuId" name="e.menuId" value="${e.menuId}"/>
 						<input type="hidden" name="e.pid" value="${e.pid}"/>
 						<table class="simple_table" style="width:100%;">
 							<tr>
@@ -95,11 +101,14 @@ $(document).ready(function() {
 							</tr>
 							<tr>
 								<td class="label">生效：</td>
-								<td><input class="input" type="text" name="e.enable" value="${e.enable}"/></td>
+								<td>
+									<label for="enable0"><input id="enable0" type="radio" name="e.enable" value="1" ${e.enable==1||e.enable==null?"checked='checked'":""}/>是</label>
+									&nbsp;<label for="enable1"><input id="enable1" type="radio" name="e.enable" value="0" ${e.enable==0?"checked='checked'":""}/>否</label>
+								</td>
 							</tr>
 							<tr>
-								<td class="label">排序：</td>
-								<td><input class="input" type="text" name="e.orderId" value="${e.orderId}"/></td>
+								<td class="label"><span class="red">*</span> 排序：</td>
+								<td><input class="input" type="text" name="e.orderId" value="${e.orderId eq null?1:e.orderId}"/></td>
 							</tr>
 							<tr>
 								<td align="center" colspan="2">
