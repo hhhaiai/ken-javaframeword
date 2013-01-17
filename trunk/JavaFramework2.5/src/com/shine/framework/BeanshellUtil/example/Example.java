@@ -1,4 +1,6 @@
-package com.shine.framework.BeanshellUtil;
+package com.shine.framework.BeanshellUtil.example;
+
+import com.shine.framework.BeanshellUtil.BeanShellUtil;
 
 public class Example {
 	public static void main(String args[]) {
