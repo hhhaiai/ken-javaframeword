@@ -85,5 +85,10 @@
 	<classpathentry kind="lib" path="lib/activejdbc-instrumentation-1.4.1.jar"/>
 	<classpathentry kind="lib" path="lib/javalite-common-1.4.1.jar"/>
 	<classpathentry kind="lib" path="lib/javassist-3.8.0.GA.jar"/>
+	<classpathentry kind="lib" path="lib/netty-3.6.0.Final-sources.jar"/>
+	<classpathentry kind="lib" path="lib/netty-3.6.0.Final.jar"/>
+	<classpathentry kind="lib" path="lib/ioserver-binary1.2b2.jar"/>
+	<classpathentry kind="lib" path="lib/jdo-api-3.0.1.jar"/>
+	<classpathentry kind="lib" path="lib/FontBox-0.1.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
