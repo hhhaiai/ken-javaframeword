@@ -185,6 +185,26 @@ public class XmlConverUtil {
 		return s;
 	}
 
+	/**
+	 * map to json
+	 * 
+	 * @param map
+	 * @return
+	 */
+	public static String mapToJson(Map map) {
+		return xmltoJson(maptoXml(map));
+	}
+
+	/**
+	 * json to map
+	 * 
+	 * @param json
+	 * @return
+	 */
+	public static Map jsonToMap(String json) {
+		return xmltoMap(jsontoXml(json));
+	}
+
 	public static void main(String args[]) throws Exception {
 		// XmlConverUtil util = new XmlConverUtil();
 		// String xml =
@@ -192,11 +212,23 @@ public class XmlConverUtil {
 		// System.out.println(util.jsontoXml(xml));
 
 		// 您好！你可以测一下试试！
-		XmlConverUtil util = new XmlConverUtil();
-		List<String> str = new ArrayList<String>();
-		str.add("1");
-		str.add("2");
-		System.out.println(util.listtoXml(str));
+		// XmlConverUtil util = new XmlConverUtil();
+		// List<String> str = new ArrayList<String>();
+		// str.add("1");
+		// str.add("2");
+		// System.out.println(util.listtoXml(str));
+
+		// Map<String, String> map = new HashMap<String, String>();
+		// map.put("1", "2");
+		// map.put("3", "4");
+		// System.out.println(XmlConverUtil.mapToJson(map));
+
+		Map<String, String> map = XmlConverUtil
+				.jsonToMap("[{\"@label\":\"3\",\"#text\":\"4\"},{\"@label\":\"1\",\"#text\":\"2\"}]");
+
+		for (int i = 0; i < map.size(); i++) {
+			System.out.println(map.keySet().toArray()[i]);
+		}
 
 	}
 }

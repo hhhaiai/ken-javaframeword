@@ -12,6 +12,7 @@ import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
 
+import com.shine.framework.core.util.XmlConverUtil;
 import com.shine.framework.core.util.XmlUitl;
 
 /**
@@ -201,6 +202,15 @@ public class DBModel extends ArrayList<DBRowModel> {
 	}
 
 	/**
+	 * 生成json数据
+	 * 
+	 * @return
+	 */
+	public String getDataJson() {
+		return XmlConverUtil.xmltoJson(getDataXml());
+	}
+
+	/**
 	 * 获取数组结构的数据库数据
 	 * 
 	 * @return
@@ -288,7 +298,7 @@ public class DBModel extends ArrayList<DBRowModel> {
 		while (rs.next()) {
 			// 防止数据溢出
 			if (i > maxRows - 1) {
-				rs.absolute(rs.getRow()-1);
+				rs.absolute(rs.getRow() - 1);
 				break;
 			}
 
