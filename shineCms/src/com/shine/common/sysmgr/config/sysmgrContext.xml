@@ -17,4 +17,5 @@
 	<bean id="sysUserAction" class="com.shine.common.sysmgr.web.SysUserAction" parent="ajaxAction" scope="prototype"/>
 	<bean id="sysRoleAction" class="com.shine.common.sysmgr.web.SysRoleAction" parent="ajaxAction" scope="prototype"/>
 	<bean id="sysMenuAction" class="com.shine.common.sysmgr.web.SysMenuAction" parent="ajaxAction" scope="prototype"/>
+	<bean id="sysFunctionAction" class="com.shine.common.sysmgr.web.SysFunctionAction" parent="ajaxAction" scope="prototype"/>
 </beans>

@@ -91,7 +91,8 @@ $.shine = {
 			}
 			div.html(iframe);
 		}
-		return div.omDialog(setting);
+		var dlg = div.omDialog(setting)
+		return dlg;
 	}
 };
 

@@ -14,7 +14,7 @@
 <script type="text/javascript" src="${path}r/js/shine.js"></script>
 <script type="text/javascript">
 <!--
-	var zTree,editIframe;
+	var zTree,funcIframe,bodyHeight;
 	var setting = {
 		view: {
 			dblClickExpand: false,
@@ -32,19 +32,19 @@
 		},
 		callback: {
 			beforeClick: function(treeId, treeNode) {
-				var zTree = $.fn.zTree.getZTreeObj("tree");
-				if (treeNode.isParent) {
-					zTree.expandNode(treeNode);
-					return false;
-				} else {
-					//editIframe.attr("src",treeNode.murl);
+				var menuId = treeNode.id;
+				if(menuId>0){
+					var url = "${path}sysmgr/fun_enter.do?menuId="+menuId;
+					funcIframe.attr("src",url);
 					return true;
 				}
+				return false;
 			},
 			onRightClick: OnRightClick
 		}
 	};
 	
+	//右击菜单
 	function OnRightClick(event, treeId, treeNode) {
 		if (!treeNode && event.target.tagName.toLowerCase() != "button" && $(event.target).parents("a").length == 0) {
 			zTree.cancelSelectedNode();
@@ -57,31 +57,38 @@
 	var zNodes =[
 		{id:0, pid:-1, name:"菜单导航", open:true}
 		<c:forEach var="m" items="${list}">
-			,{id:${m.menuId},pid:${m.pid},name:"${m.menuName}",open:true}
+			,{id:${m.menuId},pid:${m.pid},name:"${m.orderId}-${m.menuName}",open:true}
 		</c:forEach>
 	];
 	
 	var editDialog;	//编辑框
 	//增加子菜单
 	function toAdd(){
-		if (zTree.getSelectedNodes()[0]) {
-			var id = zTree.getSelectedNodes()[0].id;
-			editDialog = $.shine.openDialog({name:"editDialog", title:"增加子菜单", url:"${path}sysmgr/menu_toAdd.do?e.pid="+id, width:400, height:320});
+		var selNode = zTree.getSelectedNodes()[0];
+		if (selNode) {
+			var id = selNode.id;
+			editDialog = $.shine.openDialog({name:"editDialog", title:"增加子菜单", url:"${path}sysmgr/menu_toAdd.do?e.pid="+id, width:500, height:350});
 		}
 	}
 	//编辑菜单
 	function toEdit(){
-		if (zTree.getSelectedNodes()[0]) {
-			var id = zTree.getSelectedNodes()[0].id;
-			editDialog = $.shine.openDialog({name:"editDialog", title:"编辑菜单", url:"${path}sysmgr/menu_toEdit.do?e.menuId="+id, width:400, height:320});
+		var selNode = zTree.getSelectedNodes()[0];
+		if (selNode) {
+			var id = selNode.id;
+			editDialog = $.shine.openDialog({name:"editDialog", title:"编辑菜单", url:"${path}sysmgr/menu_toEdit.do?e.menuId="+id, width:500, height:350});
 		}
 	}
 	//删除菜单
 	function toDelete(){
-		if (zTree.getSelectedNodes()[0]) {
-			var id = zTree.getSelectedNodes()[0].id;
+		var selNode = zTree.getSelectedNodes()[0];
+		if (selNode) {
+			var id = selNode.id;
 			if(confirm("删除后将不能恢复，确认删除？")){
-				
+				$.post('${path}sysmgr/menu_delete.do','id='+id,function(data){
+	                $.shine.showAjaxMsg(data,function(){
+	                	zTree.removeNode(selNode);
+	                });
+	            });
 			}
 		}
 	}
@@ -96,10 +103,10 @@
 		closeEditDialog();
 		var tnode = zTree.getNodeByParam("id",obj["e.menuId"],null);
 		if(tnode!=null){
-			tnode.name=obj["e.menuName"];
+			tnode.name=obj["e.orderId"]+"-"+obj["e.menuName"];
 			zTree.updateNode(tnode);
 		}else{
-			var newNode = {id:obj["e.menuId"],pid:obj["e.pid"],name:obj["e.menuName"]};
+			var newNode = {id:obj["e.menuId"],pid:obj["e.pid"],name:obj["e.orderId"]+"-"+obj["e.menuName"]};
 			var pnode = zTree.getNodeByParam("id",obj["e.pid"]);
 			zTree.addNodes(pnode, newNode);
 		}
@@ -122,39 +129,32 @@
 		});
 	}
 	
-	//右边Iframe加载时调整高度
-	function iframeLoadReady() {
-		var bodyH = editIframe.contents().find("body").get(0).scrollHeight,
-		htmlH = editIframe.contents().find("html").get(0).scrollHeight,
-		maxH = Math.max(bodyH, htmlH), minH = Math.min(bodyH, htmlH),
-		h = editIframe.height() >= maxH ? minH:maxH ;
-		if (h < 530) h = 530;
-		editIframe.height(h);
-	}
-	
 	$(document).ready(function(){
-		var t = $("#tree");
-		t = $.fn.zTree.init(t, setting, zNodes);
-		zTree = $.fn.zTree.getZTreeObj("tree");
-		zTree.selectNode(zTree.getNodeByParam("id", 101));
+		//初始化Tree
+		zTree = $.fn.zTree.init($("#tree"), setting, zNodes);
 		
-		//加载右键菜单
+		//初始化右键菜单
 		initRightMenu();
 		
-		editIframe = $("#editIframe");
-		editIframe.bind("load", iframeLoadReady);
+		funcIframe = $("#funcIframe");
+		//funcIframe.bind("load", iframeLoadReady);
+		
+		bodyHeight = window.parent.centerHeight-4;
+		$("body").height(bodyHeight);
+		$("#funcIframe").height(bodyHeight);
 	});
 //-->
 </script>
 </head>
-<body>
-<table align="left" height="100%" style="width:100%;height:100%;border:0px;">
+<body style="height: 100%;">
+<table align="left" style="width:100%;height:100%;border:0px;">
 	<tr>
-		<td align="left" valign="top" style="width:260px;BORDER-RIGHT: #999999 1px dashed;height:100%;">
-			<ul id="tree" class="ztree" style="width:260px; overflow:auto;"></ul>
+		<td align="left" valign="top" style="width:260px;height:100%;border-right: #999999 1px dashed;">
+			<div style="width:260px;padding: 5px 0px 3px 2px;color:gray;border-bottom: #999999 1px dashed;">左击管理功能权限,右击显示操作菜单</div>
+			<ul id="tree" class="ztree" style="width:260px;overflow:auto;"></ul>
 		</td>
 		<td align="left" valign="top">
-			<iframe id="editIframe" name="editIframe" src="" frameborder="0" scrolling="auto" width="100%" height="100%"></iframe>
+			<iframe id="funcIframe" name="funcIframe" src="" frameborder="0" scrolling="auto" width="100%" height="100%"></iframe>
 		</td>
 	</tr>
 </table>

@@ -45,8 +45,8 @@ public abstract class AjaxAction<SERVICE extends BaseService> extends BaseAction
 		try{
 			printOutText(service.save(getE()).toJson());
 		}catch(Exception e){
-			printOutText(new PersistResult(PersistResult.ERROR, PersistResult.MSG_ERROR).toJson());
 			e.printStackTrace();
+			printOutText(new PersistResult(PersistResult.ERROR, PersistResult.MSG_ERROR).toJson());
 		}
 	}
 	
@@ -57,8 +57,8 @@ public abstract class AjaxAction<SERVICE extends BaseService> extends BaseAction
 		try{
 			printOutText(service.update(getE()).toJson());
 		}catch(Exception e){
-			printOutText(new PersistResult(PersistResult.ERROR, PersistResult.MSG_ERROR).toJson());
 			e.printStackTrace();
+			printOutText(new PersistResult(PersistResult.ERROR, PersistResult.MSG_ERROR).toJson());
 		}
 	}
 	
@@ -81,8 +81,8 @@ public abstract class AjaxAction<SERVICE extends BaseService> extends BaseAction
 			pr = doDelete();
 			printOutText(pr.toJson());
 		}catch(Exception e){
-			printOutText(new PersistResult(PersistResult.ERROR, PersistResult.MSG_ERROR).toJson());
 			e.printStackTrace();
+			printOutText(new PersistResult(PersistResult.ERROR, PersistResult.MSG_ERROR).toJson());
 		}
 	}
 

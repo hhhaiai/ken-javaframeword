@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">    
+<hibernate-mapping>
+	<class name="com.shine.common.sysmgr.entity.SysFunction" table="SYS_FUNCTION" 
+		dynamic-insert="false" dynamic-update="true">
+		<id name="funId" column="FUNID" type="java.lang.Integer" length="8">
+			<generator class="native" />
+		</id>
+		<property name="menuId" column="MENUID" type="java.lang.Integer" length="8" not-null="true"/>
+		<property name="orderId" column="ORDERID" type="java.lang.Integer" length="4" not-null="true"/>
+		<property name="funName" column="FUNNAME" type="java.lang.String" length="50" not-null="true"/>
+		<set name="urls" cascade="all" inverse="false">
+			<key column="FUNID" />
+			<one-to-many class="com.shine.common.sysmgr.entity.SysFunctionUrl"/>
+		</set>
+    </class>
+</hibernate-mapping>

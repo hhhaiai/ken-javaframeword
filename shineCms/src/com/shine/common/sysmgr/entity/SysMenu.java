@@ -14,6 +14,8 @@ public class SysMenu implements BaseEntity {
 	private String murl;
 	private String icon;
 	private String remark;
+	private String treeCode;
+	private Integer ismenu;
 	private Integer enable;
 
 	@Override
@@ -88,6 +90,22 @@ public class SysMenu implements BaseEntity {
 
 	public void setEnable(Integer enable) {
 		this.enable = enable;
+	}
+
+	public String getTreeCode() {
+		return treeCode;
+	}
+
+	public void setTreeCode(String treeCode) {
+		this.treeCode = treeCode;
+	}
+
+	public Integer getIsmenu() {
+		return ismenu;
+	}
+
+	public void setIsmenu(Integer ismenu) {
+		this.ismenu = ismenu;
 	}
 
 }

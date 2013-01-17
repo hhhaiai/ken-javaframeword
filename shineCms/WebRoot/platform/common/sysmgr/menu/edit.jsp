@@ -100,6 +100,22 @@ $(document).ready(function() {
 								<td><input class="input" type="text" name="e.remark" value="${e.remark}"/></td>
 							</tr>
 							<tr>
+								<td class="label">显示菜单：</td>
+								<td>
+									<c:choose>
+										<c:when test="${e.pid>0&&parent.ismenu!=1}">
+											<label for="ismenu1"><input id="ismenu1" type="radio" name="e.ismenu" value="0" checked='checked'/>否</label>
+											&nbsp;<font color="gray">(非显示菜单下只能有非显示菜单)</font>
+										</c:when>
+										<c:otherwise>
+											<label for="ismenu0"><input id="ismenu0" type="radio" name="e.ismenu" value="1" ${e.ismenu==1||e.ismenu==null?"checked='checked'":""}/>是</label>
+											&nbsp;<label for="ismenu1"><input id="ismenu1" type="radio" name="e.ismenu" value="0" ${e.ismenu==0?"checked='checked'":""}/>否</label>
+											&nbsp;<font color="gray">(是否在菜单导航中显示出来)</font>
+										</c:otherwise>
+									</c:choose>
+								</td>
+							</tr>
+							<tr>
 								<td class="label">生效：</td>
 								<td>
 									<label for="enable0"><input id="enable0" type="radio" name="e.enable" value="1" ${e.enable==1||e.enable==null?"checked='checked'":""}/>是</label>

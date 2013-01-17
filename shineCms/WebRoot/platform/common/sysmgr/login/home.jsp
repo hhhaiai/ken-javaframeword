@@ -4,67 +4,95 @@
 <html>
 <head>
 <title>${appName}</title>	
-<script type="text/javascript" src="${path}r/js/jquery.min.js"></script>
-<script type="text/javascript" src="${path}r/operamasks-ui/js/operamasks-ui.min.js"></script>
 <link rel="stylesheet" href="${path}r/css/base.css"/>
 <link title="default" rel="stylesheet" href="${path}r/operamasks-ui/css/${themes}/om-${themes}.css">
+<link type="text/css" rel="stylesheet" href="${path}r/ztree/css/zTreeStyle.css">
+<script type="text/javascript" src="${path}r/js/jquery.min.js"></script>
+<script type="text/javascript" src="${path}r/operamasks-ui/js/operamasks-ui.min.js"></script>
+<script type="text/javascript" src="${path}r/ztree/js/jquery.ztree.all.min.js"></script>
+<script type="text/javascript" src="${path}r/js/shine.js"></script>
 <style>
-html, body{ width: 100%; height: 100%; padding: 0; margin: 0;overflow: hidden;}
-#center-tab .om-panel-body{
-	padding: 0;
-}
+html, body{width:100%;height:100%;padding:0;margin:0;overflow:hidden;}
+#center-tab .om-panel-body{padding: 0;}
 </style>
 <script type="text/javascript">
-$(document).ready(function() {
-	$('#body-panel').omBorderLayout({
-		fit : true,
-		panels:[{
-			id:"north-panel",
-   	     	header:false,
-   	        region:"north"
-		},{
-   	        id:"center-panel",
-   	     	header:false,
-   	        region:"center"
-   	    },{
-   	        id:"west-panel",
-   	        resizable:true,
-   	        collapsible:true,
-   	        title:"导航",
-   	        region:"west",width:150
-   	    }]
+<!--
+	var centerHeight,tabElement,zTree;
+	var setting = {
+		view: {
+			dblClickExpand: false,
+			showLine: true,
+			selectedMulti: false,
+			expandSpeed: ($.browser.msie && parseInt($.browser.version)<=6)?"":"fast"
+		},
+		data: {
+			simpleData: {
+				enable:true,
+				idKey: "id",
+				pIdKey: "pid",
+				rootPId: ""
+			}
+		},
+		callback: {
+			beforeClick: function(treeId, treeNode) {
+				var murl = treeNode.murl;
+				if(murl&&murl!=""){
+					var nodeId = treeNode.id;
+					var tabId = tabElement.omTabs('getAlter', 'tab_'+nodeId);
+	        		if(tabId&&tabId!=null){
+	        			tabElement.omTabs('activate', tabId);
+	        		}else{
+	          			tabElement.omTabs('add',{
+							title : treeNode.name, 
+							tabId : 'tab_'+nodeId,
+							content : "<iframe id='tab_iframe_"+nodeId+"' border=0 frameBorder='no' name='inner-frame' src='"+murl+"' height='"+centerHeight+"' width='100%'></iframe>",
+							closable : true
+		            	});
+	        		}
+				}
+				return true;
+			}
+		}
+	};
+	
+	var zNodes =[
+		{id:1, pid:0, name:"系统管理", open:true}
+		,{id:2, pid:1, name:"用户管理", murl:"${path}sysmgr/user_enter.do"}
+		,{id:3, pid:1, name:"角色管理", murl:"${path}sysmgr/role_enter.do"}
+		,{id:4, pid:1, name:"菜单管理", murl:"${path}sysmgr/menu_enter.do"}
+	];
+	
+	$(document).ready(function() {
+		$('#body-panel').omBorderLayout({
+			fit : true,
+			panels:[{
+				id:"north-panel",
+	   	     	header:false,
+	   	        region:"north"
+			},{
+	   	        id:"center-panel",
+	   	     	header:false,
+	   	        region:"center"
+	   	    },{
+	   	        id:"west-panel",
+	   	        resizable:true,
+	   	        collapsible:true,
+	   	        title:"菜单导航",
+	   	        region:"west",width:200
+	   	    }]
+		});
+	    tabElement = $('#center-tab').omTabs({
+	        height : "fit",
+	        border : true
+	    });
+	    
+	    //初始化Tree
+		zTree = $.fn.zTree.init($("#tree"), setting, zNodes);
+	    
+	    centerHeight = tabElement.height() - tabElement.find(".om-tabs-headers").outerHeight() - 4; //为了照顾apusic皮肤，apusic没有2px的padding，只有边框，所以多减去2px
+	    $('#homeFrame').height(centerHeight);
 	});
-    var tabElement = $('#center-tab').omTabs({
-        height : "fit",
-        border : true
-    });
-    var navData = [{id:"n1",text:"系统管理",expanded:true},
-                 	{id:"n2",text:"内容管理",expanded:true},
-                 	{id:"n11",pid:"n1",text:"用户管理",url:"${path}sysmgr/user_enter.do"},
-                 	{id:"n12",pid:"n1",text:"角色管理",url:"${path}sysmgr/role_enter.do"},
-					{id:"n13",pid:"n2",text:"菜单权限管理",url:"${path}sysmgr/menu_enter.do"}];
-    $("#navTree").omTree({
-        dataSource : navData,
-        simpleDataModel: true,
-        onClick : function(nodeData , event){
-        	if(nodeData.url){
-				var tabId = tabElement.omTabs('getAlter', 'tab_'+nodeData.id);
-        		if(tabId){
-        			tabElement.omTabs('activate', tabId);
-        		}else{
-          			tabElement.omTabs('add',{
-						title : nodeData.text, 
-						tabId : 'tab_'+nodeData.id,
-						content : "<iframe id='"+nodeData.id+"' border=0 frameBorder='no' name='inner-frame' src='"+nodeData.url+"' height='"+ifh+"' width='100%'></iframe>",
-						closable : true
-	            	});
-        		}
-        	}
-        }
-    });
-    var ifh = tabElement.height() - tabElement.find(".om-tabs-headers").outerHeight() - 4; //为了照顾apusic皮肤，apusic没有2px的padding，只有边框，所以多减去2px
-    $('#3Dbox').height(ifh);
-});
+//-->
 </script>
 
 </head>
@@ -77,15 +105,15 @@ $(document).ready(function() {
 	<div id="center-panel">
 		<div id="center-tab" >
 			<ul>
-				<li><a href="#tab1">首页</a></li>
+				<li><a href="#tab_0">首页</a></li>
 			</ul>
-			<div id="tab1">
-				<iframe id='3Dbox' border=0 frameBorder='no' src='${path}sysmgr/user_enter.do' width='100%' height='100%'></iframe>
+			<div id="tab_0">
+				<iframe id='homeFrame' border=0 frameBorder='no' src='http://www.baidu.com' width='100%' height='100%'></iframe>
 			</div>
 		</div>
 	</div>
 	<div id="west-panel">
-		<ul id="navTree"></ul>
+		<ul id="tree" class="ztree" style="width:180px;overflow:auto;"></ul>
 	</div>
 </div>
 </body>

@@ -13,7 +13,7 @@ public class SysMenuAction extends AjaxAction<BaseService>{
 
 	private static final long serialVersionUID = -8274394737739352L;
 	
-	private SysMenu e = new SysMenu(); 
+	private SysMenu e = new SysMenu();
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -34,8 +34,10 @@ public class SysMenuAction extends AjaxAction<BaseService>{
 			SysMenu pmenu = new SysMenu();
 			pmenu.setMenuId(e.getPid());
 			pmenu = (SysMenu)service.get(pmenu);
-			if(pmenu!=null)
+			if(pmenu!=null){
 				pname = pmenu.getMenuName();
+				request.setAttribute("parent", pmenu);
+			}
 		}else{
 			pname = "菜单导航";
 		}
@@ -52,8 +54,10 @@ public class SysMenuAction extends AjaxAction<BaseService>{
 			SysMenu pmenu = new SysMenu();
 			pmenu.setMenuId(e.getPid());
 			pmenu = (SysMenu)service.get(pmenu);
-			if(pmenu!=null)
+			if(pmenu!=null){
 				pname = pmenu.getMenuName();
+				request.setAttribute("parent", pmenu);
+			}
 		}else{
 			pname = "菜单导航";
 		}

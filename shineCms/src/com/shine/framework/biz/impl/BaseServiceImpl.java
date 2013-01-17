@@ -35,6 +35,7 @@ public class BaseServiceImpl extends GenericServiceImpl<BaseDao> implements Base
 				return new PersistResult(PersistResult.FAILURE, PersistResult.MSG_EXIST);
 			dao.save(entity);
 		}catch(Exception e){
+			e.printStackTrace();
 			return new PersistResult(PersistResult.ERROR, PersistResult.MSG_ERROR);
 		}
 		return new PersistResult(PersistResult.SUCCESS, PersistResult.MSG_SUCCESS);
@@ -46,6 +47,7 @@ public class BaseServiceImpl extends GenericServiceImpl<BaseDao> implements Base
 				return new PersistResult(PersistResult.FAILURE, PersistResult.MSG_EXIST);
 			dao.update(entity);
 		}catch(Exception e){
+			e.printStackTrace();
 			return new PersistResult(PersistResult.ERROR, PersistResult.MSG_ERROR);
 		}
 		return new PersistResult(PersistResult.SUCCESS, PersistResult.MSG_SUCCESS);
@@ -55,6 +57,7 @@ public class BaseServiceImpl extends GenericServiceImpl<BaseDao> implements Base
 		try{
 			dao.delete(entity, id);
 		}catch(Exception e){
+			e.printStackTrace();
 			return new PersistResult(PersistResult.ERROR, PersistResult.MSG_ERROR);
 		}
 		return new PersistResult(PersistResult.SUCCESS, PersistResult.MSG_SUCCESS);
@@ -64,6 +67,7 @@ public class BaseServiceImpl extends GenericServiceImpl<BaseDao> implements Base
 		try{
 			dao.delete(entity, ids);
 		}catch(Exception e){
+			e.printStackTrace();
 			return new PersistResult(PersistResult.ERROR, PersistResult.MSG_ERROR);
 		}
 		return new PersistResult(PersistResult.SUCCESS, PersistResult.MSG_SUCCESS);

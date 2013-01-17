@@ -18,5 +18,10 @@
     		<result name="toAdd">/platform/common/sysmgr/menu/edit.jsp?method=add</result>
     		<result name="toEdit">/platform/common/sysmgr/menu/edit.jsp</result>
     	</action>
+    	<action name="fun_*" class="sysFunctionAction" method="{1}">
+    		<result name="enter">/platform/common/sysmgr/menu/funList.jsp</result>
+    		<result name="toAdd">/platform/common/sysmgr/menu/funEdit.jsp?method=add</result>
+    		<result name="toEdit">/platform/common/sysmgr/menu/funEdit.jsp</result>
+    	</action>
     </package>
 </struts>
