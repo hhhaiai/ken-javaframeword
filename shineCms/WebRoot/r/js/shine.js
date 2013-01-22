@@ -57,41 +57,43 @@ $.shine = {
 	openDialog: function(opt){
 		var setting = {
 			name:"",
-			autoOpen: true,
+			autoOpen: false,
             width:600,
             height:400,
             modal: true,
-            url:""
+            url:"about:blank"
 		}
 		$.extend(true,setting,opt);
 		var divId = setting.name;
 		var iframeId = "Dialog_Iframe_"+setting.name;
-		var div;
-		if($(divId).length==0){
-			div = $("<div>",{
-				id:divId
-			});
-		}else{
-			div = $(divId)[0];
-		}
-		var iframe;
+		var div,iframe;
 		if(setting.url!=""){
-			if($(iframeId).length==0){
+			if($("#"+iframeId).length==0){
 				iframe = $("<iframe>",{
 					id: iframeId,
 					frameborder: 0,
-					src: setting.url,
 					css:{
 						width:"100%",
 						height:"100%"
 		            }
 				});
-			}else{
-				iframe.src = setting.url;
 			}
+		}
+		if($("#"+divId).length==0){
+			div = $("<div>",{
+				id:divId,
+				html:iframe
+			});
+		}else{
+			div = $("#"+divId);
 			div.html(iframe);
 		}
 		var dlg = div.omDialog(setting)
+		if(!div.omDialog("isOpen")){
+			div.omDialog("open");
+		}
+		//为了避免延迟，所以在OpenDialog后再设置iframe的url
+		$("#"+iframeId).attr("src",setting.url);
 		return dlg;
 	}
 };

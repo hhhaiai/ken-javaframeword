@@ -9,7 +9,7 @@ public class SysUser implements BaseEntity{
 
 	private static final long serialVersionUID = -647542899691049799L;
 
-	private String userId;
+	private Integer userId;
 	private String username;
 	private String password;
 	private String name;
@@ -20,7 +20,7 @@ public class SysUser implements BaseEntity{
 	@Override
 	public QuerySQL getExistSQL() {
 		QuerySQL sql = null;
-		if(userId==null||userId.length()==-1)
+		if(userId==null)
 			sql = new QuerySQL("from SysUser u where u.username=?").setValues(new Object[]{username});
 		else
 			sql = new QuerySQL("from SysUser u where u.username=? and u.userId<>?").setValues(new Object[]{username,userId});
@@ -32,10 +32,10 @@ public class SysUser implements BaseEntity{
 		return false;
 	}
 
-	public String getUserId() {
+	public Integer getUserId() {
 		return userId;
 	}
-	public void setUserId(String userId) {
+	public void setUserId(Integer userId) {
 		this.userId = userId;
 	}
 	public String getUsername() {

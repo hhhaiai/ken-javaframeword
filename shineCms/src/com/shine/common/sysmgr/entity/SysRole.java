@@ -9,7 +9,7 @@ public class SysRole implements BaseEntity {
 
 	private static final long serialVersionUID = 4951123418205561865L;
 	
-	private String roleId;
+	private Integer roleId;
 	private String name;
 	private String remark;
 	
@@ -19,7 +19,7 @@ public class SysRole implements BaseEntity {
 	@Override
 	public QuerySQL getExistSQL() {
 		QuerySQL sql = null;
-		if(roleId==null||roleId.length()==-1)
+		if(roleId==null)
 			sql = new QuerySQL("from SysRole r where r.name=?").setValues(new Object[]{name});
 		else
 			sql = new QuerySQL("from SysRole r where r.name=? and r.roleId<>?").setValues(new Object[]{name,roleId});
@@ -31,10 +31,10 @@ public class SysRole implements BaseEntity {
 		return true;
 	}
 
-	public String getRoleId() {
+	public Integer getRoleId() {
 		return roleId;
 	}
-	public void setRoleId(String roleId) {
+	public void setRoleId(Integer roleId) {
 		this.roleId = roleId;
 	}
 	public String getName() {

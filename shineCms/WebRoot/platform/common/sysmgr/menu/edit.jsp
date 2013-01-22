@@ -4,13 +4,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
-<title>${param.method eq 'add'?'增加菜单':'编辑菜单'}</title>
+<title>${param.method eq 'add'?'新增菜单':'编辑菜单'}</title>
+<link title="${themes}" rel="stylesheet" href="${path}r/operamasks-ui/css/${themes}/om-${themes}.css">
+<link rel="stylesheet" href="${path}r/css/base.css"/>
+<link title="${themes}" rel="stylesheet" href="${path}r/css/themes/${themes}/style.css"/>
 <script type="text/javascript" src="${path}r/js/jquery.min.js"></script>
 <script type="text/javascript" src="${path}r/operamasks-ui/js/operamasks-ui.min.js"></script>
 <script type="text/javascript" src="${path}r/js/shine.js"></script>
-<link title="default" rel="stylesheet" href="${path}r/operamasks-ui/css/${themes}/om-${themes}.css">
-<link rel="stylesheet" href="${path}r/css/base.css"/>
-<link rel="stylesheet" href="${path}r/css/themes/${themes}/style.css"/>
 <script type="text/javascript">
 var validator;
 //提交表单

@@ -52,17 +52,33 @@ public class SysFunctionAction extends AjaxAction<BaseService> {
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * 获取并设置子URL
+	 */
+	private void extorChildren(){
+		int urlCount = extor.getIntValue("urlCount");
+		if(urlCount>0){
+			for(int i=0;i<urlCount;i++){
+				String uurl = extor.getValue("uurl_"+i);
+				if(uurl==null||uurl.length()<1)
+					continue;
+				SysFunctionUrl url = new SysFunctionUrl();
+				url.setUurl(uurl);
+				url.setIsLog(extor.getIntValue("log_"+i));
+				String id = extor.getValue("urlId_"+i);
+				if(id!=null&&id.length()>0)
+					url.setUrlId(Integer.parseInt(id));
+				url.setFunc(e);
+				e.getUrls().add(url);
+			}
+		}
+	}
 
 	@Override
 	public void save() {
 		try{
-			for(int i=0;i<2;i++){
-				SysFunctionUrl url1 = new SysFunctionUrl();
-				url1.setUurl("url-"+i);
-				url1.setIsLog(0);
-				url1.setFunc(e);
-				e.getUrls().add(url1);
-			}
+			extorChildren();
 			printOutText(service.save(getE()).toJson());
 		}catch(Exception e){
 			e.printStackTrace();
@@ -72,7 +88,7 @@ public class SysFunctionAction extends AjaxAction<BaseService> {
 
 	@Override
 	public void update() {
-		// TODO Auto-generated method stub
+		extorChildren();
 		super.update();
 	}
 

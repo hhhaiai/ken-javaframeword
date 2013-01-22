@@ -5,8 +5,8 @@
 <hibernate-mapping>
 	<class name="com.shine.common.sysmgr.entity.SysRole" table="SYS_ROLE" 
 		dynamic-insert="false" dynamic-update="true">
-		<id name="roleId" column="ROLEID" type="java.lang.String" length="50">
-			<generator class="uuid.hex" />
+		<id name="roleId" column="ROLEID" type="java.lang.Integer" length="8">
+			<generator class="native" />
 		</id>
 		<property name="name" column="NAME" type="java.lang.String" length="50" not-null="true"/>
 		<property name="remark" column="REMARK" type="java.lang.String" length="100" not-null="false"/>

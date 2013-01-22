@@ -8,11 +8,8 @@
 		<id name="urlId" column="URLID" type="java.lang.Integer" length="8">
 			<generator class="native" />
 		</id>
-		<!-- 
-		<property name="funId" column="FUNID" type="java.lang.Integer" length="8" not-null="true"/>
-		 -->
 		<property name="uurl" column="UURL" type="java.lang.String" length="500" not-null="true"/>
 		<property name="isLog" column="ISLOG" type="java.lang.Integer" length="1" not-null="true"/>
-		<many-to-one name="func" column="FUNID" class="com.shine.common.sysmgr.entity.SysFunction"></many-to-one>
+		<many-to-one name="func" column="FUNID" class="com.shine.common.sysmgr.entity.SysFunction" update="false"></many-to-one>
     </class>
 </hibernate-mapping>

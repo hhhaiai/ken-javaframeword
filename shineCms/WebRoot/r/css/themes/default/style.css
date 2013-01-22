@@ -116,6 +116,12 @@ body.list{
 }
 /* 简单表格 */
 
+/* 重设om-dialog 
+.om-dialog .om-dialog-content{
+	padding:0px;
+}
+*/
+
 /* 简单输入框 */
 .input{
 	border : solid #ADB1C2 1px;

@@ -4,12 +4,12 @@
 <html>
 <head>
 <title>用户管理</title>
+<link title="${themes}" rel="stylesheet" href="${path}r/operamasks-ui/css/${themes}/om-${themes}.css">
+<link rel="stylesheet" href="${path}r/css/base.css"/>
+<link title="${themes}" rel="stylesheet" href="${path}r/css/themes/${themes}/style.css"/>
 <script type="text/javascript" src="${path}r/js/jquery.min.js"></script>
 <script type="text/javascript" src="${path}r/operamasks-ui/js/operamasks-ui.min.js"></script>
 <script type="text/javascript" src="${path}r/js/shine.js"></script>
-<link title="default" rel="stylesheet" href="${path}r/operamasks-ui/css/${themes}/om-${themes}.css">
-<link rel="stylesheet" href="${path}r/css/base.css"/>
-<link title="default" rel="stylesheet" href="${path}r/css/themes/${themes}/style.css"/>
 <script type="text/javascript">
 $(document).ready(function() {
 	var dialog = $("#dialog-form").omDialog({
@@ -145,7 +145,7 @@ $(document).ready(function() {
 <body class="list">
 
 <div class="toolbar mar">
-     <a href="javascript:void(0);" id="btn_add">添加</a>
+     <a href="javascript:void(0);" id="btn_add">新增</a>
      <a href="javascript:void(0);" id="btn_modify">修改</a>
      <a href="javascript:void(0);" id="btn_delete">删除</a>
      <a href="javascript:void(0);" id="btn_refresh">查询</a>

@@ -8,7 +8,6 @@ public class SysFunctionUrl implements BaseEntity {
 	private static final long serialVersionUID = 4494817061536609637L;
 	
 	private Integer urlId;
-//	private Integer funId;
 	private SysFunction func;
 	private String uurl;
 	private Integer isLog;

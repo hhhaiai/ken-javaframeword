@@ -5,9 +5,10 @@
 <html>
 <head>
 <title>${appName}</title>	
-<link type="text/css" rel="stylesheet" href="${path}r/css/base.css"/>
-<link title="default" rel="stylesheet" href="${path}r/operamasks-ui/css/${themes}/om-${themes}.css">
+<link title="${themes}" rel="stylesheet" href="${path}r/operamasks-ui/css/${themes}/om-${themes}.css">
 <link type="text/css" rel="stylesheet" href="${path}r/ztree/css/zTreeStyle.css">
+<link type="text/css" rel="stylesheet" href="${path}r/css/base.css"/>
+<link title="${themes}" rel="stylesheet" href="${path}r/css/themes/${themes}/style.css">
 <script type="text/javascript" src="${path}r/js/jquery.min.js"></script>
 <script type="text/javascript" src="${path}r/operamasks-ui/js/operamasks-ui.min.js"></script>
 <script type="text/javascript" src="${path}r/ztree/js/jquery.ztree.all.min.js"></script>

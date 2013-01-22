@@ -13,6 +13,7 @@ public class SysFunction implements BaseEntity {
 	private Integer funId;
 	private Integer menuId;
 	private Integer orderId;
+	private String funKey;
 	private String funName;
 	private Set<SysFunctionUrl> urls = new HashSet<SysFunctionUrl>();
 
@@ -48,6 +49,14 @@ public class SysFunction implements BaseEntity {
 
 	public void setOrderId(Integer orderId) {
 		this.orderId = orderId;
+	}
+
+	public String getFunKey() {
+		return funKey;
+	}
+
+	public void setFunKey(String funKey) {
+		this.funKey = funKey;
 	}
 
 	public String getFunName() {

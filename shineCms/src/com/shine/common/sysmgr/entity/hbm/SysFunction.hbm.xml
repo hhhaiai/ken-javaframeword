@@ -10,8 +10,11 @@
 		</id>
 		<property name="menuId" column="MENUID" type="java.lang.Integer" length="8" not-null="true"/>
 		<property name="orderId" column="ORDERID" type="java.lang.Integer" length="4" not-null="true"/>
+		<property name="funKey" column="FUNKEY" type="java.lang.String" length="50" not-null="true"/>
 		<property name="funName" column="FUNNAME" type="java.lang.String" length="50" not-null="true"/>
-		<set name="urls" cascade="all" inverse="false">
+		
+		<!-- inverse="true" 与一般的一对多不太同，这里由SysFunction来维护关系 -->
+		<set name="urls" cascade="all" inverse="true">
 			<key column="FUNID" />
 			<one-to-many class="com.shine.common.sysmgr.entity.SysFunctionUrl"/>
 		</set>

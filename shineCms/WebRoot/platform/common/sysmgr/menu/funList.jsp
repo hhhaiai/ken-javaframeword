@@ -5,22 +5,25 @@
 <head>
 <title>权限功能管理</title>
 <link rel="stylesheet" href="${path}r/css/base.css"/>
-<link title="default" rel="stylesheet" href="${path}r/operamasks-ui/css/${themes}/om-${themes}.css">
-<link title="default" rel="stylesheet" href="${path}r/css/themes/${themes}/style.css"/>
+<link title="${themes}" rel="stylesheet" href="${path}r/operamasks-ui/css/${themes}/om-${themes}.css">
+<link title="${themes}" rel="stylesheet" href="${path}r/css/themes/${themes}/style.css"/>
 <script type="text/javascript" src="${path}r/js/jquery.min.js"></script>
 <script type="text/javascript" src="${path}r/operamasks-ui/js/operamasks-ui.min.js"></script>
 <script type="text/javascript" src="${path}r/js/shine.js"></script>
 <script type="text/javascript">
 var editDialog;
+//保存成功后回调
 function saveSuccess(){
 	closeEditDialog();
 	refreshData();
 }
+//关闭编辑框
 function closeEditDialog(){
 	if(editDialog.omDialog('isOpen')){
 		editDialog.omDialog('close');
 	}
 }
+//刷新grid数据
 function refreshData(){
 	$('#grid').omGrid('reload');
 }
@@ -73,7 +76,8 @@ $(document).ready(function() {
     $('#grid').omGrid({
         dataSource : '${path}sysmgr/fun_list.do?menuId=${menuId}',
         singleSelect : false,
-        colModel : [ {header : 'ID', name : 'funId', width : 100, align : 'center'}, 
+        colModel : [ {header : 'ID', name : 'funId', width : 50, align : 'left'},
+        			 {header : 'Key', name : 'funKey', width : 100, align : 'left'}, 
                      {header : '名称', name : 'funName', width:120, align : 'left',width:'autoExpand'}, 
                    ]
     });
@@ -83,7 +87,7 @@ $(document).ready(function() {
 <body class="list">
 
 <div class="toolbar mar">
-	<a href="javascript:void(0);" id="btn_add">添加</a>
+	<a href="javascript:void(0);" id="btn_add">新增</a>
 	<a href="javascript:void(0);" id="btn_modify">修改</a>
 	<a href="javascript:void(0);" id="btn_delete">删除</a>
     <span style="margin-left: 50px;color:blue;">菜单：${parent.menuName}</span>

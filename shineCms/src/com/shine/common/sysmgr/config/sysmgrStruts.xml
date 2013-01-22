@@ -12,6 +12,8 @@
     	</action>
     	<action name="role_*" class="sysRoleAction" method="{1}">
     		<result name="enter">/platform/common/sysmgr/role/list.jsp</result>
+    		<result name="toAdd">/platform/common/sysmgr/role/edit.jsp?method=add</result>
+    		<result name="toEdit">/platform/common/sysmgr/role/edit.jsp</result>
     	</action>
     	<action name="menu_*" class="sysMenuAction" method="{1}">
     		<result name="enter">/platform/common/sysmgr/menu/home.jsp</result>
