@@ -9,11 +9,14 @@
     	</action>
     	<action name="user_*" class="sysUserAction" method="{1}">
     		<result name="enter">/platform/common/sysmgr/user/list.jsp</result>
+    		<result name="toAdd">/platform/common/sysmgr/user/edit.jsp?method=add</result>
+    		<result name="toEdit">/platform/common/sysmgr/user/edit.jsp</result>
     	</action>
     	<action name="role_*" class="sysRoleAction" method="{1}">
     		<result name="enter">/platform/common/sysmgr/role/list.jsp</result>
     		<result name="toAdd">/platform/common/sysmgr/role/edit.jsp?method=add</result>
     		<result name="toEdit">/platform/common/sysmgr/role/edit.jsp</result>
+    		<result name="toGrant">/platform/common/sysmgr/role/grant.jsp</result>
     	</action>
     	<action name="menu_*" class="sysMenuAction" method="{1}">
     		<result name="enter">/platform/common/sysmgr/menu/home.jsp</result>

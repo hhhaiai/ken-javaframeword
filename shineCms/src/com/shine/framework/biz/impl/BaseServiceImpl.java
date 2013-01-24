@@ -5,14 +5,13 @@ import java.util.List;
 import com.shine.framework.biz.BaseService;
 import com.shine.framework.dao.BaseDao;
 import com.shine.framework.dao.util.QueryAnalyzer;
-import com.shine.framework.dao.util.QuerySQL;
 import com.shine.framework.entity.BaseEntity;
 import com.shine.framework.entity.PersistResult;
 
 /**
  * 复杂业务类(通用的增删改查方法)
  * @author JiangKunpeng 2011.09.01
- * @version 2012.12.25
+ * @version 2013.1.24
  *
  */
 public class BaseServiceImpl extends GenericServiceImpl<BaseDao> implements BaseService{
@@ -46,6 +45,18 @@ public class BaseServiceImpl extends GenericServiceImpl<BaseDao> implements Base
 			if(dao.exist(entity))
 				return new PersistResult(PersistResult.FAILURE, PersistResult.MSG_EXIST);
 			dao.update(entity);
+		}catch(Exception e){
+			e.printStackTrace();
+			return new PersistResult(PersistResult.ERROR, PersistResult.MSG_ERROR);
+		}
+		return new PersistResult(PersistResult.SUCCESS, PersistResult.MSG_SUCCESS);
+	}
+	
+	public PersistResult merge(BaseEntity entity) {
+		try{
+			if(dao.exist(entity))
+				return new PersistResult(PersistResult.FAILURE, PersistResult.MSG_EXIST);
+			dao.merge(entity);
 		}catch(Exception e){
 			e.printStackTrace();
 			return new PersistResult(PersistResult.ERROR, PersistResult.MSG_ERROR);

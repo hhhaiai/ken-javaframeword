@@ -13,6 +13,7 @@ body.list{
 
 /* 盒子 */
 .box1{
+	margin:5px 10px;
 }
 .box1_topcenter{
 	width: 100%;
@@ -95,7 +96,19 @@ body.list{
 	word-break: keep-all;
 	border-color: #cccccc;
 	height:24px; 
+	line-height:24px; 
 	padding: 2px 4px 2px 4px;
+}
+.line_table th{
+	background-image: url("image/table/th_bg.jpg");
+    background-repeat: repeat-x;
+	color: #000000;
+    font-weight: normal;
+    overflow: hidden;
+    padding: 0 2px 0 4px;
+    word-wrap: normal;
+    height:24px;
+    line-height:24px;
 }
 /* 线条表格 */
 
@@ -116,11 +129,10 @@ body.list{
 }
 /* 简单表格 */
 
-/* 重设om-dialog 
+/* 重设om-dialog,取消padding */
 .om-dialog .om-dialog-content{
 	padding:0px;
 }
-*/
 
 /* 简单输入框 */
 .input{

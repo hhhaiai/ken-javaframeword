@@ -46,7 +46,7 @@ public class SysFunctionAction extends AjaxAction<BaseService> {
 			extor.buildQueryItem(analyzer);
 			List list = service.list(analyzer);
 			JsonConfig jc = new JsonConfig();
-			jc.setExcludes(new String[]{"urls"});
+			jc.setExcludes(new String[]{"urls","existSQL","virtualDelete"});
 			printOutJsonList(list, page, jc);
 		}catch(Exception e){
 			e.printStackTrace();

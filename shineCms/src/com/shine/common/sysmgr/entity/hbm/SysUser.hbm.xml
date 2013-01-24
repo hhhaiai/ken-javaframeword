@@ -16,5 +16,10 @@
 			<column name="DELFLAG" sql-type="int(1)" />
 		</property>
 		<property name="deltime" column="DELTIME" type="java.util.Date" not-null="false" insert="false" update="false"/>
+		
+		<set name="roles" table="SYS_USER_ROLE" cascade="none" inverse="false" lazy="true">
+			<key column="USERID" />
+			<many-to-many column="ROLEID" class="com.shine.common.sysmgr.entity.SysRole" fetch="join" />
+		</set>
     </class>
 </hibernate-mapping>

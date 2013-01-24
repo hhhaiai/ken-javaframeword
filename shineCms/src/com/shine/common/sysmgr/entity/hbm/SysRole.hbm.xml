@@ -15,5 +15,15 @@
 			<column name="DELFLAG" sql-type="int(1)" />
 		</property>
 		<property name="deltime" column="DELTIME" type="java.util.Date" not-null="false" insert="false" update="false"/>
+		
+		<set name="menus" table="SYS_ROLE_MENU" cascade="none" inverse="false" lazy="true">
+			<key column="ROLEID" />
+			<many-to-many column="MENUID" class="com.shine.common.sysmgr.entity.SysMenu" fetch="join" />
+		</set>
+		
+		<set name="funs" table="SYS_ROLE_FUNCTION" cascade="none" inverse="false" lazy="true">
+			<key column="ROLEID" />
+			<many-to-many column="FUNID" class="com.shine.common.sysmgr.entity.SysFunction" fetch="join" />
+		</set>
     </class>
 </hibernate-mapping>

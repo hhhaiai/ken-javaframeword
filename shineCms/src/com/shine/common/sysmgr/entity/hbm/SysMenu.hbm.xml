@@ -8,7 +8,7 @@
 		<id name="menuId" column="MENUID" type="java.lang.Integer" length="8">
 			<generator class="native" />
 		</id>
-		<property name="pid" column="PID" type="java.lang.Integer" length="8" not-null="true"/>
+		<property name="pid" column="PID" type="java.lang.Integer" length="8" not-null="true" update="false"/>
 		<property name="orderId" column="ORDERID" type="java.lang.Integer" length="4" not-null="true"/>
 		<property name="menuName" column="MENUNAME" type="java.lang.String" length="50" not-null="true"/>
 		<property name="murl" column="MURL" type="java.lang.String" length="500"/>
@@ -17,5 +17,15 @@
 		<property name="treeCode" column="TREECODE" type="java.lang.String"/>
 		<property name="ismenu" column="ISMENU" type="java.lang.Integer" length="1"/>
 		<property name="enable" column="ENABLE" type="java.lang.Integer" length="1"/>
+		
+		<set name="children" cascade="all" inverse="true" order-by="ORDERID">
+			<key column="PID" />
+			<one-to-many class="com.shine.common.sysmgr.entity.SysMenu"/>
+		</set>
+		
+		<set name="funs" cascade="all" inverse="true" order-by="ORDERID">
+			<key column="MENUID" />
+			<one-to-many class="com.shine.common.sysmgr.entity.SysFunction"/>
+		</set>
     </class>
 </hibernate-mapping>

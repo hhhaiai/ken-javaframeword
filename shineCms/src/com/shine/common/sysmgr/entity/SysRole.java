@@ -1,6 +1,8 @@
 package com.shine.common.sysmgr.entity;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import com.shine.framework.dao.util.QuerySQL;
 import com.shine.framework.entity.BaseEntity;
@@ -15,6 +17,9 @@ public class SysRole implements BaseEntity {
 	
 	private Integer delflag;
 	private Date deltime;
+	
+	private Set<SysMenu> menus = new HashSet<SysMenu>();
+	private Set<SysFunction> funs = new HashSet<SysFunction>();
 
 	@Override
 	public QuerySQL getExistSQL() {
@@ -60,5 +65,17 @@ public class SysRole implements BaseEntity {
 	}
 	public void setDeltime(Date deltime) {
 		this.deltime = deltime;
+	}
+	public Set<SysMenu> getMenus() {
+		return menus;
+	}
+	public void setMenus(Set<SysMenu> menus) {
+		this.menus = menus;
+	}
+	public Set<SysFunction> getFuns() {
+		return funs;
+	}
+	public void setFuns(Set<SysFunction> funs) {
+		this.funs = funs;
 	}
 }

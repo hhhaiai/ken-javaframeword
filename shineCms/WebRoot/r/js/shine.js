@@ -111,7 +111,7 @@ $.validator.messages = {
 	rangelength: jQuery.format("字符长度必须在{0}至{1}之间"),
 	min: jQuery.format("不能小于{0}"),
 	max: jQuery.format("不能大于{0}"),
-	equalTo: "请输入相同的值",
+	equalTo: "两次输入不一致",
 	range: jQuery.format("大小必须在{0}至{1}之间"),
 	accept: "不能上传的文件类型"
 }

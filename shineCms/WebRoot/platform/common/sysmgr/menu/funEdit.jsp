@@ -113,9 +113,9 @@ $(document).ready(function() {
 											</td>
 										</tr>
 										<tr>
-											<td width="50%">URL</td>
-											<td width="30%">记录日志</td>
-											<td width="20%">删除</td>
+											<th width="50%">URL</th>
+											<th width="30%">记录日志</th>
+											<th width="20%">删除</th>
 										</tr>
 										<c:choose>
 											<c:when test="${param.method eq 'add' or fn:length(e.urls)<1}">

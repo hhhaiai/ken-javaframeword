@@ -16,6 +16,8 @@ public class SysFunction implements BaseEntity {
 	private String funKey;
 	private String funName;
 	private Set<SysFunctionUrl> urls = new HashSet<SysFunctionUrl>();
+	
+	private Boolean checked;	//是否勾选（用于分配权限时，不在数据库中存储）
 
 	@Override
 	public QuerySQL getExistSQL() {
@@ -73,6 +75,14 @@ public class SysFunction implements BaseEntity {
 
 	public void setUrls(Set<SysFunctionUrl> urls) {
 		this.urls = urls;
+	}
+
+	public Boolean getChecked() {
+		return checked;
+	}
+
+	public void setChecked(Boolean checked) {
+		this.checked = checked;
 	}
 
 }

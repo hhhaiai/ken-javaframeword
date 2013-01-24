@@ -12,6 +12,30 @@ public class SysUserAction extends AjaxAction<BaseService>{
 	private SysUser e = new SysUser();
 	
 	@Override
+	public String toAdd() {
+		// TODO Auto-generated method stub
+		return super.toAdd();
+	}
+
+	@Override
+	public String toEdit() {
+		// TODO Auto-generated method stub
+		return super.toEdit();
+	}
+
+	@Override
+	public void save() {
+		// TODO Auto-generated method stub
+		super.save();
+	}
+
+	@Override
+	public void update() {
+		// TODO Auto-generated method stub
+		super.update();
+	}
+
+	@Override
 	public SysUser getE() {
 		return e;
 	}

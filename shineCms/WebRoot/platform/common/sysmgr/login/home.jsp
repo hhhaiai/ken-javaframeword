@@ -83,7 +83,7 @@ html, body{width:100%;height:100%;padding:0;margin:0;overflow:hidden;}
 		});
 	    tabElement = $('#center-tab').omTabs({
 	        height : "fit",
-	        border : true
+	        border : false
 	    });
 	    
 	    //初始化Tree

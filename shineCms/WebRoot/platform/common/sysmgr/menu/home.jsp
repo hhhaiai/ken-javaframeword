@@ -15,7 +15,7 @@
 <script type="text/javascript" src="${path}r/js/shine.js"></script>
 <script type="text/javascript">
 <!--
-	var zTree,funcIframe,bodyHeight;
+	var zTree,funcIframe,bodyHeight,rMenu;
 	var setting = {
 		view: {
 			dblClickExpand: false,
@@ -50,8 +50,16 @@
 		if (!treeNode && event.target.tagName.toLowerCase() != "button" && $(event.target).parents("a").length == 0) {
 			zTree.cancelSelectedNode();
 		} else if (treeNode) {
+			//如果右击的是菜单导航则禁用编辑和删除菜单，否则开启
+			if(treeNode.id==0){
+				 rMenu.omMenu('disableItem','2');
+				 rMenu.omMenu('disableItem','3');
+			}else{
+				 rMenu.omMenu('enableItem','2');
+				 rMenu.omMenu('enableItem','3');
+			}
 			zTree.selectNode(treeNode);
-			$('#rightMenu').omMenu('show',event.target);
+			rMenu.omMenu('show',event.target);
 		}
 	}
 
@@ -71,12 +79,12 @@
 			editDialog = $.shine.openDialog({name:"editDialog", title:"增加子菜单", url:"${path}sysmgr/menu_toAdd.do?e.pid="+id, width:500, height:350});
 		}
 	}
-	//编辑菜单
+	//修改菜单
 	function toEdit(){
 		var selNode = zTree.getSelectedNodes()[0];
 		if (selNode) {
 			var id = selNode.id;
-			editDialog = $.shine.openDialog({name:"editDialog", title:"编辑菜单", url:"${path}sysmgr/menu_toEdit.do?e.menuId="+id, width:500, height:350});
+			editDialog = $.shine.openDialog({name:"editDialog", title:"修改菜单", url:"${path}sysmgr/menu_toEdit.do?e.menuId="+id, width:500, height:350});
 		}
 	}
 	//删除菜单
@@ -115,12 +123,12 @@
 	
 	//加载右键菜单
 	function initRightMenu(){
-		$('#rightMenu').omMenu({
+		rMenu = $('#rightMenu').omMenu({
         	minWidth : 150,
         	maxWidth : 200,
         	dataSource : [
         		{id:'1',label:'增加子菜单',handle:'toAdd()',icon:'${path}r/css/themes/${themes}/image/icon/add.gif'},
-            	{id:'2',label:'编辑',handle:'toEdit()',icon:'${path}r/css/themes/${themes}/image/icon/modify.gif'},
+            	{id:'2',label:'修改',handle:'toEdit()',icon:'${path}r/css/themes/${themes}/image/icon/modify.gif'},
             	{id:'3',label:'删除',handle:'toDelete()',icon:'${path}r/css/themes/${themes}/image/icon/delete.gif'}
             ],
         	onSelect:function(item,event){
