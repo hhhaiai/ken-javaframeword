@@ -13,6 +13,36 @@
 		<param-value>classpath:log4j.xml</param-value>
 	</context-param>
 	
+	<!-- 防止内存泄漏 -->
+	<listener>
+		<listener-class>
+			org.springframework.web.util.IntrospectorCleanupListener
+		</listener-class>
+	</listener>
+	
+	<filter>
+		<filter-name>osivFilter</filter-name>
+		<filter-class>
+			org.springframework.orm.hibernate3.support.OpenSessionInViewFilter
+		</filter-class>
+		<init-param>
+			<param-name>singleSession</param-name>
+			<param-value>false</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>osivFilter</filter-name>
+		<url-pattern>*.do</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>osivFilter</filter-name>
+		<url-pattern>*.htm</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>osivFilter</filter-name>
+		<url-pattern>*.jsp</url-pattern>
+	</filter-mapping>
+	
 	<!-- 字符编码过滤器 -->
 	<filter>
 		<filter-name>encodingFilter</filter-name>
