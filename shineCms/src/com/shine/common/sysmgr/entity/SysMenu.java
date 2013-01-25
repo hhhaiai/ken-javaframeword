@@ -5,8 +5,9 @@ import java.util.Set;
 
 import com.shine.framework.dao.util.QuerySQL;
 import com.shine.framework.entity.BaseEntity;
+import com.shine.platform.security.auth.Menu;
 
-public class SysMenu implements BaseEntity, Cloneable {
+public class SysMenu implements BaseEntity , com.shine.platform.security.auth.Menu{
 
 	private static final long serialVersionUID = 7873258527829373370L;
 	
@@ -26,11 +27,6 @@ public class SysMenu implements BaseEntity, Cloneable {
 	private Boolean checked;	//是否勾选（用于分配权限时，不在数据库中存储）
 
 	@Override
-	public SysMenu clone() throws CloneNotSupportedException {
-		return (SysMenu)super.clone();
-	}
-
-	@Override
 	public QuerySQL getExistSQL() {
 		return null;
 	}
@@ -38,6 +34,20 @@ public class SysMenu implements BaseEntity, Cloneable {
 	@Override
 	public boolean isVirtualDelete() {
 		return false;
+	}
+	
+	@Override
+	public Set<com.shine.platform.security.auth.Menu> getMenuChildren() {
+		if(children==null)
+			return null;
+		Set<com.shine.platform.security.auth.Menu> menus = new HashSet<com.shine.platform.security.auth.Menu>();
+		menus.addAll(children);
+		return menus;
+	}
+	
+	@Override
+	public boolean isMenu() {
+		return "1".equals(ismenu);
 	}
 
 	public Integer getMenuId() {

@@ -5,28 +5,28 @@
 <struts>
     <package name="sysmgr" extends="back" namespace="/sysmgr">
     	<action name="login_*" class="loginAction" method="{1}">
-    		<result name="home">/platform/common/sysmgr/login/home.jsp</result>
+    		<result name="home">/common/sysmgr/login/home.jsp</result>
     	</action>
     	<action name="user_*" class="sysUserAction" method="{1}">
-    		<result name="enter">/platform/common/sysmgr/user/list.jsp</result>
-    		<result name="toAdd">/platform/common/sysmgr/user/edit.jsp?method=add</result>
-    		<result name="toEdit">/platform/common/sysmgr/user/edit.jsp</result>
+    		<result name="enter">/common/sysmgr/user/list.jsp</result>
+    		<result name="toAdd">/common/sysmgr/user/edit.jsp?method=add</result>
+    		<result name="toEdit">/common/sysmgr/user/edit.jsp</result>
     	</action>
     	<action name="role_*" class="sysRoleAction" method="{1}">
-    		<result name="enter">/platform/common/sysmgr/role/list.jsp</result>
-    		<result name="toAdd">/platform/common/sysmgr/role/edit.jsp?method=add</result>
-    		<result name="toEdit">/platform/common/sysmgr/role/edit.jsp</result>
-    		<result name="toGrant">/platform/common/sysmgr/role/grant.jsp</result>
+    		<result name="enter">/common/sysmgr/role/list.jsp</result>
+    		<result name="toAdd">/common/sysmgr/role/edit.jsp?method=add</result>
+    		<result name="toEdit">/common/sysmgr/role/edit.jsp</result>
+    		<result name="toGrant">/common/sysmgr/role/grant.jsp</result>
     	</action>
     	<action name="menu_*" class="sysMenuAction" method="{1}">
-    		<result name="enter">/platform/common/sysmgr/menu/home.jsp</result>
-    		<result name="toAdd">/platform/common/sysmgr/menu/edit.jsp?method=add</result>
-    		<result name="toEdit">/platform/common/sysmgr/menu/edit.jsp</result>
+    		<result name="enter">/common/sysmgr/menu/home.jsp</result>
+    		<result name="toAdd">/common/sysmgr/menu/edit.jsp?method=add</result>
+    		<result name="toEdit">/common/sysmgr/menu/edit.jsp</result>
     	</action>
     	<action name="fun_*" class="sysFunctionAction" method="{1}">
-    		<result name="enter">/platform/common/sysmgr/menu/funList.jsp</result>
-    		<result name="toAdd">/platform/common/sysmgr/menu/funEdit.jsp?method=add</result>
-    		<result name="toEdit">/platform/common/sysmgr/menu/funEdit.jsp</result>
+    		<result name="enter">/common/sysmgr/menu/funList.jsp</result>
+    		<result name="toAdd">/common/sysmgr/menu/funEdit.jsp?method=add</result>
+    		<result name="toEdit">/common/sysmgr/menu/funEdit.jsp</result>
     	</action>
     </package>
 </struts>

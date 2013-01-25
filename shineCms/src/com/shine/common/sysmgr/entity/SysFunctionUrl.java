@@ -3,7 +3,7 @@ package com.shine.common.sysmgr.entity;
 import com.shine.framework.dao.util.QuerySQL;
 import com.shine.framework.entity.BaseEntity;
 
-public class SysFunctionUrl implements BaseEntity {
+public class SysFunctionUrl implements BaseEntity, com.shine.platform.security.auth.FunctionUrl {
 
 	private static final long serialVersionUID = 4494817061536609637L;
 	
@@ -52,6 +52,11 @@ public class SysFunctionUrl implements BaseEntity {
 
 	public void setFunc(SysFunction func) {
 		this.func = func;
+	}
+
+	@Override
+	public boolean isLog() {
+		return "1".equals(isLog);
 	}
 
 }

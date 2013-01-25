@@ -5,8 +5,10 @@ import java.util.Set;
 
 import com.shine.framework.dao.util.QuerySQL;
 import com.shine.framework.entity.BaseEntity;
+import com.shine.platform.security.auth.FunctionUrl;
+import com.shine.platform.security.auth.Menu;
 
-public class SysFunction implements BaseEntity {
+public class SysFunction implements BaseEntity, com.shine.platform.security.auth.Function {
 	
 	private static final long serialVersionUID = -3833729998299710235L;
 	
@@ -15,6 +17,7 @@ public class SysFunction implements BaseEntity {
 	private Integer orderId;
 	private String funKey;
 	private String funName;
+	private SysMenu sysMenu;
 	private Set<SysFunctionUrl> urls = new HashSet<SysFunctionUrl>();
 	
 	private Boolean checked;	//是否勾选（用于分配权限时，不在数据库中存储）
@@ -27,6 +30,21 @@ public class SysFunction implements BaseEntity {
 	@Override
 	public boolean isVirtualDelete() {
 		return false;
+	}
+	
+
+	@Override
+	public Menu getMenu() {
+		return sysMenu;
+	}
+	
+	@Override
+	public Set<FunctionUrl> getFunUrls() {
+		if(urls==null)
+			return null;
+		Set<FunctionUrl> furls = new HashSet<FunctionUrl>();
+		furls.addAll(urls);
+		return furls;
 	}
 
 	public Integer getFunId() {
@@ -83,6 +101,14 @@ public class SysFunction implements BaseEntity {
 
 	public void setChecked(Boolean checked) {
 		this.checked = checked;
+	}
+
+	public SysMenu getSysMenu() {
+		return sysMenu;
+	}
+
+	public void setSysMenu(SysMenu sysMenu) {
+		this.sysMenu = sysMenu;
 	}
 
 }
