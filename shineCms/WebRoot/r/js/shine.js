@@ -35,8 +35,13 @@ $.shine = {
 		var msgObj;
     	if(rs.code == 1){	//成功
     		msgObj = {title: "操作提示", content: "<font color='blue'>"+rs.msg+"</font>", type:"success", timeout: 2000};
-    		if(successHandle)
-    			successHandle.call();
+    		if(successHandle){
+    			try{
+	    			successHandle.call();
+    			}catch(e){
+    				alert(e);
+    			}
+    		}
     	}else if(rs.code == 2){	//失败
     		msgObj = {title: "操作提示", content: "<font color='scarlet'>"+rs.msg+"</font>", type:"warning", timeout: 2000};
     	}else{	//后台异常
@@ -92,8 +97,9 @@ $.shine = {
 		if(!div.omDialog("isOpen")){
 			div.omDialog("open");
 		}
-		//为了避免延迟，所以在OpenDialog后再设置iframe的url
-		$("#"+iframeId).attr("src",setting.url);
+		//为了避免延迟，所以在OpenDialog后再设置iframe的url，如果URL与上次相同则不重复设置
+		if($("#"+iframeId).attr("src")!=setting.url)
+			$("#"+iframeId).attr("src",setting.url);
 		return dlg;
 	}
 };
