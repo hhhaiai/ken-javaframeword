@@ -21,7 +21,7 @@ final public class EncryptUtil {
 	 * @return
 	 * @throws NoSuchAlgorithmException
 	 */
-	public static byte[] encryptSimple(final byte[] input,final String algorithm) throws NoSuchAlgorithmException{
+	public static synchronized byte[] encryptSimple(final byte[] input,final String algorithm) throws NoSuchAlgorithmException{
 		MessageDigest md = MessageDigest.getInstance(algorithm);
 		return md.digest(input);
 	}
@@ -33,7 +33,7 @@ final public class EncryptUtil {
 	 * @return
 	 * @throws NoSuchAlgorithmException
 	 */
-	public static String encryptSimple(final String input,final String algorithm) throws NoSuchAlgorithmException{
+	public static synchronized String encryptSimple(final String input,final String algorithm) throws NoSuchAlgorithmException{
 		return new String(Base64.encodeBase64(encryptSimple(input.getBytes(), algorithm)));
 	}
 	

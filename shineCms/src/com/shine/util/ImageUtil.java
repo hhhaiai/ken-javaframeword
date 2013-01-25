@@ -17,7 +17,7 @@ import com.sun.image.codec.jpeg.JPEGImageEncoder;
 /**
  * 图片工具类
  * @author JiangKunpeng 2012.02.15
- * @version 2012.02.15
+ * @version 2013.01.25
  */
 final public class ImageUtil {
 	private ImageUtil(){
@@ -73,48 +73,42 @@ final public class ImageUtil {
      * @throws Exception
      */  
     public final static void makeSmallImage(File srcImageFile,File dstImageFile,int maxWidth,int maxHeight) throws Exception {   
-        FileOutputStream fileOutputStream = null;   
-        JPEGImageEncoder encoder = null;   
-        BufferedImage tagImage = null;   
-        Image srcImage = null;   
-        try{   
-            srcImage = ImageIO.read(srcImageFile);
-            int srcWidth = srcImage.getWidth(null);//原图片宽度
-            int srcHeight = srcImage.getHeight(null);//原图片高度
-            int dstWidth = srcWidth;//缩略图宽度
-            int dstHeight = srcHeight;//缩略图高度
-            float scale = 0;   
-            //计算缩略图的宽和高   
-            if(srcWidth>maxWidth){   
-                dstWidth = maxWidth;   
-                scale = (float)srcWidth/(float)maxWidth;   
-                dstHeight = Math.round((float)srcHeight/scale);   
-            }   
-            srcHeight = dstHeight;   
-            if(srcHeight>maxHeight){   
-                dstHeight = maxHeight;   
-                scale = (float)srcHeight/(float)maxHeight;   
-                dstWidth = Math.round((float)dstWidth/scale);   
-            }
-            //生成缩略图
-            tagImage = new BufferedImage(dstWidth,dstHeight,BufferedImage.TYPE_INT_RGB);   
-            tagImage.getGraphics().drawImage(srcImage,0,0,dstWidth,dstHeight,null);   
-            fileOutputStream = new FileOutputStream(dstImageFile);   
-            encoder = JPEGCodec.createJPEGEncoder(fileOutputStream);   
-            encoder.encode(tagImage);   
-        }finally{
-        	try{
-	            if(fileOutputStream!=null){   
-                    fileOutputStream.close();   
-                    fileOutputStream = null;
-	            }
-            }catch(Exception e){
-            	e.printStackTrace();
-            }
-            encoder = null;
-            tagImage = null;
-            srcImage = null;
-        }
+    	FileOutputStream os = null;
+		BufferedImage bfImage = null;
+		JPEGImageEncoder encoder = null;
+		float width = maxWidth;
+		float height = maxHeight;
+		try {
+			BufferedImage image = ImageIO.read(srcImageFile);
+
+			// 获得缩放的比例
+			double ratio = 1.0;
+			// 判断如果高、宽都不大于设定值，则不处理
+			int imageHeight = image.getHeight();
+			int imageWidth = image.getWidth();
+			if (imageHeight > height || imageWidth > width) {
+				if (imageHeight > imageWidth) {
+					ratio = height / imageHeight;
+				} else {
+					ratio = width / imageWidth;
+				}
+			}
+			// 计算新的图面宽度和高度
+			int newWidth = (int) (imageWidth * ratio);
+			int newHeight = (int) (imageHeight * ratio);
+
+			bfImage = new BufferedImage(newWidth, newHeight,BufferedImage.TYPE_INT_RGB);
+			bfImage.getGraphics().drawImage(image.getScaledInstance(newWidth, newHeight,Image.SCALE_SMOOTH), 0, 0, null);
+
+			os = new FileOutputStream(dstImageFile);
+			encoder = JPEGCodec.createJPEGEncoder(os);
+			encoder.encode(bfImage);
+		} finally{
+			if(os!=null)
+				os.close();
+			bfImage = null;
+			encoder = null;
+		}
     }
     
     /** 
