@@ -32,17 +32,19 @@ function cancel(){
 	window.parent.closeEditDialog();
 }
 $(document).ready(function() {
-	$('#roles').omCombo({
+	$('#roleIds').omCombo({
 		width : "150px",
+		multi : true,
+		emptyText : '请至少选择一个角色',
+		value : '${e.roleIds}',
     	dataSource : [ 
-    		{text : '中国', value : 'China/PRC'}, 
-            {text : '美国', value : 'America/USA'}, 
-            {text : '英国', value : 'the United Kingdom/UK'}, 
-            {text : '日本', value : 'Japan/JPN'} 
+    		<c:forEach var="r" items="${roleList}" varStatus="idx">
+    			<c:if test="${!idx.first}">,</c:if>
+    			{text:'${r.name}',value:'${r.roleId}'}
+    		</c:forEach>
     	]
 	});
 	 
-	
 	// 对表单进行校验
     validator = $('#editForm').validate({
         rules : {
@@ -55,13 +57,25 @@ $(document).ready(function() {
     			maxlength : 50
     		}, 
             'e.password' : {
+    		<c:if test="${param.method eq 'add'}">
     			required : true,
+    		</c:if>
     			maxlength : 20
     		},
     		'confirmPassword' : {
+    		<c:if test="${param.method eq 'add'}">
     			required : true,
+    		</c:if>
     			equalTo : "#password"
+    		},
+    		'roleIds' : {
+    			required : true		//下拉框会有样式问题
     		}
+        },
+        messages : {
+        	'roleIds' : {
+        		required : '请至少选择一个角色'
+        	}
         }
     });
 });
@@ -80,7 +94,7 @@ $(document).ready(function() {
 			<div class="box1_middleright">
 				<div class="boxContent" style="overflow: visible;">
 					<form id="editForm" method="post">
-						<input type="hidden" name="e.roleId" value="${e.userId}"/>
+						<input type="hidden" name="e.userId" value="${e.userId}"/>
 						<table class="simple_table" style="width:100%;">
 							<tr>
 								<td class="label">用户名<span class="red">*</span>：</td>
@@ -90,17 +104,31 @@ $(document).ready(function() {
 								<td class="label">姓名<span class="red">*</span>：</td>
 								<td><input class="input" type="text" name="e.name" value="${e.name}"/></td>
 							</tr>
-							<tr>
-								<td class="label">密码<span class="red">*</span>：</td>
-								<td><input class="input" type="password" id="password" name="e.password" value=""/></td>
-							</tr>
-							<tr>
-								<td class="label">确认密码<span class="red">*</span>：</td>
-								<td><input class="input" type="password" name="confirmPassword" value=""/></td>
-							</tr>
+							<c:choose>
+								<c:when test="${param.method eq 'add'}">
+									<tr>
+										<td class="label">密码<span class="red">*</span>：</td>
+										<td><input class="input" type="password" id="password" name="e.password" value="123456"/><font color="gray">(默认：123456)</font></td>
+									</tr>
+									<tr>
+										<td class="label">确认密码<span class="red">*</span>：</td>
+										<td><input class="input" type="password" name="confirmPassword" value="123456"/></td>
+									</tr>
+								</c:when>
+								<c:otherwise>
+									<tr>
+										<td class="label">密码：</td>
+										<td><input class="input" type="password" id="password" name="e.password" value=""/><font color="gray">(不修改密码则不输入)</font></td>
+									</tr>
+									<tr>
+										<td class="label">确认密码：</td>
+										<td><input class="input" type="password" name="confirmPassword" value=""/><font color="gray">(不修改密码则不输入)</font></td>
+									</tr>
+								</c:otherwise>
+							</c:choose>
 							<tr>
 								<td class="label">角色<span class="red">*</span>：</td>
-								<td><input type="text" id="roles" name="roles" value=""/></td>
+								<td><input type="text" id="roleIds" name="e.roleIds"/></td>
 							</tr>
 							<tr>
 								<td colspan="4" align="center">
