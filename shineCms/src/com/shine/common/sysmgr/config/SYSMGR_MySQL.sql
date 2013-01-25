@@ -52,7 +52,6 @@ CREATE TABLE `SYS_MENU` (
 	`MURL` varchar(500) NULL,
 	`ICON` varchar(50) NULL,
 	`REMARK` varchar(100) NULL,
-	`TREECODE` text,
 	`ISMENU` int(1) DEFAULT 1,
 	`ENABLE` int(1) DEFAULT 1,
 	PRIMARY KEY (`MENUID`)

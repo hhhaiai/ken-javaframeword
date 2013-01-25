@@ -17,7 +17,6 @@ public class SysMenu implements BaseEntity, Cloneable {
 	private String murl;
 	private String icon;
 	private String remark;
-	private String treeCode;
 	private Integer ismenu;
 	private Integer enable;
 	
@@ -103,14 +102,6 @@ public class SysMenu implements BaseEntity, Cloneable {
 
 	public void setEnable(Integer enable) {
 		this.enable = enable;
-	}
-
-	public String getTreeCode() {
-		return treeCode;
-	}
-
-	public void setTreeCode(String treeCode) {
-		this.treeCode = treeCode;
 	}
 
 	public Integer getIsmenu() {

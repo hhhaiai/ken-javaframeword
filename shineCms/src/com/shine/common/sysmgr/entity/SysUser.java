@@ -21,6 +21,48 @@ public class SysUser implements BaseEntity{
 	
 	private Set<SysRole> roles = new HashSet<SysRole>();	//角色
 	
+	public static final String RoleSeparator = ",";		//角色ID的分隔符
+	
+	public SysUser(){
+	}
+	
+	public SysUser(int userId){
+		this.userId = userId;
+	}
+	
+	/**
+	 * 通过逗号隔开的角色ID设置用户角色（主要用于自动获取编辑页面选择的角色）
+	 * @param roleIds	如：1,2,4
+	 */
+	public void setRoleIds(String roleIds){
+		roles.clear();
+		if(roleIds!=null){
+			String[] idArray = roleIds.split(RoleSeparator);
+			for(String id : idArray){
+				if(id.length()<1)
+					continue;
+				int intId = Integer.parseInt(id);
+				roles.add(new SysRole(intId));
+			}
+		}
+	}
+	
+	/**
+	 * 获取以逗号隔开的角色ID
+	 * @return
+	 */
+	public String getRoleIds(){
+		StringBuffer rstr = new StringBuffer(20);
+		if(roles != null && roles.size() > 0){
+			for(SysRole role : roles){
+				rstr.append(role.getRoleId()).append(RoleSeparator);
+			}
+			int len = rstr.length();
+			rstr.delete(len-1, len);
+		}
+		return rstr.toString();
+	}
+	
 	@Override
 	public QuerySQL getExistSQL() {
 		QuerySQL sql = null;
@@ -33,7 +75,7 @@ public class SysUser implements BaseEntity{
 
 	@Override
 	public boolean isVirtualDelete() {
-		return false;
+		return true;
 	}
 
 	public Integer getUserId() {

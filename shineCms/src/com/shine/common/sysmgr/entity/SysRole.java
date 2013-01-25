@@ -20,6 +20,13 @@ public class SysRole implements BaseEntity {
 	
 	private Set<SysMenu> menus = new HashSet<SysMenu>();
 	private Set<SysFunction> funs = new HashSet<SysFunction>();
+	
+	public SysRole(){
+	}
+	
+	public SysRole(Integer roleId){
+		this.roleId = roleId;
+	}
 
 	@Override
 	public QuerySQL getExistSQL() {
