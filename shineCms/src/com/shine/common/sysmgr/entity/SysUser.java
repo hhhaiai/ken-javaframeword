@@ -7,7 +7,7 @@ import java.util.Set;
 import com.shine.framework.dao.util.QuerySQL;
 import com.shine.framework.entity.BaseEntity;
 
-public class SysUser implements BaseEntity{
+public class SysUser implements BaseEntity,com.shine.platform.security.auth.User{
 
 	private static final long serialVersionUID = -647542899691049799L;
 
@@ -67,9 +67,9 @@ public class SysUser implements BaseEntity{
 	public QuerySQL getExistSQL() {
 		QuerySQL sql = null;
 		if(userId==null)
-			sql = new QuerySQL("from SysUser u where u.username=?").setValues(new Object[]{username});
+			sql = new QuerySQL("from SysUser u where u.delflag<>1 and u.username=?").setValues(new Object[]{username});
 		else
-			sql = new QuerySQL("from SysUser u where u.username=? and u.userId<>?").setValues(new Object[]{username,userId});
+			sql = new QuerySQL("from SysUser u where u.delflag<>1 u.username=? and u.userId<>?").setValues(new Object[]{username,userId});
 		return sql;
 	}
 

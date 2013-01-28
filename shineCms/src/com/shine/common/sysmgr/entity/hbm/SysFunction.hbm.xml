@@ -18,5 +18,7 @@
 			<key column="FUNID" />
 			<one-to-many class="com.shine.common.sysmgr.entity.SysFunctionUrl"/>
 		</set>
+		
+		<many-to-one name="sysMenu" column="MENUID" class="com.shine.common.sysmgr.entity.SysMenu" insert="false" update="false"></many-to-one>
     </class>
 </hibernate-mapping>

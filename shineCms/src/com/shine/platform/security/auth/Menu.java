@@ -23,6 +23,10 @@ public interface Menu extends Serializable {
 	 */
 	public abstract boolean isMenu();
 	
+	/**
+	 * 获取子菜单
+	 * @return
+	 */
 	public abstract Set<Menu> getMenuChildren();
 	
 }

@@ -147,6 +147,19 @@ public class SysRoleAction extends AjaxAction<BaseService> {
 	}
 
 	@Override
+	public void update() {
+		try{
+			SysRole role = (SysRole)service.get(e);
+			e.setMenus(role.getMenus());
+			e.setFuns(role.getFuns());
+			printOutText(service.merge(getE()).toJson());
+		}catch(Exception e){
+			e.printStackTrace();
+			printOutText(new PersistResult(PersistResult.ERROR, PersistResult.MSG_ERROR).toJson());
+		}
+	}
+
+	@Override
 	public BaseEntity getE() {
 		return e;
 	}

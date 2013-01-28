@@ -9,7 +9,7 @@ import net.sf.json.JSONObject;
 /**
  * 持久化结果,保存执行结果
  * @author JiangKunpeng	2012.12.25
- * @version 2013.01.16
+ * @version 2013.01.28
  */
 public class PersistResult implements Serializable{
 
@@ -60,6 +60,17 @@ public class PersistResult implements Serializable{
 		if(datas==null)
 			datas = new HashMap<String, Object>();
 		datas.put(key, value);
+	}
+	
+	/**
+	 * 获取其他数据
+	 * @param key
+	 * @return
+	 */
+	public Object getData(String key){
+		if(datas==null)
+			return null;
+		return datas.get(key);
 	}
 	
 	public int getCode() {

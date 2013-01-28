@@ -5,6 +5,7 @@
 <struts>
     <package name="sysmgr" extends="back" namespace="/sysmgr">
     	<action name="login_*" class="loginAction" method="{1}">
+    		<result name="enter">/common/sysmgr/login/login.jsp</result>
     		<result name="home">/common/sysmgr/login/home.jsp</result>
     	</action>
     	<action name="user_*" class="sysUserAction" method="{1}">

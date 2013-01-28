@@ -22,4 +22,10 @@ public interface User extends Serializable {
 	 */
 	public abstract String getPassword();
 	
+	/**
+	 * 获取姓名
+	 * @return
+	 */
+	public abstract String getName();
+	
 }

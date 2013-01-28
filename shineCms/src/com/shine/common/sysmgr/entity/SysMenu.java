@@ -5,7 +5,6 @@ import java.util.Set;
 
 import com.shine.framework.dao.util.QuerySQL;
 import com.shine.framework.entity.BaseEntity;
-import com.shine.platform.security.auth.Menu;
 
 public class SysMenu implements BaseEntity , com.shine.platform.security.auth.Menu{
 

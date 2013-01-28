@@ -2,6 +2,7 @@ package com.shine.common.sysmgr.entity;
 
 import com.shine.framework.dao.util.QuerySQL;
 import com.shine.framework.entity.BaseEntity;
+import com.shine.platform.security.auth.Function;
 
 public class SysFunctionUrl implements BaseEntity, com.shine.platform.security.auth.FunctionUrl {
 
@@ -20,6 +21,16 @@ public class SysFunctionUrl implements BaseEntity, com.shine.platform.security.a
 	@Override
 	public boolean isVirtualDelete() {
 		return false;
+	}
+	
+	@Override
+	public boolean isLog() {
+		return "1".equals(isLog);
+	}
+
+	@Override
+	public Function getFunction() {
+		return func;
 	}
 
 	public Integer getUrlId() {
@@ -52,11 +63,6 @@ public class SysFunctionUrl implements BaseEntity, com.shine.platform.security.a
 
 	public void setFunc(SysFunction func) {
 		this.func = func;
-	}
-
-	@Override
-	public boolean isLog() {
-		return "1".equals(isLog);
 	}
 
 }

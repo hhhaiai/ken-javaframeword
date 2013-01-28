@@ -46,7 +46,8 @@ public class SysFunctionAction extends AjaxAction<BaseService> {
 			extor.buildQueryItem(analyzer);
 			List list = service.list(analyzer);
 			JsonConfig jc = new JsonConfig();
-			jc.setExcludes(new String[]{"urls","existSQL","virtualDelete"});
+			//过滤掉这些，否则json会报错，同时避免Hibernate延时加载加载不必要的资源
+			jc.setExcludes(new String[]{"urls","existSQL","virtualDelete","funUrls","menu","sysMenu"});
 			printOutJsonList(list, page, jc);
 		}catch(Exception e){
 			e.printStackTrace();

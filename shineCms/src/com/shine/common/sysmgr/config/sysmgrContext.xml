@@ -12,9 +12,22 @@
            http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
            http://www.springframework.org/schema/aop
            http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
-           
-	<bean id="loginAction" class="com.shine.common.sysmgr.web.LoginAction" scope="prototype"/>
-	<bean id="sysUserAction" class="com.shine.common.sysmgr.web.SysUserAction" parent="ajaxAction" scope="prototype"/>
+    
+    <!-- 用户密码加密接口 -->
+	<bean id="userPassGenerator" class="com.shine.platform.security.encrypt.SHAGenerator" scope="prototype"/>
+    
+	<bean id="sysUserDao" class="com.shine.common.sysmgr.dao.impl.SysUserDaoImpl" parent="genericDao" scope="prototype"/>
+	<bean id="sysUserService" class="com.shine.common.sysmgr.biz.impl.SysUserServiceImpl" scope="prototype">
+		<property name="dao" ref="sysUserDao" />
+	</bean>
+    
+	<bean id="loginAction" class="com.shine.common.sysmgr.web.LoginAction" scope="prototype">
+		<property name="userPassGenerator" ref="userPassGenerator" />
+		<property name="service" ref="sysUserService" />
+	</bean>
+	<bean id="sysUserAction" class="com.shine.common.sysmgr.web.SysUserAction" parent="ajaxAction" scope="prototype">
+		<property name="userPassGenerator" ref="userPassGenerator" />
+	</bean>
 	<bean id="sysRoleAction" class="com.shine.common.sysmgr.web.SysRoleAction" parent="ajaxAction" scope="prototype"/>
 	<bean id="sysMenuAction" class="com.shine.common.sysmgr.web.SysMenuAction" parent="ajaxAction" scope="prototype"/>
 	<bean id="sysFunctionAction" class="com.shine.common.sysmgr.web.SysFunctionAction" parent="ajaxAction" scope="prototype"/>

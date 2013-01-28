@@ -25,6 +25,10 @@ public interface Function extends Serializable {
 	 */
 	public abstract String getFunName();
 	
+	/**
+	 * 获取菜单
+	 * @return
+	 */
 	public abstract Menu getMenu();
 	
 	/**
