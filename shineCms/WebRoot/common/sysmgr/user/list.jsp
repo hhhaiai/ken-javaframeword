@@ -11,7 +11,7 @@
 <script type="text/javascript" src="${path}r/operamasks-ui/js/operamasks-ui.min.js"></script>
 <script type="text/javascript" src="${path}r/js/shine.js"></script>
 <script type="text/javascript">
-var grid,editDialog,searchDialog;
+var grid,editDialog,searchDialog,dataUrl;
 //保存成功后回调
 function saveSuccess(){
 	closeEditDialog();
@@ -94,10 +94,10 @@ $(document).ready(function() {
         resizable : false,
         buttons : {
         	"查询" : function(){
-				var q1 = $("input[name='Q_username_eq']",qdlg).val();
-				var q2 = $("input[name='Q_name_lk']",qdlg).val();
-				var url = '${path}sysmgr/user_list.do?Q^S^username^EQ='+q1+'&Q^S^name^LK='+q2;
-          		grid.omGrid('setData',url);
+				var where = $("#queryForm").serialize();
+				dataUrl = "${path}sysmgr/user_list.do?"+where;
+				
+          		grid.omGrid('setData',dataUrl);
           		searchDialog.omDialog("close");
         		return false; //阻止form的默认提交动作
       		},"取消" : function() {
@@ -105,8 +105,9 @@ $(document).ready(function() {
             }
         }
     });
+	dataUrl = "${path}sysmgr/user_list.do";
     grid = $('#grid').omGrid({
-        dataSource : '${path}sysmgr/user_list.do',
+        dataSource : dataUrl,
         singleSelect : false,
         colModel : [  
                      {header : '用户名', name : 'username', width : 120, align : 'left'}, 
@@ -129,16 +130,16 @@ $(document).ready(function() {
      <a href="javascript:void(0);" id="btn_search">查询</a>
 </div>
 <table id="grid"></table>
-<div id="query-form">
+<div id="query-form" style="padding: 5px 10px;">
     <form id="queryForm">
     <table>
         <tr>
             <td>用户名：</td>
-            <td><input name="Q_username_eq" /></td>
+            <td><input name="Q^S^username^EQ" /></td>
         </tr>
         <tr>
             <td>姓名：</td>
-            <td><input name="Q_name_lk" /></td>
+            <td><input name="Q^S^name^LK" /></td>
         </tr>
     </table>
 	</form>
