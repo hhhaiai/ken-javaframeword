@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@include file="/common/path.jsp"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
 <html>
 <head>
@@ -56,10 +57,10 @@ html, body{width:100%;height:100%;padding:0;margin:0;overflow:hidden;}
 	};
 	
 	var zNodes =[
-		{id:1, pid:0, name:"系统管理", open:true}
-		,{id:2, pid:1, name:"用户管理", murl:"${path}sysmgr/user_enter.do"}
-		,{id:3, pid:1, name:"角色管理", murl:"${path}sysmgr/role_enter.do"}
-		,{id:4, pid:1, name:"菜单管理", murl:"${path}sysmgr/menu_enter.do"}
+		<c:forEach var="m" items="${sessionScope.CURRENT_MENUS}" varStatus="idx">
+			<c:if test="${!idx.first}">,</c:if>
+			{id:'${m.menuId}', pid:'${m.pid}', name:"${m.menuName}", murl:"${m.murl}", open:true}
+		</c:forEach>
 	];
 	
 	$(document).ready(function() {
@@ -89,7 +90,7 @@ html, body{width:100%;height:100%;padding:0;margin:0;overflow:hidden;}
 	    //初始化Tree
 		zTree = $.fn.zTree.init($("#tree"), setting, zNodes);
 	    
-	    centerHeight = tabElement.height() - tabElement.find(".om-tabs-headers").outerHeight() - 4; //为了照顾apusic皮肤，apusic没有2px的padding，只有边框，所以多减去2px
+	    centerHeight = tabElement.height() - tabElement.find(".om-tabs-headers").outerHeight() - 4;
 	    $('#homeFrame').height(centerHeight);
 	});
 //-->
@@ -100,6 +101,10 @@ html, body{width:100%;height:100%;padding:0;margin:0;overflow:hidden;}
 <div id="body-panel" style="width:100%;height:100%;">
 	<div id="north-panel" style="width:100%;height:37px;padding:0px;margin:0px;background:url(${path}/r/css/themes/${themes}/image/frame/frame_top_bg.gif)">
 		<div style="float:left;width:147px;height:37px; background:url(${path}/r/css/themes/${themes}/image/frame/frame_top_logo.gif) no-repeat;">
+			<span style="float:left;margin:12px 0 0 45px;width:147px;">${sessionScope.CURRENT_USER.name}</span>
+		</div>
+		<div style="float:right;padding:12px 10px 0 0;">
+			<a href="javascript:void(0);">退出系统</a>
 		</div>
 	</div>
 	<div id="center-panel">
@@ -108,7 +113,7 @@ html, body{width:100%;height:100%;padding:0;margin:0;overflow:hidden;}
 				<li><a href="#tab_0">首页</a></li>
 			</ul>
 			<div id="tab_0">
-				<iframe id='homeFrame' border=0 frameBorder='no' src='http://www.baidu.com' width='100%' height='100%'></iframe>
+				<iframe id='homeFrame' border=0 frameBorder='no' src='about:blank' width='100%' height='100%'></iframe>
 			</div>
 		</div>
 	</div>

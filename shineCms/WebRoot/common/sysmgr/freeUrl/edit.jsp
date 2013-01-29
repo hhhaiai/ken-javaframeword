@@ -1,9 +1,11 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@include file="/common/path.jsp"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
-<title>用户登录</title>
+<title>${param.method eq 'add'?'新增自由权限URL':'编辑自由权限URL'}</title>
 <link title="${themes}" rel="stylesheet" href="${path}r/operamasks-ui/css/${themes}/om-${themes}.css">
 <link rel="stylesheet" href="${path}r/css/base.css"/>
 <link title="${themes}" rel="stylesheet" href="${path}r/css/themes/${themes}/style.css"/>
@@ -12,37 +14,35 @@
 <script type="text/javascript" src="${path}r/js/shine.js"></script>
 <script type="text/javascript">
 var validator;
+
 //提交表单
 function submitForm(){
 	if(!validator.form())
 		return;
 	
-	var url = "${path}sysmgr/login_in.do";
-	var formData = $("#loginForm").serialize();
+	var url = "${path}sysmgr/freeUrl_${param.method eq 'add'?'save':'update'}.do";
+	var formData = $("#editForm").serialize();
     $.post(url,formData,function(data){
     	$.shine.showAjaxMsg(data,function(){
-    		location.href="${path}sysmgr/login_home.do";
+    		window.parent.saveSuccess();
     	});
     });
 }
+//点击取消按钮,关闭对话框
+function cancel(){
+	window.parent.closeEditDialog();
+}
 $(document).ready(function() {
-	// 对表单进行校验
-    validator = $('#loginForm').validate({
+	 // 对表单进行校验
+    validator = $('#editForm').validate({
         rules : {
-            'username' : {
-    			required : true
-    		},
-            'password' : {
-    			required : true
+            'e.uurl' : {
+    			required : true,
+    			maxlength : 500
+    		}, 
+    		'e.remark' : {
+    			maxlength : 50
     		}
-        },
-        messages : {
-        	'username' : {
-        		required : ' 请输入帐号'
-        	},
-        	'password' : {
-        		required : ' 请输入密码'
-        	}
         }
     });
 });
@@ -50,7 +50,7 @@ $(document).ready(function() {
 </head>
 
 <body>
-<div class="box1" style="width:450px;">
+<div class="box1">
 	<div class="box1_topcenter">
 		<div class="box1_topleft">
 			<div class="box1_topright"></div>
@@ -60,19 +60,23 @@ $(document).ready(function() {
 		<div class="box1_middleleft">
 			<div class="box1_middleright">
 				<div class="boxContent" style="overflow: visible;">
-					<form id="loginForm" method="post">
+					<form id="editForm" method="post">
+						<input type="hidden" name="e.urlId" value="${e.urlId}"/>
 						<table class="simple_table" style="width:100%;">
 							<tr>
-								<td class="label">帐 号：</td>
-								<td><input class="input" type="text" name="username" value=""/></td>
+								<td class="label">URL<span class="red">*</span>：</td>
+								<td><input class="input" type="text" name="e.uurl" value="${e.uurl}" style="width: 250px;"/></td>
 							</tr>
 							<tr>
-								<td class="label">密 码：</td>
-								<td><input class="input" type="password" name="password" value=""/></td>
+								<td class="label">备注：</td>
+								<td>
+									<input class="input" type="text" name="e.remark" value="${e.remark}" style="width: 250px;"/>
+								</td>
 							</tr>
 							<tr>
-								<td colspan="4" align="center">
-									<input type="button" value="登 录" onclick="submitForm();" />
+								<td colspan="2" align="center">
+									<input type="button" value="提 交" onclick="submitForm();" />
+									<input type="button" value="取 消" onclick="cancel();" />
 								</td>
 							</tr>
 						</table>
