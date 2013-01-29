@@ -3,15 +3,12 @@
     "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
     "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">    
 <hibernate-mapping>
-	<class name="com.shine.common.sysmgr.entity.SysFunctionUrl" table="SYS_FUNCTION_URL" 
+	<class name="com.shine.common.sysmgr.entity.SysFreeUrl" table="SYS_FREE_URL" 
 		dynamic-insert="false" dynamic-update="true">
 		<id name="urlId" column="URLID" type="java.lang.Integer" length="8">
 			<generator class="native" />
 		</id>
+		<property name="remark" column="REMARK" type="java.lang.String" length="50" not-null="false"/>
 		<property name="uurl" column="UURL" type="java.lang.String" length="500" not-null="true"/>
-		<property name="isLog" column="ISLOG" type="java.lang.Integer" length="1" not-null="true"/>
-		
-		<!-- 为了初始化权限管理数据，设成非延迟加载了 lazy="false" fetch="join" -->
-		<many-to-one name="func" column="FUNID" class="com.shine.common.sysmgr.entity.SysFunction" lazy="false" fetch="join" update="false"></many-to-one>
     </class>
 </hibernate-mapping>

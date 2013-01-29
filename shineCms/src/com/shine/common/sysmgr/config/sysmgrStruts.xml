@@ -29,5 +29,10 @@
     		<result name="toAdd">/common/sysmgr/menu/funEdit.jsp?method=add</result>
     		<result name="toEdit">/common/sysmgr/menu/funEdit.jsp</result>
     	</action>
+    	<action name="freeUrl_*" class="sysFreeUrlAction" method="{1}">
+    		<result name="enter">/common/sysmgr/freeUrl/list.jsp</result>
+    		<result name="toAdd">/common/sysmgr/freeUrl/edit.jsp?method=add</result>
+    		<result name="toEdit">/common/sysmgr/freeUrl/edit.jsp</result>
+    	</action>
     </package>
 </struts>

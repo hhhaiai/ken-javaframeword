@@ -19,6 +19,7 @@
 			<one-to-many class="com.shine.common.sysmgr.entity.SysFunctionUrl"/>
 		</set>
 		
-		<many-to-one name="sysMenu" column="MENUID" class="com.shine.common.sysmgr.entity.SysMenu" insert="false" update="false"></many-to-one>
+		<!-- 为了初始化权限管理数据，设成非延迟加载了 lazy="false" fetch="join" -->
+		<many-to-one name="sysMenu" column="MENUID" class="com.shine.common.sysmgr.entity.SysMenu" lazy="false" fetch="join" insert="false" update="false"></many-to-one>
     </class>
 </hibernate-mapping>

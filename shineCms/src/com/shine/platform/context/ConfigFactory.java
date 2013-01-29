@@ -19,7 +19,7 @@ import com.shine.util.xml.JDomUtil;
 /**
  * 系统配置工厂
  * @author JiangKunpeng 2012.02.15
- * @version 2012.11.22
+ * @version 2013.01.29
  */
 @SuppressWarnings("unchecked")
 final public class ConfigFactory {
@@ -27,13 +27,20 @@ final public class ConfigFactory {
 	private ServletContext servletContext = null;	//Servlet上下文
 	private Map<String, Object> attributes = new HashMap<String, Object>();
 	private String sysPath;
+	private String appContext;
 	private String appName;
-	private String indexPage;
+	private String indexPage;	//首页
 	private ApplicationContext springContext;
 	private List<String> springPluginXmls = new ArrayList<String>();
 	private List<String> springMvcPluginXmls = new ArrayList<String>();
 	private List<String> strutsPluginXmls = new ArrayList<String>();
 	private ProjectStarterListener projectStarterListener = null;	//项目启动监听器
+	
+	//存在SESSION中的当前登录用户、用户菜单、功能的键
+	public static final String SESSION_CURRENT_USER = "CURRENT_USER";
+	public static final String SESSION_CURRENT_MENUS = "CURRENT_MENUS";
+	public static final String SESSION_CURRENT_FUNCS = "CURRENT_FUNCS";
+	
 	private ConfigFactory(){
 	}
 	
@@ -43,6 +50,7 @@ final public class ConfigFactory {
 	
 	public void init(final ServletContext servletContext){
 		this.servletContext = servletContext;
+		this.appContext = servletContext.getServletContextName();
 		sysPath = servletContext.getRealPath("/");
 		loadXmlConfig();
 	}
@@ -71,8 +79,16 @@ final public class ConfigFactory {
 		if(projectStarterListener!=null)
 			projectStarterListener.beforeLoadConfig(servletContext);
 		
+		if(appContext==null){
+			appContext = bootEle.getChildText("appContext");
+		}
+		if(appContext==null){
+			throw new IllegalArgumentException("appContext参数没有设置!");
+		}
 		appName = bootEle.getChildText("appName");
 		indexPage = bootEle.getChildText("indexPage");
+		if(indexPage==null||indexPage.length()<1)
+			indexPage = "sysmgr/login_home.do";
 		
 		List<Element> initXmls = JDomUtil.getSunList(bootEle, "beforeXmls");
 		if(initXmls!=null){
@@ -150,6 +166,9 @@ final public class ConfigFactory {
 		return cfsb.toString();
 	}
 
+	public String getAppContext() {
+		return appContext;
+	}
 	public String getSysPath() {
 		return sysPath;
 	}

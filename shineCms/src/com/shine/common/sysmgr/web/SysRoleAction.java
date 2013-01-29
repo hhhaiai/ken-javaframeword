@@ -26,11 +26,9 @@ public class SysRoleAction extends AjaxAction<BaseService> {
 	
 	@Override
 	protected JsonConfig getJsonConfig() {
-		if(JsonConfig==null){
-			JsonConfig = new JsonConfig();
-			JsonConfig.setExcludes(new String[]{"delflag","deltime","existSQL","virtualDelete","menus","funs"});
-		}
-		return JsonConfig;
+		JsonConfig jc = new JsonConfig();
+		jc.setExcludes(new String[]{"delflag","deltime","existSQL","virtualDelete","menus","funs"});
+		return jc;
 	}
 	
 	/**

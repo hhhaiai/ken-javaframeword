@@ -67,9 +67,9 @@ public class SysUser implements BaseEntity,com.shine.platform.security.auth.User
 	public QuerySQL getExistSQL() {
 		QuerySQL sql = null;
 		if(userId==null)
-			sql = new QuerySQL("from SysUser u where u.delflag<>1 and u.username=?").setValues(new Object[]{username});
+			sql = new QuerySQL("from SysUser u where (u.delflag is null or u.delflag=0) and and u.username=?").setValues(new Object[]{username});
 		else
-			sql = new QuerySQL("from SysUser u where u.delflag<>1 u.username=? and u.userId<>?").setValues(new Object[]{username,userId});
+			sql = new QuerySQL("from SysUser u where (u.delflag is null or u.delflag=0) and u.username=? and u.userId<>?").setValues(new Object[]{username,userId});
 		return sql;
 	}
 

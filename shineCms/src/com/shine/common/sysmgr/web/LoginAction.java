@@ -4,6 +4,7 @@ import com.shine.common.sysmgr.biz.SysUserService;
 import com.shine.common.sysmgr.entity.SysUser;
 import com.shine.framework.entity.PersistResult;
 import com.shine.framework.web.GenericAction;
+import com.shine.platform.context.ConfigFactory;
 import com.shine.platform.security.encrypt.UserPassGenerator;
 
 public class LoginAction extends GenericAction{
@@ -38,10 +39,14 @@ public class LoginAction extends GenericAction{
 			user.setPassword(password);
 			PersistResult pr = service.login(username, userPassGenerator.generatePassword(user));
 			
-			/**
-			 * 设置session吧
-			 */
+			//登录成功
+			if(pr.getCode()==PersistResult.SUCCESS){
+				session.setAttribute(ConfigFactory.SESSION_CURRENT_USER, pr.getData("user"));
+				session.setAttribute(ConfigFactory.SESSION_CURRENT_MENUS, pr.getData("menus"));
+				session.setAttribute(ConfigFactory.SESSION_CURRENT_FUNCS, pr.getData("funcs"));
+			}
 			
+			//设置成null，避免JSON打印异常
 			pr.setDatas(null);
 			printOutText(pr.toJson());
 		}catch(Exception e){
@@ -54,7 +59,9 @@ public class LoginAction extends GenericAction{
 	 * 退出登录
 	 */
 	public void out(){
-		
+		session.removeAttribute(ConfigFactory.SESSION_CURRENT_USER);
+		session.removeAttribute(ConfigFactory.SESSION_CURRENT_MENUS);
+		session.removeAttribute(ConfigFactory.SESSION_CURRENT_FUNCS);
 	}
 	
 	/**

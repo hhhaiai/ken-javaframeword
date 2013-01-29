@@ -16,7 +16,7 @@
     <!-- 用户密码加密接口 -->
 	<bean id="userPassGenerator" class="com.shine.platform.security.encrypt.SHAGenerator" scope="prototype"/>
     
-	<bean id="sysUserDao" class="com.shine.common.sysmgr.dao.impl.SysUserDaoImpl" parent="genericDao" scope="prototype"/>
+	<bean id="sysUserDao" class="com.shine.common.sysmgr.dao.impl.SysUserDaoImpl" parent="baseDao" scope="prototype"/>
 	<bean id="sysUserService" class="com.shine.common.sysmgr.biz.impl.SysUserServiceImpl" scope="prototype">
 		<property name="dao" ref="sysUserDao" />
 	</bean>
@@ -31,4 +31,5 @@
 	<bean id="sysRoleAction" class="com.shine.common.sysmgr.web.SysRoleAction" parent="ajaxAction" scope="prototype"/>
 	<bean id="sysMenuAction" class="com.shine.common.sysmgr.web.SysMenuAction" parent="ajaxAction" scope="prototype"/>
 	<bean id="sysFunctionAction" class="com.shine.common.sysmgr.web.SysFunctionAction" parent="ajaxAction" scope="prototype"/>
+	<bean id="sysFreeUrlAction" class="com.shine.common.sysmgr.web.SysFreeUrlAction" parent="ajaxAction" scope="prototype"/>
 </beans>

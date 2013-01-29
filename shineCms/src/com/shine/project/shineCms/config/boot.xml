@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <boot>
+	<appContext>shineCms</appContext>
 	<appName>Sunshine CMS</appName>
 	<appVendor>广州阳光耐特电子有限公司</appVendor>
 	<projectStarterListener>com.shine.project.shineCms.ShineCmsStarterListener</projectStarterListener>
