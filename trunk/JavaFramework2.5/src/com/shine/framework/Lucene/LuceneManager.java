@@ -45,6 +45,16 @@ public class LuceneManager {
 	}
 
 	/**
+	 * 建立数据库检索
+	 * 
+	 * @param jndi
+	 * @param indexDirPath
+	 */
+	public void createDBIndex(String jndi, String indexDirPath) {
+
+	}
+
+	/**
 	 * 建立索引
 	 * 
 	 * @param indexDirPath
@@ -137,6 +147,31 @@ public class LuceneManager {
 		if (srch != null) {
 			srch.close();
 		}
+	}
+
+	/**
+	 * 复合索引检索
+	 * 
+	 * @param indexDirPath
+	 * @param luceneAnalyzer
+	 * @param keyWord
+	 * @throws Exception
+	 */
+	public void complexIndexQuery(Analyzer luceneAnalyzer, String keyWord,
+			String... indexDirPath) throws Exception {
+
+	}
+
+	/**
+	 * 多关键字检索
+	 * 
+	 * @param indexDirPath
+	 * @param luceneAnalyzer
+	 * @param keyWord
+	 * @throws Exception
+	 */
+	public void simpleQuery(String indexDirPath, Analyzer luceneAnalyzer,
+			String... keyWord) throws Exception {
 
 	}
 
