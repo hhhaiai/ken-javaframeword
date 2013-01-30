@@ -82,7 +82,7 @@
 	</bean>
 	<!-- JSON  -->
 	<bean id="jsonformat" class="com.shine.framework.web.json.OmuiJsonFormat"/> 
-	<bean id="baseAction" class="com.shine.framework.web.BaseAction" abstract="true">
+	<bean id="baseAction" class="com.shine.framework.web.BaseAction" abstract="true" scope="prototype">
 		<property name="service" ref="baseService" />
 		<property name="jsonformat" ref="jsonformat" />
 	</bean>

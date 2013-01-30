@@ -29,7 +29,7 @@ function refreshData(){
 }
 //打开编辑框
 function toEdit(funId){
-	editDialog = $.shine.openDialog({name:"editDialog", title:"编辑自由权限URL", url:"${path}sysmgr/freeUrl_toEdit.do?e.urlId="+funId, width:500, height:200});
+	editDialog = $.shine.openDialog({name:"editDialog", title:"编辑自由权限URL", url:"${path}sysmgr/freeUrl_toEdit.do?e.urlId="+funId, width:500, height:220});
 }
 //删除记录
 function toDelete(ids){
@@ -43,7 +43,7 @@ $(document).ready(function() {
 	$('#btn_add').omButton({
 		icons : {left : '${path}r/css/themes/${themes}/image/icon/add.gif'},
 		onClick : function(){
-			editDialog = $.shine.openDialog({name:"editDialog", title:"增加自由权限URL", url:"${path}sysmgr/freeUrl_toAdd.do?e.menuId=${menuId}", width:500, height:200});
+			editDialog = $.shine.openDialog({name:"editDialog", title:"增加自由权限URL", url:"${path}sysmgr/freeUrl_toAdd.do?e.menuId=${menuId}", width:500, height:220});
 		}
 	});
 	$('#btn_modify').omButton({
@@ -87,6 +87,7 @@ $(document).ready(function() {
         colModel : [ 
         			 {header : 'URL', name : 'uurl', width : 150, align : 'left'}, 
                      {header : '备注', name : 'remark', width:120, align : 'left'},
+                     {header : '需要登录', name : 'loginNeedText', width:80, align : 'left'},
                      {header : '操作', name : 'urlId', width:100, align : 'center',renderer:function(value,rowData,rowIndex){
                     	 return "<a href='javascript:void(0);' onclick='toEdit(\""+value+"\");' title='修改'><img src='${path}r/css/themes/${themes}/image/icon/modify.gif' border='0' align='absmiddle' alt='修改'/></a>" +
                     	 "&nbsp;<a href='javascript:void(0);' onclick='toDelete(\""+value+"\");' title='删除'><img src='${path}r/css/themes/${themes}/image/icon/delete.gif' border='0' align='absmiddle' alt='删除'/></a>";

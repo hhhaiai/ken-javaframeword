@@ -32,8 +32,9 @@ $.shine = {
 	 */
 	showAjaxMsg : function(data,successHandle){
 		var rs = eval("("+data+")");
+		var code = rs.code;
 		var msgObj;
-    	if(rs.code == 1){	//成功
+    	if(code == 1){	//成功
     		msgObj = {title: "操作提示", content: "<font color='blue'>"+rs.msg+"</font>", type:"success", timeout: 2000};
     		if(successHandle){
     			try{
@@ -42,9 +43,9 @@ $.shine = {
     				alert(e);
     			}
     		}
-    	}else if(rs.code == 2){	//失败
+    	}else if(code == 2){	//失败
     		msgObj = {title: "操作提示", content: "<font color='scarlet'>"+rs.msg+"</font>", type:"warning", timeout: 2000};
-    	}else{	//后台异常
+    	}else{	//3：后台异常、4：登录超时、5：没有权限
     		msgObj = {title: "操作提示", content: "<font color='red'>"+rs.msg+"</font>", type:"error", timeout: 2000};
     	}
     	try{
@@ -119,8 +120,14 @@ $.validator.messages = {
 	max: jQuery.format("不能大于{0}"),
 	equalTo: "两次输入不一致",
 	range: jQuery.format("大小必须在{0}至{1}之间"),
-	accept: "不能上传的文件类型"
+	accept: "禁止上传的文件类型"
 }
+
+/**
+$.omGrid.onError = function(XMLHttpRequest,textStatus,errorThrown,event){
+	alert(XMLHttpRequest.responseText);
+}
+*/
 
 //扩展JQuery函数
 $.extend($.fn, {

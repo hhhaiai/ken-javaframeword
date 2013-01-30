@@ -19,16 +19,16 @@ import com.shine.util.xml.JDomUtil;
 /**
  * 系统配置工厂
  * @author JiangKunpeng 2012.02.15
- * @version 2013.01.29
+ * @version 2013.01.30
  */
 @SuppressWarnings("unchecked")
 final public class ConfigFactory {
 	private static final ConfigFactory factory = new ConfigFactory();		//工厂  单例
 	private ServletContext servletContext = null;	//Servlet上下文
 	private Map<String, Object> attributes = new HashMap<String, Object>();
-	private String sysPath;
-	private String appContext;
-	private String appName;
+	private String sysPath;		//系统跟目录的绝对路径
+	private String appContext;	//系统应用名,及中间件中的名称
+	private String appName;		//系统中文名称
 	private String indexPage;	//首页
 	private ApplicationContext springContext;
 	private List<String> springPluginXmls = new ArrayList<String>();
@@ -36,10 +36,10 @@ final public class ConfigFactory {
 	private List<String> strutsPluginXmls = new ArrayList<String>();
 	private ProjectStarterListener projectStarterListener = null;	//项目启动监听器
 	
-	//存在SESSION中的当前登录用户、用户菜单、功能的键
+	//存在SESSION中的当前登录用户、用户菜单、URL的键
 	public static final String SESSION_CURRENT_USER = "CURRENT_USER";
 	public static final String SESSION_CURRENT_MENUS = "CURRENT_MENUS";
-	public static final String SESSION_CURRENT_FUNCS = "CURRENT_FUNCS";
+	public static final String SESSION_CURRENT_URLS = "CURRENT_URLS";
 	
 	private ConfigFactory(){
 	}
@@ -82,10 +82,13 @@ final public class ConfigFactory {
 		if(appContext==null){
 			appContext = bootEle.getChildText("appContext");
 		}
-		if(appContext==null){
+		if(appContext==null||appContext.length()<1){
 			throw new IllegalArgumentException("appContext参数没有设置!");
 		}
 		appName = bootEle.getChildText("appName");
+		if(appName==null||appName.length()<1){
+			throw new IllegalArgumentException("appName参数没有设置!");
+		}
 		indexPage = bootEle.getChildText("indexPage");
 		if(indexPage==null||indexPage.length()<1)
 			indexPage = "sysmgr/login_home.do";
@@ -104,6 +107,17 @@ final public class ConfigFactory {
 		if(plugins!=null){
 			for(Element plugin:plugins){
 				PluginContext.getContext().registerPlugin(plugin.getText());
+			}
+		}
+		
+		//附加属性
+		Element attrEle = bootEle.getChild("attributes");
+		if(attrEle!=null){
+			List<Element> attrEles = attrEle.getChildren("attribute");
+			if(attrEles!=null){
+				for(Element attr : attrEles){
+					attributes.put(attr.getAttributeValue("name"), attr.getText());
+				}
 			}
 		}
 	}

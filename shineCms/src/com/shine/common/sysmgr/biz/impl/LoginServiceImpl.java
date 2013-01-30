@@ -4,15 +4,15 @@ import java.util.List;
 
 import org.hibernate.Hibernate;
 
-import com.shine.common.sysmgr.biz.SysUserService;
-import com.shine.common.sysmgr.dao.SysUserDao;
-import com.shine.common.sysmgr.entity.SysFunction;
+import com.shine.common.sysmgr.biz.LoginService;
+import com.shine.common.sysmgr.dao.LoginDao;
+import com.shine.common.sysmgr.entity.SysFunctionUrl;
 import com.shine.common.sysmgr.entity.SysMenu;
 import com.shine.common.sysmgr.entity.SysUser;
 import com.shine.framework.biz.impl.GenericServiceImpl;
 import com.shine.framework.entity.PersistResult;
 
-public class SysUserServiceImpl extends GenericServiceImpl<SysUserDao> implements SysUserService{
+public class LoginServiceImpl extends GenericServiceImpl<LoginDao> implements LoginService{
 
 	@Override
 	public PersistResult login(String username,String password) {
@@ -33,18 +33,17 @@ public class SysUserServiceImpl extends GenericServiceImpl<SysUserDao> implement
 		pr.putData("user", user);
 		
 		List<SysMenu> menus = dao.loadMenusByUserId(user.getUserId());
-		List<SysFunction> funcs = dao.loadFuncsByUserId(user.getUserId());
+		List<SysFunctionUrl> urls = dao.loadFunctionUrlsByUserId(user.getUserId());
 		
-		//使功能的URL和SysMenu强制加载
-		if(funcs!=null){
-			for(SysFunction func : funcs){
-				Hibernate.initialize(func.getUrls());
-				Hibernate.initialize(func.getSysMenu());
+		//使功能和SysMenu强制加载
+		if(urls!=null){
+			for(SysFunctionUrl url : urls){
+				Hibernate.initialize(url.getFunc().getSysMenu());
 			}
 		}
 		
 		pr.putData("menus", menus);
-		pr.putData("funcs", funcs);
+		pr.putData("urls", urls);
 		return pr;
 	}
 	

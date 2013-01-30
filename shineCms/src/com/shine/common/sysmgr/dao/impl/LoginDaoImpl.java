@@ -2,13 +2,13 @@ package com.shine.common.sysmgr.dao.impl;
 
 import java.util.List;
 
-import com.shine.common.sysmgr.dao.SysUserDao;
-import com.shine.common.sysmgr.entity.SysFunction;
+import com.shine.common.sysmgr.dao.LoginDao;
+import com.shine.common.sysmgr.entity.SysFunctionUrl;
 import com.shine.common.sysmgr.entity.SysMenu;
 import com.shine.common.sysmgr.entity.SysUser;
 import com.shine.framework.dao.impl.BaseDaoImpl;
 
-public class SysUserDaoImpl extends BaseDaoImpl implements SysUserDao{
+public class LoginDaoImpl extends BaseDaoImpl implements LoginDao{
 
 	@Override
 	public SysUser getByUsername(String username) {
@@ -22,9 +22,9 @@ public class SysUserDaoImpl extends BaseDaoImpl implements SysUserDao{
 	}
 
 	@Override
-	public List<SysFunction> loadFuncsByUserId(int userId) {
-		String sql = "select f.* from SYS_FUNCTION f left join SYS_ROLE_FUNCTION rf on f.FUNID = rf.FUNID left join SYS_USER_ROLE ur on rf.ROLEID = ur.ROLEID where ur.USERID=? order by f.ORDERID asc";
-		return this.listBySQL(SysFunction.class, sql, new Object[]{userId});
+	public List<SysFunctionUrl> loadFunctionUrlsByUserId(int userId) {
+		String sql = "select u.* from SYS_FUNCTION_URL u left join SYS_FUNCTION f on u.FUNID = f.FUNID left join SYS_ROLE_FUNCTION rf on f.FUNID = rf.FUNID left join SYS_USER_ROLE ur on rf.ROLEID = ur.ROLEID where ur.USERID=? order by f.ORDERID asc";
+		return this.listBySQL(SysFunctionUrl.class, sql, new Object[]{userId});
 	}
 	
 }

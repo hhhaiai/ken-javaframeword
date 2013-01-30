@@ -74,6 +74,13 @@ $(document).ready(function() {
 								</td>
 							</tr>
 							<tr>
+								<td class="label">需要登录<span class="red">*</span>：</td>
+								<td>
+									<input id="loginNeed_1" type="radio" name="e.loginNeed" value="1" ${e.loginNeed==1?"checked='checked'":""} /><label for="loginNeed_1">是</label>
+									<input id="loginNeed_0" type="radio" name="e.loginNeed" value="0" ${e.loginNeed==null||e.loginNeed!=1?"checked='checked'":""} /><label for="loginNeed_0">否</label>
+								</td>
+							</tr>
+							<tr>
 								<td colspan="2" align="center">
 									<input type="button" value="提 交" onclick="submitForm();" />
 									<input type="button" value="取 消" onclick="cancel();" />

@@ -10,5 +10,6 @@
 		</id>
 		<property name="remark" column="REMARK" type="java.lang.String" length="50" not-null="false"/>
 		<property name="uurl" column="UURL" type="java.lang.String" length="500" not-null="true"/>
+		<property name="loginNeed" column="LOGINNEED" type="java.lang.Integer" length="1" not-null="true"/>
     </class>
 </hibernate-mapping>

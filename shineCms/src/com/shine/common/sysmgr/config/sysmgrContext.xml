@@ -16,20 +16,26 @@
     <!-- 用户密码加密接口 -->
 	<bean id="userPassGenerator" class="com.shine.platform.security.encrypt.SHAGenerator" scope="prototype"/>
     
-	<bean id="sysUserDao" class="com.shine.common.sysmgr.dao.impl.SysUserDaoImpl" parent="baseDao" scope="prototype"/>
-	<bean id="sysUserService" class="com.shine.common.sysmgr.biz.impl.SysUserServiceImpl" scope="prototype">
-		<property name="dao" ref="sysUserDao" />
+	<bean id="loginDao" class="com.shine.common.sysmgr.dao.impl.LoginDaoImpl" parent="baseDao" scope="prototype"/>
+	<bean id="loginService" class="com.shine.common.sysmgr.biz.impl.LoginServiceImpl" scope="prototype">
+		<property name="dao" ref="loginDao" />
 	</bean>
     
 	<bean id="loginAction" class="com.shine.common.sysmgr.web.LoginAction" scope="prototype">
 		<property name="userPassGenerator" ref="userPassGenerator" />
-		<property name="service" ref="sysUserService" />
+		<property name="service" ref="loginService" />
 	</bean>
 	<bean id="sysUserAction" class="com.shine.common.sysmgr.web.SysUserAction" parent="ajaxAction" scope="prototype">
 		<property name="userPassGenerator" ref="userPassGenerator" />
 	</bean>
 	<bean id="sysRoleAction" class="com.shine.common.sysmgr.web.SysRoleAction" parent="ajaxAction" scope="prototype"/>
-	<bean id="sysMenuAction" class="com.shine.common.sysmgr.web.SysMenuAction" parent="ajaxAction" scope="prototype"/>
-	<bean id="sysFunctionAction" class="com.shine.common.sysmgr.web.SysFunctionAction" parent="ajaxAction" scope="prototype"/>
-	<bean id="sysFreeUrlAction" class="com.shine.common.sysmgr.web.SysFreeUrlAction" parent="ajaxAction" scope="prototype"/>
+	<bean id="sysMenuAction" class="com.shine.common.sysmgr.web.SysMenuAction" parent="ajaxAction" scope="prototype">
+		<property name="urlSecurityContext" ref="urlSecurityContext" />
+	</bean>
+	<bean id="sysFunctionAction" class="com.shine.common.sysmgr.web.SysFunctionAction" parent="ajaxAction" scope="prototype">
+		<property name="urlSecurityContext" ref="urlSecurityContext" />
+	</bean>
+	<bean id="sysFreeUrlAction" class="com.shine.common.sysmgr.web.SysFreeUrlAction" parent="ajaxAction" scope="prototype">
+		<property name="urlSecurityContext" ref="urlSecurityContext" />
+	</bean>
 </beans>

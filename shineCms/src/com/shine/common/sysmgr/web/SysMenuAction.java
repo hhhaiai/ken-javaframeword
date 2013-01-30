@@ -8,12 +8,15 @@ import com.shine.framework.dao.util.QueryAnalyzer;
 import com.shine.framework.entity.BaseEntity;
 import com.shine.framework.entity.PersistResult;
 import com.shine.framework.web.AjaxAction;
+import com.shine.platform.security.UrlSecurityContext;
 
 public class SysMenuAction extends AjaxAction<BaseService>{
 
 	private static final long serialVersionUID = -8274394737739352L;
 	
 	private SysMenu e = new SysMenu();
+	
+	private UrlSecurityContext urlSecurityContext;
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -70,7 +73,8 @@ public class SysMenuAction extends AjaxAction<BaseService>{
 		try{
 			PersistResult pr = service.save(getE());
 			pr.putData("menuid", e.getMenuId());
-			
+			if(urlSecurityContext!=null)
+				urlSecurityContext.reload(3);	//更新URL权限管理上下文相关数据
 			printOutText(pr.toJson());
 		}catch(Exception e){
 			printOutText(new PersistResult(PersistResult.ERROR, PersistResult.MSG_ERROR).toJson());
@@ -80,7 +84,29 @@ public class SysMenuAction extends AjaxAction<BaseService>{
 
 	@Override
 	public void update() {
-		super.update();
+		try{
+			PersistResult pr = service.update(getE());
+			if(urlSecurityContext!=null)
+				urlSecurityContext.reload(3);	//更新URL权限管理上下文相关数据
+			printOutText(pr.toJson());
+		}catch(Exception e){
+			e.printStackTrace();
+			printOutText(new PersistResult(PersistResult.ERROR, PersistResult.MSG_ERROR).toJson());
+		}
+	}
+
+	@Override
+	public void delete() {
+		PersistResult pr = null;
+		try{
+			pr = doDelete();
+			if(urlSecurityContext!=null)
+				urlSecurityContext.reload(3);	//更新URL权限管理上下文相关数据
+			printOutText(pr.toJson());
+		}catch(Exception e){
+			e.printStackTrace();
+			printOutText(new PersistResult(PersistResult.ERROR, PersistResult.MSG_ERROR).toJson());
+		}
 	}
 
 	@Override
@@ -91,6 +117,10 @@ public class SysMenuAction extends AjaxAction<BaseService>{
 	@Override
 	protected void setE(BaseEntity e) {
 		this.e = (SysMenu)e;
+	}
+
+	public void setUrlSecurityContext(UrlSecurityContext urlSecurityContext) {
+		this.urlSecurityContext = urlSecurityContext;
 	}
 
 }

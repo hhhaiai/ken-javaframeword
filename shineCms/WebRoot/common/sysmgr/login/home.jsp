@@ -38,6 +38,7 @@ html, body{width:100%;height:100%;padding:0;margin:0;overflow:hidden;}
 			beforeClick: function(treeId, treeNode) {
 				var murl = treeNode.murl;
 				if(murl&&murl!=""){
+					murl = "${path}"+murl;
 					var nodeId = treeNode.id;
 					var tabId = tabElement.omTabs('getAlter', 'tab_'+nodeId);
 	        		if(tabId&&tabId!=null){

@@ -6,7 +6,7 @@ import com.shine.framework.entity.BaseEntity;
 /**
  * 自由权限URL,跳过权限控制的
  * @author JiangKunpeng 2013.01.29
- * @version 2013.01.29
+ * @version 2013.01.30
  *
  */
 public class SysFreeUrl implements BaseEntity {
@@ -16,6 +16,7 @@ public class SysFreeUrl implements BaseEntity {
 	private Integer urlId;
 	private String remark;
 	private String uurl;
+	private Integer loginNeed;
 
 	@Override
 	public QuerySQL getExistSQL() {
@@ -26,7 +27,11 @@ public class SysFreeUrl implements BaseEntity {
 	public boolean isVirtualDelete() {
 		return false;
 	}
-
+	
+	public String getLoginNeedText(){
+		return loginNeed!=null&&loginNeed==1?"是":"否";
+	}
+	
 	public Integer getUrlId() {
 		return urlId;
 	}
@@ -49,6 +54,14 @@ public class SysFreeUrl implements BaseEntity {
 
 	public void setUurl(String uurl) {
 		this.uurl = uurl;
+	}
+
+	public Integer getLoginNeed() {
+		return loginNeed;
+	}
+
+	public void setLoginNeed(Integer loginNeed) {
+		this.loginNeed = loginNeed;
 	}
 
 }

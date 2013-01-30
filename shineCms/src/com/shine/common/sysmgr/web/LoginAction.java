@@ -1,6 +1,6 @@
 package com.shine.common.sysmgr.web;
 
-import com.shine.common.sysmgr.biz.SysUserService;
+import com.shine.common.sysmgr.biz.LoginService;
 import com.shine.common.sysmgr.entity.SysUser;
 import com.shine.framework.entity.PersistResult;
 import com.shine.framework.web.GenericAction;
@@ -14,7 +14,7 @@ public class LoginAction extends GenericAction{
 	//密码加密接口
 	private UserPassGenerator userPassGenerator;
 	
-	private SysUserService service;
+	private LoginService service;
 	
 	/**
 	 * 进入登录页
@@ -43,7 +43,7 @@ public class LoginAction extends GenericAction{
 			if(pr.getCode()==PersistResult.SUCCESS){
 				session.setAttribute(ConfigFactory.SESSION_CURRENT_USER, pr.getData("user"));
 				session.setAttribute(ConfigFactory.SESSION_CURRENT_MENUS, pr.getData("menus"));
-				session.setAttribute(ConfigFactory.SESSION_CURRENT_FUNCS, pr.getData("funcs"));
+				session.setAttribute(ConfigFactory.SESSION_CURRENT_URLS, pr.getData("urls"));
 			}
 			
 			//设置成null，避免JSON打印异常
@@ -61,7 +61,7 @@ public class LoginAction extends GenericAction{
 	public void out(){
 		session.removeAttribute(ConfigFactory.SESSION_CURRENT_USER);
 		session.removeAttribute(ConfigFactory.SESSION_CURRENT_MENUS);
-		session.removeAttribute(ConfigFactory.SESSION_CURRENT_FUNCS);
+		session.removeAttribute(ConfigFactory.SESSION_CURRENT_URLS);
 	}
 	
 	/**
@@ -73,11 +73,11 @@ public class LoginAction extends GenericAction{
 		return "home";
 	}
 
-	public SysUserService getService() {
+	public LoginService getService() {
 		return service;
 	}
 
-	public void setService(SysUserService service) {
+	public void setService(LoginService service) {
 		this.service = service;
 	}
 

@@ -15,12 +15,15 @@ import com.shine.framework.dao.util.QueryItem;
 import com.shine.framework.entity.BaseEntity;
 import com.shine.framework.entity.PersistResult;
 import com.shine.framework.web.AjaxAction;
+import com.shine.platform.security.UrlSecurityContext;
 
 public class SysFunctionAction extends AjaxAction<BaseService> {
 
 	private static final long serialVersionUID = -7150171628156628085L;
 	private SysFunction e = new SysFunction();
 	private Integer menuId;	//菜单ID
+	
+	private UrlSecurityContext urlSecurityContext;
 	
 	@Override
 	public String enter() {
@@ -80,7 +83,10 @@ public class SysFunctionAction extends AjaxAction<BaseService> {
 	public void save() {
 		try{
 			extorChildren();
-			printOutText(service.save(getE()).toJson());
+			PersistResult pr = service.save(getE());
+			if(urlSecurityContext!=null)
+				urlSecurityContext.reload(2);	//更新URL权限管理上下文相关数据
+			printOutText(pr.toJson());
 		}catch(Exception e){
 			e.printStackTrace();
 			printOutText(new PersistResult(PersistResult.ERROR, PersistResult.MSG_ERROR).toJson());
@@ -90,7 +96,24 @@ public class SysFunctionAction extends AjaxAction<BaseService> {
 	@Override
 	public void update() {
 		extorChildren();
-		super.update();
+		PersistResult pr = service.update(getE());
+		if(urlSecurityContext!=null)
+			urlSecurityContext.reload(2);	//更新URL权限管理上下文相关数据
+		printOutText(pr.toJson());
+	}
+	
+	@Override
+	public void delete() {
+		PersistResult pr = null;
+		try{
+			pr = doDelete();
+			if(urlSecurityContext!=null)
+				urlSecurityContext.reload(2);	//更新URL权限管理上下文相关数据
+			printOutText(pr.toJson());
+		}catch(Exception e){
+			e.printStackTrace();
+			printOutText(new PersistResult(PersistResult.ERROR, PersistResult.MSG_ERROR).toJson());
+		}
 	}
 
 	@Override
@@ -109,6 +132,10 @@ public class SysFunctionAction extends AjaxAction<BaseService> {
 
 	public void setMenuId(Integer menuId) {
 		this.menuId = menuId;
+	}
+
+	public void setUrlSecurityContext(UrlSecurityContext urlSecurityContext) {
+		this.urlSecurityContext = urlSecurityContext;
 	}
 
 }

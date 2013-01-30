@@ -2,12 +2,12 @@ package com.shine.common.sysmgr.dao;
 
 import java.util.List;
 
-import com.shine.common.sysmgr.entity.SysFunction;
+import com.shine.common.sysmgr.entity.SysFunctionUrl;
 import com.shine.common.sysmgr.entity.SysMenu;
 import com.shine.common.sysmgr.entity.SysUser;
 import com.shine.framework.dao.BaseDao;
 
-public interface SysUserDao extends BaseDao{
+public interface LoginDao extends BaseDao{
 	
 	/**
 	 * 通过用户名查询
@@ -24,9 +24,9 @@ public interface SysUserDao extends BaseDao{
 	public abstract List<SysMenu> loadMenusByUserId(int userId);
 	
 	/**
-	 * 通过用户ID查询功能权限
+	 * 通过用户ID查询URL权限
 	 * @param userId
 	 * @return
 	 */
-	public abstract List<SysFunction> loadFuncsByUserId(int userId);
+	public abstract List<SysFunctionUrl> loadFunctionUrlsByUserId(int userId);
 }

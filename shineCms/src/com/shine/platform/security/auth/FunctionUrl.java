@@ -10,6 +10,8 @@ import java.io.Serializable;
  */
 public interface FunctionUrl extends Serializable {
 	
+	public abstract Integer getUrlId();
+	
 	/**
 	 * 获取功能
 	 * @return

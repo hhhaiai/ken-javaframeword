@@ -13,4 +13,9 @@
 		<plugin>com.shine.platform.security.DefaultUrlSecurityPlugin</plugin>
 		<plugin>com.shine.common.sysmgr.SysMgrPlugin</plugin>
 	</plugins>
+	<attributes>
+	<!-- 
+		<attribute name="authorityCheck">false</attribute>
+	 -->
+	</attributes>
 </boot>
