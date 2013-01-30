@@ -152,6 +152,15 @@ public class DBModel extends ArrayList<DBRowModel> {
 	}
 
 	/**
+	 * 导入json数据
+	 * 
+	 * @param json
+	 */
+	public void setJsonValue(String json) {
+		setXmlValue(XmlConverUtil.jsontoXml(json));
+	}
+
+	/**
 	 * 获取某行的数据
 	 * 
 	 * @param i
