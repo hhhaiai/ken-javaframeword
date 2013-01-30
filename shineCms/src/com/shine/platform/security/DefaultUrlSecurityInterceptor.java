@@ -33,6 +33,9 @@ public class DefaultUrlSecurityInterceptor extends AbstractInterceptor{
 	//头文件类型表示为Ajax的值(JQuery、Ext等脚本框架均使用这个值,如果自定义的Ajax提交也需设置这个头文件才能判别出来)
 	private static final String AjaxHeaderValue = "XMLHttpRequest";
 	
+	private static final String NoAuthority = "noauthority";		//没权限返回的值
+	private static final String TimeOut = "timeout";				//没登录或登录超时返回的值
+	
 	private UrlSecurityContext urlSecurityContext;
 
 	@Override
@@ -101,7 +104,6 @@ public class DefaultUrlSecurityInterceptor extends AbstractInterceptor{
 		if(checkSession&&user==null){
 			status = 2;
 		}
-		System.out.println(uri + " -> " + status);
 		if(status!=0){
 			PersistResult pr = null;
 			String requestType = request.getHeader(RequestHeaderType);
@@ -112,15 +114,15 @@ public class DefaultUrlSecurityInterceptor extends AbstractInterceptor{
 					printOutText(invocation, pr.toJson());
 					return null;
 				}else{
-					return "noauthority";
+					return NoAuthority;
 				}
 			case 2:
 				pr = new PersistResult(PersistResult.TIMEOUT, PersistResult.MSG_TIMEOUT);
-				if("XMLHttpRequest".equals(requestType)){
+				if(AjaxHeaderValue.equals(requestType)){
 					printOutText(invocation, pr.toJson());
 					return null;
 				}else{
-					return "timeout";
+					return TimeOut;
 				}
 			default:
 				break;
