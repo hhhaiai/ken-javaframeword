@@ -8,7 +8,7 @@ import com.shine.platform.plugin.IPlugin;
 /**
  * 平台插件
  * @author JiangKunpeng 2012.02.15
- * @version 2012.03.01
+ * @version 2013.01.30
  */
 public class PlatformPlugin implements IPlugin{
 	ILogger logger = LoggerFactory.getLogger(getClass());
@@ -23,7 +23,6 @@ public class PlatformPlugin implements IPlugin{
 	public void init() {
 		logger.debug("初始化插件[" + getName() + "]");
 		ConfigFactory.getFactory().registerSpringPluginXml("classpath:com/shine/platform/platformContext.xml");
-		ConfigFactory.getFactory().registerStrutsPluginXml(getClass().getResource("platformStruts.xml").getPath());
 	}
 
 	public void start() {

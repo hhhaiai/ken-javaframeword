@@ -15,5 +15,4 @@
          
 	<bean id="pluginContext" class="com.shine.platform.plugin.PluginContext" scope="singleton"/>
 	<bean id="configFactory" class="com.shine.platform.context.ConfigFactory" factory-method="getFactory"/>
-	<bean id="indexAction" class="com.shine.platform.web.IndexAction"/>
 </beans>
