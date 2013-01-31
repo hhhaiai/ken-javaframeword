@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin-xmls name="平台插件">
+	<xml type="spring">classpath:com/shine/platform/config/platformSpring.xml</xml>
+</plugin-xmls>

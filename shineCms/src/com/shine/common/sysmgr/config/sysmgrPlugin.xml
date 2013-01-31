@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin-xmls name="系统管理">
+	<xml type="spring">classpath:com/shine/common/sysmgr/config/sysmgrSpring.xml</xml>
+	<xml type="struts">classpath:com/shine/common/sysmgr/config/sysmgrStruts.xml</xml>
+</plugin-xmls>

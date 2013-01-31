@@ -9,7 +9,7 @@ import com.shine.platform.logger.LoggerFactory;
 /**
  * 插件上下文
  * @author JiangKunpeng 2012.02.12
- * @version 2012.02.19
+ * @version 2013.01.31
  */
 public class PluginContext{
 	private static final PluginContext context = new PluginContext();
@@ -25,19 +25,25 @@ public class PluginContext{
 	
 	/**
 	 * 实例化并注册插件
-	 * @param className
+	 * @param pluginPath
 	 */
-	public void registerPlugin(String className){
+	public void registerPlugin(String pluginPath){
 		try {
-			Class<? extends Object> clazz = Class.forName(className);
-			IPlugin plugin = (IPlugin)clazz.newInstance();
+			IPlugin plugin = null;
+			//xml插件
+			if(pluginPath.toLowerCase().endsWith(".xml")){
+				plugin = new XmlPlugin(pluginPath);
+			}else{	//Class插件
+				Class<? extends Object> clazz = Class.forName(pluginPath);
+				plugin = (IPlugin)clazz.newInstance();
+			}
 			registerPlugin(plugin);
 		} catch (ClassNotFoundException e) {
-			logger.error("找不到插件类:" + className, e);
+			logger.error("找不到插件类:" + pluginPath, e);
 		} catch (InstantiationException e) {
-			logger.error("实例化插件异常：" + className, e);
+			logger.error("实例化插件异常：" + pluginPath, e);
 		} catch (IllegalAccessException e) {
-			logger.error("无权实例化插件：" + className, e);
+			logger.error("无权实例化插件：" + pluginPath, e);
 		}
 	}
 	

@@ -73,20 +73,4 @@
 		<aop:advisor advice-ref="transactionAdvice" pointcut="execution(* com.shine.**.biz.impl.*.*(..))"/>
 	</aop:config>
 	
-	<bean id="genericDao" class="com.shine.framework.dao.impl.GenericDaoImpl">
-		<property name="sessionFactory" ref="sessionFactory"/>
-	</bean>
-	<bean id="baseDao" class="com.shine.framework.dao.impl.BaseDaoImpl" parent="genericDao"/>
-	<bean id="baseService" class="com.shine.framework.biz.impl.BaseServiceImpl">
-		<property name="dao" ref="baseDao"/>
-	</bean>
-	<!-- JSON  -->
-	<bean id="jsonformat" class="com.shine.framework.web.json.OmuiJsonFormat"/> 
-	<bean id="baseAction" class="com.shine.framework.web.BaseAction" abstract="true" scope="prototype">
-		<property name="service" ref="baseService" />
-		<property name="jsonformat" ref="jsonformat" />
-	</bean>
-	<bean id="ajaxAction" class="com.shine.framework.web.AjaxAction" abstract="true" parent="baseAction"/>
-	<bean id="ordinaryAction" class="com.shine.framework.web.OrdinaryAction" abstract="true" parent="baseAction"/>
-	
 </beans>

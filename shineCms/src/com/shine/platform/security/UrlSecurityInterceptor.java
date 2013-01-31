@@ -20,11 +20,11 @@ import com.shine.platform.security.auth.Menu;
 import com.shine.platform.security.auth.User;
 
 /**
- * 默认URL权限拦截器
+ * URL权限拦截器
  * @author JiangKunpeng 2012.02.29
  * @version 2013.01.30
  */
-public class DefaultUrlSecurityInterceptor extends AbstractInterceptor{
+public class UrlSecurityInterceptor extends AbstractInterceptor{
 
 	private static final long serialVersionUID = 7676294474119408460L;
 
@@ -134,7 +134,7 @@ public class DefaultUrlSecurityInterceptor extends AbstractInterceptor{
 	private final static String CONTENT_TYPE_HTML = "text/html;charset=UTF-8";
 	
 	/**
-	 * 输出文字
+	 * 输出字符串
 	 * @param invocation
 	 * @param text
 	 */

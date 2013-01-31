@@ -14,7 +14,7 @@
     
     <package name="back" extends="struts-default" abstract="true">
     	<interceptors>
-    		<interceptor name="urlSecurityInterceptor" class="defaultUrlSecurityInterceptor" />
+    		<interceptor name="urlSecurityInterceptor" class="urlSecurityInterceptor" />
     		<interceptor name="exception" class="com.opensymphony.xwork2.interceptor.ExceptionMappingInterceptor"/>
     		<interceptor-stack name="appStack">
     			<interceptor-ref name="defaultStack"/>

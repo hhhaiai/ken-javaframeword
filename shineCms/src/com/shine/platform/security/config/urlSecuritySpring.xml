@@ -16,7 +16,7 @@
     <bean id="urlSecurityContext" class="com.shine.platform.security.UrlSecurityContext" scope="singleton" init-method="init">
     	<property name="sessionFactory" ref="sessionFactory" />
     </bean>
-	<bean id="defaultUrlSecurityInterceptor" class="com.shine.platform.security.DefaultUrlSecurityInterceptor" scope="prototype">
+	<bean id="urlSecurityInterceptor" class="com.shine.platform.security.UrlSecurityInterceptor" scope="prototype">
 		<property name="urlSecurityContext" ref="urlSecurityContext" />
 	</bean>
 </beans>

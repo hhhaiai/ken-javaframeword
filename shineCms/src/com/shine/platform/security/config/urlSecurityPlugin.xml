@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin-xmls name="URL权限控制">
+	<xml type="spring">classpath:com/shine/platform/security/config/urlSecuritySpring.xml</xml>
+	<xml type="struts">classpath:com/shine/platform/security/config/urlSecurityStruts.xml</xml>
+</plugin-xmls>
