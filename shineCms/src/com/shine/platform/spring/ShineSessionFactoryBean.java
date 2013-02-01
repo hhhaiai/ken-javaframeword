@@ -8,7 +8,6 @@ import org.hibernate.cfg.Configuration;
 import org.springframework.orm.hibernate3.LocalSessionFactoryBean;
 
 import com.shine.platform.context.ConfigFactory;
-import com.shine.platform.plugin.HbmListBean;
 
 /**
  * 重写Spring的LocalSessionFactoryBean，支持通过插件加载hbm配置

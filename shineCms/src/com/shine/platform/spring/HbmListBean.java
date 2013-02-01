@@ -1,4 +1,4 @@
-package com.shine.platform.plugin;
+package com.shine.platform.spring;
 
 import java.io.Serializable;
 import java.util.ArrayList;

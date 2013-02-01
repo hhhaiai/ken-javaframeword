@@ -10,6 +10,7 @@ import org.jdom.Element;
 import com.shine.platform.context.ConfigFactory;
 import com.shine.platform.logger.ILogger;
 import com.shine.platform.logger.LoggerFactory;
+import com.shine.platform.spring.HbmListBean;
 import com.shine.util.xml.JDomUtil;
 
 /**

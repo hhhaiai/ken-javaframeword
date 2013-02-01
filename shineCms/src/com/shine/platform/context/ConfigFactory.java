@@ -12,8 +12,8 @@ import javax.servlet.ServletContext;
 import org.jdom.Element;
 import org.springframework.context.ApplicationContext;
 
-import com.shine.platform.plugin.HbmListBean;
 import com.shine.platform.plugin.PluginContext;
+import com.shine.platform.spring.HbmListBean;
 import com.shine.util.ArrayUtil;
 import com.shine.util.xml.JDomUtil;
 
@@ -31,7 +31,7 @@ final public class ConfigFactory {
 	private String appContext;	//系统应用名,及中间件中的名称
 	private String appName;		//系统中文名称
 	private String indexPage;	//首页
-	private ApplicationContext springContext;
+	private ApplicationContext springContext;		//spring上下文
 	private List<String> springXmls = new ArrayList<String>();			//要加载的spring配置文件路径
 	private List<String> springMvcXmls = new ArrayList<String>();		//要加载的springMvc配置文件路劲
 	private List<String> strutsXmls = new ArrayList<String>();			//要加载的struts配置文件路劲
