@@ -15,16 +15,13 @@
 	
 	<!-- 防止内存泄漏 -->
 	<listener>
-		<listener-class>
-			org.springframework.web.util.IntrospectorCleanupListener
-		</listener-class>
+		<listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
 	</listener>
 	
+	<!-- 为每次视图访问开启一个数据库Session，避免在视图（Action/Jsp）中获取延时加载的数据时出现no session异常 -->
 	<filter>
 		<filter-name>osivFilter</filter-name>
-		<filter-class>
-			org.springframework.orm.hibernate3.support.OpenSessionInViewFilter
-		</filter-class>
+		<filter-class>org.springframework.orm.hibernate3.support.OpenSessionInViewFilter</filter-class>
 		<init-param>
 			<param-name>singleSession</param-name>
 			<param-value>false</param-value>
@@ -61,9 +58,10 @@
 		<url-pattern>/</url-pattern>
 	</filter-mapping>
 	
-	<!-- Spring 与mvc中不要重复 org.springframework.web.context.ContextLoaderListener -->
+	<!-- Spring监听器， contextConfigLocation值已改成通过插件加载
+		与mvc中不要重复 org.springframework.web.context.ContextLoaderListener -->
 	<listener>
-		<listener-class>com.shine.platform.context.ShineContextLoaderListener</listener-class>
+		<listener-class>com.shine.platform.spring.ShineContextLoaderListener</listener-class>
 	</listener>
 	<!-- 
 	<context-param>
@@ -74,7 +72,7 @@
 	
 	<filter>
 		<filter-name>struts2</filter-name>
-		<filter-class>com.shine.platform.context.StrutsFilterDispatcher</filter-class>
+		<filter-class>com.shine.platform.struts.StrutsFilterDispatcher</filter-class>
 		<init-param>
 		    <param-name>config</param-name> 
 		    <param-value>struts-default.xml,struts-plugin.xml</param-value> 
