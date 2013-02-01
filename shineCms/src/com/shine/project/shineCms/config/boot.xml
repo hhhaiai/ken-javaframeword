@@ -10,13 +10,15 @@
 	</beforeXmls>
 	<plugins>
 		<plugin>classpath:com/shine/platform/config/platformPlugin.xml</plugin>
-		<plugin>classpath:com/shine/platform/security/config/urlSecurityPlugin.xml</plugin>
 		<plugin>classpath:com/shine/framework/config/frameworkPlugin.xml</plugin>
+		<!-- 
+		 -->
+		<plugin>com.shine.platform.security.UrlSecurityPlugin</plugin>
 		<plugin>classpath:com/shine/common/sysmgr/config/sysmgrPlugin.xml</plugin>
 	</plugins>
 	<attributes>
-	<!-- 
-		<attribute name="authorityCheck">false</attribute>
+	<!-- 添加附加属性
+		<attribute name="attrname">attrvalue</attribute>
 	 -->
 	</attributes>
 </boot>
