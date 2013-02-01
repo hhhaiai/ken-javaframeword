@@ -1,4 +1,4 @@
-package com.shine.platform.context;
+package com.shine.platform.spring;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
@@ -6,7 +6,6 @@ import javax.servlet.ServletContextEvent;
 import org.springframework.beans.BeanUtils;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextException;
-import org.springframework.orm.hibernate3.LocalSessionFactoryBean;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.context.ConfigurableWebApplicationContext;
 import org.springframework.web.context.ContextLoader;
@@ -14,6 +13,7 @@ import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
+import com.shine.platform.context.ConfigFactory;
 import com.shine.platform.logger.LoggerFactory;
 import com.shine.platform.plugin.PluginContext;
 
@@ -22,7 +22,7 @@ import com.shine.platform.plugin.PluginContext;
  * (重写spring上下文监听器,加载spring前加载系统参数并扫描系统插件,<br/>
  * 加载spring同时初始化插件,加载spring后启动插件)
  * @author JiangKunpeng 2012.02.14
- * @version 2012.02.17
+ * @version 2013.01.31
  */
 @SuppressWarnings("deprecation")
 public class ShineContextLoaderListener extends ContextLoaderListener{
@@ -63,7 +63,6 @@ public class ShineContextLoaderListener extends ContextLoaderListener{
 		String fusionConfigLocation = ConfigFactory.getFactory().fusionSpringXml(configLocation, "Spring");
 		
 		LoggerFactory.getLogger(getClass()).debug("Spring XMLs:\r\n" + (fusionConfigLocation.replaceAll(",", "\r\n")));
-		
 		wac.setParent(parent);
 		wac.setServletContext(sc);
 		wac.setConfigLocation(fusionConfigLocation);
@@ -97,10 +96,6 @@ public class ShineContextLoaderListener extends ContextLoaderListener{
 		this.contextLoader.initWebApplicationContext(event.getServletContext());
 		
 		ApplicationContext springContext = WebApplicationContextUtils.getWebApplicationContext(event.getServletContext());
-		
-		//注入hibernate映射文件(不行)
-//		LocalSessionFactoryBean sb = (LocalSessionFactoryBean)springContext.getBean("&sessionFactory");
-//		sb.setMappingResources(new String[]{"classpath*:com/shine/common/**/entity/hbm/*.hbm.xml"});
 		
 		//注入Spring上下文到系统配置工厂
 		ConfigFactory.getFactory().setSpringContext(springContext);

@@ -12,6 +12,7 @@ import javax.servlet.ServletContext;
 import org.jdom.Element;
 import org.springframework.context.ApplicationContext;
 
+import com.shine.platform.plugin.HbmListBean;
 import com.shine.platform.plugin.PluginContext;
 import com.shine.util.ArrayUtil;
 import com.shine.util.xml.JDomUtil;
@@ -19,7 +20,7 @@ import com.shine.util.xml.JDomUtil;
 /**
  * 系统配置工厂
  * @author JiangKunpeng 2012.02.15
- * @version 2013.01.30
+ * @version 2013.02.01
  */
 @SuppressWarnings("unchecked")
 final public class ConfigFactory {
@@ -31,15 +32,21 @@ final public class ConfigFactory {
 	private String appName;		//系统中文名称
 	private String indexPage;	//首页
 	private ApplicationContext springContext;
-	private List<String> springPluginXmls = new ArrayList<String>();
-	private List<String> springMvcPluginXmls = new ArrayList<String>();
-	private List<String> strutsPluginXmls = new ArrayList<String>();
-	private ProjectStarterListener projectStarterListener = null;	//项目启动监听器
+	private List<String> springXmls = new ArrayList<String>();			//要加载的spring配置文件路径
+	private List<String> springMvcXmls = new ArrayList<String>();		//要加载的springMvc配置文件路劲
+	private List<String> strutsXmls = new ArrayList<String>();			//要加载的struts配置文件路劲
+	private List<HbmListBean> hbmList = new ArrayList<HbmListBean>();	//要加载的hbm配置文件
+	private ProjectStarterListener projectStarterListener = null;		//项目启动监听器
 	
 	//存在SESSION中的当前登录用户、用户菜单、URL的键
 	public static final String SESSION_CURRENT_USER = "CURRENT_USER";
 	public static final String SESSION_CURRENT_MENUS = "CURRENT_MENUS";
 	public static final String SESSION_CURRENT_URLS = "CURRENT_URLS";
+	
+	public static final String XmlTypeSpring = "spring";
+	public static final String XmlTypeStruts = "struts";
+	public static final String XmlTypeHbm = "hbm";
+	public static final String ClassPath = "classpath:";	//xml配置中表示系统class根目录的标识
 	
 	private ConfigFactory(){
 	}
@@ -97,10 +104,10 @@ final public class ConfigFactory {
 		if(initXmls!=null){
 			for(Element xml:initXmls){
 				String xmlType = xml.getAttributeValue("type");
-				if("spring".equals(xmlType))
-					registerSpringPluginXml(xml.getValue());
-				else if("struts".equals(xmlType))
-					registerStrutsPluginXml(xml.getValue());
+				if(XmlTypeSpring.equals(xmlType))
+					registerSpringXml(xml.getValue());
+				else if(XmlTypeStruts.equals(xmlType))
+					registerStrutsXml(xml.getValue());
 			}
 		}
 		List<Element> plugins = JDomUtil.getSunList(bootEle, "plugins");
@@ -123,27 +130,35 @@ final public class ConfigFactory {
 	}
 	
 	/**
-	 * 注入Struts插件配置文件
+	 * 注入Struts配置文件
 	 * @param xmlPath
 	 */
-	public void registerStrutsPluginXml(final String xmlPath){
-		ArrayUtil.addNoReplaceRepeat(strutsPluginXmls, xmlPath);
+	public void registerStrutsXml(final String xmlPath){
+		ArrayUtil.addNoReplaceRepeat(strutsXmls, xmlPath);
 	}
 	
 	/**
-	 * 注入Spring插件配置文件
+	 * 注入Spring配置文件
 	 * @param xmlPath
 	 */
-	public void registerSpringPluginXml(final String xmlPath){
-		ArrayUtil.addNoReplaceRepeat(springPluginXmls, xmlPath);
+	public void registerSpringXml(final String xmlPath){
+		ArrayUtil.addNoReplaceRepeat(springXmls, xmlPath);
 	}
 	
 	/**
-	 * 注入SpringMvc插件配置文件
+	 * 注入SpringMvc配置文件
 	 * @param xmlPath
 	 */
-	public void registerSpringMvcPluginXml(final String xmlPath){
-		ArrayUtil.addNoReplaceRepeat(springMvcPluginXmls, xmlPath);
+	public void registerSpringMvcXml(final String xmlPath){
+		ArrayUtil.addNoReplaceRepeat(springMvcXmls, xmlPath);
+	}
+	
+	/**
+	 * 注入Hbm配置
+	 * @param hbm
+	 */
+	public void registerHbmListBean(final HbmListBean hbm){
+		hbmList.add(hbm);
 	}
 	
 	/**
@@ -154,9 +169,9 @@ final public class ConfigFactory {
 	 */
 	public String fusionSpringXml(final String configLocation,final String type){
 		if("Spring".equals(type))
-			return fusionSpringXml(configLocation, getSpringPluginXmls());
+			return fusionSpringXml(configLocation, getSpringXmls());
 		else if("SpringMvc".equals(type))
-			return fusionSpringXml(configLocation, getSpringMvcPluginXmls());
+			return fusionSpringXml(configLocation, getSpringMvcXmls());
 		return configLocation;
 	}
 	
@@ -201,16 +216,19 @@ final public class ConfigFactory {
 	public void setSpringContext(ApplicationContext springContext) {
 		this.springContext = springContext;
 	}
-	public List<String> getSpringPluginXmls() {
-		return springPluginXmls;
+	public List<String> getSpringXmls() {
+		return springXmls;
 	}
-	public List<String> getSpringMvcPluginXmls() {
-		return springMvcPluginXmls;
+	public List<String> getSpringMvcXmls() {
+		return springMvcXmls;
 	}
-	public List<String> getStrutsPluginXmls() {
-		return strutsPluginXmls;
+	public List<String> getStrutsXmls() {
+		return strutsXmls;
 	}
 	public ProjectStarterListener getProjectStarterListener() {
 		return projectStarterListener;
+	}
+	public List<HbmListBean> getHbmList() {
+		return hbmList;
 	}
 }

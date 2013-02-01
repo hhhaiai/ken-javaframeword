@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin-xmls name="CURD框架">
 	<xml type="spring">classpath:com/shine/framework/config/frameworkSpring.xml</xml>
+	<xml type="struts">classpath:com/shine/framework/config/frameworkStruts.xml</xml>
 </plugin-xmls>

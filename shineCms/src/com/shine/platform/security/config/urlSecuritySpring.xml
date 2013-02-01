@@ -13,10 +13,7 @@
            http://www.springframework.org/schema/aop
            http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
     
-    <bean id="urlSecurityContext" class="com.shine.platform.security.UrlSecurityContext" scope="singleton" init-method="init">
+    <bean id="urlSecurityContext" class="com.shine.platform.security.UrlSecurityContext" scope="singleton">
     	<property name="sessionFactory" ref="sessionFactory" />
     </bean>
-	<bean id="urlSecurityInterceptor" class="com.shine.platform.security.UrlSecurityInterceptor" scope="prototype">
-		<property name="urlSecurityContext" ref="urlSecurityContext" />
-	</bean>
 </beans>

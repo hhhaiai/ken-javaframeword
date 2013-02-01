@@ -70,7 +70,7 @@ final public class ArrayUtil {
 	 * @param value		要加入的值
 	 * @return
 	 */
-	public static List<String> addNoReplaceRepeat(List<String> dest,String value){
+	public static <T> List<T> addNoReplaceRepeat(List<T> dest,T value){
 		boolean repeat = false;
 		int len = dest.size();
 		for(int i=0;i<len;i++){
@@ -90,8 +90,8 @@ final public class ArrayUtil {
 	 * @param values	要加入的值的List(将该List中的所有值加入dest)
 	 * @return
 	 */
-	public static List<String> addAllNoReplaceRepeat(List<String> dest,List<String> values){
-		for(String v:values){
+	public static <T> List<T> addAllNoReplaceRepeat(List<T> dest,List<T> values){
+		for(T v:values){
 			addNoReplaceRepeat(dest, v);
 		}
 		return dest;

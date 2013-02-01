@@ -29,4 +29,7 @@
 	<bean id="ajaxAction" class="com.shine.framework.web.AjaxAction" abstract="true" parent="baseAction"/>
 	<bean id="ordinaryAction" class="com.shine.framework.web.OrdinaryAction" abstract="true" parent="baseAction"/>
 	
+	<bean id="shineInterceptor" class="com.shine.platform.struts.ShineInterceptor" scope="prototype">
+		<property name="urlSecurityContext" ref="urlSecurityContext" />
+	</bean>
 </beans>

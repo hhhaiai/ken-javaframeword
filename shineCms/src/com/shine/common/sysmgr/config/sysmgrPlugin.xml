@@ -2,4 +2,12 @@
 <plugin-xmls name="系统管理">
 	<xml type="spring">classpath:com/shine/common/sysmgr/config/sysmgrSpring.xml</xml>
 	<xml type="struts">classpath:com/shine/common/sysmgr/config/sysmgrStruts.xml</xml>
+	<xml type="hbm"><!-- 可设置sessionFactory属性匹配sessionFactoryBean的id属性 -->
+		<hbm>classpath:com/shine/common/sysmgr/entity/hbm/SysUser.hbm.xml</hbm>
+		<hbm>classpath:com/shine/common/sysmgr/entity/hbm/SysRole.hbm.xml</hbm>
+		<hbm>classpath:com/shine/common/sysmgr/entity/hbm/SysMenu.hbm.xml</hbm>
+		<hbm>classpath:com/shine/common/sysmgr/entity/hbm/SysFunction.hbm.xml</hbm>
+		<hbm>classpath:com/shine/common/sysmgr/entity/hbm/SysFunctionUrl.hbm.xml</hbm>
+		<hbm>classpath:com/shine/common/sysmgr/entity/hbm/SysFreeUrl.hbm.xml</hbm>
+	</xml>
 </plugin-xmls>

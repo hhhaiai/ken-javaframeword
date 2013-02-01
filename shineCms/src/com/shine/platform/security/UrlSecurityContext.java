@@ -4,20 +4,26 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.struts2.StrutsStatics;
 import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
+import com.opensymphony.xwork2.ActionInvocation;
 import com.shine.common.sysmgr.entity.SysFreeUrl;
 import com.shine.framework.exception.DataAccessException;
+import com.shine.platform.context.ConfigFactory;
 import com.shine.platform.security.auth.FunctionUrl;
 import com.shine.platform.security.auth.Menu;
+import com.shine.platform.security.auth.User;
 
 /**
  * URL权限数据上下文,通过Spring配置为单例
  * @author JiangKunpeng	2013.01.29
- * @version	2013.01.30
+ * @version	2013.02.01
  *
  */
 public class UrlSecurityContext {
@@ -153,7 +159,7 @@ public class UrlSecurityContext {
 	 * @param url
 	 * @return
 	 */
-	public SysFreeUrl getFreeUrl(String url){
+	private SysFreeUrl getFreeUrl(String url){
 		return freeMap.get(url);
 	}
 
@@ -162,7 +168,7 @@ public class UrlSecurityContext {
 	 * @param url
 	 * @return
 	 */
-	public FunctionUrl getUrl(String url){
+	private FunctionUrl getUrl(String url){
 		return urlMap.get(url);
 	}
 	
@@ -171,7 +177,77 @@ public class UrlSecurityContext {
 	 * @param url
 	 * @return
 	 */
-	public Menu getMenu(String url){
+	private Menu getMenu(String url){
 		return menuMap.get(url);
+	}
+	
+	/**
+	 * 进行Struts权限验证
+	 * @param invocation
+	 * @return	0：通过，1：无权限，2：未登录或登录超时
+	 */
+	public int validate(ActionInvocation invocation){
+		HttpServletRequest request = (HttpServletRequest)invocation.getInvocationContext().get(StrutsStatics.HTTP_REQUEST);
+		
+		String uri = request.getRequestURI();
+		String appContext = ConfigFactory.getFactory().getAppContext();
+		int idx = uri.indexOf(appContext);
+		if(idx!=-1){
+			uri = uri.substring(idx+appContext.length());
+		}
+		SysFreeUrl freeUrl = getFreeUrl(uri);
+		List<Menu> myMenus = null;
+		User user = (User)request.getSession().getAttribute(ConfigFactory.SESSION_CURRENT_USER);
+		int status = 0;
+		boolean checkSession = false;	//是否需再检测当前登录用户
+		out:
+		if(freeUrl!=null){
+			if(freeUrl.getLoginNeed()!=null&&freeUrl.getLoginNeed()==1){
+				if(user==null){
+					status = 2;
+					break out;
+				}
+			}
+		}else{
+			Menu menu = getMenu(uri);
+			if(menu==null){
+				FunctionUrl furl = getUrl(uri);
+				if(furl!=null){
+					status = 1;
+					List<FunctionUrl> myUrls = (List<FunctionUrl>)request.getSession().getAttribute(ConfigFactory.SESSION_CURRENT_URLS);
+					if(myUrls!=null){
+						for(FunctionUrl myUrl : myUrls){
+							if(furl.getUrlId().equals(myUrl.getUrlId())){
+								status = 0;
+								//这里可做简单的日志记录
+								System.out.println("进入："+furl.getFunction().getMenu().getMenuName()+"->"+furl.getFunction().getFunName());
+								break out;
+							}
+						}
+					}else{
+						checkSession = true;
+					}
+				}
+			}else{
+				status = 1;
+				myMenus = (List<Menu>)request.getSession().getAttribute(ConfigFactory.SESSION_CURRENT_MENUS);
+				if(myMenus!=null){
+					for(Menu myMenu : myMenus){
+						if(menu.getMenuId().equals(myMenu.getMenuId())){
+							status = 0;
+							System.out.println("进入：" + menu.getMenuName());
+							break out;
+						}
+					}
+				}else{
+					checkSession = true;
+				}
+			}
+		}
+		//如果没被自由权限URL过滤并没从SESSION中获取到任何权限数据则说明用户未登录或登录超时
+		if(checkSession&&user==null){
+			status = 2;
+		}
+		return status;
 	}
 }

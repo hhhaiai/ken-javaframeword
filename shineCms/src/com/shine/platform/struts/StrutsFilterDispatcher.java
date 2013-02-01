@@ -1,4 +1,4 @@
-package com.shine.platform.context;
+package com.shine.platform.struts;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -15,10 +15,11 @@ import org.apache.struts2.dispatcher.ng.PrepareOperations;
 import org.apache.struts2.dispatcher.ng.filter.FilterHostConfig;
 import org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter;
 
+import com.shine.platform.context.ConfigFactory;
 import com.shine.platform.logger.LoggerFactory;
 
 /**
- * 通过插件动态加载struts配置文件
+ * 修改Struts的过滤器，通过插件动态加载struts配置文件
  * @author JiangKunpeng 2012.02.28
  * @version 2012.02.29
  */
@@ -60,11 +61,11 @@ public class StrutsFilterDispatcher extends StrutsPrepareAndExecuteFilter{
 	    StringBuffer strutsXmls = new StringBuffer(100);
 	    if(defaultCfg!=null){
 	    	strutsXmls.append(defaultCfg);
-	    	for(String xml : ConfigFactory.getFactory().getStrutsPluginXmls()){
+	    	for(String xml : ConfigFactory.getFactory().getStrutsXmls()){
 	    		strutsXmls.append(",").append(xml.replaceAll("%20", " "));
 	    	}
 	    }else{
-	    	for(String xml : ConfigFactory.getFactory().getStrutsPluginXmls()){
+	    	for(String xml : ConfigFactory.getFactory().getStrutsXmls()){
 	    		strutsXmls.append(xml.replaceAll("%20", " ")).append(",");
 	    	}
 	    	int len = strutsXmls.length();

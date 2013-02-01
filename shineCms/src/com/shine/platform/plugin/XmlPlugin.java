@@ -13,9 +13,9 @@ import com.shine.platform.logger.LoggerFactory;
 import com.shine.util.xml.JDomUtil;
 
 /**
- * XML配置插件,通过xml文件配置加载spring、struts配置文件
+ * XML配置插件,通过xml文件配置加载spring、struts、hbm配置文件
  * @author JiangKunpeng 2013.01.31
- * @version 2013.01.31
+ * @version 2013.02.01
  *
  */
 public class XmlPlugin implements IPlugin{
@@ -23,15 +23,11 @@ public class XmlPlugin implements IPlugin{
 	private Set<String> springXmls = new HashSet<String>();
 	private Set<String> strutsXmls = new HashSet<String>();
 	
-	private static final String TypeSpring = "spring";
-	private static final String TypeStruts = "struts";
-	private static final String ClassPath = "classpath:";
-	
 	ILogger logger = LoggerFactory.getLogger(getClass());
 	
 	public XmlPlugin(String xmlPath){
-		if(xmlPath.startsWith(ClassPath))
-			xmlPath = xmlPath.replace(ClassPath, getClass().getResource("/").getPath());
+		if(xmlPath.startsWith(ConfigFactory.ClassPath))
+			xmlPath = xmlPath.replace(ConfigFactory.ClassPath, getClass().getResource("/").getPath());
 		Document doc = JDomUtil.file2Doc(xmlPath);
 		Element root = doc.getRootElement();
 		this.name = root.getAttributeValue("name");
@@ -40,10 +36,22 @@ public class XmlPlugin implements IPlugin{
 			String type = null;
 			for(Element ele:xmls){
 				type = ele.getAttributeValue("type");
-				if(TypeSpring.equals(type)){
+				if(ConfigFactory.XmlTypeSpring.equals(type)){
 					springXmls.add(ele.getText());
-				}else if(TypeStruts.equals(type)){
+				}else if(ConfigFactory.XmlTypeStruts.equals(type)){
 					strutsXmls.add(ele.getText());
+				}else if(ConfigFactory.XmlTypeHbm.equals(type)){		//hbm配置必须在加载spring和struts前注入
+					String sfid = ele.getAttributeValue("sessionFactory");
+					List<Element> hbmEles = ele.getChildren();
+					if(hbmEles!=null){
+						HbmListBean hlb = new HbmListBean();
+						hlb.setSessionFactoryId(sfid);
+						for(Element hbmEle : hbmEles){
+							hlb.addXml(hbmEle.getValue());
+						}
+						ConfigFactory.getFactory().registerHbmListBean(hlb);
+						hbmEles = null;
+					}
 				}
 			}
 			type = null;
@@ -58,12 +66,12 @@ public class XmlPlugin implements IPlugin{
 		logger.debug("初始化插件[" + getName() + "]");
 		String classPath = getClass().getResource("/").getPath();
 		for(String xml : springXmls){
-			ConfigFactory.getFactory().registerSpringPluginXml(xml);
+			ConfigFactory.getFactory().registerSpringXml(xml);
 		}
 		for(String xml : strutsXmls){
-			if(xml.startsWith(ClassPath))
-				xml = xml.replace(ClassPath, classPath);
-			ConfigFactory.getFactory().registerStrutsPluginXml(xml);
+			if(xml.startsWith(ConfigFactory.ClassPath))
+				xml = xml.replace(ConfigFactory.ClassPath, classPath);
+			ConfigFactory.getFactory().registerStrutsXml(xml);
 		}
 	}
 
