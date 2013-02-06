@@ -12,10 +12,11 @@ body.list{
 /* 工具栏 */
 
 /* 盒子 */
+.box_body2{background-color:#DBEEFD;}
 .box1{
 	margin:5px 10px;
 }
-.box1_topcenter{
+.box1_topcenter2{
 	width: 100%;
 	height: 20px;
 	background-image: url(image/box/box1_topcenter.jpg);
@@ -23,14 +24,14 @@ body.list{
 	overflow: hidden;
 	line-height: 20px;
 }
-.box1_topleft{
+.box1_topleft2{
 	width: 100%;
 	height: 100%;
 	background-image: url(image/box/box1_topleft.jpg);
 	background-repeat: no-repeat;
 	overflow: hidden;
 }
-.box1_topright{
+.box1_topright2{
 	width: 100%;
 	height: 100%;
 	background-image: url(image/box/box1_topright.jpg);
@@ -42,18 +43,18 @@ body.list{
 	width: 100%;
 	background-color: #ffffff;
 }
-.box1_middleleft{
+.box1_middleleft2{
 	width: 100%;
 	background-image: url(image/box/box1_middleleft.jpg);
 	background-repeat: repeat-y;
 }
-.box1_middleright{
+.box1_middleright2{
 	width: 100%;
 	background-image: url(image/box/box1_middleright.jpg);
 	background-repeat: repeat-y;
 	background-position: 100% 0%;
 }
-.box1_bottomcenter{
+.box1_bottomcenter2{
 	width: 100%;
 	height: 22px;
 	background-image: url(image/box/box1_bottomcenter.jpg);
@@ -61,14 +62,14 @@ body.list{
 	overflow: hidden;
 	line-height: 22px;
 }
-.box1_bottomleft{
+.box1_bottomleft2{
 	width: 100%;
 	height: 100%;
 	background-image: url(image/box/box1_bottomleft.jpg);
 	background-repeat: no-repeat;
 	overflow: hidden;
 }
-.box1_bottomright{
+.box1_bottomright2{
 	width: 100%;
 	height: 100%;
 	background-image: url(image/box/box1_bottomright.jpg);
@@ -79,6 +80,63 @@ body.list{
 .box1 .boxContent{
 	padding:0 8px 0 18px;
 	margin:0 10px 0 0;
+}
+.box1_topcenter{
+	width: 100%;
+	height: 20px;
+	background-image: url(image/box/box1_topcenter2.jpg);
+	background-repeat: repeat-x;
+	overflow: hidden;
+	line-height: 20px;
+}
+.box1_topleft{
+	width: 100%;
+	height: 100%;
+	background-image: url(image/box/box1_topleft2.jpg);
+	background-repeat: no-repeat;
+	overflow: hidden;
+}
+.box1_topright{
+	width: 100%;
+	height: 100%;
+	background-image: url(image/box/box1_topright2.jpg);
+	background-repeat: no-repeat;
+	background-position: 100% 0%;
+	overflow: hidden;
+}
+.box1_middleleft{
+	width: 100%;
+	background-image: url(image/box/box1_middleleft2.jpg);
+	background-repeat: repeat-y;
+}
+.box1_middleright{
+	width: 100%;
+	background-image: url(image/box/box1_middleright2.jpg);
+	background-repeat: repeat-y;
+	background-position: 100% 0%;
+}
+.box1_bottomcenter{
+	width: 100%;
+	height: 22px;
+	background-image: url(image/box/box1_bottomcenter2.jpg);
+	background-repeat: repeat-x;
+	overflow: hidden;
+	line-height: 22px;
+}
+.box1_bottomleft{
+	width: 100%;
+	height: 100%;
+	background-image: url(image/box/box1_bottomleft2.jpg);
+	background-repeat: no-repeat;
+	overflow: hidden;
+}
+.box1_bottomright{
+	width: 100%;
+	height: 100%;
+	background-image: url(image/box/box1_bottomright2.jpg);
+	background-repeat: no-repeat;
+	background-position: 100% 0%;
+	overflow: hidden;
 }
 /* 盒子 */
 

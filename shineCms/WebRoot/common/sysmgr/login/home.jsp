@@ -91,7 +91,7 @@ html, body{width:100%;height:100%;padding:0;margin:0;overflow:hidden;}
 	    //初始化Tree
 		zTree = $.fn.zTree.init($("#tree"), setting, zNodes);
 	    
-	    centerHeight = tabElement.height() - tabElement.find(".om-tabs-headers").outerHeight() - 4;
+	    centerHeight = tabElement.height() - tabElement.find(".om-tabs-headers").outerHeight();
 	    $('#homeFrame').height(centerHeight);
 	});
 //-->

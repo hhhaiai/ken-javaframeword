@@ -121,31 +121,105 @@ $.validator.messages = {
 	equalTo: "两次输入不一致",
 	range: jQuery.format("大小必须在{0}至{1}之间"),
 	accept: "禁止上传的文件类型"
-}
+};
+
+//自定义JQuery函数
+(function($) {
+	$.extend($.fn, {
+		//将表单对象序列化成JSON
+	    serializeJson: function(){
+			var serializeObj={};  
+		    var array=this.serializeArray();  
+		    $(array).each(function(){  
+		        if(serializeObj[this.name]){  
+		            if($.isArray(serializeObj[this.name])){  
+		                serializeObj[this.name].push(this.value);  
+		            }else{  
+		                serializeObj[this.name]=[serializeObj[this.name],this.value];  
+		            }  
+		        }else{  
+		            serializeObj[this.name]=this.value;   
+		        }  
+		    });
+		    return serializeObj; 
+	    }
+	});
+})(jQuery);
 
 /**
-$.omGrid.onError = function(XMLHttpRequest,textStatus,errorThrown,event){
-	alert(XMLHttpRequest.responseText);
-}
-*/
-
-//扩展JQuery函数
-$.extend($.fn, {
-	//将表单对象序列化成JSON
-    serializeJson: function(){
-		var serializeObj={};  
-	    var array=this.serializeArray();  
-	    $(array).each(function(){  
-	        if(serializeObj[this.name]){  
-	            if($.isArray(serializeObj[this.name])){  
-	                serializeObj[this.name].push(this.value);  
-	            }else{  
-	                serializeObj[this.name]=[serializeObj[this.name],this.value];  
-	            }  
-	        }else{  
-	            serializeObj[this.name]=this.value;   
-	        }  
-	    });
-	    return serializeObj; 
-    }
-});
+ * 将DIV生成Box样式
+ * 用法：$("#box").box();
+ * 可通过参数type来选择背景样式，如：$("#box").box({type:2});
+ * 其中type可赋值 1:白色背景(默认) 2:天蓝背景
+ */
+(function($) {
+	$.omWidget('shine.box', {
+		options:{
+			type : 1
+		},
+		_create:function(){
+			var options=this.options,el=this.element.show();
+			var h = el.html();
+			el.addClass("box1");
+			var tp,ct,bt;
+			if(options.type==1){
+				tp = this._getBox1Top();
+				ct = this._getBox1Middle();
+				bt = this._getBox1Bottom();
+			}else if(options.type==2){
+				tp = this._getBox2Top();
+				ct = this._getBox2Middle();
+				bt = this._getBox2Bottom();
+			}
+			el.wrapInner($(ct));
+			el.prepend(tp);
+			el.append(bt);
+		},
+		_getBox1Top : function(){
+			var s = '<div class="box1_topcenter">' +
+						'<div class="box1_topleft">' +
+							'<div class="box1_topright"></div>' +
+						'</div>' +
+					'</div>';
+			return s;
+		},
+		_getBox1Middle:function(){
+			var s = '<div class="box1_middlecenter">' +
+						'<div class="box1_middleleft">' +
+							'<div class="box1_middleright">' +
+								'<div class="boxContent" style="overflow: visible;">';
+			return s;
+		},
+		_getBox1Bottom : function(){
+			var s = '<div class="box1_bottomcenter">' +
+						'<div class="box1_bottomleft">' +
+							'<div class="box1_bottomright"></div>' +
+						'</div>' +
+					'</div>';
+			return s;
+		},
+		_getBox2Top : function(){
+			var s = '<div class="box1_topcenter2">' +
+						'<div class="box1_topleft2">' +
+							'<div class="box1_topright2"></div>' +
+						'</div>' +
+					'</div>';
+			return s;
+		},
+		_getBox2Middle : function(){
+			var s = '<div class="box1_middlecenter">' +
+						'<div class="box1_middleleft2">' +
+							'<div class="box1_middleright2">' +
+								'<div class="boxContent" style="overflow: visible;">';
+			return s;
+		},
+		_getBox2Bottom : function(){
+			var s = '<div class="box1_bottomcenter2">' +
+						'<div class="box1_bottomleft2">' +
+							'<div class="box1_bottomright2"></div>' +
+						'</div>' +
+					'</div>';
+			return s;
+		}
+	});
+})(jQuery);
