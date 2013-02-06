@@ -4,7 +4,7 @@
 	<appName>Sunshine CMS</appName>
 	<appVendor>广州阳光耐特电子有限公司</appVendor>
 	<projectStarterListener>com.shine.project.shineCms.ShineCmsStarterListener</projectStarterListener>
-	<indexPage>sysmgr/login_home.do</indexPage>
+	<indexPage>sysmgr/login_enter.do</indexPage>
 	<beforeXmls>
 		<xml type="spring">classpath:com/shine/project/shineCms/config/dbSpring.xml</xml>
 	</beforeXmls>
