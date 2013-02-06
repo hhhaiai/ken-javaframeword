@@ -44,51 +44,34 @@ $(document).ready(function() {
     		}
         }
     });
+	$("#box").box();
 });
 </script>
 </head>
 
 <body>
-<div class="box1">
-	<div class="box1_topcenter">
-		<div class="box1_topleft">
-			<div class="box1_topright"></div>
-		</div>
-	</div>
-	<div class="box1_middlecenter">
-		<div class="box1_middleleft">
-			<div class="box1_middleright">
-				<div class="boxContent" style="overflow: visible;">
-					<form id="editForm" method="post">
-						<input type="hidden" name="e.roleId" value="${e.roleId}"/>
-						<table class="simple_table" style="width:100%;">
-							<tr>
-								<td class="label"><span class="red">*</span> 名称：</td>
-								<td><input class="input" type="text" name="e.name" value="${e.name}"/></td>
-							</tr>
-							<tr>
-								<td class="label">备注：</td>
-								<td>
-									<textarea name="e.remark" rows="3" cols="55" style="width:350px;height:50px;">${e.remark}</textarea>
-								</td>
-							</tr>
-							<tr>
-								<td colspan="2" align="center">
-									<input type="button" value="提 交" onclick="submitForm();" />
-									<input type="button" value="取 消" onclick="cancel();" />
-								</td>
-							</tr>
-						</table>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="box1_bottomcenter">
-		<div class="box1_bottomleft">
-			<div class="box1_bottomright"></div>
-		</div>
-	</div>
+<div id="box">
+	<form id="editForm" method="post">
+		<input type="hidden" name="e.roleId" value="${e.roleId}"/>
+		<table class="simple_table" style="width:100%;">
+			<tr>
+				<td class="label"><span class="red">*</span> 名称：</td>
+				<td><input class="input" type="text" name="e.name" value="${e.name}"/></td>
+			</tr>
+			<tr>
+				<td class="label">备注：</td>
+				<td>
+					<textarea name="e.remark" rows="3" cols="55" style="width:350px;height:50px;">${e.remark}</textarea>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center">
+					<input type="button" value="提 交" onclick="submitForm();" />
+					<input type="button" value="取 消" onclick="cancel();" />
+				</td>
+			</tr>
+		</table>
+	</form>
 </div>
 </body>
 </html>

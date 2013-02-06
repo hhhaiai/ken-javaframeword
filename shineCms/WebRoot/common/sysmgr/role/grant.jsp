@@ -102,68 +102,53 @@ function funCheck(target){
 		}
 	}
 }
+$(document).ready(function() {
+	$("#box").box();
+});
 </script>
 </head>
 
 <body>
-<div class="box1">
-	<div class="box1_topcenter">
-		<div class="box1_topleft">
-			<div class="box1_topright"></div>
+<div id="box">
+	<form id="editForm" method="post">
+		<input type="hidden" name="e.roleId" value="${e.roleId}"/>
+		<div style="padding: 2px 10px;">
+			<input id="autoFunction" type="checkbox" value="1" style="vertical-align: middle;" onclick="autoFunctionCheck(this)"/><label for="autoFunction">自动勾选功能</label>
 		</div>
-	</div>
-	<div class="box1_middlecenter">
-		<div class="box1_middleleft">
-			<div class="box1_middleright">
-				<div class="boxContent" style="overflow: visible;">
-					<form id="editForm" method="post">
-						<input type="hidden" name="e.roleId" value="${e.roleId}"/>
-						<div style="padding: 2px 10px;">
-							<input id="autoFunction" type="checkbox" value="1" style="vertical-align: middle;" onclick="autoFunctionCheck(this)"/><label for="autoFunction">自动勾选功能</label>
-						</div>
-						<table class="line_table" style="width:100%;">
-							<tr>
-								<th style="width:5%;">
-									<label for="check_all"><input id="check_all" type="checkbox" name="menu_all" value="1" onclick="checkAll(this)"/></label>
-								</th>
-								<th style="width:32%;">菜 单</th>
-								<th style="width:63%;">功 能</th>
-							</tr>
-							<c:forEach var="m" items="${menuList}">
-							<tr>
-								<td align="center">
-									<input id="menu_${m.menuId}" type="checkbox" name="menus" value="${m.menuId}" ${m.checked?"checked='checked'":""} pid="menu_${m.pid}" onclick="menuCheck(this)"/>
-								</td>
-								<td><label for="menu_${m.menuId}">${m.menuName}</label></td>
-								<td>
-									<c:choose>
-										<c:when test="${fn:length(m.funs)>0}">
-											<c:forEach var="f" items="${m.funs}">
-											<input id="fun_${f.funId}" class="funs" type="checkbox" name="funs" value="${f.funId}" ${f.checked?"checked='checked'":""} style="vertical-align: middle;" pid="menu_${m.menuId}" onclick="funCheck(this)"/><label for="fun_${f.funId}">${f.funName}</label>&nbsp;
-											</c:forEach>
-										</c:when>
-										<c:otherwise>&nbsp;</c:otherwise>
-									</c:choose>
-								</td>
-							</tr>
+		<table class="line_table" style="width:100%;">
+			<tr>
+				<th style="width:5%;">
+					<label for="check_all"><input id="check_all" type="checkbox" name="menu_all" value="1" onclick="checkAll(this)"/></label>
+				</th>
+				<th style="width:32%;">菜 单</th>
+				<th style="width:63%;">功 能</th>
+			</tr>
+			<c:forEach var="m" items="${menuList}">
+			<tr>
+				<td align="center">
+					<input id="menu_${m.menuId}" type="checkbox" name="menus" value="${m.menuId}" ${m.checked?"checked='checked'":""} pid="menu_${m.pid}" onclick="menuCheck(this)"/>
+				</td>
+				<td><label for="menu_${m.menuId}">${m.menuName}</label></td>
+				<td>
+					<c:choose>
+						<c:when test="${fn:length(m.funs)>0}">
+							<c:forEach var="f" items="${m.funs}">
+							<input id="fun_${f.funId}" class="funs" type="checkbox" name="funs" value="${f.funId}" ${f.checked?"checked='checked'":""} style="vertical-align: middle;" pid="menu_${m.menuId}" onclick="funCheck(this)"/><label for="fun_${f.funId}">${f.funName}</label>&nbsp;
 							</c:forEach>
-							<tr>
-								<td colspan="3" align="center">
-									<input type="button" value="提 交" onclick="submitForm();" />
-									<input type="button" value="取 消" onclick="cancel();" />
-								</td>
-							</tr>
-						</table>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="box1_bottomcenter">
-		<div class="box1_bottomleft">
-			<div class="box1_bottomright"></div>
-		</div>
-	</div>
+						</c:when>
+						<c:otherwise>&nbsp;</c:otherwise>
+					</c:choose>
+				</td>
+			</tr>
+			</c:forEach>
+			<tr>
+				<td colspan="3" align="center">
+					<input type="button" value="提 交" onclick="submitForm();" />
+					<input type="button" value="取 消" onclick="cancel();" />
+				</td>
+			</tr>
+		</table>
+	</form>
 </div>
 </body>
 </html>

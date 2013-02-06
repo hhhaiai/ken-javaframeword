@@ -60,89 +60,72 @@ $(document).ready(function() {
     		}
         }
     });
+	$("#box").box();
 });
 </script>
 </head>
 
 <body>
-<div class="box1">
-	<div class="box1_topcenter">
-		<div class="box1_topleft">
-			<div class="box1_topright"></div>
-		</div>
-	</div>
-	<div class="box1_middlecenter">
-		<div class="box1_middleleft">
-			<div class="box1_middleright">
-				<div class="boxContent" style="overflow: visible;">
-					<form id="editForm" method="post">
-						<input type="hidden" id="menuId" name="e.menuId" value="${e.menuId}"/>
-						<input type="hidden" name="e.pid" value="${e.pid}"/>
-						<table class="simple_table" style="width:100%;">
-							<tr>
-								<td class="label">上层菜单：</td>
-								<td>${pname}</td>
-							</tr>
-							<tr>
-								<td class="label"><span class="red">*</span> 名称：</td>
-								<td><input class="input" type="text" name="e.menuName" value="${e.menuName}"/></td>
-							</tr>
-							<tr>
-								<td class="label">URL：</td>
-								<td><input class="input" type="text" name="e.murl" value="${e.murl}"/></td>
-							</tr>
-							<tr>
-								<td class="label">图标：</td>
-								<td><input class="input" type="text" name="e.icon" value="${e.icon}"/></td>
-							</tr>
-							<tr>
-								<td class="label">备注：</td>
-								<td><input class="input" type="text" name="e.remark" value="${e.remark}"/></td>
-							</tr>
-							<tr>
-								<td class="label">显示菜单：</td>
-								<td>
-									<c:choose>
-										<c:when test="${e.pid>0&&parent.ismenu!=1}">
-											<label for="ismenu1"><input id="ismenu1" type="radio" name="e.ismenu" value="0" checked='checked'/>否</label>
-											&nbsp;<font color="gray">(非显示菜单下只能有非显示菜单)</font>
-										</c:when>
-										<c:otherwise>
-											<label for="ismenu0"><input id="ismenu0" type="radio" name="e.ismenu" value="1" ${e.ismenu==1||e.ismenu==null?"checked='checked'":""}/>是</label>
-											&nbsp;<label for="ismenu1"><input id="ismenu1" type="radio" name="e.ismenu" value="0" ${e.ismenu==0?"checked='checked'":""}/>否</label>
-											&nbsp;<font color="gray">(是否在菜单导航中显示出来)</font>
-										</c:otherwise>
-									</c:choose>
-								</td>
-							</tr>
-							<tr>
-								<td class="label">生效：</td>
-								<td>
-									<label for="enable0"><input id="enable0" type="radio" name="e.enable" value="1" ${e.enable==1||e.enable==null?"checked='checked'":""}/>是</label>
-									&nbsp;<label for="enable1"><input id="enable1" type="radio" name="e.enable" value="0" ${e.enable==0?"checked='checked'":""}/>否</label>
-								</td>
-							</tr>
-							<tr>
-								<td class="label"><span class="red">*</span> 排序：</td>
-								<td><input class="input" type="text" name="e.orderId" value="${e.orderId eq null?1:e.orderId}"/></td>
-							</tr>
-							<tr>
-								<td align="center" colspan="2">
-									<input type="button" value="提 交" onclick="submitForm();" />
-									<input type="button" value="取 消" onclick="cancel();" />
-								</td>
-							</tr>
-						</table>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="box1_bottomcenter">
-		<div class="box1_bottomleft">
-			<div class="box1_bottomright"></div>
-		</div>
-	</div>
+<div id="box">
+	<form id="editForm" method="post">
+		<input type="hidden" id="menuId" name="e.menuId" value="${e.menuId}"/>
+		<input type="hidden" name="e.pid" value="${e.pid}"/>
+		<table class="simple_table" style="width:100%;">
+			<tr>
+				<td class="label">上层菜单：</td>
+				<td>${pname}</td>
+			</tr>
+			<tr>
+				<td class="label"><span class="red">*</span> 名称：</td>
+				<td><input class="input" type="text" name="e.menuName" value="${e.menuName}"/></td>
+			</tr>
+			<tr>
+				<td class="label">URL：</td>
+				<td><input class="input" type="text" name="e.murl" value="${e.murl}"/></td>
+			</tr>
+			<tr>
+				<td class="label">图标：</td>
+				<td><input class="input" type="text" name="e.icon" value="${e.icon}"/></td>
+			</tr>
+			<tr>
+				<td class="label">备注：</td>
+				<td><input class="input" type="text" name="e.remark" value="${e.remark}"/></td>
+			</tr>
+			<tr>
+				<td class="label">显示菜单：</td>
+				<td>
+					<c:choose>
+						<c:when test="${e.pid>0&&parent.ismenu!=1}">
+							<label for="ismenu1"><input id="ismenu1" type="radio" name="e.ismenu" value="0" checked='checked'/>否</label>
+							&nbsp;<font color="gray">(非显示菜单下只能有非显示菜单)</font>
+						</c:when>
+						<c:otherwise>
+							<label for="ismenu0"><input id="ismenu0" type="radio" name="e.ismenu" value="1" ${e.ismenu==1||e.ismenu==null?"checked='checked'":""}/>是</label>
+							&nbsp;<label for="ismenu1"><input id="ismenu1" type="radio" name="e.ismenu" value="0" ${e.ismenu==0?"checked='checked'":""}/>否</label>
+							&nbsp;<font color="gray">(是否在菜单导航中显示出来)</font>
+						</c:otherwise>
+					</c:choose>
+				</td>
+			</tr>
+			<tr>
+				<td class="label">生效：</td>
+				<td>
+					<label for="enable0"><input id="enable0" type="radio" name="e.enable" value="1" ${e.enable==1||e.enable==null?"checked='checked'":""}/>是</label>
+					&nbsp;<label for="enable1"><input id="enable1" type="radio" name="e.enable" value="0" ${e.enable==0?"checked='checked'":""}/>否</label>
+				</td>
+			</tr>
+			<tr>
+				<td class="label"><span class="red">*</span> 排序：</td>
+				<td><input class="input" type="text" name="e.orderId" value="${e.orderId eq null?1:e.orderId}"/></td>
+			</tr>
+			<tr>
+				<td align="center" colspan="2">
+					<input type="button" value="提 交" onclick="submitForm();" />
+					<input type="button" value="取 消" onclick="cancel();" />
+				</td>
+			</tr>
+		</table>
+	</form>
 </div>
 </body>
 </html>

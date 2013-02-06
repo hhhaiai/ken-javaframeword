@@ -118,6 +118,7 @@ $(document).ready(function() {
                      }}
                    ]
     });
+    $("#box").box();
 });
 </script>
 </head>
@@ -131,6 +132,7 @@ $(document).ready(function() {
 </div>
 <table id="grid"></table>
 <div id="query-form" style="padding: 5px 10px;">
+	<div id="box">
     <form id="queryForm">
     <table>
         <tr>
@@ -143,6 +145,7 @@ $(document).ready(function() {
         </tr>
     </table>
 	</form>
+	</div>
 </div>
 </body>
 </html>

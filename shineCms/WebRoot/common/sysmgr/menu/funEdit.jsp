@@ -69,108 +69,91 @@ $(document).ready(function() {
     		}
         }
     });
+	$("#box").box();
 });
 </script>
 </head>
 
 <body>
-<div class="box1">
-	<div class="box1_topcenter">
-		<div class="box1_topleft">
-			<div class="box1_topright"></div>
-		</div>
-	</div>
-	<div class="box1_middlecenter">
-		<div class="box1_middleleft">
-			<div class="box1_middleright">
-				<div class="boxContent" style="overflow: visible;">
-					<form id="editForm" method="post">
-						<input type="hidden" name="e.funId" value="${e.funId}"/>
-						<input type="hidden" name="e.menuId" value="${e.menuId}"/>
-						<table class="simple_table" style="width:100%;">
-							<tr>
-								<td class="label"><span class="red">*</span> 名称：</td>
-								<td><input class="input" type="text" name="e.funName" value="${e.funName}"/></td>
-							</tr>
-							<tr>
-								<td class="label"><span class="red">*</span> Key：</td>
-								<td>
-									<input class="input" type="text" name="e.funKey" value="${e.funKey}"/>
-									<font color="gray">(唯一值)</font>
-								</td>
-							</tr>
-							<tr>
-								<td class="label"><span class="red">*</span> 排序：</td>
-								<td><input class="input" type="text" name="e.orderId" value="${e.orderId eq null?1:e.orderId}"/></td>
-							</tr>
-							<tr>
-								<td class="label" valign="top"><span class="red">*</span> URL：</td>
-								<td>
-									<table id="urlTable" class="line_table" style="width:100%;">
-										<tr>
-											<td colspan="3">
-												<a href="javascript:void(0);" onclick="addUrlRow();"><img src="${path}r/css/themes/${themes}/image/icon/add.gif" border="0" align="absmiddle"/>增加一行</a>
-											</td>
-										</tr>
-										<tr>
-											<th width="50%">URL</th>
-											<th width="30%">记录日志</th>
-											<th width="20%">删除</th>
-										</tr>
-										<c:choose>
-											<c:when test="${param.method eq 'add' or fn:length(e.urls)<1}">
-												<tr>
-													<td><input type="text" class="input" name="uurl_0" value="" maxlength="500" style="width: 180px;"/></td>
-													<td>
-														<label id="log_0"><input id="log_0" type="radio" name="log_0" value="1"/>是</label>
-														<label id="log_1"><input id="log_1" type="radio" name="log_0" value="0" checked="checked"/>否</label>
-													</td>
-													<td>&nbsp;</td>
-												</tr>
-											</c:when>
-											<c:otherwise>
-												<c:forEach var="u" items="${e.urls}" varStatus="idx">
-												<tr>
-													<td>
-														<input type="hidden" name="urlId_${idx.index}" value="${u.urlId}" />
-														<input type="text" class="input" name="uurl_${idx.index}" value="${u.uurl}" maxlength="500" style="width: 180px;"/>
-													</td>
-													<td>
-														<label id="log_0"><input id="log_0" type="radio" name="log_${idx.index}" value="1" ${u.isLog==1?"checked='checked'":""}/>是</label>
-														<label id="log_1"><input id="log_1" type="radio" name="log_${idx.index}" value="0" ${u.isLog!=1?"checked='checked'":""}/>否</label>
-													</td>
-													<td>
-														<c:if test="${idx.first}">&nbsp;</c:if>
-														<c:if test="${!idx.first}">
-															<a href="javascript:void(0);" onclick="deleteUrlRow('${idx.index}');"><img src="${path}r/css/themes/${themes}/image/icon/delete.gif" border="0" align="absmiddle"/>删除</a>
-														</c:if>
-													</td>
-												</tr>
-												</c:forEach>
-											</c:otherwise>
-										</c:choose>
-									</table>
-								</td>
-							</tr>
-						</table>
-						<table class="simple_table" style="width:100%;">
-							<tr>
-								<td align="center">
-									<input type="button" value="提 交" onclick="submitForm();" />
-									<input type="button" value="取 消" onclick="cancel();" />
-								</td>
-							</tr>
-						</table>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="box1_bottomcenter">
-		<div class="box1_bottomleft">
-			<div class="box1_bottomright"></div>
-		</div>
-	</div>
+<div id="box">
+	<form id="editForm" method="post">
+		<input type="hidden" name="e.funId" value="${e.funId}"/>
+		<input type="hidden" name="e.menuId" value="${e.menuId}"/>
+		<table class="simple_table" style="width:100%;">
+			<tr>
+				<td class="label"><span class="red">*</span> 名称：</td>
+				<td><input class="input" type="text" name="e.funName" value="${e.funName}"/></td>
+			</tr>
+			<tr>
+				<td class="label"><span class="red">*</span> Key：</td>
+				<td>
+					<input class="input" type="text" name="e.funKey" value="${e.funKey}"/>
+					<font color="gray">(唯一值)</font>
+				</td>
+			</tr>
+			<tr>
+				<td class="label"><span class="red">*</span> 排序：</td>
+				<td><input class="input" type="text" name="e.orderId" value="${e.orderId eq null?1:e.orderId}"/></td>
+			</tr>
+			<tr>
+				<td class="label" valign="top"><span class="red">*</span> URL：</td>
+				<td>
+					<table id="urlTable" class="line_table" style="width:100%;">
+						<tr>
+							<td colspan="3">
+								<a href="javascript:void(0);" onclick="addUrlRow();"><img src="${path}r/css/themes/${themes}/image/icon/add.gif" border="0" align="absmiddle"/>增加一行</a>
+							</td>
+						</tr>
+						<tr>
+							<th width="50%">URL</th>
+							<th width="30%">记录日志</th>
+							<th width="20%">删除</th>
+						</tr>
+						<c:choose>
+							<c:when test="${param.method eq 'add' or fn:length(e.urls)<1}">
+								<tr>
+									<td><input type="text" class="input" name="uurl_0" value="" maxlength="500" style="width: 180px;"/></td>
+									<td>
+										<label id="log_0"><input id="log_0" type="radio" name="log_0" value="1"/>是</label>
+										<label id="log_1"><input id="log_1" type="radio" name="log_0" value="0" checked="checked"/>否</label>
+									</td>
+									<td>&nbsp;</td>
+								</tr>
+							</c:when>
+							<c:otherwise>
+								<c:forEach var="u" items="${e.urls}" varStatus="idx">
+								<tr>
+									<td>
+										<input type="hidden" name="urlId_${idx.index}" value="${u.urlId}" />
+										<input type="text" class="input" name="uurl_${idx.index}" value="${u.uurl}" maxlength="500" style="width: 180px;"/>
+									</td>
+									<td>
+										<label id="log_0"><input id="log_0" type="radio" name="log_${idx.index}" value="1" ${u.isLog==1?"checked='checked'":""}/>是</label>
+										<label id="log_1"><input id="log_1" type="radio" name="log_${idx.index}" value="0" ${u.isLog!=1?"checked='checked'":""}/>否</label>
+									</td>
+									<td>
+										<c:if test="${idx.first}">&nbsp;</c:if>
+										<c:if test="${!idx.first}">
+											<a href="javascript:void(0);" onclick="deleteUrlRow('${idx.index}');"><img src="${path}r/css/themes/${themes}/image/icon/delete.gif" border="0" align="absmiddle"/>删除</a>
+										</c:if>
+									</td>
+								</tr>
+								</c:forEach>
+							</c:otherwise>
+						</c:choose>
+					</table>
+				</td>
+			</tr>
+		</table>
+		<table class="simple_table" style="width:100%;">
+			<tr>
+				<td align="center">
+					<input type="button" value="提 交" onclick="submitForm();" />
+					<input type="button" value="取 消" onclick="cancel();" />
+				</td>
+			</tr>
+		</table>
+	</form>
 </div>
 </body>
 </html>

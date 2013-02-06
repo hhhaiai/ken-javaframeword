@@ -49,43 +49,45 @@ $(document).ready(function() {
 </script>
 </head>
 
-<body>
-<div class="box1" style="width:450px;">
-	<div class="box1_topcenter">
-		<div class="box1_topleft">
-			<div class="box1_topright"></div>
+<body class="box_body2">
+<center>
+	<div class="box1" style="width:450px;margin-top: 200px;">
+		<div class="box1_topcenter2">
+			<div class="box1_topleft2">
+				<div class="box1_topright2"></div>
+			</div>
 		</div>
-	</div>
-	<div class="box1_middlecenter">
-		<div class="box1_middleleft">
-			<div class="box1_middleright">
-				<div class="boxContent" style="overflow: visible;">
-					<form id="loginForm" method="post">
-						<table class="simple_table" style="width:100%;">
-							<tr>
-								<td class="label">帐 号：</td>
-								<td><input class="input" type="text" name="username" value=""/></td>
-							</tr>
-							<tr>
-								<td class="label">密 码：</td>
-								<td><input class="input" type="password" name="password" value=""/></td>
-							</tr>
-							<tr>
-								<td colspan="4" align="center">
-									<input type="button" value="登 录" onclick="submitForm();" />
-								</td>
-							</tr>
-						</table>
-					</form>
+		<div class="box1_middlecenter">
+			<div class="box1_middleleft2">
+				<div class="box1_middleright2">
+					<div class="boxContent" style="overflow: visible;">
+						<form id="loginForm" method="post">
+							<table class="simple_table" style="width:100%;">
+								<tr>
+									<td class="label">帐 号：</td>
+									<td><input class="input" type="text" name="username" value=""/></td>
+								</tr>
+								<tr>
+									<td class="label">密 码：</td>
+									<td><input class="input" type="password" name="password" value="" onkeypress="if(event.keyCode==13)submitForm();"/></td>
+								</tr>
+								<tr>
+									<td colspan="4" align="center">
+										<input type="button" value="登 录" onclick="submitForm();" />
+									</td>
+								</tr>
+							</table>
+						</form>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-	<div class="box1_bottomcenter">
-		<div class="box1_bottomleft">
-			<div class="box1_bottomright"></div>
+		<div class="box1_bottomcenter2">
+			<div class="box1_bottomleft2">
+				<div class="box1_bottomright2"></div>
+			</div>
 		</div>
 	</div>
-</div>
+</center>
 </body>
 </html>
