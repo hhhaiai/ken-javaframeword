@@ -29,7 +29,7 @@ function refreshData(){
 }
 //打开编辑框
 function toEdit(id){
-	editDialog = $.shine.openDialog({name:"editDialog", title:"编辑用户", url:"${path}sysmgr/user_toEdit.do?e.userId="+id, width:500, height:300});
+	editDialog = $.shine.openDialog({id:"editDialog", title:"编辑用户", url:"${path}sysmgr/user_toEdit.do?e.userId="+id, width:500, height:300});
 }
 //删除记录
 function toDelete(ids){
@@ -39,11 +39,13 @@ function toDelete(ids){
         });
     }
 }
+//页面加载后执行
 $(document).ready(function() {
+	//新增按钮
 	$('#btn_add').omButton({
 		icons : {left : '${path}r/css/themes/${themes}/image/icon/add.gif'},
 		onClick : function(){
-			editDialog = $.shine.openDialog({name:"editDialog", title:"新增用户", url:"${path}sysmgr/user_toAdd.do", width:500, height:300});
+			editDialog = $.shine.openDialog({id:"editDialog", title:"新增用户", url:"${path}sysmgr/user_toAdd.do", width:500, height:300});
 		}
 	});
 	$('#btn_modify').omButton({
@@ -87,6 +89,7 @@ $(document).ready(function() {
 			searchDialog.omDialog("open");
 		}
 	});
+	//查询对话框
 	searchDialog = $("#query-form").omDialog({
         width: 400,
         autoOpen : false,
@@ -97,7 +100,7 @@ $(document).ready(function() {
 				var where = $("#queryForm").serialize();
 				dataUrl = "${path}sysmgr/user_list.do?"+where;
 				
-          		grid.omGrid('setData',dataUrl);
+          		grid.omGrid('setData',dataUrl);	//给grid重新设置数据源
           		searchDialog.omDialog("close");
         		return false; //阻止form的默认提交动作
       		},"取消" : function() {
@@ -106,10 +109,12 @@ $(document).ready(function() {
         }
     });
 	dataUrl = "${path}sysmgr/user_list.do";
-    grid = $('#grid').omGrid({
+	//创建grid表格
+    grid = $.shine.omGrid({
+    	id : 'grid',
         dataSource : dataUrl,
         singleSelect : false,
-        colModel : [  
+        colModel : [
                      {header : '用户名', name : 'username', width : 120, align : 'left'}, 
                      {header : '姓名', name : 'name',width : 150, align : 'left'},
                      {header : '操作', name : 'userId', width:100, align : 'center',renderer:function(value,rowData,rowIndex){
@@ -118,6 +123,7 @@ $(document).ready(function() {
                      }}
                    ]
     });
+	//将查询表单渲染为盒子模型
     $("#box").box();
 });
 </script>

@@ -29,7 +29,7 @@ function refreshData(){
 }
 //打开编辑框
 function toEdit(funId){
-	editDialog = $.shine.openDialog({name:"editDialog", title:"编辑自由权限URL", url:"${path}sysmgr/freeUrl_toEdit.do?e.urlId="+funId, width:500, height:220});
+	editDialog = $.shine.openDialog({id:"editDialog", title:"编辑自由权限URL", url:"${path}sysmgr/freeUrl_toEdit.do?e.urlId="+funId, width:500, height:220});
 }
 //删除记录
 function toDelete(ids){
@@ -43,7 +43,7 @@ $(document).ready(function() {
 	$('#btn_add').omButton({
 		icons : {left : '${path}r/css/themes/${themes}/image/icon/add.gif'},
 		onClick : function(){
-			editDialog = $.shine.openDialog({name:"editDialog", title:"增加自由权限URL", url:"${path}sysmgr/freeUrl_toAdd.do?e.menuId=${menuId}", width:500, height:220});
+			editDialog = $.shine.openDialog({id:"editDialog", title:"增加自由权限URL", url:"${path}sysmgr/freeUrl_toAdd.do?e.menuId=${menuId}", width:500, height:220});
 		}
 	});
 	$('#btn_modify').omButton({
@@ -81,7 +81,8 @@ $(document).ready(function() {
             toDelete(ids);
 		}
 	});
-    grid = $('#grid').omGrid({
+    grid = $.shine.omGrid({
+    	id : 'grid',
         dataSource : '${path}sysmgr/freeUrl_list.do',
         singleSelect : false,
         colModel : [ 

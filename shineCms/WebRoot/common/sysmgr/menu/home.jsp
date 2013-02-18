@@ -76,7 +76,7 @@
 		var selNode = zTree.getSelectedNodes()[0];
 		if (selNode) {
 			var id = selNode.id;
-			editDialog = $.shine.openDialog({name:"editDialog", title:"增加子菜单", url:"${path}sysmgr/menu_toAdd.do?e.pid="+id, width:500, height:350});
+			editDialog = $.shine.openDialog({id:"editDialog", title:"增加子菜单", url:"${path}sysmgr/menu_toAdd.do?e.pid="+id, width:500, height:350});
 		}
 	}
 	//修改菜单
@@ -84,7 +84,7 @@
 		var selNode = zTree.getSelectedNodes()[0];
 		if (selNode) {
 			var id = selNode.id;
-			editDialog = $.shine.openDialog({name:"editDialog", title:"修改菜单", url:"${path}sysmgr/menu_toEdit.do?e.menuId="+id, width:500, height:350});
+			editDialog = $.shine.openDialog({id:"editDialog", title:"修改菜单", url:"${path}sysmgr/menu_toEdit.do?e.menuId="+id, width:500, height:350});
 		}
 	}
 	//删除菜单

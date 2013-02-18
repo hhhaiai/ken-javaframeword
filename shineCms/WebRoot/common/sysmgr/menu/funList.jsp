@@ -29,7 +29,7 @@ function refreshData(){
 }
 //打开编辑框
 function toEdit(funId){
-	editDialog = $.shine.openDialog({name:"editDialog", title:"编辑功能", url:"${path}sysmgr/fun_toEdit.do?e.funId="+funId, width:600, height:400});
+	editDialog = $.shine.openDialog({id:"editDialog", title:"编辑功能", url:"${path}sysmgr/fun_toEdit.do?e.funId="+funId, width:600, height:400});
 }
 //删除记录
 function toDelete(ids){
@@ -43,7 +43,7 @@ $(document).ready(function() {
 	$('#btn_add').omButton({
 		icons : {left : '${path}r/css/themes/${themes}/image/icon/add.gif'},
 		onClick : function(){
-			editDialog = $.shine.openDialog({name:"editDialog", title:"增加功能", url:"${path}sysmgr/fun_toAdd.do?e.menuId=${menuId}", width:600, height:400});
+			editDialog = $.shine.openDialog({id:"editDialog", title:"增加功能", url:"${path}sysmgr/fun_toAdd.do?e.menuId=${menuId}", width:600, height:400});
 		}
 	});
 	$('#btn_modify').omButton({
@@ -81,7 +81,8 @@ $(document).ready(function() {
             toDelete(ids);
 		}
 	});
-    grid = $('#grid').omGrid({
+    grid = $.shine.omGrid({
+    	id : 'grid',
         dataSource : '${path}sysmgr/fun_list.do?menuId=${menuId}',
         singleSelect : false,
         colModel : [ 

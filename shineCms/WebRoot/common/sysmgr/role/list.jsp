@@ -29,11 +29,11 @@ function refreshData(){
 }
 //打开编辑框
 function toEdit(id){
-	editDialog = $.shine.openDialog({name:"editDialog", title:"编辑角色", url:"${path}sysmgr/role_toEdit.do?e.roleId="+id, width:600, height:200});
+	editDialog = $.shine.openDialog({id:"editDialog", title:"编辑角色", url:"${path}sysmgr/role_toEdit.do?e.roleId="+id, width:600, height:200});
 }
 //打开授权框
 function toGrant(id,name){
-	editDialog = $.shine.openDialog({name:"editDialog", title:"给角色["+name+"]授权", url:"${path}sysmgr/role_toGrant.do?e.roleId="+id, width:800, height:450});
+	editDialog = $.shine.openDialog({id:"editDialog", title:"给角色["+name+"]授权", url:"${path}sysmgr/role_toGrant.do?e.roleId="+id, width:800, height:450});
 }
 //删除记录
 function toDelete(ids){
@@ -47,7 +47,7 @@ $(document).ready(function() {
 	$('#btn_add').omButton({
 		icons : {left : '${path}r/css/themes/${themes}/image/icon/add.gif'},
 		onClick : function(){
-			editDialog = $.shine.openDialog({name:"editDialog", title:"新增角色", url:"${path}sysmgr/role_toAdd.do", width:600, height:200});
+			editDialog = $.shine.openDialog({id:"editDialog", title:"新增角色", url:"${path}sysmgr/role_toAdd.do", width:600, height:200});
 		}
 	});
 	$('#btn_modify').omButton({
@@ -85,7 +85,8 @@ $(document).ready(function() {
             toDelete(ids);
 		}
 	});
-    grid = $('#grid').omGrid({
+    grid = $.shine.omGrid({
+    	id: 'grid',
         dataSource : '${path}sysmgr/role_list.do',
         singleSelect : false,
         colModel : [  
