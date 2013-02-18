@@ -17,7 +17,7 @@ $.shine = {
 	 * @param dialog	要关掉的窗口
 	 */
 	listAjaxBack : function(data,grid,dialog){
-		this.showAjaxMsg(data,function(){
+		$.shine.showAjaxMsg(data,function(){
 			if(grid)
     			grid.omGrid('reload');	//刷新列表数据
     		if(dialog)
@@ -48,7 +48,15 @@ $.shine = {
     	}else{	//3：后台异常、4：登录超时、5：没有权限
     		msgObj = {title: "操作提示", content: "<font color='red'>"+rs.msg+"</font>", type:"error", timeout: 2000};
     	}
-    	try{
+    	this.showTip(msgObj);
+	},
+	
+	/**
+	 * 显示提示信息(如果可以则使用顶层页面弹出信息,否则由本页面弹出)
+	 * @param {Object} msgObj
+	 */
+	showTip:function(msgObj){
+		try{
     		window.top.$.omMessageTip.show(msgObj);
     	}catch(e){
     		$.omMessageTip.show(msgObj);
@@ -60,9 +68,9 @@ $.shine = {
 	 * @param {Object} opt
 	 * @return {TypeName} 
 	 */
-	openDialog: function(opt){
+	openDialog : function(opt){
 		var setting = {
-			name:"",
+			id:"",
 			autoOpen: false,
             width:600,
             height:400,
@@ -70,7 +78,7 @@ $.shine = {
             url:"about:blank"
 		}
 		$.extend(true,setting,opt);
-		var divId = setting.name;
+		var divId = setting.id;
 		var iframeId = "Dialog_Iframe_"+setting.name;
 		var div,iframe;
 		if(setting.url!=""){
@@ -102,6 +110,24 @@ $.shine = {
 		if($("#"+iframeId).attr("src")!=setting.url)
 			$("#"+iframeId).attr("src",setting.url);
 		return dlg;
+	},
+	
+	/**
+	 * 创建omGrid表格
+	 * @param {Object} opt
+	 * @return {TypeName} 
+	 */
+	omGrid : function(opt){
+		var setting = {
+			id: "",
+			errorMsg: "取数出错或者没有权限",
+			onError: function(XMLHttpRequest,textStatus,errorThrown,event){
+		    	$.shine.showTip({title: "提示", content: "<font color='red'>取数出错或者没有权限</font>", type:"error", timeout: 2000});
+		    }
+		}
+		$.extend(true,setting,opt);
+		var _grid = $('#'+opt.id).omGrid(setting);
+		return _grid;
 	}
 };
 
@@ -220,6 +246,15 @@ $.validator.messages = {
 						'</div>' +
 					'</div>';
 			return s;
-		}
+		},
+		destroy : function(){
+        	var el = this.element;
+        	var ct = el.find(".boxContent");
+        	var ht = ct.html();
+        	el.contents().remove();		//这里会有点问题：里面的omCombo点击没数据了
+        	//el.append(ct);	//这样的话连下拉框都没了,所以用下面的html()
+        	el.removeClass("box1");
+        	el.html(ht);
+        }
 	});
 })(jQuery);
