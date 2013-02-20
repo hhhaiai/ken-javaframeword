@@ -17,8 +17,8 @@ public class CreateIndexExample {
 		LuceneManager
 				.getManager()
 				.createIndex(
-						"E:\\JavaWorkSpace\\JavaFramework2.5\\src\\com\\shine\\framework\\Lucene\\data\\index",
-						"E:\\JavaWorkSpace\\JavaFramework2.5\\src\\com\\shine\\framework\\Lucene\\data\\documents");
+						"D:\\MyEclipse 8.5\\Workspaces\\JavaFramework2.5\\src\\com\\shine\\framework\\Lucene\\data\\index\\",
+						"D:\\MyEclipse 8.5\\");
 	}
 
 }
