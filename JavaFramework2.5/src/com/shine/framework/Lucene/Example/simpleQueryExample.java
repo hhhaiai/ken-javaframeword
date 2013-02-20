@@ -2,28 +2,20 @@ package com.shine.framework.Lucene.Example;
 
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.util.Version;
-
 import com.shine.framework.Lucene.LuceneManager;
 
 /**
- * 单字符搜索
+ * 多关键字检索
  * 
  * @author Ken
  * 
  */
-public class SimpleSearchExample {
-
-	/**
-	 * @param args
-	 * @throws Exception
-	 */
+public class simpleQueryExample {
+	
 	public static void main(String[] args) throws Exception {
+		String str[]={"2062080411740","127.0.0.1"};//多关键字
 		LuceneManager
-				.getManager()
-				.simpleQuery(
-						"D:\\MyEclipse 8.5\\Workspaces\\JavaFramework2.5\\src\\com\\shine\\framework\\Lucene\\data\\index",
-						new StandardAnalyzer(Version.LUCENE_36), "中国");
-
+		.getManager()
+		.simpleQuery("D:\\MyEclipse 8.5\\luceneTest\\",new StandardAnalyzer(Version.LUCENE_36),str);
 	}
-
 }
