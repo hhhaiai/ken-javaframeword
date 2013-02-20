@@ -73,7 +73,6 @@
 	<classpathentry kind="lib" path="lib/java_memcached-release_2.0.1.jar"/>
 	<classpathentry kind="lib" path="lib/jfugue-4.0.3-with-musicxml.jar"/>
 	<classpathentry kind="lib" path="lib/db4o-8.0.236.16058-all-java5.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk1.7.0_04"/>
 	<classpathentry kind="lib" path="lib/reflectasm-1.05-all.jar"/>
 	<classpathentry kind="lib" path="lib/lucene-core-3.6.1-javadoc.jar"/>
 	<classpathentry kind="lib" path="lib/lucene-core-3.6.1.jar"/>
@@ -90,5 +89,7 @@
 	<classpathentry kind="lib" path="lib/ioserver-binary1.2b2.jar"/>
 	<classpathentry kind="lib" path="lib/jdo-api-3.0.1.jar"/>
 	<classpathentry kind="lib" path="lib/FontBox-0.1.0.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="D:/jbpm/lucene/snoics-base-1.0-bin/dist/snoics-base.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
