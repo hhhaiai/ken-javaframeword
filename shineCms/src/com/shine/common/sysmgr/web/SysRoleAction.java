@@ -40,7 +40,7 @@ public class SysRoleAction extends AjaxAction<BaseService> {
 		QueryAnalyzer analyzer = new QueryAnalyzer();
 		analyzer.setEntity(new SysMenu());
 		analyzer.addItem("pid", "0", QueryItem.EQ, QueryItem.INTEGER);
-		analyzer.setSortField("orderId");
+		analyzer.addSortField("orderId").addSortField("menuId");
 		extor.buildQueryItem(analyzer);
 		List allMenus = service.list(analyzer);
 		List<SysMenu> dstList = new ArrayList<SysMenu>();

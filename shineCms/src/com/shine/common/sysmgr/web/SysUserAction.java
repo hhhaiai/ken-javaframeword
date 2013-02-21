@@ -7,7 +7,10 @@ import net.sf.json.JsonConfig;
 import com.shine.common.sysmgr.entity.SysRole;
 import com.shine.common.sysmgr.entity.SysUser;
 import com.shine.framework.biz.BaseService;
+import com.shine.framework.dao.util.DefaultPagination;
+import com.shine.framework.dao.util.Pagination;
 import com.shine.framework.dao.util.QueryAnalyzer;
+import com.shine.framework.dao.util.QueryItem;
 import com.shine.framework.entity.BaseEntity;
 import com.shine.framework.entity.PersistResult;
 import com.shine.framework.web.AjaxAction;
@@ -29,13 +32,31 @@ public class SysUserAction extends AjaxAction<BaseService>{
 		return jc;
 	}
 	
+	@Override
+	public void list() {
+		try{
+			QueryAnalyzer analyzer = new QueryAnalyzer();
+			analyzer.setEntity(getE());
+//			analyzer.setBaseSQL("from SysUser _E inner join fetch _E.roles r inner join fetch r.menus m where 1=1 AND(_E.delflag is null or _E.delflag=0) and m.menuId=22","_E");
+			Pagination page = new DefaultPagination();
+			page.init(extor.getIntValue("start"), extor.getIntValue("limit"));
+			analyzer.setPage(page);
+//			analyzer.addItem("roles.menus.funs.funId", "9", QueryItem.EQ, QueryItem.INTEGER);
+//			analyzer.addSorter("roles.roleId", true);
+			extor.buildQueryItem(analyzer);
+			List list = service.list(analyzer);
+			printOutJsonList(list, page, getJsonConfig());
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+
 	/**
 	 * 进入增加、编辑时加载数据
 	 */
 	private void initData(){
 		QueryAnalyzer analyzer = new QueryAnalyzer();
-		analyzer.setEntity(new SysRole());
-		analyzer.setSortField("roleId");
+		analyzer.setEntity(new SysRole()).addSortField("roleId");
 		extor.buildQueryItem(analyzer);
 		List roles = service.list(analyzer);
 		request.setAttribute("roleList", roles);

@@ -14,7 +14,6 @@ import org.hibernate.Session;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.engine.SessionFactoryImplementor;
 import org.hibernate.hql.QueryTranslator;
-import org.hibernate.hql.classic.QueryTranslatorImpl;
 import org.hibernate.metadata.ClassMetadata;
 import org.hibernate.transform.Transformers;
 import org.springframework.orm.hibernate3.HibernateCallback;
@@ -184,7 +183,8 @@ public class GenericDaoImpl extends HibernateDaoSupport implements GenericDao{
 	 * @return
 	 */
 	protected String hql2sql(String hql){
-		QueryTranslator qt = new QueryTranslatorImpl(hql, Collections.EMPTY_MAP, (SessionFactoryImplementor)this.getSessionFactory());
+//		QueryTranslator qt = new org.hibernate.hql.classic.QueryTranslatorImpl(hql, Collections.EMPTY_MAP, (SessionFactoryImplementor)this.getSessionFactory());
+		QueryTranslator qt = new org.hibernate.hql.ast.QueryTranslatorImpl(hql, hql, Collections.EMPTY_MAP, (SessionFactoryImplementor)this.getSessionFactory());
 		qt.compile(Collections.EMPTY_MAP, false);
 		return qt.getSQLString();
 	}

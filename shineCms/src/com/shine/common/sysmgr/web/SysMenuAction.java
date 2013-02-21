@@ -23,7 +23,7 @@ public class SysMenuAction extends AjaxAction<BaseService>{
 	public String enter() {
 		QueryAnalyzer analyzer = new QueryAnalyzer();
 		analyzer.setEntity(getE());
-		analyzer.setSortField("orderId");
+		analyzer.addSortField("orderId").addSortField("menuId");
 		extor.buildQueryItem(analyzer);
 		List list = service.list(analyzer);
 		request.setAttribute(LIST, list);

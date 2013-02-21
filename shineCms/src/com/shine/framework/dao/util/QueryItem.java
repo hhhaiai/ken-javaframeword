@@ -7,10 +7,9 @@ import com.shine.platform.logger.LoggerFactory;
 /**
  * 查询条件
  * @author JiangKunpeng 2011.05.06
- * @version 2011.05.30
+ * @version 2013.02.21
  */
-public class QueryItem {
-	private String name;		//字段名
+public class QueryItem extends Joinable{
 	private String value;		//参数值
 	private String operator;	//运算符
 	private String type;		//字段类型
@@ -19,18 +18,12 @@ public class QueryItem {
 	}
 	
 	public QueryItem(String name,String value,String operator,String type){
-		this.name = name;
+		setName(name);
 		this.value = value;
 		this.operator = operator;
 		this.type = type;
 	}
 	
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
 	public String getValue() {
 		return value;
 	}
@@ -73,23 +66,23 @@ public class QueryItem {
 	 * @return
 	 */
 	private String getOperatorSQL(){
-		String sql = name;
+		String sql = null;
 		if(EQ.equals(operator))
-			sql += " = ";
+			sql = " = ";
 		else if(NE.equals(operator))
-			sql += " != ";
+			sql = " != ";
 		else if(GT.equals(operator))
-			sql += " > ";
+			sql = " > ";
 		else if(GE.equals(operator))
-			sql += " >= ";
+			sql = " >= ";
 		else if(LT.equals(operator))
-			sql += " < ";
+			sql = " < ";
 		else if(LE.equals(operator))
-			sql += " <= ";
+			sql = " <= ";
 		else if(LIKE.equals(operator))
-			sql += " like ";
+			sql = " like ";
 		else
-			sql += " = ";
+			sql = " = ";
 		return sql;
 	}
 	
