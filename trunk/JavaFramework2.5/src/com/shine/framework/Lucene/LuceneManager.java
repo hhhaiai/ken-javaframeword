@@ -230,7 +230,7 @@ public class LuceneManager {
 				for(int i=0;i<searchers.length;i++)
 				searchers[i] = new IndexSearcher(FSDirectory.open(new File(indexDirPath[i])));//多索引路径搜索
 	            MultiSearcher searcher = new MultiSearcher(searchers);
-	            String fields[]={"name"};//为了与flags数组长度相等，所以多加了一个name,否则报错
+	            String fields[]={"name"};
 	            BooleanClause.Occur[] flags = new BooleanClause.Occur[] {BooleanClause.Occur.MUST};
 	            Query   query = MultiFieldQueryParser.parse(Version.LUCENE_36,keyWord,fields,flags,luceneAnalyzer);
 	            ScoreDoc[] score = searcher.search(query, 10000).scoreDocs;
