@@ -96,11 +96,8 @@ public class LuceneManager {
 		try {
 			String columnContent="";//数据库表字段的内容拼接
 			ResultSetMetaData meda=tableRS.getMetaData();
-			for(int i=1;i<meda.getColumnCount()+1;i++){
-				String columnName = meda.getColumnName(i);//获取字段名
-				String content=tableRS.getString(columnName);//获取字段内容
-				columnContent +=(content == null ? " " : content+" ");
-			}
+			for(int i=1;i<meda.getColumnCount()+1;i++)
+				columnContent +=tableRS.getString(meda.getColumnName(i));
 			System.out.println(tableName+"表的字段内容:"+columnContent);
 			Document doc = new Document(); 
 			Field body=new Field("body",columnContent,Field.Store.YES, Field.Index.ANALYZED,
