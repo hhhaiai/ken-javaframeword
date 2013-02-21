@@ -9,7 +9,6 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
@@ -29,7 +28,6 @@ import org.apache.lucene.search.TopDocs;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 import org.apache.lucene.util.Version;
-
 import com.shine.DBUtil.manage.DBManager;
 
 @SuppressWarnings("deprecation")
@@ -232,8 +230,8 @@ public class LuceneManager {
 				for(int i=0;i<searchers.length;i++)
 				searchers[i] = new IndexSearcher(FSDirectory.open(new File(indexDirPath[i])));//多索引路径搜索
 	            MultiSearcher searcher = new MultiSearcher(searchers);
-	            String fields[]={"name","name"};//为了与flags数组长度相等，所以多加了一个name,否则报错
-	            BooleanClause.Occur[] flags = new BooleanClause.Occur[] {BooleanClause.Occur.MUST, BooleanClause.Occur.MUST };
+	            String fields[]={"name"};//为了与flags数组长度相等，所以多加了一个name,否则报错
+	            BooleanClause.Occur[] flags = new BooleanClause.Occur[] {BooleanClause.Occur.MUST};
 	            Query   query = MultiFieldQueryParser.parse(Version.LUCENE_36,keyWord,fields,flags,luceneAnalyzer);
 	            ScoreDoc[] score = searcher.search(query, 10000).scoreDocs;
 	            System.out.println("搜索出来的文件数:"+score.length);
