@@ -108,7 +108,7 @@ $(document).ready(function() {
             }
         }
     });
-	dataUrl = "${path}sysmgr/user_list.do";
+	dataUrl = "${path}sysmgr/user_list.do?aa.bb=3";
 	//创建grid表格
     grid = $.shine.omGrid({
     	id : 'grid',
@@ -148,6 +148,22 @@ $(document).ready(function() {
         <tr>
             <td>姓名：</td>
             <td><input name="Q^S^name^LK" /></td>
+        </tr>
+        <tr>
+            <td>角色：</td>
+            <td><input name="Q^I^roles.roleId^EQ" /></td>
+        </tr>
+        <tr>
+            <td>排序：</td>
+            <td>
+            	<select name="S^">
+            		<option value="">无</option>
+            		<option value="userId">ID升序</option>
+            		<option value="userId^desc">ID降序</option>
+            		<option value="roles.roleId^asc">角色ID升序</option>
+            		<option value="roles.roleId^desc">角色ID降序</option>
+            	</select>
+            </td>
         </tr>
     </table>
 	</form>
