@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.shine.common.sysmgr.entity.SysFunctionUrl;
 import com.shine.common.sysmgr.entity.SysMenu;
-import com.shine.common.sysmgr.entity.SysUser;
 import com.shine.framework.dao.BaseDao;
 
 public interface LoginDao extends BaseDao{
@@ -14,7 +13,7 @@ public interface LoginDao extends BaseDao{
 	 * @param username
 	 * @return
 	 */
-	public abstract SysUser getByUsername(String username);
+	public abstract com.shine.platform.security.auth.User getByUsername(String username);
 	
 	/**
 	 * 通过用户ID查询菜单权限

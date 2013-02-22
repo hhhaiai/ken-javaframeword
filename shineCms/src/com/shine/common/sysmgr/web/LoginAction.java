@@ -1,7 +1,6 @@
 package com.shine.common.sysmgr.web;
 
 import com.shine.common.sysmgr.biz.LoginService;
-import com.shine.common.sysmgr.entity.SysUser;
 import com.shine.framework.entity.PersistResult;
 import com.shine.framework.web.GenericAction;
 import com.shine.platform.context.ConfigFactory;
@@ -34,7 +33,7 @@ public class LoginAction extends GenericAction{
 			String password = extor.getValue("password");
 			if(username==null||username.length()<1||password==null||password.length()<1)
 				printOutText(new PersistResult(PersistResult.ERROR, "帐号或密码为空").toJson());
-			SysUser user = new SysUser();
+			com.shine.platform.security.auth.User user = (com.shine.platform.security.auth.User)ConfigFactory.getFactory().getSpringContext().getBean("sysUser");
 			user.setUsername(username);
 			user.setPassword(password);
 			PersistResult pr = service.login(username, userPassGenerator.generatePassword(user));

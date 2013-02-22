@@ -5,9 +5,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.shine.framework.dao.util.QuerySQL;
-import com.shine.framework.entity.BaseEntity;
 
-public class SysUser implements BaseEntity,com.shine.platform.security.auth.User{
+public class SysUser implements com.shine.platform.security.auth.User{
 
 	private static final long serialVersionUID = -647542899691049799L;
 

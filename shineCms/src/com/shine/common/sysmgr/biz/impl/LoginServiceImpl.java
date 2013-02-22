@@ -8,7 +8,6 @@ import com.shine.common.sysmgr.biz.LoginService;
 import com.shine.common.sysmgr.dao.LoginDao;
 import com.shine.common.sysmgr.entity.SysFunctionUrl;
 import com.shine.common.sysmgr.entity.SysMenu;
-import com.shine.common.sysmgr.entity.SysUser;
 import com.shine.framework.biz.impl.GenericServiceImpl;
 import com.shine.framework.entity.PersistResult;
 
@@ -17,7 +16,7 @@ public class LoginServiceImpl extends GenericServiceImpl<LoginDao> implements Lo
 	@Override
 	public PersistResult login(String username,String password) {
 		PersistResult pr = new PersistResult();
-		SysUser user = dao.getByUsername(username);
+		com.shine.platform.security.auth.User user = dao.getByUsername(username);
 		if(user==null){
 			pr.setCode(PersistResult.FAILURE);
 			pr.setMsg("帐号不存在");

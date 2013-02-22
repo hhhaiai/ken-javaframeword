@@ -5,14 +5,15 @@ import java.util.List;
 import com.shine.common.sysmgr.dao.LoginDao;
 import com.shine.common.sysmgr.entity.SysFunctionUrl;
 import com.shine.common.sysmgr.entity.SysMenu;
-import com.shine.common.sysmgr.entity.SysUser;
 import com.shine.framework.dao.impl.BaseDaoImpl;
+import com.shine.platform.context.ConfigFactory;
 
 public class LoginDaoImpl extends BaseDaoImpl implements LoginDao{
 
 	@Override
-	public SysUser getByUsername(String username) {
-		return (SysUser)this.findOne("from SysUser u where u.username=?", new Object[]{username});
+	public com.shine.platform.security.auth.User getByUsername(String username) {
+		String className = ConfigFactory.getFactory().getSpringContext().getBean("sysUser").getClass().getName();
+		return (com.shine.platform.security.auth.User)this.findOne("from " + className + " u where u.username=?", new Object[]{username});
 	}
 
 	@Override
