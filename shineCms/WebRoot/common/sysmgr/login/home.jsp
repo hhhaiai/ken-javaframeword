@@ -41,7 +41,7 @@ html, body{width:100%;height:100%;padding:0;margin:0;overflow:hidden;}
 					murl = "${path}"+murl;
 					var nodeId = treeNode.id;
 					var tabId = tabElement.omTabs('getAlter', 'tab_'+nodeId);
-	        		if(tabId&&tabId!=null){
+	        		if(tabId!=null){
 	        			tabElement.omTabs('activate', tabId);
 	        		}else{
 	          			tabElement.omTabs('add',{
@@ -85,13 +85,28 @@ html, body{width:100%;height:100%;padding:0;margin:0;overflow:hidden;}
 		});
 	    tabElement = $('#center-tab').omTabs({
 	        height : "fit",
-	        border : false
+	        border : false,
+	        tabMenu : true,
+	        closable : [1],
+	        onBeforeClose : function(n,event){
+	    		//不关闭第一个选项卡页(首页)
+	        	if(n==0)
+	        		return false;
+	        },
+	        onBeforeCloseAll : function(event){
+	        	//不关闭第一个选项卡页(首页)
+	        	var total = this.omTabs('getLength');
+	        	for(var i=total-1;i>0;i--){
+	        		this.omTabs('close',i);
+	        	}
+	        	return false;
+	        }
 	    });
 	    
 	    //初始化Tree
 		zTree = $.fn.zTree.init($("#tree"), setting, zNodes);
 	    
-	    centerHeight = tabElement.height() - tabElement.find(".om-tabs-headers").outerHeight();
+	    centerHeight = tabElement.height() - tabElement.find(".om-tabs-headers").outerHeight()-4;
 	    $('#homeFrame').height(centerHeight);
 	});
 //-->
