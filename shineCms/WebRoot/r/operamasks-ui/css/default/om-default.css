@@ -1,6 +1,6 @@
 /*
  * $Id: om-theme.css,v 1.36 2012/06/26 08:57:31 chentianzhen Exp $
- * operamasks-ui CSS Framework 2.0
+ * operamasks-ui CSS Framework 2.1
  *
  * Copyright 2011, AUTHORS.txt (http://ui.operamasks.org/about)
  * Dual licensed under the MIT or LGPL Version 2 licenses.
@@ -40,7 +40,7 @@
 ----------------------------------*/
 
 /* Overlays */
-.om-widget-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+.om-widget-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1000;}
 
 /* Component containers
 ----------------------------------*/
@@ -136,7 +136,7 @@
 .om-resizable-nw { cursor: nw-resize; width: 9px; height: 9px; left: -5px; top: -5px; }
 .om-resizable-ne { cursor: ne-resize; width: 9px; height: 9px; right: -5px; top: -5px;}/*
  * $Id: om-panel.css,v 1.22 2012/06/27 09:10:27 licongping Exp $
- * operamasks-ui panel 2.0
+ * operamasks-ui panel 2.1
  *
  * Copyright 2011, AUTHORS.txt (http://ui.operamasks.org/about)
  * Dual licensed under the MIT or GPL Version 2 licenses.
@@ -242,7 +242,7 @@
 	background-position: -90px -36px;
 }/*
  * $Id: om-grid.css,v 1.25 2012/06/04 07:37:32 chentianzhen Exp $
- * operamasks-ui grid 2.0
+ * operamasks-ui grid 2.1
  *
  * Copyright 2011, AUTHORS.txt (http://ui.operamasks.org/about)
  * Dual licensed under the MIT or LGPL Version 2 licenses.
@@ -883,7 +883,7 @@ div.pGroup {
 .om-grid .titleDiv {background: #fafafa url(images/grid/tool-bg.png) repeat-x bottom;color:#000;}
 .om-grid .titleDiv .titleContent {color:#15428B;font-weight: bold;padding:6px;}/*
  * $Id: om-accordion.css,v 1.18 2012/02/21 09:01:48 chentianzhen Exp $
- * operamasks-ui Accordion 2.0
+ * operamasks-ui Accordion 2.1
  *
  * Copyright 2011, AUTHORS.txt (http://ui.operamasks.org/about)
  * Dual licensed under the MIT or LGPL Version 2 licenses.
@@ -903,7 +903,7 @@ div.pGroup {
 .om-accordion .om-state-disabled{cursor:not-allowed!important;}
 .om-accordion-disable{background-color:#CCCCCC; opacity: .6; filter:Alpha(Opacity=60); }/*
  * $Id: om-borderlayout.css,v 1.14 2012/06/14 03:22:51 licongping Exp $
- * operamasks-ui borderlayout 2.0
+ * operamasks-ui borderlayout 2.1
  *
  * Copyright 2011, AUTHORS.txt (http://ui.operamasks.org/about)
  * Dual licensed under the MIT or LGPL Version 2 licenses.
@@ -1143,7 +1143,7 @@ div.pGroup {
 	cursor: pointer;
 	background: url(images/borderlayout/trigger_buttons.png) no-repeat 4px 0px;
 }/*
- * operamasks-ui button 2.0
+ * operamasks-ui button 2.1
  *
  * Copyright 2011, AUTHORS.txt (http://ui.operamasks.org/about)
  * Dual licensed under the MIT or LGPL Version 2 licenses.
@@ -1173,7 +1173,7 @@ a.om-btn-only-icon{display: block;}
 .om-btn .om-btn-center {background-position: 100% -24px;background-repeat: repeat-x;}
 .om-btn .om-btn-right {background-position: 100% -48px;background-repeat: no-repeat;}
  /*
- * operamasks-ui buttonbar 2.0
+ * operamasks-ui buttonbar 2.1
  *
  * Copyright 2011, AUTHORS.txt (http://ui.operamasks.org/about)
  * Dual licensed under the MIT or LGPL Version 2 licenses.
@@ -1189,7 +1189,7 @@ a.om-btn-only-icon{display: block;}
 .om-buttonbar .om-state-hover{background: url("images/buttonbar/button-hover-bg.png") !important;}
 .om-buttonbar-sep {background: url("images/buttonbar/separtor-bg.png");background-repeat: no-repeat;height: 24px;width: 2px;display: block;margin-left:2px;margin-right:2px;margin-top : 2px;float: left;overflow: hidden;}/*
  * $Id: om-calendar.css,v 1.17 2012/06/27 07:38:03 linxiaomin Exp $
- * operamasks-ui calendar 2.0
+ * operamasks-ui calendar 2.1
  *
  * Copyright 2011, AUTHORS.txt (http://ui.operamasks.org/about)
  * Dual licensed under the MIT or LGPL Version 2 licenses.
@@ -1297,7 +1297,7 @@ a.om-btn-only-icon{display: block;}
 
 .om-cal-box a {color:#222222}/*
  * $Id: om-combo.css,v 1.15 2012/06/27 07:38:03 linxiaomin Exp $
- * operamasks-ui combo 2.0
+ * operamasks-ui combo 2.1
  *
  * Copyright 2011, AUTHORS.txt (http://ui.operamasks.org/about)
  * Dual licensed under the MIT or LGPL Version 2 licenses.
@@ -1314,7 +1314,7 @@ a.om-btn-only-icon{display: block;}
 .om-combo-trigger{background: url("images/combo/combo-trigger.png") no-repeat scroll 0px 50% transparent;}
 .om-combo-selected, .om-state-hover.om-combo-selected {background:none repeat scroll 0 0 #FFCA88}/*
  * $Id: om-dialog.css,v 1.12 2012/06/07 09:37:34 linxiaomin Exp $
- * operamasks-ui dialog 2.0
+ * operamasks-ui dialog 2.1
  *
  * Copyright 2011, AUTHORS.txt (http://ui.operamasks.org/about)
  * Dual licensed under the MIT or LGPL Version 2 licenses.
@@ -1340,7 +1340,7 @@ a.om-btn-only-icon{display: block;}
 .om-dialog.om-widget-content {border-radius: 8px 8px 0 0;}
 /*
  * $Id: om-fileupload.css,v 1.5 2012/02/08 06:00:53 licongping Exp $
- * operamasks-ui fileupload 2.0
+ * operamasks-ui fileupload 2.1
  *
  * Copyright 2011, AUTHORS.txt (http://ui.operamasks.org/about)
  * Dual licensed under the MIT or LGPL Version 2 licenses.
@@ -1510,7 +1510,9 @@ a.om-btn-only-icon{display: block;}
 .om-grid tr.rowExpand-rowDetails div.rowExpand-rowDetails-content{
     border: 1px solid #BDCBE8;
     border-width : 1px 0;
-}.om-grid-sortIcon{
+    white-space : normal;
+}
+.om-grid-sortIcon{
 	display: none;
 	background-repeat: no-repeat;
 	height: 4px;
@@ -1661,7 +1663,7 @@ a.om-btn-only-icon{display: block;}
     background-image: url("images/itemselector/remove_hover.png");
 }/*
  * $Id: om-menu.css,v 1.17 2012/06/27 01:58:28 luoyegang Exp $
- * operamasks-ui menu 2.0
+ * operamasks-ui menu 2.1
  *
  * Copyright 2011, AUTHORS.txt (http://ui.operamasks.org/about)
  * Dual licensed under the MIT or LGPL Version 2 licenses.
@@ -1684,7 +1686,7 @@ a.om-btn-only-icon{display: block;}
 .om-menu-indicator span{float: left;margin-left: 10px;white-space:nowrap;word-break:keep-all;overflow:hidden;text-overflow:ellipsis;*display:inline-block;}
 .om-menu .om-menu-item-hover{border:1px solid #AECFF7;background-color:#ECF0F6;color: #FFFFFF;outline: medium none;}/*
  * $Id: om-messagebox.css,v 1.16 2012/03/12 03:15:13 wangfan Exp $
- * operamasks-ui messageBox 2.0
+ * operamasks-ui messageBox 2.1
  *
  * Copyright 2011, AUTHORS.txt (http://ui.operamasks.org/about)
  * Dual licensed under the MIT or LGPL Version 2 licenses.
@@ -1726,7 +1728,7 @@ div.om-messageBox { position: absolute; width: 300px; overflow: hidden; outline:
 .om-messageBox-image-waiting{ background-image: url("images/messagebox/waiting.gif"); }
 /*
  * $Id: om-messagetip.css,v 1.11 2012/03/12 03:09:58 wangfan Exp $
- * operamasks-ui messagetip 2.0
+ * operamasks-ui messagetip 2.1
  *
  * Copyright 2011, AUTHORS.txt (http://ui.operamasks.org/about)
  * Dual licensed under the MIT or LGPL Version 2 licenses.
@@ -1757,7 +1759,7 @@ body {/*解决IE6不支持position:fixed的问题*/ _background-image: url(about
 .om-messageTip-image-waiting{ background: url("images/messagebox/waiting.gif");}
 /*
  * $Id: om-numberfield.css,v 1.6 2012/02/08 06:00:53 licongping Exp $
- * operamasks-ui numberfield 2.0
+ * operamasks-ui numberfield 2.1
  *
  * Copyright 2011, AUTHORS.txt (http://ui.operamasks.org/about)
  * Dual licensed under the MIT or LGPL Version 2 licenses.
@@ -1784,7 +1786,7 @@ input.om-numberfield{
 .om-progressbar .om-progressbar-value {height:100%; }
 .om-progressbar .om-progressbar-text {text-align: center; position: absolute;}/*
  * $Id: om-scrollbar.css,v 1.1 2012/06/14 00:48:20 chentianzhen Exp $
- * operamasks-ui combo 2.0
+ * operamasks-ui combo 2.1
  *
  * Copyright 2011, AUTHORS.txt (http://ui.operamasks.org/about)
  * Dual licensed under the MIT or LGPL Version 2 licenses.
@@ -1800,7 +1802,7 @@ input.om-numberfield{
 	opacity: .8; filter:Alpha(Opacity=80);
 }/*
  * $Id: om-slider.css,v 1.10 2012/02/28 07:51:23 wangfan Exp $
- * operamasks-ui slider 2.0
+ * operamasks-ui slider 2.1
  *
  * Copyright 2011, AUTHORS.txt (http://ui.operamasks.org/about)
  * Dual licensed under the MIT or LGPL Version 2 licenses.
@@ -1922,7 +1924,7 @@ input.om-numberfield{
 
 /*
  * $Id: om-suggestion.css,v 1.7 2012/06/19 07:27:06 luoyegang Exp $
- * operamasks-ui suggestion 2.0
+ * operamasks-ui suggestion 2.1
  *
  * Copyright 2011, AUTHORS.txt (http://ui.operamasks.org/about)
  * Dual licensed under the MIT or LGPL Version 2 licenses.
@@ -1934,7 +1936,7 @@ input.om-numberfield{
 .om-widget .om-droplist {overflow-x: hidden;}
 .om-suggestion{background: white;}/*
  * $Id: om-tabs.css,v 1.22 2012/06/28 06:36:00 chentianzhen Exp $
- * operamasks-ui tabs 2.0
+ * operamasks-ui tabs 2.1
  *
  * Copyright 2011, AUTHORS.txt (http://ui.operamasks.org/about)
  * Dual licensed under the MIT or LGPL Version 2 licenses.
@@ -1955,6 +1957,22 @@ input.om-numberfield{
 }
 .om-tabs .header-no-border{
 	border-width:0px;
+}
+.om-tabs .left-placeholder{
+    display: inline-block;
+    float: left;
+    height: 27px;
+    line-height: 28px;
+    width: 3px;
+    margin-left: -3px;
+}
+
+.om-tabs .right-placeholder{
+    display: inline-block;
+    float: left;
+    height: 27px;
+    line-height: 28px;
+    width: 8px;
 }
 .om-tabs .om-tabs-scroll-left {
 	background : url(images/tabs/om-tabs-scroll-left.gif) no-repeat;
@@ -2056,7 +2074,7 @@ input.om-numberfield{
 	border-width: 0;
 }/*
  * $Id: om-tooltip.css,v 1.5 2012/03/02 05:26:54 luoyegang Exp $
- * operamasks-ui tooltip 2.0
+ * operamasks-ui tooltip 2.1
  *
  * Copyright 2011, AUTHORS.txt (http://ui.operamasks.org/about)
  * Dual licensed under the MIT or LGPL Version 2 licenses.
@@ -2072,7 +2090,7 @@ input.om-numberfield{
 .tip-anchor-right {background-position: -19px 0px;width: 10px;}
 .tip-anchor{height: 10px;overflow: hidden;position: absolute;width: 9px;background-image: url("images/tooltip/tip-anchor-sprite.gif");background-repeat: no-repeat;}/*
  * $Id: om-tree.css,v 1.26 2012/06/14 01:08:25 linxiaomin Exp $
- * operamasks-ui tree 2.0
+ * operamasks-ui tree 2.1
  *
  * Copyright 2011, AUTHORS.txt (http://ui.operamasks.org/about)
  * Dual licensed under the MIT or LGPL Version 2 licenses.
