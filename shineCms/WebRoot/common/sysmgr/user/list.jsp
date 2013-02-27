@@ -108,7 +108,7 @@ $(document).ready(function() {
             }
         }
     });
-	dataUrl = "${path}sysmgr/user_list.do?aa.bb=3";
+	dataUrl = "${path}sysmgr/user_list.do";
 	//创建grid表格
     grid = $.shine.omGrid({
     	id : 'grid',

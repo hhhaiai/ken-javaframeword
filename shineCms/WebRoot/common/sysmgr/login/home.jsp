@@ -47,7 +47,7 @@ html, body{width:100%;height:100%;padding:0;margin:0;overflow:hidden;}
 	          			tabElement.omTabs('add',{
 							title : treeNode.name, 
 							tabId : 'tab_'+nodeId,
-							content : "<iframe id='tab_iframe_"+nodeId+"' border=0 frameBorder='no' name='inner-frame' src='"+murl+"' height='"+centerHeight+"' width='100%'></iframe>",
+							content : "<iframe id='tab_iframe_"+nodeId+"' border=0 frameBorder='no' name='inner-frame' src='"+murl+"' height='"+centerHeight+"' width='100%' style='width:100%;height:"+centerHeight+"px;'></iframe>",
 							closable : true
 		            	});
 	        		}
@@ -106,7 +106,7 @@ html, body{width:100%;height:100%;padding:0;margin:0;overflow:hidden;}
 	    //初始化Tree
 		zTree = $.fn.zTree.init($("#tree"), setting, zNodes);
 	    
-	    centerHeight = tabElement.height() - tabElement.find(".om-tabs-headers").outerHeight()-4;
+	    centerHeight = tabElement.height() - tabElement.find(".om-tabs-headers").outerHeight()-2;
 	    $('#homeFrame').height(centerHeight);
 	});
 //-->
@@ -129,7 +129,7 @@ html, body{width:100%;height:100%;padding:0;margin:0;overflow:hidden;}
 				<li><a href="#tab_0">首页</a></li>
 			</ul>
 			<div id="tab_0">
-				<iframe id='homeFrame' border=0 frameBorder='no' src='about:blank' width='100%' height='100%'></iframe>
+				<iframe id='homeFrame' border=0 frameBorder='no' src='http://www.yangguangnet.com' width='100%' height='100%'></iframe>
 			</div>
 		</div>
 	</div>
