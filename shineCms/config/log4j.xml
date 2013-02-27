@@ -28,7 +28,7 @@
     	<appender-ref ref="console"/>
     </logger>
     <logger name="org.hibernate" additivity="false">
-    	<level value = "INFO"/>
+    	<level value = "ERROR"/>
     	<appender-ref ref="console"/>
     </logger>
     <logger name="com.opensymphony.xwork2" additivity="false">
