@@ -11,9 +11,8 @@
 	<plugins>
 		<plugin>classpath:com/shine/platform/config/platformPlugin.xml</plugin>
 		<plugin>classpath:com/shine/framework/config/frameworkPlugin.xml</plugin>
-		<!-- 
-		 -->
 		<plugin>com.shine.platform.security.UrlSecurityPlugin</plugin>
+		<plugin>classpath:com/shine/common/jbpm/config/jbpmPlugin.xml</plugin>
 		<plugin>classpath:com/shine/common/sysmgr/config/sysmgrPlugin.xml</plugin>
 	</plugins>
 	<attributes>

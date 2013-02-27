@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jbpm-configuration>
+  <import resource="jbpm.default.cfg.xml" />
+  <import resource="jbpm.jpdl.cfg.xml" />
+  <import resource="jbpm.identity.cfg.xml" />
+  <import resource="jbpm.tx.spring.cfg.xml" />
+  
+  <process-engine-context>
+  	<!-- 注入数据源 
+  	<string name="spring.cfg" value="com/shine/project/shineCms/config/dbSpring.xml"/>
+  	-->
+  	
+  	<!-- 使用spring的事务控制 -->
+  	<command-service>
+    	<retry-interceptor />
+        <environment-interceptor />
+        <spring-transaction-interceptor current="true"/>
+    </command-service>
+  </process-engine-context>
+  
+  <transaction-context>
+	<hibernate-session current="true" />
+  </transaction-context>
+    
+</jbpm-configuration>

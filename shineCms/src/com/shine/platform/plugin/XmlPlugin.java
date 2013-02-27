@@ -1,5 +1,7 @@
 package com.shine.platform.plugin;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -16,7 +18,7 @@ import com.shine.util.xml.JDomUtil;
 /**
  * XML配置插件,通过xml文件配置加载spring、struts、hbm配置文件
  * @author JiangKunpeng 2013.01.31
- * @version 2013.02.01
+ * @version 2013.02.27
  *
  */
 public class XmlPlugin implements IPlugin{
@@ -27,9 +29,26 @@ public class XmlPlugin implements IPlugin{
 	ILogger logger = LoggerFactory.getLogger(getClass());
 	
 	public XmlPlugin(String xmlPath){
-		if(xmlPath.startsWith(ConfigFactory.ClassPath))
-			xmlPath = xmlPath.replace(ConfigFactory.ClassPath, getClass().getResource("/").getPath());
-		Document doc = JDomUtil.file2Doc(xmlPath);
+		Document doc = null;
+		InputStream is = null;
+		if(xmlPath.toLowerCase().startsWith(ConfigFactory.ClassPath)){
+			xmlPath = xmlPath.substring(ConfigFactory.ClassPath.length());
+			if(!xmlPath.startsWith("/"))
+				xmlPath = "/" + xmlPath;
+			is = getClass().getResourceAsStream(xmlPath);
+			try{
+				doc = JDomUtil.stream2Doc(is);
+			}finally{
+				try {
+					if(is!=null)
+						is.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}else{
+			doc = JDomUtil.file2Doc(xmlPath);
+		}
 		Element root = doc.getRootElement();
 		this.name = root.getAttributeValue("name");
 		List<Element> xmls = root.getChildren();
@@ -65,13 +84,12 @@ public class XmlPlugin implements IPlugin{
 	@Override
 	public void init() {
 		logger.debug("初始化插件[" + getName() + "]");
-		String classPath = getClass().getResource("/").getPath();
 		for(String xml : springXmls){
 			ConfigFactory.getFactory().registerSpringXml(xml);
 		}
 		for(String xml : strutsXmls){
 			if(xml.startsWith(ConfigFactory.ClassPath))
-				xml = xml.replace(ConfigFactory.ClassPath, classPath);
+				xml = xml.replace(ConfigFactory.ClassPath, "");
 			ConfigFactory.getFactory().registerStrutsXml(xml);
 		}
 	}

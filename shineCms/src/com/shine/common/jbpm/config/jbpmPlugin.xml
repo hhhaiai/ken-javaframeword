@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin-xmls name="JBPM工作流">
+	<xml type="spring">classpath:com/shine/common/jbpm/config/jbpmSpring.xml</xml>
+	<xml type="hbm">
+		<hbm>classpath:jbpm.execution.hbm.xml</hbm>
+		<hbm>classpath:jbpm.history.hbm.xml</hbm>
+		<hbm>classpath:jbpm.identity.hbm.xml</hbm>
+		<hbm>classpath:jbpm.repository.hbm.xml</hbm>
+		<hbm>classpath:jbpm.task.hbm.xml</hbm>
+	</xml>
+</plugin-xmls>

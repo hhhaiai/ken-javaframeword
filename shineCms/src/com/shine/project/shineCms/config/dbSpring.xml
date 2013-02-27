@@ -36,10 +36,18 @@
 		 -->
 		<property name="hibernateProperties">
 			<props>
-				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLInnoDBDialect</prop>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</prop>
 				<prop key="hibernate.query.factory_class">org.hibernate.hql.ast.ASTQueryTranslatorFactory</prop>
 				<prop key="hibernate.show_sql">true</prop>
 				<prop key="hibernate.format_sql">false</prop>
+				
+				<!-- hibernate.hbm2ddl.auto 不同值的作用:
+				       validate    加载hibernate时，验证创建数据库表结构 
+					   create      每次加载hibernate，重新创建数据库表结构 
+					   create-drop 加载hibernate时创建，退出时删除表结构 
+					   update      加载hibernate自动更新数据库结构 
+					   none        不进行任何操作 
+				-->
 				<prop key="hibernate.hbm2ddl.auto">none</prop>
 				<prop key="connection.useUnicode">true</prop>
 				<prop key="connection.characterEncoding">utf-8</prop>

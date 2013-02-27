@@ -12,7 +12,7 @@ import com.shine.platform.context.ConfigFactory;
 /**
  * 重写Spring的LocalSessionFactoryBean，支持通过插件加载hbm配置
  * @author JiangKunpeng 2013.01.31
- * @version 2013.02.01
+ * @version 2013.02.27
  *
  */
 public class ShineSessionFactoryBean extends LocalSessionFactoryBean{
@@ -23,22 +23,25 @@ public class ShineSessionFactoryBean extends LocalSessionFactoryBean{
 			throws HibernateException {
 		List<HbmListBean> hbms = ConfigFactory.getFactory().getHbmList();
 		if(hbms!=null){
-			String classPath = getClass().getResource("/").getPath();
 			for(HbmListBean hbm : hbms){
 				if(match(hbm)){
 					List<String> xmls = hbm.getXmls();
 					if(xmls!=null){
 						for(String xml : xmls){
-							if(xml.toLowerCase().startsWith(ConfigFactory.ClassPath))
-								xml = xml.replace(ConfigFactory.ClassPath, classPath);
-							config.addFile(xml);
+							if(xml.toLowerCase().startsWith(ConfigFactory.ClassPath)){
+								xml = xml.substring(ConfigFactory.ClassPath.length());
+								if(!xml.startsWith("/"))
+									xml = "/" + xml;
+								config.addInputStream(getClass().getResourceAsStream(xml));
+							}else{
+								config.addFile(xml);
+							}
 						}
 					}
 					xmls = null;
 				}
 			}
 			hbms = null;
-			classPath = null;
 		}
 		return super.newSessionFactory(config);
 	}
