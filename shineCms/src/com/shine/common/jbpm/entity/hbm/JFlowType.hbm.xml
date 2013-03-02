@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">    
+<hibernate-mapping>
+	<class name="com.shine.common.jbpm.entity.JFlowType" table="JFLOW_TYPE" 
+		dynamic-insert="false" dynamic-update="true">
+		<id name="typeId" column="TYPEID" type="java.lang.Integer" length="8">
+			<generator class="native" />
+		</id>
+		<property name="pid" column="PID" type="java.lang.Integer" length="8" not-null="true" update="false"/>
+		<property name="typeName" column="TYPENAME" type="java.lang.String" length="50" not-null="true"/>
+		
+		<set name="children" cascade="all" inverse="true">
+			<key column="PID" />
+			<one-to-many class="com.shine.common.jbpm.entity.JFlowType"/>
+		</set>
+    </class>
+</hibernate-mapping>

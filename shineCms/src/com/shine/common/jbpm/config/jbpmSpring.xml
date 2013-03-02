@@ -13,6 +13,7 @@
            http://www.springframework.org/schema/aop
            http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
     
+    <!-- JBPM引擎 -->
     <bean id="springHelper" class="org.jbpm.pvm.internal.processengine.SpringHelper">
     	<property name="jbpmCfg" value="com/shine/common/jbpm/config/jbpm.cfg.xml" />
     </bean>
@@ -24,5 +25,8 @@
 	<bean id="historyService" factory-bean="processEngine" factory-method="getHistoryService"/>
 	<bean id="identityService" factory-bean="processEngine" factory-method="getIdentityService"/>
 	<bean id="managementService" factory-bean="processEngine" factory-method="getManagementService"/>
+	
+	<!-- 工作流管理 -->
+	<bean id="jflowTypeAction" class="com.shine.common.jbpm.web.JFlowTypeAction" parent="ajaxAction" scope="prototype"/>
     
 </beans>

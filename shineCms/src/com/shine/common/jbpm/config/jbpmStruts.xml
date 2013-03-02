@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+    <package name="jbpm" extends="back" namespace="/jbpm">
+    	<action name="type_*" class="jflowTypeAction" method="{1}">
+    		<result name="enter">/common/jbpm/mgr/typeHome.jsp</result>
+    		<result name="toAdd">/common/jbpm/mgr/typeEdit.jsp?method=add</result>
+    		<result name="toEdit">/common/jbpm/mgr/typeEdit.jsp</result>
+    	</action>
+    </package>
+</struts>

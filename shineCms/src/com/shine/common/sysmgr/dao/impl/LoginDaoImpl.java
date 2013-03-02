@@ -18,7 +18,7 @@ public class LoginDaoImpl extends BaseDaoImpl implements LoginDao{
 
 	@Override
 	public List<SysMenu> loadMenusByUserId(int userId) {
-		String sql = "select m.* from SYS_MENU m left join SYS_ROLE_MENU rm on m.MENUID = rm.MENUID left join SYS_USER_ROLE ur on rm.ROLEID = ur.ROLEID where ur.USERID=? and m.ENABLE=1 order by m.ORDERID asc";
+		String sql = "select m.* from SYS_MENU m left join SYS_ROLE_MENU rm on m.MENUID = rm.MENUID left join SYS_USER_ROLE ur on rm.ROLEID = ur.ROLEID where ur.USERID=? and m.ENABLE=1 order by m.ORDERID asc,m.MENUID asc";
 		return this.listBySQL(SysMenu.class, sql, new Object[]{userId});
 	}
 
