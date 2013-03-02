@@ -34,9 +34,9 @@
 		},
 		callback: {
 			beforeClick: function(treeId, treeNode) {
-				var menuId = treeNode.id;
-				if(menuId>0){
-					var url = "${path}sysmgr/fun_enter.do?menuId="+menuId;
+				var typeId = treeNode.id;
+				if(typeId>0){
+					var url = "${path}jbpm/define_enter.do?typeId="+typeId;
 					funcIframe.attr("src",url);
 					return true;
 				}
@@ -51,7 +51,7 @@
 		if (!treeNode && event.target.tagName.toLowerCase() != "button" && $(event.target).parents("a").length == 0) {
 			zTree.cancelSelectedNode();
 		} else if (treeNode) {
-			//如果右击的是菜单导航则禁用编辑和删除菜单，否则开启
+			//如果右击的是顶层类型则禁用编辑和删除菜单，否则开启
 			if(treeNode.id==0){
 				 rMenu.omMenu('disableItem','2');
 				 rMenu.omMenu('disableItem','3');
@@ -60,41 +60,42 @@
 				 rMenu.omMenu('enableItem','3');
 			}
 			zTree.selectNode(treeNode);
+			//alert($(event.target).offset().top);
 			rMenu.omMenu('show',event.target);
 		}
 	}
 
 	var zNodes =[
-		{id:0, pid:-1, name:"菜单导航", open:true}
-		<c:forEach var="m" items="${list}">
-			,{id:${m.menuId},pid:${m.pid},name:"${m.orderId}-${m.menuName}",open:true}
+		{id:0, pid:-1, name:"流程分类", open:true}
+		<c:forEach var="t" items="${list}">
+			,{id:${t.typeId},pid:${t.pid},name:"${t.typeName}",open:true}
 		</c:forEach>
 	];
 	
 	var editDialog;	//编辑框
-	//增加子菜单
+	//增加子分类
 	function toAdd(){
 		var selNode = zTree.getSelectedNodes()[0];
 		if (selNode) {
 			var id = selNode.id;
-			editDialog = $.shine.openDialog({id:"editDialog", title:"增加子菜单", url:"${path}sysmgr/menu_toAdd.do?e.pid="+id, width:500, height:350});
+			editDialog = $.shine.openDialog({id:"editDialog", title:"增加子分类", url:"${path}jbpm/type_toAdd.do?e.pid="+id, width:500, height:200});
 		}
 	}
-	//修改菜单
+	//修改分类
 	function toEdit(){
 		var selNode = zTree.getSelectedNodes()[0];
 		if (selNode) {
 			var id = selNode.id;
-			editDialog = $.shine.openDialog({id:"editDialog", title:"修改菜单", url:"${path}sysmgr/menu_toEdit.do?e.menuId="+id, width:500, height:350});
+			editDialog = $.shine.openDialog({id:"editDialog", title:"修改分类", url:"${path}jbpm/type_toEdit.do?e.typeId="+id, width:500, height:200});
 		}
 	}
-	//删除菜单
+	//删除分类
 	function toDelete(){
 		var selNode = zTree.getSelectedNodes()[0];
 		if (selNode) {
 			var id = selNode.id;
 			if(confirm("删除后将不能恢复，确认删除？")){
-				$.post('${path}sysmgr/menu_delete.do','id='+id,function(data){
+				$.post('${path}flow/type_delete.do','id='+id,function(data){
 	                $.shine.showAjaxMsg(data,function(){
 	                	zTree.removeNode(selNode);
 	                });
@@ -111,12 +112,12 @@
 	//保存菜单成功后调用
 	function saveSuccess(obj){
 		closeEditDialog();
-		var tnode = zTree.getNodeByParam("id",obj["e.menuId"],null);
+		var tnode = zTree.getNodeByParam("id",obj["e.typeId"],null);
 		if(tnode!=null){
-			tnode.name=obj["e.orderId"]+"-"+obj["e.menuName"];
+			tnode.name=obj["e.typeName"];
 			zTree.updateNode(tnode);
 		}else{
-			var newNode = {id:obj["e.menuId"],pid:obj["e.pid"],name:obj["e.orderId"]+"-"+obj["e.menuName"]};
+			var newNode = {id:obj["e.typeId"],pid:obj["e.pid"],name:obj["e.typeName"]};
 			var pnode = zTree.getNodeByParam("id",obj["e.pid"]);
 			zTree.addNodes(pnode, newNode);
 		}
@@ -128,7 +129,7 @@
         	minWidth : 150,
         	maxWidth : 200,
         	dataSource : [
-        		{id:'1',label:'增加子菜单',handle:'toAdd()',icon:'${path}r/css/themes/${themes}/image/icon/add.gif'},
+        		{id:'1',label:'增加子类型',handle:'toAdd()',icon:'${path}r/css/themes/${themes}/image/icon/add.gif'},
             	{id:'2',label:'修改',handle:'toEdit()',icon:'${path}r/css/themes/${themes}/image/icon/modify.gif'},
             	{id:'3',label:'删除',handle:'toDelete()',icon:'${path}r/css/themes/${themes}/image/icon/delete.gif'}
             ],
@@ -139,7 +140,26 @@
 		});
 	}
 	
+	function initLayout(){
+		$('#body-panel').omBorderLayout({
+			fit : true,
+			panels:[{
+	   	        id:"center-panel",
+	   	     	header:false,
+	   	        region:"center"
+	   	    },{
+	   	        id:"west-panel",
+	   	        resizable:true,
+	   	        collapsible:true,
+	   	        title:"流程分类",
+	   	        region:"west",
+	   	        width:260
+	   	    }]
+		});
+	}
+	
 	$(document).ready(function(){
+		initLayout();
 		//初始化Tree
 		zTree = $.fn.zTree.init($("#tree"), setting, zNodes);
 		
@@ -149,18 +169,19 @@
 		funcIframe = $("#funcIframe");
 		//funcIframe.bind("load", iframeLoadReady);
 		
-		bodyHeight = window.parent.centerHeight-4;
+		bodyHeight = window.parent.centerHeight;
 		$("body").height(bodyHeight);
 		$("#funcIframe").height(bodyHeight);
 	});
 //-->
 </script>
 </head>
-<body style="height: 100%;">
+<body>
+<%-- 
 <table align="left" style="width:100%;height:100%;border:0px;">
 	<tr>
 		<td align="left" valign="top" style="width:260px;height:100%;border-right: #999999 1px dashed;">
-			<div style="width:260px;padding: 5px 0px 3px 2px;color:gray;border-bottom: #999999 1px dashed;">左击管理功能权限,右击显示操作菜单</div>
+			<div style="width:260px;padding: 5px 0px 3px 2px;color:gray;border-bottom: #999999 1px dashed;">左击管理流程定义,右击显示操作菜单</div>
 			<ul id="tree" class="ztree" style="width:260px;overflow:auto;"></ul>
 		</td>
 		<td align="left" valign="top">
@@ -168,7 +189,16 @@
 		</td>
 	</tr>
 </table>
-
+--%>
+<div id="body-panel" style="width:100%;height:100%;">
+	<div id="west-panel">
+		<div style="width:95%;padding: 5px 0px 3px 2px;color:gray;border-bottom: #999999 1px dashed;">左击管理流程定义,右击显示操作菜单</div>
+		<ul id="tree" class="ztree" style="width:95%;overflow:auto;"></ul>
+	</div>
+	<div id="center-panel">
+		<iframe id="funcIframe" name="funcIframe" src="about:blank" frameborder="0" scrolling="auto" width="100%" height="100%"></iframe>
+	</div>
+</div>
 <div id="rightMenu"></div>
 </body>
 </html>

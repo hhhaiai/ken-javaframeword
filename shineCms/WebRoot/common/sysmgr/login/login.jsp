@@ -65,11 +65,11 @@ $(document).ready(function() {
 							<table class="simple_table" style="width:100%;">
 								<tr>
 									<td class="label">帐 号：</td>
-									<td><input class="input" type="text" name="username" value=""/></td>
+									<td><input class="input" type="text" name="username" value="admin"/></td>
 								</tr>
 								<tr>
 									<td class="label">密 码：</td>
-									<td><input class="input" type="password" name="password" value="" onkeypress="if(event.keyCode==13)submitForm();"/></td>
+									<td><input class="input" type="password" name="password" value="admin" onkeypress="if(event.keyCode==13)submitForm();"/></td>
 								</tr>
 								<tr>
 									<td colspan="4" align="center">

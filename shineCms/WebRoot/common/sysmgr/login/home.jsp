@@ -120,7 +120,7 @@ html, body{width:100%;height:100%;padding:0;margin:0;overflow:hidden;}
 			<span style="float:left;margin:12px 0 0 45px;width:147px;">${sessionScope.CURRENT_USER.name}</span>
 		</div>
 		<div style="float:right;padding:12px 10px 0 0;">
-			<a href="javascript:void(0);">退出系统</a>
+			<a href="${path}">退出系统</a>
 		</div>
 	</div>
 	<div id="center-panel">
