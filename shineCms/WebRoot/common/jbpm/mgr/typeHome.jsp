@@ -60,7 +60,6 @@
 				 rMenu.omMenu('enableItem','3');
 			}
 			zTree.selectNode(treeNode);
-			//alert($(event.target).offset().top);
 			rMenu.omMenu('show',event.target);
 		}
 	}
@@ -95,7 +94,7 @@
 		if (selNode) {
 			var id = selNode.id;
 			if(confirm("删除后将不能恢复，确认删除？")){
-				$.post('${path}flow/type_delete.do','id='+id,function(data){
+				$.post('${path}jbpm/type_delete.do','id='+id,function(data){
 	                $.shine.showAjaxMsg(data,function(){
 	                	zTree.removeNode(selNode);
 	                });
@@ -144,16 +143,17 @@
 		$('#body-panel').omBorderLayout({
 			fit : true,
 			panels:[{
-	   	        id:"center-panel",
-	   	     	header:false,
-	   	        region:"center"
-	   	    },{
 	   	        id:"west-panel",
 	   	        resizable:true,
 	   	        collapsible:true,
 	   	        title:"流程分类",
 	   	        region:"west",
 	   	        width:260
+	   	    },{
+	   	        id:"center-panel",
+	   	        title : "流程定义",
+	   	     	header:true,
+	   	        region:"center"
 	   	    }]
 		});
 	}
@@ -167,32 +167,15 @@
 		initRightMenu();
 		
 		funcIframe = $("#funcIframe");
-		//funcIframe.bind("load", iframeLoadReady);
 		
 		bodyHeight = window.parent.centerHeight;
-		$("body").height(bodyHeight);
-		$("#funcIframe").height(bodyHeight);
 	});
 //-->
 </script>
 </head>
 <body>
-<%-- 
-<table align="left" style="width:100%;height:100%;border:0px;">
-	<tr>
-		<td align="left" valign="top" style="width:260px;height:100%;border-right: #999999 1px dashed;">
-			<div style="width:260px;padding: 5px 0px 3px 2px;color:gray;border-bottom: #999999 1px dashed;">左击管理流程定义,右击显示操作菜单</div>
-			<ul id="tree" class="ztree" style="width:260px;overflow:auto;"></ul>
-		</td>
-		<td align="left" valign="top">
-			<iframe id="funcIframe" name="funcIframe" src="" frameborder="0" scrolling="auto" width="100%" height="100%"></iframe>
-		</td>
-	</tr>
-</table>
---%>
 <div id="body-panel" style="width:100%;height:100%;">
 	<div id="west-panel">
-		<div style="width:95%;padding: 5px 0px 3px 2px;color:gray;border-bottom: #999999 1px dashed;">左击管理流程定义,右击显示操作菜单</div>
 		<ul id="tree" class="ztree" style="width:95%;overflow:auto;"></ul>
 	</div>
 	<div id="center-panel">

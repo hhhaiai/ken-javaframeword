@@ -13,7 +13,6 @@
 <script type="text/javascript" src="${path}r/ztree/js/jquery.ztree.all.min.js"></script>
 <script type="text/javascript" src="${path}r/js/shine.js"></script>
 <style>
-html, body{width:100%;height:100%;padding:0;margin:0;overflow:hidden;}
 #center-tab .om-panel-body{padding: 0;}
 </style>
 <script type="text/javascript">
@@ -47,7 +46,7 @@ html, body{width:100%;height:100%;padding:0;margin:0;overflow:hidden;}
 	          			tabElement.omTabs('add',{
 							title : treeNode.name, 
 							tabId : 'tab_'+nodeId,
-							content : "<iframe id='tab_iframe_"+nodeId+"' border=0 frameBorder='no' name='inner-frame' src='"+murl+"' height='"+centerHeight+"' width='100%' style='width:100%;height:"+centerHeight+"px;'></iframe>",
+							content : "<iframe id='tab_iframe_"+nodeId+"' border=0 frameBorder='no' name='inner-frame' src='"+murl+"' height='100%' width='100%' style='width:100%;height:100%;'></iframe>",
 							closable : true
 		            	});
 	        		}
@@ -107,7 +106,7 @@ html, body{width:100%;height:100%;padding:0;margin:0;overflow:hidden;}
 		zTree = $.fn.zTree.init($("#tree"), setting, zNodes);
 	    
 	    centerHeight = tabElement.height() - tabElement.find(".om-tabs-headers").outerHeight()-2;
-	    $('#homeFrame').height(centerHeight);
+	    //$('#homeFrame').height(centerHeight);
 	});
 //-->
 </script>
