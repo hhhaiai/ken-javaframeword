@@ -174,7 +174,7 @@ $.validator.messages = {
 
 /**
  * 将DIV生成Box样式
- * 用法：$("#box").box();
+ * 示例：$("#box").box();
  * 可通过参数type来选择背景样式，如：$("#box").box({type:2});
  * 其中type可赋值 1:白色背景(默认) 2:天蓝背景
  */
@@ -256,5 +256,180 @@ $.validator.messages = {
         	el.removeClass("box1");
         	el.html(ht);
         }
+	});
+})(jQuery);
+
+/**
+ * 下拉树(组合om-combo样式和ztree生成)
+ * 示例：
+   $("#pid").comboTree({
+ 		valueFiled : 'pid',		//存选择项值的隐藏域id和name(控件生成)
+ 		textFiled : 'pname',	//存选择项显示值的输入框id和name(控件生成)
+ 		treeNodes : [	//选择项
+  			{id:1, pid:0, name:"广东省"},
+			{id:2, pid:1, name:"广州市"},
+			{id:3, pid:2, name:"天河区"},
+			{id:4, pid:2, name:"越秀区"},
+			{id:5, pid:2, name:"海珠区"},
+			{id:6, pid:1, name:"中山市"},
+			{id:7, pid:1, name:"东莞市"},
+			{id:8, pid:0, name:"湖南省"},
+			{id:9, pid:8, name:"长沙市"},
+			{id:10, pid:8, name:"娄底市"}
+  		]
+   });
+ */
+(function($) {
+	$.omWidget('shine.comboTree', {
+		//以下划线开头为私有属性或方法,使用时不用管
+		_valueInput : '',
+		_textInput : '',
+		_ztreeCombo : '',
+		_menuDiv : '',
+		options:{
+			//存选择项值的隐藏域id和name
+			valueFiled: '',
+			//存选择项显示值的输入框id和name
+			textField: '',
+			//默认值
+			value: '',
+			//控件宽度
+			width: 150,
+			//树形选择高度
+			treeHeight : '',
+			//树形数据(简单),具体参考ztree资料
+			treeNodes: [],
+			//树形控件配置,具体参考ztree资料
+			treeSetting: {
+				view: {
+					dblClickExpand: false,
+					showIcon: false,
+					showLine: false
+				},
+				data: {
+					simpleData: {
+						enable: true,
+						pIdKey: 'pid'
+					}
+				},
+				callback: {
+					beforeClick: function(treeId, treeNode, clickFlag){
+						//不能多选
+						if(clickFlag==2)
+							return false;
+					},
+					onClick: function(e, treeId, treeNode, clickFlag){
+						var zTree = $.fn.zTree.getZTreeObj(treeId);
+						var idKey = zTree.setting.data.simpleData.idKey;
+						//获取到comboTree控件的ID值
+						var comboId = $("#"+treeId).parent().parent().attr("id");
+						var value,text;
+						if(clickFlag==0){
+							value = text = '';
+						}else{
+							value = treeNode[idKey];
+							text = treeNode.name;
+						}
+						//调用设置方法
+						$("#"+comboId).comboTree("setValue",value);
+						$("#"+comboId).comboTree("setText",text);
+					}
+				}
+			}
+		},
+		_create:function(){
+			var options=this.options,el=this.element.show();
+			el.addClass("om-combo om-widget om-state-default");
+			el.width(options.width);
+			
+			//以下顺序不能改变
+			this._buildValueInput();
+			this._buildTextInput();
+			this._buildTree();
+			this._buildBtn();
+			this._bindMouseEvent();
+		},
+		//构造存选择项值的隐藏域
+		_buildValueInput:function(){
+			var options=this.options,el=this.element;
+			this._valueInput = $("<input type='hidden'/>").attr("id",options.valueFiled).attr("name",options.valueFiled);
+			el.append(this._valueInput);
+		},
+		//构造存选择项显示值的输入框
+		_buildTextInput:function(){
+			var options=this.options,el=this.element;
+			this._textInput = $("<input type='text'/>");
+			this._textInput.attr("id",options.textFiled).attr("name",options.textFiled);
+			var tinputWidth = options.width-21;
+			if($.browser.msie){//IE+2
+				tinputWidth += 2;
+			}
+			this._textInput.width(tinputWidth);
+			el.append(this._textInput);
+		},
+		//构造下拉按钮
+		_buildBtn:function(){
+			var options=this.options,el=this.element;
+			var btn = $('<span class="om-combo-trigger om-icon-carat-1-s"></span>');
+			btn.attr("id",options.valueFiled+"_spanBtn");
+			var textObj = this._textInput;
+			var menuDiv = this._menuDiv;
+			btn.bind("click",this.showTreeEvent = function(){
+				var textObjOffset = textObj.offset();
+				menuDiv.css({left:textObjOffset.left-1 + "px", top:textObjOffset.top + textObj.outerHeight() + "px"}).slideDown("fast");
+				$("body").bind("mousedown", this.onBodyDownEvent = function(event){
+					if (!(event.target.id == options.valueFiled+"_spanBtn" || event.target.id == options.valueFiled+"_menuDiv" || $(event.target).parents("#"+options.valueFiled+"_menuDiv").length>0)) {
+						$("#"+options.valueFiled+"_menuDiv").fadeOut("fast");
+						$("body").unbind("mousedown", this.onBodyDownEvent);
+					}
+				});
+			});
+			el.append(btn);
+		},
+		//鼠标放上或移开时样式改变
+		_bindMouseEvent:function(){
+			var el=this.element;
+			el.mouseover(function(){
+				$(this).addClass("om-state-hover");
+			});
+			el.mouseout(function(){
+				$(this).removeClass("om-state-hover");
+			});
+		},
+		//构建树形选择界面
+		_buildTree:function(){
+			var options=this.options,el=this.element;
+			this._menuDiv = $("<div style='display:none; position: absolute;'>");
+			this._menuDiv.attr("id",options.valueFiled+"_menuDiv");
+			var menuUl = $("<ul class='ztree ztreeCombo'></ul>");
+			menuUl.attr("id",options.valueFiled+"_menuUl");
+			menuUl.width(options.width-10);	//padding:5px;
+			if(options.treeHeight!=''&&options.treeHeight>0)
+				menuUl.height(options.treeHeight);
+			this._menuDiv.append(menuUl);
+			el.append(this._menuDiv);
+			this._ztreeCombo = $.fn.zTree.init(menuUl, options.treeSetting, options.treeNodes);
+		},
+		destroy : function(){
+			var el=this.element;
+			el.contents().remove();
+			el.removeClass("om-combo om-widget om-state-default");
+        },
+		//设置隐藏值
+		setValue: function(v){
+			this._valueInput.val(v);
+		},
+		//设置显示字符
+		setText: function(v){
+			this._textInput.val(v);
+		},
+		//获取隐藏值
+		getValue: function(){
+			return this._valueInput.val();
+		},
+		//获取显示字符
+		getText: function(){
+			return this._textInput.val();
+		}
 	});
 })(jQuery);

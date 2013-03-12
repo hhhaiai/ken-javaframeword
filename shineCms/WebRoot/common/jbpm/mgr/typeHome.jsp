@@ -4,7 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
 <html>
 <head>
-<title>${appName}</title>	
+<title>流程分类</title>	
 <link title="${themes}" rel="stylesheet" href="${path}r/operamasks-ui/css/${themes}/om-${themes}.css">
 <link type="text/css" rel="stylesheet" href="${path}r/ztree/css/zTreeStyle.css">
 <link type="text/css" rel="stylesheet" href="${path}r/css/base.css"/>
@@ -36,7 +36,7 @@
 			beforeClick: function(treeId, treeNode) {
 				var typeId = treeNode.id;
 				if(typeId>0){
-					var url = "${path}jbpm/define_enter.do?typeId="+typeId;
+					var url = "${path}jbpm/def_enter.do?typeId="+typeId;
 					funcIframe.attr("src",url);
 					return true;
 				}
@@ -67,7 +67,7 @@
 	var zNodes =[
 		{id:0, pid:-1, name:"流程分类", open:true}
 		<c:forEach var="t" items="${list}">
-			,{id:${t.typeId},pid:${t.pid},name:"${t.typeName}",open:true}
+			,{id:${t.id},pid:${t.pid},name:"${t.typeName}",open:true}
 		</c:forEach>
 	];
 	
@@ -85,7 +85,7 @@
 		var selNode = zTree.getSelectedNodes()[0];
 		if (selNode) {
 			var id = selNode.id;
-			editDialog = $.shine.openDialog({id:"editDialog", title:"修改分类", url:"${path}jbpm/type_toEdit.do?e.typeId="+id, width:500, height:200});
+			editDialog = $.shine.openDialog({id:"editDialog", title:"修改分类", url:"${path}jbpm/type_toEdit.do?e.id="+id, width:500, height:200});
 		}
 	}
 	//删除分类
@@ -111,12 +111,12 @@
 	//保存菜单成功后调用
 	function saveSuccess(obj){
 		closeEditDialog();
-		var tnode = zTree.getNodeByParam("id",obj["e.typeId"],null);
+		var tnode = zTree.getNodeByParam("id",obj["e.id"],null);
 		if(tnode!=null){
 			tnode.name=obj["e.typeName"];
 			zTree.updateNode(tnode);
 		}else{
-			var newNode = {id:obj["e.typeId"],pid:obj["e.pid"],name:obj["e.typeName"]};
+			var newNode = {id:obj["e.id"],pid:obj["e.pid"],name:obj["e.typeName"]};
 			var pnode = zTree.getNodeByParam("id",obj["e.pid"]);
 			zTree.addNodes(pnode, newNode);
 		}
