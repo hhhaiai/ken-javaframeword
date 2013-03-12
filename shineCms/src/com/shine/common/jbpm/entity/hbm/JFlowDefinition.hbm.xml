@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">    
+<hibernate-mapping>
+	<class name="com.shine.common.jbpm.entity.JFlowDefinition" table="JFLOW_DEFINITION" 
+		dynamic-insert="false" dynamic-update="true">
+		<id name="defId" column="DEFID" type="java.lang.Integer" length="11">
+			<generator class="native" />
+		</id>
+		<property name="typeId" column="TYPEID" type="java.lang.Integer" length="8" not-null="true"/>
+		<property name="name" column="NAME" type="java.lang.String" length="50" not-null="true"/>
+		<property name="description" column="DESCRIPTION" type="java.lang.String" length="255"/>
+		<property name="createTime" column="CREATETIME" type="java.util.Date" not-null="true" update="false"/>
+		<property name="deployId" column="DEPLOYID" type="java.lang.Integer" length="20"/>
+		<property name="defXml" column="DEFXML" type="java.lang.String" not-null="true"/>
+    </class>
+</hibernate-mapping>

@@ -26,7 +26,9 @@
 	<bean id="identityService" factory-bean="processEngine" factory-method="getIdentityService"/>
 	<bean id="managementService" factory-bean="processEngine" factory-method="getManagementService"/>
 	
-	<!-- 工作流管理 -->
+	<!-- 流程分类 -->
 	<bean id="jflowTypeAction" class="com.shine.common.jbpm.web.JFlowTypeAction" parent="ajaxAction" scope="prototype"/>
+	<!-- 流程定义 -->
+	<bean id="jflowDefinitionAction" class="com.shine.common.jbpm.web.JFlowDefinitionAction" parent="ajaxAction" scope="prototype"/>
     
 </beans>

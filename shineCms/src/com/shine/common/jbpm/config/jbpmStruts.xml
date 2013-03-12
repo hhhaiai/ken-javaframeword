@@ -9,5 +9,10 @@
     		<result name="toAdd">/common/jbpm/mgr/typeEdit.jsp?method=add</result>
     		<result name="toEdit">/common/jbpm/mgr/typeEdit.jsp</result>
     	</action>
+    	<action name="def_*" class="jflowDefinitionAction" method="{1}">
+    		<result name="enter">/common/jbpm/mgr/defList.jsp</result>
+    		<result name="toAdd">/common/jbpm/mgr/defEdit.jsp?method=add</result>
+    		<result name="toEdit">/common/jbpm/mgr/defEdit.jsp</result>
+    	</action>
     </package>
 </struts>

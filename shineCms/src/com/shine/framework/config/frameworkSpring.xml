@@ -13,12 +13,17 @@
            http://www.springframework.org/schema/aop
            http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 	
+	<!-- ID生成器 -->
+	<bean id="idGenerator" class="com.shine.framework.entity.IDGeneratorImpl" scope="singleton">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
 	<bean id="genericDao" class="com.shine.framework.dao.impl.GenericDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory"/>
 	</bean>
 	<bean id="baseDao" class="com.shine.framework.dao.impl.BaseDaoImpl" parent="genericDao"/>
 	<bean id="baseService" class="com.shine.framework.biz.impl.BaseServiceImpl">
 		<property name="dao" ref="baseDao"/>
+		<property name="idGenerator" ref="idGenerator"/>
 	</bean>
 	<!-- JSON  -->
 	<bean id="jsonformat" class="com.shine.framework.web.json.OmuiJsonFormat"/> 

@@ -20,7 +20,7 @@ public class JFlowTypeAction extends AjaxAction<BaseService> {
 	public String enter() {
 		QueryAnalyzer analyzer = new QueryAnalyzer();
 		analyzer.setEntity(getE());
-		analyzer.addSortField("typeId");
+		analyzer.addSortField("id");
 		extor.buildQueryItem(analyzer);
 		List list = service.list(analyzer);
 		request.setAttribute(LIST, list);
@@ -32,7 +32,7 @@ public class JFlowTypeAction extends AjaxAction<BaseService> {
 		String tname = null;
 		if(e.getPid()!=0){
 			JFlowType type = new JFlowType();
-			type.setTypeId(e.getPid());
+			type.setId(e.getPid());
 			type = (JFlowType)service.get(type);
 			if(type!=null){
 				tname = type.getTypeName();
@@ -52,7 +52,7 @@ public class JFlowTypeAction extends AjaxAction<BaseService> {
 		String tname = null;
 		if(e!=null&&e.getPid()!=0){
 			JFlowType type = new JFlowType();
-			type.setTypeId(e.getPid());
+			type.setId(e.getPid());
 			type = (JFlowType)service.get(type);
 			if(type!=null){
 				tname = type.getTypeName();
@@ -69,7 +69,7 @@ public class JFlowTypeAction extends AjaxAction<BaseService> {
 	public void save() {
 		try{
 			PersistResult pr = service.save(getE());
-			pr.putData("typeid", e.getTypeId());
+			pr.putData("id", e.getId());
 			printOutText(pr.toJson());
 		}catch(Exception e){
 			printOutText(new PersistResult(PersistResult.ERROR, PersistResult.MSG_ERROR).toJson());

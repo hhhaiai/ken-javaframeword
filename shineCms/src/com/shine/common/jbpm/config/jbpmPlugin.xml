@@ -11,5 +11,6 @@
 	</xml>
 	<xml type="hbm">
 		<hbm>classpath:com/shine/common/jbpm/entity/hbm/JFlowType.hbm.xml</hbm>
+		<hbm>classpath:com/shine/common/jbpm/entity/hbm/JFlowDefinition.hbm.xml</hbm>
 	</xml>
 </plugin-xmls>
