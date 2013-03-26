@@ -19,6 +19,7 @@ public class MethodExample {
 
 		MethodThreadModel methodThreadModel = new MethodThreadModel();
 		methodThreadModel.setObject(e);
+		methodThreadModel.setType("method");
 		methodThreadModel.setMethodName("test");
 
 		ThreadPoolManager.getManager().addThread(methodThreadModel);
