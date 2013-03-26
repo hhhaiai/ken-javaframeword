@@ -90,6 +90,12 @@
 	<classpathentry kind="lib" path="lib/jdo-api-3.0.1.jar"/>
 	<classpathentry kind="lib" path="lib/FontBox-0.1.0.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="D:/jbpm/lucene/snoics-base-1.0-bin/dist/snoics-base.jar"/>
+	<classpathentry kind="lib" path="lib/hadoop-core-1.0.3-Intel.jar"/>
+	<classpathentry kind="lib" path="lib/hbase-0.94.1-Intel.jar"/>
+	<classpathentry kind="lib" path="lib/high-scale-lib-1.1.1.jar"/>
+	<classpathentry kind="lib" path="lib/hive-exec-0.9.0-Intel.jar"/>
+	<classpathentry kind="lib" path="lib/hive-jdbc-0.9.0-Intel.jar"/>
+	<classpathentry kind="lib" path="lib/hive-metastore-0.9.0-Intel.jar"/>
+	<classpathentry kind="lib" path="lib/hive-service-0.9.0-Intel.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
