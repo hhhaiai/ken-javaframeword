@@ -6,6 +6,12 @@ import java.text.MessageFormat;
 
 import com.shine.framework.core.util.HtmlUtil;
 
+/**
+ * map 工具类
+ * 
+ * @author Ken
+ *
+ */
 public class MapManager {
 
 	public final static double PI = 3.14159265354;
