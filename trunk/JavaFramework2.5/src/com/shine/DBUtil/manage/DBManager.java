@@ -14,6 +14,7 @@ import org.dom4j.Element;
 
 import com.shine.DBUtil.DBUtil;
 import com.shine.DBUtil.pool.DBPool;
+import com.shine.DBUtil.pool.HBasePool;
 import com.shine.DBUtil.pool.NetDBPool;
 import com.shine.DBUtil.pool.SqliteDBPool;
 import com.shine.DBUtil.thread.MonitorThread;
@@ -86,6 +87,14 @@ public class DBManager extends HashMap<String, DBPool> {
 								.equals("org.relique.jdbc.csv.CsvDriver")) {
 					// 初始化sqllite数据库
 					DBPool pool = new SqliteDBPool();
+					pool.init("", "", String.valueOf(attributeMap
+							.get("jdbcUrl")), String.valueOf(attributeMap
+							.get("driverClass")));
+					map.put(String.valueOf(attributeMap.get("jndi")), pool);
+				} else if (String.valueOf(attributeMap.get("driverClass"))
+						.equals("org.apache.hadoop.hive.jdbc.HiveDriver")) {
+					// 初始化sqllite数据库
+					DBPool pool = new HBasePool();
 					pool.init("", "", String.valueOf(attributeMap
 							.get("jdbcUrl")), String.valueOf(attributeMap
 							.get("driverClass")));
@@ -472,7 +481,7 @@ public class DBManager extends HashMap<String, DBPool> {
 	public boolean isDBPoolExists(String jndi) {
 		return map.get(jndi) == null ? false : true;
 	}
-	
+
 	public String getXmlfile() {
 		return xmlfile;
 	}
