@@ -17,6 +17,12 @@
 		jdbcUrl="jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&amp;characterEncoding=utf-8"
 		initSize="2" minPoolSize="1" maxPoolSize="10" maxStatements="50"
 		maxIdleTime="60" />
+	<!-- HBase -->
+	<Resource jndi="jdbc/HBase" driverClass="org.apache.hadoop.hive.jdbc.HiveDriver"
+		dbUserName="" dbPassWord=""
+		jdbcUrl="jdbc:hive://192.168.2.212:10000/default"
+		initSize="2" minPoolSize="1" maxPoolSize="10" maxStatements="50"
+		maxIdleTime="60" />
 	<!-- sqlite -->
 	<Resource jndi="jdbc/Default2" driverClass="org.sqlite.JDBC"
 		jdbcUrl="jdbc:sqlite:E://zieckey.db" />
