@@ -4,6 +4,12 @@ import java.awt.PopupMenu;
 
 import com.shine.framework.tray.model.SystemTrayModel;
 
+/**
+ * 右下角图标
+ * 
+ * @author Ken
+ * 
+ */
 public class Tray {
 	private static Tray tray = new Tray();
 

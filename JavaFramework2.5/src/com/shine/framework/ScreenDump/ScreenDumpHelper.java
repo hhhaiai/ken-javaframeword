@@ -13,6 +13,7 @@ import javax.imageio.ImageIO;
  * 截屏程序
  * 
  * @author viruscodecn@gmail.com
+ * @blog http://blog.csdn.net/arjick/article/details/8773061
  * 
  */
 public class ScreenDumpHelper {
@@ -92,6 +93,7 @@ public class ScreenDumpHelper {
 	}
 
 	public static void main(String[] a) throws Exception {
+		//截取当前屏幕
 		ScreenDumpHelper.snapShot("e:\\123.jpg");
 	}
 }
