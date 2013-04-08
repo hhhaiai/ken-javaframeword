@@ -1,11 +1,14 @@
 package com.shine.framework.HtmlManager.model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import org.dom4j.Document;
+import org.dom4j.Element;
 
 import com.shine.framework.core.util.XmlUitl;
 
@@ -22,6 +25,16 @@ public class HtmlBaseModel extends HashMap<String, String> {
 	private String tagText;
 	// 标签内容
 	private String tagContent;
+	// child list
+	private List<HtmlBaseModel> childList = new ArrayList<HtmlBaseModel>();
+
+	public HtmlBaseModel() {
+
+	}
+
+	public HtmlBaseModel(String htmlString) {
+		init(htmlString);
+	}
 
 	/**
 	 * 初始化html标签
@@ -46,6 +59,14 @@ public class HtmlBaseModel extends HashMap<String, String> {
 			this.tagName = doc.getName();
 		this.tagContent = htmlString;
 		this.tagText = doc.getRootElement().getText();
+
+		List<Element> list = XmlUitl.getAllElement(doc.getRootElement());
+		childList.clear();
+		for (Element element : list) {
+
+			childList.add((new HtmlBaseModel(element.getText())));
+		}
+		list = null;
 	}
 
 	public String getString(String key) {
