@@ -8,6 +8,7 @@ public class MemCachedManagerBaseTest {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		// 初始化集中缓存系统
 		MemCachedManager.getManager().addMemCachePool("cache",
 				"192.168.2.212:11211");
 		// 加入指定数据到cache的集中缓存
