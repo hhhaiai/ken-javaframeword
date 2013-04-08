@@ -2,6 +2,7 @@ package com.shine.framework.Memcached;
 
 import java.util.Date;
 
+import com.danga.MemCached.MemCachedClient;
 import com.shine.framework.Memcached.utils.MemCachedPool;
 import com.shine.framework.Memcached.utils.MemCachedUtil;
 
@@ -9,6 +10,7 @@ import com.shine.framework.Memcached.utils.MemCachedUtil;
  * 集中缓存管理
  * 
  * @author viruscodecn@gmail.com
+ * @blog http://blog.csdn.net/arjick/article/details/8772666
  * 
  */
 public class MemCachedManager {
@@ -37,6 +39,16 @@ public class MemCachedManager {
 			pool.put(clientName, MemCachedUtil.getMemCachedClient(clientName,
 					serverlist));
 		}
+	}
+
+	/**
+	 * 检查集中缓存的名称
+	 * 
+	 * @param clientName
+	 * @return
+	 */
+	public boolean checkCacheName(String clientName) {
+		return pool.containsKey(clientName);
 	}
 
 	/**
@@ -105,6 +117,14 @@ public class MemCachedManager {
 		}
 		return false;
 	}
+	
+	public boolean deleteAll(String clientName){
+		if (pool.containsKey(clientName)) {
+	
+			//return pool.get(clientName).
+		}
+		return false;
+	}
 
 	/**
 	 * 根据指定的关键字获取对象.
@@ -117,5 +137,18 @@ public class MemCachedManager {
 			return pool.get(clientName).get(key);
 		}
 		return false;
+	}
+
+	/**
+	 * 获取MemCachedClient
+	 * 
+	 * @param clientName
+	 * @return
+	 */
+	public MemCachedClient getMemCachedClient(String clientName) {
+		if (pool.containsKey(clientName)) {
+			return pool.get(clientName);
+		}
+		return null;
 	}
 }
