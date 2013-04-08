@@ -39,6 +39,14 @@ public class MemCachedManager {
 		}
 	}
 
+	/**
+	 * 把数据加入到指定的集中缓存
+	 * 
+	 * @param clientName
+	 * @param key
+	 * @param value
+	 * @return
+	 */
 	public boolean add(String clientName, String key, Object value) {
 		if (pool.containsKey(clientName)) {
 			return pool.get(clientName).add(key, value);
@@ -67,6 +75,15 @@ public class MemCachedManager {
 		return false;
 	}
 
+	/**
+	 * update集中缓存的数据
+	 * 
+	 * @param clientName
+	 * @param key
+	 * @param value
+	 * @param expiry
+	 * @return
+	 */
 	public boolean replace(String clientName, String key, Object value,
 			Date expiry) {
 		if (pool.containsKey(clientName)) {
