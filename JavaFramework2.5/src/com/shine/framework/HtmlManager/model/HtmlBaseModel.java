@@ -9,7 +9,6 @@ import org.dom4j.Document;
 
 import com.shine.framework.core.util.XmlUitl;
 
-
 /**
  * HtmlBaseModel
  * 
@@ -75,94 +74,5 @@ public class HtmlBaseModel extends HashMap<String, String> {
 
 	public void setTagContent(String tagContent) {
 		this.tagContent = tagContent;
-	}
-
-	/**
-	 * 获取属性中的name
-	 * 
-	 * @return
-	 */
-	private String getName() {
-		return getString("name");
-	}
-
-	/**
-	 * 获取属性中id
-	 * 
-	 * @return
-	 */
-	private String getId() {
-		return getString("id");
-	}
-
-	/**
-	 * 获取title属性
-	 * 
-	 * @return
-	 */
-	private String getTitle() {
-		return getString("title");
-	}
-
-	/**
-	 * 获取class属性
-	 * 
-	 * @return
-	 */
-	private String getTagClass() {
-		return getString("class");
-	}
-
-	/**
-	 * 获取Style属性
-	 * 
-	 * @return
-	 */
-	private String getStyle() {
-		return getString("style");
-	}
-
-	/**
-	 * 获取lang属性
-	 * 
-	 * @return
-	 */
-	private String getLang() {
-		return getString("lang");
-	}
-
-	/**
-	 * 获取点击事件
-	 * 
-	 * @return
-	 */
-	public String getOnclick() {
-		return this.getString("onclick");
-	}
-
-	public static Object getHtmlTagType(String tagName) {
-		if (tagName.equals("a")) {
-			return new HrefModel();
-		} else if (tagName.equals("img")) {
-			return new ImgModel();
-		} else if (tagName.equals("table")) {
-			return new TableModel();
-		} else if (tagName.equals("tbody")) {
-			return new TbodyModel();
-		} else if (tagName.equals("tr")) {
-			return new TrModel();
-		} else if (tagName.equals("td")) {
-			return new TdModel();
-		} else if (tagName.equals("body")) {
-			return new BodyModel();
-		} else if (tagName.equals("iframe")) {
-			return new IframeModel();
-		} else if (tagName.equals("div")) {
-			return new DivModel();
-		} else if (tagName.equals("script")) {
-			return new DivModel();
-		} else {
-			return new HtmlBaseModel();
-		}
 	}
 }

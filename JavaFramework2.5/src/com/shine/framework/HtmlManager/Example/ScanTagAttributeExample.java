@@ -6,7 +6,7 @@ import com.shine.framework.HtmlManager.HtmlManager;
 import com.shine.framework.HtmlManager.model.HtmlBaseModel;
 import com.shine.framework.core.util.HtmlUtil;
 
-public class ScanTagExample {
+public class ScanTagAttributeExample {
 
 	/**
 	 * @param args
@@ -16,7 +16,13 @@ public class ScanTagExample {
 				"http://www.hao123.com", "gb2312"));
 		List<HtmlBaseModel> list = helper.getTag("a");
 		for (HtmlBaseModel b : list) {
-			System.out.println(b.getTagContent());
+			//获取所有超链接
+			System.out.println(b.get("href"));
+		}
+		
+		for (HtmlBaseModel b : list) {
+			//获取所有内容
+			System.out.println(b.getTagText());
 		}
 	}
 
