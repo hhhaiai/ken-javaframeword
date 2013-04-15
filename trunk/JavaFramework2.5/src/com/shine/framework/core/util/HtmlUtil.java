@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 
@@ -53,13 +54,13 @@ public class HtmlUtil {
 			if (type == null
 					|| type.trim().length() == 0
 					|| (type.trim().indexOf("text/html") < 0 && type.trim()
-							.indexOf("text/xml") < 0)){
-				
-			}else{
+							.indexOf("text/xml") < 0)) {
+
+			} else {
 				if (type.indexOf("charset=") > 0)
 					charSet = type.substring(type.indexOf("charset=") + 8);
 			}
-			
+
 			in = new BufferedReader(new InputStreamReader(con.getInputStream(),
 					charSet));
 
@@ -182,6 +183,19 @@ public class HtmlUtil {
 			e.printStackTrace();
 			return null;
 		}
+	}
+
+	/**
+	 * 获取url是属于该主机名
+	 * 
+	 * @param hostName
+	 * @param url
+	 * @return
+	 */
+	public static boolean urlBlong(String hostName, String url) {
+		if (url.indexOf(hostName) != -1)
+			return true;
+		return false;
 	}
 
 	public static void main(String args[]) {
