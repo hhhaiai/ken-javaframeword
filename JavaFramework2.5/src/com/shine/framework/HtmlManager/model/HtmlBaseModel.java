@@ -10,6 +10,7 @@ import java.util.Set;
 import org.dom4j.Document;
 import org.dom4j.Element;
 
+import com.shine.framework.core.util.DataUtil;
 import com.shine.framework.core.util.XmlUitl;
 
 /**
@@ -62,10 +63,15 @@ public class HtmlBaseModel extends HashMap<String, String> {
 
 		List<Element> list = XmlUitl.getAllElement(doc.getRootElement());
 		childList.clear();
-		for (Element element : list) {
+		if (!list.isEmpty()) {
+			for (Element element : list) {
+				if (!DataUtil.isNull(element.getText())) {
+					childList.add((new HtmlBaseModel(element.getText())));
+				}
 
-			childList.add((new HtmlBaseModel(element.getText())));
+			}
 		}
+
 		list = null;
 	}
 
@@ -95,5 +101,9 @@ public class HtmlBaseModel extends HashMap<String, String> {
 
 	public void setTagContent(String tagContent) {
 		this.tagContent = tagContent;
+	}
+
+	public List<HtmlBaseModel> getChildList() {
+		return childList;
 	}
 }

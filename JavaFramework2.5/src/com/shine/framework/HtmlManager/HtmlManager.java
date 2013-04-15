@@ -45,10 +45,15 @@ public class HtmlManager {
 				.cleanHtmlByString(this.htmlString)), tagName, false);
 		List<HtmlBaseModel> htmlList = new ArrayList<HtmlBaseModel>();
 		for (Element ele : list) {
-			HtmlBaseModel htmlBaseModel = new HtmlBaseModel();
-			htmlBaseModel.init(ele.asXML());
-			if (checkHtmlParm(htmlParmList, htmlBaseModel))
-				htmlList.add(htmlBaseModel);
+			try {
+				HtmlBaseModel htmlBaseModel = new HtmlBaseModel();
+				htmlBaseModel.init(ele.asXML());
+				if (checkHtmlParm(htmlParmList, htmlBaseModel))
+					htmlList.add(htmlBaseModel);
+			} catch (Exception e) {
+				System.out.println("语法不完整："+ele.asXML());
+				//e.printStackTrace();
+			}
 		}
 		return htmlList;
 	}

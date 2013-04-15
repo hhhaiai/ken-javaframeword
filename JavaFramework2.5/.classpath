@@ -97,8 +97,17 @@
 	<classpathentry kind="lib" path="lib/hive-jdbc-0.9.0-Intel.jar"/>
 	<classpathentry kind="lib" path="lib/hive-metastore-0.9.0-Intel.jar"/>
 	<classpathentry kind="lib" path="lib/hive-service-0.9.0-Intel.jar"/>
-	<classpathentry kind="lib" path="lib/hive-jdbc-0.9.0-Intel.jar.svntmp"/>
 	<classpathentry kind="lib" path="lib/libfb303-0.7.0.jar"/>
 	<classpathentry kind="lib" path="lib/libthrift-0.8.0.jar"/>
+	<classpathentry kind="lib" path="lib/xmemcached-1.4.1-javadoc.jar"/>
+	<classpathentry kind="lib" path="lib/xmemcached-1.4.1.jar"/>
+	<classpathentry kind="lib" path="lib/olap4j-1.1.0.jar"/>
+	<classpathentry kind="lib" path="lib/olap4j-jdk14-1.1.0.jar"/>
+	<classpathentry kind="lib" path="lib/olap4j-tck-1.1.0.jar"/>
+	<classpathentry kind="lib" path="lib/olap4j-xmla-1.1.0.jar"/>
+	<classpathentry kind="lib" path="lib/xercesImpl.jar"/>
+	<classpathentry kind="lib" path="lib/mdx4j-1.0-sources.jar"/>
+	<classpathentry kind="lib" path="lib/mdx4j-1.0-tests.jar"/>
+	<classpathentry kind="lib" path="lib/mdx4j-1.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
