@@ -1,4 +1,4 @@
-#Tue Apr 09 09:15:32 CST 2013
+#Mon May 27 18:40:25 CST 2013
 eclipse.preferences.version=1
-validator.Checked=src/com/shine/framework/Mht/Html2MHTCompiler.java
+validator.Checked=src/org/mapdb/Volume.java,src/com/shine/framework/Mht/Html2MHTCompiler.java
 validator.Unchecked=
