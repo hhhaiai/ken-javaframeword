@@ -24,7 +24,7 @@
 <configuration>  
     <property>  
         <name>hbase.rootdir</name>  
-        <value>hdfs://sunshine:9000/hbase</value>  
+        <value>hdfs://192.168.22.20.:9000/hbase</value>  
     </property>  
     <property>  
         <name>hbase.cluster.distributed</name>  
