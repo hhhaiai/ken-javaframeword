@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="GmView"
+  id="myeclipse.1373441579974"
+  context-root="/GmView"
+  j2ee-spec="5.0"
+  archive="GmView.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+
