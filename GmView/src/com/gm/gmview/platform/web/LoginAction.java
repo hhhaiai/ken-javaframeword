@@ -28,8 +28,6 @@ public class LoginAction extends BaseAction {
 	}
 
 	public String execute() throws Exception {
-		UserDao dao = (UserDao) ApplicationContextUtil.getContext().getBean(
-				"userDao");
 		return SUCCESS;
 	}
 

@@ -5,16 +5,21 @@
 	<!-- struts的action配置文件 -->
 	<!-- 所有的action都应该放在对应的package下 -->
 	<package name="platform" extends="struts-default">
-	
+		<action name="login" class="com.gm.gmview.platform.web.LoginAction">
+			<!-- 定义逻辑视图和物理资源之间的映射 -->
+			<result name="success">/common/Main.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+	</package>
+
+	<package name="page" extends="struts-default">
 		<action name="index" class="com.gm.gmview.platform.web.IndexAction">
 			<!-- 定义逻辑视图和物理资源之间的映射 -->
 			<result name="success">${url}</result>
 		</action>
-		
-		<action name="login" class="com.gm.gmview.platform.web.LoginAction">
+		<action name="main" class="com.gm.gmview.platform.web.IndexAction">
 			<!-- 定义逻辑视图和物理资源之间的映射 -->
-			<result name="success">/success.jsp</result>
-			<result name="error">/error.jsp</result>
+			<result name="success">/common/Main.jsp</result>
 		</action>
 	</package>
 </struts> 
