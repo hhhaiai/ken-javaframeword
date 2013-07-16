@@ -26,4 +26,6 @@ public abstract class BaseProjectPlugin extends BasePlugin {
 	public void setLicensePath(String licensePath) {
 		this.licensePath = licensePath;
 	}
+
+	public abstract void loadFunctionPlugins();
 }
