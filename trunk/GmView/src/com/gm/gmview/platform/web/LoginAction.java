@@ -2,7 +2,9 @@ package com.gm.gmview.platform.web;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.gm.gmview.framework.util.ApplicationContextUtil;
 import com.gm.gmview.framework.web.BaseAction;
+import com.gm.gmview.test.dao.UserDao;
 
 public class LoginAction extends BaseAction {
 
@@ -26,7 +28,12 @@ public class LoginAction extends BaseAction {
 	}
 
 	public String execute() throws Exception {
-		System.out.println("123");
+		UserDao dao = (UserDao) ApplicationContextUtil.getContext().getBean(
+				"userDao");
+		return SUCCESS;
+	}
+
+	public String logout() throws Exception {
 		return SUCCESS;
 	}
 

@@ -18,6 +18,7 @@
 		-->
 		<param-value>/WEB-INF/spring-configs/applicationContext.xml</param-value>
 	</context-param>
+	
 	<!-- 监听器 -->
 	<!-- 配置spring监听器 -->
 	<listener>
@@ -42,6 +43,6 @@
 
 	<!-- 项目欢迎界面 -->
 	<welcome-file-list>
-		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>goIndex.jsp</welcome-file>
 	</welcome-file-list>
 </web-app>

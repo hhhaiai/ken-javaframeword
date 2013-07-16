@@ -8,7 +8,9 @@ import javax.servlet.ServletContext;
 
 import org.dom4j.Element;
 
+import com.gm.gmview.framework.config.LoadSpringApplicationContext;
 import com.gm.gmview.framework.config.StrutsFilterDispatcher;
+import com.gm.gmview.framework.util.ApplicationContextUtil;
 import com.gm.gmview.platform.plugin.IPlugin;
 import com.gm.gmview.platform.util.PluginMap;
 import com.shine.framework.core.util.ReflectionUtil;
@@ -73,8 +75,9 @@ public class PlatformManager {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		StrutsFilterDispatcher.registerXML(getClass().getResource("config/platformStruts.xml").getPath());
+
+		StrutsFilterDispatcher.registerXML(getClass().getResource(
+				"config/platformStruts.xml").getPath());
 	}
 
 	/**
