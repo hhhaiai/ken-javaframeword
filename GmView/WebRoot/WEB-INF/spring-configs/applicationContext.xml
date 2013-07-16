@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>  
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"   
-"http://www.springframework.org/dtd/spring-beans.dtd">  
-<beans>  
-    <bean id="userDao" class="com.gm.gmview.test.dao.UserDaoImpl">  </bean>    
-    <bean id="login" class="com.gm.gmview.test.action.LoginAction">    
-        <property name="userDao" ref="userDao" />    
-    </bean>    
+"http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+	<!--
+		<bean id="userDao" class="com.gm.gmview.test.dao.UserDaoImpl"> </bean>
+		<bean id="login" class="com.gm.gmview.test.action.LoginAction">
+		<property name="userDao" ref="userDao" /> </bean> <bean
+		class="com.gm.gmview.framework.util.ApplicationContextUtil"></bean>
+
+		<bean
+		class="com.gm.gmview.framework.util.ApplicationContextUtil"></bean>
+	-->
 </beans>  
