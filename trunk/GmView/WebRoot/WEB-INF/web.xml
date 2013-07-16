@@ -3,6 +3,10 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
 	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+	
+	<listener>
+		<listener-class>com.gm.gmview.framework.config.ConfigListener</listener-class>
+	</listener>
 
 	<!-- 初始化 -->
 	<context-param>
@@ -23,7 +27,7 @@
 	<!-- 定义struts2的核心filter -->
 	<filter>
 		<filter-name>struts2</filter-name>
-		<filter-class>org.apache.struts2.dispatcher.FilterDispatcher</filter-class>
+		<filter-class>com.gm.gmview.framework.config.StrutsFilterDispatcher</filter-class>
 		<init-param>
 			<param-name>config</param-name>
 			<param-value>struts-default.xml,struts-plugin.xml,../struts-configs/struts.xml </param-value>
