@@ -46,7 +46,6 @@ public class PlatformManager {
 	}
 
 	public void init(ServletContext appContext) {
-		System.out.println("开始加载");
 		this.sysPath = appContext.getRealPath("/");
 		this.contextName = appContext.getServletContextName();
 		attributes.put("tomcatInfo", appContext.getServerInfo());
@@ -85,10 +84,27 @@ public class PlatformManager {
 	 */
 	private void loadProjectPlugin() {
 		try {
-			System.out.println(this.projectPath);
 			// 加载项目插件
 			IPlugin iPlugin = (IPlugin) ReflectionUtil
 					.getClasstoObject(this.projectPath);
+			iPlugin.init();
+			iPlugin.start();
+			pluginMap.put(iPlugin.getPluginName(), iPlugin);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * 加载功能插件
+	 * 
+	 * @param functionPath
+	 */
+	public void loadFunctionPlugin(String functionPath) {
+		try {
+			// 加载功能插件
+			IPlugin iPlugin = (IPlugin) ReflectionUtil
+					.getClasstoObject(functionPath);
 			iPlugin.init();
 			iPlugin.start();
 			pluginMap.put(iPlugin.getPluginName(), iPlugin);

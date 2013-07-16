@@ -15,7 +15,7 @@ public abstract class BasePlugin implements IPlugin {
 
 	public void init() {
 		regist();
-		System.out.println(pluginName + "注册完成");
+		//System.out.println(pluginName + "注册完成");
 	}
 
 	public String getPluginName() {

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.dom4j.Element;
 
+import com.gm.gmview.platform.PlatformManager;
 import com.gm.gmview.platform.plugin.BaseProjectPlugin;
 import com.shine.framework.core.util.XmlUitl;
 
@@ -30,6 +31,10 @@ public class TestProjectPlugin extends BaseProjectPlugin {
 			list.clear();
 			list = null;
 
+			this.pluginType = "project";
+
+			loadFunctionPlugins();
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -45,8 +50,12 @@ public class TestProjectPlugin extends BaseProjectPlugin {
 		return null;
 	}
 
+	public void loadFunctionPlugins() {
+		PlatformManager.getManager().loadFunctionPlugin(
+				"com.gm.gmview.functions.ZfjlyManager.ZfjlyPluginPlugin");
+	}
+
 	public void start() {
-		System.out.println("启动插件:" + this.pluginName);
 		System.out.println("启动项目:" + this.projectName);
 
 	}
