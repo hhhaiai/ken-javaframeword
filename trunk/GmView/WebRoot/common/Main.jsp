@@ -22,7 +22,7 @@
 		<body class="easyui-layout">
 			<div data-options="region:'north',border:false"
 				style="height: 60px; background: #B3DFDA; padding: 10px">
-				head
+				<jsp:include page="/common/head.jsp"></jsp:include>
 			</div>
 			<div data-options="region:'west',split:true,title:'West'"
 				style="width: 150px; padding: 10px;">

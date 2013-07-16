@@ -7,7 +7,6 @@ public class IndexAction extends BaseAction {
 
 	public String execute() throws Exception {
 		this.url = "/project/test/login.jsp";
-		System.out.println("首页动态跳转");
 		return SUCCESS;
 	}
 
