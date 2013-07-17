@@ -12,6 +12,7 @@ import org.springframework.web.context.ContextLoader;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.WebApplicationContext;
 
+@SuppressWarnings("deprecation")
 public class ShineContextLoaderListener extends ContextLoaderListener {
 	private ContextLoader contextLoader;
 
@@ -53,13 +54,12 @@ public class ShineContextLoaderListener extends ContextLoaderListener {
 
 		// 将默认的spring配置文件与插件注入的配置文件融合
 		String configLocation = sc.getInitParameter(CONFIG_LOCATION_PARAM); // 这里获取到web.xml中通过param配置的spring配置文件路径
-		// String fusionConfigLocation =
-		// ConfigFactory.getFactory().fusionSpringXml(configLocation, "Spring");
+		 String fusionConfigLocation = ConfigFactory.getFactory().fusionSpringXml(configLocation, "Spring");
 		// //将动态加载的spring配置文件和默认的配置文件拼接在一起
 
 		wac.setParent(parent);
 		wac.setServletContext(sc);
-		// wac.setConfigLocation(fusionConfigLocation); //设置配置文件路径为拼接后的值
+		wac.setConfigLocation(fusionConfigLocation); //设置配置文件路径为拼接后的值
 		customizeContext(sc, wac);
 		wac.refresh();
 		return wac;
@@ -69,13 +69,14 @@ public class ShineContextLoaderListener extends ContextLoaderListener {
 	 * Initialize the root web application context.
 	 */
 	public void contextInitialized(ServletContextEvent event) {
+		System.out.println("======动态初始化======");
 		// 初始化系统配置，将启动时需要的配置文件加载到系统全局变量中
-		// ConfigFactory.getFactory().init(event.getServletContext());
+		ConfigFactory.getFactory().init(event.getServletContext());
 
 		this.contextLoader = createContextLoader();
-		if (this.contextLoader == null) {
+		//if (this.contextLoader == null) {
 			this.contextLoader = this;
-		}
+		//}
 		this.contextLoader.initWebApplicationContext(event.getServletContext());
 	}
 }

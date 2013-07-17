@@ -22,13 +22,18 @@ public abstract class BaseAction extends ActionSupport implements
 		ServletRequestAware {
 
 	private ActionContext context;
-	private Map request;
-	private Map session;
-	private Map application;
+	protected Map request;
+	protected Map session;
+	protected Map application;
 	protected RequestDataExtractor extor;
 	protected HttpServletRequest requests;
 	private final static String CONTENT_TYPE_HTML = "text/html;charset=UTF-8";
 	private final static String CONTENT_TYPE_XML = "text/xml;charset=UTF-8";
+	
+	public BaseAction(){
+		super();
+		loadBase();
+	}
 
 	public void setServletRequest(HttpServletRequest requests) {
 		this.requests = requests;

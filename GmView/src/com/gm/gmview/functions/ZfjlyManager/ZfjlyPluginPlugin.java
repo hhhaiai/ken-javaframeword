@@ -1,5 +1,6 @@
 package com.gm.gmview.functions.ZfjlyManager;
 
+import com.gm.gmview.framework.config.StrutsFilterDispatcher;
 import com.gm.gmview.platform.plugin.FunctionPlugin;
 
 public class ZfjlyPluginPlugin extends FunctionPlugin {
@@ -8,6 +9,10 @@ public class ZfjlyPluginPlugin extends FunctionPlugin {
 		this.pluginName = "Zfjly";
 		this.functionName = "执法记录仪管理";
 		this.pluginType = "function";
+
+		// 注册mvc
+		StrutsFilterDispatcher.registerXML(getClass().getResource(
+				"config/zfjly.xml").getPath());
 	}
 
 	public void close() {

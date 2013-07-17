@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.dom4j.Element;
 
+import com.gm.gmview.framework.config.ConfigFactory;
+import com.gm.gmview.framework.config.StrutsFilterDispatcher;
 import com.gm.gmview.platform.PlatformManager;
 import com.gm.gmview.platform.plugin.BaseProjectPlugin;
 import com.shine.framework.core.util.XmlUitl;
@@ -33,6 +35,16 @@ public class TestProjectPlugin extends BaseProjectPlugin {
 
 			this.pluginType = "project";
 
+			// 注册mvc
+			StrutsFilterDispatcher.registerXML(getClass().getResource(
+					"config/testProjectStruts.xml").getPath());
+
+			// 注册spring
+			ConfigFactory.getFactory().addSpringXmls(
+					getClass().getResource("config/testProjectContext.xml")
+							.getPath());
+
+			// 加载功能插件
 			loadFunctionPlugins();
 
 		} catch (Exception e) {
