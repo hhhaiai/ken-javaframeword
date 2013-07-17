@@ -1,5 +1,6 @@
 package com.gm.gmview.platform;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -67,6 +68,7 @@ public class PlatformManager {
 								.concat(this.projectName.substring(1))
 						+ "ProjectPlugin";
 				loadProjectPlugin();
+
 			} else {
 				System.out.println("工程配置出错，加载默认产品......");
 			}
@@ -75,6 +77,7 @@ public class PlatformManager {
 			e.printStackTrace();
 		}
 
+		// 注册mvc
 		StrutsFilterDispatcher.registerXML(getClass().getResource(
 				"config/platformStruts.xml").getPath());
 	}
@@ -123,4 +126,57 @@ public class PlatformManager {
 
 		return null;
 	}
+
+	public String getFrameworkXmlPath() {
+		return frameworkXmlPath;
+	}
+
+	public void setFrameworkXmlPath(String frameworkXmlPath) {
+		this.frameworkXmlPath = frameworkXmlPath;
+	}
+
+	public String getSysPath() {
+		return sysPath;
+	}
+
+	public void setSysPath(String sysPath) {
+		this.sysPath = sysPath;
+	}
+
+	public String getContextName() {
+		return contextName;
+	}
+
+	public void setContextName(String contextName) {
+		this.contextName = contextName;
+	}
+
+	public String getProjectName() {
+		return projectName;
+	}
+
+	public void setProjectName(String projectName) {
+		this.projectName = projectName;
+	}
+
+	public String getProjectPath() {
+		return projectPath;
+	}
+
+	public void setProjectPath(String projectPath) {
+		this.projectPath = projectPath;
+	}
+
+	public PluginMap getPluginMap() {
+		return pluginMap;
+	}
+
+	public void setPluginMap(PluginMap pluginMap) {
+		this.pluginMap = pluginMap;
+	}
+
+	public Map<String, Object> getAttributes() {
+		return attributes;
+	}
+
 }

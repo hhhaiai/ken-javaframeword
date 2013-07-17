@@ -5,7 +5,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 	<head>
-		<title>主页</title>
+		<title>${name}</title>
 		<link rel="stylesheet" type="text/css"
 			href="<%=rootPath%>resource/themes/default/easyui.css" />
 		<link rel="stylesheet" type="text/css"
@@ -25,17 +25,12 @@
 				<jsp:include page="/common/head.jsp"></jsp:include>
 			</div>
 			<div data-options="region:'west',split:true,title:'West'"
-				style="width: 150px; padding: 10px;">
-				tree
-			</div>
-			<div
-				data-options="region:'right',split:true,collapsed:true,title:'right'"
-				style="width: 100px; padding: 10px;">
-				right
+				style="width: 200px; padding: 10px;">
+				<jsp:include page="/common/tree.jsp"></jsp:include>
 			</div>
 			<div data-options="region:'south',border:false"
 				style="height: 50px; background: #A9FACD; padding: 10px;">
-				foot
+				<jsp:include page="/common/foot.jsp"></jsp:include>
 			</div>
 			<div data-options="region:'center',title:'Center'">
 				center
