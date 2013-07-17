@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Struts2Diagram version="2.0">
+  <webResource name="success.jsp" path="/success.jsp" location="100,205" size="150,55" />
+  <webResource name="error.jsp" path="/error.jsp" location="345,30" size="150,55" />
+</Struts2Diagram>
+
