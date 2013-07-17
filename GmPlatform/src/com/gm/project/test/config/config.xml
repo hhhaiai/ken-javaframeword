@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<pluginName>test</pluginName>
+	<projectName>测试项目</projectName>
+	<springConfig>/WEB-INF/classes/com/gm/gmview/project/test/config/frameworkSpring.xml
+	</springConfig>
+</config>
