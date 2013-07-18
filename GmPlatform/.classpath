@@ -15,8 +15,8 @@
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/ognl-3.0.6.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/struts2-core-2.3.15.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/xwork-core-2.3.15.jar"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/JavaFramework2.5"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/c3p0-0.9.1.2.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/sqlitejdbc-v056.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/JavaFramework2.5"/>
 	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
 </classpath>

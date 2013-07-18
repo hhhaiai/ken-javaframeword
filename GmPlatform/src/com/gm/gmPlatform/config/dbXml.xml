@@ -3,7 +3,7 @@
 	batchSqlSize="500" batchThreadSize="10" selectThreadSize="10" log="true"
 	logFloderPath="log">
 	<Resource jndi="jdbc/platform" driverClass="com.mysql.jdbc.Driver"
-		dbUserName="root" dbPassWord="123456"
+		dbUserName="root" dbPassWord="root"
 		jdbcUrl="jdbc:mysql://127.0.0.1:3306/gmplatform?useUnicode=true&amp;characterEncoding=utf-8"
 		initSize="2" minPoolSize="1" maxPoolSize="10" maxStatements="50"
 		maxIdleTime="60" />
