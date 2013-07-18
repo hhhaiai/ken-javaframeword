@@ -2,6 +2,8 @@ package com.gm.gmPlatform.web;
 
 import com.gm.framework.web.BaseAction;
 import com.gm.gmPlatform.GmPlatformManager;
+import com.gm.gmPlatform.model.ResultModel;
+import com.gm.gmPlatform.service.LoginService;
 import com.shine.DBUtil.DBUtil;
 import com.shine.DBUtil.model.DBModel;
 
@@ -11,7 +13,12 @@ import com.shine.DBUtil.model.DBModel;
  * @author viruscodecn@gmail.com
  * 
  */
-public class LoginAction extends BaseAction {
+public class LoginAction extends BaseAction<LoginService> {
+
+	public LoginAction() {
+		super();
+		this.setService(new LoginService());
+	}
 
 	private String userName;
 	private String password;
@@ -37,13 +44,11 @@ public class LoginAction extends BaseAction {
 		this.putRequest("name", GmPlatformManager.getManager().getPluginMap()
 				.getPlugin().getProjectName());
 
-		DBModel model = DBUtil.getInstance().executeQuery(
-				GmPlatformManager.getManager().getPlatformJndi(),
-				"select * from test");
-		model.next();
-		System.out.println(model.getDataXml());
-
-		return SUCCESS;
+		ResultModel rm = this.service.loginIn(userName, password);
+		if (rm.isResult()) {
+			return SUCCESS;
+		}
+		return ERROR;
 	}
 
 	public String logout() throws Exception {
