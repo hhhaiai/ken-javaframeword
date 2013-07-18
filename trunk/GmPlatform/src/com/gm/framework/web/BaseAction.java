@@ -1,6 +1,5 @@
 package com.gm.framework.web;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -18,8 +17,8 @@ import com.gm.framework.util.RequestDataExtractor;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
-public abstract class BaseAction extends ActionSupport implements
-		ServletRequestAware {
+public abstract class BaseAction<SERVICE extends BaseService> extends
+		ActionSupport implements ServletRequestAware {
 
 	private ActionContext context;
 	protected Map request;
@@ -29,6 +28,8 @@ public abstract class BaseAction extends ActionSupport implements
 	protected HttpServletRequest requests;
 	private final static String CONTENT_TYPE_HTML = "text/html;charset=UTF-8";
 	private final static String CONTENT_TYPE_XML = "text/xml;charset=UTF-8";
+
+	protected SERVICE service;
 
 	public BaseAction() {
 		super();
@@ -176,6 +177,14 @@ public abstract class BaseAction extends ActionSupport implements
 			}
 		}
 		return null;
+	}
+
+	public SERVICE getService() {
+		return service;
+	}
+
+	public void setService(SERVICE service) {
+		this.service = service;
 	}
 
 }

@@ -1,24 +1,51 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-<%@taglib prefix="s" uri="/struts-tags"%>
-<%
-	String path = request.getContextPath();
-	String basePath = request.getScheme() + "://"
-			+ request.getServerName() + ":" + request.getServerPort()
-			+ path + "/";
-%>
+<%@include file="/common/path.jsp"%>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 	<head>
 		<title>${name}</title>
+		<link rel="stylesheet" type="text/css"
+			href="<%=rootPath%>resource/themes/default/easyui.css" />
+		<link rel="stylesheet" type="text/css"
+			href="<%=rootPath%>resource/themes/icon.css" />
+		<script type="text/javascript"
+			src="<%=rootPath%>resource/js/jquery.min.js">
+</script>
+		<script type="text/javascript"
+			src="<%=rootPath%>resource/js/jquery.easyui.min.js">
+</script>
 	</head>
 
 	<body>
-		<s:form action="login_login">
-			<s:textfield name="userName" label="用户名" key="user"></s:textfield>
-			<s:password name="passWord" label="密码" key="password"></s:password>
-			<s:submit key="login" value="提交"></s:submit>
-		</s:form>
-		<a 	href="/GmView/common/Main.jsp">test</a>
+		<form id="login_form" action="login_login" method="post">
+			<table>
+				<tr>
+					<td>
+						用户名:
+					</td>
+					<td>
+						<input class="easyui-validatebox" type="text" name="userName"
+							data-options="required:true"></input>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						密码：
+					</td>
+					<td>
+						<input class="easyui-validatebox" type="password" name="password"
+							data-options="required:true,validType:'password'"></input>
+					</td>
+				</tr>
+				<tr align="right">
+					<td />
+					<td>
+						<input type="submit" value="登陆" />
+					</td>
+				</tr>
+			</table>
+		</form>
+
 	</body>
 </html>
