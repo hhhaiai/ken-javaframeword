@@ -26,7 +26,7 @@
 					</td>
 					<td>
 						<input class="easyui-validatebox" type="text" name="userName"
-							data-options="required:true"></input>
+							data-options="required:true" value="admin"></input>
 					</td>
 				</tr>
 				<tr>
@@ -35,7 +35,7 @@
 					</td>
 					<td>
 						<input class="easyui-validatebox" type="password" name="password"
-							data-options="required:true,validType:'password'"></input>
+							data-options="required:true,validType:'password'" value="123456"></input>
 					</td>
 				</tr>
 				<tr align="right">

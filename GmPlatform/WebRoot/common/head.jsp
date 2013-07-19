@@ -3,14 +3,17 @@
 <html>
 	<body>
 		<div>
-			<div style="padding: 5px; border: 1px solid #ddd;float:right">
-				<a href="#" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-edit'"">Home</a>
-				<a href="#" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-edit'"">Home</a>
-				<a href="#" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-edit'"">Home</a>
-				<a href="#" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-edit'"">Home</a>
-				<a href="#" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-edit'"">Home</a>
-				<a href="#" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-edit'"">退出</a>
+			
+			<div
+				style="padding: 5px; border: 1px solid #ddd; float: right; fontSize: 14">
+				<a href="#" class="easyui-linkbutton"
+					data-options="toggle:true,group:'g2',plain:true">用户管理</a>
+				<a href="#" class="easyui-linkbutton"
+					data-options="toggle:true,group:'g2',plain:true">系统管理</a>
+				<a href="#" class="easyui-linkbutton"
+					data-options="toggle:true,group:'g2',plain:true">退出</a>
 			</div>
+
 		</div>
 	</body>
 </html>
