@@ -13,7 +13,7 @@ public class HiveExample {
 		DBUtil
 				.getInstance()
 				.init(
-						"E:\\JavaWorkSpace\\JavaFramework2.5\\src\\com\\shine\\DBUtil\\config\\dbXml.xml");
+						"D:\\workspace\\JavaFramework2.5\\src\\com\\shine\\DBUtil\\config\\dbXml.xml");
 
 		DBModel model = DBUtil.getInstance().executeQuery("jdbc/HBase",
 				"SELECT a.* FROM test a");
