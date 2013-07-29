@@ -16,6 +16,7 @@ package com.shine.framework.HKNetSDK.ifs;
  * @author Xubinfeng
  */
 
+import com.shine.framework.HKNetSDK.HKNetSDKManger;
 import com.sun.jna.Native;
 import com.sun.jna.NativeLong;
 import com.sun.jna.Pointer;
@@ -35,9 +36,8 @@ public interface HCNetSDK extends StdCallLibrary {
 
 	String path = HCNetSDK.class.getProtectionDomain().getCodeSource()
 			.getLocation().getPath();
-	HCNetSDK INSTANCE = (HCNetSDK) Native.loadLibrary(path.substring(1, path
-			.indexOf("/com/"))
-			+ "/HCNetSDK.dll", HCNetSDK.class);
+	HCNetSDK INSTANCE = (HCNetSDK) Native.loadLibrary(HKNetSDKManger
+			.getManager().getHCNETSDKPath(), HCNetSDK.class);
 	/*** 宏定义 ***/
 	// 常量
 
@@ -3815,61 +3815,4 @@ public interface HCNetSDK extends StdCallLibrary {
 
 	boolean NET_DVR_GetRtspConfig(NativeLong lUserID, int dwCommand,
 			NET_DVR_RTSPCFG lpOutBuffer, int dwOutBufferSize);
-}
-
-// 播放库函数声明,PlayCtrl.dll
-interface PlayCtrl extends StdCallLibrary {
-	PlayCtrl INSTANCE = (PlayCtrl) Native.loadLibrary("PlayCtrl",
-			PlayCtrl.class);
-
-	public static final int STREAME_REALTIME = 0;
-	public static final int STREAME_FILE = 1;
-
-	boolean PlayM4_GetPort(NativeLongByReference nPort);
-
-	boolean PlayM4_OpenStream(NativeLong nPort, ByteByReference pFileHeadBuf,
-			int nSize, int nBufPoolSize);
-
-	boolean PlayM4_InputData(NativeLong nPort, ByteByReference pBuf, int nSize);
-
-	boolean PlayM4_CloseStream(NativeLong nPort);
-
-	boolean PlayM4_SetStreamOpenMode(NativeLong nPort, int nMode);
-
-	boolean PlayM4_Play(NativeLong nPort, HWND hWnd);
-
-	boolean PlayM4_Stop(NativeLong nPort);
-
-	boolean PlayM4_SetSecretKey(NativeLong nPort, NativeLong lKeyType,
-			String pSecretKey, NativeLong lKeyLen);
-}
-
-// windows gdi接口,gdi32.dll in system32 folder, 在设置遮挡区域,移动侦测区域等情况下使用
-interface GDI32 extends W32API {
-	GDI32 INSTANCE = (GDI32) Native.loadLibrary("gdi32", GDI32.class,
-			DEFAULT_OPTIONS);
-
-	public static final int TRANSPARENT = 1;
-
-	int SetBkMode(HDC hdc, int i);
-
-	HANDLE CreateSolidBrush(int icolor);
-}
-
-// windows user32接口,user32.dll in system32 folder, 在设置遮挡区域,移动侦测区域等情况下使用
-interface USER32 extends W32API {
-
-	USER32 INSTANCE = (USER32) Native.loadLibrary("user32", USER32.class,
-			DEFAULT_OPTIONS);
-
-	public static final int BF_LEFT = 0x0001;
-	public static final int BF_TOP = 0x0002;
-	public static final int BF_RIGHT = 0x0004;
-	public static final int BF_BOTTOM = 0x0008;
-	public static final int BDR_SUNKENOUTER = 0x0002;
-	public static final int BF_RECT = (BF_LEFT | BF_TOP | BF_RIGHT | BF_BOTTOM);
-
-	boolean DrawEdge(HDC hdc, RECT qrc, int edge, int grfFlags);
-
-	int FillRect(HDC hDC, RECT lprc, HANDLE hbr);
 }

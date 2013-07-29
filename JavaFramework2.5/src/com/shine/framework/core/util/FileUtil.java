@@ -506,9 +506,9 @@ public class FileUtil {
 			byte b[] = content.getBytes();
 			bais = new ByteArrayInputStream(b);
 			POIFSFileSystem poifs = new POIFSFileSystem();
-//			DirectoryEntry directory = poifs.getRoot();
-//			DocumentEntry documentEntry = directory.createDocument(
-//					"WordDocument", bais);
+			// DirectoryEntry directory = poifs.getRoot();
+			// DocumentEntry documentEntry = directory.createDocument(
+			// "WordDocument", bais);
 
 			ostream = new FileOutputStream(path);
 			// 生成Word临时文件
@@ -551,9 +551,9 @@ public class FileUtil {
 			byte b[] = content.getBytes();
 			bais = new ByteArrayInputStream(b);
 			POIFSFileSystem poifs = new POIFSFileSystem();
-//			DirectoryEntry directory = poifs.getRoot();
-//			DocumentEntry documentEntry = directory.createDocument(
-//					"WordDocument", bais);
+			// DirectoryEntry directory = poifs.getRoot();
+			// DocumentEntry documentEntry = directory.createDocument(
+			// "WordDocument", bais);
 
 			ostream = new FileOutputStream(path);
 			// 生成Word临时文件
@@ -613,23 +613,27 @@ public class FileUtil {
 
 	public static void main(String args[]) {
 		// TODO Auto-generated method stub
-		String dir = "F:/JavaWorkSpace/";
-		File directory = new File("F:/JavaWorkSpace/");
-		File[] files = directory.listFiles();
-		System.out.println(files.length);
-		for (int i = 0; i < files.length; i++) {
-			/**
-			 * outputFlage1 输出文件名及其绝对路径
-			 */
-			System.out.println(i + ":" + files[i].getName() + ";;;"
-					+ files[i].getAbsolutePath());
-			files[i].renameTo(new File(dir + i + files[i].getName()));
-			/**
-			 * outputFlag2
-			 * 这里可以看出输出的结果和outputFlag一样，renameTo方法没有改变files[i]的值（内存中数据没变
-			 * ），但是改变了文件名
-			 */
-			System.out.println(files[i].getName());
-		}
+		// String dir = "F:/JavaWorkSpace/";
+		// File directory = new File("F:/JavaWorkSpace/");
+		// File[] files = directory.listFiles();
+		// System.out.println(files.length);
+		// for (int i = 0; i < files.length; i++) {
+		// /**
+		// * outputFlage1 输出文件名及其绝对路径
+		// */
+		// System.out.println(i + ":" + files[i].getName() + ";;;"
+		// + files[i].getAbsolutePath());
+		// files[i].renameTo(new File(dir + i + files[i].getName()));
+		// /**
+		// * outputFlag2
+		// * 这里可以看出输出的结果和outputFlag一样，renameTo方法没有改变files[i]的值（内存中数据没变
+		// * ），但是改变了文件名
+		// */
+		// System.out.println(files[i].getName());
+		// }
+
+		System.out
+				.println(FileUtil
+						.getFileList("D:/Program%20Files (x86)/apache-tomcat-6.0.35-windows-x64/apache-tomcat-6.0.35/webapps/GmPlatform/WEB-INF/classes/com/gm/function/").length);
 	}
 }
