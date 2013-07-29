@@ -1,4 +1,6 @@
-package com.shine.framework.Cache;
+package com.shine.framework.Cache.Example;
+
+import com.shine.framework.Cache.CacheManager;
 
 public class Example {
 	public static void main(String args[]) {
