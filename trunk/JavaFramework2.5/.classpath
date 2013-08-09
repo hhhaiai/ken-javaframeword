@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="lib/activation.jar"/>
+	<classpathentry kind="lib" path="lib/activejdbc-1.4.2-javadoc.jar"/>
+	<classpathentry kind="lib" path="lib/activejdbc-1.4.2-sources.jar"/>
+	<classpathentry kind="lib" path="lib/activejdbc-1.4.2.jar"/>
+	<classpathentry kind="lib" path="lib/activejdbc-instrumentation-1.4.1.jar"/>
 	<classpathentry kind="lib" path="lib/ant-1.6.4.jar"/>
 	<classpathentry kind="lib" path="lib/bsh-2.0b4.jar"/>
 	<classpathentry kind="lib" path="lib/c3p0-0.9.1.2.jar"/>
@@ -15,47 +20,85 @@
 	<classpathentry kind="lib" path="lib/commons-io-1.3.2.jar"/>
 	<classpathentry kind="lib" path="lib/commons-lang-2.4.jar"/>
 	<classpathentry kind="lib" path="lib/commons-logging.jar"/>
-	<classpathentry kind="lib" path="lib/commons-net-2.2.jar" sourcepath="C:/Users/123/.m2/repository/commons-net/commons-net/2.2/commons-net-2.2-sources.jar"/>
+	<classpathentry kind="lib" path="lib/commons-net-2.2.jar"/>
 	<classpathentry kind="lib" path="lib/csvjdbc.jar"/>
-	<classpathentry kind="lib" path="lib/dom4j-1.6.1.jar" sourcepath="C:/Users/123/.m2/repository/dom4j/dom4j/1.6.1/dom4j-1.6.1-sources.jar"/>
+	<classpathentry kind="lib" path="lib/db4o-8.0.236.16058-all-java5.jar"/>
+	<classpathentry kind="lib" path="lib/DdlUtils-1.0.jar"/>
+	<classpathentry kind="lib" path="lib/dom4j-1.6.1.jar"/>
 	<classpathentry kind="lib" path="lib/edtftpj.jar"/>
+	<classpathentry kind="lib" path="lib/examples.jar"/>
 	<classpathentry kind="lib" path="lib/ezmorph-1.0.6.jar"/>
 	<classpathentry kind="lib" path="lib/Filters.jar"/>
+	<classpathentry kind="lib" path="lib/FontBox-0.1.0.jar"/>
 	<classpathentry kind="lib" path="lib/gpsparser.jar"/>
+	<classpathentry kind="lib" path="lib/hadoop-core-1.0.3-Intel.jar"/>
+	<classpathentry kind="lib" path="lib/hbase-0.94.1-Intel.jar"/>
+	<classpathentry kind="lib" path="lib/high-scale-lib-1.1.1.jar"/>
+	<classpathentry kind="lib" path="lib/hive-exec-0.9.0-Intel.jar"/>
+	<classpathentry kind="lib" path="lib/hive-jdbc-0.9.0-Intel.jar"/>
+	<classpathentry kind="lib" path="lib/hive-metastore-0.9.0-Intel.jar"/>
+	<classpathentry kind="lib" path="lib/hive-service-0.9.0-Intel.jar"/>
 	<classpathentry kind="lib" path="lib/htmlcleaner2_1.jar"/>
 	<classpathentry kind="lib" path="lib/htmlparser.jar"/>
+	<classpathentry kind="lib" path="lib/ioserver-binary1.2b2.jar"/>
 	<classpathentry kind="lib" path="lib/jai_imageio-1.1-alpha.jar"/>
 	<classpathentry kind="lib" path="lib/jargs-1.0.jar"/>
 	<classpathentry kind="lib" path="lib/jasper-compiler-5.5.15.jar"/>
 	<classpathentry kind="lib" path="lib/jasper-compiler-jdt-5.5.15.jar"/>
 	<classpathentry kind="lib" path="lib/jasper-runtime-5.5.15.jar"/>
+	<classpathentry kind="lib" path="lib/java_memcached-release_2.0.1.jar"/>
+	<classpathentry kind="lib" path="lib/javalite-common-1.4.1.jar"/>
 	<classpathentry kind="lib" path="lib/JavaSnmpPacket.jar"/>
+	<classpathentry kind="lib" path="lib/javassist-3.8.0.GA.jar"/>
+	<classpathentry kind="lib" path="lib/jave-1.0.2.jar"/>
 	<classpathentry kind="lib" path="lib/jaxen-1.1-beta-6.jar"/>
 	<classpathentry kind="lib" path="lib/jcl104-over-slf4j-1.3.1.jar"/>
+	<classpathentry kind="lib" path="lib/jdo-api-3.0.1.jar"/>
 	<classpathentry kind="lib" path="lib/jdom.jar"/>
 	<classpathentry kind="lib" path="lib/jetty-6.1.26.jar"/>
 	<classpathentry kind="lib" path="lib/jetty-util-6.1.26.jar"/>
+	<classpathentry kind="lib" path="lib/jfugue-4.0.3-with-musicxml.jar"/>
 	<classpathentry kind="lib" path="lib/jimi.jar"/>
+	<classpathentry kind="lib" path="lib/jna.jar"/>
 	<classpathentry kind="lib" path="lib/JNative.jar"/>
 	<classpathentry kind="lib" path="lib/jnca-beta-0.91.jar"/>
+	<classpathentry kind="lib" path="lib/jnmp2p.jar"/>
 	<classpathentry kind="lib" path="lib/jpcap.jar"/>
 	<classpathentry kind="lib" path="lib/json-lib-2.2.3-jdk13.jar"/>
 	<classpathentry kind="lib" path="lib/jsp-api-2.0.jar"/>
+	<classpathentry kind="lib" path="lib/libfb303-0.7.0.jar"/>
 	<classpathentry kind="lib" path="lib/log4j-1.2.14.jar"/>
+	<classpathentry kind="lib" path="lib/lucene-core-3.6.1-javadoc.jar"/>
+	<classpathentry kind="lib" path="lib/lucene-core-3.6.1.jar"/>
+	<classpathentry kind="lib" path="lib/lucene-test-framework-3.6.1-javadoc.jar"/>
+	<classpathentry kind="lib" path="lib/lucene-test-framework-3.6.1.jar"/>
 	<classpathentry kind="lib" path="lib/mail.jar"/>
 	<classpathentry kind="lib" path="lib/maplefetion-core-2.5.1.jar"/>
+	<classpathentry kind="lib" path="lib/mdx4j-1.0-sources.jar"/>
+	<classpathentry kind="lib" path="lib/mdx4j-1.0-tests.jar"/>
+	<classpathentry kind="lib" path="lib/mdx4j-1.0.jar"/>
+	<classpathentry kind="lib" path="lib/mibble-parser-2.9.2.jar"/>
 	<classpathentry kind="lib" path="lib/monetdb-1.11-jdbc.jar"/>
 	<classpathentry kind="lib" path="lib/mysql-connector-java-3.0.10-stable-bin.jar"/>
+	<classpathentry kind="lib" path="lib/netty-3.6.0.Final-sources.jar"/>
+	<classpathentry kind="lib" path="lib/netty-3.6.0.Final.jar"/>
+	<classpathentry kind="lib" path="lib/olap4j-1.1.0.jar"/>
+	<classpathentry kind="lib" path="lib/olap4j-jdk14-1.1.0.jar"/>
+	<classpathentry kind="lib" path="lib/olap4j-tck-1.1.0.jar"/>
+	<classpathentry kind="lib" path="lib/olap4j-xmla-1.1.0.jar"/>
 	<classpathentry kind="lib" path="lib/org-jofc-0.8.20110729.jar"/>
+	<classpathentry kind="lib" path="lib/platform.jar"/>
 	<classpathentry kind="lib" path="lib/poi-3.7-20101029.jar"/>
 	<classpathentry kind="lib" path="lib/poi-scratchpad-3.7-20101029.jar"/>
 	<classpathentry kind="lib" path="lib/pygmy-core-ooweb.jar"/>
 	<classpathentry kind="lib" path="lib/pygmy-handlers.jar"/>
 	<classpathentry kind="lib" path="lib/quartz-1.6.6.jar"/>
+	<classpathentry kind="lib" path="lib/reflectasm-1.05-all.jar"/>
 	<classpathentry kind="lib" path="lib/rhino-1.6R7.jar"/>
 	<classpathentry kind="lib" path="lib/servlet-api-2.5-20081211.jar"/>
 	<classpathentry kind="lib" path="lib/slf4j-api-1.3.1.jar"/>
 	<classpathentry kind="lib" path="lib/slf4j-simple-1.3.1.jar"/>
+	<classpathentry kind="lib" path="lib/snmp4j-1.10.2.jar"/>
 	<classpathentry kind="lib" path="lib/sqlitejdbc-v056.jar"/>
 	<classpathentry kind="lib" path="lib/StarJFlvLib.jar"/>
 	<classpathentry kind="lib" path="lib/swt-linux.jar"/>
@@ -64,54 +107,17 @@
 	<classpathentry kind="lib" path="lib/sybases-jconn4.jar"/>
 	<classpathentry kind="lib" path="lib/tomcat-juli.jar"/>
 	<classpathentry kind="lib" path="lib/tools.jar"/>
-	<classpathentry kind="lib" path="lib/xom-1.2.5.jar"/>
-	<classpathentry kind="lib" path="lib/yuicompressor-2.4.6.jar"/>
-	<classpathentry kind="lib" path="lib/DdlUtils-1.0.jar"/>
-	<classpathentry kind="lib" path="lib/snmp4j-1.10.2.jar"/>
-	<classpathentry kind="lib" path="lib/jave-1.0.2.jar"/>
-	<classpathentry kind="lib" path="lib/mibble-parser-2.9.2.jar"/>
-	<classpathentry kind="lib" path="lib/java_memcached-release_2.0.1.jar"/>
-	<classpathentry kind="lib" path="lib/jfugue-4.0.3-with-musicxml.jar"/>
-	<classpathentry kind="lib" path="lib/db4o-8.0.236.16058-all-java5.jar"/>
-	<classpathentry kind="lib" path="lib/reflectasm-1.05-all.jar"/>
-	<classpathentry kind="lib" path="lib/lucene-core-3.6.1-javadoc.jar"/>
-	<classpathentry kind="lib" path="lib/lucene-core-3.6.1.jar"/>
-	<classpathentry kind="lib" path="lib/lucene-test-framework-3.6.1-javadoc.jar"/>
-	<classpathentry kind="lib" path="lib/lucene-test-framework-3.6.1.jar"/>
-	<classpathentry kind="lib" path="lib/activejdbc-1.4.2-javadoc.jar"/>
-	<classpathentry kind="lib" path="lib/activejdbc-1.4.2-sources.jar"/>
-	<classpathentry kind="lib" path="lib/activejdbc-1.4.2.jar"/>
-	<classpathentry kind="lib" path="lib/activejdbc-instrumentation-1.4.1.jar"/>
-	<classpathentry kind="lib" path="lib/javalite-common-1.4.1.jar"/>
-	<classpathentry kind="lib" path="lib/javassist-3.8.0.GA.jar"/>
-	<classpathentry kind="lib" path="lib/netty-3.6.0.Final-sources.jar"/>
-	<classpathentry kind="lib" path="lib/netty-3.6.0.Final.jar"/>
-	<classpathentry kind="lib" path="lib/ioserver-binary1.2b2.jar"/>
-	<classpathentry kind="lib" path="lib/jdo-api-3.0.1.jar"/>
-	<classpathentry kind="lib" path="lib/FontBox-0.1.0.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="lib/hadoop-core-1.0.3-Intel.jar"/>
-	<classpathentry kind="lib" path="lib/hbase-0.94.1-Intel.jar"/>
-	<classpathentry kind="lib" path="lib/high-scale-lib-1.1.1.jar"/>
-	<classpathentry kind="lib" path="lib/hive-exec-0.9.0-Intel.jar"/>
-	<classpathentry kind="lib" path="lib/hive-jdbc-0.9.0-Intel.jar"/>
-	<classpathentry kind="lib" path="lib/hive-metastore-0.9.0-Intel.jar"/>
-	<classpathentry kind="lib" path="lib/hive-service-0.9.0-Intel.jar"/>
-	<classpathentry kind="lib" path="lib/libfb303-0.7.0.jar"/>
-	<classpathentry kind="lib" path="lib/libthrift-0.8.0.jar"/>
+	<classpathentry kind="lib" path="lib/xercesImpl.jar"/>
 	<classpathentry kind="lib" path="lib/xmemcached-1.4.1-javadoc.jar"/>
 	<classpathentry kind="lib" path="lib/xmemcached-1.4.1.jar"/>
-	<classpathentry kind="lib" path="lib/olap4j-1.1.0.jar"/>
-	<classpathentry kind="lib" path="lib/olap4j-jdk14-1.1.0.jar"/>
-	<classpathentry kind="lib" path="lib/olap4j-tck-1.1.0.jar"/>
-	<classpathentry kind="lib" path="lib/olap4j-xmla-1.1.0.jar"/>
-	<classpathentry kind="lib" path="lib/xercesImpl.jar"/>
-	<classpathentry kind="lib" path="lib/mdx4j-1.0-sources.jar"/>
-	<classpathentry kind="lib" path="lib/mdx4j-1.0-tests.jar"/>
-	<classpathentry kind="lib" path="lib/mdx4j-1.0.jar"/>
-	<classpathentry kind="lib" path="lib/jnmp2p.jar"/>
-	<classpathentry kind="lib" path="lib/jna.jar"/>
-	<classpathentry kind="lib" path="lib/platform.jar"/>
-	<classpathentry kind="lib" path="lib/examples.jar"/>
+	<classpathentry kind="lib" path="lib/xom-1.2.5.jar"/>
+	<classpathentry kind="lib" path="lib/yourbase-client-0.10-RC3.jar"/>
+	<classpathentry kind="lib" path="lib/yourbase-hbase-0.10-RC3.jar"/>
+	<classpathentry kind="lib" path="lib/yourbase-sql-0.10-RC3.jar"/>
+	<classpathentry kind="lib" path="lib/yuicompressor-2.4.6.jar"/>
+	<classpathentry kind="lib" path="lib/zookeeper-3.3.3-sources.jar"/>
+	<classpathentry kind="lib" path="lib/zookeeper-3.3.3.jar"/>
+	<classpathentry kind="lib" path="lib/libthrift-0.9.0.jar"/>
+	<classpathentry kind="lib" path="lib/slf4j-log4j12-1.5.8.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
