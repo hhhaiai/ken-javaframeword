@@ -30,6 +30,11 @@ import org.apache.lucene.store.FSDirectory;
 import org.apache.lucene.util.Version;
 import com.shine.DBUtil.manage.DBManager;
 
+/**
+ * 
+ * @author viruscodecn@gmail.com
+ *
+ */
 @SuppressWarnings("deprecation")
 public class LuceneManager {
 	private static LuceneManager manager = null;
