@@ -1,0 +1,17 @@
+package us.codecraft.webmagic.selector;
+
+import java.util.List;
+
+/**
+ * 抽取器。<br>
+ * @author code4crafter@gmail.com <br>
+ * Date: 13-4-20
+ * Time: 下午8:02
+ */
+public interface Selector {
+
+    public String select(String text);
+
+    public List<String> selectList(String text);
+
+}
