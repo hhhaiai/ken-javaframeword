@@ -175,7 +175,7 @@ public class SnmpHelper extends SnmpAbstract {
 		SnmpHelper util = null;
 		try {
 			String[] oid = { "1.3.6.1.4.1.311.1.7.2.1.1" };
-			util = new SnmpHelper("192.168.2.18", "public", 161,0);
+			util = new SnmpHelper("192.168.10.159", "mogu", 161,0);
 			List<String> list = util.getTableView(oid);
 			for (String s : list) {
 				System.out.println(s);
