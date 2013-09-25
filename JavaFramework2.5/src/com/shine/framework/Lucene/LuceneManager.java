@@ -33,7 +33,7 @@ import com.shine.DBUtil.manage.DBManager;
 /**
  * 
  * @author viruscodecn@gmail.com
- *
+ * 
  */
 @SuppressWarnings("deprecation")
 public class LuceneManager {
@@ -62,61 +62,70 @@ public class LuceneManager {
 	 * @param jndi
 	 * @param indexDirPath
 	 */
-	public void createDBIndex(String jndi, String indexDirPath)throws Exception {
+	public void createDBIndex(String jndi, String indexDirPath)
+			throws Exception {
 		Directory dir = FSDirectory.open(new File(indexDirPath));
-		IndexWriterConfig conf = new IndexWriterConfig(Version.LUCENE_36,new StandardAnalyzer(Version.LUCENE_36));// 创建的是哪个版本的IndexWriterConfig
+		IndexWriterConfig conf = new IndexWriterConfig(Version.LUCENE_36,
+				new StandardAnalyzer(Version.LUCENE_36));// 创建的是哪个版本的IndexWriterConfig
 		IndexWriter iw = new IndexWriter(dir, conf);
-		
+
 		Connection conn = DBManager.getInstance().getConnection(jndi);
-		ResultSet rs = conn.getMetaData().getTables(null, null, "%", new String[] { "TABLE" }); //获取全部表名
-		
+		ResultSet rs = conn.getMetaData().getTables(null, null, "%",
+				new String[] { "TABLE" }); // 获取全部表名
+
 		try {
-			while(rs.next()){
-			System.out.println("正在建立索引的表名:"+rs.getString(3));
-			String tableName=rs.getString(3);
-			String sql = "select * from " + tableName;
-			ResultSet tableRS= conn.createStatement().executeQuery(sql);//获取单张表信息
-		    while(tableRS.next()){
-		    	indexDB(tableRS,iw,tableName);
-		    }
-		    tableRS.close();
-		}
+			while (rs.next()) {
+				System.out.println("正在建立索引的表名:" + rs.getString(3));
+				String tableName = rs.getString(3);
+				String sql = "select * from " + tableName;
+				ResultSet tableRS = conn.createStatement().executeQuery(sql);// 获取单张表信息
+				while (tableRS.next()) {
+					indexDB(tableRS, iw, tableName);
+				}
+				tableRS.close();
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
-		}finally{
-		if (iw != null) {
-		   iw.close();
-		}
-		if (rs != null) {
-			rs.close();
-		}
-		if (conn != null) {
-			conn.close();
-		}
+		} finally {
+			if (iw != null) {
+				iw.close();
+			}
+			if (rs != null) {
+				rs.close();
+			}
+			if (conn != null) {
+				conn.close();
+			}
 		}
 		System.out.println("建立数据库索引完毕--------");
 	}
-	
-	public void indexDB(ResultSet tableRS, IndexWriter iw, String tableName) throws SQLException, CorruptIndexException, IOException{
+
+	/**
+	 * 索引DB
+	 */
+	public void indexDB(ResultSet tableRS, IndexWriter iw, String tableName)
+			throws SQLException, CorruptIndexException, IOException {
 		try {
-			String columnContent="";//数据库表字段的内容拼接
-			ResultSetMetaData meda=tableRS.getMetaData();
-			for(int i=1;i<meda.getColumnCount()+1;i++)
-				columnContent +=tableRS.getString(meda.getColumnName(i));
-			System.out.println(tableName+"表的字段内容:"+columnContent);
-			Document doc = new Document(); 
-			Field body=new Field("body",columnContent,Field.Store.YES, Field.Index.ANALYZED,
+			String columnContent = "";// 数据库表字段的内容拼接
+			ResultSetMetaData meda = tableRS.getMetaData();
+			for (int i = 1; i < meda.getColumnCount() + 1; i++)
+				columnContent += tableRS.getString(meda.getColumnName(i));
+			System.out.println(tableName + "表的字段内容:" + columnContent);
+			Document doc = new Document();
+			Field body = new Field("body", columnContent, Field.Store.YES,
+					Field.Index.ANALYZED,
 					Field.TermVector.WITH_POSITIONS_OFFSETS);
-			Field name=new Field("name", tableName, Field.Store.YES, Field.Index.ANALYZED,
+			Field name = new Field("name", tableName, Field.Store.YES,
+					Field.Index.ANALYZED,
 					Field.TermVector.WITH_POSITIONS_OFFSETS);
 			doc.add(name);
 			doc.add(body);
 			iw.addDocument(doc);
-			
-			doc=null;
-			name=null;
-			body=null;
-			meda=null;
+
+			doc = null;
+			name = null;
+			body = null;
+			meda = null;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -227,27 +236,29 @@ public class LuceneManager {
 
 	public void complexIndexQuery(Analyzer luceneAnalyzer, String keyWord,
 			String... indexDirPath) throws Exception {
-		  try {
-				IndexSearcher[] searchers = new IndexSearcher[indexDirPath.length];
-				for(int i=0;i<searchers.length;i++)
-				searchers[i] = new IndexSearcher(FSDirectory.open(new File(indexDirPath[i])));//多索引路径搜索
-	            MultiSearcher searcher = new MultiSearcher(searchers);
-	            String fields[]={"name"};
-	            BooleanClause.Occur[] flags = new BooleanClause.Occur[] {BooleanClause.Occur.MUST};
-	            Query   query = MultiFieldQueryParser.parse(Version.LUCENE_36,keyWord,fields,flags,luceneAnalyzer);
-	            ScoreDoc[] score = searcher.search(query, 10000).scoreDocs;
-	            System.out.println("搜索出来的文件数:"+score.length);
-	            for (int i = 0; i < score.length; i++) {
-	                Document hitDoc = searcher.doc(score[i].doc);
-	                System.out.print("name: " + hitDoc.get("name") + "    ");
-	                System.out.print("body: " + hitDoc.get("body") + "    ");
-	                System.out.print("\n");
-	            }
-	        } catch (Exception e) {
-	        	e.printStackTrace();
-	        }
+		try {
+			IndexSearcher[] searchers = new IndexSearcher[indexDirPath.length];
+			for (int i = 0; i < searchers.length; i++)
+				searchers[i] = new IndexSearcher(FSDirectory.open(new File(
+						indexDirPath[i])));// 多索引路径搜索
+			MultiSearcher searcher = new MultiSearcher(searchers);
+			String fields[] = { "name" };
+			BooleanClause.Occur[] flags = new BooleanClause.Occur[] { BooleanClause.Occur.MUST };
+			Query query = MultiFieldQueryParser.parse(Version.LUCENE_36,
+					keyWord, fields, flags, luceneAnalyzer);
+			ScoreDoc[] score = searcher.search(query, 10000).scoreDocs;
+			System.out.println("搜索出来的文件数:" + score.length);
+			for (int i = 0; i < score.length; i++) {
+				Document hitDoc = searcher.doc(score[i].doc);
+				System.out.print("name: " + hitDoc.get("name") + "    ");
+				System.out.print("body: " + hitDoc.get("body") + "    ");
+				System.out.print("\n");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
-	
+
 	/**
 	 * 多关键字检索
 	 * 
@@ -256,14 +267,18 @@ public class LuceneManager {
 	 * @param keyWord
 	 * @throws Exception
 	 */
-	public void simpleQuery(String indexDirPath, Analyzer luceneAnalyzer,String... keyWord) throws Exception {
+	public void simpleQuery(String indexDirPath, Analyzer luceneAnalyzer,
+			String... keyWord) throws Exception {
 
-		IndexReader ir = IndexReader.open(FSDirectory.open(new File(indexDirPath)));
+		IndexReader ir = IndexReader.open(FSDirectory.open(new File(
+				indexDirPath)));
 		IndexSearcher srch = new IndexSearcher(ir);
-//		String[] fields={"name","body"};
+		// String[] fields={"name","body"};
 		String[] fields = new String[keyWord.length];
-		for(int j=0;j<fields.length;j++)fields[j]="body";
-		Query query = MultiFieldQueryParser.parse(Version.LUCENE_36, keyWord,fields, luceneAnalyzer);
+		for (int j = 0; j < fields.length; j++)
+			fields[j] = "body";
+		Query query = MultiFieldQueryParser.parse(Version.LUCENE_36, keyWord,
+				fields, luceneAnalyzer);
 		TopDocs tds = srch.search(query, 10000);
 		ScoreDoc[] sds = tds.scoreDocs;
 		System.out.println(sds.length);
