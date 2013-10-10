@@ -75,6 +75,11 @@ public class MongoDBManager {
 		return null;
 	}
 
+	public List<String> getData(String jndi, String dbName,
+			String collectionName) {
+		return null;
+	}
+
 	/**
 	 * 获取map
 	 * 
